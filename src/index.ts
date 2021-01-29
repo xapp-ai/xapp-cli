@@ -11,12 +11,10 @@ const pkg = require("../package.json");
 
 import { analyze } from "./analyze";
 import { copy } from "./copy";
-import { crawl } from "./crawl";
 import { exportApp, exportAsScript, exportToAlexa, exportToDialogflow, exportToLex } from "./export";
 import { getConfig } from "./getConfig";
 import { login } from "./login";
 import { logout } from "./logout";
-import { migrateSkill } from "./migrateSkill";
 import { Options } from "./Options";
 import { evaluate, profile } from "./profile";
 import { pullFromDialogflow, pullFromDialogflowV2 } from "./pull";
@@ -111,7 +109,7 @@ program
 // Push app and  to Alexa and Dialogflow
 program
     .command("push")
-    .description("Takes a OVAI app and pushes it to Alexa, Actions on Google and Dialogflow (v1 or v2")
+    .description("Takes a XAPP app and pushes it to Alexa, Actions on Google and Dialogflow (v1 or v2")
     .option(
         "-p --platform <platform>",
         "Comma delimited list of platforms to push to. 'a' for Alexa, 'g' for Actions on Google, 'd' for Dialogflow version 1, 'd2' for version 2, 'l' for Lex"
@@ -154,7 +152,7 @@ program
 
 program
     .command("pull")
-    .description("Pulls from Dialogflow and merges them with stentor app")
+    .description("Pulls from the provided platform and merges them with the provided XAPP AI app")
     .option(
         "-p --platform <platform>",
         "Comma delimited list of platforms to push to. 'a' for Alexa, 'g' for Actions on Google, 'd' for Dialogflow version 1, 'd2' for version 2"
@@ -225,21 +223,6 @@ program
             default:
                 await exportApp(directory, options);
         }
-    });
-
-// Moves a skill from Alexa to Stentor
-program
-    .command("migrate <alexaId> <organizationId> <appId>")
-    .action((alexaId: string, organizationId: string, appId: string) => {
-        migrateSkill(alexaId, organizationId, appId);
-    });
-
-program
-    .command("crawl <rssFeed>")
-    .description("Crawls the provided RSS feed URL and uploads it to our media elastic search instance")
-    .option("-d, --dryRun", "Dry run")
-    .action(async (rssFeed: string, options: Options) => {
-        await crawl(rssFeed, options);
     });
 
 program.parse(process.argv);
