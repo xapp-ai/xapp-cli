@@ -3,7 +3,7 @@ import log from "stentor-logger";
 import { hasAudioPlayerHandlerProps, OVAIApp } from "@xapp/ovai-lib";
 import { AlexaSkillManagementService } from "@xapp/stentor-service-smapi";
 import { getAppIntentEntities } from "../getAppIntentEntities";
-import { getOVAIClient } from "../getOVAIClient";
+import { getXAPPClient } from "../getXAPPClient";
 import { getSMAPITokenAndVendorId } from "../getSMAPITokenAndVendor";
 
 // First read all the intents from the DB
@@ -34,7 +34,7 @@ export async function pushToAlexa(options?: { appId?: string }): Promise<void> {
         // Augment with the organization ID
         const appToUpdate: OVAIApp = { ...skillResponse.app, organizationId };
         log.info("Skill created " + skillResponse.app.alexaSkillId);
-        const client = getOVAIClient(token, appId);
+        const client = getXAPPClient(token, appId);
         await client.updateApp(appToUpdate);
         log.info("App updated on OVAI");
     }

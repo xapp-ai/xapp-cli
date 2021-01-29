@@ -10,7 +10,7 @@ import { mergeIntents, MergeIntentsResults } from "stentor-interaction-model";
 import { Intent, SlotType } from "stentor-models";
 import { DialogflowService } from "@xapp/stentor-service-dialogflow";
 import { getAppIntentEntities } from "../getAppIntentEntities";
-import { getOVAIClient } from "../getOVAIClient";
+import { getXAPPClient } from "../getXAPPClient";
 
 /**
  * Pulls intent information from Dialogflow and merges with the
@@ -94,7 +94,7 @@ export async function pullFromDialogflow(options?: {
         intentsToWrite.push(intentToWrite);
 
         if (write) {
-            const client = getOVAIClient(token);
+            const client = getXAPPClient(token);
             intentsToWritePromises.push(client.updateIntent(intentToWrite));
         } else {
             log().info(`!NOT WRITING intent ${intentToWrite.intentId}`);

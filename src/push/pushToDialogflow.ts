@@ -11,7 +11,7 @@ import { mergeIntents } from "stentor-interaction-model";
 import { Intent } from "stentor-models";
 import { DialogflowService } from "@xapp/stentor-service-dialogflow";
 import { getAppIntentEntities } from "../getAppIntentEntities";
-import { getOVAIClient } from "../getOVAIClient";
+import { getXAPPClient } from "../getXAPPClient";
 
 export async function pushToDialogflow(options?: {
     appId?: string;
@@ -166,8 +166,7 @@ export async function pushToDialogflow(options?: {
         log().debug(`Updated ${updateResults.length} intents`);
 
         log().debug(
-            `${
-            Object.keys(existingIntentsWithoutMatchOnDialogflow).length
+            `${Object.keys(existingIntentsWithoutMatchOnDialogflow).length
             } did not have a match on dialogflow, adding them back to the need to be added list`
         );
         // Now, go through the ones without a match on dialogflow, delete the old dialogflowId
@@ -200,7 +199,7 @@ export async function pushToDialogflow(options?: {
     const createIntentsResults = await Promise.all(createIntentsPromises);
     log().debug(`Created ${createIntentsResults.length} intents`);
 
-    const client = getOVAIClient(token, appId);
+    const client = getXAPPClient(token, appId);
     const updateExistingPromises: Promise<Intent>[] = [];
     const updateList = createIntentsResults.concat(intentsToUpdateInStentor);
     updateList.forEach(intent => {

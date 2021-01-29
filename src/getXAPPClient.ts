@@ -1,7 +1,7 @@
 /*! Copyright (c) 2019, XAPPmedia */
 import { getAppId } from "./getAppId";
 import { getConfig } from "./getConfig";
-import { OVAIClient } from "./OVAIClient";
+import { XAPPClient } from "./XAPPClient";
 
 /**
  * Helper function to get a OVAI client.
@@ -9,14 +9,14 @@ import { OVAIClient } from "./OVAIClient";
  * @param token User auth token.
  * @param appId
  */
-export function getOVAIClient(token: string, appId?: string) {
+export function getXAPPClient(token: string, appId?: string) {
     if (!appId) {
         appId = getAppId();
     }
 
     const config = getConfig();
 
-    return new OVAIClient({
+    return new XAPPClient({
         userToken: token,
         appId,
         basePath: config.profiles.default.basePath

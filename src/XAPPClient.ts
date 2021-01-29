@@ -4,18 +4,18 @@ import { generateClient, StentorClient } from "@xapp/stentor-api-client";
 import { HeaderProcessor, RequestHTTPClient } from "@xapp/stentor-api-client";
 import { Entity, Intent } from "stentor-models";
 
-export interface OVAIClientProps {
+export interface XAPPClientProps {
     userToken: string;
     basePath?: string;
     appId?: string;
 }
 
-export class OVAIClient {
+export class XAPPClient {
     private client: StentorClient;
 
     private appId: string;
 
-    constructor(props: OVAIClientProps) {
+    constructor(props: XAPPClientProps) {
         if (typeof props.appId === "string") {
             this.appId = props.appId;
         }
@@ -57,6 +57,12 @@ export class OVAIClient {
         });
     }
 
+    createIntent(id: { appId: string, organizationId: string }, intent: Intent): Promise<Intent> {
+        return this.client.createAppIntent(id, intent).then(response => {
+            return response.appIntent;
+        });
+    };
+
     updateIntent(intent: Intent, optionalAppId?: string): Promise<Intent> {
         const appId: string = typeof optionalAppId === "string" ? optionalAppId : this.appId;
 
@@ -67,7 +73,13 @@ export class OVAIClient {
             .then(response => {
                 return response.appIntent;
             });
-    }
+    };
+
+    createEntity(id: { appId: string, organizationId: string }, entity: Entity): Promise<Entity> {
+        return this.client.createEntity(id.appId, { entities: entity }).then(response => {
+            return response.entities;
+        });
+    };
 
     updateEntity(entity: Entity): Promise<Entity> {
         const appId: string = typeof entity.appId === "string" ? entity.appId : this.appId;

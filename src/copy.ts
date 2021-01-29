@@ -2,7 +2,7 @@
 import { log } from "stentor-logger";
 import { Handler, Intent } from "stentor-models";
 import { getAppIntentEntities } from "./getAppIntentEntities";
-import { getOVAIClient } from "./getOVAIClient";
+import { getXAPPClient } from "./getXAPPClient";
 import { Options } from "./Options";
 
 export async function copy(appId: string, newAppId: string, intentId: string | undefined, options: Options) {
@@ -11,7 +11,7 @@ export async function copy(appId: string, newAppId: string, intentId: string | u
     }
 
     const { intents, token } = await getAppIntentEntities(appId);
-    const client = getOVAIClient(token);
+    const client = getXAPPClient(token);
 
     const newApp = await client.getApp(newAppId);
 
