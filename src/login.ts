@@ -8,6 +8,8 @@ import { getConfig } from "./getConfig";
 import { saveConfig } from "./saveConfig";
 import { TokenResponse } from "./TokenResponse";
 
+const DEFAULT_LISTENING_PORT = 8787;
+
 /**
  * Logs the user in.
  */
@@ -61,11 +63,12 @@ async function getCode(challenge: string): Promise<string> {
         const basePath = config.profiles.default.basePath || 'https://api.xapp.ai';
         const authPath = config.profiles.default.authPath || 'https://auth.xapp.ai';
         const clientId = config.profiles.default.clientId || '1jla9939g04f6ip54b51sgc0mu';
+        const port = config.profiles.default.port || DEFAULT_LISTENING_PORT;
 
-        const get = `${authPath}/authorize?audience=${basePath}&scope=studio/api&response_type=code&client_id=${clientId}&redirect_uri=http://localhost:8787/authorize&code_challenge=${challenge}&code_challenge_method=S256&state=XAPP_CLI`;
+        const get = `${authPath}/authorize?audience=${basePath}&scope=studio/api&response_type=code&client_id=${clientId}&redirect_uri=http://localhost:${port}/authorize&code_challenge=${challenge}&code_challenge_method=S256&state=XAPP_CLI`;
         // Start the server to listen
         const app = express();
-        const port = 8787;
+
         const server = app.listen(port, () =>
             log.info(`Temporary server setup listening on port ${port} to catch the redirect URL.`)
         );
@@ -98,6 +101,7 @@ async function getToken(code: string, verifier: string): Promise<TokenResponse> 
         const config = getConfig();
         const authPath = config.profiles.default.authPath || 'https://auth.xapp.ai';
         const clientId = config.profiles.default.clientId || '1jla9939g04f6ip54b51sgc0mu';
+        const port = config.profiles.default.port || DEFAULT_LISTENING_PORT;
         // Exchange it for a token, code based on example provided by Auth0
         const options = {
             method: "POST",
@@ -108,11 +112,18 @@ async function getToken(code: string, verifier: string): Promise<TokenResponse> 
                 client_id: clientId,
                 code_verifier: `${verifier}`,
                 code: `${code}`,
-                redirect_uri: "http://localhost:8787/authorize"
+                redirect_uri: `http://localhost:${port}/authorize`
             }
         };
 
         request(options, (error, response, body) => {
+
+            const code = response.statusCode;
+
+            if (code !== 200) {
+                reject(new Error(body));
+                return;
+            }
             if (error) {
                 reject(error);
             } else {
