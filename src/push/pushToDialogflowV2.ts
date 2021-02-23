@@ -10,9 +10,10 @@ export async function pushToDialogflowV2(
         appId?: string;
         id?: string;
         lang?: string;
+        beta?: boolean;
     }
 ): Promise<void> {
-    const { appId } = options;
+    const { appId, beta } = options;
     const { app, intents, entities } = await getAppIntentEntities(appId);
     log.info(`Pushing ${app.name} with ${intents.length} intents & ${entities.length} entities.`);
 
@@ -35,6 +36,7 @@ export async function pushToDialogflowV2(
 
     const service = new DialogflowV2Service({
         projectId: actionsOnGoogleId,
+        useBeta: beta,
         credentials: {
             client_email: credentials.client_email,
             private_key: credentials.private_key

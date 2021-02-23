@@ -22,6 +22,7 @@ import { pushToActionsOnGoogle, pushToAlexa, pushToDialogflow, pushToDialogflowV
 import { pushToLex } from "./push/pushToLex";
 import { saveConfig } from "./saveConfig";
 import { log } from "stentor-logger";
+import { importApp } from "./import/importApp";
 
 program.version(pkg.version);
 
@@ -38,7 +39,8 @@ program.command("set")
     .option('-p --basePath <basePath>', "Base Path")
     .option('-a --authPath <authPath>', "Auth Path")
     .option('-c --clientId <clientId>', "Client ID")
-    .action((options: { basePath?: string; authPath?: string; clientId?: string }) => {
+    .option('-p --port <port>', "Port to listen on localhost redirect URL")
+    .action((options: { basePath?: string; authPath?: string; clientId?: string, port?: string }) => {
 
         const config = getConfig();
 
@@ -50,6 +52,9 @@ program.command("set")
         }
         if (options.clientId) {
             config.profiles.default.clientId = options.clientId;
+        }
+        if (options.port) {
+            config.profiles.default.port = Number(options.port);
         }
 
         saveConfig(config);
@@ -175,14 +180,23 @@ program
     });
 
 program
+    .command("import <file>")
+    .description("Imports an app")
+    .option("-a --appId <appId>", "App ID in XAPP that will be imported")
+    .action(async (file: string, options: { appId: string }) => {
+        await importApp(file, options);
+    });
+
+program
     .command("export <directory>")
     .description("Takes a XAPP app and exports it to the provided directory.")
     .option("-a --appId <appId>", "XAPP App ID")
     .option(
         "-p --platform <platform>",
-        "Platform to export to; a for Alexa, d for Dialogflow, s for Word doc.  Defaults to stentor"
+        "Platform to export to: 'a' for Alexa, 'd' for Dialogflow, 's' for Word doc.  Defaults to stentor based export"
     )
-    .action(async (directory: string, options: { appId: string; platform: string }) => {
+    .option("-i --individual", "Used for stentor export, it splits the files in addition to a consolidated file.")
+    .action(async (directory: string, options: { appId: string; platform: string; individual?: boolean }) => {
         let { platform } = options;
         if (!platform) {
             platform = "stentor";

@@ -18,6 +18,10 @@ export interface ConfigProfile {
      * The client id used when logging in.
      */
     clientId?: string;
+    /**
+     * Optional port number to listen on localhost with.  
+     */
+    port?: number;
 }
 
 export interface Config {
