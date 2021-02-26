@@ -1,9 +1,10 @@
 /*! Copyright (c) 2019, XAPPmedia */
 import log from "stentor-logger";
-import { OVAIApp } from "@xapp/ovai-lib";
+
 import { generateClient } from "@xapp/stentor-api-client";
 import { HeaderProcessor, RequestHTTPClient } from "@xapp/stentor-api-client";
 import { Entity, Handler, Intent } from "stentor-models";
+import { StudioApp } from "./App";
 import { getAppId } from "./getAppId";
 import { getConfig } from "./getConfig";
 import { getUserToken } from "./getUserToken";
@@ -17,7 +18,7 @@ import { getUserToken } from "./getUserToken";
  */
 export async function getAppIntentEntities(
     appId?: string
-): Promise<{ app: OVAIApp; intents: (Intent | Handler)[]; entities: Entity[]; token: string }> {
+): Promise<{ app: StudioApp; intents: (Intent | Handler)[]; entities: Entity[]; token: string }> {
     const token = await getUserToken();
 
     if (!appId) {
@@ -56,7 +57,7 @@ export async function getAppIntentEntities(
         return response.entities;
     });
 
-    let results: [OVAIApp, Intent[], Entity[]];
+    let results: [StudioApp, Intent[], Entity[]];
 
     try {
         results = await Promise.all([getAppPromise, getIntentsPromise, getEntityPromise]);

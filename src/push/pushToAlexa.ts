@@ -1,10 +1,11 @@
 /*! Copyright (c) 2019, XAPPmedia */
 import log from "stentor-logger";
-import { hasAudioPlayerHandlerProps, OVAIApp } from "@xapp/ovai-lib";
+import { hasAudioPlayerHandlerProps } from "@xapp/stentor-handler-media";
 import { AlexaSkillManagementService } from "@xapp/stentor-service-smapi";
 import { getAppIntentEntities } from "../getAppIntentEntities";
 import { getXAPPClient } from "../getXAPPClient";
 import { getSMAPITokenAndVendorId } from "../getSMAPITokenAndVendor";
+import { StudioApp } from "../App";
 
 // First read all the intents from the DB
 // Second, read the app info from the DB
@@ -32,7 +33,7 @@ export async function pushToAlexa(options?: { appId?: string }): Promise<void> {
         log.info("Need to first create the skill within AMAZON");
         const skillResponse = await askManagement.createSkill(credentials.vendorId, { app, intents }, { playsMedia });
         // Augment with the organization ID
-        const appToUpdate: OVAIApp = { ...skillResponse.app, organizationId };
+        const appToUpdate: StudioApp = { ...skillResponse.app, organizationId };
         log.info("Skill created " + skillResponse.app.alexaSkillId);
         const client = getXAPPClient(token, appId);
         await client.updateApp(appToUpdate);

@@ -275,16 +275,6 @@
   dependencies:
     tslint-config-prettier "1.6.0"
 
-"@xapp/ovai-lib@1.31.7":
-  version "1.31.7"
-  resolved "https://registry.yarnpkg.com/@xapp/ovai-lib/-/ovai-lib-1.31.7.tgz#2c0ce9c09008a5ea7ac682ba545cc73eb302e94e"
-  integrity sha512-6RKj5awgXB94eplrRkI6SxvQQu/OrmgUeuGTSP8R7N1L1TbBUfgN3Q5uZ1krOvVxZtBdBKKUkNMzdIObif0MfA==
-  dependencies:
-    "@xapp/stentor-media-manager" "1.31.7"
-    "@xapp/stentor-service-search" "1.31.7"
-    stentor-guards "1.37.13"
-    stentor-media "1.37.14"
-
 "@xapp/patterns@1.29.31":
   version "1.29.31"
   resolved "https://registry.yarnpkg.com/@xapp/patterns/-/patterns-1.29.31.tgz#e827e0e12a63174e5716ca68e543b7a5f4970d06"
@@ -523,22 +513,6 @@
     stentor-request "1.38.0"
     stentor-utils "1.38.0"
 
-"@xapp/stentor-media-manager@1.31.7":
-  version "1.31.7"
-  resolved "https://registry.yarnpkg.com/@xapp/stentor-media-manager/-/stentor-media-manager-1.31.7.tgz#65ba50bddd4f23120533914a78a09dfb9c82c701"
-  integrity sha512-ErwaXQ4Fa0QQQFJ0FVoNQ7V6egzONPA4NF0yi6H+2mxBaFCUklQHr0YWiZNgkWuqtSpxozuvYiSx4fo/wVcbuw==
-  dependencies:
-    "@xapp/stentor-service-rss-feed" "1.31.7"
-    "@xapp/stentor-service-search" "1.31.7"
-    "@xapp/stentor-service-social-radio" "1.31.7"
-    "@xapp/stentor-text-to-speech" "1.31.7"
-    isomorphic-fetch "2.2.1"
-    moment "2.29.1"
-    stentor-constants "1.37.12"
-    stentor-history "1.37.13"
-    stentor-media "1.37.14"
-    stentor-utils "1.37.14"
-
 "@xapp/stentor-media-manager@1.32.1":
   version "1.32.1"
   resolved "https://registry.yarnpkg.com/@xapp/stentor-media-manager/-/stentor-media-manager-1.32.1.tgz#d535b140da65d689eadac87a5a465f37186681ae"
@@ -653,15 +627,6 @@
     stentor-constants "1.37.12"
     stentor-logger "1.37.14"
 
-"@xapp/stentor-service-social-radio@1.31.7":
-  version "1.31.7"
-  resolved "https://registry.yarnpkg.com/@xapp/stentor-service-social-radio/-/stentor-service-social-radio-1.31.7.tgz#817940b6fcbfc1b7e5f3c82d8c16eed6595b9f8c"
-  integrity sha512-CWcNRI3R/JBknZ0Fe6RtOS39EPUw0E6tJp0+E8083uWn9OJPkJT+P03yC/Lo//yvUelfnz5YaHB1WpJswJeSJw==
-  dependencies:
-    isomorphic-fetch "2.2.1"
-    stentor-media "1.37.14"
-    stentor-utils "1.37.14"
-
 "@xapp/stentor-service-social-radio@1.32.1":
   version "1.32.1"
   resolved "https://registry.yarnpkg.com/@xapp/stentor-service-social-radio/-/stentor-service-social-radio-1.32.1.tgz#c9f652861be92a3c5462caab7b57ef4f2476f0b3"
@@ -710,15 +675,6 @@
     stentor-utils "1.38.0"
     traverse "0.6.6"
     uuid4 "2.0.2"
-
-"@xapp/stentor-text-to-speech@1.31.7":
-  version "1.31.7"
-  resolved "https://registry.yarnpkg.com/@xapp/stentor-text-to-speech/-/stentor-text-to-speech-1.31.7.tgz#c7b8a7157e0aea1366e1827ee09e2af2569861cf"
-  integrity sha512-615DuPHhevYeMqYVMZCIwQzScptqGlviSx2ZdxbPDER0zZY2oP3lPrYGKcw9LU3qBUphUbmF3XIyErDBzcfheQ==
-  dependencies:
-    "@xapp/patterns" "1.31.7"
-    query-string "6.13.8"
-    stentor-utils "1.37.14"
 
 "@xapp/stentor-text-to-speech@1.32.1":
   version "1.32.1"

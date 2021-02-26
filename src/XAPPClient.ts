@@ -1,5 +1,5 @@
 /*! Copyright (c) 2019, XAPPmedia */
-import { OVAIApp } from "@xapp/ovai-lib";
+import { StudioApp } from "./App";
 import { generateClient, StentorClient } from "@xapp/stentor-api-client";
 import { HeaderProcessor, RequestHTTPClient } from "@xapp/stentor-api-client";
 import { Entity, Intent } from "stentor-models";
@@ -39,19 +39,19 @@ export class XAPPClient {
         );
     }
 
-    createApp(app: OVAIApp): Promise<OVAIApp> {
+    createApp(app: StudioApp): Promise<StudioApp> {
         return this.client.createApp(app).then(response => {
             return response.app;
         });
     }
 
-    updateApp(app: OVAIApp): Promise<OVAIApp> {
+    updateApp(app: StudioApp): Promise<StudioApp> {
         return this.client.updateApp(app.appId, { set: app }).then(response => {
             return response.app;
         });
     }
 
-    getApp(appId: string): Promise<OVAIApp> {
+    getApp(appId: string): Promise<StudioApp> {
         return this.client.getApp(appId).then(response => {
             return response.app;
         });
