@@ -3294,6 +3294,11 @@ stentor-constants@1.37.12:
   resolved "https://registry.yarnpkg.com/stentor-constants/-/stentor-constants-1.37.12.tgz#56e718d4d7b9cb877e506a5765adfae8d868dcc2"
   integrity sha512-WAtswMqrPdYxG9d8WMnE1kwuMK2qv6PgLM6UwBbFGmU9p0Yhfy7pv9+dEMnBGjDRelcEecOT0+BFXOc3EEI/Nw==
 
+stentor-constants@1.38.0:
+  version "1.38.0"
+  resolved "https://registry.yarnpkg.com/stentor-constants/-/stentor-constants-1.38.0.tgz#8b545dd7d6a933c0a8e3f63094f0f8c6fd59c303"
+  integrity sha512-aFoV9MTkziPAQZ9X14jumbb9YtA4auy0Xtk1FJUDDv4cp9rSvIje5i2hG7Bb1EcVVhUU1fSTVb+FJ2SErQ0V9A==
+
 stentor-context@1.37.15:
   version "1.37.15"
   resolved "https://registry.yarnpkg.com/stentor-context/-/stentor-context-1.37.15.tgz#5ecc0eebd7b399159bcccb255d57c4b3b12721a7"
@@ -3326,6 +3331,13 @@ stentor-guards@1.37.13:
   integrity sha512-RlNHP5jNbVkRL5Z0ofHqKhxgaGlmzezAI6rvGU43jb1zToVoTvzo/5kPIc6jgG4iSk+8w8pheqYG6CUFho/wxA==
   dependencies:
     stentor-constants "1.37.12"
+
+stentor-guards@1.38.0:
+  version "1.38.0"
+  resolved "https://registry.yarnpkg.com/stentor-guards/-/stentor-guards-1.38.0.tgz#52597aba89ef759e789e9e0b16fce8934778ed24"
+  integrity sha512-jpJEdYek+ax6FqjT1T8u/id9xzQBnrGGors3GkmrqXidijE9qAr1mSQUljYasfJh58cjyhkVWwRduHR5tP4wtg==
+  dependencies:
+    stentor-constants "1.38.0"
 
 stentor-handler@1.37.15:
   version "1.37.15"
