@@ -386,16 +386,6 @@
     stentor-response "1.38.0"
     stentor-utils "1.38.0"
 
-"@xapp/stentor-analyze@1.31.7":
-  version "1.31.7"
-  resolved "https://registry.yarnpkg.com/@xapp/stentor-analyze/-/stentor-analyze-1.31.7.tgz#a92daee18dc2fda4fa62bfa32118d12eff760b34"
-  integrity sha512-eBQGTSXxnS+e5iigc3PBu8SEzgMWuYYxE+NmCKk2QgBGKJFUyKEDgG8oUDfhsanVtSMj5FQZ9UCjhk1JZV7JqQ==
-  dependencies:
-    stentor-guards "1.37.13"
-    stentor-handler "1.37.15"
-    stentor-logger "1.37.14"
-    stentor-utils "1.37.14"
-
 "@xapp/stentor-api-client@1.10.3":
   version "1.10.3"
   resolved "https://registry.yarnpkg.com/@xapp/stentor-api-client/-/stentor-api-client-1.10.3.tgz#0ba7ae1a89c67b61dab96b38d7f509f89b1c2d56"
@@ -3516,25 +3506,6 @@ stentor-guards@1.38.0:
   dependencies:
     stentor-constants "1.38.0"
 
-stentor-handler@1.37.15:
-  version "1.37.15"
-  resolved "https://registry.yarnpkg.com/stentor-handler/-/stentor-handler-1.37.15.tgz#cc54a0981d61191115293b83e29738e8fece5dc8"
-  integrity sha512-gOE/SxpBYeyCGChyc3ljmajfmWFNVgRg2XoUCxG0jkN3FLrXRndQqQS2U72x+0fL240Yo3dUb744hvL9bM/tbA==
-  dependencies:
-    "@xapp/patterns" "1.29.31"
-    stentor-conditional "1.37.14"
-    stentor-constants "1.37.12"
-    stentor-context "1.37.15"
-    stentor-guards "1.37.13"
-    stentor-history "1.37.13"
-    stentor-interaction-model "1.37.15"
-    stentor-locales "1.37.14"
-    stentor-logger "1.37.14"
-    stentor-request "1.37.15"
-    stentor-response "1.37.15"
-    stentor-storage "1.37.14"
-    stentor-utils "1.37.14"
-
 stentor-handler@1.38.0:
   version "1.38.0"
   resolved "https://registry.yarnpkg.com/stentor-handler/-/stentor-handler-1.38.0.tgz#5972ac754a37a38885264731e75229525d07a0ed"
@@ -3553,11 +3524,6 @@ stentor-handler@1.38.0:
     stentor-response "1.38.0"
     stentor-storage "1.38.0"
     stentor-utils "1.38.0"
-
-stentor-history@1.37.13:
-  version "1.37.13"
-  resolved "https://registry.yarnpkg.com/stentor-history/-/stentor-history-1.37.13.tgz#b9ab8e66631e5116ac6557576f535c21bb31042a"
-  integrity sha512-0nH2lw/9TXP/AJ+AgDsYI+XlYfaLud+FJn5MtDADXPRgZhXF1umnFMf8vS9G8mNbr/grBbxJ/5fn9fYKyD2koA==
 
 stentor-history@1.38.0:
   version "1.38.0"

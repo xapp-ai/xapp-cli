@@ -9,7 +9,6 @@ process.env.STENTOR_LOG_LEVEL = "debug";
 import * as program from "commander";
 const pkg = require("../package.json");
 
-import { analyze } from "./analyze";
 import { copy } from "./copy";
 import { exportApp, exportAsScript, exportToAlexa, exportToDialogflow, exportToLex } from "./export";
 import { getConfig } from "./getConfig";
@@ -100,15 +99,6 @@ program
             console.error("Error evaluating utterance");
             console.error(e.stack);
         }
-    });
-
-program
-    .command("analyze")
-    .description("Analyzes your apps model & content")
-    .option("-a --appId <appId>", "XAPP App ID")
-    .option("-o --output <output>", "Output directory")
-    .action(async (options: { appId: string; output: string }) => {
-        await analyze(options);
     });
 
 // Push app and  to Alexa and Dialogflow
