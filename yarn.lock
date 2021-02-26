@@ -3294,6 +3294,11 @@ stentor-constants@1.37.12:
   resolved "https://registry.yarnpkg.com/stentor-constants/-/stentor-constants-1.37.12.tgz#56e718d4d7b9cb877e506a5765adfae8d868dcc2"
   integrity sha512-WAtswMqrPdYxG9d8WMnE1kwuMK2qv6PgLM6UwBbFGmU9p0Yhfy7pv9+dEMnBGjDRelcEecOT0+BFXOc3EEI/Nw==
 
+stentor-constants@1.38.0:
+  version "1.38.0"
+  resolved "https://registry.yarnpkg.com/stentor-constants/-/stentor-constants-1.38.0.tgz#8b545dd7d6a933c0a8e3f63094f0f8c6fd59c303"
+  integrity sha512-aFoV9MTkziPAQZ9X14jumbb9YtA4auy0Xtk1FJUDDv4cp9rSvIje5i2hG7Bb1EcVVhUU1fSTVb+FJ2SErQ0V9A==
+
 stentor-context@1.37.15:
   version "1.37.15"
   resolved "https://registry.yarnpkg.com/stentor-context/-/stentor-context-1.37.15.tgz#5ecc0eebd7b399159bcccb255d57c4b3b12721a7"
@@ -3326,6 +3331,13 @@ stentor-guards@1.37.13:
   integrity sha512-RlNHP5jNbVkRL5Z0ofHqKhxgaGlmzezAI6rvGU43jb1zToVoTvzo/5kPIc6jgG4iSk+8w8pheqYG6CUFho/wxA==
   dependencies:
     stentor-constants "1.37.12"
+
+stentor-guards@1.38.0:
+  version "1.38.0"
+  resolved "https://registry.yarnpkg.com/stentor-guards/-/stentor-guards-1.38.0.tgz#52597aba89ef759e789e9e0b16fce8934778ed24"
+  integrity sha512-jpJEdYek+ax6FqjT1T8u/id9xzQBnrGGors3GkmrqXidijE9qAr1mSQUljYasfJh58cjyhkVWwRduHR5tP4wtg==
+  dependencies:
+    stentor-constants "1.38.0"
 
 stentor-handler@1.37.15:
   version "1.37.15"
@@ -3361,12 +3373,29 @@ stentor-interaction-model@1.37.15:
     stentor-logger "1.37.14"
     stentor-utils "1.37.14"
 
+stentor-interaction-model@1.38.0:
+  version "1.38.0"
+  resolved "https://registry.yarnpkg.com/stentor-interaction-model/-/stentor-interaction-model-1.38.0.tgz#a534bf7074c509ad3812562b51ce2464627bf874"
+  integrity sha512-j8qLknb0CfKpzAaSIo6yZKfYpViDtfZF3dtf++Xrt26R3SUG5OxBE8DPNFQOou1hDq6XjLTb4FDOXnSAPsQEdg==
+  dependencies:
+    stentor-constants "1.38.0"
+    stentor-locales "1.38.0"
+    stentor-logger "1.38.0"
+    stentor-utils "1.38.0"
+
 stentor-locales@1.37.14:
   version "1.37.14"
   resolved "https://registry.yarnpkg.com/stentor-locales/-/stentor-locales-1.37.14.tgz#a71f9a262b63662ae0a928dbaecb8ba82d939d4a"
   integrity sha512-BZFz8sapnSRNQIIeLxKQJrrv3/A2ErVF7R3t+sLh08fDXiKrhlf/qi2UqYJnGx0ATJOniqmhapqhfXfKt6Z7iQ==
   dependencies:
     stentor-utils "1.37.14"
+
+stentor-locales@1.38.0:
+  version "1.38.0"
+  resolved "https://registry.yarnpkg.com/stentor-locales/-/stentor-locales-1.38.0.tgz#cdbbaa48c080fc9603daf61124e9a07138def7b0"
+  integrity sha512-St4zgGnW6h472proT8d1NrKw9+7UttbtkpB9gu90CMqNzz3EU+g9Y14uWDYj7FbViCrMJvV004eERYcWNFiiiw==
+  dependencies:
+    stentor-utils "1.38.0"
 
 stentor-logger@1.37.14:
   version "1.37.14"
@@ -3375,6 +3404,15 @@ stentor-logger@1.37.14:
   dependencies:
     chalk "4.1.0"
     stentor-utils "1.37.14"
+    winston "3.3.3"
+
+stentor-logger@1.38.0:
+  version "1.38.0"
+  resolved "https://registry.yarnpkg.com/stentor-logger/-/stentor-logger-1.38.0.tgz#4265eef48ea696c2eaf06209851f01aa357206c8"
+  integrity sha512-8mrxZ5pSduJddNLuEcQ0rX5A025w/C8mvZ1TYEiPwFclsZn/zv7WFxpCNOlDZv59TTPF7CWtszFjsbMD3td4XA==
+  dependencies:
+    chalk "4.1.0"
+    stentor-utils "1.38.0"
     winston "3.3.3"
 
 stentor-media@1.37.14:
@@ -3459,6 +3497,33 @@ stentor-utils@1.37.14:
     slugify "1.4.6"
     stentor-constants "1.37.12"
     stentor-guards "1.37.13"
+    winston "3.3.3"
+    words-to-numbers "1.5.1"
+    xmldoc "1.1.2"
+
+stentor-utils@1.38.0:
+  version "1.38.0"
+  resolved "https://registry.yarnpkg.com/stentor-utils/-/stentor-utils-1.38.0.tgz#c9e904d6f3894bee31c3bada9537f2a1c63e0527"
+  integrity sha512-fj6+SJUrHMQx81cK//F2FR0NlbklLUOsm/tQIvvaDES14KMNUsRj5lNMNnH6g4O98KLdULTkS17a3MoqBIHADA==
+  dependencies:
+    "@types/xmldoc" "1.1.5"
+    blueimp-md5 "2.18.0"
+    chrono-node "2.1.11"
+    date-fns "2.16.1"
+    dyno-item-size "0.3.3"
+    fuse.js "5.1.0"
+    jsonpath "1.1.0"
+    lodash.clonedeep "4.5.0"
+    lodash.forown "4.4.0"
+    lodash.isempty "4.4.0"
+    lodash.isobject "3.0.2"
+    lodash.isstring "4.0.1"
+    lodash.pull "4.1.0"
+    number-to-words "1.2.4"
+    numeral "2.0.6"
+    slugify "1.4.6"
+    stentor-constants "1.38.0"
+    stentor-guards "1.38.0"
     winston "3.3.3"
     words-to-numbers "1.5.1"
     xmldoc "1.1.2"
