@@ -13,8 +13,10 @@ import { existsSync, mkdirSync, writeFileSync } from "fs";
 import { resolve } from "path";
 import { getAppIntentEntities } from "../getAppIntentEntities";
 
-export async function analyze(options?: { appId?: string; outputDir?: string }): Promise<void> {
-    const { appId, outputDir } = options;
+export async function analyze(appId: string, options?: { output?: string }): Promise<void> {
+
+    console.log(appId);
+    const { output } = options;
     const { app, intents } = await getAppIntentEntities(appId);
 
     try {
@@ -80,12 +82,12 @@ export async function analyze(options?: { appId?: string; outputDir?: string }):
     log.info(`\trelations: ${handlerGraph.relations()}`);
     const nodesAndConnections = toNodesAndConnections(handlerGraph);
 
-    if (outputDir) {
-        const path = resolve(outputDir);
+    if (output) {
+        const path = resolve(output);
 
         if (!existsSync(path)) {
             throw new Error(
-                `Path ${outputDir} does not exist.  Please provide an existing path to create the export within.`
+                `Path ${output} does not exist.  Please provide an existing path to create the export within.`
             );
         }
 

@@ -48,7 +48,7 @@ export async function copy(appId: string, newAppId: string, intentId: string | u
     } else {
         try {
             const writePromises = intentsToWrite.map(intent => {
-                return client.updateIntent(intent);
+                return client.updateIntent(appId, intent);
             });
 
             const results = await Promise.all(writePromises);

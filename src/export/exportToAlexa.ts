@@ -1,6 +1,6 @@
 /*! Copyright (c) 2019, XAPPmedia */
 import { log } from "stentor-logger";
-import { hasAudioPlayerHandlerProps } from "@xapp/ovai-lib";
+import { hasAudioPlayerHandlerProps } from "@xapp/stentor-handler-media";
 import { TranslateToAlexaInteractionModel, TranslateToAlexaSkillManifest } from "@xapp/stentor-alexa";
 import { existsSync, mkdirSync, writeFileSync } from "fs";
 import { resolve } from "path";

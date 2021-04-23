@@ -1,98 +1,183 @@
 /*! Copyright (c) 2019, XAPPmedia */
 import { OVAIApp } from "@xapp/ovai-lib";
-import { generateClient, StentorClient } from "@xapp/stentor-api-client";
-import { HeaderProcessor, RequestHTTPClient } from "@xapp/stentor-api-client";
-import { Entity, Intent } from "stentor-models";
+import { Client } from "@urql/core";
+import { getGraphQLClient } from "./graphql/getGraphQLClient";
+
+import { Handler, Entity, Intent } from "stentor-models";
+import { AddAppMutation, AddEntityMutation, AddIntentMutation, UpdateAppMutation, UpdateEntityMutation, UpdateIntentMutation } from "./graphql/mutations";
+import { GetApp, GetIntent, GetHandler, GetEntity } from "./graphql/queries";
+
+export interface HandlerDescription {
+    intentId: string;
+    name: string;
+    type: string;
+}
+
+export interface HandlerDescription {
+    intentId: string;
+    name: string;
+    type: string;
+}
+
+export interface IntentDescription {
+    intentId: string;
+    name: string;
+}
+
+export interface EntityDescription {
+    entityId: string;
+    displayName: string;
+}
+
+export interface AppOverview {
+    appId: string;
+    organizationId: string;
+    name: string;
+    invocationName?: string;
+    handlers: {
+        total: number;
+        handlers: HandlerDescription[];
+    };
+    intents: {
+        total: number;
+        intents: IntentDescription[];
+    }
+    entities: {
+        total: number;
+        entities: EntityDescription[];
+    }
+}
 
 export interface XAPPClientProps {
     userToken: string;
-    basePath?: string;
-    appId?: string;
 }
 
 export class XAPPClient {
-    private client: StentorClient;
-
-    private appId: string;
+    private client: Client;
 
     constructor(props: XAPPClientProps) {
-        if (typeof props.appId === "string") {
-            this.appId = props.appId;
+        this.client = getGraphQLClient(props.userToken);
+    }
+
+    createApp(app: OVAIApp): Promise<Pick<OVAIApp, "appId" | "name" | "organizationId">> {
+        return this.client.mutation(AddAppMutation, {
+            app
+        }).toPromise().then((response) => {
+            return response.data.addApp;
+        });
+    }
+
+    updateApp(app: OVAIApp): Promise<Pick<OVAIApp, "appId" | "name" | "organizationId">> {
+        return this.client.mutation(UpdateAppMutation, {
+            appId: app.appId,
+            app
+        }).toPromise().then((response) => {
+            return response.data.updateApp;
+        });
+    }
+
+    getApp(appId: string, start?: string, end?: string): Promise<AppOverview> {
+        if (!start) {
+            const now = new Date();
+            start = now.toISOString();
+            const lastWeek = new Date();
+            lastWeek.setDate(now.getDate() - 7);
+            end = lastWeek.toISOString();
         }
 
-        let basePath: string = "https://api.xapp.ai";
-        if (typeof props.basePath === "string" && props.basePath) {
-            basePath = props.basePath;
-        }
-
-        const addUserToken: HeaderProcessor = headers => {
-            return {
-                ...headers,
-                ["x-xapp-usertoken"]: props.userToken
-            };
-        };
-        this.client = generateClient(
-            new RequestHTTPClient({
-                basePath,
-                headerProcessor: addUserToken
-            })
-        );
-    }
-
-    createApp(app: OVAIApp): Promise<OVAIApp> {
-        return this.client.createApp(app).then(response => {
-            return response.app;
+        return this.client.query(GetApp, {
+            appId,
+            start,
+            end
+        }).toPromise().then((response) => {
+            console.log(response);
+            return response.data.app;
         });
     }
 
-    updateApp(app: OVAIApp): Promise<OVAIApp> {
-        return this.client.updateApp(app.appId, { set: app }).then(response => {
-            return response.app;
+    /**
+     * Handler
+     */
+
+    getHandler(appId: string, intentId: string): Promise<Handler> {
+        return this.client.query(GetHandler, {
+            appId,
+            intentId
+        }).toPromise().then((response) => {
+            return response.data.handler;
         });
     }
 
-    getApp(appId: string): Promise<OVAIApp> {
-        return this.client.getApp(appId).then(response => {
-            return response.app;
-        });
-    }
+    /**
+     * Intent
+     */
 
-    createIntent(id: { appId: string, organizationId: string }, intent: Intent): Promise<Intent> {
-        return this.client.createAppIntent(id, intent).then(response => {
-            return response.appIntent;
+    createIntent(appId: string, intent: Intent): Promise<Intent> {
+        return this.client.mutation(AddIntentMutation, {
+            appId,
+            intent
+        }).toPromise().then((response) => {
+            return response.data.addIntent;
         });
     };
 
-    updateIntent(intent: Intent, optionalAppId?: string): Promise<Intent> {
-        const appId: string = typeof optionalAppId === "string" ? optionalAppId : this.appId;
-
-        return this.client
-            .updateAppIntent(appId, intent.intentId, {
-                set: intent
-            })
-            .then(response => {
-                return response.appIntent;
-            });
-    };
-
-    createEntity(id: { appId: string, organizationId: string }, entity: Entity): Promise<Entity> {
-        return this.client.createEntity(id.appId, { entities: entity }).then(response => {
-            return response.entities;
+    getIntent(appId: string, intentId: string): Promise<Intent> {
+        return this.client.query(GetIntent, {
+            appId,
+            intentId
+        }).toPromise().then((response) => {
+            return response.data.intent;
         });
     };
 
-    updateEntity(entity: Entity): Promise<Entity> {
-        const appId: string = typeof entity.appId === "string" ? entity.appId : this.appId;
-        const entityId: string = entity.entityId;
-        return this.client
-            .updateEntity(
-                { entityId, appId },
-                {
-                    set: entity
-                }
-            )
-            .then(response => {
-                return response.entity;
-            });
+    updateIntent(appId: string, intent: Intent): Promise<Pick<Intent, "intentId" | "name">> {
+        return this.client.mutation(UpdateIntentMutation, {
+            appId,
+            intentId: intent.intentId,
+            intent
+        }).toPromise().then((response) => {
+            return response.data.updateIntent
+        });
+    };
+
+    /**
+     * ENTITY
+     */
+
+    /**
+     * Create an entity
+     * 
+     * @param appId 
+     * @param entity 
+     * @returns 
+     */
+    createEntity(appId: string, entity: Entity): Promise<Pick<Entity, "entityId" | "displayName">> {
+        return this.client.mutation(AddEntityMutation, {
+            entity: {
+                appId,
+                ...entity
+            }
+        }).toPromise().then((response) => {
+            return response.data.addEntity;
+        });
+    };
+
+    getEntity(appId: string, entityId: string): Promise<Entity> {
+        return this.client.query(GetEntity, {
+            appId,
+            entityId
+        }).toPromise().then((response) => {
+            return response.data.entity;
+        });
+    }
+
+    updateEntity(appId: string, entity: Entity): Promise<Entity> {
+        return this.client.mutation(UpdateEntityMutation, {
+            appId,
+            entityId: entity.entityId,
+            entity
+        }).toPromise().then((response) => {
+            return response.data.updateEntity;
+        });
     }
 }

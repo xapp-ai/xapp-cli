@@ -16,13 +16,13 @@ import { getConfig } from "./getConfig";
 import { login } from "./login";
 import { logout } from "./logout";
 import { Options } from "./Options";
-import { evaluate, profile } from "./profile";
-import { pullFromDialogflow, pullFromDialogflowV2 } from "./pull";
-import { pushToActionsOnGoogle, pushToAlexa, pushToDialogflow, pushToDialogflowV2 } from "./push";
+import { pullFromDialogflowV2 } from "./pull";
+import { pushToDialogflowV2 } from "./push";
 import { pushToLex } from "./push/pushToLex";
 import { saveConfig } from "./saveConfig";
 import { log } from "stentor-logger";
 import { importApp } from "./import/importApp";
+import { importFromDialogflow } from "./import";
 
 program.version(pkg.version);
 
@@ -68,47 +68,11 @@ program
     });
 
 program
-    .command("profile")
-    .option(
-        "-p --platform <platform>",
-        "Comma delimited list of platforms to push to. 'a' for Alexa, 'd' for Dialogflow version 1, 'd2' for version 2"
-    )
-    .option("-a --appId <appId>", "XAPP App ID")
-    .option("-u, --utterance <utterance>", "The utterance")
-    .option("-f, --file <file>", "The pipe delimited file")
-    .option("-c --credentials <credentials>", "Path to the service account credentials required for Dialogflow V2")
-    .description("Profiles the provided utterance with the interaction models")
-    .action(
-        async (options: { appId: string; utterance: string; file: string; platform: string; credentials: string }) => {
-            try {
-                await profile(options);
-            } catch (e) {
-                console.error("Error profiling utterance");
-                console.error(e.stack);
-            }
-        }
-    );
-
-program
-    .command("evaluate <appId> <file>")
-    .option("-r, --results <results>", "Retrieve the results of a current/completed evaluation.")
-    .description("Profiles the provided utterance with the interaction models")
-    .action(async (appId: string, file: string, options: { results: string }) => {
-        try {
-            await evaluate(appId, file, options);
-        } catch (e) {
-            console.error("Error evaluating utterance");
-            console.error(e.stack);
-        }
-    });
-
-program
-    .command("analyze")
+    .command("analyze <appId>")
     .description("Analyzes your apps model & content")
-    .option("-a --appId <appId>", "XAPP App ID")
     .option("-o --output <output>", "Output directory")
-    .action(async (options: { appId: string; output: string }) => {
-        await analyze(options);
+    .action(async (appId: string, options: { output: string }) => {
+        await analyze(appId, options);
     });
 
 // Push app and  to Alexa and Dialogflow
@@ -117,7 +81,7 @@ program
     .description("Takes a XAPP app and pushes it to Alexa, Actions on Google and Dialogflow (v1 or v2")
     .option(
         "-p --platform <platform>",
-        "Comma delimited list of platforms to push to. 'a' for Alexa, 'g' for Actions on Google, 'd' for Dialogflow version 1, 'd2' for version 2, 'l' for Lex"
+        "Comma delimited list of platforms to push to. 'd' for Dialogflow version 2, 'l' for Lex"
     )
     .option("-a --appId <appId>", "XAPP App ID")
     .option("-o --output <output>", "Output directory")
@@ -129,24 +93,12 @@ program
         "The AWS Role ARN to the Arn that the service can assume if the service must connect to another AWS Account."
     )
     .action(async (options: { appId: string; platform: string; id?: string; output: string; lang: string; credentials: string }) => {
-        const { platform, credentials, output, appId } = options;
+        const { platform, credentials } = options;
 
         // Parse platform
         const platforms = platform.split(",").map((item) => item.toLowerCase().trim());
 
-        if (platforms.includes("a")) {
-            await pushToAlexa(options);
-        }
-
-        if (platforms.includes("g")) {
-            await pushToActionsOnGoogle(output, appId);
-        }
-
         if (platforms.includes("d")) {
-            await pushToDialogflow(options);
-        }
-
-        if (platforms.includes("d2")) {
             await pushToDialogflowV2(credentials, options);
         }
 
@@ -160,7 +112,7 @@ program
     .description("Pulls from the provided platform and merges them with the provided XAPP AI app")
     .option(
         "-p --platform <platform>",
-        "Comma delimited list of platforms to push to. 'a' for Alexa, 'g' for Actions on Google, 'd' for Dialogflow version 1, 'd2' for version 2"
+        "Comma delimited list of platforms to push to. 'a' for Alexa, 'g' for Actions on Google, 'd' for Dialogflow version 2"
     )
     .option("-a --appId <appId>", "XAPP App ID")
     .option("-w --write", "Write back to stentor")
@@ -171,10 +123,6 @@ program
         const platforms = platform.split(",").map((item) => item.toLowerCase().trim());
 
         if (platforms.includes("d")) {
-            await pullFromDialogflow(options);
-        }
-
-        if (platforms.includes("d2")) {
             await pullFromDialogflowV2(credentials, options);
         }
     });
@@ -182,9 +130,26 @@ program
 program
     .command("import <file>")
     .description("Imports an app")
+    .option("-o --organizationId <organizationId>", "Organization ID that the agent will be imported to.")
     .option("-a --appId <appId>", "App ID in XAPP that will be imported")
-    .action(async (file: string, options: { appId: string }) => {
-        await importApp(file, options);
+    .option("-p --platform <platform>", "Platform to import from: 'd' for Dialogflow, 'l' for Lex. Defaults to stentor based import")
+    .option("-c --credentials <credentials>", "Path to the service account credentials required for Dialogflow")
+    .action(async (file: string, options: { appId: string, credentials?: string; platform?: string; organizationId: string }) => {
+
+        let { platform } = options;
+        if (!platform) {
+            platform = "stentor";
+        }
+
+        switch (platform) {
+            case "d":
+            case "dialogflow":
+                await importFromDialogflow(options.credentials, options);
+
+            default:
+                await importApp(file, options);
+        }
+
     });
 
 program

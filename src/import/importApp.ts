@@ -71,10 +71,10 @@ export async function importApp(file: string, options: { appId: string }): Promi
     const entityCreatePromises = entities.map((entity) => {
         delete entity.appId;
         delete entity.dialogflowId;
-        return client.createEntity({ appId, organizationId }, entity);
+        return client.createEntity(appId, entity);
     });
 
-    let entityResults: Entity[];
+    let entityResults: Pick<Entity, "entityId" | "displayName">[];
     try {
         entityResults = await Promise.all(entityCreatePromises);
     } catch (e) {
@@ -89,7 +89,7 @@ export async function importApp(file: string, options: { appId: string }): Promi
         delete intent.organizationId;
         delete intent.dialogflowId;
         delete intent.slotTypes;
-        return client.createIntent({ appId, organizationId }, intent);
+        return client.createIntent(appId, intent);
     });
 
     let intentAndHandlerResults: Intent[];
