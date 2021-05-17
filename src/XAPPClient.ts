@@ -90,7 +90,6 @@ export class XAPPClient {
             start,
             end
         }).toPromise().then((response) => {
-            console.log(response);
             return response.data.app;
         });
     }
@@ -98,7 +97,6 @@ export class XAPPClient {
     /**
      * Handler
      */
-
     getHandler(appId: string, intentId: string): Promise<Handler> {
         return this.client.query(GetHandler, {
             appId,

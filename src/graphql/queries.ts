@@ -203,19 +203,21 @@ query getHandler($appId: ID!, $intentId: ID!) {
             }
           }
         }
+        segments {
+          key
+          segments {
+            segment {
+              ssml
+              displayText
+            }
+          }
+        }
         reprompt {
           ssml
           textToSpeech
           displayText
           suggestions {
             __typename
-          }
-        }
-        segments {
-          key
-          segment {
-            displayText
-            ssml
           }
         }
         ... on SchedulableHandlerResponse {

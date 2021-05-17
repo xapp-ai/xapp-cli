@@ -9,7 +9,7 @@ process.env.STENTOR_LOG_LEVEL = "debug";
 import * as program from "commander";
 const pkg = require("../package.json");
 
-import { analyze } from "./analyze";
+import { info } from "./analyze";
 import { copy } from "./copy";
 import { exportApp, exportAsScript, exportToAlexa, exportToDialogflow, exportToLex } from "./export";
 import { getConfig } from "./getConfig";
@@ -36,6 +36,7 @@ program.command("login").action(async () => {
 program.command("logout").action(logout);
 
 program.command("set")
+    .description("Changes the environment for the CLI, not typically used.")
     .option('-p --basePath <basePath>', "Base Path")
     .option('-a --authPath <authPath>', "Auth Path")
     .option('-c --clientId <clientId>', "Client ID")
@@ -68,17 +69,15 @@ program
     });
 
 program
-    .command("analyze <appId>")
-    .description("Analyzes your apps model & content")
-    .option("-o --output <output>", "Output directory")
+    .command("info <appId>")
+    .description("Returns basic information about the provided appId")
     .action(async (appId: string, options: { output: string }) => {
-        await analyze(appId, options);
+        await info(appId, options);
     });
 
-// Push app and  to Alexa and Dialogflow
 program
     .command("push")
-    .description("Takes a XAPP app and pushes it to Alexa, Actions on Google and Dialogflow (v1 or v2")
+    .description("BETA - Pushes the provided appId to either Dialogflow (v2) or Lex")
     .option(
         "-p --platform <platform>",
         "Comma delimited list of platforms to push to. 'd' for Dialogflow version 2, 'l' for Lex"
@@ -109,12 +108,12 @@ program
 
 program
     .command("pull")
-    .description("Pulls from the provided platform and merges them with the provided XAPP AI app")
+    .description("BETA Pulls the provided platform and pushes it to the provided appId")
     .option(
         "-p --platform <platform>",
-        "Comma delimited list of platforms to push to. 'a' for Alexa, 'g' for Actions on Google, 'd' for Dialogflow version 2"
+        "'d' for Dialogflow version 2"
     )
-    .option("-a --appId <appId>", "XAPP App ID")
+    .option("-a --appId <appId>", "App ID")
     .option("-w --write", "Write back to stentor")
     .option("-c --credentials <credentials>", "Path to the service account credentials required for Dialogflow V2")
     .action(async (options: { platform: string; appId: string; write: boolean; credentials: string }) => {
@@ -145,7 +144,6 @@ program
             case "d":
             case "dialogflow":
                 await importFromDialogflow(options.credentials, options);
-
             default:
                 await importApp(file, options);
         }
@@ -154,7 +152,7 @@ program
 
 program
     .command("export <directory>")
-    .description("Takes a XAPP app and exports it to the provided directory.")
+    .description("Exports the provided appId and exports it for the provided platform.")
     .option("-a --appId <appId>", "XAPP App ID")
     .option(
         "-p --platform <platform>",

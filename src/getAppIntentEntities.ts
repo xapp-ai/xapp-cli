@@ -18,7 +18,6 @@ export async function getAppIntentEntities(
     const token = await getUserToken();
 
     if (!appId) {
-        console.log('no appid, getting appId');
         appId = getAppId();
     }
 
@@ -31,8 +30,6 @@ export async function getAppIntentEntities(
     if (!app) {
         throw new Error(`Unable to find app with ID ${appId}`);
     }
-
-    console.log(app);
 
     const getIntentsPromise = app.intents.intents.map((intent) => {
         return client.getIntent(appId, intent.intentId);
