@@ -2,19 +2,11 @@
 import { isGlobalHandler } from "stentor-guards";
 import log from "stentor-logger";
 import { Handler } from "stentor-models";
-import { analyzeModelAndContent, printResult } from "@xapp/stentor-analyze";
 import { getAppIntentEntities } from "../getAppIntentEntities";
 
 export async function info(appId: string, options?: { output?: string }): Promise<void> {
 
     const { app, intents, handlers, entities } = await getAppIntentEntities(appId);
-
-    try {
-        const modelAndContentResult = analyzeModelAndContent(intents);
-        printResult(modelAndContentResult);
-    } catch (error) {
-        console.error(error.stack);
-    }
 
     log.info(`name: ${app.name}`)
     log.info(`\t${entities.length} entities`);
