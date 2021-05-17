@@ -19,11 +19,6 @@ export async function pushToDialogflowV2(
 
     let actionsOnGoogleId: string = options.id;
 
-    // Fallback is the deprecated app way.
-    if (!actionsOnGoogleId) {
-        actionsOnGoogleId = app.actionsOnGoogleId;
-    }
-
     if (!actionsOnGoogleId) {
         throw new Error("Actions on Google ID required for pushing to Dialogflow V2");
     }

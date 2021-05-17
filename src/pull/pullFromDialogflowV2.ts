@@ -1,5 +1,4 @@
 /*! Copyright (c) 2020, XAPPmedia */
-
 import {
     TranslateDialogflowV2Intent,
     TranslateDialogflowV2EntityType
@@ -56,7 +55,7 @@ export async function pullFromDialogflowV2(
     const intentTranslator = new TranslateDialogflowV2Intent({ appId, organizationId });
 
     const writeIntents = intents.map((intent) => {
-        return client.createIntent({ appId, organizationId }, intentTranslator.translate(intent));
+        return client.createIntent(appId, intentTranslator.translate(intent));
     });
 
     const intentResults = await Promise.all(writeIntents);
@@ -65,7 +64,7 @@ export async function pullFromDialogflowV2(
     const entityTranslator = new TranslateDialogflowV2EntityType();
 
     const writeEntities = entityTypes.map((entityType) => {
-        return client.createEntity({ appId, organizationId }, entityTranslator.translate(entityType));
+        return client.createEntity(appId, entityTranslator.translate(entityType));
     });
 
     const entityResults = await Promise.all(writeEntities);

@@ -9,20 +9,20 @@ process.env.STENTOR_LOG_LEVEL = "debug";
 import * as program from "commander";
 const pkg = require("../package.json");
 
-import { analyze } from "./analyze";
+import { info } from "./analyze";
 import { copy } from "./copy";
 import { exportApp, exportAsScript, exportToAlexa, exportToDialogflow, exportToLex } from "./export";
 import { getConfig } from "./getConfig";
 import { login } from "./login";
 import { logout } from "./logout";
 import { Options } from "./Options";
-import { evaluate, profile } from "./profile";
-import { pullFromDialogflow, pullFromDialogflowV2 } from "./pull";
-import { pushToActionsOnGoogle, pushToAlexa, pushToDialogflow, pushToDialogflowV2 } from "./push";
+import { pullFromDialogflowV2 } from "./pull";
+import { pushToDialogflowV2 } from "./push";
 import { pushToLex } from "./push/pushToLex";
 import { saveConfig } from "./saveConfig";
 import { log } from "stentor-logger";
 import { importApp } from "./import/importApp";
+import { importFromDialogflow } from "./import";
 
 program.version(pkg.version);
 
@@ -36,6 +36,7 @@ program.command("login").action(async () => {
 program.command("logout").action(logout);
 
 program.command("set")
+    .description("Changes the environment for the CLI, not typically used.")
     .option('-p --basePath <basePath>', "Base Path")
     .option('-a --authPath <authPath>', "Auth Path")
     .option('-c --clientId <clientId>', "Client ID")
@@ -68,56 +69,18 @@ program
     });
 
 program
-    .command("profile")
-    .option(
-        "-p --platform <platform>",
-        "Comma delimited list of platforms to push to. 'a' for Alexa, 'd' for Dialogflow version 1, 'd2' for version 2"
-    )
-    .option("-a --appId <appId>", "XAPP App ID")
-    .option("-u, --utterance <utterance>", "The utterance")
-    .option("-f, --file <file>", "The pipe delimited file")
-    .option("-c --credentials <credentials>", "Path to the service account credentials required for Dialogflow V2")
-    .description("Profiles the provided utterance with the interaction models")
-    .action(
-        async (options: { appId: string; utterance: string; file: string; platform: string; credentials: string }) => {
-            try {
-                await profile(options);
-            } catch (e) {
-                console.error("Error profiling utterance");
-                console.error(e.stack);
-            }
-        }
-    );
-
-program
-    .command("evaluate <appId> <file>")
-    .option("-r, --results <results>", "Retrieve the results of a current/completed evaluation.")
-    .description("Profiles the provided utterance with the interaction models")
-    .action(async (appId: string, file: string, options: { results: string }) => {
-        try {
-            await evaluate(appId, file, options);
-        } catch (e) {
-            console.error("Error evaluating utterance");
-            console.error(e.stack);
-        }
+    .command("info <appId>")
+    .description("Returns basic information about the provided appId")
+    .action(async (appId: string, options: { output: string }) => {
+        await info(appId, options);
     });
 
-program
-    .command("analyze")
-    .description("Analyzes your apps model & content")
-    .option("-a --appId <appId>", "XAPP App ID")
-    .option("-o --output <output>", "Output directory")
-    .action(async (options: { appId: string; output: string }) => {
-        await analyze(options);
-    });
-
-// Push app and  to Alexa and Dialogflow
 program
     .command("push")
-    .description("Takes a XAPP app and pushes it to Alexa, Actions on Google and Dialogflow (v1 or v2")
+    .description("BETA - Pushes the provided appId to either Dialogflow (v2) or Lex")
     .option(
         "-p --platform <platform>",
-        "Comma delimited list of platforms to push to. 'a' for Alexa, 'g' for Actions on Google, 'd' for Dialogflow version 1, 'd2' for version 2, 'l' for Lex"
+        "Comma delimited list of platforms to push to. 'd' for Dialogflow version 2, 'l' for Lex"
     )
     .option("-a --appId <appId>", "XAPP App ID")
     .option("-o --output <output>", "Output directory")
@@ -129,24 +92,12 @@ program
         "The AWS Role ARN to the Arn that the service can assume if the service must connect to another AWS Account."
     )
     .action(async (options: { appId: string; platform: string; id?: string; output: string; lang: string; credentials: string }) => {
-        const { platform, credentials, output, appId } = options;
+        const { platform, credentials } = options;
 
         // Parse platform
         const platforms = platform.split(",").map((item) => item.toLowerCase().trim());
 
-        if (platforms.includes("a")) {
-            await pushToAlexa(options);
-        }
-
-        if (platforms.includes("g")) {
-            await pushToActionsOnGoogle(output, appId);
-        }
-
         if (platforms.includes("d")) {
-            await pushToDialogflow(options);
-        }
-
-        if (platforms.includes("d2")) {
             await pushToDialogflowV2(credentials, options);
         }
 
@@ -157,12 +108,12 @@ program
 
 program
     .command("pull")
-    .description("Pulls from the provided platform and merges them with the provided XAPP AI app")
+    .description("BETA Pulls the provided platform and pushes it to the provided appId")
     .option(
         "-p --platform <platform>",
-        "Comma delimited list of platforms to push to. 'a' for Alexa, 'g' for Actions on Google, 'd' for Dialogflow version 1, 'd2' for version 2"
+        "'d' for Dialogflow version 2"
     )
-    .option("-a --appId <appId>", "XAPP App ID")
+    .option("-a --appId <appId>", "App ID")
     .option("-w --write", "Write back to stentor")
     .option("-c --credentials <credentials>", "Path to the service account credentials required for Dialogflow V2")
     .action(async (options: { platform: string; appId: string; write: boolean; credentials: string }) => {
@@ -171,10 +122,6 @@ program
         const platforms = platform.split(",").map((item) => item.toLowerCase().trim());
 
         if (platforms.includes("d")) {
-            await pullFromDialogflow(options);
-        }
-
-        if (platforms.includes("d2")) {
             await pullFromDialogflowV2(credentials, options);
         }
     });
@@ -182,18 +129,34 @@ program
 program
     .command("import <file>")
     .description("Imports an app")
+    .option("-o --organizationId <organizationId>", "Organization ID that the agent will be imported to.")
     .option("-a --appId <appId>", "App ID in XAPP that will be imported")
-    .action(async (file: string, options: { appId: string }) => {
-        await importApp(file, options);
+    .option("-p --platform <platform>", "Platform to import from: 'd' for Dialogflow, 'l' for Lex. Defaults to stentor based import")
+    .option("-c --credentials <credentials>", "Path to the service account credentials required for Dialogflow")
+    .action(async (file: string, options: { appId: string, credentials?: string; platform?: string; organizationId: string }) => {
+
+        let { platform } = options;
+        if (!platform) {
+            platform = "stentor";
+        }
+
+        switch (platform) {
+            case "d":
+            case "dialogflow":
+                await importFromDialogflow(options.credentials, options);
+            default:
+                await importApp(file, options);
+        }
+
     });
 
 program
     .command("export <directory>")
-    .description("Takes a XAPP app and exports it to the provided directory.")
+    .description("Exports the provided appId")
     .option("-a --appId <appId>", "XAPP App ID")
     .option(
         "-p --platform <platform>",
-        "Platform to export to: 'a' for Alexa, 'd' for Dialogflow, 's' for Word doc.  Defaults to stentor based export"
+        "BETA - Platform to export to: 'a' for Alexa, 'd' for Dialogflow, 's' for Word doc.  Defaults to stentor based export"
     )
     .option("-i --individual", "Used for stentor export, it splits the files in addition to a consolidated file.")
     .action(async (directory: string, options: { appId: string; platform: string; individual?: boolean }) => {
