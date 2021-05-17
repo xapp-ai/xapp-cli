@@ -1,11 +1,11 @@
 /*! Copyright (c) 2019, XAPPmedia */
-import { OVAIApp } from "@xapp/ovai-lib";
 import { Client } from "@urql/core";
 import { getGraphQLClient } from "./graphql/getGraphQLClient";
 
 import { Handler, Entity, Intent } from "stentor-models";
 import { AddAppMutation, AddEntityMutation, AddIntentMutation, UpdateAppMutation, UpdateEntityMutation, UpdateIntentMutation } from "./graphql/mutations";
 import { GetApp, GetIntent, GetHandler, GetEntity } from "./graphql/queries";
+import { App } from "./models";
 
 export interface HandlerDescription {
     intentId: string;
@@ -59,7 +59,7 @@ export class XAPPClient {
         this.client = getGraphQLClient(props.userToken);
     }
 
-    createApp(app: OVAIApp): Promise<Pick<OVAIApp, "appId" | "name" | "organizationId">> {
+    createApp(app: App): Promise<App> {
         return this.client.mutation(AddAppMutation, {
             app
         }).toPromise().then((response) => {
@@ -67,7 +67,7 @@ export class XAPPClient {
         });
     }
 
-    updateApp(app: OVAIApp): Promise<Pick<OVAIApp, "appId" | "name" | "organizationId">> {
+    updateApp(app: App): Promise<App> {
         return this.client.mutation(UpdateAppMutation, {
             appId: app.appId,
             app

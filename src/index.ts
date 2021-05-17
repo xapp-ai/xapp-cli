@@ -152,11 +152,11 @@ program
 
 program
     .command("export <directory>")
-    .description("Exports the provided appId and exports it for the provided platform.")
+    .description("Exports the provided appId")
     .option("-a --appId <appId>", "XAPP App ID")
     .option(
         "-p --platform <platform>",
-        "Platform to export to: 'a' for Alexa, 'd' for Dialogflow, 's' for Word doc.  Defaults to stentor based export"
+        "BETA - Platform to export to: 'a' for Alexa, 'd' for Dialogflow, 's' for Word doc.  Defaults to stentor based export"
     )
     .option("-i --individual", "Used for stentor export, it splits the files in addition to a consolidated file.")
     .action(async (directory: string, options: { appId: string; platform: string; individual?: boolean }) => {

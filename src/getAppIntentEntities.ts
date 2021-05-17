@@ -1,7 +1,7 @@
 /*! Copyright (c) 2019, XAPPmedia */
-import { OVAIApp } from "@xapp/ovai-lib";
 import log from "stentor-logger";
 import { Entity, Handler, Intent } from "stentor-models";
+import { App } from "./models";
 import { getAppId } from "./getAppId";
 import { getUserToken } from "./getUserToken";
 import { getXAPPClient } from "./getXAPPClient";
@@ -14,7 +14,7 @@ import { getXAPPClient } from "./getXAPPClient";
  */
 export async function getAppIntentEntities(
     appId?: string
-): Promise<{ app: Pick<OVAIApp, "appId" | "name" | "organizationId" | "invocationName">; intents: Intent[]; handlers: Handler[]; entities: Entity[]; token: string }> {
+): Promise<{ app: App; intents: Intent[]; handlers: Handler[]; entities: Entity[]; token: string }> {
     const token = await getUserToken();
 
     if (!appId) {
