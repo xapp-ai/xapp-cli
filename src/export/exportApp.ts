@@ -44,7 +44,7 @@ export async function exportApp(output: string, options?: { appId: string, indiv
         const appPath = resolve(exportPath, `app.json`);
         writeFileSync(appPath, JSON.stringify(app, undefined, 2));
 
-        // entites
+        // entities
         const entitiesPath = resolve(exportPath, "entities");
         mkdirSync(entitiesPath);
 
@@ -69,7 +69,4 @@ export async function exportApp(output: string, options?: { appId: string, indiv
             writeFileSync(intentPath, JSON.stringify(props, undefined, 2));
         });
     }
-
-
-
 }

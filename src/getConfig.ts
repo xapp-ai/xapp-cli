@@ -1,7 +1,7 @@
 /*! Copyright (c) 2020, XAPPmedia */
 import { readFileSync } from "fs";
 
-import { Config } from "./Config";
+import { Config, ConfigProfile } from "./Config";
 import { getConfigPath } from "./getConfigPath";
 
 /**
@@ -21,6 +21,16 @@ export function getConfig(): Config {
     }
 
     return config;
+}
 
+/**
+ * Get the current profile for configuration which OC Studio environment to communicate with.
+ * 
+ * @returns Current profile used to configure all network calls
+ */
+export function getConfigProfile(): ConfigProfile {
+    const config = getConfig();
+
+    return !!config.currentProfile ? config.profiles[config.currentProfile] : config.profiles.default;
 
 }

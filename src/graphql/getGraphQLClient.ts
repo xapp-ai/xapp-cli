@@ -1,13 +1,13 @@
 /*! Copyright (c) 2021, XAPPmedia */
 import { Client } from "@urql/core";
 
-import { getConfig } from "../getConfig";
+import { getConfigProfile } from "../getConfig";
 
 export function getGraphQLClient(token: string): Client {
 
-    const config = getConfig();
+    const profile = getConfigProfile();
 
-    const url: string = config.profiles.default.basePath || "https://api.xapp.ai"
+    const url: string = profile.basePath || "https://api.xapp.ai"
 
     const client = new Client({
         fetchOptions: {

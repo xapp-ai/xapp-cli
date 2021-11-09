@@ -37,28 +37,23 @@ program.command("logout").action(logout);
 
 program.command("set")
     .description("Changes the environment for the CLI, not typically used.")
-    .option('-p --basePath <basePath>', "Base Path")
-    .option('-a --authPath <authPath>', "Auth Path")
-    .option('-c --clientId <clientId>', "Client ID")
-    .option('-p --port <port>', "Port to listen on localhost redirect URL")
-    .action((options: { basePath?: string; authPath?: string; clientId?: string, port?: string }) => {
+    .option('-p --profile <profile>', 'Sets the current profile to use')
+    .action((options: { profile?: string; }) => {
 
         const config = getConfig();
 
-        if (options.basePath) {
-            config.profiles.default.basePath = options.basePath;
-        }
-        if (options.authPath) {
-            config.profiles.default.authPath = options.authPath;
-        }
-        if (options.clientId) {
-            config.profiles.default.clientId = options.clientId;
-        }
-        if (options.port) {
-            config.profiles.default.port = Number(options.port);
+        config.currentProfile = options?.profile;
+
+        // Make sure it exists
+        if (typeof config.profiles[config.currentProfile] !== "object") {
+            log().error(`Unable to set current profile, profile "${options.profile}" does not yet exist in your config file, please add it first.`)
+        } else {
+            // Checks out
+            saveConfig(config);
         }
 
-        saveConfig(config);
+
+
     });
 
 program
