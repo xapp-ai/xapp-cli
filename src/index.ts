@@ -23,6 +23,7 @@ import { saveConfig } from "./saveConfig";
 import { log } from "stentor-logger";
 import { importApp } from "./import/importApp";
 import { importFromDialogflow } from "./import";
+import { profile } from "./profile";
 
 program.version(pkg.version);
 
@@ -51,9 +52,6 @@ program.command("set")
             // Checks out
             saveConfig(config);
         }
-
-
-
     });
 
 program
@@ -69,6 +67,28 @@ program
     .action(async (appId: string, options: { output: string }) => {
         await info(appId, options);
     });
+
+program
+    .command("profile")
+    .description("Profile your interaction model against an NLU")
+    .option(
+        "-p --platform <platform>",
+        "Comma delimited list of NLUs to profile. 'a' for Alexa, 'd' for Dialogflow (v2), 'l' for Lex (v1)"
+    )
+    .option("-a --appId <appId>", "OC Studio App ID.")
+    .option("-u, --utterance <utterance>", "The utterance.")
+    .option("-f, --file <file>", "The pipe delimited file of utterance tests.")
+    .option("-c --credentials <credentials>", "Path to the service account credentials required for Dialogflow (v2)")
+    .action(
+        async (options: { appId: string; utterance: string; file: string; platform: string; credentials: string }) => {
+            try {
+                await profile(options);
+            } catch (e) {
+                console.error("Error profiling utterance");
+                console.error(e.stack);
+            }
+        }
+    );
 
 program
     .command("push")

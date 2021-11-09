@@ -407,6 +407,15 @@
     "@xapp/stentor-service-search" "1.37.53"
     moment-timezone "0.5.33"
 
+"@xapp/stentor-interaction-model-profiler@1.37.52":
+  version "1.37.52"
+  resolved "https://registry.yarnpkg.com/@xapp/stentor-interaction-model-profiler/-/stentor-interaction-model-profiler-1.37.52.tgz#9d0270b4bb9bdd13d6a4f0bd2c7609ccd2335601"
+  integrity sha512-H4kQnmHNLfGO13DAdjVAPwq1oRWD8zod+BYAzVWTOo8SUbwI8AlJX08u8GOChQEaJYbapzfduqU+0IPQxsQViA==
+  dependencies:
+    "@xapp/stentor-service-dialogflow" "1.37.52"
+    "@xapp/stentor-service-smapi" "1.37.52"
+    lodash.isequal "4.5.0"
+
 "@xapp/stentor-lex-lib@1.37.53":
   version "1.37.53"
   resolved "https://registry.yarnpkg.com/@xapp/stentor-lex-lib/-/stentor-lex-lib-1.37.53.tgz#3d286253d5be899aa94418bf410cfb96ecaf8890"
@@ -469,6 +478,16 @@
   dependencies:
     elasticsearch "16.7.2"
     http-aws-es "6.0.0"
+
+"@xapp/stentor-service-smapi@1.37.52":
+  version "1.37.52"
+  resolved "https://registry.yarnpkg.com/@xapp/stentor-service-smapi/-/stentor-service-smapi-1.37.52.tgz#2c377f15a799b616b57cc81a45198ffc8a8d0dd6"
+  integrity sha512-qnFCQpKGpxLUYhSeBMBlrcWh//F/cHp585BMLykpUNA3sARHZ5HaEo2Y4dnWUpgjG1gRao3M7YfFMXwM+NG9xw==
+  dependencies:
+    "@xapp/stentor-alexa" "1.37.52"
+    "@xapp/stentor-app" "1.37.52"
+    "@xapp/stentor-service" "1.37.52"
+    isomorphic-fetch "2.2.1"
 
 "@xapp/stentor-service-social-radio@1.37.52":
   version "1.37.52"
@@ -2337,6 +2356,11 @@ lodash.isempty@4.4.0:
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/lodash.isempty/-/lodash.isempty-4.4.0.tgz#6f86cbedd8be4ec987be9aaf33c9684db1b31e7e"
   integrity sha1-b4bL7di+TsmHvpqvM8loTbGzHn4=
+
+lodash.isequal@4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
+  integrity sha1-QVxEePK8wwEgwizhDtMib30+GOA=
 
 lodash.isobject@3.0.2:
   version "3.0.2"

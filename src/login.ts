@@ -43,9 +43,11 @@ export async function login(): Promise<string> {
     log.info(`And got the token, saving it to use in the future.`);
     // Save it on the config
     const config = getConfig();
-    config.profiles.default = { ...config.profiles.default, token };
+    const currentProfile: string = config.currentProfile || "default";
+    config.profiles[currentProfile] = { ...config.profiles[currentProfile], token };
     saveConfig(config);
-    log.info(`You are logged in.`);
+
+    log.info(`You are logged in. Enjoy`);
     // Return it
     return token.access_token;
 }

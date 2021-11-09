@@ -5,4 +5,6 @@ export interface App {
     name: string;
     organizationId: string;
     invocationName?: string;
+    //
+    actionsOnGoogleId?: string;
 }
