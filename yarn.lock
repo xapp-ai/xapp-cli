@@ -212,13 +212,6 @@
   dependencies:
     "@types/node" "*"
 
-"@types/image-size@0.0.29":
-  version "0.0.29"
-  resolved "https://registry.yarnpkg.com/@types/image-size/-/image-size-0.0.29.tgz#0924d4ec95edc82f615b7f634cba31534b81c351"
-  integrity sha512-d47SGzTnoUXSLRn3Kej43FZXLduZjHJqkb26BmxKp9fQveCvjfirtpk7a5iLCGkJ/rur9kxUf7DwD2eKlPxjMg==
-  dependencies:
-    "@types/node" "*"
-
 "@types/inquirer@7.3.3":
   version "7.3.3"
   resolved "https://registry.yarnpkg.com/@types/inquirer/-/inquirer-7.3.3.tgz#92e6676efb67fa6925c69a2ee638f67a822952ac"
@@ -226,13 +219,6 @@
   dependencies:
     "@types/through" "*"
     rxjs "^6.4.0"
-
-"@types/jszip@^3.1.4":
-  version "3.4.1"
-  resolved "https://registry.yarnpkg.com/@types/jszip/-/jszip-3.4.1.tgz#e7a4059486e494c949ef750933d009684227846f"
-  integrity sha512-TezXjmf3lj+zQ651r6hPqvSScqBLvyPI9FxdXBqpEwBijNGQ2NXpaFW/7joGzveYkKQUil7iiDHLo6LV71Pc0A==
-  dependencies:
-    jszip "*"
 
 "@types/lodash.padstart@4.6.6":
   version "4.6.6"
@@ -270,6 +256,11 @@
   version "13.13.40"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-13.13.40.tgz#f655ef327362cc83912f2e69336ddc62a24a9f88"
   integrity sha512-eKaRo87lu1yAXrzEJl0zcJxfUMDT5/mZalFyOkT44rnQps41eS2pfWzbaulSPpQLFNy29bFqn+Y5lOTL8ATlEQ==
+
+"@types/node@^16.0.0":
+  version "16.11.7"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.11.7.tgz#36820945061326978c42a01e56b61cd223dfdc42"
+  integrity sha512-QB5D2sqfSjCmTuWcBWyJ+/44bcjO7VbjSbOE0ucoVbAsSNQc4Lt6QkgkVXkTDwkL4z/beecZNDvVX15D4P8Jbw==
 
 "@types/qs@*":
   version "6.9.5"
@@ -1172,15 +1163,14 @@ discontinuous-range@1.0.0:
   resolved "https://registry.yarnpkg.com/discontinuous-range/-/discontinuous-range-1.0.0.tgz#e38331f0844bba49b9a9cb71c771585aab1bc65a"
   integrity sha1-44Mx8IRLukm5qctxx3FYWqsbxlo=
 
-docx@4.7.1:
-  version "4.7.1"
-  resolved "https://registry.yarnpkg.com/docx/-/docx-4.7.1.tgz#9ce7a5b4eea66d295053651d5def79f5566a3b2c"
-  integrity sha512-MTToHT11MV8Srnzy+JJ2gyotEhub3t5ey+96J12OCMujvLGjEoLigtTnIvMonKlA+TvDtNKbGsiU2h8WOD6wdw==
+docx@7.1.2:
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/docx/-/docx-7.1.2.tgz#629f24222e82fb624f7221cfcc520dd3ab819cfe"
+  integrity sha512-uzdkDh0u1KNRmIprxuZ9x2ti2/3xn+TfBGfjIPplR6WFdhK13hL1NcgdJsu9+QsASAqjuogiJiiEap5fv8ubow==
   dependencies:
-    "@types/image-size" "0.0.29"
-    "@types/jszip" "^3.1.4"
-    image-size "^0.6.2"
+    "@types/node" "^16.0.0"
     jszip "^3.1.5"
+    nanoid "^3.1.20"
     xml "^1.0.1"
     xml-js "^1.6.8"
 
@@ -1973,11 +1963,6 @@ ieee754@^1.1.4:
   resolved "https://registry.yarnpkg.com/ieee754/-/ieee754-1.2.1.tgz#8eb7a10a63fff25d15a57b001586d177d1b0d352"
   integrity sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==
 
-image-size@^0.6.2:
-  version "0.6.3"
-  resolved "https://registry.yarnpkg.com/image-size/-/image-size-0.6.3.tgz#e7e5c65bb534bd7cdcedd6cb5166272a85f75fb2"
-  integrity sha512-47xSUiQioGaB96nqtp5/q55m0aBQSQdyIloMOc/x+QVTDZLNmXE892IIDrJ0hM1A5vcNUDD5tDffkSP5lCaIIA==
-
 immediate@~3.0.5:
   version "3.0.6"
   resolved "https://registry.yarnpkg.com/immediate/-/immediate-3.0.6.tgz#9db1dbd0faf8de6fbe0f5dd5e56bb606280de69b"
@@ -2215,7 +2200,7 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.10.0"
 
-jszip@*, jszip@^3.1.5:
+jszip@^3.1.5:
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/jszip/-/jszip-3.5.0.tgz#b4fd1f368245346658e781fec9675802489e15f6"
   integrity sha512-WRtu7TPCmYePR1nazfrtuF216cIVon/3GWOvHS9QR5bIwSbnxtdpma6un3jyGGNhHsKCSzn5Ypk+EkDRvTGiFA==
@@ -2574,7 +2559,7 @@ nanoid@3.1.23:
   resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.1.23.tgz#f744086ce7c2bc47ee0a8472574d5c78e4183a81"
   integrity sha512-FiB0kzdP0FFVGDKlRLEQ1BgDzU87dy5NnzjeW9YZNt+/c3+q82EQDUwniSAUxp/F0gFNI1ZhKU1FqYsMuqZVnw==
 
-nanoid@^3.1.30:
+nanoid@^3.1.20, nanoid@^3.1.30:
   version "3.1.30"
   resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.1.30.tgz#63f93cc548d2a113dc5dfbc63bfa09e2b9b64362"
   integrity sha512-zJpuPDwOv8D2zq2WRoMe1HsfZthVewpel9CAvTfc/2mBD1uUT/agc5f7GHGWXlYkFvi1mVxe4IjvP2HNrop7nQ==
