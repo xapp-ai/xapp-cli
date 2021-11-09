@@ -1,8 +1,6 @@
 /*! Copyright (c) 2021, XAPPmedia */
 import { gql } from "@urql/core";
 
-
-
 export const AddAppMutation = gql`
 mutation addApp($app: AppInput) {
 	addApp(app: $app) {

@@ -153,8 +153,8 @@ program
         "-p --platform <platform>",
         "BETA - Platform to export to: 'a' for Alexa, 'd' for Dialogflow, 's' for Word doc.  Defaults to stentor based export"
     )
-    .option("-i --individual", "Used for stentor export, it splits the files in addition to a consolidated file.")
-    .action(async (directory: string, options: { appId: string; platform: string; individual?: boolean }) => {
+    .option("-f --full", "Used for stentor export, it exports the individual handlers, intents, entities")
+    .action(async (directory: string, options: { appId: string; platform: string; full?: boolean }) => {
         let { platform } = options;
         if (!platform) {
             platform = "stentor";
