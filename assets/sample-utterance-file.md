@@ -1,1 +1,3 @@
-yes | YesNo | yes_no="yes"
+# This is a sample file
+
+yes | YesNoIntent | yes_no="yes"

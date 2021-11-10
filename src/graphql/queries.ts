@@ -220,7 +220,7 @@ query getHandler($appId: ID!, $intentId: ID!) {
             __typename
           }
         }
-        ... on SchedulableHandlerResponse {
+        ... on SchedulableDependentHandlerResponse {
           schedule {
             start {
               format
@@ -239,7 +239,7 @@ query getHandler($appId: ID!, $intentId: ID!) {
         system
         data
         conditions
-        ... on SchedulableHandlerResponse {
+        ... on SchedulableDependentHandlerResponse {
           schedule {
             start {
               time

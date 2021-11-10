@@ -23,6 +23,7 @@ import { saveConfig } from "./saveConfig";
 import { log } from "stentor-logger";
 import { importApp } from "./import/importApp";
 import { importFromDialogflow } from "./import";
+import { profile } from "./profile";
 
 program.version(pkg.version);
 
@@ -37,28 +38,20 @@ program.command("logout").action(logout);
 
 program.command("set")
     .description("Changes the environment for the CLI, not typically used.")
-    .option('-p --basePath <basePath>', "Base Path")
-    .option('-a --authPath <authPath>', "Auth Path")
-    .option('-c --clientId <clientId>', "Client ID")
-    .option('-p --port <port>', "Port to listen on localhost redirect URL")
-    .action((options: { basePath?: string; authPath?: string; clientId?: string, port?: string }) => {
+    .option('-p --profile <profile>', 'Sets the current profile to use')
+    .action((options: { profile?: string; }) => {
 
         const config = getConfig();
 
-        if (options.basePath) {
-            config.profiles.default.basePath = options.basePath;
-        }
-        if (options.authPath) {
-            config.profiles.default.authPath = options.authPath;
-        }
-        if (options.clientId) {
-            config.profiles.default.clientId = options.clientId;
-        }
-        if (options.port) {
-            config.profiles.default.port = Number(options.port);
-        }
+        config.currentProfile = options?.profile;
 
-        saveConfig(config);
+        // Make sure it exists
+        if (typeof config.profiles[config.currentProfile] !== "object") {
+            log().error(`Unable to set current profile, profile "${options.profile}" does not yet exist in your config file, please add it first.`)
+        } else {
+            // Checks out
+            saveConfig(config);
+        }
     });
 
 program
@@ -74,6 +67,28 @@ program
     .action(async (appId: string, options: { output: string }) => {
         await info(appId, options);
     });
+
+program
+    .command("profile")
+    .description("Profile your interaction model against an NLU")
+    .option(
+        "-p --platform <platform>",
+        "Comma delimited list of NLUs to profile. 'a' for Alexa, 'd' for Dialogflow (v2), 'l' for Lex (v1)"
+    )
+    .option("-a --appId <appId>", "OC Studio App ID.")
+    .option("-u, --utterance <utterance>", "The utterance.")
+    .option("-f, --file <file>", "The pipe delimited file of utterance tests.")
+    .option("-c --credentials <credentials>", "Path to the service account credentials required for Dialogflow (v2)")
+    .action(
+        async (options: { appId: string; utterance: string; file: string; platform: string; credentials: string }) => {
+            try {
+                await profile(options);
+            } catch (e) {
+                console.error("Error profiling utterance");
+                console.error(e.stack);
+            }
+        }
+    );
 
 program
     .command("push")
@@ -158,8 +173,8 @@ program
         "-p --platform <platform>",
         "BETA - Platform to export to: 'a' for Alexa, 'd' for Dialogflow, 's' for Word doc.  Defaults to stentor based export"
     )
-    .option("-i --individual", "Used for stentor export, it splits the files in addition to a consolidated file.")
-    .action(async (directory: string, options: { appId: string; platform: string; individual?: boolean }) => {
+    .option("-f --full", "Used for stentor export, it exports the individual handlers, intents, entities")
+    .action(async (directory: string, options: { appId: string; platform: string; full?: boolean }) => {
         let { platform } = options;
         if (!platform) {
             platform = "stentor";

@@ -4,7 +4,7 @@ import { createHash, randomBytes } from "crypto";
 import * as express from "express";
 import * as open from "open";
 import * as request from "request";
-import { getConfig } from "./getConfig";
+import { getConfig, getConfigProfile } from "./getConfig";
 import { saveConfig } from "./saveConfig";
 import { TokenResponse } from "./TokenResponse";
 
@@ -43,9 +43,11 @@ export async function login(): Promise<string> {
     log.info(`And got the token, saving it to use in the future.`);
     // Save it on the config
     const config = getConfig();
-    config.profiles.default = { ...config.profiles.default, token };
+    const currentProfile: string = config.currentProfile || "default";
+    config.profiles[currentProfile] = { ...config.profiles[currentProfile], token };
     saveConfig(config);
-    log.info(`You are logged in.`);
+
+    log.info(`You are logged in. Enjoy`);
     // Return it
     return token.access_token;
 }
@@ -58,14 +60,17 @@ export async function login(): Promise<string> {
 async function getCode(challenge: string): Promise<string> {
     return new Promise((resolve, reject) => {
 
-        const config = getConfig();
+        const profile = getConfigProfile();
 
-        const basePath = config.profiles.default.basePath || 'https://api.xapp.ai';
-        const authPath = config.profiles.default.authPath || 'https://auth.xapp.ai';
-        const clientId = config.profiles.default.clientId || '1jla9939g04f6ip54b51sgc0mu';
-        const port = config.profiles.default.port || DEFAULT_LISTENING_PORT;
+        const basePath = profile.basePath || 'https://api.xapp.ai';
+        const authPath = profile.authPath || 'https://auth.xapp.ai';
+        const clientId = profile.clientId || '1jla9939g04f6ip54b51sgc0mu';
 
-        const get = `${authPath}/authorize?audience=${basePath}&scope=studio/api&response_type=code&client_id=${clientId}&redirect_uri=http://localhost:${port}/authorize&code_challenge=${challenge}&code_challenge_method=S256&state=XAPP_CLI`;
+        const path = profile.path || 'authorize';
+        const port = profile.port || DEFAULT_LISTENING_PORT;
+        const redirect = `http://localhost:${port}/${path}`;
+
+        const get = `${authPath}/authorize?audience=${basePath}&scope=studio/api&response_type=code&client_id=${clientId}&redirect_uri=${redirect}&code_challenge=${challenge}&code_challenge_method=S256&state=XAPP_CLI`;
         // Start the server to listen
         const app = express();
 
@@ -73,9 +78,9 @@ async function getCode(challenge: string): Promise<string> {
             log.info(`Temporary server setup listening on port ${port} to catch the redirect URL.`)
         );
 
-        app.get("/authorize", (req, res) => {
+        app.get(`/${path}`, (req, res) => {
             if (req.query.code) {
-                res.send("Received access code, please return to the console.");
+                res.send("Received access code, please return to the console.  You may close this page.");
                 server.close();
                 resolve(`${req.query.code}`);
             } else {
@@ -98,21 +103,25 @@ async function getCode(challenge: string): Promise<string> {
  */
 async function getToken(code: string, verifier: string): Promise<TokenResponse> {
     return new Promise((resolve, reject) => {
-        const config = getConfig();
-        const authPath = config.profiles.default.authPath || 'https://auth.xapp.ai';
-        const clientId = config.profiles.default.clientId || '1jla9939g04f6ip54b51sgc0mu';
-        const port = config.profiles.default.port || DEFAULT_LISTENING_PORT;
+
+        const profile = getConfigProfile();
+
+        const authPath = profile.authPath || 'https://auth.xapp.ai';
+        const clientId = profile.clientId || '1jla9939g04f6ip54b51sgc0mu';
+        const port = profile.port || DEFAULT_LISTENING_PORT;
+        const path = profile.path || "authorize";
+        const tokenPath = profile.tokenPath || "oauth2/token"
         // Exchange it for a token, code based on example provided by Auth0
         const options = {
             method: "POST",
-            url: `${authPath}/oauth2/token`,
+            url: `${authPath}/${tokenPath}`,
             headers: { "content-type": "application/x-www-form-urlencoded" },
             form: {
                 grant_type: "authorization_code",
                 client_id: clientId,
                 code_verifier: `${verifier}`,
                 code: `${code}`,
-                redirect_uri: `http://localhost:${port}/authorize`
+                redirect_uri: `http://localhost:${port}/${path}`
             }
         };
 

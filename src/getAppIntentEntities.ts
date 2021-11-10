@@ -6,6 +6,9 @@ import { getAppId } from "./getAppId";
 import { getUserToken } from "./getUserToken";
 import { getXAPPClient } from "./getXAPPClient";
 
+
+export interface FullApp { app: App; intents?: Intent[]; handlers?: Handler[]; entities?: Entity[]; token: string }
+
 /**
  * Fetch the app, intents, and entities
  *
@@ -13,13 +16,20 @@ import { getXAPPClient } from "./getXAPPClient";
  * @returns 
  */
 export async function getAppIntentEntities(
-    appId?: string
-): Promise<{ app: App; intents: Intent[]; handlers: Handler[]; entities: Entity[]; token: string }> {
+    appId?: string,
+    options: {
+        excludeHandlers?: boolean;
+        excludeEntities?: boolean;
+        excludeIntents?: boolean;
+    } = {}
+): Promise<FullApp> {
     const token = await getUserToken();
 
     if (!appId) {
         appId = getAppId();
     }
+
+    const { excludeEntities, excludeHandlers, excludeIntents } = options;
 
     log.info(`Retrieving app with ID: ${appId}`);
 
@@ -31,44 +41,60 @@ export async function getAppIntentEntities(
         throw new Error(`Unable to find app with ID ${appId}`);
     }
 
-    const getIntentsPromise = app.intents.intents.map((intent) => {
-        return client.getIntent(appId, intent.intentId);
-    });
+    const value: FullApp = { app, token };
 
-    let intents: Intent[];
+    if (!excludeIntents) {
 
-    try {
-        intents = await Promise.all(getIntentsPromise);
-    } catch (err) {
-        log.error("Error retrieving intents. Try running $xapp login again");
-        log.error(err);
+        const getIntentsPromise = app.intents.intents.map((intent) => {
+            return client.getIntent(appId, intent.intentId);
+        });
+
+        let intents: Intent[];
+
+        try {
+            intents = await Promise.all(getIntentsPromise);
+        } catch (err) {
+            log.error("Error retrieving intents. Try running $xapp login again");
+            log.error(err);
+        }
+
+        value.intents = intents;
+
     }
 
-    const getEntitiesPromise = app.entities.entities.map((entity) => {
-        return client.getEntity(appId, entity.entityId);
-    });
+    if (!excludeEntities) {
+        const getEntitiesPromise = app.entities.entities.map((entity) => {
+            return client.getEntity(appId, entity.entityId);
+        });
 
-    let entities: Entity[];
+        let entities: Entity[];
 
-    try {
-        entities = await Promise.all(getEntitiesPromise);
-    } catch (err) {
-        log.error("Error retrieving entities. Try running $xapp login again");
-        log.error(err);
+        try {
+            entities = await Promise.all(getEntitiesPromise);
+        } catch (err) {
+            log.error("Error retrieving entities. Try running $xapp login again");
+            log.error(err);
+        }
+
+        value.entities = entities;
     }
 
-    const getHandlersPromise = app.handlers.handlers.map((handler) => {
-        return client.getHandler(appId, handler.intentId);
-    });
+    if (!excludeHandlers) {
+        const getHandlersPromise = app.handlers.handlers.map((handler) => {
+            return client.getHandler(appId, handler.intentId);
+        });
 
-    let handlers: Handler[];
+        let handlers: Handler[];
 
-    try {
-        handlers = await Promise.all(getHandlersPromise);
-    } catch (err) {
-        log.error("Error retrieving handlers. Try running $xapp login again");
-        log.error(err);
+        try {
+            handlers = await Promise.all(getHandlersPromise);
+        } catch (err) {
+            log.error("Error retrieving handlers. Try running $xapp login again");
+            log.error(err);
+        }
+
+        value.handlers = handlers;
     }
 
-    return { app, intents, entities, handlers, token };
+    return value;
 }
