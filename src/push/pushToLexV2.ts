@@ -18,10 +18,6 @@ export async function pushToLexV2(options?: { appId?: string; lang?: string; aws
         throw new Error("Please specify bot name");
     }
 
-    if (file) {
-        throw new Error("Pushing from export is not implemented (yet)");
-    }
-
     const { app, intents = [], entities = [], handlers = [] } =
         file ? await getAppIntentEntitiesFromExport(appId, file) : await getAppIntentEntities(appId);
 
