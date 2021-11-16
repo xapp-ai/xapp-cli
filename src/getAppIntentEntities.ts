@@ -6,6 +6,7 @@ import { getAppId } from "./getAppId";
 import { getUserToken } from "./getUserToken";
 import { getXAPPClient } from "./getXAPPClient";
 
+import * as fs from "fs";
 
 export interface FullApp { app: App; intents?: Intent[]; handlers?: Handler[]; entities?: Entity[]; token: string }
 
@@ -13,7 +14,8 @@ export interface FullApp { app: App; intents?: Intent[]; handlers?: Handler[]; e
  * Fetch the app, intents, and entities
  *
  * @param appId
- * @returns 
+ * @param options
+ * @returns
  */
 export async function getAppIntentEntities(
     appId?: string,
@@ -59,7 +61,6 @@ export async function getAppIntentEntities(
         }
 
         value.intents = intents;
-
     }
 
     if (!excludeEntities) {
@@ -97,4 +98,24 @@ export async function getAppIntentEntities(
     }
 
     return value;
+}
+
+/**
+ * Fetch the app from an export file
+ *
+ * @returns {Promise<FullApp>}
+ * @param appId
+ * @param fileName
+ */
+export async function getAppIntentEntitiesFromExport(
+    appId: string,
+    fileName: string
+): Promise<FullApp> {
+    const app: FullApp = JSON.parse(fs.readFileSync(fileName, "utf8"));
+
+    if (app.app.appId != appId) {
+        throw new Error(`This isn't the App you're looking for. App Id in file: ${app.app.appId}`);
+    }
+
+    return app;
 }

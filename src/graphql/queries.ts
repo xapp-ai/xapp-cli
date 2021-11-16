@@ -23,7 +23,7 @@ query getAppOverview($appId: ID!, $start: DateTime!, $end: DateTime!) {
       timestamp
       email
     }
-    handlers(size: 100) {
+    handlers(size: 1000) {
       _id
       total
       handlers {
@@ -33,7 +33,7 @@ query getAppOverview($appId: ID!, $start: DateTime!, $end: DateTime!) {
         type
       }
     }
-    intents {
+    intents(size: 1000) {
       _id
       total
       intents {
@@ -42,7 +42,7 @@ query getAppOverview($appId: ID!, $start: DateTime!, $end: DateTime!) {
         intentId
       }
     }
-    entities {
+    entities(size: 1000) {
       _id
       total
       entities {
@@ -109,7 +109,8 @@ query getIntent($appId:ID!, $intentId:ID!) {
       __typename
       name
       type
-      isList
+      isList,
+      nlu
     }
   }
 }

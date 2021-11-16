@@ -17,7 +17,7 @@ import { login } from "./login";
 import { logout } from "./logout";
 import { Options } from "./Options";
 import { pullFromDialogflowV2 } from "./pull";
-import { pushToDialogflowV2 } from "./push";
+import { pushToDialogflowV2, pushToLexV2 } from "./push";
 import { pushToLex } from "./push/pushToLex";
 import { saveConfig } from "./saveConfig";
 import { log } from "stentor-logger";
@@ -92,19 +92,28 @@ program
 
 program
     .command("push")
-    .description("BETA - Pushes the provided appId to either Dialogflow (v2) or Lex")
+    .description("BETA - Pushes the provided appId to either Dialogflow (v2) or Lex (v1 and v2")
     .option(
         "-p --platform <platform>",
-        "Comma delimited list of platforms to push to. 'd' for Dialogflow version 2, 'l' for Lex"
+        "Comma delimited list of platforms to push to. 'd' for Dialogflow version 2," +
+        " 'l' for Lex and 'l2' for Lex version 2"
     )
     .option("-a --appId <appId>", "XAPP App ID")
     .option("-o --output <output>", "Output directory")
     .option("-l --lang <lang>", "Language code; for example en, it, es")
+    .option("-f --file <file>", "Model export file path (exported app)")
     .option("-i --id <id>", "ID within the platform you are pushing to.")
     .option("-c --credentials <credentials>", "Path to the service account credentials required for Dialogflow V2")
     .option(
+        "--botName <botName>",
+        "The bot name if applicable (LEX V2)")
+    .option(
         "--aws-role <awsRoleArn>",
         "The AWS Role ARN to the Arn that the service can assume if the service must connect to another AWS Account."
+    )
+    .option(
+        "--fulfillment <fulfillment>",
+        "The ARN of the intent fulfillment lambda."
     )
     .action(async (options: { appId: string; platform: string; id?: string; output: string; lang: string; credentials: string }) => {
         const { platform, credentials } = options;
@@ -118,6 +127,10 @@ program
 
         if (platforms.includes("l")) {
             await pushToLex(options);
+        }
+
+        if (platforms.includes("l2")) {
+            await pushToLexV2(options);
         }
     });
 

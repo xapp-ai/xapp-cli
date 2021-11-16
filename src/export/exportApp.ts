@@ -28,7 +28,7 @@ export async function exportApp(output: string, options?: { appId: string, full?
 
     // Create a consolidated JSON object that will be exported
     const exportFilePath = resolve(exportPath, `${appId}.json`);
-    writeFileSync(exportFilePath, JSON.stringify({ app, handlers: intents, entities }, undefined, 2));
+    writeFileSync(exportFilePath, JSON.stringify({ app, intents, handlers, entities }, undefined, 2));
 
     // OK!  if they want individual di
     if (full) {
