@@ -369,10 +369,10 @@
     ask-sdk-model "1.37.1"
     lodash.invert "4.3.0"
 
-"@xapp/stentor-alexa@1.39.43":
-  version "1.39.43"
-  resolved "https://registry.yarnpkg.com/@xapp/stentor-alexa/-/stentor-alexa-1.39.43.tgz#22238916fc23c6d7e81d1fb4359641cbf74517a1"
-  integrity sha512-ACohL9sTB1YBmEfZpntrdvbJKsqz2OVjzAE+SNqlGyT7eUxriNsa0VCRM2G3VxWD1lZC1CMF4JMcVMSNtM57pg==
+"@xapp/stentor-alexa@1.39.44":
+  version "1.39.44"
+  resolved "https://registry.yarnpkg.com/@xapp/stentor-alexa/-/stentor-alexa-1.39.44.tgz#6704a187f0ee8802d6106990534a16e9d6767853"
+  integrity sha512-S/+2eNTOm8EV+afiFB1HLVP7h0xfBT6+TjirIuYslgS/npl5gunUf+Xao47mIk7Fb5Dc7GFU/8jQRnn2LiDYpw==
   dependencies:
     "@xapp/patterns" "1.39.41"
     "@xapp/stentor-alexa-lib" "1.39.43"
@@ -412,13 +412,13 @@
     "@xapp/stentor-service-search" "1.39.43"
     moment-timezone "0.5.34"
 
-"@xapp/stentor-interaction-model-profiler@1.39.43":
-  version "1.39.43"
-  resolved "https://registry.yarnpkg.com/@xapp/stentor-interaction-model-profiler/-/stentor-interaction-model-profiler-1.39.43.tgz#663b47a91269eda95bc3f6ca00eae76e562148d2"
-  integrity sha512-zavx6PIK6REjE+JSr+vB22B2bg+71+rw0lQc6FBUf2fV84N7mdG/VNsVxO507G2SyYu/CSORTy/IRcGhi4Tdmw==
+"@xapp/stentor-interaction-model-profiler@1.39.44":
+  version "1.39.44"
+  resolved "https://registry.yarnpkg.com/@xapp/stentor-interaction-model-profiler/-/stentor-interaction-model-profiler-1.39.44.tgz#d56ea2d6b523da020eb5175898874361c3f66daa"
+  integrity sha512-El97JnvgLnDIuCNqYIAWP1qVdfNtyOpxiMVGgi47wGelEQpNuV4RECoXPlryx4DbucWFtEvrmIgCy3YgAPjO6A==
   dependencies:
     "@xapp/stentor-service-dialogflow" "1.39.43"
-    "@xapp/stentor-service-smapi" "1.39.43"
+    "@xapp/stentor-service-smapi" "1.39.44"
     lodash.isequal "4.5.0"
 
 "@xapp/stentor-lex-lib@1.39.43":
@@ -484,12 +484,12 @@
     elasticsearch "16.7.2"
     http-aws-es "6.0.0"
 
-"@xapp/stentor-service-smapi@1.39.43":
-  version "1.39.43"
-  resolved "https://registry.yarnpkg.com/@xapp/stentor-service-smapi/-/stentor-service-smapi-1.39.43.tgz#5a6251952b3d92cac82bd1ac2eedb93019f8fe9a"
-  integrity sha512-yRkuXFw0uU33sCJDR9llZIIV4Uj6B4GCpHtsgXhziQoe39gzJUKfEhuj+nJ6vvMFq3imMlTGldLO2vzlpXD+RA==
+"@xapp/stentor-service-smapi@1.39.44":
+  version "1.39.44"
+  resolved "https://registry.yarnpkg.com/@xapp/stentor-service-smapi/-/stentor-service-smapi-1.39.44.tgz#9a05eeb7e279fd891ba26468e9ce78633673bf1b"
+  integrity sha512-+RxH8HvT4WB0t6QYcdvk/02vha4gy19Vu2k0aaFVZY3Ahnojfidfnj0Gc1sIfBuwMxo+BVXIBonLtZGwLjHr+Q==
   dependencies:
-    "@xapp/stentor-alexa" "1.39.43"
+    "@xapp/stentor-alexa" "1.39.44"
     "@xapp/stentor-app" "1.39.43"
     "@xapp/stentor-service" "1.39.43"
     isomorphic-fetch "2.2.1"
