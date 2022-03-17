@@ -31,7 +31,7 @@ export async function importFromDialogflow(credentialsPath: string, options: { o
 
     const { app, intents, entities } = await service.import();
 
-    log.info(`Retreived ${app.name} with ${intents.length} intents & ${entities.length} entities.`);
+    log.info(`Retrieved ${app.name} with ${intents.length} intents & ${entities.length} entities.`);
 
     log.info(`Creating app on organization with ID ${organizationId}`);
 
@@ -81,6 +81,6 @@ export async function importFromDialogflow(credentialsPath: string, options: { o
 
     log.info(`${entityReturns.length} entities added`);
 
-    // ADD THE CHANNEL!!!
+    // TODO: ADD THE CHANNEL!!!
 
 }

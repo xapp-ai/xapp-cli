@@ -4,8 +4,8 @@ import { getGraphQLClient } from "./graphql/getGraphQLClient";
 
 import { Handler, Entity, Intent } from "stentor-models";
 import { AddAppMutation, AddEntityMutation, AddIntentMutation, UpdateAppMutation, UpdateEntityMutation, UpdateIntentMutation } from "./graphql/mutations";
-import { GetApp, GetIntent, GetHandler, GetEntity } from "./graphql/queries";
-import { App } from "./models";
+import { GetApp, GetIntent, GetHandler, GetEntity, ExportApp as ExportAppQuery } from "./graphql/queries";
+import { App, ExportApp } from "./models";
 
 export interface HandlerDescription {
     intentId: string;
@@ -176,6 +176,18 @@ export class XAPPClient {
             entity
         }).toPromise().then((response) => {
             return response.data.updateEntity;
+        });
+    }
+
+    exportApp(appId: string, organizationId: string): Promise<ExportApp> {
+        return this.client.mutation(ExportAppQuery, {
+            appId,
+            organizationId
+        }).toPromise().then((response) => {
+            const url = response.data.app.update.exportApp.url;
+            return fetch(url);
+        }).then((response) => {
+            return response.json();
         });
     }
 }

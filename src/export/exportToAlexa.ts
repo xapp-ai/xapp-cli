@@ -5,8 +5,9 @@ import { TranslateToAlexaInteractionModel, TranslateToAlexaSkillManifest } from 
 import { existsSync, mkdirSync, writeFileSync } from "fs";
 import { resolve } from "path";
 import { getAppIntentEntities } from "../getAppIntentEntities";
+import { ExportOptions } from "../models/options";
 
-export async function exportToAlexa(targetDirectory: string, options?: { appId?: string }): Promise<void> {
+export async function exportToAlexa(targetDirectory: string, options?: ExportOptions): Promise<void> {
     const { appId } = options;
 
     // Resolve the path

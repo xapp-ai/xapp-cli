@@ -2,14 +2,15 @@
 import { log } from "stentor-logger";
 import { existsSync, mkdirSync, writeFileSync } from "fs";
 import { resolve } from "path";
-import { getAppIntentEntities } from "../getAppIntentEntities";
+import { getStentorApp } from "../getStentorApp";
+import { ExportOptions } from "../models/options";
 
 /**
  * Exports an app to the provided directory.
  */
-export async function exportApp(output: string, options?: { appId: string, full?: boolean }): Promise<void> {
+export async function exportApp(output: string, options?: ExportOptions): Promise<void> {
     const { appId, full } = options;
-    const { app, intents, entities, handlers } = await getAppIntentEntities(appId);
+    const { app, intents, entities, handlers } = await getStentorApp(appId);
 
     // Resolve the path
     const path = resolve(output);
@@ -30,7 +31,7 @@ export async function exportApp(output: string, options?: { appId: string, full?
     const exportFilePath = resolve(exportPath, `${appId}.json`);
     writeFileSync(exportFilePath, JSON.stringify({ app, intents, handlers, entities }, undefined, 2));
 
-    // OK!  if they want individual di
+    // OK!  if they want individual directories
     if (full) {
         // save the app by appId
         const appPath = resolve(exportPath, `app.json`);

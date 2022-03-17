@@ -10,8 +10,9 @@ import {
 import { existsSync, mkdirSync, writeFileSync } from "fs";
 import { resolve } from "path";
 import { getAppIntentEntities } from "../getAppIntentEntities";
+import { ExportOptions } from "../models/options";
 
-export async function exportToLex(output: string, options: { appId: string }): Promise<void> {
+export async function exportToLex(output: string, options: ExportOptions): Promise<void> {
 
     const { appId } = options;
     const { app, intents, entities } = await getAppIntentEntities(appId);

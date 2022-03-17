@@ -1,5 +1,5 @@
 /*! Copyright (c) 2019, XAPPmedia */
-import { isExecutablePath, isHandler } from "stentor-guards";
+import { isExecutablePath } from "stentor-guards";
 import { isSlotDependable, UtteranceGenerator } from "stentor-interaction-model";
 import log from "stentor-logger";
 import { Handler, Intent } from "stentor-models";
@@ -7,7 +7,8 @@ import { findValueForKey, hasForwards, toMap } from "stentor-utils";
 import { Document, Packer, PageNumberFormat } from "docx";
 import { existsSync, writeFileSync } from "fs";
 import { resolve } from "path";
-import { getAppIntentEntities } from "../getAppIntentEntities";
+import { ExportOptions } from "../models/options";
+import { getStentorApp } from "../getStentorApp";
 
 const XML_REGEX = /<.*\/>/;
 
@@ -159,19 +160,9 @@ function convertHandlerToPage(handler: Handler, intents: (Intent | Handler)[]): 
  *
  * @param options
  */
-export async function exportAsScript(output: string, options: { appId?: string }): Promise<void> {
+export async function exportAsScript(output: string, options: ExportOptions): Promise<void> {
     const { appId } = options;
-    const { app, intents } = await getAppIntentEntities(appId);
-
-    // Just pull off the handlers
-    // First filter off intents
-    const handlers: Handler[] = [];
-
-    intents.forEach(handler => {
-        if (isHandler(handler)) {
-            handlers.push(handler);
-        }
-    });
+    const { app, intents, handlers } = await getStentorApp(appId);
 
     log.info(`Found ${handlers.length} handlers`);
 

@@ -302,3 +302,15 @@ query getEntity($appId:String!, $entityId:String!) {
   }
 }
 `;
+
+export const ExportApp = gql`
+mutation exportApp($appId:ID!, $organizationId:ID!){
+  app(organizationId:$organizationId) {
+    update(appId:$appId) {
+      exportApp {
+        url
+      }
+    }
+  }
+}
+`
