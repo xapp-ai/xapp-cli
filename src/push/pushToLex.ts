@@ -9,6 +9,19 @@ import { getAppIntentEntities } from "../getAppIntentEntities";
 
 const DELAY_IN_MS = 1000;
 
+
+/**
+ * Private helper to add a delay to the promise chain
+ *
+ * @param t
+ */
+function delay(t: number, v?: any): Promise<void> {
+    return new Promise((resolve) => {
+        // tslint:disable-next-line:no-null-keyword
+        setTimeout(resolve.bind(null, v), t);
+    });
+}
+
 /**
  * Push to LEX
  *
@@ -97,14 +110,4 @@ export async function pushToLex(options?: { appId?: string; lang?: string; awsRo
     }
 }
 
-/**
- * Private helper to add a delay to the promise chain
- *
- * @param t
- */
-function delay(t: number, v?: any) {
-    return new Promise((resolve) => {
-        // tslint:disable-next-line:no-null-keyword
-        setTimeout(resolve.bind(null, v), t);
-    });
-}
+

@@ -39,7 +39,7 @@ program.command("logout").action(logout);
 program.command("set")
     .description("Changes the environment for the CLI, not typically used.")
     .option('-p --profile <profile>', 'Sets the current profile to use')
-    .action((options: { profile?: string; }) => {
+    .action((options: { profile?: string }) => {
 
         const config = getConfig();
 
@@ -64,8 +64,8 @@ program
 program
     .command("info <appId>")
     .description("Returns basic information about the provided appId")
-    .action(async (appId: string, options: { output: string }) => {
-        await info(appId, options);
+    .action(async (appId: string) => {
+        await info(appId);
     });
 
 program
@@ -161,7 +161,7 @@ program
     .option("-a --appId <appId>", "App ID in XAPP that will be imported")
     .option("-p --platform <platform>", "Platform to import from: 'd' for Dialogflow, 'l' for Lex. Defaults to stentor based import")
     .option("-c --credentials <credentials>", "Path to the service account credentials required for Dialogflow")
-    .action(async (file: string, options: { appId: string, credentials?: string; platform?: string; organizationId: string }) => {
+    .action(async (file: string, options: { appId: string; credentials?: string; platform?: string; organizationId: string }) => {
 
         let { platform } = options;
         if (!platform) {

@@ -11,48 +11,6 @@ import { TokenResponse } from "./TokenResponse";
 const DEFAULT_LISTENING_PORT = 8787;
 
 /**
- * Logs the user in.
- */
-export async function login(): Promise<string> {
-    function base64URLEncode(str: Buffer) {
-        return str
-            .toString("base64")
-            .replace(/\+/g, "-")
-            .replace(/\//g, "_")
-            .replace(/=/g, "");
-    }
-    const length = 32;
-    const verifier = base64URLEncode(randomBytes(length));
-
-    function sha256(buffer: string) {
-        return createHash("sha256")
-            .update(buffer)
-            .digest();
-    }
-    const challenge = base64URLEncode(sha256(verifier));
-    log.info(`Ok, logging you in.`);
-    const code = await getCode(challenge);
-    log.info(`Got the code from the redirect, converting it to an access token.`);
-    let token: TokenResponse;
-    try {
-        token = await getToken(code, verifier);
-    } catch (e) {
-        log.warn(`Error retrieving access token: ${e}`);
-        throw e;
-    }
-    log.info(`And got the token, saving it to use in the future.`);
-    // Save it on the config
-    const config = getConfig();
-    const currentProfile: string = config.currentProfile || "default";
-    config.profiles[currentProfile] = { ...config.profiles[currentProfile], token };
-    saveConfig(config);
-
-    log.info(`You are logged in. Enjoy`);
-    // Return it
-    return token.access_token;
-}
-
-/**
  * Open the login page, setup a server to receive the redirect with the code and return it.
  *
  * @param challenge The challenge code to be used later for verification.
@@ -117,10 +75,14 @@ async function getToken(code: string, verifier: string): Promise<TokenResponse> 
             url: `${authPath}/${tokenPath}`,
             headers: { "content-type": "application/x-www-form-urlencoded" },
             form: {
+                // eslint-disable-next-line @typescript-eslint/camelcase
                 grant_type: "authorization_code",
+                // eslint-disable-next-line @typescript-eslint/camelcase
                 client_id: clientId,
+                // eslint-disable-next-line @typescript-eslint/camelcase
                 code_verifier: `${verifier}`,
                 code: `${code}`,
+                // eslint-disable-next-line @typescript-eslint/camelcase
                 redirect_uri: `http://localhost:${port}/${path}`
             }
         };
@@ -146,4 +108,46 @@ async function getToken(code: string, verifier: string): Promise<TokenResponse> 
             }
         });
     });
+}
+
+/**
+ * Logs the user in.
+ */
+export async function login(): Promise<string> {
+    function base64URLEncode(str: Buffer): string {
+        return str
+            .toString("base64")
+            .replace(/\+/g, "-")
+            .replace(/\//g, "_")
+            .replace(/=/g, "");
+    }
+    const length = 32;
+    const verifier = base64URLEncode(randomBytes(length));
+
+    function sha256(buffer: string): Buffer {
+        return createHash("sha256")
+            .update(buffer)
+            .digest();
+    }
+    const challenge = base64URLEncode(sha256(verifier));
+    log.info(`Ok, logging you in.`);
+    const code = await getCode(challenge);
+    log.info(`Got the code from the redirect, converting it to an access token.`);
+    let token: TokenResponse;
+    try {
+        token = await getToken(code, verifier);
+    } catch (e) {
+        log.warn(`Error retrieving access token: ${e}`);
+        throw e;
+    }
+    log.info(`And got the token, saving it to use in the future.`);
+    // Save it on the config
+    const config = getConfig();
+    const currentProfile: string = config.currentProfile || "default";
+    config.profiles[currentProfile] = { ...config.profiles[currentProfile], token };
+    saveConfig(config);
+
+    log.info(`You are logged in. Enjoy`);
+    // Return it
+    return token.access_token;
 }

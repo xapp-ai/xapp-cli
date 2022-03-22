@@ -17,7 +17,7 @@ export async function pushToDialogflowV2(
     const { app, intents, entities } = await getAppIntentEntities(appId);
     log.info(`Pushing ${app.name} with ${intents.length} intents & ${entities.length} entities.`);
 
-    let actionsOnGoogleId: string = options.id;
+    const actionsOnGoogleId: string = options.id;
 
     if (!actionsOnGoogleId) {
         throw new Error("Actions on Google ID required for pushing to Dialogflow V2");
@@ -33,7 +33,9 @@ export async function pushToDialogflowV2(
         projectId: actionsOnGoogleId,
         useBeta: beta,
         credentials: {
+            // eslint-disable-next-line @typescript-eslint/camelcase
             client_email: credentials.client_email,
+            // eslint-disable-next-line @typescript-eslint/camelcase
             private_key: credentials.private_key
         }
     });

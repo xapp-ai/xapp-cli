@@ -7,7 +7,7 @@ import { getAppIntentEntities } from "../getAppIntentEntities";
 /**
  * Exports an app to the provided directory.
  */
-export async function exportApp(output: string, options?: { appId: string, full?: boolean }): Promise<void> {
+export async function exportApp(output: string, options?: { appId: string; full?: boolean }): Promise<void> {
     const { appId, full } = options;
     const { app, intents, entities, handlers } = await getAppIntentEntities(appId);
 

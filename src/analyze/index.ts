@@ -4,7 +4,7 @@ import log from "stentor-logger";
 import { Handler } from "stentor-models";
 import { getAppIntentEntities } from "../getAppIntentEntities";
 
-export async function info(appId: string, options?: { output?: string }): Promise<void> {
+export async function info(appId: string): Promise<void> {
 
     const { app, intents, handlers, entities } = await getAppIntentEntities(appId);
 

@@ -24,7 +24,9 @@ export async function importFromDialogflow(credentialsPath: string, options: { o
     const service = new DialogflowV2Service({
         projectId: credentials.project_id,
         credentials: {
+            // eslint-disable-next-line @typescript-eslint/camelcase
             client_email: credentials.client_email,
+            // eslint-disable-next-line @typescript-eslint/camelcase
             private_key: credentials.private_key
         }
     });
@@ -47,7 +49,7 @@ export async function importFromDialogflow(credentialsPath: string, options: { o
         }
     }).toPromise();
 
-    const newApp = appReturn.data.addApp as { appId: string, name: string, organizationId: string };
+    const newApp = appReturn.data.addApp as { appId: string; name: string; organizationId: string };
     const { appId } = newApp;
     log.info(`App ${newApp.name} created with id ${newApp.appId}`);
 

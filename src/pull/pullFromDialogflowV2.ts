@@ -35,7 +35,9 @@ export async function pullFromDialogflowV2(
     const service = new DialogflowV2Service({
         projectId: credentials.project_id,
         credentials: {
+            // eslint-disable-next-line @typescript-eslint/camelcase
             client_email: credentials.client_email,
+            // eslint-disable-next-line @typescript-eslint/camelcase
             private_key: credentials.private_key
         }
     });

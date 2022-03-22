@@ -1,3 +1,4 @@
+/*! Copyright (c) 2022, XAPPmedia */
 import { resolve } from "path";
 import { existsSync, readFileSync } from "fs";
 
@@ -24,7 +25,7 @@ export async function importApp(file: string, options: { appId: string }): Promi
 
     const importedFile = readFileSync(path, "utf8");
 
-    let imported: { app: App, handlers?: (Intent | Handler)[], intents?: (Intent | Handler)[], entities: Entity[] };
+    let imported: { app: App; handlers?: (Intent | Handler)[]; intents?: (Intent | Handler)[]; entities: Entity[] };
 
     try {
         imported = JSON.parse(importedFile);
