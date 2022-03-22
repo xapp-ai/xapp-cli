@@ -8,7 +8,7 @@ import { XAPPClient } from "./XAPPClient";
  * @param token User auth token.
  * @param appId
  */
-export function getXAPPClient(token: string, appId?: string) {
+export function getXAPPClient(token: string, appId?: string): XAPPClient {
     if (!appId) {
         appId = getAppId();
     }

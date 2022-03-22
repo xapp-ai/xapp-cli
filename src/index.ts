@@ -40,7 +40,7 @@ program.command("logout").action(logout);
 program.command("set")
     .description("Changes the environment for the CLI, not typically used.")
     .option('-p --profile <profile>', 'Sets the current profile to use')
-    .action((options: { profile?: string; }) => {
+    .action((options: { profile?: string }) => {
 
         const config = getConfig();
 
@@ -58,8 +58,8 @@ program.command("set")
 program
     .command("info <appId>")
     .description("Returns basic information about the provided appId")
-    .action(async (appId: string, options: { output: string }) => {
-        await info(appId, options);
+    .action(async (appId: string) => {
+        await info(appId);
     });
 
 program

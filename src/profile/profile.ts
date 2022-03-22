@@ -47,7 +47,9 @@ export async function profile(options?: {
                 const dialogflowV2 = new DialogflowV2Service({
                     projectId: googleCredentials.project_id,
                     credentials: {
+                        // eslint-disable-next-line @typescript-eslint/camelcase
                         client_email: googleCredentials.client_email,
+                        // eslint-disable-next-line @typescript-eslint/camelcase
                         private_key: googleCredentials.private_key,
                     },
                 });
@@ -103,7 +105,7 @@ export async function profile(options?: {
         const tests: UtteranceTest[] = [];
 
         // We use this to keep track of the test number
-        let index: number = 0;
+        let index = 0;
 
         rl.on("line", (input) => {
             try {
@@ -117,7 +119,7 @@ export async function profile(options?: {
         }).on("close", async () => {
             log().info(`Finished reading file... running profiler on ${tests.length} tests`);
 
-            let passed: number = 0;
+            let passed = 0;
             await profiler.profile(tests, (result) => {
                 const FOUR = 4;
                 const id = result.id ? result.id : padStart(index + 1, FOUR, 0);

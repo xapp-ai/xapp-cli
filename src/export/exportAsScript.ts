@@ -257,9 +257,9 @@ export async function exportAsScript(output: string, options: ExportOptions): Pr
         }
 
         const promptSegments = page.prompt.split(/\r?\n/);
-        let promptWordCount: number = 0;
+        let promptWordCount = 0;
 
-        promptSegments.forEach((segment, index) => {
+        promptSegments.forEach((segment) => {
             // Clean it up
             const results = XML_REGEX.exec(segment);
 

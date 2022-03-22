@@ -41,11 +41,11 @@ export interface AppOverview {
     intents: {
         total: number;
         intents: IntentDescription[];
-    }
+    };
     entities: {
         total: number;
         entities: EntityDescription[];
-    }
+    };
 }
 
 export interface XAPPClientProps {
@@ -55,11 +55,11 @@ export interface XAPPClientProps {
 export class XAPPClient {
     private client: Client;
 
-    constructor(props: XAPPClientProps) {
+    public constructor(props: XAPPClientProps) {
         this.client = getGraphQLClient(props.userToken);
     }
 
-    createApp(app: App): Promise<App> {
+    public createApp(app: App): Promise<App> {
         return this.client.mutation(AddAppMutation, {
             app
         }).toPromise().then((response) => {
@@ -67,7 +67,7 @@ export class XAPPClient {
         });
     }
 
-    updateApp(app: App): Promise<App> {
+    public updateApp(app: App): Promise<App> {
         return this.client.mutation(UpdateAppMutation, {
             appId: app.appId,
             app
@@ -76,7 +76,7 @@ export class XAPPClient {
         });
     }
 
-    getApp(appId: string, start?: string, end?: string): Promise<AppOverview> {
+    public getApp(appId: string, start?: string, end?: string): Promise<AppOverview> {
         if (!start) {
             const now = new Date();
             start = now.toISOString();
@@ -97,7 +97,7 @@ export class XAPPClient {
     /**
      * Handler
      */
-    getHandler(appId: string, intentId: string): Promise<Handler> {
+    public getHandler(appId: string, intentId: string): Promise<Handler> {
         return this.client.query(GetHandler, {
             appId,
             intentId
@@ -109,8 +109,7 @@ export class XAPPClient {
     /**
      * Intent
      */
-
-    createIntent(appId: string, intent: Intent): Promise<Intent> {
+    public createIntent(appId: string, intent: Intent): Promise<Intent> {
         return this.client.mutation(AddIntentMutation, {
             appId,
             intent
@@ -119,7 +118,7 @@ export class XAPPClient {
         });
     };
 
-    getIntent(appId: string, intentId: string): Promise<Intent> {
+    public getIntent(appId: string, intentId: string): Promise<Intent> {
         return this.client.query(GetIntent, {
             appId,
             intentId
@@ -128,7 +127,7 @@ export class XAPPClient {
         });
     };
 
-    updateIntent(appId: string, intent: Intent): Promise<Pick<Intent, "intentId" | "name">> {
+    public updateIntent(appId: string, intent: Intent): Promise<Pick<Intent, "intentId" | "name">> {
         return this.client.mutation(UpdateIntentMutation, {
             appId,
             intentId: intent.intentId,
@@ -149,7 +148,7 @@ export class XAPPClient {
      * @param entity 
      * @returns 
      */
-    createEntity(appId: string, entity: Entity): Promise<Pick<Entity, "entityId" | "displayName">> {
+    public createEntity(appId: string, entity: Entity): Promise<Pick<Entity, "entityId" | "displayName">> {
         return this.client.mutation(AddEntityMutation, {
             entity: {
                 appId,
@@ -160,7 +159,7 @@ export class XAPPClient {
         });
     };
 
-    getEntity(appId: string, entityId: string): Promise<Entity> {
+    public getEntity(appId: string, entityId: string): Promise<Entity> {
         return this.client.query(GetEntity, {
             appId,
             entityId
@@ -169,7 +168,7 @@ export class XAPPClient {
         });
     }
 
-    updateEntity(appId: string, entity: Entity): Promise<Entity> {
+    public updateEntity(appId: string, entity: Entity): Promise<Entity> {
         return this.client.mutation(UpdateEntityMutation, {
             appId,
             entityId: entity.entityId,

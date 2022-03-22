@@ -7,13 +7,18 @@ import { existsSync, mkdirSync, writeFileSync } from "fs";
 
 import { Config } from "./Config";
 
+
+function getRootConfigPath(name = ".xapp"): string {
+    return join(homedir(), name);
+}
+
 /**
  * Returns the path to the config object, it will create the root directory
  * if it doesn't exist.
  *
  * @param name - Path to the config object
  */
-export function getConfigPath(name: string = ".xapp"): string {
+export function getConfigPath(name = ".xapp"): string {
     const configPath = join(homedir(), name, "cli_config");
 
     if (!existsSync(configPath)) {
@@ -36,8 +41,4 @@ export function getConfigPath(name: string = ".xapp"): string {
     }
 
     return configPath;
-}
-
-function getRootConfigPath(name: string = ".xapp"): string {
-    return join(homedir(), name);
 }

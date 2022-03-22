@@ -10,7 +10,7 @@ import { getConfigPath } from "./getConfigPath";
  *
  * @param config - Config to be saved
  */
-export function saveConfig(config: Config) {
+export function saveConfig(config: Config): void {
     config.modified = moment().toISOString();
     const configPath = getConfigPath();
     const buffer = Buffer.from(JSON.stringify(config, undefined, 2));

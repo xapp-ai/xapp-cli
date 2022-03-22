@@ -6,12 +6,22 @@ import { getAppIntentEntities, getAppIntentEntitiesFromExport } from "../getAppI
 
 import log from "stentor-logger";
 
+
+function sleep(ms: number): Promise<void> {
+    log.info("Snoozing for ms milliseconds ... zzzzz");
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve();
+        }, ms);
+    });
+}
+
 /**
  * Push to LEX V2
  *
  * @param options
  */
-export async function pushToLexV2(options?: { appId?: string; lang?: string; awsRole?: string, fulfillment?: string, file?: string, botName?: string }): Promise<void> {
+export async function pushToLexV2(options?: { appId?: string; lang?: string; awsRole?: string; fulfillment?: string; file?: string; botName?: string }): Promise<void> {
     const { appId, awsRole, fulfillment, file, botName } = options;
 
     if (!botName) {
@@ -22,13 +32,13 @@ export async function pushToLexV2(options?: { appId?: string; lang?: string; aws
         file ? await getAppIntentEntitiesFromExport(appId, file) : await getAppIntentEntities(appId);
 
     // We can push v1 too
-    const lexChannel = (app as any).channels.find((ch: { type: string; }) => {
+    const lexChannel = (app as any).channels.find((ch: { type: string }) => {
         return ch.type === "lex-connect" || ch.type === "lex-v2";
     });
 
     let kendraRole: string;
     let kendraIndexARN: string;
-    let fulfillmentARN : string;
+    let fulfillmentARN: string;
 
     if (lexChannel) {
         kendraRole = (lexChannel as any).kendraRole;
@@ -96,13 +106,4 @@ export async function pushToLexV2(options?: { appId?: string; lang?: string; aws
         const nluResponse = lexSyncerV2.query("hello");
         log.info(`App ${app.appId} nlu response\n ${JSON.stringify(nluResponse, undefined, 2)}}`);
     }
-}
-
-function sleep(ms: number): Promise<void> {
-    log.info("Snoozing for ms milliseconds ... zzzzz");
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve();
-        }, ms);
-    });
 }

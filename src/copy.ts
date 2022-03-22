@@ -5,7 +5,7 @@ import { getAppIntentEntities } from "./getAppIntentEntities";
 import { getXAPPClient } from "./getXAPPClient";
 import { Options } from "./Options";
 
-export async function copy(appId: string, newAppId: string, intentId: string | undefined, options: Options) {
+export async function copy(appId: string, newAppId: string, intentId: string | undefined, options: Options): Promise<void> {
     if (!newAppId) {
         throw Error("New APP Id undefined");
     }
@@ -15,7 +15,7 @@ export async function copy(appId: string, newAppId: string, intentId: string | u
 
     const newApp = await client.getApp(newAppId);
 
-    const existingIntentsMap = intents.reduce<any>((map, intent, index) => {
+    const existingIntentsMap = intents.reduce<any>((map, intent) => {
         const id = intent.intentId;
         map[id] = intent;
         return map;
