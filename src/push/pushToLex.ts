@@ -1,4 +1,5 @@
-/*! Copyright (c) 2019, XAPPmedia */
+/*! Copyright (c) 2022, XAPP AI*/
+
 import { TranslateToLexImportExportBot, LexImportExportBot, LexImportExportResource } from "@xapp/stentor-lex-lib";
 import { GetImportResponse, LexService, StartImportResponse } from "@xapp/stentor-service-lex";
 import AdmZip = require("adm-zip");

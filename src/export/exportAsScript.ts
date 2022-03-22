@@ -1,4 +1,5 @@
-/*! Copyright (c) 2019, XAPPmedia */
+/*! Copyright (c) 2022, XAPP AI*/
+
 import { isExecutablePath } from "stentor-guards";
 import { isSlotDependable, UtteranceGenerator } from "stentor-interaction-model";
 import log from "stentor-logger";

@@ -1,3 +1,4 @@
+/*! Copyright (c) 2022, XAPP AI*/
 /*! Copyright (c) 2021, XAPPmedia */
 import { DialogflowV2Service } from "@xapp/stentor-service-dialogflow";
 import log from "stentor-logger";

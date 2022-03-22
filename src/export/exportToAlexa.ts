@@ -1,4 +1,5 @@
-/*! Copyright (c) 2019, XAPPmedia */
+/*! Copyright (c) 2022, XAPP AI*/
+
 import { log } from "stentor-logger";
 import { hasAudioPlayerHandlerProps } from "@xapp/stentor-handler-media";
 import { TranslateToAlexaInteractionModel, TranslateToAlexaSkillManifest } from "@xapp/stentor-alexa";

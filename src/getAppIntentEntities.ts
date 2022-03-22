@@ -1,4 +1,5 @@
-/*! Copyright (c) 2019, XAPPmedia */
+/*! Copyright (c) 2022, XAPP AI*/
+
 import log from "stentor-logger";
 import { Entity, Handler, Intent } from "stentor-models";
 import { App } from "./models";

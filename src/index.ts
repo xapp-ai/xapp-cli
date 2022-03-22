@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/*! Copyright (c) 2019, XAPPmedia */
+/*! Copyright (c) 2022, XAPP AI*/
 require("dotenv").config(); // process the .env file
 
 // For the CLI, we want the log level to always be debug
@@ -220,7 +220,7 @@ program
     .option("-a --appId <appId>", "App ID in XAPP that will be imported")
     .option("-p --platform <platform>", "Platform to import from: 'd' for Dialogflow, 'l' for Lex. Defaults to stentor based import")
     .option("-c --credentials <credentials>", "Path to the service account credentials required for Dialogflow")
-    .action(async (file: string, options: { appId: string, credentials?: string; platform?: string; organizationId: string }) => {
+    .action(async (file: string, options: { appId: string; credentials?: string; platform?: string; organizationId: string }) => {
 
         let { platform } = options;
         if (!platform) {

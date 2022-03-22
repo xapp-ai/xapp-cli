@@ -1,3 +1,4 @@
+/*! Copyright (c) 2022, XAPP AI*/
 /*! Copyright (c) 2020, XAPPmedia */
 import {
     TranslateDialogflowV2Intent,
