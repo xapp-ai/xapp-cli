@@ -1,4 +1,5 @@
-/*! Copyright (c) 2019, XAPPmedia */
+/*! Copyright (c) 2022, XAPP AI*/
+
 import { getConfigProfile } from "./getConfig";
 import { login } from "./login";
 

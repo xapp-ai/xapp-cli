@@ -1,3 +1,4 @@
+/*! Copyright (c) 2022, XAPP AI*/
 /*! Copyright (c) 2020, XAPPmedia */
 import { isIntent } from "stentor-guards";
 import log from "stentor-logger";
@@ -10,8 +11,9 @@ import {
 import { existsSync, mkdirSync, writeFileSync } from "fs";
 import { resolve } from "path";
 import { getAppIntentEntities } from "../getAppIntentEntities";
+import { ExportOptions } from "../models/options";
 
-export async function exportToLex(output: string, options: { appId: string }): Promise<void> {
+export async function exportToLex(output: string, options: ExportOptions): Promise<void> {
 
     const { appId } = options;
     const { app, intents, entities } = await getAppIntentEntities(appId);

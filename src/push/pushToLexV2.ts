@@ -1,4 +1,5 @@
-/*! Copyright (c) 2019, XAPPmedia */
+/*! Copyright (c) 2022, XAPP AI*/
+
 import { LexServiceV2, LexSyncStatusV2 } from "@xapp/stentor-service-lex";
 import { isHandler, isIntent } from "stentor-guards";
 import { Handler } from "stentor-models";

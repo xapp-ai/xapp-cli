@@ -1,3 +1,4 @@
+/*! Copyright (c) 2022, XAPP AI*/
 /*! Copyright (c) 2022, XAPPmedia */
 
 
@@ -8,4 +9,11 @@ export interface App {
     invocationName?: string;
     //
     actionsOnGoogleId?: string;
+}
+
+// This is a very simple version
+export interface Channel {
+    type: string;
+    id: string;
+    [key: string]: unknown;
 }

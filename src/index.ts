@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/*! Copyright (c) 2019, XAPPmedia */
+/*! Copyright (c) 2022, XAPP AI*/
 require("dotenv").config(); // process the .env file
 
 // For the CLI, we want the log level to always be debug
@@ -24,6 +24,7 @@ import { log } from "stentor-logger";
 import { importApp } from "./import/importApp";
 import { importFromDialogflow } from "./import";
 import { profile } from "./profile";
+import { ExportOptions } from "./models/options";
 
 program.version(pkg.version);
 
@@ -55,13 +56,6 @@ program.command("set")
     });
 
 program
-    .command("copy <appId> <newAppId> [intentId]")
-    .option("-d, --dryRun", "Dry run")
-    .action((appId: string, newAppId: string, intentId: string | undefined, options: Options) => {
-        copy(appId, newAppId, intentId, options);
-    });
-
-program
     .command("info <appId>")
     .description("Returns basic information about the provided appId")
     .action(async (appId: string) => {
@@ -89,6 +83,14 @@ program
             }
         }
     );
+
+program
+    .command("copy <appId> <newAppId> [intentId]")
+    .description("BETA - Copies the app")
+    .option("-d, --dryRun", "Dry run")
+    .action((appId: string, newAppId: string, intentId: string | undefined, options: Options) => {
+        copy(appId, newAppId, intentId, options);
+    });
 
 program
     .command("push")
@@ -136,7 +138,7 @@ program
 
 program
     .command("pull")
-    .description("BETA Pulls the provided platform and pushes it to the provided appId")
+    .description("BETA - Pulls the provided platform and pushes it to the provided appId")
     .option(
         "-p --platform <platform>",
         "'d' for Dialogflow version 2"
@@ -154,9 +156,70 @@ program
         }
     });
 
+
+program
+    .command("export <directory> [appId]")
+    .description("Exports an app to the provided directory.  If appId isn't provided it will look for the environment variable.")
+    .option(
+        "-p --platform <platform>",
+        "BETA - Platform to export to: 'a' for Alexa, 'd' for Dialogflow, 's' for Word doc.  Defaults to stentor based export."
+    )
+    .option("-c --channels", "Exports the channels as well, these will be found in a directory /channels")
+    .option("-s --split", "Used for stentor export, it exports the individual handlers, intents, entities into individual files")
+    .action(async (directory: string, appId: string = undefined, options: { platform?: string; channels?: boolean; split?: boolean }) => {
+        let { platform } = options;
+        const { channels } = options;
+
+        if (!platform) {
+            platform = "stentor";
+        }
+
+        const exportOptions: ExportOptions = {
+            appId,
+            channels
+        }
+
+        switch (platform) {
+            case "a":
+            case "alexa":
+                try {
+                    await exportToAlexa(directory, exportOptions);
+                } catch (error) {
+                    console.error(error.stack);
+                }
+                break;
+            case "d":
+            case "dialogflow":
+                try {
+                    await exportToDialogflow(directory, exportOptions);
+                } catch (error) {
+                    console.error(error.stack);
+                }
+                break;
+            case "l":
+            case "lex":
+                try {
+                    await exportToLex(directory, exportOptions);
+                } catch (error) {
+                    console.error(error.stack);
+                }
+                break;
+            case "s":
+            case "script":
+                try {
+                    await exportAsScript(directory, exportOptions);
+                } catch (error) {
+                    console.error(error.stack);
+                }
+                break;
+            default:
+                await exportApp(directory, exportOptions);
+        }
+    });
+
 program
     .command("import <file>")
-    .description("Imports an app")
+    .description("BETA - Imports an app")
     .option("-o --organizationId <organizationId>", "Organization ID that the agent will be imported to.")
     .option("-a --appId <appId>", "App ID in XAPP that will be imported")
     .option("-p --platform <platform>", "Platform to import from: 'd' for Dialogflow, 'l' for Lex. Defaults to stentor based import")
@@ -176,58 +239,6 @@ program
                 await importApp(file, options);
         }
 
-    });
-
-program
-    .command("export <directory>")
-    .description("Exports the provided appId")
-    .option("-a --appId <appId>", "XAPP App ID")
-    .option(
-        "-p --platform <platform>",
-        "BETA - Platform to export to: 'a' for Alexa, 'd' for Dialogflow, 's' for Word doc.  Defaults to stentor based export"
-    )
-    .option("-f --full", "Used for stentor export, it exports the individual handlers, intents, entities")
-    .action(async (directory: string, options: { appId: string; platform: string; full?: boolean }) => {
-        let { platform } = options;
-        if (!platform) {
-            platform = "stentor";
-        }
-        switch (platform) {
-            case "a":
-            case "alexa":
-                try {
-                    await exportToAlexa(directory, options);
-                } catch (error) {
-                    console.error(error.stack);
-                }
-                break;
-            case "d":
-            case "dialogflow":
-                try {
-                    await exportToDialogflow(directory, options);
-                } catch (error) {
-                    console.error(error.stack);
-                }
-                break;
-            case "l":
-            case "lex":
-                try {
-                    await exportToLex(directory, options);
-                } catch (error) {
-                    console.error(error.stack);
-                }
-                break;
-            case "s":
-            case "script":
-                try {
-                    await exportAsScript(directory, options);
-                } catch (error) {
-                    console.error(error.stack);
-                }
-                break;
-            default:
-                await exportApp(directory, options);
-        }
     });
 
 program.parse(process.argv);

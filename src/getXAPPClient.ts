@@ -1,4 +1,5 @@
-/*! Copyright (c) 2019, XAPPmedia */
+/*! Copyright (c) 2022, XAPP AI*/
+
 import { getAppId } from "./getAppId";
 import { XAPPClient } from "./XAPPClient";
 

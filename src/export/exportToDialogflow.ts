@@ -1,4 +1,5 @@
-/*! Copyright (c) 2019, XAPPmedia */
+/*! Copyright (c) 2022, XAPP AI*/
+
 import log from "stentor-logger";
 import {
     ExportEntityAndEntityEntries,
@@ -10,6 +11,7 @@ import {
 import { existsSync, mkdirSync, writeFileSync } from "fs";
 import { resolve } from "path";
 import { getAppIntentEntities } from "../getAppIntentEntities";
+import { ExportOptions } from "../models/options";
 
 /**
  * Create a Dialogflow zip from the intents and the app
@@ -20,7 +22,7 @@ import { getAppIntentEntities } from "../getAppIntentEntities";
  * @param newSkill
  * @returns {Promise<TResult>}
  */
-export async function exportToDialogflow(output: string, options: { appId: string }): Promise<void> {
+export async function exportToDialogflow(output: string, options: ExportOptions): Promise<void> {
     const { appId } = options;
     const { app, intents } = await getAppIntentEntities(appId);
     log.info(`Exporting ${app.appId} to Dialogflow`);
