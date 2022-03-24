@@ -10,3 +10,10 @@ export interface App {
     //
     actionsOnGoogleId?: string;
 }
+
+// This is a very simple version
+export interface Channel {
+    type: string;
+    id: string;
+    [key: string]: unknown;
+}

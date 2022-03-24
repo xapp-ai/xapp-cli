@@ -162,17 +162,21 @@ program
     .description("Exports an app to the provided directory.  If appId isn't provided it will look for the environment variable.")
     .option(
         "-p --platform <platform>",
-        "BETA - Platform to export to: 'a' for Alexa, 'd' for Dialogflow, 's' for Word doc.  Defaults to stentor based export"
+        "BETA - Platform to export to: 'a' for Alexa, 'd' for Dialogflow, 's' for Word doc.  Defaults to stentor based export."
     )
-    .option("-f --full", "Used for stentor export, it exports the individual handlers, intents, entities")
-    .action(async (directory: string, appId: string = undefined, options: { platform: string; full?: boolean }) => {
+    .option("-c --channels", "Exports the channels as well, these will be found in a directory /channels")
+    .option("-s --split", "Used for stentor export, it exports the individual handlers, intents, entities into individual files")
+    .action(async (directory: string, appId: string = undefined, options: { platform?: string; channels?: boolean; split?: boolean }) => {
         let { platform } = options;
+        const { channels } = options;
+
         if (!platform) {
             platform = "stentor";
         }
 
         const exportOptions: ExportOptions = {
-            appId
+            appId,
+            channels
         }
 
         switch (platform) {

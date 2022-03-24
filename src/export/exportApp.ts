@@ -5,12 +5,14 @@ import { existsSync, mkdirSync, writeFileSync } from "fs";
 import { resolve } from "path";
 import { getStentorApp } from "../getStentorApp";
 import { ExportOptions } from "../models/options";
+import { getXAPPClient } from "../getXAPPClient";
+import { getUserToken } from "../getUserToken";
 
 /**
  * Exports an app to the provided directory.
  */
 export async function exportApp(output: string, options?: ExportOptions): Promise<void> {
-    const { appId, full } = options;
+    const { appId, channels, split } = options;
     const { app, intents, entities, handlers } = await getStentorApp(appId);
 
     // Resolve the path
@@ -21,7 +23,6 @@ export async function exportApp(output: string, options?: ExportOptions): Promis
     }
 
     // folder name is app name plus date
-
     const exportDirName = `${app.organizationId}-${app.appId}-${new Date().getTime()}`;
     const exportPath = resolve(path, exportDirName);
     mkdirSync(exportPath);
@@ -33,7 +34,7 @@ export async function exportApp(output: string, options?: ExportOptions): Promis
     writeFileSync(exportFilePath, JSON.stringify({ app, intents, handlers, entities }, undefined, 2));
 
     // OK!  if they want individual directories
-    if (full) {
+    if (split) {
         // save the app by appId
         const appPath = resolve(exportPath, `app.json`);
         writeFileSync(appPath, JSON.stringify(app, undefined, 2));
@@ -59,6 +60,25 @@ export async function exportApp(output: string, options?: ExportOptions): Promis
         handlers.forEach((handler) => {
             const handlerPath = resolve(handlersPath, `${handler.intentId}.json`);
             writeFileSync(handlerPath, JSON.stringify(handler, undefined, 2));
+        });
+    }
+
+    if (channels) {
+        // Ok! find the channel
+        const token = await getUserToken();
+        const client = getXAPPClient(token, appId);
+        const channels = await client.getAppChannels(appId);
+
+        log().info(`Found ${channels.length} channels`);
+
+
+        // Find the channel
+        // entities
+        const channelsPath = resolve(exportPath, "channels");
+        mkdirSync(channelsPath);
+        channels.forEach((channel) => {
+            const entityPath = resolve(channelsPath, `${channel.id}.json`);
+            writeFileSync(entityPath, JSON.stringify(channel, undefined, 2));
         });
     }
 }
