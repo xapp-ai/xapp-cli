@@ -14,6 +14,7 @@ export interface FullApp { app: App; intents?: Intent[]; handlers?: Handler[]; e
 /**
  * Fetch the app, intents, and entities
  *
+ * @deprecated - Use getStentorApp
  * @param appId
  * @param options
  * @returns
