@@ -905,10 +905,10 @@
   resolved "https://registry.yarnpkg.com/@xapp/stentor-app/-/stentor-app-1.40.112.tgz#eb79455fcee961e056c81c336ccc307f3d2a26c9"
   integrity sha512-JMRaDXPNdHfvZXaPBmY5kwbIN5wa/Eb3oYq6PO1Op1tIbIudZDylvdyqg2KwPv0diVT+lBUqMk4IPJ/qkB55rA==
 
-"@xapp/stentor-dialogflow@1.40.112":
-  version "1.40.112"
-  resolved "https://registry.yarnpkg.com/@xapp/stentor-dialogflow/-/stentor-dialogflow-1.40.112.tgz#a0d271574e44e4094be31ec761085202bdb4228a"
-  integrity sha512-27suC8PhUbKvHXreXUfUs8wEG9b6zfZHy+2DfDVEsey/WRdy1yNTmcI/KnqXRPk1zhu6eGkB0qGVHxnXZS315g==
+"@xapp/stentor-dialogflow@1.40.113":
+  version "1.40.113"
+  resolved "https://registry.yarnpkg.com/@xapp/stentor-dialogflow/-/stentor-dialogflow-1.40.113.tgz#debe22838ce0b72fa3a1cdfb719865bf1c8383fb"
+  integrity sha512-OoPUEyTJbzs6yZFUZpphbRi/J+phbZbqnYrSVYMpUsxL60UssIzyV5/XjF2mh3Fvz6t0vHsvutaWAT46BJz4DA==
   dependencies:
     "@types/dialogflow" "0.11.0"
     "@xapp/patterns" "1.40.101"
@@ -927,12 +927,12 @@
     "@xapp/stentor-service-search" "1.40.112"
     moment-timezone "0.5.34"
 
-"@xapp/stentor-interaction-model-profiler@1.40.112":
-  version "1.40.112"
-  resolved "https://registry.yarnpkg.com/@xapp/stentor-interaction-model-profiler/-/stentor-interaction-model-profiler-1.40.112.tgz#cbe1417d5eda8cc236b192d38251bf362a027421"
-  integrity sha512-6V9fEuP5jvtRBslk+dtaPBZ7thX5EF4lKjcWdn44pG0y8v0RWhlkTvZyL+sJY2jCM28uhwu+W5gAMqZXXuVJjQ==
+"@xapp/stentor-interaction-model-profiler@1.40.113":
+  version "1.40.113"
+  resolved "https://registry.yarnpkg.com/@xapp/stentor-interaction-model-profiler/-/stentor-interaction-model-profiler-1.40.113.tgz#6233a86a7536aa0e9c58287aadbfb2675cb28942"
+  integrity sha512-REHWtQFVxOfXDMyEtIfA0X+JCzQUaWrLspurRiad2845J+rCnJ7/VDsWrALOZmkkC5xavQna8fCqxfbLXcSjyw==
   dependencies:
-    "@xapp/stentor-service-dialogflow" "1.40.112"
+    "@xapp/stentor-service-dialogflow" "1.40.113"
     "@xapp/stentor-service-smapi" "1.40.112"
     lodash.isequal "4.5.0"
 
@@ -956,13 +956,13 @@
     isomorphic-fetch "3.0.0"
     moment "2.29.1"
 
-"@xapp/stentor-service-dialogflow@1.40.112":
-  version "1.40.112"
-  resolved "https://registry.yarnpkg.com/@xapp/stentor-service-dialogflow/-/stentor-service-dialogflow-1.40.112.tgz#8453277ada05ff95b05562f10d8de32bf25ee247"
-  integrity sha512-bHeFVBpDdU5OZ+LCTbz5BTSSloO5TqPNZZ7SRk5pcKXKtyRq23Di5T4Gx/E8aG9K5Q5ptAEEjpdQSi/T1lH2WA==
+"@xapp/stentor-service-dialogflow@1.40.113":
+  version "1.40.113"
+  resolved "https://registry.yarnpkg.com/@xapp/stentor-service-dialogflow/-/stentor-service-dialogflow-1.40.113.tgz#750dd027e0fbe1c2b40e9accfd126540ff0e9c6e"
+  integrity sha512-N/RpA/7mEe+NYDd39PBnFvWF3Jvs2rYOZrYnauIKiOPSP8HJjmLzBNwBE6FW7OqXD/Db8eQGb330mJ24Es31fw==
   dependencies:
     "@types/dialogflow" "0.11.0"
-    "@xapp/stentor-dialogflow" "1.40.112"
+    "@xapp/stentor-dialogflow" "1.40.113"
     "@xapp/stentor-service" "1.40.112"
     actions-on-google "2.14.0"
     dialogflow "0.14.1"
