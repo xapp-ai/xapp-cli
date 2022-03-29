@@ -6,7 +6,7 @@ import { getUserToken } from "./getUserToken";
 import { getXAPPClient } from "./getXAPPClient";
 import { ExportApp } from "./models";
 
-export async function getStentorApp(appId?: string): Promise<ExportApp> {
+export async function getStentorApp(appId?: string, withChannels = false): Promise<ExportApp> {
     const token = await getUserToken();
 
     if (!appId) {
@@ -27,6 +27,15 @@ export async function getStentorApp(appId?: string): Promise<ExportApp> {
     // Also temporary
     exported.app.appId = appId;
     exported.app.organizationId = organizationId
+
+    if (withChannels) {
+        // Ok! find the channel
+        const token = await getUserToken();
+        const client = getXAPPClient(token, appId);
+        const channels = await client.getAppChannels(appId);
+
+        exported.app.channels = channels;
+    }
 
     return exported;
 }

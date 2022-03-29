@@ -3,10 +3,10 @@
 import { LexServiceV2, LexSyncStatusV2 } from "@xapp/stentor-service-lex";
 import { isHandler, isIntent } from "stentor-guards";
 import { Handler } from "stentor-models";
-import { getAppIntentEntities, getAppIntentEntitiesFromExport } from "../getAppIntentEntities";
+import { getAppIntentEntitiesFromExport } from "../getAppIntentEntities";
+import { getStentorApp } from "../getStentorApp";
 
 import log from "stentor-logger";
-
 
 function sleep(ms: number): Promise<void> {
     log.info("Snoozing for ms milliseconds ... zzzzz");
@@ -30,7 +30,7 @@ export async function pushToLexV2(options?: { appId?: string; lang?: string; aws
     }
 
     const { app, intents = [], entities = [], handlers = [] } =
-        file ? await getAppIntentEntitiesFromExport(appId, file) : await getAppIntentEntities(appId);
+        file ? await getAppIntentEntitiesFromExport(appId, file) : await getStentorApp(appId, true);
 
     // We can push v1 too
     const lexChannel = (app as any).channels.find((ch: { type: string }) => {

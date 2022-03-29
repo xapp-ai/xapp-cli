@@ -117,7 +117,7 @@ program
         "--fulfillment <fulfillment>",
         "The ARN of the intent fulfillment lambda."
     )
-    .action(async (options: { appId: string; platform: string; id?: string; output: string; lang: string; credentials: string }) => {
+    .action(async (options: { appId: string; platform: string; id?: string; output?: string; lang: string; credentials: string }) => {
         const { platform, credentials } = options;
 
         // Parse platform
