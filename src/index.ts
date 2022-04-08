@@ -218,7 +218,7 @@ program
     });
 
 program
-    .command("import <file>")
+    .command("import [file]")
     .description("BETA - Imports an app")
     .option("-o --organizationId <organizationId>", "Organization ID that the agent will be imported to.")
     .option("-a --appId <appId>", "App ID in XAPP that will be imported")
@@ -235,6 +235,7 @@ program
             case "d":
             case "dialogflow":
                 await importFromDialogflow(options.credentials, options);
+                break;
             default:
                 await importApp(file, options);
         }
