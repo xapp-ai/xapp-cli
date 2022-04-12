@@ -907,13 +907,13 @@
     actions-on-google "2.14.0"
     dialogflow "1.2.0"
 
-"@xapp/stentor-handler-media@1.40.137":
-  version "1.40.137"
-  resolved "https://registry.yarnpkg.com/@xapp/stentor-handler-media/-/stentor-handler-media-1.40.137.tgz#a4f673542983af8be2275f41cb08e719858ac997"
-  integrity sha512-UofI6H40sF/d5B+jwziUsHcPZK1EAe+wz3bcVH0En1Gq3dIbhPINhCCi40pDzAzURahWiutTcbx/wXA2zRcuvg==
+"@xapp/stentor-handler-media@1.40.138":
+  version "1.40.138"
+  resolved "https://registry.yarnpkg.com/@xapp/stentor-handler-media/-/stentor-handler-media-1.40.138.tgz#88f778da7c7b88de4d226160128cd7dfca16709e"
+  integrity sha512-mWaBPmsY1ChZpylerG2a8E3wk3evZl9WkNxPnTV/wEdfoY7kV8rYeZH2g0XNCBftfGwCdEa7xK/JfP9wsHEcTQ==
   dependencies:
     "@xapp/stentor-actions-on-google" "1.40.137"
-    "@xapp/stentor-media-manager" "1.40.137"
+    "@xapp/stentor-media-manager" "1.40.138"
     "@xapp/stentor-service-search" "1.40.137"
     moment-timezone "0.5.34"
 
@@ -934,12 +934,12 @@
     "@xapp/stentor-alexa-lib" "1.40.137"
     lodash.merge "4.6.2"
 
-"@xapp/stentor-media-manager@1.40.137":
-  version "1.40.137"
-  resolved "https://registry.yarnpkg.com/@xapp/stentor-media-manager/-/stentor-media-manager-1.40.137.tgz#487c2761504f727a4e5d9f6ecec15329558126d4"
-  integrity sha512-ickJvbftStFal6Tm/FfU5IGydLttL0jJwG0/x/nVdEZ+l9DLGdiI8HRP/t7LD/oBf/ISA4j6T4tdozAIi9M1Vw==
+"@xapp/stentor-media-manager@1.40.138":
+  version "1.40.138"
+  resolved "https://registry.yarnpkg.com/@xapp/stentor-media-manager/-/stentor-media-manager-1.40.138.tgz#6d2943de1651218c38696f224d9f16e44a752e56"
+  integrity sha512-KtTdYCgGqKmeZUN5fg0pWhTV0vUNCjtzYu8pYRkh1MBcgzZbF4dwCTNVzW+Pa6Suf3UM3uCalDGMedwoubUb2Q==
   dependencies:
-    "@xapp/stentor-service-rss-feed" "1.40.137"
+    "@xapp/stentor-service-rss-feed" "1.40.138"
     "@xapp/stentor-service-search" "1.40.137"
     "@xapp/stentor-service-social-radio" "1.40.137"
     "@xapp/stentor-text-to-speech" "1.40.137"
@@ -970,14 +970,14 @@
     stentor-media "1.54.24"
     uuid "^8.3.2"
 
-"@xapp/stentor-service-rss-feed@1.40.137":
-  version "1.40.137"
-  resolved "https://registry.yarnpkg.com/@xapp/stentor-service-rss-feed/-/stentor-service-rss-feed-1.40.137.tgz#41a18a46a1d4ffe6b6eecc2c98ea54019c389afe"
-  integrity sha512-D/c1zcNktZgR2o/0XCd1OC7WogjTp8A4E+U4J1Oo1kbi9gPDBhXVjJlBZY/JWEIhGBNn6CWXkfATVXAIFPe3xA==
+"@xapp/stentor-service-rss-feed@1.40.138":
+  version "1.40.138"
+  resolved "https://registry.yarnpkg.com/@xapp/stentor-service-rss-feed/-/stentor-service-rss-feed-1.40.138.tgz#bb7c9495d6716493600fb632a1d83d96eddc8cf1"
+  integrity sha512-GwNpVM+x1QClOH5O3LOv/gfDRiJqj0SboWtnffMkppk+nHG3LN9RgtERzQ138SoSweywL4FMIc56SnjRkp706g==
   dependencies:
     "@xapp/stentor-service" "1.40.137"
     "@xapp/stentor-service-search" "1.40.137"
-    html-to-text "8.1.0"
+    html-to-text "8.2.0"
     performance-now "2.1.0"
     xml2js "0.4.23"
 
@@ -3163,16 +3163,16 @@ html-entities@2.3.3:
   resolved "https://registry.yarnpkg.com/html-entities/-/html-entities-2.3.3.tgz#117d7626bece327fc8baace8868fa6f5ef856e46"
   integrity sha512-DV5Ln36z34NNTDgnz0EWGBLZENelNAtkiFA4kyNOG2tDI6Mz1uSWiq1wAKdyjnJwyDiDO7Fa2SO1CTxPXL8VxA==
 
-html-to-text@8.1.0:
-  version "8.1.0"
-  resolved "https://registry.yarnpkg.com/html-to-text/-/html-to-text-8.1.0.tgz#0c35fc452e6eccb275669adb8bcc61d93ec43ed5"
-  integrity sha512-Z9iYAqYK2c18GswSbnxJSeMs7lyJgwR2oIkDOyOHGBbYsPsG4HvT379jj3Lcbfko8A5ceyyMHAfkmp/BiXA9/Q==
+html-to-text@8.2.0:
+  version "8.2.0"
+  resolved "https://registry.yarnpkg.com/html-to-text/-/html-to-text-8.2.0.tgz#8b35e280ba7fc27710b7aa76d4500aab30731924"
+  integrity sha512-CLXExYn1b++Lgri+ZyVvbUEFwzkLZppjjZOwB7X1qv2jIi8MrMEvxWX5KQ7zATAzTvcqgmtO00M2kCRMtEdOKQ==
   dependencies:
     "@selderee/plugin-htmlparser2" "^0.6.0"
     deepmerge "^4.2.2"
     he "^1.2.0"
     htmlparser2 "^6.1.0"
-    minimist "^1.2.5"
+    minimist "^1.2.6"
     selderee "^0.6.0"
 
 htmlparser2@^6.0.0, htmlparser2@^6.1.0:
@@ -4268,7 +4268,7 @@ minimist-options@4.1.0:
     is-plain-obj "^1.1.0"
     kind-of "^6.0.3"
 
-minimist@^1.2.0, minimist@^1.2.5:
+minimist@^1.2.0, minimist@^1.2.5, minimist@^1.2.6:
   version "1.2.6"
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.6.tgz#8637a5b759ea0d6e98702cfb3a9283323c93af44"
   integrity sha512-Jsjnk4bw3YJqYzbdyBiNsPWHPfO++UGG749Cxs6peCu5Xg4nrena6OVxOYxrQTqww0Jmwt+Ref8rggumkTLz9Q==
