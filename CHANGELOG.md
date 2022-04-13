@@ -1,3 +1,10 @@
+## [1.0.13](https://github.com/xapp-ai/xapp-cli/compare/v1.0.12...v1.0.13) (2022-04-13)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @xapp/stentor-handler-media to v1.40.138 ([cfac2ff](https://github.com/xapp-ai/xapp-cli/commit/cfac2ff38581a7478f44e248fb29390156bc02e6))
+
 ## [1.0.12](https://github.com/xapp-ai/xapp-cli/compare/v1.0.11...v1.0.12) (2022-04-12)
 
 
