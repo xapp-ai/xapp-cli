@@ -3,11 +3,11 @@
 import { isGlobalHandler } from "stentor-guards";
 import log from "stentor-logger";
 import { Handler } from "stentor-models";
-import { getAppIntentEntities } from "../getAppIntentEntities";
+import { getStentorApp } from "../getStentorApp";
 
 export async function info(appId: string): Promise<void> {
 
-    const { app, intents, handlers, entities } = await getAppIntentEntities(appId);
+    const { app, intents, handlers, entities } = await getStentorApp(appId);
 
     log.info(`name: ${app.name}`)
     log.info(`\t${entities.length} entities`);
