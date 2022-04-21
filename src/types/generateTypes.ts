@@ -8,6 +8,7 @@ import { getStentorApp } from "../getStentorApp";
 import { existsAndNotEmpty } from "stentor-utils";
 import { intentToTypes } from "./utils/intentToTypes";
 import { entityToTypes } from "./utils/entityToTypes";
+import { isIntent } from "stentor-guards";
 
 export interface GenerateTypesOptions {
     header?: string;
@@ -17,7 +18,7 @@ export interface GenerateTypesOptions {
 
 export async function generateTypes(output: string, appId: string = undefined, options: GenerateTypesOptions): Promise<void> {
 
-    const { app, intents, entities } = await getStentorApp(appId);
+    const { app, intents, handlers, entities } = await getStentorApp(appId);
 
     // Resolve the path
     const path = resolve(output);
@@ -26,7 +27,24 @@ export async function generateTypes(output: string, appId: string = undefined, o
         throw new Error(`Path ${output} does not exist.  Please provide an existing path to create the export within.`);
     }
 
-    log().info(`Exporting types for ${app.name} to ${path}`);
+    // Find the handlers that have utterances, add them
+    if (existsAndNotEmpty(handlers)) {
+        handlers.forEach((handler) => {
+            if (isIntent(handler)) {
+                const found = intents.find((intent) => {
+                    return intent.intentId === handler.intentId;
+                })
+
+                if (!found && handler.intentId !== "LaunchRequest" && handler.intentId !== "InputUnknown") {
+                    intents.push(handler);
+                }
+            }
+        })
+    }
+
+    const requestsPath = resolve(path, options?.file || 'studio.ts');
+
+    log().info(`Exporting types for ${app.name} to ${requestsPath}`);
 
     let requests = "";
 
@@ -61,8 +79,5 @@ export async function generateTypes(output: string, appId: string = undefined, o
         });
     }
 
-    // print it to a file
-    const requestsPath = resolve(path, options?.file || 'studio.ts');
     writeFileSync(requestsPath, requests);
-
 }
