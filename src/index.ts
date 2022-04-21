@@ -25,7 +25,7 @@ import { importApp } from "./import/importApp";
 import { importFromDialogflow } from "./import";
 import { profile } from "./profile";
 import { ExportOptions } from "./models/options";
-import { generateTypes } from "./types";
+import { generateTypes, GenerateTypesOptions } from "./types";
 
 program.version(pkg.version);
 
@@ -160,8 +160,10 @@ program
 program
     .command("types <directory> [appId]")
     .description("Generate the TypeScript types for the possible requests to the provided directory")
+    .option("-f --file <file>", "Optional file name, defaults to studio.ts")
     .option("-h --header <header>", "Optional header to add to the top of the file")
-    .action(async (directory: string, appId: string = undefined, options?: { header?: string }) => {
+    .option("-m --max <header>", "Optional limit for entity values to generate types, defaults to 20")
+    .action(async (directory: string, appId: string = undefined, options?: GenerateTypesOptions) => {
         await generateTypes(directory, appId, options);
     });
 

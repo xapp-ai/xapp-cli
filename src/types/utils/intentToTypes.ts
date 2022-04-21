@@ -5,7 +5,7 @@ import { slotsToTypes } from "./slotsToTypes";
 
 const FS = "    ";
 
-export function intentToTypes(intent: Intent): string {
+export function intentToTypes(intent: Intent, availableEntities: { [type: string]: string }): string {
 
     const name = `${intent.intentId}IntentRequest`;
 
@@ -15,7 +15,7 @@ export function intentToTypes(intent: Intent): string {
 
     if (existsAndNotEmpty(intent.slots)) {
         slotMapType = `${name}SlotMap`;
-        const slotTypes = slotsToTypes(intent.slots, slotMapType);
+        const slotTypes = slotsToTypes(intent.slots, slotMapType, availableEntities);
         intentType += slotTypes
         intentType += `\n\n`;
     }
@@ -28,6 +28,13 @@ export function intentToTypes(intent: Intent): string {
     }
 
     // close it off
+    intentType += `}`;
+
+    // Add the guard
+    intentType += `\n\n`;
+
+    intentType += `export function is${name}(request: Request): request is ${name} {\n`;
+    intentType += `${FS}return !!request && (request as IntentRequest).intentId === "${intent.intentId}";\n`;
     intentType += `}`;
 
     return intentType;

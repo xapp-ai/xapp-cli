@@ -5,7 +5,7 @@ import { existsAndNotEmpty } from "stentor-utils";
 
 const FS = "    ";
 
-export function slotsToTypes(slots: Slot[], name: string): string {
+export function slotsToTypes(slots: Slot[], name: string, availableEntities: { [type: string]: string }): string {
 
     let slotType = `export interface ${name} extends RequestSlotMap {\n`;
 
@@ -18,7 +18,8 @@ export function slotsToTypes(slots: Slot[], name: string): string {
 
             switch (slot.type) {
                 default:
-                    type = "string";
+                    // Try to grab it out of the map
+                    type = availableEntities[slot.type] || "string";
             }
 
             slotType += `${FS}${slotName}?: {\n`;
