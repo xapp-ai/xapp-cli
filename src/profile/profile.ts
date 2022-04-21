@@ -11,20 +11,23 @@ import { log } from "stentor-logger";
 import { convertToUtteranceTest, UtteranceProfiler, UtteranceTest } from "@xapp/stentor-interaction-model-profiler";
 import { NLUService } from "stentor-models";
 import { DialogflowV2Service } from "@xapp/stentor-service-dialogflow";
-import { LexService } from "@xapp/stentor-service-lex";
-import { getAppIntentEntities } from "../getAppIntentEntities";
+import { LexService, LexServiceV2 } from "@xapp/stentor-service-lex";
 import { getGoogleCredentials } from "../getGoogleCredentials";
+import { getStentorApp } from "../getStentorApp";
 
-export async function profile(options?: {
+export interface ProfileOptions {
     platform: string;
     credentials: string;
     appId?: string;
     utterance?: string;
     file?: string;
     awsRole?: string;
-}): Promise<void> {
-    const { appId, credentials, platform, utterance, file, awsRole } = options;
-    const { app, intents } = await getAppIntentEntities(appId, { excludeHandlers: true, excludeEntities: true });
+    botName?: string;
+}
+
+export async function profile(options?: ProfileOptions): Promise<void> {
+    const { appId, botName, credentials, platform, utterance, file, awsRole } = options;
+    const { app, intents } = await getStentorApp(appId);
 
     log().info(`Found ${app.name} with ${intents.length} intents`);
 
@@ -80,7 +83,26 @@ export async function profile(options?: {
                     service: lex,
                 });
                 break;
+            case "l2":
 
+                if (!botName) {
+                    throw new Error("Please specify botName when profiling Lex V2");
+                }
+
+                const lex2 = new LexServiceV2({
+                    botName,
+                    credentials: {
+                        role: {
+                            arn: awsRole,
+                            externalId: undefined, // cross-account not supported for non-user creds yet
+                        },
+                    },
+                });
+                nlu.push({
+                    name: "lexV2",
+                    service: lex2
+                });
+                break;
             default:
                 throw new Error(`Could not  match platform ${platform} to an available NLU`);
         }

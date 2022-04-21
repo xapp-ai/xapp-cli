@@ -7,6 +7,7 @@ process.env.STENTOR_LOG_LEVEL = "debug";
 // It will only last this execution
 
 import * as program from "commander";
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkg = require("../package.json");
 
 import { info } from "./analyze";
@@ -23,7 +24,7 @@ import { saveConfig } from "./saveConfig";
 import { log } from "stentor-logger";
 import { importApp } from "./import/importApp";
 import { importFromDialogflow } from "./import";
-import { profile } from "./profile";
+import { profile, ProfileOptions } from "./profile";
 import { ExportOptions } from "./models/options";
 import { generateTypes, GenerateTypesOptions } from "./types";
 
@@ -74,8 +75,9 @@ program
     .option("-u, --utterance <utterance>", "The utterance.")
     .option("-f, --file <file>", "The pipe delimited file of utterance tests.")
     .option("-c --credentials <credentials>", "Path to the service account credentials required for Dialogflow (v2)")
+    .option("-b, --botName", "Name of the bot, required for Lex V2")
     .action(
-        async (options: { appId: string; utterance: string; file: string; platform: string; credentials: string }) => {
+        async (options: ProfileOptions) => {
             try {
                 await profile(options);
             } catch (e) {
