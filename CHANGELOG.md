@@ -1,3 +1,11 @@
+## [1.1.1](https://github.com/xapp-ai/xapp-cli/compare/v1.1.0...v1.1.1) (2022-04-21)
+
+
+### Bug Fixes
+
+* **deps:** update dependency moment to v2.29.3 ([#315](https://github.com/xapp-ai/xapp-cli/issues/315)) ([68aa92e](https://github.com/xapp-ai/xapp-cli/commit/68aa92e38d1d7e932a47c9ee4e2cfc2cb2b24d05))
+* **deps:** update stentor to v1.55.2 ([#316](https://github.com/xapp-ai/xapp-cli/issues/316)) ([63c1064](https://github.com/xapp-ai/xapp-cli/commit/63c1064bfc583dc9d2a22887ced9f353fcf42cb6))
+
 # [1.1.0](https://github.com/xapp-ai/xapp-cli/compare/v1.0.13...v1.1.0) (2022-04-21)
 
 
