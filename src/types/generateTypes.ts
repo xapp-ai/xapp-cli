@@ -52,7 +52,7 @@ export async function generateTypes(output: string, appId: string = undefined, o
         requests += `${options.header}\n`;
     }
     const HEADER = `/* This is a generated file */`;
-    const IMPORTS = `import { IntentRequest, Request, RequestSlotMap } from "stentor";`;
+    const IMPORTS = `import { IntentRequest, Request, RequestSlot, RequestSlotMap } from "stentor";`;
 
     requests += `${HEADER}\n${IMPORTS}\n\n`;
 
