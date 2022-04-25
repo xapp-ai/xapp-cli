@@ -22,15 +22,12 @@ export function slotsToTypes(slots: Slot[], name: string, availableEntities: { [
                     type = availableEntities[slot.type] || "string";
             }
 
-            slotType += `${FS}${slotName}?: {\n`;
-            slotType += `${FS}${FS}name: "${slotName}";\n`;
-            slotType += `${FS}${FS}value: ${type};\n`;
-            slotType += `${FS}};\n`;
+            slotType += `${FS}${slotName}?: RequestSlot<${type}>; \n`;
         });
     }
 
     // close it off
-    slotType += `}`;
+    slotType += `} `;
 
     return slotType;
 }
