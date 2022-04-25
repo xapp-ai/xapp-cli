@@ -1,3 +1,10 @@
+## [1.1.12](https://github.com/xapp-ai/xapp-cli/compare/v1.1.11...v1.1.12) (2022-04-25)
+
+
+### Bug Fixes
+
+* Use generic RequestSlot on types generation ([#328](https://github.com/xapp-ai/xapp-cli/issues/328)) ([91d32c1](https://github.com/xapp-ai/xapp-cli/commit/91d32c1f574e75adf1ac0a718f62ff3823cdffa6))
+
 ## [1.1.11](https://github.com/xapp-ai/xapp-cli/compare/v1.1.10...v1.1.11) (2022-04-25)
 
 
