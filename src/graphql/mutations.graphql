@@ -1,0 +1,196 @@
+mutation addChatWidgetChannel(
+  $appId: ID!
+  $channel: ChatWidgetAppChannelInput!
+) {
+  addChatWidgetChannel(appId: $appId, channel: $channel) {
+    __typename
+    id
+    type
+    endPoint
+    useNLU
+    directoryListing
+    id
+    status {
+      type
+    }
+    cta {
+      message
+      timeout
+    }
+    direct
+    disabled
+    accountKey
+    botName
+    avatarUrl
+    key
+    serverUrl
+    middlewareUrl
+    autocompleteSuggestionsUrl
+    urls {
+      policies {
+        pattern
+        behavior {
+          type
+          ... on ChatWidgetAppChannelUrlBehaviorNewWindow {
+            width
+            height
+          }
+        }
+      }
+      defaultBehavior {
+        type
+        ... on ChatWidgetAppChannelUrlBehaviorNewWindow {
+          width
+          height
+        }
+      }
+    }
+    autoOpenOnWidth
+    header {
+      status {
+        online
+        offline
+        away
+        connecting
+      }
+      actions {
+        minimize
+        cancel
+      }
+    }
+    theme {
+      border {
+        color
+        width
+        radius
+      }
+      carousel {
+        button {
+          color
+        }
+        subtitle {
+          color
+          fontFamily
+          fontSize
+          fontWeight
+          fontWeight
+        }
+        title {
+          color
+          fontFamily
+          fontSize
+          fontWeight
+          fontWeight
+        }
+      }
+      chatButton {
+        background
+        margin {
+          top
+          right
+          bottom
+          left
+        }
+      }
+      content {
+        background
+      }
+      cta {
+        background
+        text {
+          color
+          fontFamily
+          fontSize
+        }
+      }
+      footer {
+        background
+      }
+      header {
+        background
+        border {
+          color
+          radius
+          width
+        }
+        text {
+          color
+          fontFamily
+          fontSize
+        }
+      }
+      input {
+        background
+        border {
+          color
+          width
+          radius
+        }
+        text {
+          color
+          fontFamily
+          fontSize
+        }
+      }
+      menu {
+        item {
+          height
+          background
+          text {
+            color
+            fontSize
+            fontFamily
+            fontWeight
+            fontStyle
+          }
+        }
+      }
+      menuButton {
+        color
+      }
+      messages {
+        mine {
+          bubbleColor
+          text {
+            color
+            fontSize
+            fontFamily
+            fontWeight
+            fontStyle
+          }
+        }
+        others {
+          bubbleColor
+          text {
+            color
+            fontSize
+            fontFamily
+            fontWeight
+            fontStyle
+          }
+        }
+        padding {
+          left
+          right
+          bottom
+          top
+        }
+        maxWidth
+      }
+      minimizeButton {
+        color
+      }
+      cancelButton {
+        color
+      }
+      primaryColor
+      sendButton {
+        color
+      }
+      size {
+        width
+        height
+      }
+    }
+  }
+}

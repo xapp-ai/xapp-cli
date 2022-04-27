@@ -19,6 +19,13 @@
     "node": "^12 || ^14 || ^16"
   },
   "devDependencies": {
+    "@graphql-codegen/add": "3.1.1",
+    "@graphql-codegen/cli": "2.6.2",
+    "@graphql-codegen/introspection": "2.1.1",
+    "@graphql-codegen/typescript-graphql-files-modules": "2.1.1",
+    "@graphql-codegen/typescript-operations": "2.3.5",
+    "@graphql-codegen/typescript-urql": "3.5.7",
+    "@graphql-codegen/typescript": "2.4.8",
     "@semantic-release/changelog": "6.0.1",
     "@semantic-release/commit-analyzer": "9.0.2",
     "@semantic-release/git": "10.0.1",
@@ -37,8 +44,8 @@
     "@xapp/config": "0.2.3",
     "chai": "4.3.6",
     "conventional-changelog-conventionalcommits": "4.6.3",
-    "eslint": "7.32.0",
     "eslint-plugin-notice": "0.9.10",
+    "eslint": "7.32.0",
     "mocha": "9.2.2",
     "ts-node": "10.7.0",
     "typescript": "4.6.3"
@@ -84,7 +91,8 @@
     "build": "tsc -d true -p .",
     "clean": "rm -rf ./lib/*",
     "lint": "eslint 'src/**/*.{ts,tsx}'",
-    "test": "mocha --recursive -r ts-node/register \"./src/**/*.test.ts\""
+    "test": "mocha --recursive -r ts-node/register \"./src/**/*.test.ts\"",
+    "codegen": "graphql-codegen --config codegen.yml"
   },
   "gitHead": "bb8fead16cbd0cff42ea73d73f0da9a5401c4c99"
 }
