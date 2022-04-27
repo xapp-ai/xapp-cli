@@ -271,4 +271,8 @@ program
 
     });
 
-program.parse(process.argv);
+// Only tell commander to parse the args if this index.js is being called directly
+// This allows us to be used as a module if needed.
+if (require.main === module) {
+    program.parse(process.argv);
+}
