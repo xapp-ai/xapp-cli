@@ -1,5 +1,4 @@
 /*! Copyright (c) 2022, XAPP AI*/
-/*! Copyright (c) 2021, XAPPmedia */
 import { gql } from "@urql/core";
 
 export const AddAppMutation = gql`
@@ -21,7 +20,6 @@ mutation updateApp($appId: ID, $app: UpdateAppInput) {
   }
 }
 `;
-
 
 export const AddIntentMutation = gql`
 mutation addIntent($appId: ID!, $intent: AddIntentInput!){
@@ -61,3 +59,27 @@ mutation updateEntity($entityId: ID!, $appId: ID!, $entity: UpdateEntityInput) {
   }
 }
 `;
+
+export const ExportApp = gql`
+mutation exportApp($appId:ID!, $organizationId:ID!){
+  app(organizationId:$organizationId) {
+    update(appId:$appId) {
+      exportApp {
+        url
+      }
+    }
+  }
+}
+`
+
+export const ImportApp = gql`
+mutation importApp($organizationId: ID!, $appUrl: URL!) {
+  app(organizationId: $organizationId) {
+    importApp(url: $appUrl) {
+      appId
+      organizationId
+      name
+    }
+  }
+}
+`

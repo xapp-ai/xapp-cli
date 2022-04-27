@@ -1,12 +1,26 @@
 /*! Copyright (c) 2022, XAPP AI*/
-
 import { Client } from "@urql/core";
-import { getGraphQLClient } from "./graphql/getGraphQLClient";
-
 import { Handler, Entity, Intent } from "stentor-models";
-import { AddAppMutation, AddEntityMutation, AddIntentMutation, UpdateAppMutation, UpdateEntityMutation, UpdateIntentMutation } from "./graphql/mutations";
-import { GetApp, GetIntent, GetHandler, GetEntity, ExportApp as ExportAppQuery, GetAppWithChannels } from "./graphql/queries";
-import { App, Channel, ExportApp } from "./models";
+
+import { getGraphQLClient } from "./graphql/getGraphQLClient";
+import {
+    AddChatWidgetChannelDocument,
+    ChatWidgetAppChannelInput,
+    GetProfileDocument,
+    GetProfileQuery
+} from "./graphql/models";
+import {
+    AddAppMutation,
+    AddEntityMutation,
+    AddIntentMutation,
+    ExportApp as ExportAppMutation,
+    ImportApp as ImportAppMutation,
+    UpdateAppMutation,
+    UpdateEntityMutation,
+    UpdateIntentMutation
+} from "./graphql/mutations";
+import { GetApp, GetIntent, GetHandler, GetEntity, GetAppWithChannels } from "./graphql/queries";
+import { App, Channel, ExportApp, ImportApp } from "./models";
 
 export interface HandlerDescription {
     intentId: string;
@@ -60,6 +74,16 @@ export class XAPPClient {
         this.client = getGraphQLClient(props.userToken);
     }
 
+    public getProfile(): Promise<GetProfileQuery> {
+        return this.client.query(GetProfileDocument, {}).toPromise().then((response) => {
+            return response.data;
+        });
+    }
+
+    //
+    // APP
+    //
+
     public createApp(app: App): Promise<App> {
         return this.client.mutation(AddAppMutation, {
             app
@@ -94,6 +118,42 @@ export class XAPPClient {
             return response.data.app;
         });
     }
+    /**
+     * Export an app
+     * @param appId 
+     * @param organizationId 
+     * @returns 
+     */
+    public exportApp(appId: string, organizationId: string): Promise<ExportApp> {
+        return this.client.mutation(ExportAppMutation, {
+            appId,
+            organizationId
+        }).toPromise().then((response) => {
+            const url = response.data.app.update.exportApp.url;
+            return fetch(url);
+        }).then((response) => {
+            return response.json();
+        });
+    }
+    /**
+     * Import an App from a publicly available URL
+     * 
+     * @param url 
+     * @param organizationId 
+     * @returns 
+     */
+    public importApp(url: string, organizationId: string): Promise<ImportApp> {
+        return this.client.mutation(ImportAppMutation, {
+            organizationId,
+            appUrl: url
+        }).toPromise().then((response) => {
+            return {
+                appId: response.data.app.importApp.appId,
+                organizationId: response.data.app.importApp.organizationId,
+                name: response.data.app.importApp.name
+            }
+        })
+    }
 
     public getAppChannels(appId: string): Promise<Channel[]> {
         return this.client.query(GetAppWithChannels, {
@@ -103,9 +163,16 @@ export class XAPPClient {
         });
     }
 
-    /**
-     * HANDLER
-     */
+    public creatAppWidgetChannel(appId: string, channel: ChatWidgetAppChannelInput): Promise<Channel> {
+        return this.client.mutation(AddChatWidgetChannelDocument, { appId, channel })
+            .toPromise().then((response) => {
+                return response.data.addChatWidgetChannel;
+            });
+    }
+
+    //
+    // HANDLER
+    //
 
     /**
      * Get a specific handler
@@ -123,8 +190,16 @@ export class XAPPClient {
         });
     }
 
+    //
+    // INTENT
+    //
+
     /**
-     * Intent
+     * Create an intent
+     * 
+     * @param appId 
+     * @param intent 
+     * @returns 
      */
     public createIntent(appId: string, intent: Intent): Promise<Intent> {
         return this.client.mutation(AddIntentMutation, {
@@ -135,6 +210,13 @@ export class XAPPClient {
         });
     };
 
+    /**
+     * Get an intent by intentId
+     * 
+     * @param appId 
+     * @param intentId 
+     * @returns 
+     */
     public getIntent(appId: string, intentId: string): Promise<Intent> {
         return this.client.query(GetIntent, {
             appId,
@@ -154,9 +236,9 @@ export class XAPPClient {
         });
     };
 
-    /**
-     * ENTITY
-     */
+    //
+    // ENTITY
+    //
 
     /**
      * Create an entity
@@ -192,18 +274,6 @@ export class XAPPClient {
             entity
         }).toPromise().then((response) => {
             return response.data.updateEntity;
-        });
-    }
-
-    public exportApp(appId: string, organizationId: string): Promise<ExportApp> {
-        return this.client.mutation(ExportAppQuery, {
-            appId,
-            organizationId
-        }).toPromise().then((response) => {
-            const url = response.data.app.update.exportApp.url;
-            return fetch(url);
-        }).then((response) => {
-            return response.json();
         });
     }
 }
