@@ -1,5 +1,5 @@
-/*! Copyright (c) 2022, XAPP AI*/
-/* eslint:disable */
+/*! Copyright (c) 2022, XAPP AI*/ 
+ /* eslint-disable */
 import gql from 'graphql-tag';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
@@ -8990,7 +8990,9 @@ export type AddChatWidgetChannelMutation = { addChatWidgetChannel: { __typename:
 
 export type GetProfileQueryVariables = Exact<{ [key: string]: never; }>;
 
+
 export type GetProfileQuery = { profile?: { email: string } | null };
+
 
 export const AddChatWidgetChannelDocument = gql`
     mutation addChatWidgetChannel($appId: ID!, $channel: ChatWidgetAppChannelInput!) {

@@ -5,7 +5,7 @@ generates:
   src/graphql/models.ts:
     plugins:
       - add:
-          content: "/*! Copyright (c) 2022, XAPP AI*/ \n /* eslint:disable */"
+          content: "/*! Copyright (c) 2022, XAPP AI*/ \n /* eslint-disable */"
       - "typescript"
       - "typescript-operations"
       - "typescript-urql"
