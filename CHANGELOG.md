@@ -1,3 +1,10 @@
+## [1.2.3](https://github.com/xapp-ai/xapp-cli/compare/v1.2.2...v1.2.3) (2022-04-27)
+
+
+### Bug Fixes
+
+* Ability to be used as a module ([#336](https://github.com/xapp-ai/xapp-cli/issues/336)) ([0f86c73](https://github.com/xapp-ai/xapp-cli/commit/0f86c73040e2b3f8c89d23480de96dac98e0f469))
+
 ## [1.2.2](https://github.com/xapp-ai/xapp-cli/compare/v1.2.1...v1.2.2) (2022-04-27)
 
 
