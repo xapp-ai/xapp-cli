@@ -1,5 +1,4 @@
 /*! Copyright (c) 2022, XAPP AI*/
-/*! Copyright (c) 2021, XAPPmedia */
 import { gql } from "@urql/core";
 
 export const GetApp = gql`
@@ -303,18 +302,6 @@ query getEntity($appId:ID!, $entityId:ID!) {
   }
 }
 `;
-
-export const ExportApp = gql`
-mutation exportApp($appId:ID!, $organizationId:ID!){
-  app(organizationId:$organizationId) {
-    update(appId:$appId) {
-      exportApp {
-        url
-      }
-    }
-  }
-}
-`
 
 export const GetAppWithChannels = gql`
 query getAppWithChannelData($appId: ID!) {

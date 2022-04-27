@@ -28,6 +28,11 @@ import { profile, ProfileOptions } from "./profile";
 import { ExportOptions } from "./models/options";
 import { generateTypes, GenerateTypesOptions } from "./types";
 
+// A couple of exports for if you use it not like a CLI
+export { getStentorApp } from "./getStentorApp";
+export { XAPPClient } from "./XAPPClient";
+export { getUserToken } from "./getUserToken"
+
 program.version(pkg.version);
 
 program.command("login").action(async () => {

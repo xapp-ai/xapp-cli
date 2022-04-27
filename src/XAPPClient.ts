@@ -4,9 +4,9 @@ import { Client } from "@urql/core";
 import { getGraphQLClient } from "./graphql/getGraphQLClient";
 
 import { Handler, Entity, Intent } from "stentor-models";
-import { AddAppMutation, AddEntityMutation, AddIntentMutation, UpdateAppMutation, UpdateEntityMutation, UpdateIntentMutation } from "./graphql/mutations";
-import { GetApp, GetIntent, GetHandler, GetEntity, ExportApp as ExportAppQuery, GetAppWithChannels } from "./graphql/queries";
-import { App, Channel, ExportApp } from "./models";
+import { AddAppMutation, AddEntityMutation, AddIntentMutation, ExportApp as ExportAppMutation, ImportApp as ImportAppMutation, UpdateAppMutation, UpdateEntityMutation, UpdateIntentMutation } from "./graphql/mutations";
+import { GetApp, GetIntent, GetHandler, GetEntity, GetAppWithChannels } from "./graphql/queries";
+import { App, Channel, ExportApp, ImportApp } from "./models";
 
 export interface HandlerDescription {
     intentId: string;
@@ -196,7 +196,7 @@ export class XAPPClient {
     }
 
     public exportApp(appId: string, organizationId: string): Promise<ExportApp> {
-        return this.client.mutation(ExportAppQuery, {
+        return this.client.mutation(ExportAppMutation, {
             appId,
             organizationId
         }).toPromise().then((response) => {
@@ -205,5 +205,18 @@ export class XAPPClient {
         }).then((response) => {
             return response.json();
         });
+    }
+
+    public importApp(url: string, organizationId: string): Promise<ImportApp> {
+        return this.client.mutation(ImportAppMutation, {
+            organizationId,
+            appUrl: url
+        }).toPromise().then((response) => {
+            return {
+                appId: response.data.app.importApp.appId,
+                organizationId: response.data.app.importApp.organizationId,
+                name: response.data.app.importApp.name
+            }
+        })
     }
 }
