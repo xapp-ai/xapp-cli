@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/xapp-ai/xapp-cli/compare/v1.2.1...v1.2.2) (2022-04-27)
+
+
+### Bug Fixes
+
+* graphql-tag missing dependency ([#335](https://github.com/xapp-ai/xapp-cli/issues/335)) ([fec2a42](https://github.com/xapp-ai/xapp-cli/commit/fec2a42e7b53865ce825d325157fea9cdb02f5ac))
+
 ## [1.2.1](https://github.com/xapp-ai/xapp-cli/compare/v1.2.0...v1.2.1) (2022-04-27)
 
 
