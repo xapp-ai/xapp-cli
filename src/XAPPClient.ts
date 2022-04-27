@@ -6,8 +6,10 @@ import { getGraphQLClient } from "./graphql/getGraphQLClient";
 import {
     AddChatWidgetChannelDocument,
     ChatWidgetAppChannelInput,
+    GetAppContentDocument,
     GetProfileDocument,
-    GetProfileQuery
+    GetProfileQuery,
+    StartCrawlDocument
 } from "./graphql/models";
 import {
     AddAppMutation,
@@ -20,7 +22,7 @@ import {
     UpdateIntentMutation
 } from "./graphql/mutations";
 import { GetApp, GetIntent, GetHandler, GetEntity, GetAppWithChannels } from "./graphql/queries";
-import { App, Channel, ExportApp, ImportApp } from "./models";
+import { App, Channel, ExportApp, GraphqlApp, ImportApp } from "./models";
 
 export interface HandlerDescription {
     intentId: string;
@@ -119,7 +121,8 @@ export class XAPPClient {
         });
     }
     /**
-     * Export an app
+     * Export an app and all of its intents, handlers, entities.
+     * 
      * @param appId 
      * @param organizationId 
      * @returns 
@@ -136,7 +139,9 @@ export class XAPPClient {
         });
     }
     /**
-     * Import an App from a publicly available URL
+     * Import an App from a publicly available URL.
+     * 
+     * The app and it's assets must be uploaded in JSON format to a publically available URL.
      * 
      * @param url 
      * @param organizationId 
@@ -163,11 +168,34 @@ export class XAPPClient {
         });
     }
 
-    public creatAppWidgetChannel(appId: string, channel: ChatWidgetAppChannelInput): Promise<Channel> {
+    public createChatWidgetChannel(appId: string, channel: ChatWidgetAppChannelInput): Promise<Channel> {
         return this.client.mutation(AddChatWidgetChannelDocument, { appId, channel })
             .toPromise().then((response) => {
                 return response.data.addChatWidgetChannel;
             });
+    }
+
+    public updateChatWidgetChannel(appId: string, channel: ChatWidgetAppChannelInput): Promise<Channel> {
+        return this.client.mutation(AddChatWidgetChannelDocument, { appId, channel })
+            .toPromise().then((response) => {
+                return response.data.addChatWidgetChannel;
+            });
+    }
+
+    public getDocuments(appId: string, size = 10, from = 0): Promise<Pick<GraphqlApp, "contentSources" | "content">> {
+        return this.client.query(GetAppContentDocument, { appId, size, from }).toPromise().then((response) => {
+            return response.data.app;
+        });
+    }
+
+    public getFAQs(appId: string, size = 10, from = 0): Promise<Pick<GraphqlApp, "faq">> {
+        return this.client.query(GetAppContentDocument, { appId, size, from }).toPromise().then((response) => {
+            return response.data.app;
+        });
+    }
+
+    public startCrawl(appId: string, url: string, pattern: string[], channelId: string): Promise<void> {
+        return this.client.mutation(StartCrawlDocument, { appId, url, pattern, channelId }).toPromise().then();
     }
 
     //

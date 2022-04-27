@@ -8980,6 +8980,16 @@ export enum WithdrawFromAlexaCertReasons {
   TestSkill = 'TEST_SKILL'
 }
 
+export type StartCrawlMutationVariables = Exact<{
+  appId: Scalars['ID'];
+  url: Scalars['URL'];
+  pattern?: InputMaybe<Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>>;
+  channelId: Scalars['String'];
+}>;
+
+
+export type StartCrawlMutation = { startWebsiteCrawling: string };
+
 export type AddChatWidgetChannelMutationVariables = Exact<{
   appId: Scalars['ID'];
   channel: ChatWidgetAppChannelInput;
@@ -8993,7 +9003,26 @@ export type GetProfileQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetProfileQuery = { profile?: { email: string } | null };
 
+export type GetAppContentQueryVariables = Exact<{
+  appId: Scalars['ID'];
+  size: Scalars['Int'];
+  from: Scalars['Int'];
+}>;
 
+
+export type GetAppContentQuery = { app?: { appId: string, contentSources?: { __typename: 'TotalWebContentSources', total: number, sources: Array<{ __typename: 'WebContentSources', webUrl: string, webUrlPatterns: Array<string | null> } | null> } | null, content?: { total: number, content: Array<{ _id: string, name: string, url: string, type: WebContentType, lastUpdated: any, text: string } | null> } | null, faq?: { total: number, faq: Array<{ name: string, raw?: string | null, answer: string, questions: Array<string | null> } | null> } | null } | null };
+
+
+export const StartCrawlDocument = gql`
+    mutation startCrawl($appId: ID!, $url: URL!, $pattern: [String], $channelId: String!) {
+  startWebsiteCrawling(
+    appId: $appId
+    webUrl: $url
+    webUrlPatterns: $pattern
+    channelId: $channelId
+  )
+}
+    `;
 export const AddChatWidgetChannelDocument = gql`
     mutation addChatWidgetChannel($appId: ID!, $channel: ChatWidgetAppChannelInput!) {
   addChatWidgetChannel(appId: $appId, channel: $channel) {
@@ -9193,6 +9222,42 @@ export const GetProfileDocument = gql`
     query getProfile {
   profile {
     email
+  }
+}
+    `;
+export const GetAppContentDocument = gql`
+    query getAppContent($appId: ID!, $size: Int!, $from: Int!) {
+  app(appId: $appId) {
+    appId
+    contentSources {
+      __typename
+      total
+      sources {
+        __typename
+        webUrl
+        webUrlPatterns
+      }
+    }
+    content(size: $size, from: $from) {
+      total
+      content {
+        _id
+        name
+        url
+        type
+        lastUpdated
+        text
+      }
+    }
+    faq(size: $size, from: $from) {
+      total
+      faq {
+        name
+        raw
+        answer
+        questions
+      }
+    }
   }
 }
     `;

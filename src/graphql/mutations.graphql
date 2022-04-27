@@ -1,3 +1,17 @@
+mutation startCrawl(
+  $appId: ID!
+  $url: URL!
+  $pattern: [String]
+  $channelId: String!
+) {
+  startWebsiteCrawling(
+    appId: $appId
+    webUrl: $url
+    webUrlPatterns: $pattern
+    channelId: $channelId
+  )
+}
+
 mutation addChatWidgetChannel(
   $appId: ID!
   $channel: ChatWidgetAppChannelInput!

@@ -3,3 +3,38 @@ query getProfile {
     email
   }
 }
+
+query getAppContent($appId: ID!, $size: Int!, $from: Int!) {
+  app(appId: $appId) {
+    appId
+    contentSources {
+      __typename
+      total
+      sources {
+        __typename
+        webUrl
+        webUrlPatterns
+      }
+    }
+    content(size: $size, from: $from) {
+      total
+      content {
+        _id
+        name
+        url
+        type
+        lastUpdated
+        text
+      }
+    }
+    faq(size: $size, from: $from) {
+      total
+      faq {
+        name
+        raw
+        answer
+        questions
+      }
+    }
+  }
+}
