@@ -1,3 +1,10 @@
+## [1.2.4](https://github.com/xapp-ai/xapp-cli/compare/v1.2.3...v1.2.4) (2022-04-28)
+
+
+### Bug Fixes
+
+* **deps:** update dependency express to v4.18.0 ([#331](https://github.com/xapp-ai/xapp-cli/issues/331)) ([b9d8dd6](https://github.com/xapp-ai/xapp-cli/commit/b9d8dd646ef1ec96b378f40dd606c529e4157bc8))
+
 ## [1.2.3](https://github.com/xapp-ai/xapp-cli/compare/v1.2.2...v1.2.3) (2022-04-27)
 
 
