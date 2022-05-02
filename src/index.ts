@@ -22,7 +22,7 @@ import { pushToDialogflowV2, pushToLexV2 } from "./push";
 import { pushToLex } from "./push/pushToLex";
 import { saveConfig } from "./saveConfig";
 import { log } from "stentor-logger";
-import { importApp } from "./import/importApp";
+import { importApp, importAppFromFile } from "./import";
 import { importFromDialogflow } from "./import";
 import { profile, ProfileOptions } from "./profile";
 import { ExportOptions } from "./models/options";
@@ -247,13 +247,13 @@ program
     });
 
 program
-    .command("import [file]")
+    .command("import [uri]")
     .description("BETA - Imports an app")
     .option("-o --organizationId <organizationId>", "Organization ID that the agent will be imported to.")
     .option("-a --appId <appId>", "App ID in XAPP that will be imported")
     .option("-p --platform <platform>", "Platform to import from: 'd' for Dialogflow, 'l' for Lex. Defaults to stentor based import")
     .option("-c --credentials <credentials>", "Path to the service account credentials required for Dialogflow")
-    .action(async (file: string, options: { appId: string; credentials?: string; platform?: string; organizationId: string }) => {
+    .action(async (uri: string, options: { appId: string; credentials?: string; platform?: string; organizationId: string }) => {
 
         let { platform } = options;
         if (!platform) {
@@ -266,7 +266,11 @@ program
                 await importFromDialogflow(options.credentials, options);
                 break;
             default:
-                await importApp(file, options);
+                if (uri.startsWith("https://") || uri.startsWith("http://")) {
+                    await importApp(uri, options);
+                } else {
+                    await importAppFromFile(uri, options);
+                }
         }
 
     });

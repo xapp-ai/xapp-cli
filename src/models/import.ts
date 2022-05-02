@@ -1,7 +1,7 @@
 /*! Copyright (c) 2022, XAPP AI*/
 
 export interface ImportApp {
-    appId: string;
+    appId?: string;
     organizationId: string;
-    name: string;
+    name?: string;
 }

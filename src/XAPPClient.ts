@@ -152,12 +152,17 @@ export class XAPPClient {
             organizationId,
             appUrl: url
         }).toPromise().then((response) => {
-            return {
-                appId: response.data.app.importApp.appId,
-                organizationId: response.data.app.importApp.organizationId,
-                name: response.data.app.importApp.name
+            if (response.data) {
+                return {
+                    appId: response.data.app.importApp.appId,
+                    organizationId: response.data.app.importApp.organizationId,
+                    name: response.data.app.importApp.name
+                }
+            } else {
+                const error = response.error || `Unable to import app, unknown error`;
+                throw error;
             }
-        })
+        });
     }
 
     public getAppChannels(appId: string): Promise<Channel[]> {
