@@ -1,5 +1,4 @@
 /*! Copyright (c) 2022, XAPP AI*/
-
 import { log } from "stentor-logger";
 import { existsSync, mkdirSync, writeFileSync } from "fs";
 import { resolve } from "path";
