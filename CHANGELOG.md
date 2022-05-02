@@ -1,3 +1,10 @@
+## [1.2.6](https://github.com/xapp-ai/xapp-cli/compare/v1.2.5...v1.2.6) (2022-05-02)
+
+
+### Bug Fixes
+
+* Surface errors on App Import from URL ([#339](https://github.com/xapp-ai/xapp-cli/issues/339)) ([3965bce](https://github.com/xapp-ai/xapp-cli/commit/3965bce28d6fea49f4f139728b6a4efd71aa3b1a))
+
 ## [1.2.5](https://github.com/xapp-ai/xapp-cli/compare/v1.2.4...v1.2.5) (2022-05-02)
 
 
