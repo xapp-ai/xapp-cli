@@ -90,7 +90,12 @@ export class XAPPClient {
         return this.client.mutation(AddAppMutation, {
             app
         }).toPromise().then((response) => {
-            return response.data.addApp;
+            if (response.data) {
+                return response.data.addApp;
+            } else {
+                const error = response.error || `Unable to create app, unknown error`;
+                throw error;
+            }
         });
     }
 
@@ -99,7 +104,13 @@ export class XAPPClient {
             appId: app.appId,
             app
         }).toPromise().then((response) => {
-            return response.data.updateApp;
+            if (response.data) {
+                return response.data.updateApp;
+            } else {
+                const error = response.error || `Unable to update app, unknown error`;
+                throw error;
+            }
+
         });
     }
 
@@ -176,14 +187,24 @@ export class XAPPClient {
     public createChatWidgetChannel(appId: string, channel: ChatWidgetAppChannelInput): Promise<Channel> {
         return this.client.mutation(AddChatWidgetChannelDocument, { appId, channel })
             .toPromise().then((response) => {
-                return response.data.addChatWidgetChannel;
+                if (response.data) {
+                    return response.data.addChatWidgetChannel;
+                } else {
+                    const error = response.error || `Unable to create chat widget channel, unknown error`;
+                    throw error;
+                }
             });
     }
 
     public updateChatWidgetChannel(appId: string, channel: ChatWidgetAppChannelInput): Promise<Channel> {
         return this.client.mutation(AddChatWidgetChannelDocument, { appId, channel })
             .toPromise().then((response) => {
-                return response.data.addChatWidgetChannel;
+                if (response.data) {
+                    return response.data.addChatWidgetChannel;
+                } else {
+                    const error = response.error || `Unable to update chat widget channel, unknown error`;
+                    throw error;
+                }
             });
     }
 
