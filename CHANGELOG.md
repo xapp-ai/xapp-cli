@@ -1,3 +1,10 @@
+## [1.2.8](https://github.com/xapp-ai/xapp-cli/compare/v1.2.7...v1.2.8) (2022-05-03)
+
+
+### Bug Fixes
+
+* Raise errors for common GraphQL XAPPClient ([#342](https://github.com/xapp-ai/xapp-cli/issues/342)) ([d37509f](https://github.com/xapp-ai/xapp-cli/commit/d37509f38639e628064f909557749f6c2c3c9c35))
+
 ## [1.2.7](https://github.com/xapp-ai/xapp-cli/compare/v1.2.6...v1.2.7) (2022-05-03)
 
 
