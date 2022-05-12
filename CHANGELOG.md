@@ -1,3 +1,11 @@
+## [1.2.12](https://github.com/xapp-ai/xapp-cli/compare/v1.2.11...v1.2.12) (2022-05-12)
+
+
+### Bug Fixes
+
+* **deps:** update dependency dotenv to v16.0.1 ([#350](https://github.com/xapp-ai/xapp-cli/issues/350)) ([6faf5a3](https://github.com/xapp-ai/xapp-cli/commit/6faf5a3544d23f01f00518601834ec70ed29f64b))
+* **deps:** update stentor to v1.40.168 ([#348](https://github.com/xapp-ai/xapp-cli/issues/348)) ([b8088be](https://github.com/xapp-ai/xapp-cli/commit/b8088beb03a8b9a86b0b6db43754e716aaed8bbb))
+
 ## [1.2.11](https://github.com/xapp-ai/xapp-cli/compare/v1.2.10...v1.2.11) (2022-05-11)
 
 
