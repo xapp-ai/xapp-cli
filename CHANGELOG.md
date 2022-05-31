@@ -1,3 +1,11 @@
+## [1.2.25](https://github.com/xapp-ai/xapp-cli/compare/v1.2.24...v1.2.25) (2022-05-31)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @urql/core to v2.5.0 ([#359](https://github.com/xapp-ai/xapp-cli/issues/359)) ([e28113d](https://github.com/xapp-ai/xapp-cli/commit/e28113ddd85cb23c23d859d71bcbb46f2e04680a))
+* **deps:** update dependency aws-sdk to v2.1145.0 ([#325](https://github.com/xapp-ai/xapp-cli/issues/325)) ([6e0d6ab](https://github.com/xapp-ai/xapp-cli/commit/6e0d6ab01ce9867011ddec65faf59a6273069296))
+
 ## [1.2.24](https://github.com/xapp-ai/xapp-cli/compare/v1.2.23...v1.2.24) (2022-05-31)
 
 
