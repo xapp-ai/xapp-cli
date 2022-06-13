@@ -4,6 +4,22 @@ query getProfile {
   }
 }
 
+query getOrgAnalytics($orgId: ID!, $startDate: DateTime!, $endDate: DateTime!) {
+  org(organizationId: $orgId) {
+    _id
+    __typename
+    name
+    analytics {
+      user(start: $startDate, end: $endDate) {
+        newUsers
+        returningUsers
+        totalSessions
+        totalUsers
+      }
+    }
+  }
+}
+
 query getAppContent($appId: ID!, $size: Int!, $from: Int!) {
   app(appId: $appId) {
     appId
@@ -34,6 +50,35 @@ query getAppContent($appId: ID!, $size: Int!, $from: Int!) {
         raw
         answer
         questions
+      }
+    }
+  }
+}
+
+query getAppAnalytics($appId: ID!, $startDate: DateTime!, $endDate: DateTime!) {
+  app(appId: $appId) {
+    _id
+    __typename
+    name
+    analytics {
+      user(start: $startDate, end: $endDate) {
+        newUsers
+        returningUsers
+        totalSessions
+        totalUsers
+      }
+    }
+  }
+}
+
+query getAppSchedules($appId: ID!) {
+  app(appId: $appId) {
+    schedules {
+      schedules {
+        scheduleId
+        type
+        event
+        parameters
       }
     }
   }

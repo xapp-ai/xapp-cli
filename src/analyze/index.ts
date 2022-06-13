@@ -1,23 +1,31 @@
 /*! Copyright (c) 2022, XAPP AI*/
 
-import { isGlobalHandler } from "stentor-guards";
 import log from "stentor-logger";
-import { Handler } from "stentor-models";
-import { getStentorApp } from "../getStentorApp";
+import { getAppId } from "../getAppId";
+import { getUserToken } from "../getUserToken";
+import { getXAPPClient } from "../getXAPPClient";
 
 export async function info(appId: string): Promise<void> {
 
-    const { app, intents, handlers, entities } = await getStentorApp(appId);
+    const token = await getUserToken();
+
+    if (!appId) {
+        appId = getAppId();
+    }
+
+    const client = getXAPPClient(token, appId);
+
+    // Temporary to get organizationId
+    const app = await client.getApp(appId);
+
+    const { entities, intents, handlers } = app;
 
     log.info(`name: ${app.name}`)
-    log.info(`\t${entities.length} entities`);
-    log.info(`\t${intents.length} intents`);
-    log.info(`\t${handlers.length} handlers`);
-
-    // Go through and find all the global handlers
-    const globalHandlers: Handler[] = handlers.filter(handler => {
-        return isGlobalHandler(handler);
-    });
-
-    log.info(`\t${globalHandlers.length} global handlers`);
+    log.info(`\t${entities.total} entities`);
+    log.info(`\t${intents.total} intents`);
+    log.info(`\t${handlers.total} handlers`);
+    log.info(`Last 7 days...`)
+    log.info(`\t${app.analytics.user.totalUsers} total users`);
+    log.info(`\t${app.analytics.user.newUsers} new users`);
+    log.info(`\t${app.analytics.user.totalSessions} total sessions`);
 }

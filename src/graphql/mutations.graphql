@@ -12,6 +12,28 @@ mutation startCrawl(
   )
 }
 
+mutation addScheduledCrawl(
+  $appId: ID!
+  $url: URL!
+  $pattern: [String]
+  $daysOfWeek: [SchedulerDaysOfWeek]!
+) {
+  app {
+    update(appId: $appId) {
+      scheduleWeeklyWebCrawls(
+        webUrl: $url
+        webUrlPatterns: $pattern
+        daysOfWeek: $daysOfWeek
+      ) {
+        scheduleId
+        type
+        event
+        parameters
+      }
+    }
+  }
+}
+
 mutation addChatWidgetChannel(
   $appId: ID!
   $channel: ChatWidgetAppChannelInput!
