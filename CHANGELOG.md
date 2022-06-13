@@ -1,3 +1,10 @@
+## [1.2.28](https://github.com/xapp-ai/xapp-cli/compare/v1.2.27...v1.2.28) (2022-06-13)
+
+
+### Bug Fixes
+
+* Allow running XAPPClient without .xapp/config ([#375](https://github.com/xapp-ai/xapp-cli/issues/375)) ([15d3fc7](https://github.com/xapp-ai/xapp-cli/commit/15d3fc7678d74703931b0b437b941e2186b07ab3))
+
 ## [1.2.27](https://github.com/xapp-ai/xapp-cli/compare/v1.2.26...v1.2.27) (2022-06-13)
 
 
