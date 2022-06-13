@@ -7,7 +7,13 @@ export function getGraphQLClient(token: string): Client {
 
     const profile = getConfigProfile();
 
-    const url: string = profile.basePath || "https://api.xapp.ai"
+    let url: string;
+
+    if (profile) {
+        url = profile.basePath || "https://api.xapp.ai"
+    } else {
+        url = "https://api.xapp.ai"
+    }
 
     const client = new Client({
         fetchOptions: {
