@@ -5,11 +5,15 @@ import { Handler, Entity, Intent } from "stentor-models";
 import { getGraphQLClient } from "./graphql/getGraphQLClient";
 import {
     AddChatWidgetChannelDocument,
+    AddScheduledCrawlDocument,
     ChatWidgetAppChannelInput,
     GetAppContentDocument,
+    GetAppSchedulesDocument,
+    GetAppSchedulesQuery,
     GetProfileDocument,
     GetProfileQuery,
-    StartCrawlDocument
+    StartCrawlDocument,
+    WebCrawlSchedule,
 } from "./graphql/models";
 import {
     AddAppMutation,
@@ -63,6 +67,14 @@ export interface AppOverview {
         total: number;
         entities: EntityDescription[];
     };
+    analytics?: {
+        user?: {
+            totalUsers: number;
+            totalSessions: number;
+            returningUsers: number;
+            newUsers: number;
+        };
+    };
 }
 
 export interface XAPPClientProps {
@@ -110,17 +122,16 @@ export class XAPPClient {
                 const error = response.error || `Unable to update app, unknown error`;
                 throw error;
             }
-
         });
     }
 
     public getApp(appId: string, start?: string, end?: string): Promise<AppOverview> {
         if (!start) {
             const now = new Date();
-            start = now.toISOString();
+            end = now.toISOString();
             const lastWeek = new Date();
             lastWeek.setDate(now.getDate() - 7);
-            end = lastWeek.toISOString();
+            start = lastWeek.toISOString();
         }
 
         return this.client.query(GetApp, {
@@ -131,6 +142,7 @@ export class XAPPClient {
             return response.data.app;
         });
     }
+
     /**
      * Export an app and all of its intents, handlers, entities.
      * 
@@ -180,7 +192,12 @@ export class XAPPClient {
         return this.client.query(GetAppWithChannels, {
             appId
         }).toPromise().then((response) => {
-            return response.data.app.channels;
+            if (response.data) {
+                return response.data.app.channels;
+            } else {
+                const error = response.error || `Unabled to get app channels, unknown error`;
+                throw error;
+            }
         });
     }
 
@@ -210,18 +227,40 @@ export class XAPPClient {
 
     public getDocuments(appId: string, size = 10, from = 0): Promise<Pick<GraphqlApp, "contentSources" | "content">> {
         return this.client.query(GetAppContentDocument, { appId, size, from }).toPromise().then((response) => {
-            return response.data.app;
+            if (response.data) {
+                return response.data.app;
+            } else {
+                const error = response.error || `Unable to get documents, unknown error`;
+                throw error;
+            }
         });
     }
 
     public getFAQs(appId: string, size = 10, from = 0): Promise<Pick<GraphqlApp, "faq">> {
         return this.client.query(GetAppContentDocument, { appId, size, from }).toPromise().then((response) => {
-            return response.data.app;
+            if (response.data) {
+                return response.data.app;
+            } else {
+                const error = response.error || `Unable to get FAQs, unknown error`;
+                throw error;
+            }
         });
     }
 
     public startCrawl(appId: string, url: string, pattern: string[], channelId: string): Promise<void> {
         return this.client.mutation(StartCrawlDocument, { appId, url, pattern, channelId }).toPromise().then();
+    }
+
+    public scheduleCrawl(appId: string, url: string, pattern: string[], daysOfWeek?: string[]): Promise<WebCrawlSchedule> {
+        return this.client.mutation(AddScheduledCrawlDocument, { appId, url, pattern, daysOfWeek }).toPromise().then((response) => {
+            return response.data;
+        });
+    }
+
+    public getSchedules(appId: string): Promise<GetAppSchedulesQuery> {
+        return this.client.query(GetAppSchedulesDocument, { appId }).toPromise().then((response) => {
+            return response.data;
+        })
     }
 
     //

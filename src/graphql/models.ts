@@ -18,6 +18,7 @@ export type Scalars = {
   DateTime: any;
   HandlerResponseConditions: any;
   IntOrBoolean: any;
+  IntOrString: any;
   /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
   JSON: any;
   /** The `BigInt` scalar type represents non-fractional signed whole numeric values. */
@@ -201,6 +202,8 @@ export type AddFaq = {
   answer: Scalars['String'];
   /** An ID to a Handler that is associated with the FAQ */
   associatedHandlerId?: InputMaybe<Scalars['ID']>;
+  /** Set to true if the FAQ should be excluded from the auto-complete search. */
+  excludeFromAutoComplete?: InputMaybe<Scalars['Boolean']>;
   /** An ID linked to an external system in which the FAQ was derived from. */
   externalFAQId?: InputMaybe<Scalars['ID']>;
   /** The name of the FAQ */
@@ -209,6 +212,7 @@ export type AddFaq = {
   questions: Array<InputMaybe<Scalars['String']>>;
   /** The raw text */
   raw?: InputMaybe<Scalars['String']>;
+  responses?: InputMaybe<Array<InputMaybe<Scalars['JSON']>>>;
   /** The URL that the FAQ could be found on. */
   url?: InputMaybe<Scalars['URL']>;
 };
@@ -303,6 +307,7 @@ export type AddIntentInput = {
   langCode?: InputMaybe<Scalars['String']>;
   /** The human-readable name of the intent. */
   name: Scalars['String'];
+  nlu?: InputMaybe<Scalars['JSON']>;
   /** The permissions that the intent requires in order to work. */
   permissions?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Slot type definition. */
@@ -1205,6 +1210,8 @@ export type App = {
   platformData?: Maybe<PlatformData>;
   /** URL to the privacy policy for the app. */
   privacyPolicyUrl?: Maybe<Scalars['String']>;
+  /** The status that the app is currently in Stentor. */
+  schedules: AppSchedules;
   /**
    * A small icon for the app, 108x108 PNG
    *
@@ -1328,6 +1335,11 @@ export type AppIntentsArgs = {
 };
 
 
+export type AppSchedulesArgs = {
+  previousKey?: InputMaybe<Scalars['String']>;
+};
+
+
 export type AppUsageEventsArgs = {
   from?: InputMaybe<Scalars['Int']>;
   size?: InputMaybe<Scalars['Int']>;
@@ -1440,6 +1452,12 @@ export type AppChannelMutation = {
    */
   addFacebookMessengerChannel: FacebookMessengerAppChannel;
   /**
+   * Adds or updates an Intelligent Search channel to the specified app
+   *
+   * @return The channel that was just added
+   */
+  addIntelligentSearchChannel: IntelligentSearchAppChannel;
+  /**
    * Adds or updates a Lex channel to the specified app.
    *
    * @return The channel that was just added
@@ -1483,6 +1501,11 @@ export type AppChannelMutationAddDialogflowChannelArgs = {
 
 export type AppChannelMutationAddFacebookMessengerChannelArgs = {
   channel: FacebookMessengerAppChannelInput;
+};
+
+
+export type AppChannelMutationAddIntelligentSearchChannelArgs = {
+  channel: IntelligentSearchAppChannelInput;
 };
 
 
@@ -1887,6 +1910,7 @@ export type AppMutationAddAppArgs = {
 
 
 export type AppMutationImportAppArgs = {
+  overwrite?: InputMaybe<Scalars['Boolean']>;
   url: Scalars['URL'];
 };
 
@@ -1907,6 +1931,13 @@ export type AppNluInput = {
   id?: InputMaybe<Scalars['String']>;
   /** The type of NLU. */
   type: Scalars['String'];
+};
+
+export type AppSchedules = {
+  /** The key to include in the next query of schedules. */
+  nextKey?: Maybe<Scalars['String']>;
+  /** The schedules that were found */
+  schedules: Array<Maybe<WebCrawlSchedule>>;
 };
 
 export type AppTemplateInput = {
@@ -2045,6 +2076,8 @@ export enum AppUsageInterval {
 export type AppUsageStat = {
   /** ID of the organization that contains the app */
   appId: Scalars['ID'];
+  /** A CSV formatted output of the stats found. */
+  csv: UsageStatCsvReturn;
   intervals: Array<Maybe<UsageStat>>;
   newUsers: Scalars['Int'];
   returningUsers: Scalars['Int'];
@@ -2272,6 +2305,7 @@ export type ChatWidgetAppChannel = BaseAppChannel & {
   disabled?: Maybe<Scalars['Boolean']>;
   /** URI where the channel can be accessed. */
   endPoint?: Maybe<Scalars['String']>;
+  footer?: Maybe<ChatWidgetFooterConfig>;
   header?: Maybe<ChatWidgetHeaderConfig>;
   /** The ID of the channel. */
   id: Scalars['String'];
@@ -2287,6 +2321,7 @@ export type ChatWidgetAppChannel = BaseAppChannel & {
    * @deprecated Use connection
    */
   serverUrl?: Maybe<Scalars['String']>;
+  sessionExpiration?: Maybe<Scalars['String']>;
   /** The lifecycle status of the app. */
   status?: Maybe<AppChannelStatus>;
   /** Theme for the widget */
@@ -2332,6 +2367,7 @@ export type ChatWidgetAppChannelInput = {
   disabled?: InputMaybe<Scalars['Boolean']>;
   /** URI where the channel can be accessed. */
   endPoint?: InputMaybe<Scalars['String']>;
+  footer?: InputMaybe<ChatWidgetFooterConfigInput>;
   header?: InputMaybe<ChatWidgetHeaderConfigInput>;
   /**
    * The ID of the channel.
@@ -2355,6 +2391,7 @@ export type ChatWidgetAppChannelInput = {
    * @deprecated use connection
    */
   serverUrl?: InputMaybe<Scalars['String']>;
+  sessionExpiration?: InputMaybe<Scalars['String']>;
   /** Theme for the widget */
   theme?: InputMaybe<ChatWidgetThemeInput>;
   /** The type of channel */
@@ -2437,6 +2474,24 @@ export type ChatWidgetBorderThemeInput = {
   width?: InputMaybe<Scalars['String']>;
 };
 
+export type ChatWidgetBrandingConfig = {
+  enabled?: Maybe<Scalars['Boolean']>;
+  text?: Maybe<Scalars['String']>;
+};
+
+export type ChatWidgetBrandingConfigInput = {
+  enabled?: InputMaybe<Scalars['Boolean']>;
+  text?: InputMaybe<Scalars['String']>;
+};
+
+export type ChatWidgetBrandingTheme = {
+  text?: Maybe<ChatWidgetTextTheme>;
+};
+
+export type ChatWidgetBrandingThemeInput = {
+  text?: InputMaybe<ChatWidgetTextThemeInput>;
+};
+
 export type ChatWidgetButtonTheme = {
   color?: Maybe<Scalars['String']>;
 };
@@ -2489,14 +2544,24 @@ export type ChatWidgetCtaThemeInput = {
   text?: InputMaybe<ChatWidgetTextThemeInput>;
 };
 
+export type ChatWidgetFooterConfig = {
+  branding?: Maybe<ChatWidgetBrandingConfig>;
+};
+
+export type ChatWidgetFooterConfigInput = {
+  branding?: InputMaybe<ChatWidgetBrandingConfigInput>;
+};
+
 export type ChatWidgetFooterTheme = {
   background?: Maybe<Scalars['String']>;
   border?: Maybe<ChatWidgetBorderTheme>;
+  branding?: Maybe<ChatWidgetBrandingTheme>;
 };
 
 export type ChatWidgetFooterThemeInput = {
   background?: InputMaybe<Scalars['String']>;
   border?: InputMaybe<ChatWidgetBorderThemeInput>;
+  branding?: InputMaybe<ChatWidgetBrandingThemeInput>;
 };
 
 export type ChatWidgetHeaderActionsConfig = {
@@ -2729,6 +2794,7 @@ export type ChatWidgetTheme = {
   primaryColor?: Maybe<Scalars['String']>;
   /** ChatWidget sendButton styling */
   sendButton?: Maybe<ChatWidgetButtonTheme>;
+  sessionExpiration?: Maybe<Scalars['String']>;
   /** Widget size */
   size?: Maybe<ChatWidgetSizeTheme>;
 };
@@ -2766,6 +2832,7 @@ export type ChatWidgetThemeInput = {
   primaryColor?: InputMaybe<Scalars['String']>;
   /** ChatWidget sendButton styling */
   sendButton?: InputMaybe<ChatWidgetButtonThemeInput>;
+  sessionExpiration?: InputMaybe<Scalars['String']>;
   /** Widget size */
   size?: InputMaybe<ChatWidgetSizeThemeInput>;
 };
@@ -4607,13 +4674,13 @@ export type IntelligentSearchWidgetCarouselThemeInput = {
 export type IntelligentSearchWidgetLinkBlockTheme = {
   margin?: Maybe<IntelligentSearchWidgetMarginTheme>;
   padding?: Maybe<IntelligentSearchWidgetPaddingTheme>;
-  text?: Maybe<IntelligentSearchWidgetTextTheme>;
+  text?: Maybe<IntelligentSearchWidgetLinkTheme>;
 };
 
 export type IntelligentSearchWidgetLinkBlockThemeInput = {
   margin?: InputMaybe<IntelligentSearchWidgetMarginThemeInput>;
   padding?: InputMaybe<IntelligentSearchWidgetPaddingThemeInput>;
-  text?: InputMaybe<IntelligentSearchWidgetTextThemeInput>;
+  text?: InputMaybe<IntelligentSearchWidgetLinkThemeInput>;
 };
 
 export type IntelligentSearchWidgetLinkTheme = {
@@ -4696,7 +4763,7 @@ export type IntelligentSearchWidgetTextTheme = {
   fontSize?: Maybe<Scalars['String']>;
   fontStyle?: Maybe<Scalars['String']>;
   fontWeight?: Maybe<Scalars['String']>;
-  lineHeight?: Maybe<Scalars['String']>;
+  lineHeight?: Maybe<Scalars['IntOrString']>;
 };
 
 export type IntelligentSearchWidgetTextThemeInput = {
@@ -4711,11 +4778,19 @@ export type IntelligentSearchWidgetTextThemeInput = {
 export type IntelligentSearchWidgetTheme = {
   accentColor?: Maybe<Scalars['String']>;
   border?: Maybe<IntelligentWidgetBorderTheme>;
+  card?: Maybe<IntelligentSearchWidgetCardTheme>;
+  carousel?: Maybe<IntelligentSearchWidgetCarouselTheme>;
+  list?: Maybe<IntelligentSearchWidgetListTheme>;
+  messages?: Maybe<IntelligentSearchWidgetMessagesTheme>;
 };
 
 export type IntelligentSearchWidgetThemeInput = {
   accentColor?: InputMaybe<Scalars['String']>;
   border?: InputMaybe<IntelligentSearchWidgetBorderThemeInput>;
+  card?: InputMaybe<IntelligentSearchWidgetCardThemeInput>;
+  carousel?: InputMaybe<IntelligentSearchWidgetCarouselThemeInput>;
+  list?: InputMaybe<IntelligentSearchWidgetListThemeInput>;
+  messages?: InputMaybe<IntelligentSearchWidgetMessagesThemeInput>;
 };
 
 export type IntelligentWidgetBorderTheme = {
@@ -4777,6 +4852,7 @@ export type Intent = {
   langCode?: Maybe<Scalars['String']>;
   /** The human-readable name of the intent. */
   name: Scalars['String'];
+  nlu?: Maybe<Scalars['JSON']>;
   /** The ID of the organization that the intent is linked to. */
   organizationId: Scalars['ID'];
   /** The permissions that the intent requires in order to work. */
@@ -6297,6 +6373,7 @@ export type MutationStartWebsiteCrawlingArgs = {
   channelId: Scalars['String'];
   kendra?: InputMaybe<WebCrawlKendraInput>;
   s3RegionalDomain?: InputMaybe<Scalars['String']>;
+  stealth?: InputMaybe<Scalars['Boolean']>;
   webUrl: Scalars['URL'];
   webUrlPatterns?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
@@ -6554,6 +6631,8 @@ export type OrgPolicy = {
 };
 
 export type OrgUsageStat = {
+  /** A CSV formatted output of the stats found. */
+  csv: UsageStatCsvReturn;
   intervals: Array<Maybe<UsageStat>>;
   newUsers: Scalars['Int'];
   /** ID of the organization that contains the app */
@@ -6564,10 +6643,12 @@ export type OrgUsageStat = {
 };
 
 export type OrgUsageStats = {
+  docsCrawled: Scalars['Int'];
   entities: Scalars['Int'];
   handlers: Scalars['Int'];
   intents: Scalars['Int'];
   testsExecuted: Scalars['Int'];
+  totalDocs: Scalars['Int'];
   uniqueSessions: Scalars['Int'];
 };
 
@@ -8234,13 +8315,20 @@ export type TrialTierPaymentAccount = BaseStudioTierPaymentAccount & {
 };
 
 export type UpdateAppChannelMutation = {
-  scheduleWeeklyWebCrawls: WebCrawlWeeklySchedule;
+  deleteScheduledEvent: Scalars['String'];
+  scheduleWeeklyWebCrawls: WebCrawlSchedule;
   syncFAQToKendra: SyncFaqToKendraReturn;
+};
+
+
+export type UpdateAppChannelMutationDeleteScheduledEventArgs = {
+  scheduleId: Scalars['ID'];
 };
 
 
 export type UpdateAppChannelMutationScheduleWeeklyWebCrawlsArgs = {
   daysOfWeek: Array<InputMaybe<SchedulerDaysOfWeek>>;
+  stealth?: InputMaybe<Scalars['Boolean']>;
   webUrl: Scalars['URL'];
   webUrlPatterns?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
@@ -8354,6 +8442,7 @@ export type UpdateAppMutation = {
   cms: CmsMutation;
   /** Deletes the app. */
   deleteApp: Scalars['String'];
+  deleteScheduledEvent: Scalars['String'];
   /** Exports the app to a file. Returns the URL of the file to download. */
   exportApp: ExportAppMutationResponse;
   faq: FaqMutation;
@@ -8367,6 +8456,7 @@ export type UpdateAppMutation = {
   removeAllNotifications: Scalars['String'];
   /** Removes a notification from the app.  Returns a list of notifications that remain. */
   removeNotification: Array<Maybe<SystemNotification>>;
+  scheduleWeeklyWebCrawls: WebCrawlSchedule;
   /**
    * Update an existing app.  Only the attributes included will be updated.
    *
@@ -8374,6 +8464,11 @@ export type UpdateAppMutation = {
    * be ignored as they are to remain constant.
    */
   updateApp: App;
+};
+
+
+export type UpdateAppMutationDeleteScheduledEventArgs = {
+  scheduleId: Scalars['ID'];
 };
 
 
@@ -8386,6 +8481,13 @@ export type UpdateAppMutationFlagEventArgs = {
 
 export type UpdateAppMutationRemoveNotificationArgs = {
   id: Scalars['ID'];
+};
+
+
+export type UpdateAppMutationScheduleWeeklyWebCrawlsArgs = {
+  daysOfWeek: Array<InputMaybe<SchedulerDaysOfWeek>>;
+  webUrl: Scalars['URL'];
+  webUrlPatterns?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 
@@ -8406,12 +8508,15 @@ export type UpdateFaq = {
   answer?: InputMaybe<Scalars['String']>;
   /** An ID to a Handler that is associated with the FAQ */
   associatedHandlerId?: InputMaybe<Scalars['ID']>;
+  /** Set to true if the FAQ should be excluded from the auto-complete search. */
+  excludeFromAutoComplete?: InputMaybe<Scalars['Boolean']>;
   /** An ID linked to an external system in which the FAQ was derived from. */
   externalFAQId?: InputMaybe<Scalars['ID']>;
   /** Questions associated with the FAQ */
   questions?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** The raw text */
   raw?: InputMaybe<Scalars['String']>;
+  responses?: InputMaybe<Array<InputMaybe<Scalars['JSON']>>>;
   /** The URL where the FAQ can be found. */
   url?: InputMaybe<Scalars['URL']>;
 };
@@ -8448,7 +8553,7 @@ export type UpdateHandlerInput = {
   /** The language code that the intent covers. */
   langCode?: InputMaybe<Scalars['String']>;
   /** The human-readable name of the intent. */
-  name?: InputMaybe<Scalars['String']>;
+  name: Scalars['String'];
   /** The permissions that the intent requires in order to work. */
   permissions?: InputMaybe<Array<InputMaybe<HandlerPermissions>>>;
   redirect?: InputMaybe<Array<InputMaybe<HandlerRedirectInput>>>;
@@ -8542,6 +8647,7 @@ export type UpdateIntentInput = {
   langCode?: InputMaybe<Scalars['String']>;
   /** The name of the intent */
   name?: InputMaybe<Scalars['String']>;
+  nlu?: InputMaybe<Scalars['JSON']>;
   /** The permissions that the intent requires in order to work. */
   permissions?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Slot type definition. */
@@ -8686,6 +8792,13 @@ export type UsageStat = {
   returningUsers: Scalars['Int'];
   totalSessions: Scalars['Int'];
   totalUsers: Scalars['Int'];
+};
+
+export type UsageStatCsvReturn = {
+  /** The CSV formatted data */
+  csv: Scalars['String'];
+  /** The file location of the CSV data */
+  file: Scalars['URL'];
 };
 
 export type UserEntitlements = {
@@ -8903,8 +9016,15 @@ export type WebCrawlKendraInput = {
   kendraDataSourceArn: Scalars['String'];
 };
 
-export type WebCrawlWeeklySchedule = {
+export type WebCrawlSchedule = {
+  /** The event that is to be performed on the schedule. */
+  event: Scalars['String'];
+  /** The parameters that the schedule holds. */
+  parameters: Scalars['JSON'];
+  /** The ID of the schedule. */
   scheduleId: Scalars['ID'];
+  /** The type of schedule that this is. ("weekly" is currently only option) */
+  type: Scalars['String'];
 };
 
 export type WebCrawlerQuery = {
@@ -8940,15 +9060,21 @@ export type WebFaq = {
   _id: Scalars['ID'];
   /** The answer of the FAQ questions */
   answer: Scalars['String'];
+  /** An ID to a Handler that is associated with the FAQ */
   associatedHandlerId?: Maybe<Scalars['String']>;
   /** The time it was created. */
   created: Scalars['String'];
+  /** Set to true if the FAQ should be excluded from the auto-complete search. */
+  excludeFromAutoComplete?: Maybe<Scalars['Boolean']>;
+  /** An ID linked to an external system in which the FAQ was derived from. */
+  externalFAQId?: Maybe<Scalars['ID']>;
   /** The name assigned to the question-answer page */
   name: Scalars['String'];
   /** Questions that are linked to the answer */
   questions: Array<Maybe<Scalars['String']>>;
   /** The raw text of the FAQ page */
   raw?: Maybe<Scalars['String']>;
+  responses?: Maybe<Array<Maybe<HandlerResponse>>>;
   /** The URL that the FAQ came from */
   url?: Maybe<Scalars['String']>;
 };
@@ -8990,6 +9116,16 @@ export type StartCrawlMutationVariables = Exact<{
 
 export type StartCrawlMutation = { startWebsiteCrawling: string };
 
+export type AddScheduledCrawlMutationVariables = Exact<{
+  appId: Scalars['ID'];
+  url: Scalars['URL'];
+  pattern?: InputMaybe<Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>>;
+  daysOfWeek: Array<InputMaybe<SchedulerDaysOfWeek>> | InputMaybe<SchedulerDaysOfWeek>;
+}>;
+
+
+export type AddScheduledCrawlMutation = { app: { update: { scheduleWeeklyWebCrawls: { scheduleId: string, type: string, event: string, parameters: any } } } };
+
 export type AddChatWidgetChannelMutationVariables = Exact<{
   appId: Scalars['ID'];
   channel: ChatWidgetAppChannelInput;
@@ -9003,6 +9139,15 @@ export type GetProfileQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetProfileQuery = { profile?: { email: string } | null };
 
+export type GetOrgAnalyticsQueryVariables = Exact<{
+  orgId: Scalars['ID'];
+  startDate: Scalars['DateTime'];
+  endDate: Scalars['DateTime'];
+}>;
+
+
+export type GetOrgAnalyticsQuery = { org?: { __typename: 'Organization', _id: string, name: string, analytics?: { user: { newUsers: number, returningUsers: number, totalSessions: number, totalUsers: number } } | null } | null };
+
 export type GetAppContentQueryVariables = Exact<{
   appId: Scalars['ID'];
   size: Scalars['Int'];
@@ -9011,6 +9156,22 @@ export type GetAppContentQueryVariables = Exact<{
 
 
 export type GetAppContentQuery = { app?: { appId: string, contentSources?: { __typename: 'TotalWebContentSources', total: number, sources: Array<{ __typename: 'WebContentSources', webUrl: string, webUrlPatterns: Array<string | null> } | null> } | null, content?: { total: number, content: Array<{ _id: string, name: string, url: string, type: WebContentType, lastUpdated: any, text: string } | null> } | null, faq?: { total: number, faq: Array<{ name: string, raw?: string | null, answer: string, questions: Array<string | null> } | null> } | null } | null };
+
+export type GetAppAnalyticsQueryVariables = Exact<{
+  appId: Scalars['ID'];
+  startDate: Scalars['DateTime'];
+  endDate: Scalars['DateTime'];
+}>;
+
+
+export type GetAppAnalyticsQuery = { app?: { __typename: 'App', _id: string, name: string, analytics?: { user: { newUsers: number, returningUsers: number, totalSessions: number, totalUsers: number } } | null } | null };
+
+export type GetAppSchedulesQueryVariables = Exact<{
+  appId: Scalars['ID'];
+}>;
+
+
+export type GetAppSchedulesQuery = { app?: { schedules: { schedules: Array<{ scheduleId: string, type: string, event: string, parameters: any } | null> } } | null };
 
 
 export const StartCrawlDocument = gql`
@@ -9021,6 +9182,24 @@ export const StartCrawlDocument = gql`
     webUrlPatterns: $pattern
     channelId: $channelId
   )
+}
+    `;
+export const AddScheduledCrawlDocument = gql`
+    mutation addScheduledCrawl($appId: ID!, $url: URL!, $pattern: [String], $daysOfWeek: [SchedulerDaysOfWeek]!) {
+  app {
+    update(appId: $appId) {
+      scheduleWeeklyWebCrawls(
+        webUrl: $url
+        webUrlPatterns: $pattern
+        daysOfWeek: $daysOfWeek
+      ) {
+        scheduleId
+        type
+        event
+        parameters
+      }
+    }
+  }
 }
     `;
 export const AddChatWidgetChannelDocument = gql`
@@ -9225,6 +9404,23 @@ export const GetProfileDocument = gql`
   }
 }
     `;
+export const GetOrgAnalyticsDocument = gql`
+    query getOrgAnalytics($orgId: ID!, $startDate: DateTime!, $endDate: DateTime!) {
+  org(organizationId: $orgId) {
+    _id
+    __typename
+    name
+    analytics {
+      user(start: $startDate, end: $endDate) {
+        newUsers
+        returningUsers
+        totalSessions
+        totalUsers
+      }
+    }
+  }
+}
+    `;
 export const GetAppContentDocument = gql`
     query getAppContent($appId: ID!, $size: Int!, $from: Int!) {
   app(appId: $appId) {
@@ -9256,6 +9452,37 @@ export const GetAppContentDocument = gql`
         raw
         answer
         questions
+      }
+    }
+  }
+}
+    `;
+export const GetAppAnalyticsDocument = gql`
+    query getAppAnalytics($appId: ID!, $startDate: DateTime!, $endDate: DateTime!) {
+  app(appId: $appId) {
+    _id
+    __typename
+    name
+    analytics {
+      user(start: $startDate, end: $endDate) {
+        newUsers
+        returningUsers
+        totalSessions
+        totalUsers
+      }
+    }
+  }
+}
+    `;
+export const GetAppSchedulesDocument = gql`
+    query getAppSchedules($appId: ID!) {
+  app(appId: $appId) {
+    schedules {
+      schedules {
+        scheduleId
+        type
+        event
+        parameters
       }
     }
   }
