@@ -1,3 +1,10 @@
+## [1.2.27](https://github.com/xapp-ai/xapp-cli/compare/v1.2.26...v1.2.27) (2022-06-13)
+
+
+### Bug Fixes
+
+* Additional XAPPClient Queries ([#374](https://github.com/xapp-ai/xapp-cli/issues/374)) ([f227946](https://github.com/xapp-ai/xapp-cli/commit/f22794653e357d6a0c9f2701f737595d94442324))
+
 ## [1.2.26](https://github.com/xapp-ai/xapp-cli/compare/v1.2.25...v1.2.26) (2022-05-31)
 
 
