@@ -67,8 +67,8 @@ export interface AppOverview {
         total: number;
         entities: EntityDescription[];
     };
-    analytics: {
-        user: {
+    analytics?: {
+        user?: {
             totalUsers: number;
             totalSessions: number;
             returningUsers: number;
