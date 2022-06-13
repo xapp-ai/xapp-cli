@@ -1,5 +1,6 @@
 /*! Copyright (c) 2022, XAPP AI*/
 import { readFileSync } from "fs";
+import { log } from "stentor-logger";
 
 import { Config, ConfigProfile } from "./Config";
 import { getConfigPath } from "./getConfigPath";
@@ -13,8 +14,8 @@ export function getConfig(): Config {
 
     let config: Config;
 
-    const configData = readFileSync(configPath, "UTF-8");
     try {
+        const configData = readFileSync(configPath, "UTF-8");
         config = JSON.parse(configData);
     } catch (e) {
         throw Error(`Error reading config from ${configPath}`);
@@ -28,8 +29,18 @@ export function getConfig(): Config {
  * 
  * @returns Current profile used to configure all network calls
  */
-export function getConfigProfile(): ConfigProfile {
-    const config = getConfig();
+export function getConfigProfile(): ConfigProfile | undefined {
+
+    let config: Config;
+    try {
+        config = getConfig();
+    } catch (e) {
+        log().info(`Unable to get config from file`);
+    }
+
+    if (!config) {
+        return undefined;
+    }
 
     return !!config.currentProfile ? config.profiles[config.currentProfile] : config.profiles.default;
 
