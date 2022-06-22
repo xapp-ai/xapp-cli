@@ -1,3 +1,10 @@
+## [1.2.32](https://github.com/xapp-ai/xapp-cli/compare/v1.2.31...v1.2.32) (2022-06-22)
+
+
+### Bug Fixes
+
+* **deps:** update dependency inquirer to v9 ([#382](https://github.com/xapp-ai/xapp-cli/issues/382)) ([f8bf70f](https://github.com/xapp-ai/xapp-cli/commit/f8bf70f332eb625b584d8779d2bd285b4465ebdd))
+
 ## [1.2.31](https://github.com/xapp-ai/xapp-cli/compare/v1.2.30...v1.2.31) (2022-06-20)
 
 
