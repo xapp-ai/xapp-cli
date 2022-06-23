@@ -83,3 +83,111 @@ query getAppSchedules($appId: ID!) {
     }
   }
 }
+
+query getAnalyticsAndEvents(
+  $appId: ID!
+  $startDate: DateTime!
+  $endDate: DateTime!
+  $byTag: [String]
+  $byRequestIntentId: [String]
+  $byChannel: [String]
+) {
+  app(appId: $appId) {
+    _id
+    __typename
+    appId
+    name
+    analytics {
+      user(start: $startDate, end: $endDate) {
+        newUsers
+        returningUsers
+        totalSessions
+        totalUsers
+      }
+    }
+    events(
+      startDate: $startDate
+      endDate: $endDate
+      byTag: $byTag
+      byRequestIntentId: $byRequestIntentId
+      byChannel: $byChannel
+    ) {
+      total
+    }
+  }
+}
+
+query getEvents(
+  $appId: ID!
+  $startDate: DateTime!
+  $endDate: DateTime!
+  $size: Int = 10
+  $from: Int = 0
+  $byTag: [String]
+  $byRequestIntentId: [String]
+  $byChannel: [String]
+) {
+  app(appId: $appId) {
+    _id
+    __typename
+    appId
+    name
+    events(
+      size: $size
+      from: $from
+      startDate: $startDate
+      endDate: $endDate
+      byTag: $byTag
+      byRequestIntentId: $byRequestIntentId
+      byChannel: $byChannel
+    ) {
+      total
+      events {
+        eventId
+        channel
+        platform
+        userId
+        sessionId
+        eventTime
+        currentHandler
+        selectedHandler
+        environment
+        eventType
+        eventName
+        request
+        slots {
+          name
+          rawValue
+          slotValue
+        }
+        stentorRequest {
+          intentId
+          rawQuery
+          matchConfidence
+        }
+        response {
+          outputSpeech {
+            displayText
+            ssml
+            suggestions {
+              title
+              url
+            }
+          }
+          reprompt {
+            displayText
+            ssml
+            suggestions {
+              title
+              url
+            }
+          }
+        }
+        rawQuery
+        errorCode
+        errorMessage
+        payload
+      }
+    }
+  }
+}

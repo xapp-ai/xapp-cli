@@ -7,6 +7,8 @@ import {
     AddChatWidgetChannelDocument,
     AddScheduledCrawlDocument,
     ChatWidgetAppChannelInput,
+    GetAnalyticsAndEventsDocument,
+    GetAnalyticsAndEventsQuery,
     GetAppContentDocument,
     GetAppSchedulesDocument,
     GetAppSchedulesQuery,
@@ -14,6 +16,7 @@ import {
     GetProfileQuery,
     StartCrawlDocument,
     WebCrawlSchedule,
+    GetAnalyticsAndEventsQueryVariables
 } from "./graphql/models";
 import {
     AddAppMutation,
@@ -50,6 +53,15 @@ export interface EntityDescription {
     displayName: string;
 }
 
+export interface AppAnalytics {
+    user?: {
+        totalUsers: number;
+        totalSessions: number;
+        returningUsers: number;
+        newUsers: number;
+    };
+}
+
 export interface AppOverview {
     appId: string;
     organizationId: string;
@@ -67,14 +79,16 @@ export interface AppOverview {
         total: number;
         entities: EntityDescription[];
     };
-    analytics?: {
-        user?: {
-            totalUsers: number;
-            totalSessions: number;
-            returningUsers: number;
-            newUsers: number;
-        };
-    };
+    analytics?: AppAnalytics;
+}
+
+export interface AppEventsTotal {
+    appId: string;
+    name: string;
+    analytics: AppAnalytics;
+    events: {
+        total: number
+    }
 }
 
 export interface XAPPClientProps {
@@ -143,6 +157,27 @@ export class XAPPClient {
         });
     }
 
+    public getAppAnalytics(appId: string, start?: string, end?: string, options?: Pick<GetAnalyticsAndEventsQueryVariables, "byTag" | "byChannel" | "byRequestIntentId">): Promise<GetAnalyticsAndEventsQuery> {
+        if (!start) {
+            const now = new Date();
+            end = now.toISOString();
+            const lastWeek = new Date();
+            lastWeek.setDate(now.getDate() - 7);
+            start = lastWeek.toISOString();
+        }
+
+        const variables: GetAnalyticsAndEventsQueryVariables = {
+            appId,
+            startDate: start,
+            endDate: end,
+            ...options
+        }
+
+        return this.client.query(GetAnalyticsAndEventsDocument, variables).toPromise().then((response) => {
+            return response.data;
+        });
+    }
+
     /**
      * Export an app and all of its intents, handlers, entities.
      * 
@@ -188,6 +223,10 @@ export class XAPPClient {
         });
     }
 
+    ///
+    /// Channels
+    ///
+
     public getAppChannels(appId: string): Promise<Channel[]> {
         return this.client.query(GetAppWithChannels, {
             appId
@@ -225,6 +264,10 @@ export class XAPPClient {
             });
     }
 
+    ///
+    /// DOCUMENTS
+    ///
+
     public getDocuments(appId: string, size = 10, from = 0): Promise<Pick<GraphqlApp, "contentSources" | "content">> {
         return this.client.query(GetAppContentDocument, { appId, size, from }).toPromise().then((response) => {
             if (response.data) {
@@ -260,7 +303,7 @@ export class XAPPClient {
     public getSchedules(appId: string): Promise<GetAppSchedulesQuery> {
         return this.client.query(GetAppSchedulesDocument, { appId }).toPromise().then((response) => {
             return response.data;
-        })
+        });
     }
 
     //
@@ -301,7 +344,7 @@ export class XAPPClient {
         }).toPromise().then((response) => {
             return response.data.addIntent;
         });
-    };
+    }
 
     /**
      * Get an intent by intentId
@@ -317,7 +360,7 @@ export class XAPPClient {
         }).toPromise().then((response) => {
             return response.data.intent;
         });
-    };
+    }
 
     public updateIntent(appId: string, intent: Intent): Promise<Pick<Intent, "intentId" | "name">> {
         return this.client.mutation(UpdateIntentMutation, {
@@ -327,7 +370,7 @@ export class XAPPClient {
         }).toPromise().then((response) => {
             return response.data.updateIntent
         });
-    };
+    }
 
     //
     // ENTITY
@@ -349,7 +392,7 @@ export class XAPPClient {
         }).toPromise().then((response) => {
             return response.data.addEntity;
         });
-    };
+    }
 
     public getEntity(appId: string, entityId: string): Promise<Entity> {
         return this.client.query(GetEntity, {
