@@ -1,3 +1,10 @@
+## [1.2.39](https://github.com/xapp-ai/xapp-cli/compare/v1.2.38...v1.2.39) (2022-06-27)
+
+
+### Bug Fixes
+
+* Adding tag search to XAPPClient ([#388](https://github.com/xapp-ai/xapp-cli/issues/388)) ([83a8d88](https://github.com/xapp-ai/xapp-cli/commit/83a8d880276a76fcf74f2440330f440353ee09f6))
+
 ## [1.2.38](https://github.com/xapp-ai/xapp-cli/compare/v1.2.37...v1.2.38) (2022-06-27)
 
 
