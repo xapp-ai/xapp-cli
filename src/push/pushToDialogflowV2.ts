@@ -34,9 +34,7 @@ export async function pushToDialogflowV2(
         projectId: actionsOnGoogleId,
         useBeta: beta,
         credentials: {
-            // eslint-disable-next-line @typescript-eslint/camelcase
             client_email: credentials.client_email,
-            // eslint-disable-next-line @typescript-eslint/camelcase
             private_key: credentials.private_key
         }
     });

@@ -51,9 +51,7 @@ export async function profile(options?: ProfileOptions): Promise<void> {
                 const dialogflowV2 = new DialogflowV2Service({
                     projectId: googleCredentials.project_id,
                     credentials: {
-                        // eslint-disable-next-line @typescript-eslint/camelcase
                         client_email: googleCredentials.client_email,
-                        // eslint-disable-next-line @typescript-eslint/camelcase
                         private_key: googleCredentials.private_key,
                     },
                 });
