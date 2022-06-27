@@ -9,14 +9,17 @@ import {
     ChatWidgetAppChannelInput,
     GetAnalyticsAndEventsDocument,
     GetAnalyticsAndEventsQuery,
+    GetAnalyticsAndEventsQueryVariables,
     GetAppContentDocument,
     GetAppSchedulesDocument,
     GetAppSchedulesQuery,
+    GetEventsDocument,
+    GetEventsQuery,
+    GetEventsQueryVariables,
     GetProfileDocument,
     GetProfileQuery,
     StartCrawlDocument,
     WebCrawlSchedule,
-    GetAnalyticsAndEventsQueryVariables
 } from "./graphql/models";
 import {
     AddAppMutation,
@@ -176,6 +179,30 @@ export class XAPPClient {
         return this.client.query(GetAnalyticsAndEventsDocument, variables).toPromise().then((response) => {
             return response.data;
         });
+    }
+
+    public getAppEvents(appId: string, start?: string, end?: string, options?: Pick<GetEventsQueryVariables, "size" | "from" | "byTag" | "byRequestIntentId" | "byChannel">): Promise<GetEventsQuery> {
+
+        if (!start) {
+            const now = new Date();
+            end = now.toISOString();
+            const lastWeek = new Date();
+            lastWeek.setDate(now.getDate() - 7);
+            start = lastWeek.toISOString();
+        }
+
+        const variables: GetEventsQueryVariables = {
+            appId,
+            startDate: start,
+            endDate: end,
+            ...options
+        }
+
+        return this.client.query(GetEventsDocument, variables).toPromise().then((response) => {
+            return response.data;
+        });
+
+
     }
 
     /**
