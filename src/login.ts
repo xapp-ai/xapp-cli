@@ -76,14 +76,10 @@ async function getToken(code: string, verifier: string): Promise<TokenResponse> 
             url: `${authPath}/${tokenPath}`,
             headers: { "content-type": "application/x-www-form-urlencoded" },
             form: {
-                // eslint-disable-next-line @typescript-eslint/camelcase
                 grant_type: "authorization_code",
-                // eslint-disable-next-line @typescript-eslint/camelcase
                 client_id: clientId,
-                // eslint-disable-next-line @typescript-eslint/camelcase
                 code_verifier: `${verifier}`,
                 code: `${code}`,
-                // eslint-disable-next-line @typescript-eslint/camelcase
                 redirect_uri: `http://localhost:${port}/${path}`
             }
         };

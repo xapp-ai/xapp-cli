@@ -15,7 +15,7 @@ export function getConfig(): Config {
     let config: Config;
 
     try {
-        const configData = readFileSync(configPath, "UTF-8");
+        const configData = readFileSync(configPath, "utf-8");
         config = JSON.parse(configData);
     } catch (e) {
         throw Error(`Error reading config from ${configPath}`);

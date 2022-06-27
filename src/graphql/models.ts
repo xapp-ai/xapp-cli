@@ -1910,6 +1910,7 @@ export type AppMutationAddAppArgs = {
 
 
 export type AppMutationImportAppArgs = {
+  modelOnly?: InputMaybe<Scalars['Boolean']>;
   overwrite?: InputMaybe<Scalars['Boolean']>;
   url: Scalars['URL'];
 };
@@ -3547,15 +3548,11 @@ export type EventStentorRequest = {
   locale?: Maybe<Scalars['String']>;
   matchConfidence?: Maybe<Scalars['Float']>;
   platform?: Maybe<Scalars['String']>;
-  rawQuery?: Maybe<EventStentorRequestRawQuery>;
+  rawQuery?: Maybe<Scalars['String']>;
   sessionAttributes?: Maybe<EventStentorRequestsSessionAttributes>;
   sessionId?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
   userId?: Maybe<Scalars['String']>;
-};
-
-export type EventStentorRequestRawQuery = {
-  raw?: Maybe<Scalars['String']>;
 };
 
 export type EventStentorRequestsSessionAttributes = {
@@ -9173,6 +9170,32 @@ export type GetAppSchedulesQueryVariables = Exact<{
 
 export type GetAppSchedulesQuery = { app?: { schedules: { schedules: Array<{ scheduleId: string, type: string, event: string, parameters: any } | null> } } | null };
 
+export type GetAnalyticsAndEventsQueryVariables = Exact<{
+  appId: Scalars['ID'];
+  startDate: Scalars['DateTime'];
+  endDate: Scalars['DateTime'];
+  byTag?: InputMaybe<Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>>;
+  byRequestIntentId?: InputMaybe<Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>>;
+  byChannel?: InputMaybe<Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>>;
+}>;
+
+
+export type GetAnalyticsAndEventsQuery = { app?: { __typename: 'App', _id: string, appId: string, name: string, analytics?: { user: { newUsers: number, returningUsers: number, totalSessions: number, totalUsers: number } } | null, events?: { total: number } | null } | null };
+
+export type GetEventsQueryVariables = Exact<{
+  appId: Scalars['ID'];
+  startDate: Scalars['DateTime'];
+  endDate: Scalars['DateTime'];
+  size?: InputMaybe<Scalars['Int']>;
+  from?: InputMaybe<Scalars['Int']>;
+  byTag?: InputMaybe<Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>>;
+  byRequestIntentId?: InputMaybe<Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>>;
+  byChannel?: InputMaybe<Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>>;
+}>;
+
+
+export type GetEventsQuery = { app?: { __typename: 'App', _id: string, appId: string, name: string, events?: { total: number, events?: Array<{ eventId: string, channel?: string | null, platform?: string | null, userId?: string | null, sessionId?: string | null, eventTime?: string | null, currentHandler?: string | null, selectedHandler?: string | null, environment?: string | null, eventType?: string | null, eventName?: string | null, request?: string | null, rawQuery?: string | null, errorCode?: number | null, errorMessage?: string | null, payload?: string | null, slots?: Array<{ name?: string | null, rawValue?: string | null, slotValue?: string | null } | null> | null, stentorRequest?: { intentId?: string | null, rawQuery?: string | null, matchConfidence?: number | null } | null, response?: { outputSpeech?: { displayText?: string | null, ssml?: string | null, suggestions?: Array<{ title?: string | null, url?: string | null } | null> | null } | null, reprompt?: { displayText?: string | null, ssml?: string | null, suggestions?: Array<{ title?: string | null, url?: string | null } | null> | null } | null } | null } | null> | null } | null } | null };
+
 
 export const StartCrawlDocument = gql`
     mutation startCrawl($appId: ID!, $url: URL!, $pattern: [String], $channelId: String!) {
@@ -9483,6 +9506,100 @@ export const GetAppSchedulesDocument = gql`
         type
         event
         parameters
+      }
+    }
+  }
+}
+    `;
+export const GetAnalyticsAndEventsDocument = gql`
+    query getAnalyticsAndEvents($appId: ID!, $startDate: DateTime!, $endDate: DateTime!, $byTag: [String], $byRequestIntentId: [String], $byChannel: [String]) {
+  app(appId: $appId) {
+    _id
+    __typename
+    appId
+    name
+    analytics {
+      user(start: $startDate, end: $endDate) {
+        newUsers
+        returningUsers
+        totalSessions
+        totalUsers
+      }
+    }
+    events(
+      startDate: $startDate
+      endDate: $endDate
+      byTag: $byTag
+      byRequestIntentId: $byRequestIntentId
+      byChannel: $byChannel
+    ) {
+      total
+    }
+  }
+}
+    `;
+export const GetEventsDocument = gql`
+    query getEvents($appId: ID!, $startDate: DateTime!, $endDate: DateTime!, $size: Int = 10, $from: Int = 0, $byTag: [String], $byRequestIntentId: [String], $byChannel: [String]) {
+  app(appId: $appId) {
+    _id
+    __typename
+    appId
+    name
+    events(
+      size: $size
+      from: $from
+      startDate: $startDate
+      endDate: $endDate
+      byTag: $byTag
+      byRequestIntentId: $byRequestIntentId
+      byChannel: $byChannel
+    ) {
+      total
+      events {
+        eventId
+        channel
+        platform
+        userId
+        sessionId
+        eventTime
+        currentHandler
+        selectedHandler
+        environment
+        eventType
+        eventName
+        request
+        slots {
+          name
+          rawValue
+          slotValue
+        }
+        stentorRequest {
+          intentId
+          rawQuery
+          matchConfidence
+        }
+        response {
+          outputSpeech {
+            displayText
+            ssml
+            suggestions {
+              title
+              url
+            }
+          }
+          reprompt {
+            displayText
+            ssml
+            suggestions {
+              title
+              url
+            }
+          }
+        }
+        rawQuery
+        errorCode
+        errorMessage
+        payload
       }
     }
   }

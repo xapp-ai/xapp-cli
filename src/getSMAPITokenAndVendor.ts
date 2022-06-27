@@ -7,7 +7,7 @@ import { join } from "path";
 
 export function getSMAPITokenAndVendorId(): { token: string; vendorId: string } {
     const configPath = join(homedir(), ".ask", "cli_config");
-    const config = readFileSync(configPath, "UTF-8");
+    const config = readFileSync(configPath, "utf-8");
     const obj = JSON.parse(config);
 
     const expirationDate = obj.profiles.default.token.expires_at;

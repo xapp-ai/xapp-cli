@@ -24,9 +24,7 @@ export async function importFromDialogflow(credentialsPath: string, options: { o
     const service = new DialogflowV2Service({
         projectId: credentials.project_id,
         credentials: {
-            // eslint-disable-next-line @typescript-eslint/camelcase
             client_email: credentials.client_email,
-            // eslint-disable-next-line @typescript-eslint/camelcase
             private_key: credentials.private_key
         }
     });
