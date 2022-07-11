@@ -1,3 +1,10 @@
+## [1.2.45](https://github.com/xapp-ai/xapp-cli/compare/v1.2.44...v1.2.45) (2022-07-11)
+
+
+### Bug Fixes
+
+* Missing peer dependency in package.json ([#400](https://github.com/xapp-ai/xapp-cli/issues/400)) ([3d375af](https://github.com/xapp-ai/xapp-cli/commit/3d375af56aa4a30871581be4e36ddb10a920be24))
+
 ## [1.2.44](https://github.com/xapp-ai/xapp-cli/compare/v1.2.43...v1.2.44) (2022-07-11)
 
 
