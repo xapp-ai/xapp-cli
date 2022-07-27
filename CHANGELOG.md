@@ -1,3 +1,11 @@
+## [1.2.48](https://github.com/xapp-ai/xapp-cli/compare/v1.2.47...v1.2.48) (2022-07-27)
+
+
+### Bug Fixes
+
+* **deps:** update dependency chalk to v5 ([#191](https://github.com/xapp-ai/xapp-cli/issues/191)) ([82c1747](https://github.com/xapp-ai/xapp-cli/commit/82c17471564a16dbc69cf6b251f81f192ca3980a))
+* **deps:** update dependency inquirer to v9.0.2 ([#408](https://github.com/xapp-ai/xapp-cli/issues/408)) ([be51826](https://github.com/xapp-ai/xapp-cli/commit/be51826ecb16f7f129d62bc923a18b3ceccab16b))
+
 ## [1.2.47](https://github.com/xapp-ai/xapp-cli/compare/v1.2.46...v1.2.47) (2022-07-12)
 
 
