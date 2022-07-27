@@ -20,6 +20,8 @@ import {
     GetProfileQuery,
     StartCrawlDocument,
     WebCrawlSchedule,
+    GetAppsForOrgDocument,
+    GetAppsForOrgQuery
 } from "./graphql/models";
 import {
     AddAppMutation,
@@ -142,6 +144,13 @@ export class XAPPClient {
         });
     }
 
+    /**
+     * Get a specific app.
+     * @param appId 
+     * @param start 
+     * @param end 
+     * @returns 
+     */
     public getApp(appId: string, start?: string, end?: string): Promise<AppOverview> {
         if (!start) {
             const now = new Date();
@@ -157,6 +166,26 @@ export class XAPPClient {
             end
         }).toPromise().then((response) => {
             return response.data.app;
+        });
+    }
+
+    /**
+     * Get apps for a specific organization.
+     * 
+     * By default, it only returns 10.
+     * 
+     * @param organizationId 
+     * @param from - Used for pagination, the offset of number of apps
+     * @param size - Total number of apps to return per page
+     * @returns 
+     */
+    public getAppsForOrg(organizationId: string, size = 10, from = 0): Promise<GetAppsForOrgQuery> {
+        return this.client.query(GetAppsForOrgDocument, {
+            organizationId,
+            from,
+            size
+        }).toPromise().then((response) => {
+            return response.data;
         });
     }
 

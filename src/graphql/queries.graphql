@@ -20,6 +20,23 @@ query getOrgAnalytics($orgId: ID!, $startDate: DateTime!, $endDate: DateTime!) {
   }
 }
 
+query getAppsForOrg($organizationId: ID!, $from: Int = 0, $size: Int = 10) {
+  org(organizationId: $organizationId) {
+    apps(from: $from, size: $size) {
+      total
+      apps {
+        appId
+        organizationId
+        name
+        largeIcon
+        smallIcon
+        description
+        summary
+      }
+    }
+  }
+}
+
 query getAppContent($appId: ID!, $size: Int!, $from: Int!) {
   app(appId: $appId) {
     appId

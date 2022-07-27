@@ -14,18 +14,14 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  /** A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
   DateTime: any;
   HandlerResponseConditions: any;
   IntOrBoolean: any;
   IntOrString: any;
-  /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
   JSON: any;
-  /** The `BigInt` scalar type represents non-fractional signed whole numeric values. */
   Long: any;
   PathConditions: any;
   StringMap: any;
-  /** A field whose value conforms to the standard URL format as specified in RFC3986: https://www.ietf.org/rfc/rfc3986.txt. */
   URL: any;
   URLString: any;
 };
@@ -514,6 +510,7 @@ export type AdminLaboratory = {
 
 export type AdminLaboratoryChatSuggestionsArgs = {
   appId: Scalars['ID'];
+  indexVersion?: InputMaybe<Scalars['String']>;
   organizationId: Scalars['ID'];
   queryText: Scalars['String'];
   size?: InputMaybe<Scalars['Int']>;
@@ -1276,6 +1273,7 @@ export type AppEntitiesArgs = {
 
 export type AppEventsArgs = {
   byChannel?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  byEnvironment?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   byFlag?: InputMaybe<Array<InputMaybe<RawQueryEventFlag>>>;
   byName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   byPlatform?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
@@ -1351,6 +1349,7 @@ export type AppAnalytics = {
 
 
 export type AppAnalyticsUserArgs = {
+  byEnvironment?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   end: Scalars['DateTime'];
   start: Scalars['DateTime'];
 };
@@ -2329,6 +2328,7 @@ export type ChatWidgetAppChannel = BaseAppChannel & {
   theme?: Maybe<ChatWidgetTheme>;
   /** The type of channel */
   type: Scalars['String'];
+  typingStatus?: Maybe<ChatWidgetTypingStatusConfig>;
   urls?: Maybe<ChatWidgetAppChannelUrlsConfig>;
   /** Retrieves any events that are related to this specific app */
   usageEvents?: Maybe<TotalUsageEvents>;
@@ -2397,6 +2397,7 @@ export type ChatWidgetAppChannelInput = {
   theme?: InputMaybe<ChatWidgetThemeInput>;
   /** The type of channel */
   type: Scalars['String'];
+  typingStatus?: InputMaybe<ChatWidgetTypingStatusConfigInput>;
   urls?: InputMaybe<ChatWidgetAppChannelUrlsConfigInput>;
   /**
    * ID of the NLU to use within app.nlu[].
@@ -2568,21 +2569,27 @@ export type ChatWidgetFooterThemeInput = {
 export type ChatWidgetHeaderActionsConfig = {
   cancel?: Maybe<Scalars['Boolean']>;
   minimize?: Maybe<Scalars['Boolean']>;
+  refresh?: Maybe<Scalars['Boolean']>;
 };
 
 export type ChatWidgetHeaderConfig = {
   actions?: Maybe<ChatWidgetHeaderActionsConfig>;
+  alignTextCenter?: Maybe<Scalars['Boolean']>;
   status?: Maybe<ChatWidgetHeaderStatusConfig>;
+  subtitle?: Maybe<ChatWidgetHeaderSubtitleConfig>;
 };
 
 export type ChatWidgetHeaderConfigActionsInput = {
   cancel?: InputMaybe<Scalars['Boolean']>;
   minimize?: InputMaybe<Scalars['Boolean']>;
+  refresh?: InputMaybe<Scalars['Boolean']>;
 };
 
 export type ChatWidgetHeaderConfigInput = {
   actions?: InputMaybe<ChatWidgetHeaderConfigActionsInput>;
+  alignTextCenter?: InputMaybe<Scalars['Boolean']>;
   status?: InputMaybe<ChatWidgetHeaderStatusConfigInput>;
+  subtitle?: InputMaybe<ChatWidgetHeaderSubtitleConfigInput>;
 };
 
 export type ChatWidgetHeaderStatusConfig = {
@@ -2599,15 +2606,27 @@ export type ChatWidgetHeaderStatusConfigInput = {
   online?: InputMaybe<Scalars['String']>;
 };
 
+export type ChatWidgetHeaderSubtitleConfig = {
+  enabled?: Maybe<Scalars['Boolean']>;
+  text?: Maybe<Scalars['String']>;
+};
+
+export type ChatWidgetHeaderSubtitleConfigInput = {
+  enabled?: InputMaybe<Scalars['Boolean']>;
+  text?: InputMaybe<Scalars['String']>;
+};
+
 export type ChatWidgetHeaderTheme = {
   background?: Maybe<Scalars['String']>;
   border?: Maybe<ChatWidgetBorderTheme>;
+  subtitle?: Maybe<ChatWidgetTextTheme>;
   text?: Maybe<ChatWidgetTextTheme>;
 };
 
 export type ChatWidgetHeaderThemeInput = {
   background?: InputMaybe<Scalars['String']>;
   border?: InputMaybe<ChatWidgetBorderThemeInput>;
+  subtitle?: InputMaybe<ChatWidgetTextThemeInput>;
   text?: InputMaybe<ChatWidgetTextThemeInput>;
 };
 
@@ -2763,6 +2782,14 @@ export type ChatWidgetTextThemeInput = {
   fontWeight?: InputMaybe<Scalars['String']>;
 };
 
+export type ChatWidgetTextTypingStatusTheme = {
+  text?: Maybe<ChatWidgetTextTheme>;
+};
+
+export type ChatWidgetTextTypingStatusThemeInput = {
+  text?: InputMaybe<ChatWidgetTextThemeInput>;
+};
+
 export type ChatWidgetTheme = {
   /** ChatWidget border styling */
   border?: Maybe<ChatWidgetBorderTheme>;
@@ -2793,11 +2820,16 @@ export type ChatWidgetTheme = {
   minimizeButton?: Maybe<ChatWidgetButtonTheme>;
   /** Primary color of ChatWidget */
   primaryColor?: Maybe<Scalars['String']>;
+  /** ChatWidget refreshButton styling */
+  refreshButton?: Maybe<ChatWidgetButtonTheme>;
   /** ChatWidget sendButton styling */
   sendButton?: Maybe<ChatWidgetButtonTheme>;
   sessionExpiration?: Maybe<Scalars['String']>;
   /** Widget size */
   size?: Maybe<ChatWidgetSizeTheme>;
+  textTypingStatus?: Maybe<ChatWidgetTextTypingStatusTheme>;
+  /** Widget z-index */
+  zIndex?: Maybe<Scalars['String']>;
 };
 
 export type ChatWidgetThemeInput = {
@@ -2831,11 +2863,24 @@ export type ChatWidgetThemeInput = {
   minimizeButton?: InputMaybe<ChatWidgetButtonThemeInput>;
   /** Primary color of ChatWidget */
   primaryColor?: InputMaybe<Scalars['String']>;
+  /** ChatWidget menuButton Styling */
+  refreshButton?: InputMaybe<ChatWidgetButtonThemeInput>;
   /** ChatWidget sendButton styling */
   sendButton?: InputMaybe<ChatWidgetButtonThemeInput>;
   sessionExpiration?: InputMaybe<Scalars['String']>;
   /** Widget size */
   size?: InputMaybe<ChatWidgetSizeThemeInput>;
+  textTypingStatus?: InputMaybe<ChatWidgetTextTypingStatusThemeInput>;
+  /** Widget z-index */
+  zIndex?: InputMaybe<Scalars['String']>;
+};
+
+export type ChatWidgetTypingStatusConfig = {
+  textTypingStatusEnabled?: Maybe<Scalars['Boolean']>;
+};
+
+export type ChatWidgetTypingStatusConfigInput = {
+  textTypingStatusEnabled?: InputMaybe<Scalars['Boolean']>;
 };
 
 export type ChatbaseDataStream = {
@@ -3493,6 +3538,7 @@ export enum EventResolutionType {
 }
 
 export type EventResponse = {
+  displays?: Maybe<Scalars['JSON']>;
   outputSpeech?: Maybe<EventResponseObject>;
   reprompt?: Maybe<EventResponseObject>;
 };
@@ -3611,6 +3657,8 @@ export type Events = {
   slots?: Maybe<Array<Maybe<EventSlots>>>;
   /** The request that was pulled out of the event. */
   stentorRequest?: Maybe<EventStentorRequest>;
+  /** The tag that is related to the query. */
+  tag?: Maybe<Array<Maybe<Scalars['String']>>>;
   /** The ID of the user which was making the request. */
   userId?: Maybe<Scalars['String']>;
 };
@@ -3847,6 +3895,7 @@ export type FlagTotals = {
   FLAGGED: Scalars['Int'];
   HELPFUL: Scalars['Int'];
   INCORRECT: Scalars['Int'];
+  INCORRECT_RESOLVED: Scalars['Int'];
   NEEDS_HUMAN: Scalars['Int'];
   OPTIMAL: Scalars['Int'];
 };
@@ -4521,6 +4570,15 @@ export type InputSlot = {
    */
   name: Scalars['String'];
   nlu?: InputMaybe<Scalars['JSON']>;
+  /**
+   * The slot will be obfuscated either fully or partially.
+   *
+   *     Full obfuscation, the slot is replaced with the slot name.  "my name is ${first_name}"
+   *     Partial obfuscation will only display a subset of characters, enough to protect the full value but enough for someone that is debugging to recognize the value.
+   *
+   * For some NLU, such as Amazon Lex, any setting on this value will be interpretted as obfuscated, for more information see [Amazon Lex Slot Obfuscation](https://docs.aws.amazon.com/lex/latest/dg/how-obfuscate.html)
+   */
+  obfuscateValue?: InputMaybe<SlotObfuscation>;
   /**
    * The type of entity for the slot.
    *
@@ -6472,6 +6530,8 @@ export enum NewRawQueryFlag {
   Helpful = 'HELPFUL',
   /** For utterance events. It means it was determined that the recognition was bad. Tuning is needed. */
   Incorrect = 'INCORRECT',
+  /** For utterance events. It means it was determined that the recognition was bad, but there has been a resolution. */
+  IncorrectResolved = 'INCORRECT_RESOLVED',
   /**
    * For response events, indicates the response will always need to go
    * to a live human agent.
@@ -6510,6 +6570,7 @@ export type OrgAnalytics = {
 
 
 export type OrgAnalyticsUserArgs = {
+  byEnvironment?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   end: Scalars['DateTime'];
   start: Scalars['DateTime'];
 };
@@ -6959,6 +7020,8 @@ export enum RawQueryEventFlag {
   Helpful = 'HELPFUL',
   /** For utterance events. It means it was determined that the recognition was bad. Tuning is needed. */
   Incorrect = 'INCORRECT',
+  /** For utterance events. It means it was determined that the recognition was bad, but there has been a resolution. */
+  IncorrectResolved = 'INCORRECT_RESOLVED',
   /**
    * For response events, indicates the response will always need to go
    * to a live human agent.
@@ -7563,6 +7626,15 @@ export type Slot = {
   name: Scalars['String'];
   nlu?: Maybe<Scalars['JSON']>;
   /**
+   * The slot will be obfuscated either fully or partially.
+   *
+   *     Full obfuscation, the slot is replaced with the slot name.  "my name is ${first_name}"
+   *     Partial obfuscation will only display a subset of characters, enough to protect the full value but enough for someone that is debugging to recognize the value.
+   *
+   * For some NLU, such as Amazon Lex, any setting on this value will be interpretted as obfuscated, for more information see [Amazon Lex Slot Obfuscation](https://docs.aws.amazon.com/lex/latest/dg/how-obfuscate.html)
+   */
+  obfuscateValue?: Maybe<SlotObfuscation>;
+  /**
    * The type of entity for the slot.
    *
    * This corresponds to an Entity, specifically the entityId key.
@@ -7700,6 +7772,11 @@ export type SlotDependentPreviousHandlerPath = BaseHandlerPath & {
    */
   slotMatch?: Maybe<Scalars['JSON']>;
 };
+
+export enum SlotObfuscation {
+  Full = 'FULL',
+  Partial = 'PARTIAL'
+}
 
 export type SmapiAccount = {
   /** The ID for the linked SMAPI developer account. */
@@ -7940,10 +8017,15 @@ export enum StudioTierType {
 }
 
 export enum SubscriptionType {
+  Bronze = 'BRONZE',
+  BronzeLite = 'BRONZE_LITE',
   /** The Apps under this organization are frozen. */
   Free = 'FREE',
+  Gold = 'GOLD',
+  Platinum = 'PLATINUM',
   /** A top-tier privileged organization */
   Pro = 'PRO',
+  Silver = 'SILVER',
   /** A very limited privileged organization */
   Standard = 'STANDARD',
   /** A temporary period for the organization which gives them "STANDARD" privileges */
@@ -9145,6 +9227,15 @@ export type GetOrgAnalyticsQueryVariables = Exact<{
 
 export type GetOrgAnalyticsQuery = { org?: { __typename: 'Organization', _id: string, name: string, analytics?: { user: { newUsers: number, returningUsers: number, totalSessions: number, totalUsers: number } } | null } | null };
 
+export type GetAppsForOrgQueryVariables = Exact<{
+  organizationId: Scalars['ID'];
+  from?: InputMaybe<Scalars['Int']>;
+  size?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type GetAppsForOrgQuery = { org?: { apps?: { total: number, apps: Array<{ appId: string, organizationId: string, name: string, largeIcon?: string | null, smallIcon?: string | null, description?: string | null, summary?: string | null } | null> } | null } | null };
+
 export type GetAppContentQueryVariables = Exact<{
   appId: Scalars['ID'];
   size: Scalars['Int'];
@@ -9439,6 +9530,24 @@ export const GetOrgAnalyticsDocument = gql`
         returningUsers
         totalSessions
         totalUsers
+      }
+    }
+  }
+}
+    `;
+export const GetAppsForOrgDocument = gql`
+    query getAppsForOrg($organizationId: ID!, $from: Int = 0, $size: Int = 10) {
+  org(organizationId: $organizationId) {
+    apps(from: $from, size: $size) {
+      total
+      apps {
+        appId
+        organizationId
+        name
+        largeIcon
+        smallIcon
+        description
+        summary
       }
     }
   }
