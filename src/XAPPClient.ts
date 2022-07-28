@@ -85,6 +85,17 @@ export interface AppOverview {
         entities: EntityDescription[];
     };
     analytics?: AppAnalytics;
+    faq: {
+        total: number;
+    };
+    content: {
+        total: number;
+    }
+    contentSources: {
+        total: number;
+        sources: { webUrl: string; webUrlPatterns: string[] }[]
+    }
+    channels: { id: string; type: string }[]
 }
 
 export interface AppEventsTotal {
