@@ -1,3 +1,10 @@
+## [1.2.52](https://github.com/xapp-ai/xapp-cli/compare/v1.2.51...v1.2.52) (2022-07-28)
+
+
+### Bug Fixes
+
+* **deps:** update graphqlcodegenerator monorepo ([#414](https://github.com/xapp-ai/xapp-cli/issues/414)) ([a4170be](https://github.com/xapp-ai/xapp-cli/commit/a4170bea2cf7879e7d5cbc9c3cb4b5e544b26c6b))
+
 ## [1.2.51](https://github.com/xapp-ai/xapp-cli/compare/v1.2.50...v1.2.51) (2022-07-28)
 
 
