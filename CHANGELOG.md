@@ -1,3 +1,10 @@
+## [1.2.50](https://github.com/xapp-ai/xapp-cli/compare/v1.2.49...v1.2.50) (2022-07-28)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @urql/core to v2.6.1 ([#406](https://github.com/xapp-ai/xapp-cli/issues/406)) ([b72b262](https://github.com/xapp-ai/xapp-cli/commit/b72b262546e87fee6d4cb791631113c93e2ff686))
+
 ## [1.2.49](https://github.com/xapp-ai/xapp-cli/compare/v1.2.48...v1.2.49) (2022-07-27)
 
 
