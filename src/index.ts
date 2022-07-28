@@ -2,8 +2,8 @@
 /*! Copyright (c) 2022, XAPP AI*/
 require("dotenv").config(); // process the .env file
 
-// For the CLI, we want the log level to always be debug
-process.env.STENTOR_LOG_LEVEL = "debug";
+// For the CLI, we want the log level to always be info
+process.env.STENTOR_LOG_LEVEL = "info";
 // It will only last this execution
 
 import * as program from "commander";
