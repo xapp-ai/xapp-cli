@@ -1,3 +1,11 @@
+## [1.2.54](https://github.com/xapp-ai/xapp-cli/compare/v1.2.53...v1.2.54) (2022-08-22)
+
+
+### Bug Fixes
+
+* **deps:** update dependency inquirer to v9.1.0 ([#422](https://github.com/xapp-ai/xapp-cli/issues/422)) ([c899e5e](https://github.com/xapp-ai/xapp-cli/commit/c899e5ed25123227dcac65ccde337d4d045bab94))
+* **deps:** update stentor ([#418](https://github.com/xapp-ai/xapp-cli/issues/418)) ([99b645a](https://github.com/xapp-ai/xapp-cli/commit/99b645a3e608e6fa1d6fb9fc7421d10fe4c698d5))
+
 ## [1.2.53](https://github.com/xapp-ai/xapp-cli/compare/v1.2.52...v1.2.53) (2022-07-29)
 
 
