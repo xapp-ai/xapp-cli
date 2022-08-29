@@ -1,3 +1,12 @@
+## [1.2.62](https://github.com/xapp-ai/xapp-cli/compare/v1.2.61...v1.2.62) (2022-08-29)
+
+
+### Bug Fixes
+
+* **deps:** update dependency aws-sdk to v2.1204.0 ([#415](https://github.com/xapp-ai/xapp-cli/issues/415)) ([dce45d8](https://github.com/xapp-ai/xapp-cli/commit/dce45d89494af6cdee60908dd5afed8efaa7ba89))
+* **deps:** update dependency graphql to v16.6.0 ([#437](https://github.com/xapp-ai/xapp-cli/issues/437)) ([1e2b751](https://github.com/xapp-ai/xapp-cli/commit/1e2b75135bbfd10a0bfa9ece68137ce9fce0714a))
+* **deps:** update stentor ([#435](https://github.com/xapp-ai/xapp-cli/issues/435)) ([51730b2](https://github.com/xapp-ai/xapp-cli/commit/51730b280f9d0de4b6204bab3e5e6fccb2e5d8b9))
+
 ## [1.2.61](https://github.com/xapp-ai/xapp-cli/compare/v1.2.60...v1.2.61) (2022-08-26)
 
 
