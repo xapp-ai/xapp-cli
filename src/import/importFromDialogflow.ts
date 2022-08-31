@@ -2,6 +2,7 @@
 import { DialogflowV2Service } from "@xapp/stentor-service-dialogflow";
 import log from "stentor-logger";
 
+import { getConfigProfile } from "../getConfig";
 import { getGoogleCredentials } from "../getGoogleCredentials";
 import { getUserToken } from "../getUserToken";
 import { getGraphQLClient } from "../graphql/getGraphQLClient";
@@ -36,8 +37,9 @@ export async function importFromDialogflow(credentialsPath: string, options: { o
     log.info(`Creating app on organization with ID ${organizationId}`);
 
     const token = await getUserToken();
+    const profile = await getConfigProfile();
 
-    const client = getGraphQLClient(token);
+    const client = getGraphQLClient(token, profile.basePath);
 
     const appReturn = await client.mutation(AddAppMutation, {
         app: {

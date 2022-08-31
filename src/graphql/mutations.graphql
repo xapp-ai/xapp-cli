@@ -29,6 +29,33 @@ mutation addScheduledCrawl(
         type
         event
         parameters
+        ... on WebCrawlWeeklySchedule {
+          daysOfWeek
+        }
+        ... on WebCrawlMonthlySchedule {
+          dayOfMonth
+        }
+      }
+    }
+  }
+}
+
+mutation updateStatus($appId: ID!, $type: String!, $notes: String) {
+  app {
+    update(appId: $appId) {
+      changeStatus(type: $type, note: $notes) {
+        status {
+          type
+          notes
+          email
+          timestamp
+          statusHistory {
+            type
+            email
+            timestamp
+            notes
+          }
+        }
       }
     }
   }
