@@ -29,6 +29,12 @@ mutation addScheduledCrawl(
         type
         event
         parameters
+        ... on WebCrawlWeeklySchedule {
+          daysOfWeek
+        }
+        ... on WebCrawlMonthlySchedule {
+          dayOfMonth
+        }
       }
     }
   }

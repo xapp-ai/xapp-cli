@@ -9372,7 +9372,7 @@ export type AddScheduledCrawlMutationVariables = Exact<{
 }>;
 
 
-export type AddScheduledCrawlMutation = { app: { update: { scheduleWeeklyWebCrawls: { scheduleId: string, type: string, event: string, parameters: any } | { scheduleId: string, type: string, event: string, parameters: any } } } };
+export type AddScheduledCrawlMutation = { app: { update: { scheduleWeeklyWebCrawls: { dayOfMonth: number, scheduleId: string, type: string, event: string, parameters: any } | { daysOfWeek: Array<ScheduleDaysOfWeek | null>, scheduleId: string, type: string, event: string, parameters: any } } } };
 
 export type UpdateStatusMutationVariables = Exact<{
   appId: Scalars['ID'];
@@ -9489,6 +9489,12 @@ export const AddScheduledCrawlDocument = gql`
         type
         event
         parameters
+        ... on WebCrawlWeeklySchedule {
+          daysOfWeek
+        }
+        ... on WebCrawlMonthlySchedule {
+          dayOfMonth
+        }
       }
     }
   }

@@ -13,17 +13,19 @@ import {
     GetAppContentDocument,
     GetAppSchedulesDocument,
     GetAppSchedulesQuery,
+    GetAppsForOrgDocument,
+    GetAppsForOrgQuery,
     GetEventsDocument,
     GetEventsQuery,
     GetEventsQueryVariables,
     GetProfileDocument,
     GetProfileQuery,
     StartCrawlDocument,
-    WebCrawlSchedule,
-    GetAppsForOrgDocument,
-    GetAppsForOrgQuery,
+    UpdateStatusDocument,
     UpdateStatusMutation,
-    UpdateStatusDocument
+    WebCrawlMonthlySchedule,
+    WebCrawlSchedule,
+    WebCrawlWeeklySchedule,
 } from "./graphql/models";
 import {
     AddAppMutation,
@@ -388,7 +390,7 @@ export class XAPPClient {
         return this.client.mutation(StartCrawlDocument, { appId, url, pattern, channelId }).toPromise().then();
     }
 
-    public scheduleCrawl(appId: string, url: string, pattern: string[], daysOfWeek?: string[]): Promise<WebCrawlSchedule> {
+    public scheduleCrawl(appId: string, url: string, pattern: string[], daysOfWeek?: string[]): Promise<WebCrawlSchedule | WebCrawlMonthlySchedule | WebCrawlWeeklySchedule> {
         return this.client.mutation(AddScheduledCrawlDocument, { appId, url, pattern, daysOfWeek }).toPromise().then((response) => {
             return response.data;
         });
