@@ -34,6 +34,27 @@ mutation addScheduledCrawl(
   }
 }
 
+mutation updateStatus($appId: ID!, $type: String!, $notes: String) {
+  app {
+    update(appId: $appId) {
+      changeStatus(type: $type, note: $notes) {
+        status {
+          type
+          notes
+          email
+          timestamp
+          statusHistory {
+            type
+            email
+            timestamp
+            notes
+          }
+        }
+      }
+    }
+  }
+}
+
 mutation addChatWidgetChannel(
   $appId: ID!
   $channel: ChatWidgetAppChannelInput!

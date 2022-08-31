@@ -1,19 +1,8 @@
 /*! Copyright (c) 2022, XAPP AI*/
 import { Client } from "@urql/core";
 
-import { getConfigProfile } from "../getConfig";
 
-export function getGraphQLClient(token: string): Client {
-
-    const profile = getConfigProfile();
-
-    let url: string;
-
-    if (profile) {
-        url = profile.basePath || "https://api.xapp.ai"
-    } else {
-        url = "https://api.xapp.ai"
-    }
+export function getGraphQLClient(token: string, url = "https://api.xapp.ai"): Client {
 
     const client = new Client({
         fetchOptions: {

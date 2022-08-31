@@ -21,7 +21,9 @@ import {
     StartCrawlDocument,
     WebCrawlSchedule,
     GetAppsForOrgDocument,
-    GetAppsForOrgQuery
+    GetAppsForOrgQuery,
+    UpdateStatusMutation,
+    UpdateStatusDocument
 } from "./graphql/models";
 import {
     AddAppMutation,
@@ -107,15 +109,17 @@ export interface AppEventsTotal {
     }
 }
 
+
 export interface XAPPClientProps {
     userToken: string;
+    url?: string;
 }
 
 export class XAPPClient {
     private client: Client;
 
     public constructor(props: XAPPClientProps) {
-        this.client = getGraphQLClient(props.userToken);
+        this.client = getGraphQLClient(props.userToken, props.url);
     }
 
     public getProfile(): Promise<GetProfileQuery> {
@@ -150,6 +154,29 @@ export class XAPPClient {
                 return response.data.updateApp;
             } else {
                 const error = response.error || `Unable to update app, unknown error`;
+                throw error;
+            }
+        });
+    }
+
+    /**
+     * Sets the status of the app.
+     * 
+     * @param appId 
+     * @param status - String or "Submitted for Review", "Live", 
+     * @param notes 
+     * @returns 
+     */
+    public setAppStatus(appId: string, status: string, notes?: string): Promise<UpdateStatusMutation> {
+        return this.client.mutation(UpdateStatusDocument, {
+            appId,
+            type: status,
+            notes
+        }).toPromise().then((response) => {
+            if (response.data) {
+                return response.data;
+            } else {
+                const error = response.error || `Unable to update app status, unknown error`;
                 throw error;
             }
         });
