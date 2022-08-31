@@ -1,3 +1,12 @@
+## [1.2.66](https://github.com/xapp-ai/xapp-cli/compare/v1.2.65...v1.2.66) (2022-08-31)
+
+
+### Bug Fixes
+
+* Ability to set app status in XAPPClient ([#444](https://github.com/xapp-ai/xapp-cli/issues/444)) ([4bdff06](https://github.com/xapp-ai/xapp-cli/commit/4bdff064526c99baedf1b55afef5dac67cd4b739))
+* **deps:** update dependency dotenv to v16.0.2 ([#441](https://github.com/xapp-ai/xapp-cli/issues/441)) ([3e71638](https://github.com/xapp-ai/xapp-cli/commit/3e7163877031fb08da0206b0e509ca452f6506e8))
+* **deps:** update stentor to v1.40.270 ([#443](https://github.com/xapp-ai/xapp-cli/issues/443)) ([88d57eb](https://github.com/xapp-ai/xapp-cli/commit/88d57ebde6e5a55e078a943ffb7082eacd358493))
+
 ## [1.2.65](https://github.com/xapp-ai/xapp-cli/compare/v1.2.64...v1.2.65) (2022-08-31)
 
 
