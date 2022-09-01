@@ -30,7 +30,7 @@ export async function pushToLexV2(options?: { appId?: string; lang?: string; aws
     }
 
     const { app, intents = [], entities = [], handlers = [] } =
-        file ? await getAppIntentEntitiesFromExport(appId, file) : await getStentorApp(appId, true);
+        file ? await getAppIntentEntitiesFromExport(appId, file) : await getStentorApp(appId, { withChannels: true });
 
     // We can push v1 too
     const lexChannel = (app as any).channels.find((ch: { type: string }) => {
