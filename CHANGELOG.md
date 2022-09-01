@@ -1,3 +1,10 @@
+## [1.2.68](https://github.com/xapp-ai/xapp-cli/compare/v1.2.67...v1.2.68) (2022-09-01)
+
+
+### Bug Fixes
+
+* Option to use token for getStentorApp  ([#449](https://github.com/xapp-ai/xapp-cli/issues/449)) ([61d7f78](https://github.com/xapp-ai/xapp-cli/commit/61d7f78284cab60d309a90985d937b0b1c69b8bd))
+
 ## [1.2.67](https://github.com/xapp-ai/xapp-cli/compare/v1.2.66...v1.2.67) (2022-08-31)
 
 
