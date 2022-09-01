@@ -36,7 +36,7 @@ function delay(t: number, v?: any): Promise<void> {
  */
 export async function pushToLex(options?: { appId?: string; lang?: string; awsRole?: string; output?: string }): Promise<void> {
     const { appId, awsRole, output } = options;
-    const { app, intents = [], entities = [] } = await getStentorApp(appId, true);
+    const { app, intents = [], entities = [] } = await getStentorApp(appId, { withChannels: true });
     const filtered: Intent[] = intents.filter((potential) => {
         return isIntent(potential);
     });
