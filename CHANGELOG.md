@@ -1,3 +1,10 @@
+## [1.2.79](https://github.com/xapp-ai/xapp-cli/compare/v1.2.78...v1.2.79) (2022-09-13)
+
+
+### Bug Fixes
+
+* **deps:** update stentor ([bb12917](https://github.com/xapp-ai/xapp-cli/commit/bb129174413372454a4c92f0f4a5a3fe8272e1d8))
+
 ## [1.2.78](https://github.com/xapp-ai/xapp-cli/compare/v1.2.77...v1.2.78) (2022-09-12)
 
 
