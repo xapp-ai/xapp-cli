@@ -1,3 +1,10 @@
+## [1.2.81](https://github.com/xapp-ai/xapp-cli/compare/v1.2.80...v1.2.81) (2022-09-15)
+
+
+### Bug Fixes
+
+* **deps:** update dependency aws-sdk to v2.1216.0 ([#451](https://github.com/xapp-ai/xapp-cli/issues/451)) ([963c8ce](https://github.com/xapp-ai/xapp-cli/commit/963c8ce5b162e41ed2c9d66eb8a7b2eb99030313))
+
 ## [1.2.80](https://github.com/xapp-ai/xapp-cli/compare/v1.2.79...v1.2.80) (2022-09-15)
 
 
