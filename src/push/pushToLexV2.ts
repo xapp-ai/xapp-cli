@@ -66,7 +66,7 @@ export async function pushToLexV2(options?: { appId?: string; lang?: string; aws
             }
 
             if (nluOverrideType === "AMAZON.KendraSearchIntent") {
-                if (!this.props.kendraIndexARN || !this.props.kendraRole) {
+                if (!kendraIndexARN || !kendraRole) {
                     throw new TypeError(
                         `For AMAZON.KendraSearchIntent, you must have both kendraIndexARN and kendraRole set in the channel.`
                     );
@@ -74,6 +74,12 @@ export async function pushToLexV2(options?: { appId?: string; lang?: string; aws
 
                 return true;
             }
+
+        }
+
+        if (potential.intentId === "InputUnknown") {
+            // We can't push these because they come built-in and you can't delete them.  Great.
+            return false;
         }
 
         return isIntent(potential);
@@ -106,5 +112,8 @@ export async function pushToLexV2(options?: { appId?: string; lang?: string; aws
         await sleep(3);
         const nluResponse = lexSyncerV2.query("hello");
         log.info(`App ${app.appId} nlu response\n ${JSON.stringify(nluResponse, undefined, 2)}}`);
+    } else {
+        log.info(`FAILED`);
+        log.info(responseStatus.message);
     }
 }

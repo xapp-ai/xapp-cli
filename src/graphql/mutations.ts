@@ -73,9 +73,9 @@ mutation exportApp($appId:ID!, $organizationId:ID!){
 `
 
 export const ImportApp = gql`
-mutation importApp($organizationId: ID!, $appUrl: URL!) {
+mutation importApp($organizationId: ID!, $appUrl: URL!, $overwrite: Boolean, $modelOnly: Boolean) {
   app(organizationId: $organizationId) {
-    importApp(url: $appUrl) {
+    importApp(url: $appUrl, overwrite:$overwrite, modelOnly:$modelOnly) {
       appId
       organizationId
       name
