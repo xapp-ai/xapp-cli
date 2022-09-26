@@ -29,6 +29,7 @@ import { ExportOptions } from "./models/options";
 import { generateTypes, GenerateTypesOptions } from "./types";
 import { getUserToken } from "./getUserToken";
 import { XAPPClient } from "./XAPPClient";
+import { createChannelLexV2 } from "./create/channelLexV2";
 
 // A couple of exports for if you use it not like a CLI
 export { getStentorApp } from "./getStentorApp";
@@ -74,15 +75,13 @@ program.command("whoami")
         log().info(`If above is masked, run the following to unmask: STENTOR_LOG_PII=true xapp whoami`);
     });
 
-program
-    .command("info <appId>")
+program.command("info <appId>")
     .description("Returns basic information about the provided appId")
     .action(async (appId: string) => {
         await info(appId);
     });
 
-program
-    .command("profile")
+program.command("profile")
     .description("Profile your interaction model against an NLU")
     .option(
         "-p --platform <platform>",
@@ -104,16 +103,14 @@ program
         }
     );
 
-program
-    .command("copy <appId> <newAppId> [intentId]")
+program.command("copy <appId> <newAppId> [intentId]")
     .description("BETA - Copies the app")
     .option("-d, --dryRun", "Dry run")
     .action((appId: string, newAppId: string, intentId: string | undefined, options: Options) => {
         copy(appId, newAppId, intentId, options);
     });
 
-program
-    .command("push")
+program.command("push")
     .description("BETA - Pushes the provided appId to either Dialogflow (v2) or Lex (v1 and v2")
     .option(
         "-p --platform <platform>",
@@ -156,8 +153,7 @@ program
         }
     });
 
-program
-    .command("pull")
+program.command("pull")
     .description("BETA - Pulls the provided platform and pushes it to the provided appId")
     .option(
         "-p --platform <platform>",
@@ -176,8 +172,7 @@ program
         }
     });
 
-program
-    .command("types <directory> [appId]")
+program.command("types <directory> [appId]")
     .description("Generate the TypeScript types for the possible requests to the provided directory")
     .option("-f --file <file>", "Optional file name, defaults to studio.ts")
     .option("-h --header <header>", "Optional header to add to the top of the file")
@@ -186,8 +181,7 @@ program
         await generateTypes(directory, appId, options);
     });
 
-program
-    .command("export <directory> [appId]")
+program.command("export <directory> [appId]")
     .description("Exports an app to the provided directory.  If appId isn't provided it will look for the environment variable.")
     .option(
         "-p --platform <platform>",
@@ -246,10 +240,10 @@ program
         }
     });
 
-program
-    .command("import [uri]")
+program.command("import [uri]")
     .description("BETA - Imports an app")
     .option("-o --organizationId <organizationId>", "Organization ID that the agent will be imported to.")
+    .option("-m --modelOnly", "Imports just the model to the provided appId")
     .option("-a --appId <appId>", "App ID in XAPP that will be imported")
     .option("-p --platform <platform>", "Platform to import from: 'd' for Dialogflow, 'l' for Lex. Defaults to stentor based import")
     .option("-c --credentials <credentials>", "Path to the service account credentials required for Dialogflow")
@@ -272,7 +266,27 @@ program
                     await importAppFromFile(uri, options);
                 }
         }
+    });
 
+program.command("create")
+    .description("BETA - Create a an app or channel for an app")
+    .option("-a --appId <appId>", "App ID")
+    .option("-c --channel <channel>", "Create a new channel")
+    .action(async (options: { appId: string, channel: string }) => {
+        const { appId, channel } = options;
+
+        if (channel) {
+            switch (channel) {
+
+                case "lex-v2":
+
+                    await createChannelLexV2(appId);
+                    break;
+
+                default:
+                    throw new Error(`${channel} creation not yet supported.`)
+            }
+        }
     });
 
 // Only tell commander to parse the args if this index.js is being called directly

@@ -416,7 +416,17 @@ query getAppWithChannelData($appId: ID!) {
         key
         menu {
           items {
-            label
+            ... on ChatWidgetMenuItemConfig {
+              label
+              subtitle
+            }
+            ... on ChatWidgetMenuItemStaticText {
+              title
+              body
+            }
+            ... on ChatWidgetMenuItemStaticImage {
+              imageUrl
+            }
           }
         }
         serverUrl
