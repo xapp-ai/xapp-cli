@@ -6,7 +6,7 @@ require("dotenv").config(); // process the .env file
 process.env.STENTOR_LOG_LEVEL = "info";
 // It will only last this execution
 
-import * as program from "commander";
+import program from "commander";
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkg = require("../package.json");
 
@@ -30,6 +30,7 @@ import { generateTypes, GenerateTypesOptions } from "./types";
 import { getUserToken } from "./getUserToken";
 import { XAPPClient } from "./XAPPClient";
 import { createChannelLexV2 } from "./create/channelLexV2";
+import { serve } from "./serve";
 
 // A couple of exports for if you use it not like a CLI
 export { getStentorApp } from "./getStentorApp";
@@ -287,6 +288,16 @@ program.command("create")
                     throw new Error(`${channel} creation not yet supported.`)
             }
         }
+    });
+
+program.command("serve")
+    .description("BETA - Serve your application's chat widget")
+    .option("-a --appId <appId>", "App ID")
+    .option("-k --key <key>", "Key of the channel to use")
+    .option("-u --url <url>", "URL for your widget, typically something like localhost:8080")
+    .option("-p --port <port>", "PORT for localhost widget server")
+    .action(async (options?: { url?: string, port?: string }) => {
+        await serve(options);
     });
 
 // Only tell commander to parse the args if this index.js is being called directly

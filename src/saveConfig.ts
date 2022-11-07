@@ -1,6 +1,6 @@
 /*! Copyright (c) 2022, XAPP AI*/
 import { writeFileSync } from "fs";
-import * as moment from "moment";
+import moment from "moment";
 
 import { Config } from "./Config";
 import { getConfigPath } from "./getConfigPath";
