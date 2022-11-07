@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>{{name}}</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <script>
+    window['xaConfig'] = JSON.parse('{{config}}');
+  </script>
+
+  <script id="xapp-js" src="https://widget.xapp.ai/xapp-chat-widget.js?key={{key}}"></script>
+</head>
+
+<body>
+  <noscript>
+    <div>
+      <h1>JavaScript is required to run this app.</h1>
+      <p>Please check your browser settings and ensure that JavaScript is enabled. If you need further assistance, you
+        can reach us via our <a href="https://documentation.xapp.ai/">support site</a>.</p>
+    </div>
+  </noscript>
+  <div id="root"></div>
+</body>
+
+</html>

@@ -2,9 +2,9 @@
 
 import log from "stentor-logger";
 import { createHash, randomBytes } from "crypto";
-import * as express from "express";
-import * as open from "open";
-import * as request from "request";
+import express from "express";
+import open from "open";
+import request from "request";
 import { getConfig, getConfigProfile } from "./getConfig";
 import { saveConfig } from "./saveConfig";
 import { TokenResponse } from "./TokenResponse";

@@ -76,6 +76,10 @@ export interface AppOverview {
     organizationId: string;
     name: string;
     invocationName?: string;
+    status: {
+        type: string;
+        email: string;
+    };
     handlers: {
         total: number;
         handlers: HandlerDescription[];
@@ -270,8 +274,6 @@ export class XAPPClient {
         return this.client.query(GetEventsDocument, variables).toPromise().then((response) => {
             return response.data;
         });
-
-
     }
 
     /**

@@ -1,7 +1,7 @@
 /*! Copyright (c) 2022, XAPP AI*/
 
 import { readFileSync } from "fs";
-import * as moment from "moment";
+import moment from "moment";
 import { homedir } from "os";
 import { join } from "path";
 

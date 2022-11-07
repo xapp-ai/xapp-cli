@@ -1,6 +1,6 @@
 /*! Copyright (c) 2022, XAPP AI*/
 import log from "stentor-logger";
-import * as moment from "moment";
+import moment from "moment";
 import { homedir } from "os";
 import { join } from "path";
 import { existsSync, mkdirSync, writeFileSync } from "fs";
