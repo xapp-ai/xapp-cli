@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/xapp-ai/xapp-cli/compare/v1.2.114...v1.3.0) (2022-11-07)
+
+
+### Features
+
+* BETA - Serve function ([#528](https://github.com/xapp-ai/xapp-cli/issues/528)) ([1f01101](https://github.com/xapp-ai/xapp-cli/commit/1f011016495624a27605e18880dd088ba628650a))
+
 ## [1.2.114](https://github.com/xapp-ai/xapp-cli/compare/v1.2.113...v1.2.114) (2022-11-05)
 
 
