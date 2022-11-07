@@ -24,14 +24,7 @@ export async function serve(props?: { url?: string, port?: string, appId?: strin
             serverUrl: url,
             type: "direct"
         },
-        serverUrl: url,
-        hooks: {
-            onResponse: (response: Response) => {
-                console.log('Hook.onResponse');
-                console.log(response);
-                console.log(response.data);
-            }
-        }
+        serverUrl: url
     };
 
     const token = await getUserToken();
