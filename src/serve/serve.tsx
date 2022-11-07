@@ -5,7 +5,6 @@ import fs from "fs";
 import log from "stentor-logger";
 import express from "express";
 import { WidgetEnv } from "@xapp/stentor-chat-widget";
-import { Response } from "stentor-models";
 
 import { getAppId } from "../getAppId";
 import { getUserToken } from "../getUserToken";
