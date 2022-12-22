@@ -1,3 +1,10 @@
+## [1.3.46](https://github.com/xapp-ai/xapp-cli/compare/v1.3.45...v1.3.46) (2022-12-22)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @xapp/stentor-chat-widget to v1.53.0 ([17072cb](https://github.com/xapp-ai/xapp-cli/commit/17072cb20de2f83f701e18e825e30f9dfdb1757d))
+
 ## [1.3.45](https://github.com/xapp-ai/xapp-cli/compare/v1.3.44...v1.3.45) (2022-12-22)
 
 
