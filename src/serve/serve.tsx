@@ -23,7 +23,10 @@ export async function serve(props?: { url?: string, port?: string, appId?: strin
             serverUrl: url,
             type: "direct"
         },
-        serverUrl: url
+        serverUrl: url,
+        attributes: {
+            environment: "development"
+        }
     };
 
     const token = await getUserToken();
