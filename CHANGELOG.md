@@ -1,3 +1,37 @@
+## [1.3.64](https://github.com/xapp-ai/xapp-cli/compare/v1.3.63...v1.3.64) (2023-01-25)
+
+
+### Bug Fixes
+
+* Better types on getApp ([#647](https://github.com/xapp-ai/xapp-cli/issues/647)) ([d19fd41](https://github.com/xapp-ai/xapp-cli/commit/d19fd415a8c313769c6bf215ed4196cf48f376a8))
+* **deps:** update dependency @xapp/stentor-chat-widget to v1.53.2 ([#644](https://github.com/xapp-ai/xapp-cli/issues/644)) ([c14d0cb](https://github.com/xapp-ai/xapp-cli/commit/c14d0cb0a8555bc748d20c8a2d4944bc7f9fab1b))
+* **deps:** update dependency aws-sdk to v2.1299.0 ([#615](https://github.com/xapp-ai/xapp-cli/issues/615)) ([85bacce](https://github.com/xapp-ai/xapp-cli/commit/85bacce55baa2534ea1ae0d52da3abb537a6afcb))
+* **deps:** update stentor ([e2d2fda](https://github.com/xapp-ai/xapp-cli/commit/e2d2fda8bb43a88dd7b78fa50979678f4cf1175b))
+* **deps:** update stentor ([39d4c7c](https://github.com/xapp-ai/xapp-cli/commit/39d4c7c40d861632a0084910081cacda8ab75353))
+* **deps:** update stentor ([7ec4119](https://github.com/xapp-ai/xapp-cli/commit/7ec4119cbae97e1fa39ba908d80c56676c1aee67))
+* **deps:** update stentor ([609b59d](https://github.com/xapp-ai/xapp-cli/commit/609b59ddd717e162431961b31b3c7c79a0791328))
+* **deps:** update stentor ([f8b1f86](https://github.com/xapp-ai/xapp-cli/commit/f8b1f86264ae54a03c1ad039b1684feaca401cd3))
+* **deps:** update stentor ([4431d07](https://github.com/xapp-ai/xapp-cli/commit/4431d073c5ea19bedc34709d7589cbf462d411d6))
+* **deps:** update stentor ([e53551f](https://github.com/xapp-ai/xapp-cli/commit/e53551f6953a83b37744f4b14fa12da97560f416))
+* **deps:** update stentor ([b83abb2](https://github.com/xapp-ai/xapp-cli/commit/b83abb2871dc78f86eee8a173d795e98ac916a99))
+* **deps:** update stentor ([f4ed272](https://github.com/xapp-ai/xapp-cli/commit/f4ed27261c078172ecd87fd70b71985c3e4b2912))
+* **deps:** update stentor ([781fa63](https://github.com/xapp-ai/xapp-cli/commit/781fa63a9beecd01d959441514c471e65b77a19f))
+* **deps:** update stentor ([#638](https://github.com/xapp-ai/xapp-cli/issues/638)) ([6c075dc](https://github.com/xapp-ai/xapp-cli/commit/6c075dc431f43db94b82f42fd6511a63bb7b9e43))
+* **deps:** update stentor ([#641](https://github.com/xapp-ai/xapp-cli/issues/641)) ([bc294bc](https://github.com/xapp-ai/xapp-cli/commit/bc294bce430b35ebdec968d6483b1e9b004fb4d9))
+* **deps:** update stentor to v1.43.42 ([7c67fb3](https://github.com/xapp-ai/xapp-cli/commit/7c67fb3a5e9d71e70483938708336a58ac2c62ce))
+* **deps:** update stentor to v1.43.44 ([8936d4a](https://github.com/xapp-ai/xapp-cli/commit/8936d4ab311fa45bbf01209f249ed9eb219a9dd0))
+* **deps:** update stentor to v1.43.45 ([355f17d](https://github.com/xapp-ai/xapp-cli/commit/355f17d231237be9eaea1e9151e7e32710a04de2))
+* **deps:** update stentor to v1.43.46 ([22ba5e3](https://github.com/xapp-ai/xapp-cli/commit/22ba5e3f1218c2125274a315fa3dd8d82c74edb3))
+* **deps:** update stentor to v1.43.47 ([6c24e0a](https://github.com/xapp-ai/xapp-cli/commit/6c24e0a2f3c1c457ae1e62c550a3d15e0ee6a146))
+* **deps:** update stentor to v1.43.49 ([c161d02](https://github.com/xapp-ai/xapp-cli/commit/c161d027d6d5a8021b6e43f8a2196d2646539928))
+* **deps:** update stentor to v1.43.50 ([77800d9](https://github.com/xapp-ai/xapp-cli/commit/77800d95ac2326a188223e6e5110d2633beaa07b))
+* **deps:** update stentor to v1.43.54 ([f704c28](https://github.com/xapp-ai/xapp-cli/commit/f704c2833297819a20217d44978def3fc013beb4))
+* **deps:** update stentor to v1.43.55 ([19c49e9](https://github.com/xapp-ai/xapp-cli/commit/19c49e9f636dd2b72cd25b2a093129b62b61d7aa))
+* **deps:** update stentor to v1.43.56 ([53cc7f5](https://github.com/xapp-ai/xapp-cli/commit/53cc7f5bf2f6a95a43f88f5990c78f68a2dd2e61))
+* **deps:** update stentor to v1.43.59 ([#640](https://github.com/xapp-ai/xapp-cli/issues/640)) ([b53a13f](https://github.com/xapp-ai/xapp-cli/commit/b53a13fe52fe7de0f2fb876b75390cf302a71295))
+* **deps:** update stentor to v1.43.62 ([#643](https://github.com/xapp-ai/xapp-cli/issues/643)) ([d95def6](https://github.com/xapp-ai/xapp-cli/commit/d95def6cc0fa508bc6107af792629cf5e825eac8))
+* serve has environment: development ([#639](https://github.com/xapp-ai/xapp-cli/issues/639)) ([6290f1a](https://github.com/xapp-ai/xapp-cli/commit/6290f1ad6407583cc639f3a0310474aea73cfa6d))
+
 ## [1.3.63](https://github.com/xapp-ai/xapp-cli/compare/v1.3.62...v1.3.63) (2023-01-06)
 
 
