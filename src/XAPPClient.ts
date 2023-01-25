@@ -11,6 +11,8 @@ import {
     GetAnalyticsAndEventsQuery,
     GetAnalyticsAndEventsQueryVariables,
     GetAppContentDocument,
+    GetAppOverviewDocument,
+    GetAppOverviewQuery,
     GetAppSchedulesDocument,
     GetAppSchedulesQuery,
     GetAppsForOrgDocument,
@@ -37,7 +39,7 @@ import {
     UpdateEntityMutation,
     UpdateIntentMutation
 } from "./graphql/mutations";
-import { GetApp, GetIntent, GetHandler, GetEntity, GetAppWithChannels } from "./graphql/queries";
+import { GetIntent, GetHandler, GetEntity, GetAppWithChannels } from "./graphql/queries";
 import { App, Channel, ExportApp, GraphqlApp, ImportApp } from "./models";
 
 export interface HandlerDescription {
@@ -195,7 +197,7 @@ export class XAPPClient {
      * @param end 
      * @returns 
      */
-    public getApp(appId: string, start?: string, end?: string): Promise<AppOverview> {
+    public getApp(appId: string, start?: string, end?: string): Promise<GetAppOverviewQuery> {
         if (!start) {
             const now = new Date();
             end = now.toISOString();
@@ -204,12 +206,13 @@ export class XAPPClient {
             start = lastWeek.toISOString();
         }
 
-        return this.client.query(GetApp, {
+        // GetApp
+        return this.client.query(GetAppOverviewDocument, {
             appId,
             start,
             end
         }).toPromise().then((response) => {
-            return response.data.app;
+            return response.data;
         });
     }
 

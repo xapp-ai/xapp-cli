@@ -22,11 +22,10 @@ export async function info(appId: string): Promise<void> {
     const start = lastWeek.toISOString();
 
     // Temporary to get organizationId
-    const app = await client.getApp(appId, start, end);
+    const data = await client.getApp(appId, start, end);
+    const app = data.app;
 
     const { entities, intents, handlers } = app;
-
-
 
     log.info(`name: ${app.name}`)
     log.info(`Summary...`)

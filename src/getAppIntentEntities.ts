@@ -39,7 +39,8 @@ export async function getAppIntentEntities(
 
     const client = getXAPPClient(token, appId);
 
-    const app = await client.getApp(appId);
+    const data = await client.getApp(appId);
+    const app = data.app;
 
     if (!app) {
         throw new Error(`Unable to find app with ID ${appId}`);

@@ -21,7 +21,8 @@ export async function getStentorApp(appId?: string, options: { withChannels?: bo
     const client = getXAPPClient(token, appId);
 
     // Temporary to get organizationId
-    const app = await client.getApp(appId);
+    const data = await client.getApp(appId);
+    const app = data.app;
 
     const { organizationId } = app;
 
