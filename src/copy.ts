@@ -14,7 +14,8 @@ export async function copy(appId: string, newAppId: string, intentId: string | u
     const { intents, token } = await getAppIntentEntities(appId);
     const client = getXAPPClient(token);
 
-    const newApp = await client.getApp(newAppId);
+    const data = await client.getApp(newAppId);
+    const newApp = data.app;
 
     const existingIntentsMap = intents.reduce<any>((map, intent) => {
         const id = intent.intentId;

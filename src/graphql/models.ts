@@ -15,6 +15,7 @@ export type Scalars = {
   Int: number;
   Float: number;
   DateTime: any;
+  EmailAddress: any;
   HandlerResponseConditions: any;
   IntOrBoolean: any;
   IntOrString: any;
@@ -402,6 +403,24 @@ export enum AddLocaleEnum {
   ZhTw = 'zhTW'
 }
 
+export type AddedFaq = {
+  _id: Scalars['ID'];
+  answer: Scalars['String'];
+  associatedHandlerId?: Maybe<Scalars['String']>;
+  created: Scalars['String'];
+  excludeFromAutoComplete?: Maybe<Scalars['Boolean']>;
+  externalFAQId?: Maybe<Scalars['ID']>;
+  name: Scalars['String'];
+  questions: Array<Maybe<Scalars['String']>>;
+  raw?: Maybe<Scalars['String']>;
+  /** If "wasAdded" was false, this provides the reason that the FAQ was not added. */
+  reason?: Maybe<FaqNotAddedReason>;
+  responses?: Maybe<Array<Maybe<HandlerResponse>>>;
+  url?: Maybe<Scalars['String']>;
+  /** A boolean saying whether or not the FAQ was added in this operation. */
+  wasAdded: Scalars['Boolean'];
+};
+
 export type AdminAwsQuery = {
   /** Returns the AWS region that the graphql server is currently querying from. */
   region: Scalars['String'];
@@ -499,6 +518,8 @@ export type AdminLaboratory = {
   faqSearch: TotalWebFaq;
   /** Returns all results from the KNN test database */
   knnQuestions: KnnSearchOutput;
+  /** This uses KNN to search for raw queries in the events database. */
+  knnRawQuerySearch: KnnRawQuerySearchQuery;
   /** This uses KNN to search for related questions. */
   knnSearch: KnnSearchQuery;
   /** This uses KNN to search for suggestions to things. */
@@ -551,6 +572,15 @@ export type AdminLaboratoryKnnQuestionsArgs = {
 };
 
 
+export type AdminLaboratoryKnnRawQuerySearchArgs = {
+  appId: Scalars['ID'];
+  k?: InputMaybe<Scalars['Int']>;
+  minScore?: InputMaybe<Scalars['Float']>;
+  searchString: Scalars['String'];
+  size?: InputMaybe<Scalars['Int']>;
+};
+
+
 export type AdminLaboratoryKnnSearchArgs = {
   inputVectorSlice?: InputMaybe<Scalars['Int']>;
   k?: InputMaybe<Scalars['Int']>;
@@ -563,6 +593,7 @@ export type AdminLaboratoryKnnSearchArgs = {
 export type AdminLaboratoryKnnSuggSearchArgs = {
   appId: Scalars['ID'];
   k?: InputMaybe<Scalars['Int']>;
+  minScore?: InputMaybe<Scalars['Float']>;
   searchString: Scalars['String'];
   size?: InputMaybe<Scalars['Int']>;
 };
@@ -1112,6 +1143,8 @@ export type App = {
    */
   banner?: Maybe<Scalars['String']>;
   beta?: Maybe<Scalars['JSON']>;
+  /** Returns an App channel based on the provided ID. */
+  channel?: Maybe<BaseAppChannel>;
   /** The Channels that are available to the app. */
   channels?: Maybe<Array<Maybe<BaseAppChannel>>>;
   /**
@@ -1157,8 +1190,6 @@ export type App = {
   externalId?: Maybe<Scalars['String']>;
   /** Retrieves the attributes used to download web content. */
   faq?: Maybe<TotalWebFaq>;
-  /** Retrieves the attributes used to download web content */
-  faqQuery: FaqQueryReturn;
   /** A Map of all the intents and their locations for mapping intents. */
   graph?: Maybe<IntentsGraph>;
   /** The handlers that are associated with the app. */
@@ -1197,6 +1228,8 @@ export type App = {
    * Required for Alexa
    */
   largeIcon?: Maybe<Scalars['String']>;
+  /** The Email address to send lead captures to. */
+  leadsContact?: Maybe<Scalars['EmailAddress']>;
   /**
    * This is a series of locales that the apps supports.  These can override the
    * items that are in the original App.  The items in the main app are used as defaults if they
@@ -1257,6 +1290,11 @@ export type App = {
 };
 
 
+export type AppChannelArgs = {
+  id?: InputMaybe<Scalars['ID']>;
+};
+
+
 export type AppContentArgs = {
   from?: InputMaybe<Scalars['Int']>;
   size?: InputMaybe<Scalars['Int']>;
@@ -1296,6 +1334,7 @@ export type AppEventsArgs = {
   byName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   byPlatform?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   byRequestIntentId?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  bySimilarRawQueries?: InputMaybe<Scalars['String']>;
   byTag?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   byType?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   endDate?: InputMaybe<Scalars['DateTime']>;
@@ -1315,15 +1354,9 @@ export type AppEventsArgs = {
 
 export type AppFaqArgs = {
   from?: InputMaybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['ID']>;
   size?: InputMaybe<Scalars['Int']>;
   text?: InputMaybe<Scalars['String']>;
-};
-
-
-export type AppFaqQueryArgs = {
-  from?: InputMaybe<Scalars['Int']>;
-  question: Scalars['String'];
-  size?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -1469,6 +1502,12 @@ export type AppChannelMutation = {
    */
   addFacebookMessengerChannel: FacebookMessengerAppChannel;
   /**
+   * Adds or updates a Google Business Message channel to the specified app
+   *
+   * @return The channel that was just added
+   */
+  addGoogleBusinessMessageChannel: GoogleBusinessMessagesAppChannel;
+  /**
    * Adds or updates an Intelligent Search channel to the specified app
    *
    * @return The channel that was just added
@@ -1518,6 +1557,11 @@ export type AppChannelMutationAddDialogflowChannelArgs = {
 
 export type AppChannelMutationAddFacebookMessengerChannelArgs = {
   channel: FacebookMessengerAppChannelInput;
+};
+
+
+export type AppChannelMutationAddGoogleBusinessMessageChannelArgs = {
+  channel: GoogleBusinessMessagesAppChannelInput;
 };
 
 
@@ -1639,6 +1683,8 @@ export type AppInput = {
    * Required for Alexa
    */
   largeIcon?: InputMaybe<Scalars['String']>;
+  /** The Email address to send lead captures to. */
+  leadsContact?: InputMaybe<Scalars['EmailAddress']>;
   /** Physical location associated with the app. */
   location?: InputMaybe<LocationInput>;
   /**
@@ -1927,6 +1973,7 @@ export type AppMutationAddAppArgs = {
 
 
 export type AppMutationImportAppArgs = {
+  appId?: InputMaybe<Scalars['ID']>;
   modelOnly?: InputMaybe<Scalars['Boolean']>;
   overwrite?: InputMaybe<Scalars['Boolean']>;
   url: Scalars['URL'];
@@ -2313,6 +2360,7 @@ export type ChatWidgetAppChannel = BaseAppChannel & {
   /** The web location for the avatar */
   avatarUrl?: Maybe<Scalars['URL']>;
   botName?: Maybe<Scalars['String']>;
+  chatButton?: Maybe<ChatWidgetChatButtonConfig>;
   configurableMessages?: Maybe<WidgetConfigurableMessagesConfig>;
   connection?: Maybe<ChatWidgetServerConfig>;
   cta?: Maybe<CtaConfig>;
@@ -2376,6 +2424,7 @@ export type ChatWidgetAppChannelInput = {
   /** The web location for the avatar */
   avatarUrl?: InputMaybe<Scalars['URL']>;
   botName?: InputMaybe<Scalars['String']>;
+  chatButton?: InputMaybe<ChatWidgetChatButtonConfigInput>;
   configurableMessages?: InputMaybe<WidgetConfigurableMessagesConfigInput>;
   connection?: InputMaybe<ChatWidgetServerConfigInput>;
   cta?: InputMaybe<CtaConfigInput>;
@@ -2534,6 +2583,14 @@ export type ChatWidgetCarouselThemeInput = {
   title?: InputMaybe<ChatWidgetTextThemeInput>;
 };
 
+export type ChatWidgetChatButtonConfig = {
+  tabIndex?: Maybe<Scalars['String']>;
+};
+
+export type ChatWidgetChatButtonConfigInput = {
+  tabIndex?: InputMaybe<Scalars['String']>;
+};
+
 export type ChatWidgetChatButtonTheme = {
   /** Widget chat button color */
   background?: Maybe<Scalars['String']>;
@@ -2546,6 +2603,14 @@ export type ChatWidgetChatButtonThemeInput = {
   background?: InputMaybe<Scalars['String']>;
   /** Widget margin */
   margin?: InputMaybe<ChatWidgetMarginsThemeInput>;
+};
+
+export type ChatWidgetClearButtonConfig = {
+  tabIndex?: Maybe<Scalars['String']>;
+};
+
+export type ChatWidgetClearButtonConfigInput = {
+  tabIndex?: InputMaybe<Scalars['String']>;
 };
 
 export type ChatWidgetContentTheme = {
@@ -2568,11 +2633,13 @@ export type ChatWidgetCtaThemeInput = {
 
 export type ChatWidgetFooterConfig = {
   branding?: Maybe<ChatWidgetBrandingConfig>;
+  clearButton?: Maybe<ChatWidgetClearButtonConfig>;
   sendButton?: Maybe<ChatWidgetSendButtonConfig>;
 };
 
 export type ChatWidgetFooterConfigInput = {
   branding?: InputMaybe<ChatWidgetBrandingConfigInput>;
+  clearButton?: InputMaybe<ChatWidgetClearButtonConfigInput>;
   sendButton?: InputMaybe<ChatWidgetSendButtonConfigInput>;
 };
 
@@ -2590,8 +2657,11 @@ export type ChatWidgetFooterThemeInput = {
 
 export type ChatWidgetHeaderActionsConfig = {
   cancel?: Maybe<Scalars['Boolean']>;
+  cancelTabIndex?: Maybe<Scalars['String']>;
   minimize?: Maybe<Scalars['Boolean']>;
+  minimizeTabIndex?: Maybe<Scalars['String']>;
   refresh?: Maybe<Scalars['Boolean']>;
+  refreshTabIndex?: Maybe<Scalars['String']>;
 };
 
 export type ChatWidgetHeaderConfig = {
@@ -2603,8 +2673,11 @@ export type ChatWidgetHeaderConfig = {
 
 export type ChatWidgetHeaderConfigActionsInput = {
   cancel?: InputMaybe<Scalars['Boolean']>;
+  cancelTabIndex?: InputMaybe<Scalars['String']>;
   minimize?: InputMaybe<Scalars['Boolean']>;
+  minimizeTabIndex?: InputMaybe<Scalars['String']>;
   refresh?: InputMaybe<Scalars['Boolean']>;
+  refreshTabIndex?: InputMaybe<Scalars['String']>;
 };
 
 export type ChatWidgetHeaderConfigInput = {
@@ -2654,10 +2727,12 @@ export type ChatWidgetHeaderThemeInput = {
 
 export type ChatWidgetInputConfig = {
   placeholder?: Maybe<Scalars['String']>;
+  tabIndex?: Maybe<Scalars['String']>;
 };
 
 export type ChatWidgetInputConfigInput = {
   placeholder?: InputMaybe<Scalars['String']>;
+  tabIndex?: InputMaybe<Scalars['String']>;
 };
 
 export type ChatWidgetInputTheme = {
@@ -2688,12 +2763,31 @@ export type ChatWidgetMarginsThemeInput = {
   top?: InputMaybe<Scalars['String']>;
 };
 
+export type ChatWidgetMenuButtonConfig = {
+  tabIndex?: Maybe<Scalars['String']>;
+};
+
+export type ChatWidgetMenuButtonConfigInput = {
+  tabIndex?: InputMaybe<Scalars['String']>;
+};
+
+export enum ChatWidgetMenuButtonLocation {
+  Footer = 'FOOTER',
+  HeaderLeft = 'HEADER_LEFT'
+}
+
 export type ChatWidgetMenuConfig = {
+  button?: Maybe<ChatWidgetMenuButtonConfig>;
   items?: Maybe<Array<Maybe<ChatWidgetMenuItems>>>;
+  itemsTabIndex?: Maybe<Scalars['String']>;
+  menuButtonLocation?: Maybe<ChatWidgetMenuButtonLocation>;
 };
 
 export type ChatWidgetMenuConfigInput = {
+  button?: InputMaybe<ChatWidgetMenuButtonConfigInput>;
   items?: InputMaybe<Array<InputMaybe<ChatWidgetMenuItemConfigInput>>>;
+  itemsTabIndex?: InputMaybe<Scalars['String']>;
+  menuButtonLocation?: InputMaybe<ChatWidgetMenuButtonLocation>;
 };
 
 export type ChatWidgetMenuItemConfig = {
@@ -2702,11 +2796,23 @@ export type ChatWidgetMenuItemConfig = {
 };
 
 export type ChatWidgetMenuItemConfigInput = {
+  behavior?: InputMaybe<ChatWidgetAppChannelUrlBehaviorInput>;
   body?: InputMaybe<Scalars['String']>;
   imageUrl?: InputMaybe<Scalars['String']>;
   label?: InputMaybe<Scalars['String']>;
   subtitle?: InputMaybe<Scalars['String']>;
+  text?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
+  url?: InputMaybe<Scalars['String']>;
+};
+
+export type ChatWidgetMenuItemOpenUrl = {
+  /** How the URL opens, defaults to defined behavior on URL opening config. */
+  behavior?: Maybe<ChatWidgetAppChannelUrlBehaviorBase>;
+  /** Display label for the URL */
+  text: Scalars['String'];
+  /** URL to be opened */
+  url: Scalars['String'];
 };
 
 export type ChatWidgetMenuItemStaticImage = {
@@ -2720,17 +2826,21 @@ export type ChatWidgetMenuItemStaticText = {
 
 export type ChatWidgetMenuItemTheme = {
   background?: Maybe<Scalars['String']>;
+  border?: Maybe<ChatWidgetBorderTheme>;
   height?: Maybe<Scalars['String']>;
+  subtitle?: Maybe<ChatWidgetTextTheme>;
   text?: Maybe<ChatWidgetTextTheme>;
 };
 
 export type ChatWidgetMenuItemThemeInput = {
   background?: InputMaybe<Scalars['String']>;
+  border?: InputMaybe<ChatWidgetBorderThemeInput>;
   height?: InputMaybe<Scalars['String']>;
+  subtitle?: InputMaybe<ChatWidgetTextThemeInput>;
   text?: InputMaybe<ChatWidgetTextThemeInput>;
 };
 
-export type ChatWidgetMenuItems = ChatWidgetMenuItemConfig | ChatWidgetMenuItemStaticImage | ChatWidgetMenuItemStaticText;
+export type ChatWidgetMenuItems = ChatWidgetMenuItemConfig | ChatWidgetMenuItemOpenUrl | ChatWidgetMenuItemStaticImage | ChatWidgetMenuItemStaticText;
 
 export type ChatWidgetMenuTheme = {
   item?: Maybe<ChatWidgetMenuItemTheme>;
@@ -2784,10 +2894,12 @@ export type ChatWidgetPaddingThemeInput = {
 
 export type ChatWidgetSendButtonConfig = {
   icon?: Maybe<Scalars['String']>;
+  tabIndex?: Maybe<Scalars['String']>;
 };
 
 export type ChatWidgetSendButtonConfigInput = {
   icon?: InputMaybe<Scalars['String']>;
+  tabIndex?: InputMaybe<Scalars['String']>;
 };
 
 export type ChatWidgetServerConfig = {
@@ -2937,6 +3049,11 @@ export type ChatbaseDataStreamInput = {
   type: Scalars['String'];
 };
 
+export type ClearFaqReturn = {
+  /** The task ID of the faq clear which can be queried to check if it's done. */
+  taskId: Scalars['ID'];
+};
+
 export type CodeChallenge = {
   codeChallenge: Scalars['String'];
   codeChallengeMethod: Scalars['String'];
@@ -2986,6 +3103,8 @@ export type CreateOrgReturn = {
 export type CreateOrganizationInput = {
   /** The email XAPPineer that is in charge of handling the organization's account */
   XAPPLead?: InputMaybe<Scalars['String']>;
+  /** An event bus that is attatched to the organization to receive specific events related to the organization such as App status changes. */
+  awsEventBusArn?: InputMaybe<Scalars['String']>;
   /**
    * The email address of a user who can be contacted about issues
    * related to the organization.
@@ -3420,6 +3539,8 @@ export type Entity = {
   _id: Scalars['ID'];
   /** The appId of the app that the slot is associated with. */
   appId: Scalars['ID'];
+  /** The date at which the entity was created. */
+  createdAt?: Maybe<Scalars['String']>;
   /** Optional ID if the slot type has a representation in Dialogflow. */
   dialogflowId?: Maybe<Scalars['String']>;
   /** The name of the slot as it is to the user. */
@@ -3442,6 +3563,8 @@ export type Entity = {
    * supported by all NLU.
    */
   type?: Maybe<EntityType>;
+  /** The date at which the entity was last updated. */
+  updatedAt?: Maybe<Scalars['String']>;
   /** A query for any errors that may be in the Entity. */
   validation: EntityValidation;
   /** The values that the slot can be. */
@@ -3787,7 +3910,9 @@ export type ExportToCsvReturn = {
 
 export type FaqMutation = {
   /** Adds FAQs to the database. */
-  addFAQs: Array<Maybe<WebFaq>>;
+  addFAQs: Array<Maybe<AddedFaq>>;
+  /** Clears all FAQs from the app. */
+  clear: ClearFaqReturn;
   exportToCSV: ExportToCsvReturn;
   /** Update operations on FAQs */
   update: UpdateFaqMutation;
@@ -3824,6 +3949,11 @@ export type FaqMutationUploadCsvArgs = {
   file: Scalars['URL'];
   hasTitle?: InputMaybe<Scalars['Boolean']>;
 };
+
+export enum FaqNotAddedReason {
+  AlreadyExists = 'ALREADY_EXISTS',
+  Unknown = 'UNKNOWN'
+}
 
 export type FaqSuggestionReturn = {
   failedPutRequests: Scalars['Int'];
@@ -3927,11 +4057,6 @@ export type FacebookPageInput = {
   pageToken?: InputMaybe<Scalars['String']>;
 };
 
-export type FaqQueryReturn = {
-  faq: Array<Maybe<ScoredWebFaq>>;
-  total: Scalars['Int'];
-};
-
 export type FirstTimeHandlerResponseSegment = HandlerResponseSegment & {
   fistTime: Scalars['Boolean'];
   segment: ResponseOutput;
@@ -4028,7 +4153,7 @@ export type GetAppsListStatus = {
   /** The email of the user who last changed the status. */
   email?: Maybe<Scalars['String']>;
   /** Any notes that was associated with the status change. */
-  notes: Scalars['String'];
+  notes?: Maybe<Scalars['String']>;
   /**
    * The time the status was last changed.
    *
@@ -4118,6 +4243,60 @@ export type GoogleAnalyticsDataStream = {
 
 export type GoogleAnalyticsDataStreamInput = {
   type: Scalars['String'];
+};
+
+export type GoogleBusinessMessagesAppChannel = BaseAppChannel & {
+  /** URL for the directory listing. */
+  directoryListing?: Maybe<Scalars['String']>;
+  /** URI where the channel can be accessed. */
+  endPoint?: Maybe<Scalars['String']>;
+  /** The ID of the channel. */
+  id: Scalars['String'];
+  /** The display name for the channel. */
+  name?: Maybe<Scalars['String']>;
+  /** The lifecycle status of the app. */
+  status?: Maybe<AppChannelStatus>;
+  /** The type of channel */
+  type: Scalars['String'];
+  /** Retrieves any events that are related to this specific app */
+  usageEvents?: Maybe<TotalUsageEvents>;
+  /**
+   * ID of the NLU to use within app.nlu[].
+   *
+   * If it exists, the channel will use the provided NLU at runtime
+   * to convert the raw text to an Intent
+   *
+   * If the value is "*", then it will pick the first available NLU within app.nlu[]
+   */
+  useNLU?: Maybe<Scalars['String']>;
+};
+
+
+export type GoogleBusinessMessagesAppChannelUsageEventsArgs = {
+  from?: InputMaybe<Scalars['Int']>;
+  size?: InputMaybe<Scalars['Int']>;
+};
+
+export type GoogleBusinessMessagesAppChannelInput = {
+  /** URL for the directory listing. */
+  directoryListing?: InputMaybe<Scalars['String']>;
+  /** URI where the channel can be accessed. */
+  endPoint?: InputMaybe<Scalars['String']>;
+  /** The ID of the channel. */
+  id: Scalars['String'];
+  /** The display name for the channel. */
+  name?: InputMaybe<Scalars['String']>;
+  /** The type of channel */
+  type: Scalars['String'];
+  /**
+   * ID of the NLU to use within app.nlu[].
+   *
+   * If it exists, the channel will use the provided NLU at runtime
+   * to convert the raw text to an Intent
+   *
+   * If the value is "*", then it will pick the first available NLU within app.nlu[]
+   */
+  useNLU?: InputMaybe<Scalars['String']>;
 };
 
 export type GooglePlatformAdditionalInformationQuestions = {
@@ -4234,7 +4413,7 @@ export type GraphNodeFields = {
  * These are translated to their platform specific counterparts when publishing.
  */
 export type Handler = {
-  /** The ID of the app that the intent is linked to. */
+  /** The ID of the app that the Handler is linked to. */
   appId: Scalars['ID'];
   /**
    * Base content map for the handler.
@@ -4243,7 +4422,7 @@ export type Handler = {
    */
   content?: Maybe<Array<Maybe<HandlerContent>>>;
   /**
-   * The date in which the intent was created.
+   * The date in which the Handler was created.
    *
    * Format: ISO 8601 date format.
    */
@@ -4259,13 +4438,13 @@ export type Handler = {
   forward?: Maybe<Array<Maybe<HandlerForward>>>;
   /** The location that the intent was last saved in Stentor's Handler Graph UI. */
   graphCoords?: Maybe<GraphCoords>;
-  /** The unique identifier of the intent itself. */
+  /** The unique identifier of the Handler itself. */
   intentId: Scalars['ID'];
   /** The language code that the intent covers. */
   langCode?: Maybe<Scalars['String']>;
   /** The human-readable name of the intent. */
   name: Scalars['String'];
-  /** The ID of the organization that the intent is linked to. */
+  /** The ID of the organization that the Handler is linked to. */
   organizationId: Scalars['ID'];
   /** The permissions that the intent requires in order to work. */
   permissions?: Maybe<Array<Maybe<HandlerPermissions>>>;
@@ -4274,6 +4453,12 @@ export type Handler = {
   slots?: Maybe<Array<Maybe<Slot>>>;
   /** The type of Handler that this is. */
   type: Scalars['String'];
+  /**
+   * The date at which the Handler was last updated.
+   *
+   * Format: ISO 8601 date format.
+   */
+  updatedAt?: Maybe<Scalars['String']>;
   /**
    * An array of utterance patterns.
    *
@@ -4391,6 +4576,8 @@ export type HandlerRedirectInput = {
 };
 
 export type HandlerResponse = {
+  /** Description of the channel that will be */
+  channel?: Maybe<HandlerResponseChannel>;
   /** Conditions to be met. */
   conditions?: Maybe<Scalars['HandlerResponseConditions']>;
   /**
@@ -4433,6 +4620,14 @@ export type HandlerResponseActiveContextTtl = {
   /** Not supported in Dialogflow */
   timeToLiveInSeconds?: Maybe<Scalars['Int']>;
   turnsToLive?: Maybe<Scalars['Int']>;
+};
+
+export type HandlerResponseChannel = {
+  /**
+   * String to match with the name of the channel that will match.  It can either be the exact name of the
+   * channel or a regex string to match multiple.
+   */
+  name?: Maybe<Scalars['String']>;
 };
 
 export type HandlerResponseContext = {
@@ -4976,6 +5171,12 @@ export type Intent = {
   /** The slots defined within the utterance patterns and their Entity types. */
   slots?: Maybe<Array<Maybe<Slot>>>;
   /**
+   * The date at which the Intent was last updated.
+   *
+   * Format: ISO 8601 date format.
+   */
+  updatedAt?: Maybe<Scalars['String']>;
+  /**
    * An array of utterance patterns.
    *
    * For more information on syntax see https://github.com/alexa-js/alexa-utterances
@@ -5087,6 +5288,8 @@ export type JsonDependableHandlerResponse = HandlerResponse & {
    * 'name' on Match is the JSON path
    */
   JSONPathMatch?: Maybe<Scalars['JSON']>;
+  /** Description of the channel that will be */
+  channel?: Maybe<HandlerResponseChannel>;
   /** Conditions to be met. */
   conditions?: Maybe<Scalars['HandlerResponseConditions']>;
   context?: Maybe<HandlerResponseContext>;
@@ -5222,6 +5425,23 @@ export type KnnMutationAddQuestionArgs = {
   question: Scalars['String'];
 };
 
+export type KnnRawQueryHit = {
+  _score: Scalars['Float'];
+  rawQuery: Scalars['String'];
+  rawQueryVector: Array<Maybe<Scalars['Float']>>;
+};
+
+export type KnnRawQuerySearchOutput = {
+  aggs: Scalars['JSON'];
+  hits: Array<Maybe<KnnRawQueryHit>>;
+  total: Scalars['Int'];
+};
+
+export type KnnRawQuerySearchQuery = {
+  input: KnnSearchInput;
+  output: KnnRawQuerySearchOutput;
+};
+
 export type KnnSearchHit = {
   _score: Scalars['Float'];
   answer: Scalars['String'];
@@ -5252,6 +5472,7 @@ export type KnnSuggSearchHit = {
 };
 
 export type KnnSuggSearchOutput = {
+  aggs: Scalars['JSON'];
   hits: Array<Maybe<KnnSuggSearchHit>>;
   total: Scalars['Int'];
 };
@@ -5315,6 +5536,8 @@ export type LabMutation = {
 
 export type LastActiveActiveWithinHandlerResponse = HandlerResponse & {
   activeWithin?: Maybe<HandlerResponseDuration>;
+  /** Description of the channel that will be */
+  channel?: Maybe<HandlerResponseChannel>;
   /** Conditions to be met. */
   conditions?: Maybe<Scalars['HandlerResponseConditions']>;
   context?: Maybe<HandlerResponseContext>;
@@ -5343,6 +5566,8 @@ export type LastActiveActiveWithinHandlerResponse = HandlerResponse & {
 };
 
 export type LastActiveFirstTimeHandlerResponse = HandlerResponse & {
+  /** Description of the channel that will be */
+  channel?: Maybe<HandlerResponseChannel>;
   /** Conditions to be met. */
   conditions?: Maybe<Scalars['HandlerResponseConditions']>;
   context?: Maybe<HandlerResponseContext>;
@@ -5376,6 +5601,8 @@ export type LastActiveHandlerResponse = LastActiveActiveWithinHandlerResponse | 
 export type LastActiveHandlerResponseSegment = ActiveWithinHandlerResponseSegment | FirstTimeHandlerResponseSegment | HaveNotSeenWithinHandlerResponseSegment;
 
 export type LastActiveHaveNotSeenWithinHandlerResponse = HandlerResponse & {
+  /** Description of the channel that will be */
+  channel?: Maybe<HandlerResponseChannel>;
   /** Conditions to be met. */
   conditions?: Maybe<Scalars['HandlerResponseConditions']>;
   context?: Maybe<HandlerResponseContext>;
@@ -5693,8 +5920,6 @@ export type LexV2ConnectAppChannelInput = {
   lexFulfillmentLambdaARN?: InputMaybe<Scalars['String']>;
   /** The role that is used to manage Lex on alternate accounts. */
   managementRole?: InputMaybe<Scalars['String']>;
-  /** The external ID if applicable that allows external accounts to assume the role. */
-  managementRoleExternalId?: InputMaybe<Scalars['String']>;
   /** The display name for the channel. */
   name?: InputMaybe<Scalars['String']>;
   /** The type of channel */
@@ -6695,6 +6920,18 @@ export type OrgAnalyticsUserArgs = {
   start: Scalars['DateTime'];
 };
 
+export type OrgAppQuerySortByParameters = {
+  /** The order in which to sort by. */
+  order?: InputMaybe<OrgAppQuerySortByParametersOrder>;
+  /** The attribute to sort by. */
+  sortBy: SortableAppAttributes;
+};
+
+export enum OrgAppQuerySortByParametersOrder {
+  Asc = 'ASC',
+  Desc = 'DESC'
+}
+
 export type OrgMember = {
   email: Scalars['String'];
   policy: OrgPolicy;
@@ -6844,6 +7081,10 @@ export type Organization = {
   apps?: Maybe<GetAppsQuery>;
   /** Deprecated: The Auth0 Group that the organization is linked to. */
   auth0GroupId?: Maybe<Scalars['ID']>;
+  /** An event bus that is attatched to the organization to receive specific events related to the organization such as App status changes. */
+  awsEventBusArn?: Maybe<Scalars['String']>;
+  /** An object of feature flags */
+  beta?: Maybe<Scalars['JSON']>;
   /**
    * A CMS token is an authorization token that is linked to the app
    * which allows third party services to access certain resources without
@@ -6908,9 +7149,10 @@ export type Organization = {
  */
 export type OrganizationAppsArgs = {
   byName?: InputMaybe<Scalars['String']>;
+  byStatusType?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   from?: InputMaybe<Scalars['Int']>;
+  nuSortBy?: InputMaybe<Array<InputMaybe<OrgAppQuerySortByParameters>>>;
   size?: InputMaybe<Scalars['Int']>;
-  sortBy?: InputMaybe<SortableAppAttributes>;
 };
 
 
@@ -7194,6 +7436,8 @@ export type RequestDependentExecutableHandlerPath = BaseHandlerPath & {
 export type RequestDependentHandlerPath = RequestDependentExecutableHandlerPath | RequestDependentHistoricalHandlerPath | RequestDependentPreviousHandlerPath;
 
 export type RequestDependentHandlerResponse = HandlerResponse & {
+  /** Description of the channel that will be */
+  channel?: Maybe<HandlerResponseChannel>;
   /** Conditions to be met. */
   conditions?: Maybe<Scalars['HandlerResponseConditions']>;
   context?: Maybe<HandlerResponseContext>;
@@ -7447,6 +7691,8 @@ export type ResponseTypeCode = {
 };
 
 export type SchedulableDependentHandlerResponse = HandlerResponse & {
+  /** Description of the channel that will be */
+  channel?: Maybe<HandlerResponseChannel>;
   /** Conditions to be met. */
   conditions?: Maybe<Scalars['HandlerResponseConditions']>;
   context?: Maybe<HandlerResponseContext>;
@@ -7518,26 +7764,6 @@ export enum SchedulerDaysOfWeek {
   Tuesday = 'TUESDAY',
   Wednesday = 'WEDNESDAY'
 }
-
-export type ScoredWebFaq = {
-  /** ID of the webFAQ */
-  _id: Scalars['ID'];
-  /** The score received based on the query presented. */
-  _score: Scalars['Float'];
-  /** The answer of the FAQ questions */
-  answer: Scalars['String'];
-  associatedHandlerId?: Maybe<Scalars['String']>;
-  /** The time it was created. */
-  created: Scalars['String'];
-  /** The name assigned to the question-answer page */
-  name: Scalars['String'];
-  /** Questions that are linked to the answer */
-  questions: Array<Maybe<Scalars['String']>>;
-  /** The raw text of the FAQ page */
-  raw?: Maybe<Scalars['String']>;
-  /** The URL that the FAQ came from */
-  url?: Maybe<Scalars['String']>;
-};
 
 /** Organization that is returned from a Search query. */
 export type SearchedApp = {
@@ -7695,6 +7921,8 @@ export type SimpleDisplayInput = {
 };
 
 export type SimpleHandlerResponse = HandlerResponse & {
+  /** Description of the channel that will be */
+  channel?: Maybe<HandlerResponseChannel>;
   /** Conditions to be met. */
   conditions?: Maybe<Scalars['HandlerResponseConditions']>;
   context?: Maybe<HandlerResponseContext>;
@@ -7814,6 +8042,8 @@ export type SlotDependentExecutableHandlerPath = BaseHandlerPath & {
 export type SlotDependentHandlerPath = SlotDependentExecutableHandlerPath | SlotDependentHistoricalHandlerPath | SlotDependentPreviousHandlerPath;
 
 export type SlotDependentHandlerResponse = HandlerResponse & {
+  /** Description of the channel that will be */
+  channel?: Maybe<HandlerResponseChannel>;
   /** Conditions to be met. */
   conditions?: Maybe<Scalars['HandlerResponseConditions']>;
   context?: Maybe<HandlerResponseContext>;
@@ -7929,7 +8159,10 @@ export type SmapiVendor = {
 
 /** These are the attributes that are available for sorting when querying apps of an organization. */
 export enum SortableAppAttributes {
-  AppId = 'APP_ID'
+  /** Sort alphabetically by appId */
+  AppId = 'APP_ID',
+  /** Sort by most recent status time */
+  StatusTime = 'STATUS_TIME'
 }
 
 export type Status = {
@@ -8036,6 +8269,8 @@ export type StorageDependentExecutableHandlerPath = BaseHandlerPath & {
 export type StorageDependentHandlerPath = StorageDependentExecutableHandlerPath | StorageDependentHistoricalHandlerPath | StorageDependentPreviousHandlerPath;
 
 export type StorageDependentHandlerResponse = HandlerResponse & {
+  /** Description of the channel that will be */
+  channel?: Maybe<HandlerResponseChannel>;
   /** Conditions to be met. */
   conditions?: Maybe<Scalars['HandlerResponseConditions']>;
   context?: Maybe<HandlerResponseContext>;
@@ -8269,6 +8504,8 @@ export type SystemDependentExecutableHandlerPath = BaseHandlerPath & {
 export type SystemDependentHandlerPath = SystemDependentExecutableHandlerPath | SystemDependentHistoricalHandlerPath | SystemDependentPreviousHandlerPath;
 
 export type SystemDependentHandlerResponse = HandlerResponse & {
+  /** Description of the channel that will be */
+  channel?: Maybe<HandlerResponseChannel>;
   /** Conditions to be met. */
   conditions?: Maybe<Scalars['HandlerResponseConditions']>;
   context?: Maybe<HandlerResponseContext>;
@@ -8362,6 +8599,10 @@ export enum SystemNotificationLevel {
   Info = 'INFO',
   Warn = 'WARN'
 }
+
+export type TaskResult = {
+  completed: Scalars['Boolean'];
+};
 
 export type TestConfig = {
   /**
@@ -8607,6 +8848,8 @@ export type UpdateAppInput = {
    * Required for Alexa
    */
   largeIcon?: InputMaybe<Scalars['String']>;
+  /** The Email address to send lead captures to. */
+  leadsContact?: InputMaybe<Scalars['EmailAddress']>;
   /** Physical location associated with the app. */
   location?: InputMaybe<LocationInput>;
   /**
@@ -8919,6 +9162,10 @@ export type UpdateIntentReturnGraphArgs = {
 export type UpdateOrganizationInput = {
   /** The email XAPPineer that is in charge of handling the organization's account */
   XAPPLead?: InputMaybe<Scalars['String']>;
+  /** An event bus that is attatched to the organization to receive specific events related to the organization such as App status changes. */
+  awsEventBusArn?: InputMaybe<Scalars['String']>;
+  /** An object of feature flags */
+  beta?: InputMaybe<Scalars['JSON']>;
   /**
    * The email address of a user who can be contacted about issues
    * related to the organization.
@@ -9082,6 +9329,13 @@ export type Utils = {
    * stentor can securely assume it.
    */
   generateExternalID: Scalars['String'];
+  /** Returns the result of a task */
+  task: TaskResult;
+};
+
+
+export type UtilsTaskArgs = {
+  taskId: Scalars['ID'];
 };
 
 export type UtteranceTest = {
@@ -9413,6 +9667,15 @@ export type GetAppsForOrgQueryVariables = Exact<{
 
 
 export type GetAppsForOrgQuery = { org?: { apps?: { total: number, apps: Array<{ appId: string, organizationId: string, name: string, largeIcon?: string | null, smallIcon?: string | null, description?: string | null, summary?: string | null } | null> } | null } | null };
+
+export type GetAppOverviewQueryVariables = Exact<{
+  appId: Scalars['ID'];
+  start: Scalars['DateTime'];
+  end: Scalars['DateTime'];
+}>;
+
+
+export type GetAppOverviewQuery = { app?: { __typename: 'App', _id: string, appId: string, name: string, description?: string | null, summary?: string | null, organizationId: string, invocationName?: string | null, templateType?: string | null, icon?: string | null, smallIcon?: string | null, largeIcon?: string | null, banner?: string | null, largeBanner?: string | null, status?: { type: string, timestamp: any, email: string } | null, handlers?: { _id: string, total: number, handlers?: Array<{ _id: string, name?: string | null, intentId: string, type: string } | null> | null } | null, intents?: { _id: string, total: number, intents?: Array<{ _id: string, name: string, intentId: string } | null> | null } | null, entities?: { _id: string, total: number, entities?: Array<{ _id: string, entityId: string, displayName: string } | null> | null } | null, content?: { __typename: 'TotalWebContent', total: number, content: Array<{ __typename: 'WebContentWithHighlights', _id: string, name: string, url: string } | null> } | null, contentSources?: { __typename: 'TotalWebContentSources', total: number, sources: Array<{ __typename: 'WebContentSources', webUrl: string, webUrlPatterns: Array<string | null> } | null> } | null, faq?: { total: number } | null, channels?: Array<{ __typename: 'ActionsOnGoogleAppChannel', type: string, id: string, name?: string | null } | { __typename: 'AlexaAppChannel', type: string, id: string, name?: string | null } | { __typename: 'AppChannel', type: string, id: string, name?: string | null } | { __typename: 'ChatWidgetAppChannel', key?: string | null, type: string, id: string, name?: string | null, theme?: { primaryColor?: string | null } | null } | { __typename: 'DialogflowAppChannel', type: string, id: string, name?: string | null } | { __typename: 'FacebookMessengerAppChannel', type: string, id: string, name?: string | null } | { __typename: 'GoogleBusinessMessagesAppChannel', type: string, id: string, name?: string | null } | { __typename: 'IntelligentSearchAppChannel', key?: string | null, type: string, id: string, name?: string | null, theme?: { accentColor?: string | null } | null } | { __typename: 'LexConnectAppChannel', type: string, id: string, name?: string | null } | { __typename: 'LexV2ConnectAppChannel', type: string, id: string, name?: string | null } | null> | null, analytics?: { user: { totalUsers: number, totalSessions: number, returningUsers: number, newUsers: number } } | null } | null };
 
 export type GetAppContentQueryVariables = Exact<{
   appId: Scalars['ID'];
@@ -9754,6 +10017,107 @@ export const GetAppsForOrgDocument = gql`
         smallIcon
         description
         summary
+      }
+    }
+  }
+}
+    `;
+export const GetAppOverviewDocument = gql`
+    query getAppOverview($appId: ID!, $start: DateTime!, $end: DateTime!) {
+  app(appId: $appId) {
+    __typename
+    _id
+    appId
+    name
+    description
+    summary
+    organizationId
+    invocationName
+    templateType
+    icon
+    smallIcon
+    largeIcon
+    banner
+    largeBanner
+    status {
+      type
+      timestamp
+      email
+    }
+    handlers(size: 1000) {
+      _id
+      total
+      handlers {
+        _id
+        name
+        intentId
+        type
+      }
+    }
+    intents(size: 1000) {
+      _id
+      total
+      intents {
+        _id
+        name
+        intentId
+      }
+    }
+    entities(size: 1000) {
+      _id
+      total
+      entities {
+        _id
+        entityId
+        displayName
+      }
+    }
+    content {
+      __typename
+      total
+      content {
+        __typename
+        _id
+        name
+        url
+      }
+    }
+    contentSources {
+      __typename
+      total
+      sources {
+        __typename
+        webUrl
+        webUrlPatterns
+      }
+    }
+    faq {
+      total
+    }
+    channels {
+      __typename
+      type
+      id
+      name
+      ... on ChatWidgetAppChannel {
+        key
+        theme {
+          primaryColor
+        }
+      }
+      ... on IntelligentSearchAppChannel {
+        key
+        theme {
+          accentColor
+        }
+      }
+    }
+    analytics {
+      user(start: $start, end: $end) {
+        totalUsers
+        totalSessions
+        returningUsers
+        newUsers
       }
     }
   }

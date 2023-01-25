@@ -47,7 +47,8 @@ export async function importAppFromFile(file: string, options: { appId: string }
     // It is also a test of if the user has access to this app.
     let existingApp: App;
     try {
-        existingApp = await client.getApp(appId);
+        const data = await client.getApp(appId);
+        existingApp = data.app;
     } catch (e) {
         log().error(`Unable to access app with ID ${appId}, ensure you have the correct app ID`);
         throw e;
