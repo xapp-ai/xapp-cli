@@ -1,3 +1,10 @@
+## [1.3.69](https://github.com/xapp-ai/xapp-cli/compare/v1.3.68...v1.3.69) (2023-03-14)
+
+
+### Bug Fixes
+
+* **deps:** update dependency open to v8.4.2 ([#663](https://github.com/xapp-ai/xapp-cli/issues/663)) ([a5bb19a](https://github.com/xapp-ai/xapp-cli/commit/a5bb19acb0cda0af31a651875f3d242ec0ebb321))
+
 ## [1.3.68](https://github.com/xapp-ai/xapp-cli/compare/v1.3.67...v1.3.68) (2023-01-31)
 
 
