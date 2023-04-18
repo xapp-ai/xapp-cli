@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/xapp-ai/xapp-cli/compare/v1.3.69...v1.4.0) (2023-04-18)
+
+
+### Features
+
+* Export all apps to CSV ([#671](https://github.com/xapp-ai/xapp-cli/issues/671)) ([dd74eaa](https://github.com/xapp-ai/xapp-cli/commit/dd74eaad2e616d05b19f1f5c0d8297d13574e168))
+
 ## [1.3.69](https://github.com/xapp-ai/xapp-cli/compare/v1.3.68...v1.3.69) (2023-03-14)
 
 
