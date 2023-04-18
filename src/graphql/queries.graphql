@@ -32,6 +32,12 @@ query getAppsForOrg($organizationId: ID!, $from: Int = 0, $size: Int = 10) {
         smallIcon
         description
         summary
+        status {
+          type
+          timestamp
+          notes
+          email
+        }
       }
     }
   }

@@ -31,6 +31,7 @@ import { getUserToken } from "./getUserToken";
 import { XAPPClient } from "./XAPPClient";
 import { createChannelLexV2 } from "./create/channelLexV2";
 import { serve } from "./serve";
+import { exportOrg } from "./org/exportOrg";
 
 // A couple of exports for if you use it not like a CLI
 export { getStentorApp } from "./getStentorApp";
@@ -180,6 +181,13 @@ program.command("types <directory> [appId]")
     .option("-m --max <header>", "Optional limit for entity values to generate types, defaults to 20")
     .action(async (directory: string, appId: string = undefined, options?: GenerateTypesOptions) => {
         await generateTypes(directory, appId, options);
+    });
+
+program.command("org <directory> <v>")
+    .description("Exports all the information for all the apps in an organization")
+    .option("-d --delimiter <delimiter>", "Optional delimiter, defaults to comma.  Can be helpful when values have commas")
+    .action(async (directory: string, organizationId: string, options: { delimiter?: string }) => {
+        await exportOrg(organizationId, directory, options);
     });
 
 program.command("export <directory> [appId]")

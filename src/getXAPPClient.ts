@@ -13,6 +13,7 @@ export function getXAPPClient(token: string, appId?: string): XAPPClient {
     if (!appId) {
         appId = getAppId();
     }
+    // we aren't doing anything with appId?
 
     return new XAPPClient({
         userToken: token

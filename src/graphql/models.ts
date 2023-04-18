@@ -2274,6 +2274,10 @@ export type BespokenDataStreamInput = {
   type: Scalars['String'];
 };
 
+export type BillingContact = {
+  name: Scalars['String'];
+};
+
 export type BlacklistedWebsite = {
   /** The user that blacklisted the website. */
   blacklistedBy?: Maybe<Scalars['String']>;
@@ -2281,6 +2285,10 @@ export type BlacklistedWebsite = {
   createdOn: Scalars['DateTime'];
   /** URL of the blacklisted website. */
   url: Scalars['String'];
+};
+
+export type BrandContact = {
+  name: Scalars['String'];
 };
 
 export type CmsMutation = {
@@ -7085,6 +7093,8 @@ export type Organization = {
   awsEventBusArn?: Maybe<Scalars['String']>;
   /** An object of feature flags */
   beta?: Maybe<Scalars['JSON']>;
+  billingContact?: Maybe<BillingContact>;
+  brandContact?: Maybe<BrandContact>;
   /**
    * A CMS token is an authorization token that is linked to the app
    * which allows third party services to access certain resources without
@@ -9666,7 +9676,7 @@ export type GetAppsForOrgQueryVariables = Exact<{
 }>;
 
 
-export type GetAppsForOrgQuery = { org?: { apps?: { total: number, apps: Array<{ appId: string, organizationId: string, name: string, largeIcon?: string | null, smallIcon?: string | null, description?: string | null, summary?: string | null } | null> } | null } | null };
+export type GetAppsForOrgQuery = { org?: { apps?: { total: number, apps: Array<{ appId: string, organizationId: string, name: string, largeIcon?: string | null, smallIcon?: string | null, description?: string | null, summary?: string | null, status?: { type: string, timestamp: string, notes?: string | null, email?: string | null } | null } | null> } | null } | null };
 
 export type GetAppOverviewQueryVariables = Exact<{
   appId: Scalars['ID'];
@@ -10017,6 +10027,12 @@ export const GetAppsForOrgDocument = gql`
         smallIcon
         description
         summary
+        status {
+          type
+          timestamp
+          notes
+          email
+        }
       }
     }
   }
