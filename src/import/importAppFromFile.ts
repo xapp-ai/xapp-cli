@@ -41,7 +41,7 @@ export async function importAppFromFile(file: string, options: { appId: string }
 
     // Lets start writing
     const token = await getUserToken();
-    const client = getXAPPClient(token, appId);
+    const client = await getXAPPClient(token, appId);
 
     // Get the existing app, we will need it for the organizationId
     // It is also a test of if the user has access to this app.

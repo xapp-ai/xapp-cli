@@ -13,7 +13,7 @@ export async function info(appId: string): Promise<void> {
         appId = getAppId();
     }
 
-    const client = getXAPPClient(token, appId);
+    const client = await getXAPPClient(token, appId);
 
     const now = new Date();
     const end = now.toISOString();
@@ -24,6 +24,11 @@ export async function info(appId: string): Promise<void> {
     // Temporary to get organizationId
     const data = await client.getApp(appId, start, end);
     const app = data.app;
+
+    if (!app) {
+        log.info(`Cannot find app with id: ${appId}`);
+        return;
+    }
 
     const { entities, intents, handlers } = app;
 
