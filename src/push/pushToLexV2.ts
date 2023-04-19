@@ -1,7 +1,7 @@
 /*! Copyright (c) 2022, XAPP AI*/
 
 import { LexServiceV2, LexSyncStatusV2 } from "@xapp/stentor-service-lex";
-import { isHandler, isIntent } from "stentor-guards";
+import { isIntent } from "stentor-guards";
 import { Handler } from "stentor-models";
 import { getAppIntentEntitiesFromExport } from "../getAppIntentEntities";
 import { getStentorApp } from "../getStentorApp";
@@ -50,32 +50,6 @@ export async function pushToLexV2(options?: { appId?: string; lang?: string; aws
     }
 
     const filteredHandlers: Handler[] = handlers.filter((potential) => {
-        // Include the Kendra handler
-        if (isHandler(potential)) {
-            let nluOverrideType;
-
-            // Accept all
-            if (!!potential.nlu && typeof potential.nlu === "object") {
-                if (potential.nlu["lex"]) {
-                    nluOverrideType = potential.nlu["lex"].type;
-                } else if (potential.nlu["lex-connect"]) {
-                    nluOverrideType = potential.nlu["lex-connect"].type;
-                } else if (potential.nlu["lex-v2"]) {
-                    nluOverrideType = potential.nlu["lex-v2"].type;
-                }
-            }
-
-            if (nluOverrideType === "AMAZON.KendraSearchIntent") {
-                if (!kendraIndexARN || !kendraRole) {
-                    throw new TypeError(
-                        `For AMAZON.KendraSearchIntent, you must have both kendraIndexARN and kendraRole set in the channel.`
-                    );
-                }
-
-                return true;
-            }
-
-        }
 
         if (potential.intentId === "InputUnknown") {
             // We can't push these because they come built-in and you can't delete them.  Great.

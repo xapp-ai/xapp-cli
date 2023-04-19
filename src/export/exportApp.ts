@@ -65,7 +65,7 @@ export async function exportApp(output: string, options?: ExportOptions): Promis
     if (channels) {
         // Ok! find the channel
         const token = await getUserToken();
-        const client = getXAPPClient(token, appId);
+        const client = await getXAPPClient(token, appId);
         const channels = await client.getAppChannels(appId);
 
         log().info(`Found ${channels.length} channels`);

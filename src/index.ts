@@ -183,7 +183,7 @@ program.command("types <directory> [appId]")
         await generateTypes(directory, appId, options);
     });
 
-program.command("org <directory> <v>")
+program.command("org <directory> <organizationId>")
     .description("Exports all the information for all the apps in an organization")
     .option("-d --delimiter <delimiter>", "Optional delimiter, defaults to comma.  Can be helpful when values have commas")
     .action(async (directory: string, organizationId: string, options: { delimiter?: string }) => {

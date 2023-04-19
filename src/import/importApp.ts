@@ -2,6 +2,7 @@
 import { log } from "stentor-logger";
 import { ImportApp } from "../models";
 import { getUserToken } from "../getUserToken";
+import { getConfigProfile } from "../getConfig";
 import { XAPPClient } from "../XAPPClient";
 
 export async function importApp(uri: string, options: ImportApp): Promise<void> {
@@ -16,8 +17,13 @@ export async function importApp(uri: string, options: ImportApp): Promise<void> 
         throw new Error(`organizationId is required to import an app.`);
     }
 
-    const userToken = await getUserToken();
-    const studioClient = new XAPPClient({ userToken });
+    const token = await getUserToken();
+    const profile = await getConfigProfile();
+
+    const studioClient = new XAPPClient({
+        userToken: token,
+        url: profile.basePath
+    });
 
     log().info(`Importing app to ${organizationId}`);
 

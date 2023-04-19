@@ -8,6 +8,7 @@ import { log } from "stentor-logger";
 
 import { XAPPClient } from "../XAPPClient";
 import { getUserToken } from "../getUserToken";
+import { getConfigProfile } from "../getConfig";
 
 export interface ExportOrgOptions {
     delimiter?: string;
@@ -31,9 +32,11 @@ export async function exportOrg(organizationId: string, output: string, options:
     mkdirSync(exportPath);
 
     const token = await getUserToken();
+    const profile = await getConfigProfile();
 
     const client = new XAPPClient({
-        userToken: token
+        userToken: token,
+        url: profile.basePath
     });
 
     log().info(`Retreiving apps for ${organizationId}...`)

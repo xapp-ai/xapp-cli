@@ -30,7 +30,7 @@ export async function serve(props?: { url?: string, port?: string, appId?: strin
     };
 
     const token = await getUserToken();
-    const client = getXAPPClient(token, appId);
+    const client = await getXAPPClient(token, appId);
     const channels = await client.getAppChannels(appId);
 
     // find a chat-widget channel

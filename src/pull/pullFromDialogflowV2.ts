@@ -50,7 +50,7 @@ export async function pullFromDialogflowV2(
 
     const token = await getUserToken();
 
-    const client = getXAPPClient(token, appId);
+    const client = await getXAPPClient(token, appId);
 
     const intentTranslator = new TranslateDialogflowV2Intent({ appId, organizationId });
 
