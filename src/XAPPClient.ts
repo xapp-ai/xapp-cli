@@ -197,7 +197,7 @@ export class XAPPClient {
      * @param end 
      * @returns 
      */
-    public getApp(appId: string, start?: string, end?: string): Promise<GetAppOverviewQuery> {
+    public getApp(appId: string, start?: string, end?: string, env?: string[]): Promise<GetAppOverviewQuery> {
         if (!start) {
             const now = new Date();
             end = now.toISOString();
@@ -210,7 +210,8 @@ export class XAPPClient {
         return this.client.query(GetAppOverviewDocument, {
             appId,
             start,
-            end
+            end,
+            env
         }).toPromise().then((response) => {
             return response.data;
         });
