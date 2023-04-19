@@ -1,3 +1,10 @@
+## [1.4.2](https://github.com/xapp-ai/xapp-cli/compare/v1.4.1...v1.4.2) (2023-04-19)
+
+
+### Bug Fixes
+
+* Use Config ([#672](https://github.com/xapp-ai/xapp-cli/issues/672)) ([350f23f](https://github.com/xapp-ai/xapp-cli/commit/350f23f572d59391ad308a39330803dac414e921))
+
 ## [1.4.1](https://github.com/xapp-ai/xapp-cli/compare/v1.4.0...v1.4.1) (2023-04-18)
 
 
