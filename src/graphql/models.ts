@@ -2394,7 +2394,7 @@ export type ChatWidgetAppChannel = BaseAppChannel & {
    * The backend for the URL
    * @deprecated Use connection
    */
-  serverUrl?: Maybe<Scalars['String']>;
+  serverUrl?: Maybe<Scalars['URLString']>;
   sessionExpiration?: Maybe<Scalars['String']>;
   /** The lifecycle status of the app. */
   status?: Maybe<AppChannelStatus>;
@@ -2466,7 +2466,7 @@ export type ChatWidgetAppChannelInput = {
    *
    * @deprecated use connection
    */
-  serverUrl?: InputMaybe<Scalars['String']>;
+  serverUrl?: InputMaybe<Scalars['URLString']>;
   sessionExpiration?: InputMaybe<Scalars['String']>;
   /** Theme for the widget */
   theme?: InputMaybe<ChatWidgetThemeInput>;
@@ -2912,13 +2912,13 @@ export type ChatWidgetSendButtonConfigInput = {
 
 export type ChatWidgetServerConfig = {
   accountKey?: Maybe<Scalars['String']>;
-  serverUrl?: Maybe<Scalars['String']>;
+  serverUrl?: Maybe<Scalars['URLString']>;
   type?: Maybe<Scalars['String']>;
 };
 
 export type ChatWidgetServerConfigInput = {
   accountKey?: InputMaybe<Scalars['String']>;
-  serverUrl?: InputMaybe<Scalars['String']>;
+  serverUrl?: InputMaybe<Scalars['URLString']>;
   type?: InputMaybe<Scalars['String']>;
 };
 
@@ -9653,7 +9653,7 @@ export type AddChatWidgetChannelMutationVariables = Exact<{
 }>;
 
 
-export type AddChatWidgetChannelMutation = { addChatWidgetChannel: { __typename: 'ChatWidgetAppChannel', id: string, type: string, endPoint?: string | null, useNLU?: string | null, directoryListing?: string | null, direct?: boolean | null, disabled?: boolean | null, accountKey?: string | null, botName?: string | null, avatarUrl?: any | null, key?: string | null, serverUrl?: string | null, middlewareUrl?: string | null, autocompleteSuggestionsUrl?: any | null, autoOpenOnWidth?: string | null, status?: { type: string } | null, cta?: { message?: string | null, timeout?: number | null } | null, urls?: { policies: Array<{ pattern: string, behavior: { type: ChatWidgetAppChannelWidgetUrlBehaviorType } | { width?: number | null, height?: number | null, type: ChatWidgetAppChannelWidgetUrlBehaviorType } | { type: ChatWidgetAppChannelWidgetUrlBehaviorType } } | null>, defaultBehavior: { type: ChatWidgetAppChannelWidgetUrlBehaviorType } | { width?: number | null, height?: number | null, type: ChatWidgetAppChannelWidgetUrlBehaviorType } | { type: ChatWidgetAppChannelWidgetUrlBehaviorType } } | null, header?: { status?: { online?: string | null, offline?: string | null, away?: string | null, connecting?: string | null } | null, actions?: { minimize?: boolean | null, cancel?: boolean | null } | null } | null, theme?: { primaryColor?: string | null, border?: { color?: string | null, width?: string | null, radius?: string | null } | null, carousel?: { button?: { color?: string | null } | null, subtitle?: { color?: string | null, fontFamily?: string | null, fontSize?: string | null, fontWeight?: string | null } | null, title?: { color?: string | null, fontFamily?: string | null, fontSize?: string | null, fontWeight?: string | null } | null } | null, chatButton?: { background?: string | null, margin?: { top?: string | null, right?: string | null, bottom?: string | null, left?: string | null } | null } | null, content?: { background?: string | null } | null, cta?: { background?: string | null, text?: { color?: string | null, fontFamily?: string | null, fontSize?: string | null } | null } | null, footer?: { background?: string | null } | null, header?: { background?: string | null, border?: { color?: string | null, radius?: string | null, width?: string | null } | null, text?: { color?: string | null, fontFamily?: string | null, fontSize?: string | null } | null } | null, input?: { background?: string | null, border?: { color?: string | null, width?: string | null, radius?: string | null } | null, text?: { color?: string | null, fontFamily?: string | null, fontSize?: string | null } | null } | null, menu?: { item?: { height?: string | null, background?: string | null, text?: { color?: string | null, fontSize?: string | null, fontFamily?: string | null, fontWeight?: string | null, fontStyle?: string | null } | null } | null } | null, menuButton?: { color?: string | null } | null, messages?: { maxWidth?: string | null, mine?: { bubbleColor?: string | null, text?: { color?: string | null, fontSize?: string | null, fontFamily?: string | null, fontWeight?: string | null, fontStyle?: string | null } | null } | null, others?: { bubbleColor?: string | null, text?: { color?: string | null, fontSize?: string | null, fontFamily?: string | null, fontWeight?: string | null, fontStyle?: string | null } | null } | null, padding?: { left?: string | null, right?: string | null, bottom?: string | null, top?: string | null } | null } | null, minimizeButton?: { color?: string | null } | null, cancelButton?: { color?: string | null } | null, sendButton?: { color?: string | null } | null, size?: { width?: string | null, height?: string | null } | null } | null } };
+export type AddChatWidgetChannelMutation = { addChatWidgetChannel: { __typename: 'ChatWidgetAppChannel', id: string, type: string, endPoint?: string | null, useNLU?: string | null, directoryListing?: string | null, direct?: boolean | null, disabled?: boolean | null, accountKey?: string | null, botName?: string | null, avatarUrl?: any | null, key?: string | null, serverUrl?: any | null, middlewareUrl?: string | null, autocompleteSuggestionsUrl?: any | null, autoOpenOnWidth?: string | null, status?: { type: string } | null, cta?: { message?: string | null, timeout?: number | null } | null, urls?: { policies: Array<{ pattern: string, behavior: { type: ChatWidgetAppChannelWidgetUrlBehaviorType } | { width?: number | null, height?: number | null, type: ChatWidgetAppChannelWidgetUrlBehaviorType } | { type: ChatWidgetAppChannelWidgetUrlBehaviorType } } | null>, defaultBehavior: { type: ChatWidgetAppChannelWidgetUrlBehaviorType } | { width?: number | null, height?: number | null, type: ChatWidgetAppChannelWidgetUrlBehaviorType } | { type: ChatWidgetAppChannelWidgetUrlBehaviorType } } | null, header?: { status?: { online?: string | null, offline?: string | null, away?: string | null, connecting?: string | null } | null, actions?: { minimize?: boolean | null, cancel?: boolean | null } | null } | null, theme?: { primaryColor?: string | null, border?: { color?: string | null, width?: string | null, radius?: string | null } | null, carousel?: { button?: { color?: string | null } | null, subtitle?: { color?: string | null, fontFamily?: string | null, fontSize?: string | null, fontWeight?: string | null } | null, title?: { color?: string | null, fontFamily?: string | null, fontSize?: string | null, fontWeight?: string | null } | null } | null, chatButton?: { background?: string | null, margin?: { top?: string | null, right?: string | null, bottom?: string | null, left?: string | null } | null } | null, content?: { background?: string | null } | null, cta?: { background?: string | null, text?: { color?: string | null, fontFamily?: string | null, fontSize?: string | null } | null } | null, footer?: { background?: string | null } | null, header?: { background?: string | null, border?: { color?: string | null, radius?: string | null, width?: string | null } | null, text?: { color?: string | null, fontFamily?: string | null, fontSize?: string | null } | null } | null, input?: { background?: string | null, border?: { color?: string | null, width?: string | null, radius?: string | null } | null, text?: { color?: string | null, fontFamily?: string | null, fontSize?: string | null } | null } | null, menu?: { item?: { height?: string | null, background?: string | null, text?: { color?: string | null, fontSize?: string | null, fontFamily?: string | null, fontWeight?: string | null, fontStyle?: string | null } | null } | null } | null, menuButton?: { color?: string | null } | null, messages?: { maxWidth?: string | null, mine?: { bubbleColor?: string | null, text?: { color?: string | null, fontSize?: string | null, fontFamily?: string | null, fontWeight?: string | null, fontStyle?: string | null } | null } | null, others?: { bubbleColor?: string | null, text?: { color?: string | null, fontSize?: string | null, fontFamily?: string | null, fontWeight?: string | null, fontStyle?: string | null } | null } | null, padding?: { left?: string | null, right?: string | null, bottom?: string | null, top?: string | null } | null } | null, minimizeButton?: { color?: string | null } | null, cancelButton?: { color?: string | null } | null, sendButton?: { color?: string | null } | null, size?: { width?: string | null, height?: string | null } | null } | null } };
 
 export type GetProfileQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -9682,6 +9682,7 @@ export type GetAppOverviewQueryVariables = Exact<{
   appId: Scalars['ID'];
   start: Scalars['DateTime'];
   end: Scalars['DateTime'];
+  env?: InputMaybe<Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>>;
 }>;
 
 
@@ -10039,7 +10040,7 @@ export const GetAppsForOrgDocument = gql`
 }
     `;
 export const GetAppOverviewDocument = gql`
-    query getAppOverview($appId: ID!, $start: DateTime!, $end: DateTime!) {
+    query getAppOverview($appId: ID!, $start: DateTime!, $end: DateTime!, $env: [String]) {
   app(appId: $appId) {
     __typename
     _id
@@ -10129,7 +10130,7 @@ export const GetAppOverviewDocument = gql`
       }
     }
     analytics {
-      user(start: $start, end: $end) {
+      user(start: $start, end: $end, byEnvironment: $env) {
         totalUsers
         totalSessions
         returningUsers

@@ -37,10 +37,15 @@ export async function info(appId: string): Promise<void> {
     log.info(`\t${entities.total} entities`);
     log.info(`\t${intents.total} intents`);
     log.info(`\t${handlers.total} handlers`);
-    log.info(`Last 7 days...`)
-    log.info(`\t${app.analytics.user.totalUsers} total users`);
-    log.info(`\t${app.analytics.user.newUsers} new users`);
-    log.info(`\t${app.analytics.user.totalSessions} total sessions`);
+
+    if (app.analytics?.user) {
+        log.info(`Last 7 days...`)
+        log.info(`\t${app.analytics.user.totalUsers} total users`);
+        log.info(`\t${app.analytics.user.newUsers} new users`);
+        log.info(`\t${app.analytics.user.totalSessions} total sessions`);
+    } else {
+        log.info(`No usage in the last 7 days...`);
+    }
 
     const noAnswerFlags = await client.getAppEvents(appId, start, end, {
         byTag: ["KB_NO_ANSWER"]

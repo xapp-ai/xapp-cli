@@ -43,7 +43,12 @@ query getAppsForOrg($organizationId: ID!, $from: Int = 0, $size: Int = 10) {
   }
 }
 
-query getAppOverview($appId: ID!, $start: DateTime!, $end: DateTime!) {
+query getAppOverview(
+  $appId: ID!
+  $start: DateTime!
+  $end: DateTime!
+  $env: [String]
+) {
   app(appId: $appId) {
     __typename
     _id
@@ -133,7 +138,7 @@ query getAppOverview($appId: ID!, $start: DateTime!, $end: DateTime!) {
       }
     }
     analytics {
-      user(start: $start, end: $end) {
+      user(start: $start, end: $end, byEnvironment: $env) {
         totalUsers
         totalSessions
         returningUsers
