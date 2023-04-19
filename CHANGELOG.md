@@ -1,3 +1,10 @@
+## [1.4.3](https://github.com/xapp-ai/xapp-cli/compare/v1.4.2...v1.4.3) (2023-04-19)
+
+
+### Bug Fixes
+
+* Ability to specify environment in XAPPClient getApp() ([#673](https://github.com/xapp-ai/xapp-cli/issues/673)) ([993d015](https://github.com/xapp-ai/xapp-cli/commit/993d0152ef04ecfdb3ceaa777c1a2b19851d75c6))
+
 ## [1.4.2](https://github.com/xapp-ai/xapp-cli/compare/v1.4.1...v1.4.2) (2023-04-19)
 
 
