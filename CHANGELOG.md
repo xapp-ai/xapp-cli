@@ -1,3 +1,10 @@
+## [1.4.4](https://github.com/xapp-ai/xapp-cli/compare/v1.4.3...v1.4.4) (2023-04-21)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @xapp/stentor-service-lex to v1.45.61 ([cddf643](https://github.com/xapp-ai/xapp-cli/commit/cddf64381e46eed371941eeba3a360f683366cdd))
+
 ## [1.4.3](https://github.com/xapp-ai/xapp-cli/compare/v1.4.2...v1.4.3) (2023-04-19)
 
 
