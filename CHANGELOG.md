@@ -1,3 +1,10 @@
+## [1.4.5](https://github.com/xapp-ai/xapp-cli/compare/v1.4.4...v1.4.5) (2023-04-24)
+
+
+### Bug Fixes
+
+* Bug with getXAPPClient when running from a server without a config ([#676](https://github.com/xapp-ai/xapp-cli/issues/676)) ([f1e4fce](https://github.com/xapp-ai/xapp-cli/commit/f1e4fce52d7124cc8eb104202f61356b92a98965))
+
 ## [1.4.4](https://github.com/xapp-ai/xapp-cli/compare/v1.4.3...v1.4.4) (2023-04-21)
 
 
