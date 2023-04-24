@@ -258,7 +258,7 @@ export class XAPPClient {
         });
     }
 
-    public getAppEvents(appId: string, start?: string, end?: string, options?: Pick<GetEventsQueryVariables, "size" | "from" | "byTag" | "byRequestIntentId" | "byChannel">): Promise<GetEventsQuery> {
+    public getAppEvents(appId: string, start?: string, end?: string, options?: Pick<GetEventsQueryVariables, "size" | "from" | "byTag" | "byRequestIntentId" | "byChannel" | "byEnv">): Promise<GetEventsQuery> {
 
         if (!start) {
             const now = new Date();

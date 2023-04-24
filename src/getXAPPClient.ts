@@ -1,5 +1,4 @@
 /*! Copyright (c) 2022, XAPP AI*/
-
 import { getAppId } from "./getAppId";
 import { XAPPClient } from "./XAPPClient";
 import { getConfigProfile } from "./getConfig";
@@ -23,8 +22,11 @@ export async function getXAPPClient(token?: string, appId?: string): Promise<XAP
 
     const profile = await getConfigProfile();
 
+    // Profile can be undefined here so we set the default if it doesn't exist
+    const url = profile ? profile.basePath : "https://api.xapp.ai";
+
     return new XAPPClient({
         userToken: token,
-        url: profile.basePath
+        url
     });
 }

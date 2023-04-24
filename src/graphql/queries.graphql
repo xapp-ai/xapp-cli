@@ -254,6 +254,7 @@ query getEvents(
   $byTag: [String]
   $byRequestIntentId: [String]
   $byChannel: [String]
+  $byEnv: [String]
 ) {
   app(appId: $appId) {
     _id
@@ -268,6 +269,7 @@ query getEvents(
       byTag: $byTag
       byRequestIntentId: $byRequestIntentId
       byChannel: $byChannel
+      byEnvironment: $byEnv
     ) {
       total
       events {
