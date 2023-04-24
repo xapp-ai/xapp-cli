@@ -1,6 +1,4 @@
 /*! Copyright (c) 2022, XAPP AI*/
-import { log } from "stentor-logger";
-
 import { getAppId } from "./getAppId";
 import { XAPPClient } from "./XAPPClient";
 import { getConfigProfile } from "./getConfig";
