@@ -1,3 +1,11 @@
+## [1.4.6](https://github.com/xapp-ai/xapp-cli/compare/v1.4.5...v1.4.6) (2023-04-24)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @urql/core to v3.2.2 ([#668](https://github.com/xapp-ai/xapp-cli/issues/668)) ([0df34dc](https://github.com/xapp-ai/xapp-cli/commit/0df34dc762f3a43d75ba8392596d9732ad32a235))
+* **deps:** update stentor ([#675](https://github.com/xapp-ai/xapp-cli/issues/675)) ([9ca2b8e](https://github.com/xapp-ai/xapp-cli/commit/9ca2b8ec2100ff9b86c23f2068b617ca1e14dade))
+
 ## [1.4.5](https://github.com/xapp-ai/xapp-cli/compare/v1.4.4...v1.4.5) (2023-04-24)
 
 
