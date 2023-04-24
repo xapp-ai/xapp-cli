@@ -9734,6 +9734,7 @@ export type GetEventsQueryVariables = Exact<{
   byTag?: InputMaybe<Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>>;
   byRequestIntentId?: InputMaybe<Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>>;
   byChannel?: InputMaybe<Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>>;
+  byEnv?: InputMaybe<Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>>;
 }>;
 
 
@@ -10235,7 +10236,7 @@ export const GetAnalyticsAndEventsDocument = gql`
 }
     `;
 export const GetEventsDocument = gql`
-    query getEvents($appId: ID!, $startDate: DateTime!, $endDate: DateTime!, $size: Int = 10, $from: Int = 0, $byTag: [String], $byRequestIntentId: [String], $byChannel: [String]) {
+    query getEvents($appId: ID!, $startDate: DateTime!, $endDate: DateTime!, $size: Int = 10, $from: Int = 0, $byTag: [String], $byRequestIntentId: [String], $byChannel: [String], $byEnv: [String]) {
   app(appId: $appId) {
     _id
     __typename
@@ -10249,6 +10250,7 @@ export const GetEventsDocument = gql`
       byTag: $byTag
       byRequestIntentId: $byRequestIntentId
       byChannel: $byChannel
+      byEnvironment: $byEnv
     ) {
       total
       events {
