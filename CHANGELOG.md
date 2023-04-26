@@ -1,3 +1,11 @@
+## [1.4.7](https://github.com/xapp-ai/xapp-cli/compare/v1.4.6...v1.4.7) (2023-04-26)
+
+
+### Bug Fixes
+
+* **deps:** update dependency aws-sdk to v2.1364.0 ([#659](https://github.com/xapp-ai/xapp-cli/issues/659)) ([4febe6e](https://github.com/xapp-ai/xapp-cli/commit/4febe6ef0b8866f929fe9edb3d1ee1c4ec2ef38f))
+* **deps:** update stentor to v1.45.63 ([f249820](https://github.com/xapp-ai/xapp-cli/commit/f249820693e48c1ebf8f304de50996f26f9d5ca2))
+
 ## [1.4.6](https://github.com/xapp-ai/xapp-cli/compare/v1.4.5...v1.4.6) (2023-04-24)
 
 
