@@ -18,6 +18,9 @@ export async function serve(props?: { url?: string, port?: string, appId?: strin
 
     const appId = props.appId || getAppId();
 
+    log.info(`Starting widget server for ${appId} at http://localhost:${port}...`);
+
+    log.info(`Setting widget server URL to ${url}`);
     const config: WidgetEnv = {
         connection: {
             serverUrl: url,
