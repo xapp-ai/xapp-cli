@@ -1,3 +1,10 @@
+## [1.4.10](https://github.com/xapp-ai/xapp-cli/compare/v1.4.9...v1.4.10) (2023-05-01)
+
+
+### Bug Fixes
+
+* Better messages for serve command ([#684](https://github.com/xapp-ai/xapp-cli/issues/684)) ([34132e6](https://github.com/xapp-ai/xapp-cli/commit/34132e62ae97244dad4400ecce6dc43828e44175))
+
 ## [1.4.9](https://github.com/xapp-ai/xapp-cli/compare/v1.4.8...v1.4.9) (2023-05-01)
 
 
