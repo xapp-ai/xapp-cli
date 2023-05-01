@@ -303,7 +303,7 @@ program.command("serve")
     .option("-a --appId <appId>", "App ID")
     .option("-k --key <key>", "Key of the channel to use")
     .option("-u --url <url>", "URL for your widget, typically something like localhost:8080")
-    .option("-p --port <port>", "PORT for localhost widget server")
+    .option("-p --port <port>", "PORT for localhost widget server, https://localhost:PORT, defaults to 3000")
     .action(async (options?: { url?: string, port?: string }) => {
         await serve(options);
     });
