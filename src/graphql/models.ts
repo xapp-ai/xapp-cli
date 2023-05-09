@@ -25,6 +25,7 @@ export type Scalars = {
   StringMap: any;
   URL: any;
   URLString: any;
+  time_String_NotNull_format_date: any;
 };
 
 export type AwsPaymentAccount = {
@@ -1143,6 +1144,8 @@ export type App = {
    */
   banner?: Maybe<Scalars['String']>;
   beta?: Maybe<Scalars['JSON']>;
+  /** The hours in which the business related to the app is open. */
+  businessHours: Array<BusinessHours>;
   /** Returns an App channel based on the provided ID. */
   channel?: Maybe<BaseAppChannel>;
   /** The Channels that are available to the app. */
@@ -1190,6 +1193,8 @@ export type App = {
   externalId?: Maybe<Scalars['String']>;
   /** Retrieves the attributes used to download web content. */
   faq?: Maybe<TotalWebFaq>;
+  /** Retrieves the attributes used to download web content */
+  faqQuery: FaqQueryReturn;
   /** A Map of all the intents and their locations for mapping intents. */
   graph?: Maybe<IntentsGraph>;
   /** The handlers that are associated with the app. */
@@ -1248,8 +1253,12 @@ export type App = {
   name: Scalars['String'];
   /** The NLUs that are available to the app. */
   nlu?: Maybe<Array<Maybe<AppNlu>>>;
+  /** Potential opportunities. */
+  opportunityAlerts: Array<BaseOpportunityAlert>;
   /** The ID of the organization that the app is linked to. */
   organizationId: Scalars['ID'];
+  /** Google PlaceIds that correspond with the business. */
+  places?: Maybe<Array<AppPlaceDescription>>;
   /**
    * Platform specific data for the app that does not correspond
    * with other high level data that is shared.
@@ -1257,6 +1266,8 @@ export type App = {
   platformData?: Maybe<PlatformData>;
   /** URL to the privacy policy for the app. */
   privacyPolicyUrl?: Maybe<Scalars['String']>;
+  /** A referenceId is an ID of the app in a difference service outside this API */
+  refernceId?: Maybe<AppReferenceId>;
   /** The status that the app is currently in Stentor. */
   schedules: AppSchedules;
   /**
@@ -1287,6 +1298,8 @@ export type App = {
   thirdPartyDeployments?: Maybe<ThirdPartyDeployments>;
   /** Retrieves any events that are related to this specific app */
   usageEvents?: Maybe<TotalUsageEvents>;
+  /** Primary website for the company or division of a company that the app is representing. */
+  website?: Maybe<Scalars['URL']>;
 };
 
 
@@ -1357,6 +1370,13 @@ export type AppFaqArgs = {
   id?: InputMaybe<Scalars['ID']>;
   size?: InputMaybe<Scalars['Int']>;
   text?: InputMaybe<Scalars['String']>;
+};
+
+
+export type AppFaqQueryArgs = {
+  from?: InputMaybe<Scalars['Int']>;
+  question: Scalars['String'];
+  size?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -1637,6 +1657,8 @@ export type AppInput = {
    */
   banner?: InputMaybe<Scalars['String']>;
   beta?: InputMaybe<Scalars['JSON']>;
+  /** The hours in which the business related to the app is open. */
+  businessHours?: InputMaybe<Array<BusinessHoursInput>>;
   /** Third party analytics platforms. */
   dataStreams?: InputMaybe<DataStreamsInput>;
   /**
@@ -1697,6 +1719,8 @@ export type AppInput = {
   name: Scalars['String'];
   /** The ID of the organization that the app is linked to. */
   organizationId: Scalars['ID'];
+  /** Google PlaceIds that correspond with the business. */
+  places?: InputMaybe<Array<AppPlaceDescriptionInput>>;
   /**
    * Platform specific data for the app that does not correspond
    * with other high level data that is shared.
@@ -1704,6 +1728,8 @@ export type AppInput = {
   platformData?: InputMaybe<PlatformDataInput>;
   /** URL to the privacy policy for the app. */
   privacyPolicyUrl?: InputMaybe<Scalars['String']>;
+  /** A referenceId is an ID of the app in a difference service outside this API */
+  refernceId?: InputMaybe<AppReferenceIdInput>;
   /**
    * A small icon for the app, 108x108 PNG
    *
@@ -1728,6 +1754,8 @@ export type AppInput = {
   testingInstructions?: InputMaybe<Scalars['String']>;
   /** Contains fields related to publishing the app to various platforms such as dialogflow or alexa. */
   thirdPartyDeployments?: InputMaybe<ThirdPartyDeploymentsInput>;
+  /** Primary website for the company or division of a company that the app is representing. */
+  website?: InputMaybe<Scalars['URLString']>;
 };
 
 /**
@@ -1998,6 +2026,32 @@ export type AppNluInput = {
   type: Scalars['String'];
 };
 
+export type AppPlaceDescription = {
+  address?: Maybe<Scalars['String']>;
+  default?: Maybe<Scalars['Boolean']>;
+  placeId?: Maybe<Scalars['String']>;
+};
+
+export type AppPlaceDescriptionInput = {
+  address?: InputMaybe<Scalars['String']>;
+  default?: InputMaybe<Scalars['Boolean']>;
+  placeId?: InputMaybe<Scalars['String']>;
+};
+
+export type AppReferenceId = {
+  /** The ID of as it is in the service. */
+  id: Scalars['ID'];
+  /** The service that the ID is referencing to. */
+  service: Scalars['String'];
+};
+
+export type AppReferenceIdInput = {
+  /** The ID of as it is in the service. */
+  id: Scalars['ID'];
+  /** The service that the ID is referencing to. */
+  service: Scalars['String'];
+};
+
 export type AppSchedules = {
   /** The key to include in the next query of schedules. */
   nextKey?: Maybe<Scalars['String']>;
@@ -2228,6 +2282,15 @@ export type BaseHandlerPath = {
   platform?: Maybe<Scalars['String']>;
 };
 
+export type BaseOpportunityAlert = {
+  /** Registered alerts */
+  alerts: Array<OpportunityAlertDetail>;
+  /** Temporarily disable the alert */
+  disabled?: Maybe<Scalars['Boolean']>;
+  /** The Google PlaceID for the location */
+  placeId?: Maybe<Scalars['String']>;
+};
+
 export type BaseStudioTierPaymentAccount = {
   tier?: Maybe<StudioTierType>;
 };
@@ -2275,7 +2338,26 @@ export type BespokenDataStreamInput = {
 };
 
 export type BillingContact = {
+  email?: Maybe<Scalars['String']>;
   name: Scalars['String'];
+  phoneNumber?: Maybe<Scalars['String']>;
+};
+
+export type BillingContactInput = {
+  /**
+   * The email of the contact.
+   *
+   * Required
+   */
+  email: Scalars['String'];
+  /** The name of the contact */
+  name: Scalars['String'];
+  /**
+   * The phone number of the contact.
+   *
+   * Optional
+   */
+  phoneNumber?: InputMaybe<Scalars['String']>;
 };
 
 export type BlacklistedWebsite = {
@@ -2288,7 +2370,64 @@ export type BlacklistedWebsite = {
 };
 
 export type BrandContact = {
+  email?: Maybe<Scalars['String']>;
   name: Scalars['String'];
+  phoneNumber?: Maybe<Scalars['String']>;
+};
+
+export type BrandContactInput = {
+  /**
+   * The email of the contact.
+   *
+   * Required
+   */
+  email: Scalars['String'];
+  /** The name of the contact */
+  name: Scalars['String'];
+  /**
+   * The phone number of the contact.
+   *
+   * Optional
+   */
+  phoneNumber?: InputMaybe<Scalars['String']>;
+};
+
+export enum BusinessDayOfWeek {
+  Friday = 'FRIDAY',
+  Monday = 'MONDAY',
+  Saturday = 'SATURDAY',
+  Sunday = 'SUNDAY',
+  Thursday = 'THURSDAY',
+  Tuesday = 'TUESDAY',
+  Wednesday = 'WEDNESDAY'
+}
+
+export type BusinessHourPeriod = {
+  open: BusinessHourPeriodDetail;
+};
+
+export type BusinessHourPeriodDetail = {
+  day: BusinessDayOfWeek;
+  time: Scalars['DateTime'];
+};
+
+export type BusinessHourPeriodDetailInput = {
+  /** The day that the period relates to. */
+  day: BusinessDayOfWeek;
+  time: Scalars['time_String_NotNull_format_date'];
+};
+
+export type BusinessHourPeriodInput = {
+  open: BusinessHourPeriodDetailInput;
+};
+
+export type BusinessHours = {
+  periods: Array<BusinessHourPeriod>;
+};
+
+export type BusinessHoursInput = {
+  /** Each day that the busines is open. */
+  periods: Array<BusinessHourPeriodInput>;
 };
 
 export type CmsMutation = {
@@ -2363,6 +2502,7 @@ export type CardDisplayInput = {
 export type ChatWidgetAppChannel = BaseAppChannel & {
   /** Optional key used for basic authentication */
   accountKey?: Maybe<Scalars['String']>;
+  autoOpenOnPattern?: Maybe<WidgetAutoOpenOnPattern>;
   autoOpenOnWidth?: Maybe<Scalars['String']>;
   autocompleteSuggestionsUrl?: Maybe<Scalars['URL']>;
   /** The web location for the avatar */
@@ -2427,6 +2567,7 @@ export type ChatWidgetAppChannelUsageEventsArgs = {
 export type ChatWidgetAppChannelInput = {
   /** Optional key used for basic authentication */
   accountKey?: InputMaybe<Scalars['String']>;
+  autoOpenOnPattern?: InputMaybe<WidgetAutoOpenOnPatternInput>;
   autoOpenOnWidth?: InputMaybe<Scalars['String']>;
   autocompleteSuggestionsUrl?: InputMaybe<Scalars['URL']>;
   /** The web location for the avatar */
@@ -3519,6 +3660,26 @@ export type DisplayTextContentInput = {
   tertiaryText?: InputMaybe<Scalars['String']>;
 };
 
+/** Opportunity alert that sends the message to the user via email. */
+export type EmailOpportunityAlert = BaseOpportunityAlert & {
+  alerts: Array<OpportunityAlertDetail>;
+  disabled?: Maybe<Scalars['Boolean']>;
+  /** Email of the user to receive the alert. */
+  email: Scalars['EmailAddress'];
+  placeId?: Maybe<Scalars['String']>;
+};
+
+export type EmailOpportunityAlertInput = {
+  /** Registered alerts */
+  alerts: Array<OpportunityAlertDetailInput>;
+  /** Temporarily disable the alert */
+  disabled?: InputMaybe<Scalars['Boolean']>;
+  /** Email of the user to receive the alert. */
+  email: Scalars['EmailAddress'];
+  /** The Google PlaceID for the location */
+  placeId?: InputMaybe<Scalars['String']>;
+};
+
 /** URLs for each platform to call for utterance resolution. Each key corresponds to the specific platform. */
 export type Endpoint = {
   actionsOnGoogle?: Maybe<Url>;
@@ -3963,6 +4124,15 @@ export enum FaqNotAddedReason {
   Unknown = 'UNKNOWN'
 }
 
+export type FaqQuestionSuggestion = {
+  /** The possible question */
+  question: Scalars['String'];
+};
+
+export type FaqQuestionSuggestions = {
+  suggestions: Array<FaqQuestionSuggestion>;
+};
+
 export type FaqSuggestionReturn = {
   failedPutRequests: Scalars['Int'];
   responses: Scalars['JSON'];
@@ -4063,6 +4233,11 @@ export type FacebookPageInput = {
   pageId: Scalars['ID'];
   pageName?: InputMaybe<Scalars['String']>;
   pageToken?: InputMaybe<Scalars['String']>;
+};
+
+export type FaqQueryReturn = {
+  faq: Array<Maybe<ScoredWebFaq>>;
+  total: Scalars['Int'];
 };
 
 export type FirstTimeHandlerResponseSegment = HandlerResponseSegment & {
@@ -5190,6 +5365,8 @@ export type Intent = {
    * For more information on syntax see https://github.com/alexa-js/alexa-utterances
    */
   utterancePatterns?: Maybe<Array<Maybe<Scalars['String']>>>;
+  /** Retrieves suggestions of new possible utterances similar to the ones the intent already has. */
+  utteranceSuggestions: UtteranceSuggestions;
   /** A query for any errors that may be in the Intent. */
   validation: IntentValidation;
 };
@@ -6917,6 +7094,31 @@ export type NluRequestSlot = {
   successfulMatch?: Maybe<Scalars['Boolean']>;
 };
 
+export type OpportunityAlertDetail = {
+  /** Whether or not to receive the messages during the business hours */
+  duringBusinessHours?: Maybe<Scalars['Boolean']>;
+  /** Whether or not to receive the messages outside the business hours */
+  outsideBusinessHours?: Maybe<Scalars['Boolean']>;
+  /** Type of alert that it is. */
+  type: OpportunityAlertDetailType;
+};
+
+export type OpportunityAlertDetailInput = {
+  /** Whether or not to receive the messages during the business hours */
+  duringBusinessHours?: InputMaybe<Scalars['Boolean']>;
+  /** Whether or not to receive the messages outside the business hours */
+  outsideBusinessHours?: InputMaybe<Scalars['Boolean']>;
+  /** Type of alert that it is. */
+  type: OpportunityAlertDetailType;
+};
+
+export enum OpportunityAlertDetailType {
+  AgentRequested = 'AGENT_REQUESTED',
+  BuyingIntent = 'BUYING_INTENT',
+  ChatStarted = 'CHAT_STARTED',
+  UnansweredQuestion = 'UNANSWERED_QUESTION'
+}
+
 export type OrgAnalytics = {
   user: OrgUsageStat;
 };
@@ -7019,6 +7221,10 @@ export type OrgMutation = {
   members: OrgMembersMutation;
   /** Updates the attributes of the organization. */
   update: Organization;
+  /** Updates the billing contact of an org. */
+  updateBillingContact: Organization;
+  /** Updates the brand contact of an org. */
+  updateBrandContact: Organization;
   /**
    * Updates the tier of an organization without linking it to a third party.
    *
@@ -7041,6 +7247,16 @@ export type OrgMutationLinkToAwsSubArgs = {
 
 export type OrgMutationUpdateArgs = {
   org: UpdateOrganizationInput;
+};
+
+
+export type OrgMutationUpdateBillingContactArgs = {
+  contact: BillingContactInput;
+};
+
+
+export type OrgMutationUpdateBrandContactArgs = {
+  contact: BrandContactInput;
 };
 
 
@@ -7774,6 +7990,28 @@ export enum SchedulerDaysOfWeek {
   Tuesday = 'TUESDAY',
   Wednesday = 'WEDNESDAY'
 }
+
+export type ScoredWebFaq = {
+  /** ID of the webFAQ */
+  _id: Scalars['ID'];
+  /** The score received based on the query presented. */
+  _score: Scalars['Float'];
+  /** The answer of the FAQ questions */
+  answer: Scalars['String'];
+  associatedHandlerId?: Maybe<Scalars['String']>;
+  /** The time it was created. */
+  created: Scalars['String'];
+  /** The name assigned to the question-answer page */
+  name: Scalars['String'];
+  /** Questions that are linked to the answer */
+  questions: Array<Maybe<Scalars['String']>>;
+  /** The raw text of the FAQ page */
+  raw?: Maybe<Scalars['String']>;
+  /** The URL that the FAQ came from */
+  url?: Maybe<Scalars['String']>;
+  /** A query for any errors that may be in the ScoredWebFAQ */
+  validation: WebFaqValidation;
+};
 
 /** Organization that is returned from a Search query. */
 export type SearchedApp = {
@@ -8688,6 +8926,46 @@ export type TestState = {
   state: CurrentTestState;
 };
 
+/** Opportunity alert that sends the message to the user via text message. */
+export type TextOpportunityAlert = BaseOpportunityAlert & {
+  alerts: Array<OpportunityAlertDetail>;
+  /**
+   * Did the user consent to receiving messages.
+   *
+   * Keeping track of this for compliance purposes.
+   */
+  consented: Scalars['Boolean'];
+  disabled?: Maybe<Scalars['Boolean']>;
+  /**
+   * Phone number of the user to receive the alert.
+   *
+   * It is assumed that this number belongs to a mobile device with web browsing capabilities.
+   */
+  phoneNumber: Scalars['String'];
+  placeId?: Maybe<Scalars['String']>;
+};
+
+export type TextOpportunityAlertInput = {
+  /** Registered alerts */
+  alerts: Array<OpportunityAlertDetailInput>;
+  /**
+   * Did the user consent to receiving messages.
+   *
+   * Keeping track of this for compliance purposes.
+   */
+  consented: Scalars['Boolean'];
+  /** Temporarily disable the alert */
+  disabled?: InputMaybe<Scalars['Boolean']>;
+  /**
+   * Phone number of the user to receive the alert.
+   *
+   * It is assumed that this number belongs to a mobile device with web browsing capabilities.
+   */
+  phoneNumber: Scalars['String'];
+  /** The Google PlaceID for the location */
+  placeId?: InputMaybe<Scalars['String']>;
+};
+
 /** Information needed to publish to specific platforms. */
 export type ThirdPartyDeployments = {
   alexa?: Maybe<AlexaIntegration>;
@@ -8779,6 +9057,13 @@ export type TrialTierPaymentAccount = BaseStudioTierPaymentAccount & {
   tier: StudioTierType;
 };
 
+/** A currently unsupported opportunity alert. */
+export type UnknownOpportunityAlert = BaseOpportunityAlert & {
+  alerts: Array<OpportunityAlertDetail>;
+  disabled?: Maybe<Scalars['Boolean']>;
+  placeId?: Maybe<Scalars['String']>;
+};
+
 export type UpdateAppChannelMutation = {
   deleteScheduledEvent: Scalars['String'];
   scheduleWeeklyWebCrawls: WebCrawlSchedule;
@@ -8816,6 +9101,8 @@ export type UpdateAppInput = {
    */
   banner?: InputMaybe<Scalars['String']>;
   beta?: InputMaybe<Scalars['JSON']>;
+  /** The hours in which the business related to the app is open. */
+  businessHours?: InputMaybe<Array<BusinessHoursInput>>;
   /**
    * The description for the app.
    *
@@ -8872,6 +9159,8 @@ export type UpdateAppInput = {
   name?: InputMaybe<Scalars['String']>;
   /** The ID of the organization that the app is linked to. This attribute will not be updated on an update request. */
   organizationId?: InputMaybe<Scalars['ID']>;
+  /** Google PlaceIds that correspond with the business. */
+  places?: InputMaybe<Array<AppPlaceDescriptionInput>>;
   /**
    * Platform specific data for the app that does not correspond
    * with other high level data that is shared.
@@ -8879,6 +9168,8 @@ export type UpdateAppInput = {
   platformData?: InputMaybe<PlatformDataInput>;
   /** URL to the privacy policy for the app. */
   privacyPolicyUrl?: InputMaybe<Scalars['String']>;
+  /** A referenceId is an ID of the app in a difference service outside this API */
+  refernceId?: InputMaybe<AppReferenceIdInput>;
   /**
    * A small icon for the app, 108x108 PNG
    *
@@ -8901,9 +9192,13 @@ export type UpdateAppInput = {
   testingInstructions?: InputMaybe<Scalars['String']>;
   /** Contains fields related to publishing the app to various platforms such as dialogflow or alexa. */
   thirdPartyDeployments?: InputMaybe<ThirdPartyDeploymentsInput>;
+  /** Primary website for the company or division of a company that the app is representing. */
+  website?: InputMaybe<Scalars['URLString']>;
 };
 
 export type UpdateAppMutation = {
+  addEmailOpportunityAlert: App;
+  addTextOpportunityAlert: App;
   /** Updates the status of the app. */
   changeStatus: App;
   /** Mutations related to the app channel */
@@ -8933,6 +9228,16 @@ export type UpdateAppMutation = {
    * be ignored as they are to remain constant.
    */
   updateApp: App;
+};
+
+
+export type UpdateAppMutationAddEmailOpportunityAlertArgs = {
+  alert: EmailOpportunityAlertInput;
+};
+
+
+export type UpdateAppMutationAddTextOpportunityAlertArgs = {
+  alert: TextOpportunityAlertInput;
 };
 
 
@@ -9176,6 +9481,8 @@ export type UpdateOrganizationInput = {
   awsEventBusArn?: InputMaybe<Scalars['String']>;
   /** An object of feature flags */
   beta?: InputMaybe<Scalars['JSON']>;
+  billingContact?: InputMaybe<BillingContactInput>;
+  brandContact?: InputMaybe<BrandContactInput>;
   /**
    * The email address of a user who can be contacted about issues
    * related to the organization.
@@ -9346,6 +9653,15 @@ export type Utils = {
 
 export type UtilsTaskArgs = {
   taskId: Scalars['ID'];
+};
+
+export type UtteranceSuggestion = {
+  /** The possible utterance */
+  utterance: Scalars['String'];
+};
+
+export type UtteranceSuggestions = {
+  suggestions: Array<UtteranceSuggestion>;
 };
 
 export type UtteranceTest = {
@@ -9580,6 +9896,8 @@ export type WebFaq = {
   excludeFromAutoComplete?: Maybe<Scalars['Boolean']>;
   /** An ID linked to an external system in which the FAQ was derived from. */
   externalFAQId?: Maybe<Scalars['ID']>;
+  /** Returns suggestions for further questions that answer the FAQ. */
+  faqQuestionsSuggestions: FaqQuestionSuggestions;
   /** The name assigned to the question-answer page */
   name: Scalars['String'];
   /** Questions that are linked to the answer */
@@ -9589,6 +9907,32 @@ export type WebFaq = {
   responses?: Maybe<Array<Maybe<HandlerResponse>>>;
   /** The URL that the FAQ came from */
   url?: Maybe<Scalars['String']>;
+  /** A query for any errors that may be in the WebFAQ */
+  validation: WebFaqValidation;
+};
+
+export type WebFaqValidation = {
+  /** Any errors that may be associated with the object. */
+  errors: Array<Maybe<WebFaqValidationError>>;
+  /** Whether or not the full FAQ is valid. */
+  isValid: Scalars['Boolean'];
+};
+
+export type WebFaqValidationError = {
+  /** A description of the error message */
+  errorMessage: Scalars['String'];
+  /** The property that is in error. */
+  propertyName?: Maybe<Scalars['String']>;
+};
+
+export type WidgetAutoOpenOnPattern = {
+  minimumWidth?: Maybe<Scalars['String']>;
+  patterns?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+export type WidgetAutoOpenOnPatternInput = {
+  minimumWidth?: InputMaybe<Scalars['String']>;
+  patterns?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 export type WidgetConfigurableMessageConfig = {
@@ -9738,7 +10082,7 @@ export type GetEventsQueryVariables = Exact<{
 }>;
 
 
-export type GetEventsQuery = { app?: { __typename: 'App', _id: string, appId: string, name: string, events?: { total: number, events?: Array<{ eventId: string, channel?: string | null, platform?: string | null, userId?: string | null, sessionId?: string | null, eventTime?: string | null, currentHandler?: string | null, selectedHandler?: string | null, environment?: string | null, eventType?: string | null, eventName?: string | null, request?: string | null, rawQuery?: string | null, errorCode?: number | null, errorMessage?: string | null, payload?: string | null, slots?: Array<{ name?: string | null, rawValue?: string | null, slotValue?: string | null } | null> | null, stentorRequest?: { intentId?: string | null, rawQuery?: string | null, matchConfidence?: number | null } | null, response?: { outputSpeech?: { displayText?: string | null, ssml?: string | null, suggestions?: Array<{ title?: string | null, url?: string | null } | null> | null } | null, reprompt?: { displayText?: string | null, ssml?: string | null, suggestions?: Array<{ title?: string | null, url?: string | null } | null> | null } | null } | null } | null> | null } | null } | null };
+export type GetEventsQuery = { app?: { __typename: 'App', _id: string, appId: string, name: string, events?: { total: number, events?: Array<{ eventId: string, channel?: string | null, platform?: string | null, userId?: string | null, sessionId?: string | null, eventTime?: string | null, currentHandler?: string | null, selectedHandler?: string | null, environment?: string | null, eventType?: string | null, eventName?: string | null, request?: string | null, rawQuery?: string | null, errorCode?: number | null, errorMessage?: string | null, payload?: string | null, slots?: Array<{ name?: string | null, rawValue?: string | null, slotValue?: string | null } | null> | null, stentorRequest?: { intentId?: string | null, rawQuery?: string | null, matchConfidence?: number | null } | null, response?: { displays?: any | null, outputSpeech?: { displayText?: string | null, ssml?: string | null, suggestions?: Array<{ title?: string | null, url?: string | null } | null> | null } | null, reprompt?: { displayText?: string | null, ssml?: string | null, suggestions?: Array<{ title?: string | null, url?: string | null } | null> | null } | null } | null } | null> | null } | null } | null };
 
 
 export const StartCrawlDocument = gql`
@@ -10285,6 +10629,7 @@ export const GetEventsDocument = gql`
               url
             }
           }
+          displays
           reprompt {
             displayText
             ssml
