@@ -1,3 +1,10 @@
+## [1.4.12](https://github.com/xapp-ai/xapp-cli/compare/v1.4.11...v1.4.12) (2023-05-09)
+
+
+### Bug Fixes
+
+* Adding some more fields to the app overview query ([#688](https://github.com/xapp-ai/xapp-cli/issues/688)) ([eaa26b3](https://github.com/xapp-ai/xapp-cli/commit/eaa26b3dd8accbf7136c69f6d8f940e212aaaff4))
+
 ## [1.4.11](https://github.com/xapp-ai/xapp-cli/compare/v1.4.10...v1.4.11) (2023-05-02)
 
 
