@@ -1,5 +1,5 @@
-/*! Copyright (c) 2022, XAPP AI*/ 
- /* eslint-disable */
+/*! Copyright (c) 2022, XAPP AI*/
+/* eslint-disable */
 import gql from 'graphql-tag';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
@@ -10405,6 +10405,11 @@ export const GetAppOverviewDocument = gql`
       type
       timestamp
       email
+      statusHistory {
+        type
+        timestamp
+        email
+      }
     }
     handlers(size: 1000) {
       _id
