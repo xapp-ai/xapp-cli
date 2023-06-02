@@ -68,6 +68,12 @@ query getAppOverview(
       type
       timestamp
       email
+      statusHistory {
+        type
+        email
+        timestamp
+        notes
+      }
     }
     handlers(size: 1000) {
       _id

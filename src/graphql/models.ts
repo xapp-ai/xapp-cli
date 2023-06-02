@@ -1,5 +1,5 @@
-/*! Copyright (c) 2022, XAPP AI*/
-/* eslint-disable */
+/*! Copyright (c) 2022, XAPP AI*/ 
+ /* eslint-disable */
 import gql from 'graphql-tag';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
@@ -525,6 +525,8 @@ export type AdminLaboratory = {
   knnSearch: KnnSearchQuery;
   /** This uses KNN to search for suggestions to things. */
   knnSuggSearch: KnnSuggSearchQuery;
+  /** This attempts to generate a valid answer based on a question for an app. */
+  provideAnswer?: Maybe<Scalars['JSON']>;
   /** This queries the Kendra instance available and returns the results. */
   queryKendra?: Maybe<Scalars['JSON']>;
   /** Returns the response from the KNN Endpoint */
@@ -597,6 +599,14 @@ export type AdminLaboratoryKnnSuggSearchArgs = {
   minScore?: InputMaybe<Scalars['Float']>;
   searchString: Scalars['String'];
   size?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type AdminLaboratoryProvideAnswerArgs = {
+  appId: Scalars['ID'];
+  max_tokens?: InputMaybe<Scalars['Int']>;
+  temperature?: InputMaybe<Scalars['Float']>;
+  text: Scalars['String'];
 };
 
 
@@ -1144,6 +1154,19 @@ export type App = {
    */
   banner?: Maybe<Scalars['String']>;
   beta?: Maybe<Scalars['JSON']>;
+  /**
+   * A description of the business and it's services.
+   *
+   * This can be used for LLM operations
+   */
+  businessDescription?: Maybe<Scalars['String']>;
+  /**
+   * A description of what they consider to be high value leads, prioritized queries that they
+   * want to be notified immediately.
+   *
+   * This can be used for LLM operations
+   */
+  businessHighValueLeadDescription?: Maybe<Scalars['String']>;
   /** The hours in which the business related to the app is open. */
   businessHours: Array<BusinessHours>;
   /** Returns an App channel based on the provided ID. */
@@ -1300,6 +1323,8 @@ export type App = {
   usageEvents?: Maybe<TotalUsageEvents>;
   /** Primary website for the company or division of a company that the app is representing. */
   website?: Maybe<Scalars['URL']>;
+  /** Data related to what was found on the customers website */
+  websiteData?: Maybe<AppWebsiteData>;
 };
 
 
@@ -1657,6 +1682,19 @@ export type AppInput = {
    */
   banner?: InputMaybe<Scalars['String']>;
   beta?: InputMaybe<Scalars['JSON']>;
+  /**
+   * A description of the business and it's services.
+   *
+   * This can be used for LLM operations
+   */
+  businessDescription?: InputMaybe<Scalars['String']>;
+  /**
+   * A description of what they consider to be high value leads, prioritized queries that they
+   * want to be notified immediately.
+   *
+   * This can be used for LLM operations
+   */
+  businessHighValueLeadDescription?: InputMaybe<Scalars['String']>;
   /** The hours in which the business related to the app is open. */
   businessHours?: InputMaybe<Array<BusinessHoursInput>>;
   /** Third party analytics platforms. */
@@ -1756,6 +1794,8 @@ export type AppInput = {
   thirdPartyDeployments?: InputMaybe<ThirdPartyDeploymentsInput>;
   /** Primary website for the company or division of a company that the app is representing. */
   website?: InputMaybe<Scalars['URLString']>;
+  /** Data related to what was found on the customers website */
+  websiteData?: InputMaybe<AppWebsiteDataInput>;
 };
 
 /**
@@ -2029,12 +2069,14 @@ export type AppNluInput = {
 export type AppPlaceDescription = {
   address?: Maybe<Scalars['String']>;
   default?: Maybe<Scalars['Boolean']>;
+  name?: Maybe<Scalars['String']>;
   placeId?: Maybe<Scalars['String']>;
 };
 
 export type AppPlaceDescriptionInput = {
   address?: InputMaybe<Scalars['String']>;
   default?: InputMaybe<Scalars['Boolean']>;
+  name?: InputMaybe<Scalars['String']>;
   placeId?: InputMaybe<Scalars['String']>;
 };
 
@@ -2202,6 +2244,32 @@ export type AppUsageStat = {
   returningUsers: Scalars['Int'];
   totalSessions: Scalars['Int'];
   totalUsers: Scalars['Int'];
+};
+
+export type AppWebsiteData = {
+  /**
+   * Calls to action such as "Free Quote", "Schedule Consultation".
+   *
+   * These can be used as suggestion chips.
+   */
+  callsToAction?: Maybe<Array<Scalars['String']>>;
+  /** Primary theme color, hex value, based on an image of the website. */
+  primaryColor?: Maybe<Scalars['String']>;
+  /** Secondary color, hex value, that complements the primary color on the website. */
+  secondaryColor?: Maybe<Scalars['String']>;
+};
+
+export type AppWebsiteDataInput = {
+  /**
+   * Calls to action such as "Free Quote", "Schedule Consultation".
+   *
+   * These can be used as suggestion chips.
+   */
+  callsToAction?: InputMaybe<Array<Scalars['String']>>;
+  /** Primary theme color, hex value, based on an image of the website. */
+  primaryColor?: InputMaybe<Scalars['String']>;
+  /** Secondary color, hex value, that complements the primary color on the website. */
+  secondaryColor?: InputMaybe<Scalars['String']>;
 };
 
 /** A collections query which returns a collection of apps */
@@ -9101,6 +9169,19 @@ export type UpdateAppInput = {
    */
   banner?: InputMaybe<Scalars['String']>;
   beta?: InputMaybe<Scalars['JSON']>;
+  /**
+   * A description of the business and it's services.
+   *
+   * This can be used for LLM operations
+   */
+  businessDescription?: InputMaybe<Scalars['String']>;
+  /**
+   * A description of what they consider to be high value leads, prioritized queries that they
+   * want to be notified immediately.
+   *
+   * This can be used for LLM operations
+   */
+  businessHighValueLeadDescription?: InputMaybe<Scalars['String']>;
   /** The hours in which the business related to the app is open. */
   businessHours?: InputMaybe<Array<BusinessHoursInput>>;
   /**
@@ -9194,6 +9275,8 @@ export type UpdateAppInput = {
   thirdPartyDeployments?: InputMaybe<ThirdPartyDeploymentsInput>;
   /** Primary website for the company or division of a company that the app is representing. */
   website?: InputMaybe<Scalars['URLString']>;
+  /** Data related to what was found on the customers website */
+  websiteData?: InputMaybe<AppWebsiteDataInput>;
 };
 
 export type UpdateAppMutation = {
@@ -10030,7 +10113,7 @@ export type GetAppOverviewQueryVariables = Exact<{
 }>;
 
 
-export type GetAppOverviewQuery = { app?: { __typename: 'App', _id: string, appId: string, name: string, description?: string | null, summary?: string | null, organizationId: string, invocationName?: string | null, templateType?: string | null, icon?: string | null, smallIcon?: string | null, largeIcon?: string | null, banner?: string | null, largeBanner?: string | null, status?: { type: string, timestamp: any, email: string } | null, handlers?: { _id: string, total: number, handlers?: Array<{ _id: string, name?: string | null, intentId: string, type: string } | null> | null } | null, intents?: { _id: string, total: number, intents?: Array<{ _id: string, name: string, intentId: string } | null> | null } | null, entities?: { _id: string, total: number, entities?: Array<{ _id: string, entityId: string, displayName: string } | null> | null } | null, content?: { __typename: 'TotalWebContent', total: number, content: Array<{ __typename: 'WebContentWithHighlights', _id: string, name: string, url: string } | null> } | null, contentSources?: { __typename: 'TotalWebContentSources', total: number, sources: Array<{ __typename: 'WebContentSources', webUrl: string, webUrlPatterns: Array<string | null> } | null> } | null, faq?: { total: number } | null, channels?: Array<{ __typename: 'ActionsOnGoogleAppChannel', type: string, id: string, name?: string | null } | { __typename: 'AlexaAppChannel', type: string, id: string, name?: string | null } | { __typename: 'AppChannel', type: string, id: string, name?: string | null } | { __typename: 'ChatWidgetAppChannel', key?: string | null, type: string, id: string, name?: string | null, theme?: { primaryColor?: string | null } | null } | { __typename: 'DialogflowAppChannel', type: string, id: string, name?: string | null } | { __typename: 'FacebookMessengerAppChannel', type: string, id: string, name?: string | null } | { __typename: 'GoogleBusinessMessagesAppChannel', type: string, id: string, name?: string | null } | { __typename: 'IntelligentSearchAppChannel', key?: string | null, type: string, id: string, name?: string | null, theme?: { accentColor?: string | null } | null } | { __typename: 'LexConnectAppChannel', type: string, id: string, name?: string | null } | { __typename: 'LexV2ConnectAppChannel', type: string, id: string, name?: string | null } | null> | null, analytics?: { user: { totalUsers: number, totalSessions: number, returningUsers: number, newUsers: number } } | null } | null };
+export type GetAppOverviewQuery = { app?: { __typename: 'App', _id: string, appId: string, name: string, description?: string | null, summary?: string | null, organizationId: string, invocationName?: string | null, templateType?: string | null, icon?: string | null, smallIcon?: string | null, largeIcon?: string | null, banner?: string | null, largeBanner?: string | null, status?: { type: string, timestamp: any, email: string, statusHistory?: Array<{ type: string, email: string, timestamp: any, notes?: string | null } | null> | null } | null, handlers?: { _id: string, total: number, handlers?: Array<{ _id: string, name?: string | null, intentId: string, type: string } | null> | null } | null, intents?: { _id: string, total: number, intents?: Array<{ _id: string, name: string, intentId: string } | null> | null } | null, entities?: { _id: string, total: number, entities?: Array<{ _id: string, entityId: string, displayName: string } | null> | null } | null, content?: { __typename: 'TotalWebContent', total: number, content: Array<{ __typename: 'WebContentWithHighlights', _id: string, name: string, url: string } | null> } | null, contentSources?: { __typename: 'TotalWebContentSources', total: number, sources: Array<{ __typename: 'WebContentSources', webUrl: string, webUrlPatterns: Array<string | null> } | null> } | null, faq?: { total: number } | null, channels?: Array<{ __typename: 'ActionsOnGoogleAppChannel', type: string, id: string, name?: string | null } | { __typename: 'AlexaAppChannel', type: string, id: string, name?: string | null } | { __typename: 'AppChannel', type: string, id: string, name?: string | null } | { __typename: 'ChatWidgetAppChannel', key?: string | null, type: string, id: string, name?: string | null, theme?: { primaryColor?: string | null } | null } | { __typename: 'DialogflowAppChannel', type: string, id: string, name?: string | null } | { __typename: 'FacebookMessengerAppChannel', type: string, id: string, name?: string | null } | { __typename: 'GoogleBusinessMessagesAppChannel', type: string, id: string, name?: string | null } | { __typename: 'IntelligentSearchAppChannel', key?: string | null, type: string, id: string, name?: string | null, theme?: { accentColor?: string | null } | null } | { __typename: 'LexConnectAppChannel', type: string, id: string, name?: string | null } | { __typename: 'LexV2ConnectAppChannel', type: string, id: string, name?: string | null } | null> | null, analytics?: { user: { totalUsers: number, totalSessions: number, returningUsers: number, newUsers: number } } | null } | null };
 
 export type GetAppContentQueryVariables = Exact<{
   appId: Scalars['ID'];
@@ -10407,8 +10490,9 @@ export const GetAppOverviewDocument = gql`
       email
       statusHistory {
         type
-        timestamp
         email
+        timestamp
+        notes
       }
     }
     handlers(size: 1000) {
