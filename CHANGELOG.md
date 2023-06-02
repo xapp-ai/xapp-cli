@@ -1,3 +1,10 @@
+## [1.4.20](https://github.com/xapp-ai/xapp-cli/compare/v1.4.19...v1.4.20) (2023-06-02)
+
+
+### Bug Fixes
+
+* **deps:** update stentor ([1cbcc3d](https://github.com/xapp-ai/xapp-cli/commit/1cbcc3d1125d2318cf36b95bfb055577f0f3b4df))
+
 ## [1.4.19](https://github.com/xapp-ai/xapp-cli/compare/v1.4.18...v1.4.19) (2023-06-02)
 
 
