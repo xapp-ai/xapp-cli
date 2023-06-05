@@ -1,3 +1,11 @@
+## [1.4.25](https://github.com/xapp-ai/xapp-cli/compare/v1.4.24...v1.4.25) (2023-06-05)
+
+
+### Bug Fixes
+
+* **deps:** update dependency dotenv to v16.1.4 ([#705](https://github.com/xapp-ai/xapp-cli/issues/705)) ([43d75dd](https://github.com/xapp-ai/xapp-cli/commit/43d75dd645a4bf9aadc544a09e83c96acb1ac12e))
+* **deps:** update dependency inquirer to v9.2.7 ([#703](https://github.com/xapp-ai/xapp-cli/issues/703)) ([5e1a2af](https://github.com/xapp-ai/xapp-cli/commit/5e1a2af98715a23da5951674d08f5c1e5cb2ae6d))
+
 ## [1.4.24](https://github.com/xapp-ai/xapp-cli/compare/v1.4.23...v1.4.24) (2023-06-05)
 
 
