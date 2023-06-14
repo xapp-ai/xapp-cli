@@ -6,39 +6,41 @@ export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
+export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: string;
-  String: string;
-  Boolean: boolean;
-  Int: number;
-  Float: number;
-  DateTime: any;
-  EmailAddress: any;
-  HandlerResponseConditions: any;
-  IntOrBoolean: any;
-  IntOrString: any;
-  JSON: any;
-  Long: any;
-  PathConditions: any;
-  StringMap: any;
-  URL: any;
-  URLString: any;
-  time_String_NotNull_format_date: any;
+  ID: { input: string | number; output: string; }
+  String: { input: string; output: string; }
+  Boolean: { input: boolean; output: boolean; }
+  Int: { input: number; output: number; }
+  Float: { input: number; output: number; }
+  DateTime: { input: any; output: any; }
+  EmailAddress: { input: any; output: any; }
+  HandlerResponseConditions: { input: any; output: any; }
+  IntOrBoolean: { input: any; output: any; }
+  IntOrString: { input: any; output: any; }
+  JSON: { input: any; output: any; }
+  Long: { input: any; output: any; }
+  PathConditions: { input: any; output: any; }
+  StringMap: { input: any; output: any; }
+  URL: { input: any; output: any; }
+  URLString: { input: any; output: any; }
+  time_String_NotNull_format_date: { input: any; output: any; }
 };
 
 export type AwsPaymentAccount = {
   /** The usage for the given AWS subscription during the current pay period. */
   currentUsage: OrgUsageStats;
   /** The customerId of the customer that linked the account. */
-  customerId?: Maybe<Scalars['String']>;
+  customerId?: Maybe<Scalars['String']['output']>;
   /** The date in which the subscription was placed. */
-  date?: Maybe<Scalars['String']>;
+  date?: Maybe<Scalars['String']['output']>;
   /** The product within the product of the subscription. */
-  dimension?: Maybe<Scalars['String']>;
+  dimension?: Maybe<Scalars['String']['output']>;
   /** The product code of the aws product that is linked to the org. */
-  productCode?: Maybe<Scalars['String']>;
+  productCode?: Maybe<Scalars['String']['output']>;
 };
 
 /**
@@ -54,7 +56,7 @@ export type ActionsOnGoogleAdditionalInformationQuestions = {
    * If your Actions mainly sell alcohol or tobacco, you must implement
    * account linking and verify that the user meets legal age requirements.
    */
-  alcoholAndTobaccoRelatedContent?: Maybe<Scalars['Boolean']>;
+  alcoholAndTobaccoRelatedContent?: Maybe<Scalars['Boolean']['output']>;
   /**
    * Are childer under the age of 13 one of the intended audienced of your actions?
    *
@@ -62,7 +64,7 @@ export type ActionsOnGoogleAdditionalInformationQuestions = {
    * program allows develpers to dsignate that their Actions are family-friendly, so parents and kids
    * cand find trusted, high-quality content more easily on teh Google Assistant.
    */
-  intendedForUnderThirteen?: Maybe<Scalars['Boolean']>;
+  intendedForUnderThirteen?: Maybe<Scalars['Boolean']['output']>;
 };
 
 /**
@@ -78,7 +80,7 @@ export type ActionsOnGoogleAdditionalInformationQuestionsInput = {
    * If your Actions mainly sell alcohol or tobacco, you must implement
    * account linking and verify that the user meets legal age requirements.
    */
-  alcoholAndTobaccoRelatedContent?: InputMaybe<Scalars['Boolean']>;
+  alcoholAndTobaccoRelatedContent?: InputMaybe<Scalars['Boolean']['input']>;
   /**
    * Are childer under the age of 13 one of the intended audienced of your actions?
    *
@@ -86,7 +88,7 @@ export type ActionsOnGoogleAdditionalInformationQuestionsInput = {
    * program allows develpers to dsignate that their Actions are family-friendly, so parents and kids
    * cand find trusted, high-quality content more easily on teh Google Assistant.
    */
-  intendedForUnderThirteen?: InputMaybe<Scalars['Boolean']>;
+  intendedForUnderThirteen?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** A channel that is specific for apps to run on the Actions On Google. */
@@ -94,23 +96,23 @@ export type ActionsOnGoogleAppChannel = BaseAppChannel & {
   /** For "actions-on-google" type channels only. */
   additionalInformationQuestions?: Maybe<ActionsOnGoogleAdditionalInformationQuestions>;
   /** Deprecated: DO NOT USE. IT WILL BE REMOVED */
-  credentialsURL?: Maybe<Scalars['String']>;
+  credentialsURL?: Maybe<Scalars['String']['output']>;
   /** URL for the directory listing. */
-  directoryListing?: Maybe<Scalars['String']>;
+  directoryListing?: Maybe<Scalars['String']['output']>;
   /** URI where the channel can be accessed. */
-  endPoint?: Maybe<Scalars['String']>;
+  endPoint?: Maybe<Scalars['String']['output']>;
   /** Whether or not the credentials for the channel has been uploaded. */
-  hasCredentials: Scalars['Boolean'];
+  hasCredentials: Scalars['Boolean']['output'];
   /** The ID of the channel. */
-  id: Scalars['String'];
+  id: Scalars['String']['output'];
   /** The display name for the channel. */
-  name?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']['output']>;
   /** The ID of the project on Google */
-  projectId: Scalars['ID'];
+  projectId: Scalars['ID']['output'];
   /** The lifecycle status of the app. */
   status?: Maybe<AppChannelStatus>;
   /** The type of channel */
-  type: Scalars['String'];
+  type: Scalars['String']['output'];
   /** Retrieves any events that are related to this specific app */
   usageEvents?: Maybe<TotalUsageEvents>;
   /**
@@ -121,23 +123,23 @@ export type ActionsOnGoogleAppChannel = BaseAppChannel & {
    *
    * If the value is "*", then it will pick the first available NLU within app.nlu[]
    */
-  useNLU?: Maybe<Scalars['String']>;
+  useNLU?: Maybe<Scalars['String']['output']>;
 };
 
 
 /** A channel that is specific for apps to run on the Actions On Google. */
 export type ActionsOnGoogleAppChannelUsageEventsArgs = {
-  from?: InputMaybe<Scalars['Int']>;
-  size?: InputMaybe<Scalars['Int']>;
+  from?: InputMaybe<Scalars['Int']['input']>;
+  size?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type ActionsOnGoogleAppChannelInput = {
   /** For "actions-on-google" type channels only. */
   additionalInformationQuestions?: InputMaybe<ActionsOnGoogleAdditionalInformationQuestionsInput>;
   /** URL for the directory listing. */
-  directoryListing?: InputMaybe<Scalars['String']>;
+  directoryListing?: InputMaybe<Scalars['String']['input']>;
   /** URI where the channel can be accessed. */
-  endPoint?: InputMaybe<Scalars['String']>;
+  endPoint?: InputMaybe<Scalars['String']['input']>;
   /**
    * The ID of the channel.
    *
@@ -148,11 +150,11 @@ export type ActionsOnGoogleAppChannelInput = {
    * updated.  Otherwise the channel will be inserted and an ID will be
    * generated.
    */
-  id?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['String']['input']>;
   /** The display name for the channel. */
-  name?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']['input']>;
   /** The type of channel */
-  type: Scalars['String'];
+  type: Scalars['String']['input'];
   /**
    * ID of the NLU to use within app.nlu[].
    *
@@ -161,7 +163,7 @@ export type ActionsOnGoogleAppChannelInput = {
    *
    * If the value is "*", then it will pick the first available NLU within app.nlu[]
    */
-  useNLU?: InputMaybe<Scalars['String']>;
+  useNLU?: InputMaybe<Scalars['String']['input']>;
 };
 
 /**
@@ -169,16 +171,16 @@ export type ActionsOnGoogleAppChannelInput = {
  * call the Actions On Google resources on the client's behalf.
  */
 export type ActionsOnGoogleCredentials = {
-  auth_provider_x509_cert_url?: InputMaybe<Scalars['String']>;
-  auth_uri?: InputMaybe<Scalars['String']>;
-  client_email: Scalars['String'];
-  client_id?: InputMaybe<Scalars['String']>;
-  client_x509_cert_url?: InputMaybe<Scalars['String']>;
-  private_key: Scalars['String'];
-  private_key_id?: InputMaybe<Scalars['String']>;
-  project_id: Scalars['String'];
-  token_uri?: InputMaybe<Scalars['String']>;
-  type?: InputMaybe<Scalars['String']>;
+  auth_provider_x509_cert_url?: InputMaybe<Scalars['String']['input']>;
+  auth_uri?: InputMaybe<Scalars['String']['input']>;
+  client_email: Scalars['String']['input'];
+  client_id?: InputMaybe<Scalars['String']['input']>;
+  client_x509_cert_url?: InputMaybe<Scalars['String']['input']>;
+  private_key: Scalars['String']['input'];
+  private_key_id?: InputMaybe<Scalars['String']['input']>;
+  project_id: Scalars['String']['input'];
+  token_uri?: InputMaybe<Scalars['String']['input']>;
+  type?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ActiveWithinHandlerResponseSegment = HandlerResponseSegment & {
@@ -187,32 +189,32 @@ export type ActiveWithinHandlerResponseSegment = HandlerResponseSegment & {
 };
 
 export type AddEntityInput = {
-  appId: Scalars['ID'];
-  dialogflowId?: InputMaybe<Scalars['String']>;
-  displayName: Scalars['String'];
-  nlu?: InputMaybe<Scalars['JSON']>;
-  type?: InputMaybe<Scalars['String']>;
+  appId: Scalars['ID']['input'];
+  dialogflowId?: InputMaybe<Scalars['String']['input']>;
+  displayName: Scalars['String']['input'];
+  nlu?: InputMaybe<Scalars['JSON']['input']>;
+  type?: InputMaybe<Scalars['String']['input']>;
   values?: InputMaybe<Array<InputMaybe<EntityValueInput>>>;
 };
 
 export type AddFaq = {
   /** The answer to those questions */
-  answer: Scalars['String'];
+  answer: Scalars['String']['input'];
   /** An ID to a Handler that is associated with the FAQ */
-  associatedHandlerId?: InputMaybe<Scalars['ID']>;
+  associatedHandlerId?: InputMaybe<Scalars['ID']['input']>;
   /** Set to true if the FAQ should be excluded from the auto-complete search. */
-  excludeFromAutoComplete?: InputMaybe<Scalars['Boolean']>;
+  excludeFromAutoComplete?: InputMaybe<Scalars['Boolean']['input']>;
   /** An ID linked to an external system in which the FAQ was derived from. */
-  externalFAQId?: InputMaybe<Scalars['ID']>;
+  externalFAQId?: InputMaybe<Scalars['ID']['input']>;
   /** The name of the FAQ */
-  name: Scalars['String'];
+  name: Scalars['String']['input'];
   /** Questions that the FAQ handles. */
-  questions: Array<InputMaybe<Scalars['String']>>;
+  questions: Array<InputMaybe<Scalars['String']['input']>>;
   /** The raw text */
-  raw?: InputMaybe<Scalars['String']>;
-  responses?: InputMaybe<Array<InputMaybe<Scalars['JSON']>>>;
+  raw?: InputMaybe<Scalars['String']['input']>;
+  responses?: InputMaybe<Array<InputMaybe<Scalars['JSON']['input']>>>;
   /** The URL that the FAQ could be found on. */
-  url?: InputMaybe<Scalars['URL']>;
+  url?: InputMaybe<Scalars['URL']['input']>;
 };
 
 export type AddForwardReturn = {
@@ -224,8 +226,8 @@ export type AddForwardReturn = {
 
 
 export type AddForwardReturnGraphArgs = {
-  endDate?: InputMaybe<Scalars['DateTime']>;
-  startDate?: InputMaybe<Scalars['DateTime']>;
+  endDate?: InputMaybe<Scalars['DateTime']['input']>;
+  startDate?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
 export type AddHandlerInput = {
@@ -235,34 +237,34 @@ export type AddHandlerInput = {
    * All handlers have contextual help and cancel content
    */
   content?: InputMaybe<Array<InputMaybe<InputHandlerContent>>>;
-  data?: InputMaybe<Scalars['JSON']>;
+  data?: InputMaybe<Scalars['JSON']['input']>;
   /**
    * The locale that all the attributes in this intent are used for before
    * they are overridden.
    */
-  defaultLocale?: InputMaybe<Scalars['String']>;
+  defaultLocale?: InputMaybe<Scalars['String']['input']>;
   forward?: InputMaybe<Array<InputMaybe<HandlerForwardInput>>>;
   /** The location that the intent was last saved in Stentor's Handler Graph UI. */
   graphCoords?: InputMaybe<GraphCoordsInput>;
   /** The unique identifier of the intent itself. */
-  intentId: Scalars['ID'];
+  intentId: Scalars['ID']['input'];
   /** The language code that the intent covers. */
-  langCode?: InputMaybe<Scalars['String']>;
+  langCode?: InputMaybe<Scalars['String']['input']>;
   /** The human-readable name of the intent. */
-  name: Scalars['String'];
+  name: Scalars['String']['input'];
   /** The permissions that the intent requires in order to work. */
   permissions?: InputMaybe<Array<InputMaybe<HandlerPermissions>>>;
   redirect?: InputMaybe<Array<InputMaybe<HandlerRedirectInput>>>;
   /** The slots defined within the utterance patterns and their Entity types. */
   slots?: InputMaybe<Array<InputMaybe<InputSlot>>>;
   /** The type of intent that this is. */
-  type?: InputMaybe<Scalars['String']>;
+  type?: InputMaybe<Scalars['String']['input']>;
   /**
    * An array of utterance patterns.
    *
    * For more information on syntax see https://github.com/alexa-js/alexa-utterances
    */
-  utterancePatterns?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  utterancePatterns?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export type AddHandlerReturn = {
@@ -274,8 +276,8 @@ export type AddHandlerReturn = {
 
 
 export type AddHandlerReturnGraphArgs = {
-  endDate?: InputMaybe<Scalars['DateTime']>;
-  startDate?: InputMaybe<Scalars['DateTime']>;
+  endDate?: InputMaybe<Scalars['DateTime']['input']>;
+  startDate?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
 export type AddIntentInput = {
@@ -296,30 +298,30 @@ export type AddIntentInput = {
    * The locale that all the attributes in this intent are used for before
    * they are overridden.
    */
-  defaultLocale?: InputMaybe<Scalars['String']>;
+  defaultLocale?: InputMaybe<Scalars['String']['input']>;
   /** The location that the intent was last saved in Stentor's Handler Graph UI. */
   graphCoords?: InputMaybe<GraphCoordsInput>;
   /** The unique identifier of the intent itself. */
-  intentId: Scalars['ID'];
+  intentId: Scalars['ID']['input'];
   /** The language code that the intent covers. */
-  langCode?: InputMaybe<Scalars['String']>;
+  langCode?: InputMaybe<Scalars['String']['input']>;
   /** The human-readable name of the intent. */
-  name: Scalars['String'];
-  nlu?: InputMaybe<Scalars['JSON']>;
+  name: Scalars['String']['input'];
+  nlu?: InputMaybe<Scalars['JSON']['input']>;
   /** The permissions that the intent requires in order to work. */
-  permissions?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  permissions?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /** Slot type definition. */
-  slotTypes?: InputMaybe<Scalars['JSON']>;
+  slotTypes?: InputMaybe<Scalars['JSON']['input']>;
   /** The slots defined within the utterance patterns and their Entity types. */
   slots?: InputMaybe<Array<InputMaybe<InputSlot>>>;
   /** The type of intent that this is. */
-  type?: InputMaybe<Scalars['String']>;
+  type?: InputMaybe<Scalars['String']['input']>;
   /**
    * An array of utterance patterns.
    *
    * For more information on syntax see https://github.com/alexa-js/alexa-utterances
    */
-  utterancePatterns?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  utterancePatterns?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export type AddIntentReturn = {
@@ -331,8 +333,8 @@ export type AddIntentReturn = {
 
 
 export type AddIntentReturnGraphArgs = {
-  endDate?: InputMaybe<Scalars['DateTime']>;
-  startDate?: InputMaybe<Scalars['DateTime']>;
+  endDate?: InputMaybe<Scalars['DateTime']['input']>;
+  startDate?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
 export enum AddLocaleEnum {
@@ -405,26 +407,26 @@ export enum AddLocaleEnum {
 }
 
 export type AddedFaq = {
-  _id: Scalars['ID'];
-  answer: Scalars['String'];
-  associatedHandlerId?: Maybe<Scalars['String']>;
-  created: Scalars['String'];
-  excludeFromAutoComplete?: Maybe<Scalars['Boolean']>;
-  externalFAQId?: Maybe<Scalars['ID']>;
-  name: Scalars['String'];
-  questions: Array<Maybe<Scalars['String']>>;
-  raw?: Maybe<Scalars['String']>;
+  _id: Scalars['ID']['output'];
+  answer: Scalars['String']['output'];
+  associatedHandlerId?: Maybe<Scalars['String']['output']>;
+  created: Scalars['String']['output'];
+  excludeFromAutoComplete?: Maybe<Scalars['Boolean']['output']>;
+  externalFAQId?: Maybe<Scalars['ID']['output']>;
+  name: Scalars['String']['output'];
+  questions: Array<Maybe<Scalars['String']['output']>>;
+  raw?: Maybe<Scalars['String']['output']>;
   /** If "wasAdded" was false, this provides the reason that the FAQ was not added. */
   reason?: Maybe<FaqNotAddedReason>;
   responses?: Maybe<Array<Maybe<HandlerResponse>>>;
-  url?: Maybe<Scalars['String']>;
+  url?: Maybe<Scalars['String']['output']>;
   /** A boolean saying whether or not the FAQ was added in this operation. */
-  wasAdded: Scalars['Boolean'];
+  wasAdded: Scalars['Boolean']['output'];
 };
 
 export type AdminAwsQuery = {
   /** Returns the AWS region that the graphql server is currently querying from. */
-  region: Scalars['String'];
+  region: Scalars['String']['output'];
 };
 
 export type AdminAppMutation = {
@@ -433,15 +435,15 @@ export type AdminAppMutation = {
 
 
 export type AdminAppMutationUpdateArgs = {
-  appId: Scalars['ID'];
+  appId: Scalars['ID']['input'];
 };
 
 export type AdminChatSuggestion = {
-  answer?: Maybe<Scalars['String']>;
+  answer?: Maybe<Scalars['String']['output']>;
   format: Array<Maybe<AdminChatSuggestionFormat>>;
-  suggestion: Scalars['String'];
-  truncatedAnswer?: Maybe<Scalars['Boolean']>;
-  type: Scalars['String'];
+  suggestion: Scalars['String']['output'];
+  truncatedAnswer?: Maybe<Scalars['Boolean']['output']>;
+  type: Scalars['String']['output'];
 };
 
 export type AdminChatSuggestionFormat = {
@@ -450,15 +452,15 @@ export type AdminChatSuggestionFormat = {
 };
 
 export type AdminChatSuggestionFormatBold = {
-  end: Scalars['Int'];
-  start: Scalars['Int'];
+  end: Scalars['Int']['output'];
+  start: Scalars['Int']['output'];
 };
 
 export type AdminChatSuggestionFormatInputText = {
-  end: Scalars['Int'];
-  slotMatch: Scalars['String'];
-  start: Scalars['Int'];
-  text: Scalars['String'];
+  end: Scalars['Int']['output'];
+  slotMatch: Scalars['String']['output'];
+  start: Scalars['Int']['output'];
+  text: Scalars['String']['output'];
 };
 
 export type AdminChatSuggestionReturn = {
@@ -480,34 +482,34 @@ export type AdminEventsQuery = {
 
 /** A collections query which returns a collection of organizations. */
 export type AdminEventsQueryEventsArgs = {
-  appId?: InputMaybe<Scalars['ID']>;
-  byChannel?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  appId?: InputMaybe<Scalars['ID']['input']>;
+  byChannel?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   byFlag?: InputMaybe<Array<InputMaybe<RawQueryEventFlag>>>;
-  byName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  byPlatform?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  byRequestIntentId?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  byTag?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  byType?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  endDate?: InputMaybe<Scalars['DateTime']>;
-  from?: InputMaybe<Scalars['Int']>;
-  newSessionsOnly?: InputMaybe<Scalars['Boolean']>;
-  noFlag?: InputMaybe<Scalars['Boolean']>;
-  organizationId?: InputMaybe<Scalars['ID']>;
-  rawQueryOnly?: InputMaybe<Scalars['Boolean']>;
-  rawQueryOrSlotsOnly?: InputMaybe<Scalars['Boolean']>;
-  rawQueryText?: InputMaybe<Scalars['String']>;
-  responseOutputText?: InputMaybe<Scalars['String']>;
-  responseRepromptText?: InputMaybe<Scalars['String']>;
-  sessionId?: InputMaybe<Scalars['String']>;
-  size?: InputMaybe<Scalars['Int']>;
-  startDate?: InputMaybe<Scalars['DateTime']>;
+  byName?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  byPlatform?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  byRequestIntentId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  byTag?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  byType?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  endDate?: InputMaybe<Scalars['DateTime']['input']>;
+  from?: InputMaybe<Scalars['Int']['input']>;
+  newSessionsOnly?: InputMaybe<Scalars['Boolean']['input']>;
+  noFlag?: InputMaybe<Scalars['Boolean']['input']>;
+  organizationId?: InputMaybe<Scalars['ID']['input']>;
+  rawQueryOnly?: InputMaybe<Scalars['Boolean']['input']>;
+  rawQueryOrSlotsOnly?: InputMaybe<Scalars['Boolean']['input']>;
+  rawQueryText?: InputMaybe<Scalars['String']['input']>;
+  responseOutputText?: InputMaybe<Scalars['String']['input']>;
+  responseRepromptText?: InputMaybe<Scalars['String']['input']>;
+  sessionId?: InputMaybe<Scalars['String']['input']>;
+  size?: InputMaybe<Scalars['Int']['input']>;
+  startDate?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
 export type AdminFaqSuggestionInput = {
-  answer: Scalars['String'];
-  appId: Scalars['String'];
-  organizationId: Scalars['String'];
-  suggestion: Scalars['String'];
+  answer: Scalars['String']['input'];
+  appId: Scalars['String']['input'];
+  organizationId: Scalars['String']['input'];
+  suggestion: Scalars['String']['input'];
 };
 
 export type AdminLaboratory = {
@@ -526,108 +528,108 @@ export type AdminLaboratory = {
   /** This uses KNN to search for suggestions to things. */
   knnSuggSearch: KnnSuggSearchQuery;
   /** This attempts to generate a valid answer based on a question for an app. */
-  provideAnswer?: Maybe<Scalars['JSON']>;
+  provideAnswer?: Maybe<Scalars['JSON']['output']>;
   /** This queries the Kendra instance available and returns the results. */
-  queryKendra?: Maybe<Scalars['JSON']>;
+  queryKendra?: Maybe<Scalars['JSON']['output']>;
   /** Returns the response from the KNN Endpoint */
-  sagemakerKnn: Scalars['JSON'];
+  sagemakerKnn: Scalars['JSON']['output'];
   /** Returns a spellcheck of the given sentence. */
   spellCheck: AdminSpellCheckLabResult;
 };
 
 
 export type AdminLaboratoryChatSuggestionsArgs = {
-  appId: Scalars['ID'];
-  indexVersion?: InputMaybe<Scalars['String']>;
-  organizationId: Scalars['ID'];
-  queryText: Scalars['String'];
-  size?: InputMaybe<Scalars['Int']>;
+  appId: Scalars['ID']['input'];
+  indexVersion?: InputMaybe<Scalars['String']['input']>;
+  organizationId: Scalars['ID']['input'];
+  queryText: Scalars['String']['input'];
+  size?: InputMaybe<Scalars['Int']['input']>;
   types?: InputMaybe<Array<InputMaybe<AdminChatSuggestionType>>>;
 };
 
 
 export type AdminLaboratoryEntitySearchArgs = {
-  searchQuery: Scalars['String'];
+  searchQuery: Scalars['String']['input'];
 };
 
 
 export type AdminLaboratoryEventsSearchArgs = {
-  from?: InputMaybe<Scalars['Int']>;
-  searchRawQueryAutoComplete?: InputMaybe<Scalars['String']>;
-  size?: InputMaybe<Scalars['Int']>;
+  from?: InputMaybe<Scalars['Int']['input']>;
+  searchRawQueryAutoComplete?: InputMaybe<Scalars['String']['input']>;
+  size?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type AdminLaboratoryFaqSearchArgs = {
-  answerAutoComplete?: InputMaybe<Scalars['String']>;
-  answerSuggestion?: InputMaybe<Scalars['String']>;
-  from?: InputMaybe<Scalars['Int']>;
-  questionsAutoComplete?: InputMaybe<Scalars['String']>;
-  size?: InputMaybe<Scalars['Int']>;
+  answerAutoComplete?: InputMaybe<Scalars['String']['input']>;
+  answerSuggestion?: InputMaybe<Scalars['String']['input']>;
+  from?: InputMaybe<Scalars['Int']['input']>;
+  questionsAutoComplete?: InputMaybe<Scalars['String']['input']>;
+  size?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type AdminLaboratoryKnnQuestionsArgs = {
-  from?: InputMaybe<Scalars['Int']>;
-  inputVectorSlice?: InputMaybe<Scalars['Int']>;
-  outputVectorSlice?: InputMaybe<Scalars['Int']>;
-  size?: InputMaybe<Scalars['Int']>;
+  from?: InputMaybe<Scalars['Int']['input']>;
+  inputVectorSlice?: InputMaybe<Scalars['Int']['input']>;
+  outputVectorSlice?: InputMaybe<Scalars['Int']['input']>;
+  size?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type AdminLaboratoryKnnRawQuerySearchArgs = {
-  appId: Scalars['ID'];
-  k?: InputMaybe<Scalars['Int']>;
-  minScore?: InputMaybe<Scalars['Float']>;
-  searchString: Scalars['String'];
-  size?: InputMaybe<Scalars['Int']>;
+  appId: Scalars['ID']['input'];
+  k?: InputMaybe<Scalars['Int']['input']>;
+  minScore?: InputMaybe<Scalars['Float']['input']>;
+  searchString: Scalars['String']['input'];
+  size?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type AdminLaboratoryKnnSearchArgs = {
-  inputVectorSlice?: InputMaybe<Scalars['Int']>;
-  k?: InputMaybe<Scalars['Int']>;
-  outputVectorSlice?: InputMaybe<Scalars['Int']>;
-  searchString: Scalars['String'];
-  size?: InputMaybe<Scalars['Int']>;
+  inputVectorSlice?: InputMaybe<Scalars['Int']['input']>;
+  k?: InputMaybe<Scalars['Int']['input']>;
+  outputVectorSlice?: InputMaybe<Scalars['Int']['input']>;
+  searchString: Scalars['String']['input'];
+  size?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type AdminLaboratoryKnnSuggSearchArgs = {
-  appId: Scalars['ID'];
-  k?: InputMaybe<Scalars['Int']>;
-  minScore?: InputMaybe<Scalars['Float']>;
-  searchString: Scalars['String'];
-  size?: InputMaybe<Scalars['Int']>;
+  appId: Scalars['ID']['input'];
+  k?: InputMaybe<Scalars['Int']['input']>;
+  minScore?: InputMaybe<Scalars['Float']['input']>;
+  searchString: Scalars['String']['input'];
+  size?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type AdminLaboratoryProvideAnswerArgs = {
-  appId: Scalars['ID'];
-  max_tokens?: InputMaybe<Scalars['Int']>;
-  temperature?: InputMaybe<Scalars['Float']>;
-  text: Scalars['String'];
+  appId: Scalars['ID']['input'];
+  max_tokens?: InputMaybe<Scalars['Int']['input']>;
+  temperature?: InputMaybe<Scalars['Float']['input']>;
+  text: Scalars['String']['input'];
 };
 
 
 export type AdminLaboratoryQueryKendraArgs = {
-  appId: Scalars['ID'];
-  text: Scalars['String'];
+  appId: Scalars['ID']['input'];
+  text: Scalars['String']['input'];
 };
 
 
 export type AdminLaboratorySagemakerKnnArgs = {
-  text: Scalars['String'];
+  text: Scalars['String']['input'];
 };
 
 
 export type AdminLaboratorySpellCheckArgs = {
-  sentence: Scalars['String'];
+  sentence: Scalars['String']['input'];
 };
 
 export type AdminMutation = {
   app: AdminAppMutation;
-  isAdmin: Scalars['Boolean'];
+  isAdmin: Scalars['Boolean']['output'];
   laboratory: LabMutation;
   webCrawler?: Maybe<WebCrawlerSettings>;
 };
@@ -636,7 +638,7 @@ export type AdminQuery = {
   /** Returns AWS server related stats. */
   aws: AdminAwsQuery;
   events: AdminEventsQuery;
-  isAdmin: Scalars['Boolean'];
+  isAdmin: Scalars['Boolean']['output'];
   laboratory: AdminLaboratory;
   webCrawler?: Maybe<WebCrawlerQuery>;
 };
@@ -646,23 +648,23 @@ export type AdminSpellCheckLabResult = {
 };
 
 export type AdminSpellCheckResult = {
-  isCorrect?: Maybe<Scalars['Boolean']>;
-  suggestions?: Maybe<Array<Maybe<Scalars['String']>>>;
-  word?: Maybe<Scalars['String']>;
+  isCorrect?: Maybe<Scalars['Boolean']['output']>;
+  suggestions?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  word?: Maybe<Scalars['String']['output']>;
 };
 
 export type AdminTotalEvents = {
   /** The events that are returned in the current query. */
   events?: Maybe<Array<Maybe<Events>>>;
   /** The total number of events that fit the last query. */
-  total: Scalars['Int'];
+  total: Scalars['Int']['output'];
 };
 
 export type AdminUpdateAppMutation = {
   /** Adds a notification that users of the app are capable of seeing. */
   addNotification: SystemNotification;
   /** Removes all notifications associated with an app. */
-  removeAllNotifications: Scalars['String'];
+  removeAllNotifications: Scalars['String']['output'];
   /** Removes a notification from the app list */
   removeNotification?: Maybe<Array<Maybe<SystemNotification>>>;
 };
@@ -670,13 +672,13 @@ export type AdminUpdateAppMutation = {
 
 export type AdminUpdateAppMutationAddNotificationArgs = {
   level?: InputMaybe<SystemNotificationLevel>;
-  message: Scalars['String'];
-  name?: InputMaybe<Scalars['String']>;
+  message: Scalars['String']['input'];
+  name?: InputMaybe<Scalars['String']['input']>;
 };
 
 
 export type AdminUpdateAppMutationRemoveNotificationArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 export type AlexaAppChannel = BaseAppChannel & {
@@ -687,7 +689,7 @@ export type AlexaAppChannel = BaseAppChannel & {
    */
   category?: Maybe<AlexaSkillCategories>;
   /** URL for the directory listing. */
-  directoryListing?: Maybe<Scalars['String']>;
+  directoryListing?: Maybe<Scalars['String']['output']>;
   /**
    * Part of the Alexa Skill Manifest publishing information. When isAvailableWorldwide is
    * false, this must be specified.
@@ -698,62 +700,62 @@ export type AlexaAppChannel = BaseAppChannel & {
   /** Part of the Alexa Skill manifest Publishing Information. */
   distributionMode?: Maybe<AlexaDistributionMode>;
   /** URI where the channel can be accessed. */
-  endPoint?: Maybe<Scalars['String']>;
+  endPoint?: Maybe<Scalars['String']['output']>;
   /** Whether or not the credentials for the channel has been uploaded. */
-  hasCredentials: Scalars['Boolean'];
+  hasCredentials: Scalars['Boolean']['output'];
   /** The ID of the channel. */
-  id: Scalars['String'];
+  id: Scalars['String']['output'];
   /**
    * The invocation name for the app.
    *
    * If not provided, the application level invocation name will be used.
    */
-  invocationName?: Maybe<Scalars['String']>;
+  invocationName?: Maybe<Scalars['String']['output']>;
   /**
    * Part of the Alexa Skill manifest publishing information.
    *
    * If true, the skill will be distributed in all countries covered by specified locales.
    */
-  isAvailableWorldwide?: Maybe<Scalars['Boolean']>;
+  isAvailableWorldwide?: Maybe<Scalars['Boolean']['output']>;
   /** Whether or not the alexa channel is building on Alexa. */
-  isBuilding: Scalars['Boolean'];
+  isBuilding: Scalars['Boolean']['output'];
   /**
    * If useManifest is true, it will use this manifest instead of generating one based on
    * other data about the assistant application
    */
   manifest?: Maybe<AlexaSkill>;
   /** The display name for the channel. */
-  name?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']['output']>;
   /**
    * A regex to match against possible intent IDs to determine if they will be processed with the NLU.
    *
    * useNLU and nluSlotName must exist or else this is ignored.
    */
-  nluIntentRegex?: Maybe<Scalars['String']>;
+  nluIntentRegex?: Maybe<Scalars['String']['output']>;
   /**
    * Query the text from the NLU. The channel must have valid credentials,
    * projectId, and nlu.
    */
   nluQuery: AlexaNluQuery;
   /** Slot name that will exist on the intent that is matched. */
-  nluSlotName?: Maybe<Scalars['String']>;
+  nluSlotName?: Maybe<Scalars['String']['output']>;
   /** Part of the Alexa Skill manifest. An array of named permissions that the skill can use. */
   permissions?: Maybe<Array<Maybe<AlexaPermissions>>>;
   /** Part of the Alexa Skill Manifest */
   privacyAndCompliance?: Maybe<AlexaPrivacyAndCompliance>;
   /** The skill ID within Alexa */
-  skillId?: Maybe<Scalars['String']>;
+  skillId?: Maybe<Scalars['String']['output']>;
   /** The lifecycle status of the app. */
   status?: Maybe<AppChannelStatus>;
   /** The type of channel */
-  type: Scalars['String'];
+  type: Scalars['String']['output'];
   /** Retrieves any events that are related to this specific app */
   usageEvents?: Maybe<TotalUsageEvents>;
   /**
    * If set to true, it will use the manifest property instead of generating one based
    * on other known data.
    */
-  useManifest?: Maybe<Scalars['Boolean']>;
+  useManifest?: Maybe<Scalars['Boolean']['output']>;
   /**
    * ID of the NLU to use within app.nlu[].
    *
@@ -762,24 +764,24 @@ export type AlexaAppChannel = BaseAppChannel & {
    *
    * If the value is "*", then it will pick the first available NLU within app.nlu[]
    */
-  useNLU?: Maybe<Scalars['String']>;
+  useNLU?: Maybe<Scalars['String']['output']>;
   /**
    * The vendor ID of the SMAPI vendor that the app is published to.
    * If this is undefined, the vendor on the organization will be used instead.
    */
-  vendorId?: Maybe<Scalars['ID']>;
+  vendorId?: Maybe<Scalars['ID']['output']>;
   vendors?: Maybe<Array<Maybe<SmapiVendor>>>;
 };
 
 
 export type AlexaAppChannelNluQueryArgs = {
-  text: Scalars['String'];
+  text: Scalars['String']['input'];
 };
 
 
 export type AlexaAppChannelUsageEventsArgs = {
-  from?: InputMaybe<Scalars['Int']>;
-  size?: InputMaybe<Scalars['Int']>;
+  from?: InputMaybe<Scalars['Int']['input']>;
+  size?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type AlexaAppChannelInput = {
@@ -795,9 +797,9 @@ export type AlexaAppChannelInput = {
    * If you are not authorized to access the URL, then it will be "Saved" to indicate
    * that there are credentials uploaded.
    */
-  credentialsURL?: InputMaybe<Scalars['String']>;
+  credentialsURL?: InputMaybe<Scalars['String']['input']>;
   /** URL for the directory listing. */
-  directoryListing?: InputMaybe<Scalars['String']>;
+  directoryListing?: InputMaybe<Scalars['String']['input']>;
   /**
    * Part of the Alexa Skill Manifest publishing information. When isAvailableWorldwide is
    * false, this must be specified.
@@ -808,7 +810,7 @@ export type AlexaAppChannelInput = {
   /** Part of the Alexa Skill manifest Publishing Information. */
   distributionMode?: InputMaybe<AlexaDistributionMode>;
   /** URI where the channel can be accessed. */
-  endPoint?: InputMaybe<Scalars['String']>;
+  endPoint?: InputMaybe<Scalars['String']['input']>;
   /**
    * The ID of the channel.
    *
@@ -819,43 +821,43 @@ export type AlexaAppChannelInput = {
    * updated.  Otherwise the channel will be inserted and an ID will be
    * generated.
    */
-  id?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['String']['input']>;
   /**
    * The invocation name for the app.
    *
    * If not provided, the application level invocation name will be used.
    */
-  invocationName?: InputMaybe<Scalars['String']>;
+  invocationName?: InputMaybe<Scalars['String']['input']>;
   /**
    * Part of the Alexa Skill manifest publishing information.
    *
    * If true, the skill will be distributed in all countries covered by specified locales.
    */
-  isAvailableWorldwide?: InputMaybe<Scalars['Boolean']>;
+  isAvailableWorldwide?: InputMaybe<Scalars['Boolean']['input']>;
   manifest?: InputMaybe<AlexaSkillInput>;
   /** The display name for the channel. */
-  name?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']['input']>;
   /**
    * A regex to match against possible intent IDs to determine if they will be processed with the NLU.
    *
    * useNLU and nluSlotName must exist or else this is ignored.
    */
-  nluIntentRegex?: InputMaybe<Scalars['String']>;
+  nluIntentRegex?: InputMaybe<Scalars['String']['input']>;
   /** Slot name that will exist on the intent that is matched. */
-  nluSlotName?: InputMaybe<Scalars['String']>;
+  nluSlotName?: InputMaybe<Scalars['String']['input']>;
   /** Part of the Alexa Skill manifest. An array of named permissions that the skill can use. */
   permissions?: InputMaybe<Array<InputMaybe<AlexaPermissionsInput>>>;
   /** Part of the Alexa Skill Manifest */
   privacyAndCompliance?: InputMaybe<AlexaPrivacyAndComplianceInput>;
   /** The skill ID within Alexa */
-  skillId?: InputMaybe<Scalars['String']>;
+  skillId?: InputMaybe<Scalars['String']['input']>;
   /** The type of channel */
-  type: Scalars['String'];
+  type: Scalars['String']['input'];
   /**
    * If set to true, it will use the manifest property instead of generating one based
    * on other known data.
    */
-  useManifest?: InputMaybe<Scalars['Boolean']>;
+  useManifest?: InputMaybe<Scalars['Boolean']['input']>;
   /**
    * ID of the NLU to use within app.nlu[].
    *
@@ -864,12 +866,12 @@ export type AlexaAppChannelInput = {
    *
    * If the value is "*", then it will pick the first available NLU within app.nlu[]
    */
-  useNLU?: InputMaybe<Scalars['String']>;
+  useNLU?: InputMaybe<Scalars['String']['input']>;
   /**
    * The vendor ID of the SMAPI vendor that the app is published to.
    * If this is undefined, the vendor on the organization will be used instead.
    */
-  vendorId?: InputMaybe<Scalars['ID']>;
+  vendorId?: InputMaybe<Scalars['ID']['input']>;
 };
 
 export enum AlexaChannelPermissionType {
@@ -888,11 +890,11 @@ export enum AlexaChannelPermissionType {
 
 /** Credentials that the Stentor client can use to call SMAPI actions. */
 export type AlexaCredentialsInput = {
-  access_token: Scalars['String'];
-  expires_at: Scalars['String'];
-  expires_in: Scalars['Long'];
-  refresh_token: Scalars['String'];
-  token_type: Scalars['String'];
+  access_token: Scalars['String']['input'];
+  expires_at: Scalars['String']['input'];
+  expires_in: Scalars['Long']['input'];
+  refresh_token: Scalars['String']['input'];
+  token_type: Scalars['String']['input'];
 };
 
 export enum AlexaDistributionMode {
@@ -911,13 +913,13 @@ export enum AlexaDistrubutionCountry {
 /** Attributes used for alexa publishing. */
 export type AlexaIntegration = {
   /** The location of the credentials needed to upload to alexa. */
-  credentialsUrl: Scalars['String'];
+  credentialsUrl: Scalars['String']['output'];
 };
 
 /** Attributes used for alexa publishing. */
 export type AlexaIntegrationInput = {
   /** The location of the credentials needed to upload to alexa. */
-  credentialsUrl: Scalars['String'];
+  credentialsUrl: Scalars['String']['input'];
 };
 
 export type AlexaInteractionModel = {
@@ -925,42 +927,42 @@ export type AlexaInteractionModel = {
 };
 
 export type AlexaInteractionModelIntent = {
-  name: Scalars['String'];
-  samples?: Maybe<Array<Maybe<Scalars['String']>>>;
+  name: Scalars['String']['output'];
+  samples?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   slots?: Maybe<Array<Maybe<AlexaInteractionModelSlot>>>;
 };
 
 export type AlexaInteractionModelSlot = {
-  name: Scalars['String'];
-  samples?: Maybe<Array<Maybe<Scalars['String']>>>;
-  type: Scalars['String'];
+  name: Scalars['String']['output'];
+  samples?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  type: Scalars['String']['output'];
 };
 
 export type AlexaInteractionModelSlotType = {
-  name: Scalars['String'];
+  name: Scalars['String']['output'];
   values: Array<Maybe<AlexaInteractionModelSlotTypeValue>>;
 };
 
 export type AlexaInteractionModelSlotTypeValue = {
-  id?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']['output']>;
   name?: Maybe<AlexaInteractionModelSlotTypeValueName>;
 };
 
 export type AlexaInteractionModelSlotTypeValueName = {
-  synonyms: Array<Maybe<Scalars['String']>>;
-  value: Scalars['String'];
+  synonyms: Array<Maybe<Scalars['String']['output']>>;
+  value: Scalars['String']['output'];
 };
 
 export type AlexaLanguageModel = {
   intents: Array<Maybe<AlexaInteractionModelIntent>>;
-  invocationName: Scalars['String'];
+  invocationName: Scalars['String']['output'];
   types?: Maybe<Array<Maybe<AlexaInteractionModelSlotType>>>;
 };
 
 export type AlexaNluQuery = {
-  intentId: Scalars['String'];
+  intentId: Scalars['String']['output'];
   slots?: Maybe<Array<Maybe<NluRequestSlot>>>;
-  type: Scalars['String'];
+  type: Scalars['String']['output'];
 };
 
 export type AlexaPermissions = {
@@ -976,7 +978,7 @@ export type AlexaPlatformData = {
    * The platform that the data is associated with
    * All Platform data has this. It determines the structure of the remaining data.
    */
-  platform: Scalars['String'];
+  platform: Scalars['String']['output'];
   /** Privacy and compliance data required for Alexa publishing */
   privacyAndCompliance: AlexaPrivacyAndCompliance;
 };
@@ -986,7 +988,7 @@ export type AlexaPlatformDataInput = {
    * The platform that the data is associated with
    * All Platform data has this. It determines the structure of the remaining data.
    */
-  platform: Scalars['String'];
+  platform: Scalars['String']['input'];
   /** Part of the Alexa Skill Manifest */
   privacyAndCompliance?: InputMaybe<AlexaPrivacyAndComplianceInput>;
 };
@@ -994,23 +996,23 @@ export type AlexaPlatformDataInput = {
 /** Data that is required to publish to Alexa. It tells Amazon what the app can do. */
 export type AlexaPrivacyAndCompliance = {
   /** Does the app allow purchases? */
-  allowsPurchases?: Maybe<Scalars['Boolean']>;
+  allowsPurchases?: Maybe<Scalars['Boolean']['output']>;
   /** Does the app contain ads? */
-  containsAds?: Maybe<Scalars['Boolean']>;
+  containsAds?: Maybe<Scalars['Boolean']['output']>;
   /** Is the app directed at children? */
-  isChildDirected?: Maybe<Scalars['Boolean']>;
+  isChildDirected?: Maybe<Scalars['Boolean']['output']>;
   /** Can the skill be imported and exported from the United States and all other countries and regions in which XAPP operates? */
-  isExportCompliant?: Maybe<Scalars['Boolean']>;
+  isExportCompliant?: Maybe<Scalars['Boolean']['output']>;
   /** Does the skill collect personal information? */
-  usesPersonalInfo?: Maybe<Scalars['Boolean']>;
+  usesPersonalInfo?: Maybe<Scalars['Boolean']['output']>;
 };
 
 export type AlexaPrivacyAndComplianceInput = {
-  allowsPurchases?: InputMaybe<Scalars['Boolean']>;
-  containsAds?: InputMaybe<Scalars['Boolean']>;
-  isChildDirected?: InputMaybe<Scalars['Boolean']>;
-  isExportCompliant?: InputMaybe<Scalars['Boolean']>;
-  usesPersonalInfo?: InputMaybe<Scalars['Boolean']>;
+  allowsPurchases?: InputMaybe<Scalars['Boolean']['input']>;
+  containsAds?: InputMaybe<Scalars['Boolean']['input']>;
+  isChildDirected?: InputMaybe<Scalars['Boolean']['input']>;
+  isExportCompliant?: InputMaybe<Scalars['Boolean']['input']>;
+  usesPersonalInfo?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type AlexaSkill = {
@@ -1085,7 +1087,7 @@ export type AlexaSkillInput = {
 
 export type AlexaSkillManifest = {
   lastUpdateRequest?: Maybe<AlexaSkillManifestLastUpdateRequest>;
-  manifestVersion?: Maybe<Scalars['String']>;
+  manifestVersion?: Maybe<Scalars['String']['output']>;
   permissions?: Maybe<Array<Maybe<AlexaPermissions>>>;
   /** Privacy and compliance data required for Alexa publishing */
   privacyAndCompliance: AlexaPrivacyAndCompliance;
@@ -1094,7 +1096,7 @@ export type AlexaSkillManifest = {
 
 export type AlexaSkillManifestInput = {
   lastUpdateRequest?: InputMaybe<AlexaSkillManifestLastUpdateRequestInput>;
-  manifestVersion?: InputMaybe<Scalars['String']>;
+  manifestVersion?: InputMaybe<Scalars['String']['input']>;
   permissions?: InputMaybe<Array<InputMaybe<AlexaPermissionsInput>>>;
   publishingInformation?: InputMaybe<AlexaSkillmanifestPublishingInformationInput>;
 };
@@ -1115,58 +1117,58 @@ export type AlexaSkillmanifestPublishingInformation = {
   category: AlexaSkillCategories;
   distributionCountries?: Maybe<AlexaDistrubutionCountry>;
   distributionMode: AlexaDistributionMode;
-  isAvailableWorldwide: Scalars['Boolean'];
-  testingInstructions: Scalars['String'];
+  isAvailableWorldwide: Scalars['Boolean']['output'];
+  testingInstructions: Scalars['String']['output'];
 };
 
 export type AlexaSkillmanifestPublishingInformationInput = {
   category: AlexaSkillCategories;
   distributionCountries?: InputMaybe<AlexaDistrubutionCountry>;
   distributionMode: AlexaDistributionMode;
-  isAvailableWorldwide: Scalars['Boolean'];
-  testingInstructions: Scalars['String'];
+  isAvailableWorldwide: Scalars['Boolean']['input'];
+  testingInstructions: Scalars['String']['input'];
 };
 
 export type Analytics = {
   /** An aggregated portion of Intent events. */
   selectedCount?: Maybe<Array<Maybe<SelectedCount>>>;
   /** The total number of handler events that are found. */
-  totalCount: Scalars['Int'];
+  totalCount: Scalars['Int']['output'];
 };
 
 export type App = {
-  _id: Scalars['ID'];
+  _id: Scalars['ID']['output'];
   /** The type of the account linking. This tells us how to redeem the token for PII. */
-  accountLinkType?: Maybe<Scalars['String']>;
+  accountLinkType?: Maybe<Scalars['String']['output']>;
   /** The unique ID of the google action that the app is linked to. */
-  actionsOnGoogleId?: Maybe<Scalars['String']>;
+  actionsOnGoogleId?: Maybe<Scalars['String']['output']>;
   /** The category that the app will fall in to when published to Alexa. */
-  alexaCategory?: Maybe<Scalars['String']>;
+  alexaCategory?: Maybe<Scalars['String']['output']>;
   /** The unique ID of the alexa skill that the app is linked to. */
-  alexaSkillId?: Maybe<Scalars['String']>;
+  alexaSkillId?: Maybe<Scalars['String']['output']>;
   analytics?: Maybe<AppAnalytics>;
   /** Unique identifier of the app in Stentor. */
-  appId: Scalars['ID'];
+  appId: Scalars['ID']['output'];
   /**
    * URL of the original banner image with aspect ratio of 16:9 and minimum dimensions of 1920x1080.
    *
    * Required by Actions on Google
    */
-  banner?: Maybe<Scalars['String']>;
-  beta?: Maybe<Scalars['JSON']>;
+  banner?: Maybe<Scalars['String']['output']>;
+  beta?: Maybe<Scalars['JSON']['output']>;
   /**
    * A description of the business and it's services.
    *
    * This can be used for LLM operations
    */
-  businessDescription?: Maybe<Scalars['String']>;
+  businessDescription?: Maybe<Scalars['String']['output']>;
   /**
    * A description of what they consider to be high value leads, prioritized queries that they
    * want to be notified immediately.
    *
    * This can be used for LLM operations
    */
-  businessHighValueLeadDescription?: Maybe<Scalars['String']>;
+  businessHighValueLeadDescription?: Maybe<Scalars['String']['output']>;
   /** The hours in which the business related to the app is open. */
   businessHours: Array<BusinessHours>;
   /** Returns an App channel based on the provided ID. */
@@ -1193,13 +1195,13 @@ export type App = {
    *
    * Default: "en"
    */
-  defaultLocale?: Maybe<Scalars['String']>;
+  defaultLocale?: Maybe<Scalars['String']['output']>;
   /**
    * The description for the app.
    *
    * The description cannot be more than 4000 characters.
    */
-  description?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']['output']>;
   /** The URL where the app is served. */
   endPoint?: Maybe<Endpoint>;
   /** The entities that are associated with the app. */
@@ -1211,9 +1213,9 @@ export type App = {
    *
    * At least three are required for publication.
    */
-  examplePhrases?: Maybe<Array<Maybe<Scalars['String']>>>;
+  examplePhrases?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   /** Contains an externalId that is used by Stentor when assuming roles on client AWS accounts. */
-  externalId?: Maybe<Scalars['String']>;
+  externalId?: Maybe<Scalars['String']['output']>;
   /** Retrieves the attributes used to download web content. */
   faq?: Maybe<TotalWebFaq>;
   /** Retrieves the attributes used to download web content */
@@ -1227,37 +1229,37 @@ export type App = {
    *
    * Aspect ration must be 1:1 and minimum dimensions are 512x512.
    */
-  icon?: Maybe<Scalars['String']>;
+  icon?: Maybe<Scalars['String']['output']>;
   /** The intents that are associated with the app. */
   intents?: Maybe<IntentsQuery>;
   /** Allows stentor_admins to view and add notes to apps for internal use. */
-  internalNotes?: Maybe<Scalars['String']>;
+  internalNotes?: Maybe<Scalars['String']['output']>;
   /** The phrase a user must speak to wake the app up on a specific platform. */
-  invocationName?: Maybe<Scalars['String']>;
+  invocationName?: Maybe<Scalars['String']['output']>;
   /** Allows app-specific overriding of IPRights. */
   ipRights?: Maybe<IpRights>;
   /** Whether or not the app is copyable to another organization. */
-  isCopyable?: Maybe<Scalars['Boolean']>;
+  isCopyable?: Maybe<Scalars['Boolean']['output']>;
   /**
    * Keywords to help when searching directories for the app
    *
    * Max of 30 keywords are allowed.
    */
-  keywords?: Maybe<Array<Maybe<Scalars['String']>>>;
+  keywords?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   /**
    * Banner that is 1920x1080.
    *
    * Required by Actions on Google
    */
-  largeBanner?: Maybe<Scalars['String']>;
+  largeBanner?: Maybe<Scalars['String']['output']>;
   /**
    * A large icon for the app, 512x512 PNG
    *
    * Required for Alexa
    */
-  largeIcon?: Maybe<Scalars['String']>;
+  largeIcon?: Maybe<Scalars['String']['output']>;
   /** The Email address to send lead captures to. */
-  leadsContact?: Maybe<Scalars['EmailAddress']>;
+  leadsContact?: Maybe<Scalars['EmailAddress']['output']>;
   /**
    * This is a series of locales that the apps supports.  These can override the
    * items that are in the original App.  The items in the main app are used as defaults if they
@@ -1271,15 +1273,15 @@ export type App = {
    *
    * Required for Actions On Google
    */
-  mediumIcon?: Maybe<Scalars['String']>;
+  mediumIcon?: Maybe<Scalars['String']['output']>;
   /** The human-readable name of the app. */
-  name: Scalars['String'];
+  name: Scalars['String']['output'];
   /** The NLUs that are available to the app. */
   nlu?: Maybe<Array<Maybe<AppNlu>>>;
   /** Potential opportunities. */
   opportunityAlerts: Array<BaseOpportunityAlert>;
   /** The ID of the organization that the app is linked to. */
-  organizationId: Scalars['ID'];
+  organizationId: Scalars['ID']['output'];
   /** Google PlaceIds that correspond with the business. */
   places?: Maybe<Array<AppPlaceDescription>>;
   /**
@@ -1288,7 +1290,7 @@ export type App = {
    */
   platformData?: Maybe<PlatformData>;
   /** URL to the privacy policy for the app. */
-  privacyPolicyUrl?: Maybe<Scalars['String']>;
+  privacyPolicyUrl?: Maybe<Scalars['String']['output']>;
   /** A referenceId is an ID of the app in a difference service outside this API */
   refernceId?: Maybe<AppReferenceId>;
   /** The status that the app is currently in Stentor. */
@@ -1298,145 +1300,145 @@ export type App = {
    *
    * Required for Alexa
    */
-  smallIcon?: Maybe<Scalars['String']>;
+  smallIcon?: Maybe<Scalars['String']['output']>;
   /** The status that the app is currently in Stentor. */
   status?: Maybe<Status>;
   /** The subscription ID that is linked to this app in Stripe. */
-  stripeSubscriptionId?: Maybe<Scalars['String']>;
+  stripeSubscriptionId?: Maybe<Scalars['String']['output']>;
   /**
    * The summary of the app.
    *
    * Shorter than the description, maximum 160 characters.
    */
-  summary?: Maybe<Scalars['String']>;
+  summary?: Maybe<Scalars['String']['output']>;
   /** Retrieves a list of notifications that the user should see related to the app. */
   systemNotifications?: Maybe<Array<Maybe<SystemNotification>>>;
   /** Type of template the app and its intents adhere to. */
-  templateType?: Maybe<Scalars['String']>;
+  templateType?: Maybe<Scalars['String']['output']>;
   /** URL to the terms of use for the app */
-  termsOfUseUrl?: Maybe<Scalars['String']>;
+  termsOfUseUrl?: Maybe<Scalars['String']['output']>;
   /** Instructions for platform testers on how to test the app. */
-  testingInstructions?: Maybe<Scalars['String']>;
+  testingInstructions?: Maybe<Scalars['String']['output']>;
   /** Contains fields related to publishing the app to various platforms such as dialogflow or alexa. */
   thirdPartyDeployments?: Maybe<ThirdPartyDeployments>;
   /** Retrieves any events that are related to this specific app */
   usageEvents?: Maybe<TotalUsageEvents>;
   /** Primary website for the company or division of a company that the app is representing. */
-  website?: Maybe<Scalars['URL']>;
+  website?: Maybe<Scalars['URL']['output']>;
   /** Data related to what was found on the customers website */
   websiteData?: Maybe<AppWebsiteData>;
 };
 
 
 export type AppChannelArgs = {
-  id?: InputMaybe<Scalars['ID']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
 };
 
 
 export type AppContentArgs = {
-  from?: InputMaybe<Scalars['Int']>;
-  size?: InputMaybe<Scalars['Int']>;
-  textHighlight?: InputMaybe<Scalars['String']>;
+  from?: InputMaybe<Scalars['Int']['input']>;
+  size?: InputMaybe<Scalars['Int']['input']>;
+  textHighlight?: InputMaybe<Scalars['String']['input']>;
 };
 
 
 export type AppContentErrorsArgs = {
-  from?: InputMaybe<Scalars['Int']>;
-  size?: InputMaybe<Scalars['Int']>;
+  from?: InputMaybe<Scalars['Int']['input']>;
+  size?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type AppContentSourcesArgs = {
-  from?: InputMaybe<Scalars['Int']>;
-  size?: InputMaybe<Scalars['Int']>;
+  from?: InputMaybe<Scalars['Int']['input']>;
+  size?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type AppEntitiesArgs = {
-  from?: InputMaybe<Scalars['Int']>;
-  size?: InputMaybe<Scalars['Int']>;
-  withDisplayName?: InputMaybe<Scalars['String']>;
-  withId?: InputMaybe<Scalars['String']>;
-  withIdOrDisplayName?: InputMaybe<Scalars['String']>;
-  withSynonym?: InputMaybe<Scalars['String']>;
-  withValue?: InputMaybe<Scalars['String']>;
-  withValueOrSynonym?: InputMaybe<Scalars['String']>;
+  from?: InputMaybe<Scalars['Int']['input']>;
+  size?: InputMaybe<Scalars['Int']['input']>;
+  withDisplayName?: InputMaybe<Scalars['String']['input']>;
+  withId?: InputMaybe<Scalars['String']['input']>;
+  withIdOrDisplayName?: InputMaybe<Scalars['String']['input']>;
+  withSynonym?: InputMaybe<Scalars['String']['input']>;
+  withValue?: InputMaybe<Scalars['String']['input']>;
+  withValueOrSynonym?: InputMaybe<Scalars['String']['input']>;
 };
 
 
 export type AppEventsArgs = {
-  byChannel?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  byEnvironment?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  byChannel?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  byEnvironment?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   byFlag?: InputMaybe<Array<InputMaybe<RawQueryEventFlag>>>;
   byMatchConfidenceRange?: InputMaybe<MatchConfidenceRange>;
-  byName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  byPlatform?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  byRequestIntentId?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  bySimilarRawQueries?: InputMaybe<Scalars['String']>;
-  byTag?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  byType?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  endDate?: InputMaybe<Scalars['DateTime']>;
-  from?: InputMaybe<Scalars['Int']>;
-  newSessionsOnly?: InputMaybe<Scalars['Boolean']>;
-  noFlag?: InputMaybe<Scalars['Boolean']>;
-  rawQueryOnly?: InputMaybe<Scalars['Boolean']>;
-  rawQueryOrSlotsOnly?: InputMaybe<Scalars['Boolean']>;
-  rawQueryText?: InputMaybe<Scalars['String']>;
-  responseOutputText?: InputMaybe<Scalars['String']>;
-  responseRepromptText?: InputMaybe<Scalars['String']>;
-  sessionId?: InputMaybe<Scalars['String']>;
-  size?: InputMaybe<Scalars['Int']>;
-  startDate?: InputMaybe<Scalars['DateTime']>;
+  byName?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  byPlatform?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  byRequestIntentId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  bySimilarRawQueries?: InputMaybe<Scalars['String']['input']>;
+  byTag?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  byType?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  endDate?: InputMaybe<Scalars['DateTime']['input']>;
+  from?: InputMaybe<Scalars['Int']['input']>;
+  newSessionsOnly?: InputMaybe<Scalars['Boolean']['input']>;
+  noFlag?: InputMaybe<Scalars['Boolean']['input']>;
+  rawQueryOnly?: InputMaybe<Scalars['Boolean']['input']>;
+  rawQueryOrSlotsOnly?: InputMaybe<Scalars['Boolean']['input']>;
+  rawQueryText?: InputMaybe<Scalars['String']['input']>;
+  responseOutputText?: InputMaybe<Scalars['String']['input']>;
+  responseRepromptText?: InputMaybe<Scalars['String']['input']>;
+  sessionId?: InputMaybe<Scalars['String']['input']>;
+  size?: InputMaybe<Scalars['Int']['input']>;
+  startDate?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
 
 export type AppFaqArgs = {
-  from?: InputMaybe<Scalars['Int']>;
-  id?: InputMaybe<Scalars['ID']>;
-  size?: InputMaybe<Scalars['Int']>;
-  text?: InputMaybe<Scalars['String']>;
+  from?: InputMaybe<Scalars['Int']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  size?: InputMaybe<Scalars['Int']['input']>;
+  text?: InputMaybe<Scalars['String']['input']>;
 };
 
 
 export type AppFaqQueryArgs = {
-  from?: InputMaybe<Scalars['Int']>;
-  question: Scalars['String'];
-  size?: InputMaybe<Scalars['Int']>;
+  from?: InputMaybe<Scalars['Int']['input']>;
+  question: Scalars['String']['input'];
+  size?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type AppGraphArgs = {
-  endDate?: InputMaybe<Scalars['DateTime']>;
-  startDate?: InputMaybe<Scalars['DateTime']>;
+  endDate?: InputMaybe<Scalars['DateTime']['input']>;
+  startDate?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
 
 export type AppHandlersArgs = {
-  from?: InputMaybe<Scalars['Int']>;
-  size?: InputMaybe<Scalars['Int']>;
-  withId?: InputMaybe<Scalars['String']>;
-  withIdOrName?: InputMaybe<Scalars['String']>;
-  withName?: InputMaybe<Scalars['String']>;
+  from?: InputMaybe<Scalars['Int']['input']>;
+  size?: InputMaybe<Scalars['Int']['input']>;
+  withId?: InputMaybe<Scalars['String']['input']>;
+  withIdOrName?: InputMaybe<Scalars['String']['input']>;
+  withName?: InputMaybe<Scalars['String']['input']>;
 };
 
 
 export type AppIntentsArgs = {
-  from?: InputMaybe<Scalars['Int']>;
-  size?: InputMaybe<Scalars['Int']>;
-  withId?: InputMaybe<Scalars['String']>;
-  withIdOrName?: InputMaybe<Scalars['String']>;
-  withName?: InputMaybe<Scalars['String']>;
+  from?: InputMaybe<Scalars['Int']['input']>;
+  size?: InputMaybe<Scalars['Int']['input']>;
+  withId?: InputMaybe<Scalars['String']['input']>;
+  withIdOrName?: InputMaybe<Scalars['String']['input']>;
+  withName?: InputMaybe<Scalars['String']['input']>;
 };
 
 
 export type AppSchedulesArgs = {
-  previousKey?: InputMaybe<Scalars['String']>;
+  previousKey?: InputMaybe<Scalars['String']['input']>;
 };
 
 
 export type AppUsageEventsArgs = {
-  from?: InputMaybe<Scalars['Int']>;
-  size?: InputMaybe<Scalars['Int']>;
+  from?: InputMaybe<Scalars['Int']['input']>;
+  size?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type AppAnalytics = {
@@ -1445,24 +1447,24 @@ export type AppAnalytics = {
 
 
 export type AppAnalyticsUserArgs = {
-  byEnvironment?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  end: Scalars['DateTime'];
-  start: Scalars['DateTime'];
+  byEnvironment?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  end: Scalars['DateTime']['input'];
+  start: Scalars['DateTime']['input'];
 };
 
 export type AppChannel = BaseAppChannel & {
   /** URL for the directory listing. */
-  directoryListing?: Maybe<Scalars['String']>;
+  directoryListing?: Maybe<Scalars['String']['output']>;
   /** URI where the channel can be accessed. */
-  endPoint?: Maybe<Scalars['String']>;
+  endPoint?: Maybe<Scalars['String']['output']>;
   /** The ID of the channel. */
-  id: Scalars['String'];
+  id: Scalars['String']['output'];
   /** The display name for the channel. */
-  name?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']['output']>;
   /** The lifecycle status of the app. */
   status?: Maybe<AppChannelStatus>;
   /** The type of channel */
-  type: Scalars['String'];
+  type: Scalars['String']['output'];
   /** Retrieves any events that are related to this specific app */
   usageEvents?: Maybe<TotalUsageEvents>;
   /**
@@ -1473,20 +1475,20 @@ export type AppChannel = BaseAppChannel & {
    *
    * If the value is "*", then it will pick the first available NLU within app.nlu[]
    */
-  useNLU?: Maybe<Scalars['String']>;
+  useNLU?: Maybe<Scalars['String']['output']>;
 };
 
 
 export type AppChannelUsageEventsArgs = {
-  from?: InputMaybe<Scalars['Int']>;
-  size?: InputMaybe<Scalars['Int']>;
+  from?: InputMaybe<Scalars['Int']['input']>;
+  size?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type AppChannelInput = {
   /** URL for the directory listing. */
-  directoryListing?: InputMaybe<Scalars['String']>;
+  directoryListing?: InputMaybe<Scalars['String']['input']>;
   /** URI where the channel can be accessed. */
-  endPoint?: InputMaybe<Scalars['String']>;
+  endPoint?: InputMaybe<Scalars['String']['input']>;
   /**
    * The ID of the channel.
    *
@@ -1497,11 +1499,11 @@ export type AppChannelInput = {
    * updated.  Otherwise the channel will be inserted and an ID will be
    * generated.
    */
-  id?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['String']['input']>;
   /** The display name for the channel. */
-  name?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']['input']>;
   /** The type of channel */
-  type: Scalars['String'];
+  type: Scalars['String']['input'];
   /**
    * ID of the NLU to use within app.nlu[].
    *
@@ -1510,7 +1512,7 @@ export type AppChannelInput = {
    *
    * If the value is "*", then it will pick the first available NLU within app.nlu[]
    */
-  useNLU?: InputMaybe<Scalars['String']>;
+  useNLU?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type AppChannelMutation = {
@@ -1626,14 +1628,14 @@ export type AppChannelMutationAddLexV2ChannelArgs = {
 
 
 export type AppChannelMutationUpdateArgs = {
-  channelId?: InputMaybe<Scalars['ID']>;
+  channelId?: InputMaybe<Scalars['ID']['input']>;
 };
 
 export type AppChannelStatus = {
   /** The email of the user who last changed the status. */
-  email: Scalars['String'];
+  email: Scalars['String']['output'];
   /** Any notes that was associated with the status change. */
-  notes?: Maybe<Scalars['String']>;
+  notes?: Maybe<Scalars['String']['output']>;
   /** A brief history of the status changes. */
   statusHistory?: Maybe<Array<Maybe<AppChannelStatusHistory>>>;
   /**
@@ -1641,60 +1643,60 @@ export type AppChannelStatus = {
    *
    * Format: UNIX timestamp
    */
-  timestamp: Scalars['Long'];
+  timestamp: Scalars['Long']['output'];
   /** The status level of the app. */
-  type: Scalars['String'];
+  type: Scalars['String']['output'];
 };
 
 export type AppChannelStatusHistory = {
   /** The email of the user who changed the status. */
-  email: Scalars['String'];
+  email: Scalars['String']['output'];
   /** Any notes that was associated with the status change. */
-  notes?: Maybe<Scalars['String']>;
+  notes?: Maybe<Scalars['String']['output']>;
   /**
    * The time the status was changed.
    *
    * Format: UNIX timestamp
    */
-  timestamp: Scalars['Long'];
+  timestamp: Scalars['Long']['output'];
   /** The status level that the app was. */
-  type: Scalars['String'];
+  type: Scalars['String']['output'];
 };
 
 export type AppInput = {
   /** The type of the account linking. This tells us how to redeem the token for PII. */
-  accountLinkType?: InputMaybe<Scalars['String']>;
+  accountLinkType?: InputMaybe<Scalars['String']['input']>;
   /** The unique ID of the google action that the app is linked to. */
-  actionsOnGoogleId?: InputMaybe<Scalars['String']>;
+  actionsOnGoogleId?: InputMaybe<Scalars['String']['input']>;
   /** The category that the app will fall in to when published to Alexa. */
-  alexaCategory?: InputMaybe<Scalars['String']>;
+  alexaCategory?: InputMaybe<Scalars['String']['input']>;
   /** The unique ID of the alexa skill that the app is linked to. */
-  alexaSkillId?: InputMaybe<Scalars['String']>;
+  alexaSkillId?: InputMaybe<Scalars['String']['input']>;
   /**
    * Unique identifier of the app in Stentor.
    * If not provided then the name will derive the appId.
    */
-  appId?: InputMaybe<Scalars['ID']>;
+  appId?: InputMaybe<Scalars['ID']['input']>;
   /**
    * URL of the original banner image with aspect ratio of 16:9 and minimum dimensions of 1920x1080.
    *
    * Required by Actions on Google
    */
-  banner?: InputMaybe<Scalars['String']>;
-  beta?: InputMaybe<Scalars['JSON']>;
+  banner?: InputMaybe<Scalars['String']['input']>;
+  beta?: InputMaybe<Scalars['JSON']['input']>;
   /**
    * A description of the business and it's services.
    *
    * This can be used for LLM operations
    */
-  businessDescription?: InputMaybe<Scalars['String']>;
+  businessDescription?: InputMaybe<Scalars['String']['input']>;
   /**
    * A description of what they consider to be high value leads, prioritized queries that they
    * want to be notified immediately.
    *
    * This can be used for LLM operations
    */
-  businessHighValueLeadDescription?: InputMaybe<Scalars['String']>;
+  businessHighValueLeadDescription?: InputMaybe<Scalars['String']['input']>;
   /** The hours in which the business related to the app is open. */
   businessHours?: InputMaybe<Array<BusinessHoursInput>>;
   /** Third party analytics platforms. */
@@ -1704,7 +1706,7 @@ export type AppInput = {
    *
    * The description cannot be more than 4000 characters.
    */
-  description?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['String']['input']>;
   /** The URL where the app is served. */
   endPoint?: InputMaybe<EndpointInput>;
   /**
@@ -1712,17 +1714,17 @@ export type AppInput = {
    *
    * At least three are required for publication.
    */
-  examplePhrases?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  examplePhrases?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /**
    * URL to the original icon file before transformation.
    *
    * Aspect ration must be 1:1 and minimum dimensions are 512x512.
    */
-  icon?: InputMaybe<Scalars['String']>;
+  icon?: InputMaybe<Scalars['String']['input']>;
   /** Allows stentor_admins to view and add notes to apps for internal use. */
-  internalNotes?: InputMaybe<Scalars['String']>;
+  internalNotes?: InputMaybe<Scalars['String']['input']>;
   /** The phrase a user must speak to wake the app up on a specific platform. */
-  invocationName?: InputMaybe<Scalars['String']>;
+  invocationName?: InputMaybe<Scalars['String']['input']>;
   /** Allows app-specific overriding of IPRights. */
   ipRights?: InputMaybe<IpRightsInput>;
   /**
@@ -1730,21 +1732,21 @@ export type AppInput = {
    *
    * Max of 30 keywords are allowed.
    */
-  keywords?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  keywords?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /**
    * Banner that is 1920x1080.
    *
    * Required by Actions on Google
    */
-  largeBanner?: InputMaybe<Scalars['String']>;
+  largeBanner?: InputMaybe<Scalars['String']['input']>;
   /**
    * A large icon for the app, 512x512 PNG
    *
    * Required for Alexa
    */
-  largeIcon?: InputMaybe<Scalars['String']>;
+  largeIcon?: InputMaybe<Scalars['String']['input']>;
   /** The Email address to send lead captures to. */
-  leadsContact?: InputMaybe<Scalars['EmailAddress']>;
+  leadsContact?: InputMaybe<Scalars['EmailAddress']['input']>;
   /** Physical location associated with the app. */
   location?: InputMaybe<LocationInput>;
   /**
@@ -1752,11 +1754,11 @@ export type AppInput = {
    *
    * Required for Actions On Google
    */
-  mediumIcon?: InputMaybe<Scalars['String']>;
+  mediumIcon?: InputMaybe<Scalars['String']['input']>;
   /** The human-readable name of the app. */
-  name: Scalars['String'];
+  name: Scalars['String']['input'];
   /** The ID of the organization that the app is linked to. */
-  organizationId: Scalars['ID'];
+  organizationId: Scalars['ID']['input'];
   /** Google PlaceIds that correspond with the business. */
   places?: InputMaybe<Array<AppPlaceDescriptionInput>>;
   /**
@@ -1765,7 +1767,7 @@ export type AppInput = {
    */
   platformData?: InputMaybe<PlatformDataInput>;
   /** URL to the privacy policy for the app. */
-  privacyPolicyUrl?: InputMaybe<Scalars['String']>;
+  privacyPolicyUrl?: InputMaybe<Scalars['String']['input']>;
   /** A referenceId is an ID of the app in a difference service outside this API */
   refernceId?: InputMaybe<AppReferenceIdInput>;
   /**
@@ -1773,27 +1775,27 @@ export type AppInput = {
    *
    * Required for Alexa
    */
-  smallIcon?: InputMaybe<Scalars['String']>;
+  smallIcon?: InputMaybe<Scalars['String']['input']>;
   /** The status that the app is currently in Stentor. */
   status?: InputMaybe<StatusInput>;
   /** The subscription ID that is linked to this app in Stripe. */
-  stripeSubscriptionId?: InputMaybe<Scalars['String']>;
+  stripeSubscriptionId?: InputMaybe<Scalars['String']['input']>;
   /**
    * The summary of the app.
    *
    * Shorter than the description, maximum 160 characters.
    */
-  summary?: InputMaybe<Scalars['String']>;
+  summary?: InputMaybe<Scalars['String']['input']>;
   /** Type of template the app and its intents adhere to. */
-  templateType?: InputMaybe<Scalars['String']>;
+  templateType?: InputMaybe<Scalars['String']['input']>;
   /** URL to the terms of use for the app */
-  termsOfUseUrl?: InputMaybe<Scalars['String']>;
+  termsOfUseUrl?: InputMaybe<Scalars['String']['input']>;
   /** Instructions for platform testers on how to test the app. */
-  testingInstructions?: InputMaybe<Scalars['String']>;
+  testingInstructions?: InputMaybe<Scalars['String']['input']>;
   /** Contains fields related to publishing the app to various platforms such as dialogflow or alexa. */
   thirdPartyDeployments?: InputMaybe<ThirdPartyDeploymentsInput>;
   /** Primary website for the company or division of a company that the app is representing. */
-  website?: InputMaybe<Scalars['URLString']>;
+  website?: InputMaybe<Scalars['URLString']['input']>;
   /** Data related to what was found on the customers website */
   websiteData?: InputMaybe<AppWebsiteDataInput>;
 };
@@ -2041,105 +2043,105 @@ export type AppMutationAddAppArgs = {
 
 
 export type AppMutationImportAppArgs = {
-  appId?: InputMaybe<Scalars['ID']>;
-  modelOnly?: InputMaybe<Scalars['Boolean']>;
-  overwrite?: InputMaybe<Scalars['Boolean']>;
-  url: Scalars['URL'];
+  appId?: InputMaybe<Scalars['ID']['input']>;
+  modelOnly?: InputMaybe<Scalars['Boolean']['input']>;
+  overwrite?: InputMaybe<Scalars['Boolean']['input']>;
+  url: Scalars['URL']['input'];
 };
 
 
 export type AppMutationUpdateArgs = {
-  appId: Scalars['ID'];
+  appId: Scalars['ID']['input'];
 };
 
 export type AppNlu = BaseAppNlu & {
   /** The reference ID for the NLU */
-  id?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']['output']>;
   /** The type of NLU. */
-  type: Scalars['String'];
+  type: Scalars['String']['output'];
 };
 
 export type AppNluInput = {
   /** The reference ID for the NLU */
-  id?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['String']['input']>;
   /** The type of NLU. */
-  type: Scalars['String'];
+  type: Scalars['String']['input'];
 };
 
 export type AppPlaceDescription = {
-  address?: Maybe<Scalars['String']>;
-  default?: Maybe<Scalars['Boolean']>;
-  name?: Maybe<Scalars['String']>;
-  placeId?: Maybe<Scalars['String']>;
+  address?: Maybe<Scalars['String']['output']>;
+  default?: Maybe<Scalars['Boolean']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  placeId?: Maybe<Scalars['String']['output']>;
 };
 
 export type AppPlaceDescriptionInput = {
-  address?: InputMaybe<Scalars['String']>;
-  default?: InputMaybe<Scalars['Boolean']>;
-  name?: InputMaybe<Scalars['String']>;
-  placeId?: InputMaybe<Scalars['String']>;
+  address?: InputMaybe<Scalars['String']['input']>;
+  default?: InputMaybe<Scalars['Boolean']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  placeId?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type AppReferenceId = {
   /** The ID of as it is in the service. */
-  id: Scalars['ID'];
+  id: Scalars['ID']['output'];
   /** The service that the ID is referencing to. */
-  service: Scalars['String'];
+  service: Scalars['String']['output'];
 };
 
 export type AppReferenceIdInput = {
   /** The ID of as it is in the service. */
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
   /** The service that the ID is referencing to. */
-  service: Scalars['String'];
+  service: Scalars['String']['input'];
 };
 
 export type AppSchedules = {
   /** The key to include in the next query of schedules. */
-  nextKey?: Maybe<Scalars['String']>;
+  nextKey?: Maybe<Scalars['String']['output']>;
   /** The schedules that were found */
   schedules: Array<Maybe<WebCrawlSchedule>>;
 };
 
 export type AppTemplateInput = {
   /** The type of the account linking. This tells us how to redeem the token for PII. */
-  accountLinkType?: InputMaybe<Scalars['String']>;
+  accountLinkType?: InputMaybe<Scalars['String']['input']>;
   /** The unique ID of the google action that the app is linked to. */
-  actionsOnGoogleId?: InputMaybe<Scalars['String']>;
+  actionsOnGoogleId?: InputMaybe<Scalars['String']['input']>;
   /** The category that the app will fall in to when published to Alexa. */
-  alexaCategory?: InputMaybe<Scalars['String']>;
+  alexaCategory?: InputMaybe<Scalars['String']['input']>;
   /** The unique ID of the alexa skill that the app is linked to. */
-  alexaSkillId?: InputMaybe<Scalars['String']>;
+  alexaSkillId?: InputMaybe<Scalars['String']['input']>;
   /**
    * URL of the original banner image with aspect ratio of 16:9 and minimum dimensions of 1920x1080.
    *
    * Required by Actions on Google
    */
-  banner?: InputMaybe<Scalars['String']>;
+  banner?: InputMaybe<Scalars['String']['input']>;
   /** The location of the collaboration agreement between the app and XAPP. */
-  collaborationAgreementUrl?: InputMaybe<Scalars['String']>;
+  collaborationAgreementUrl?: InputMaybe<Scalars['String']['input']>;
   /**
    * The description for the app.
    *
    * The description cannot be more than 4000 characters.
    */
-  description?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['String']['input']>;
   /**
    * Example phrases the help users know how to use the app.
    *
    * At least three are required for publication.
    */
-  examplePhrases?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  examplePhrases?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /**
    * URL to the original icon file before transformation.
    *
    * Aspect ration must be 1:1 and minimum dimensions are 512x512.
    */
-  icon?: InputMaybe<Scalars['String']>;
+  icon?: InputMaybe<Scalars['String']['input']>;
   /** Allows stentor_admins to view and add notes to apps for internal use. */
-  internalNotes?: InputMaybe<Scalars['String']>;
+  internalNotes?: InputMaybe<Scalars['String']['input']>;
   /** The phrase a user must speak to wake the app up on a specific platform. */
-  invocationName?: InputMaybe<Scalars['String']>;
+  invocationName?: InputMaybe<Scalars['String']['input']>;
   /** Allows app-specific overriding of IPRights. */
   ipRights?: InputMaybe<IpRightsInput>;
   /**
@@ -2147,49 +2149,49 @@ export type AppTemplateInput = {
    *
    * Max of 30 keywords are allowed.
    */
-  keywords?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  keywords?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /**
    * Banner that is 1920x1080.
    *
    * Required by Actions on Google
    */
-  largeBanner?: InputMaybe<Scalars['String']>;
+  largeBanner?: InputMaybe<Scalars['String']['input']>;
   /**
    * A large icon for the app, 512x512 PNG
    *
    * Required for Alexa
    */
-  largeIcon?: InputMaybe<Scalars['String']>;
+  largeIcon?: InputMaybe<Scalars['String']['input']>;
   /**
    * A medium icon for the app, 192x192 PNG.
    *
    * Required for Actions On Google
    */
-  mediumIcon?: InputMaybe<Scalars['String']>;
+  mediumIcon?: InputMaybe<Scalars['String']['input']>;
   /** The human-readable name of the app. */
-  name: Scalars['String'];
+  name: Scalars['String']['input'];
   /** URL to the privacy policy for the app. */
-  privacyPolicyUrl?: InputMaybe<Scalars['String']>;
+  privacyPolicyUrl?: InputMaybe<Scalars['String']['input']>;
   /**
    * A small icon for the app, 108x108 PNG
    *
    * Required for Alexa
    */
-  smallIcon?: InputMaybe<Scalars['String']>;
+  smallIcon?: InputMaybe<Scalars['String']['input']>;
   /** The subscription ID that is linked to this app in Stripe. */
-  stripeSubscriptionId?: InputMaybe<Scalars['String']>;
+  stripeSubscriptionId?: InputMaybe<Scalars['String']['input']>;
   /**
    * The summary of the app.
    *
    * Shorter than the description, maximum 160 characters.
    */
-  summary?: InputMaybe<Scalars['String']>;
+  summary?: InputMaybe<Scalars['String']['input']>;
   /** The type of template that the app is to build from. */
   templateType: AppTemplateType;
   /** URL to the terms of use for the app */
-  termsOfUseUrl?: InputMaybe<Scalars['String']>;
+  termsOfUseUrl?: InputMaybe<Scalars['String']['input']>;
   /** Instructions for platform testers on how to test the app. */
-  testingInstructions?: InputMaybe<Scalars['String']>;
+  testingInstructions?: InputMaybe<Scalars['String']['input']>;
   /** Contains fields related to publishing the app to various platforms such as dialogflow or alexa. */
   thirdPartyDeployments?: InputMaybe<ThirdPartyDeploymentsInput>;
 };
@@ -2203,27 +2205,27 @@ export enum AppTemplateType {
 /** Remote tests that can be executed for the app. */
 export type AppTest = {
   /** The unique identifier of the app that the test is linked to. */
-  appId: Scalars['ID'];
+  appId: Scalars['ID']['output'];
   /** COnfigurations for executing the test. */
   config?: Maybe<TestConfig>;
   /** The time that the test was created.  Format: ISO 8601 */
-  createdOn: Scalars['String'];
+  createdOn: Scalars['String']['output'];
   /** Utterance Test Only: The expected result of the utterance test. */
   expectedResult?: Maybe<ExpectedUtteranceTestResult>;
   /** A list of the test history. */
   history?: Maybe<Array<Maybe<TestHistory>>>;
   /** Utterance Tests Only: The platform that the test should run on.  If not present, it will run on all platforms. */
-  platform?: Maybe<Scalars['String']>;
+  platform?: Maybe<Scalars['String']['output']>;
   /** Do Nothing Tests Only: The result of the test. */
-  result?: Maybe<Scalars['String']>;
+  result?: Maybe<Scalars['String']['output']>;
   /** The state that the test is currently in. If there is no state, then the test was never executed. */
   state?: Maybe<TestState>;
   /** The unique identifier for the test. */
-  testId: Scalars['ID'];
+  testId: Scalars['ID']['output'];
   /** The type of tests that this is. */
-  testType: Scalars['String'];
+  testType: Scalars['String']['output'];
   /** Utterance Tests Only: The utterance that the test is executing for. */
-  utterance?: Maybe<Scalars['String']>;
+  utterance?: Maybe<Scalars['String']['output']>;
 };
 
 export enum AppUsageInterval {
@@ -2236,14 +2238,14 @@ export enum AppUsageInterval {
 
 export type AppUsageStat = {
   /** ID of the organization that contains the app */
-  appId: Scalars['ID'];
+  appId: Scalars['ID']['output'];
   /** A CSV formatted output of the stats found. */
   csv: UsageStatCsvReturn;
   intervals: Array<Maybe<UsageStat>>;
-  newUsers: Scalars['Int'];
-  returningUsers: Scalars['Int'];
-  totalSessions: Scalars['Int'];
-  totalUsers: Scalars['Int'];
+  newUsers: Scalars['Int']['output'];
+  returningUsers: Scalars['Int']['output'];
+  totalSessions: Scalars['Int']['output'];
+  totalUsers: Scalars['Int']['output'];
 };
 
 export type AppWebsiteData = {
@@ -2252,11 +2254,11 @@ export type AppWebsiteData = {
    *
    * These can be used as suggestion chips.
    */
-  callsToAction?: Maybe<Array<Scalars['String']>>;
+  callsToAction?: Maybe<Array<Scalars['String']['output']>>;
   /** Primary theme color, hex value, based on an image of the website. */
-  primaryColor?: Maybe<Scalars['String']>;
+  primaryColor?: Maybe<Scalars['String']['output']>;
   /** Secondary color, hex value, that complements the primary color on the website. */
-  secondaryColor?: Maybe<Scalars['String']>;
+  secondaryColor?: Maybe<Scalars['String']['output']>;
 };
 
 export type AppWebsiteDataInput = {
@@ -2265,11 +2267,11 @@ export type AppWebsiteDataInput = {
    *
    * These can be used as suggestion chips.
    */
-  callsToAction?: InputMaybe<Array<Scalars['String']>>;
+  callsToAction?: InputMaybe<Array<Scalars['String']['input']>>;
   /** Primary theme color, hex value, based on an image of the website. */
-  primaryColor?: InputMaybe<Scalars['String']>;
+  primaryColor?: InputMaybe<Scalars['String']['input']>;
   /** Secondary color, hex value, that complements the primary color on the website. */
-  secondaryColor?: InputMaybe<Scalars['String']>;
+  secondaryColor?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** A collections query which returns a collection of apps */
@@ -2277,7 +2279,7 @@ export type AppsQuery = {
   /** A subset of apps that were viewed. */
   apps?: Maybe<Array<Maybe<SearchedApp>>>;
   /** The total number of apps that were found in the query */
-  total: Scalars['Int'];
+  total: Scalars['Int']['output'];
 };
 
 export enum AuthOrigin {
@@ -2293,17 +2295,17 @@ export enum AuthVerifyOrigin {
 
 export type BaseAppChannel = {
   /** URL for the directory listing. */
-  directoryListing?: Maybe<Scalars['String']>;
+  directoryListing?: Maybe<Scalars['String']['output']>;
   /** URI where the channel can be accessed. */
-  endPoint?: Maybe<Scalars['String']>;
+  endPoint?: Maybe<Scalars['String']['output']>;
   /** The ID of the channel. */
-  id: Scalars['String'];
+  id: Scalars['String']['output'];
   /** The display name for the channel. */
-  name?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']['output']>;
   /** The lifecycle status of the app. */
   status?: Maybe<AppChannelStatus>;
   /** The type of channel */
-  type: Scalars['String'];
+  type: Scalars['String']['output'];
   /** Retrieves any events that are related to this specific app */
   usageEvents?: Maybe<TotalUsageEvents>;
   /**
@@ -2314,49 +2316,49 @@ export type BaseAppChannel = {
    *
    * If the value is "*", then it will pick the first available NLU within app.nlu[]
    */
-  useNLU?: Maybe<Scalars['String']>;
+  useNLU?: Maybe<Scalars['String']['output']>;
 };
 
 
 export type BaseAppChannelUsageEventsArgs = {
-  from?: InputMaybe<Scalars['Int']>;
-  size?: InputMaybe<Scalars['Int']>;
+  from?: InputMaybe<Scalars['Int']['input']>;
+  size?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type BaseAppNlu = {
   /** The reference ID for the NLU */
-  id?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']['output']>;
   /** The type of NLU. */
-  type: Scalars['String'];
+  type: Scalars['String']['output'];
 };
 
 export type BaseDisplay = {
-  payload?: Maybe<Scalars['JSON']>;
-  title?: Maybe<Scalars['String']>;
-  token?: Maybe<Scalars['String']>;
-  type: Scalars['String'];
+  payload?: Maybe<Scalars['JSON']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  token?: Maybe<Scalars['String']['output']>;
+  type: Scalars['String']['output'];
 };
 
 export type BaseHandlerPath = {
-  actions?: Maybe<Array<Maybe<Scalars['JSON']>>>;
+  actions?: Maybe<Array<Maybe<Scalars['JSON']['output']>>>;
   /** Conditions to be met. */
-  conditions?: Maybe<Scalars['PathConditions']>;
-  data?: Maybe<Scalars['JSON']>;
+  conditions?: Maybe<Scalars['PathConditions']['output']>;
+  data?: Maybe<Scalars['JSON']['output']>;
   /**
    * Optional platform filter for the path.
    *
    * If set, the path will only apply to the specified platform.
    */
-  platform?: Maybe<Scalars['String']>;
+  platform?: Maybe<Scalars['String']['output']>;
 };
 
 export type BaseOpportunityAlert = {
   /** Registered alerts */
   alerts: Array<OpportunityAlertDetail>;
   /** Temporarily disable the alert */
-  disabled?: Maybe<Scalars['Boolean']>;
+  disabled?: Maybe<Scalars['Boolean']['output']>;
   /** The Google PlaceID for the location */
-  placeId?: Maybe<Scalars['String']>;
+  placeId?: Maybe<Scalars['String']['output']>;
 };
 
 export type BaseStudioTierPaymentAccount = {
@@ -2365,50 +2367,50 @@ export type BaseStudioTierPaymentAccount = {
 
 export type BaseSystemNotification = {
   /** A time when the notification was received */
-  created: Scalars['DateTime'];
+  created: Scalars['DateTime']['output'];
   /** A unique identifier for the notification */
-  id: Scalars['ID'];
+  id: Scalars['ID']['output'];
   /** The custom level that the notification should be at. */
   level: SystemNotificationLevel;
   /** A details description of the notification */
-  message: Scalars['String'];
+  message: Scalars['String']['output'];
   /** A title or name of the notification */
-  name: Scalars['String'];
+  name: Scalars['String']['output'];
 };
 
 export type BaseWebContent = {
   /** Unique ID for the web content */
-  _id: Scalars['String'];
+  _id: Scalars['String']['output'];
   /** The last time the website was updated. */
-  lastUpdated: Scalars['DateTime'];
+  lastUpdated: Scalars['DateTime']['output'];
   /** The name of the content */
-  name: Scalars['String'];
+  name: Scalars['String']['output'];
   /**
    * The raw-text of the content.
    *
    * For websites, this will be the text of the website with the HTML removed.
    */
-  text: Scalars['String'];
+  text: Scalars['String']['output'];
   /** The type of content that was parsed. */
   type: WebContentType;
   /** The full URL of the web content */
-  url: Scalars['String'];
+  url: Scalars['String']['output'];
 };
 
 export type BespokenDataStream = {
-  token: Scalars['String'];
-  type: Scalars['String'];
+  token: Scalars['String']['output'];
+  type: Scalars['String']['output'];
 };
 
 export type BespokenDataStreamInput = {
-  token: Scalars['String'];
-  type: Scalars['String'];
+  token: Scalars['String']['input'];
+  type: Scalars['String']['input'];
 };
 
 export type BillingContact = {
-  email?: Maybe<Scalars['String']>;
-  name: Scalars['String'];
-  phoneNumber?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']['output']>;
+  name: Scalars['String']['output'];
+  phoneNumber?: Maybe<Scalars['String']['output']>;
 };
 
 export type BillingContactInput = {
@@ -2417,30 +2419,30 @@ export type BillingContactInput = {
    *
    * Required
    */
-  email: Scalars['String'];
+  email: Scalars['String']['input'];
   /** The name of the contact */
-  name: Scalars['String'];
+  name: Scalars['String']['input'];
   /**
    * The phone number of the contact.
    *
    * Optional
    */
-  phoneNumber?: InputMaybe<Scalars['String']>;
+  phoneNumber?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type BlacklistedWebsite = {
   /** The user that blacklisted the website. */
-  blacklistedBy?: Maybe<Scalars['String']>;
+  blacklistedBy?: Maybe<Scalars['String']['output']>;
   /** The date which the website was blacklisted */
-  createdOn: Scalars['DateTime'];
+  createdOn: Scalars['DateTime']['output'];
   /** URL of the blacklisted website. */
-  url: Scalars['String'];
+  url: Scalars['String']['output'];
 };
 
 export type BrandContact = {
-  email?: Maybe<Scalars['String']>;
-  name: Scalars['String'];
-  phoneNumber?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']['output']>;
+  name: Scalars['String']['output'];
+  phoneNumber?: Maybe<Scalars['String']['output']>;
 };
 
 export type BrandContactInput = {
@@ -2449,15 +2451,15 @@ export type BrandContactInput = {
    *
    * Required
    */
-  email: Scalars['String'];
+  email: Scalars['String']['input'];
   /** The name of the contact */
-  name: Scalars['String'];
+  name: Scalars['String']['input'];
   /**
    * The phone number of the contact.
    *
    * Optional
    */
-  phoneNumber?: InputMaybe<Scalars['String']>;
+  phoneNumber?: InputMaybe<Scalars['String']['input']>;
 };
 
 export enum BusinessDayOfWeek {
@@ -2476,13 +2478,13 @@ export type BusinessHourPeriod = {
 
 export type BusinessHourPeriodDetail = {
   day: BusinessDayOfWeek;
-  time: Scalars['DateTime'];
+  time: Scalars['DateTime']['output'];
 };
 
 export type BusinessHourPeriodDetailInput = {
   /** The day that the period relates to. */
   day: BusinessDayOfWeek;
-  time: Scalars['time_String_NotNull_format_date'];
+  time: Scalars['time_String_NotNull_format_date']['input'];
 };
 
 export type BusinessHourPeriodInput = {
@@ -2506,110 +2508,110 @@ export type CmsMutation = {
 
 
 export type CmsMutationUpdateArgs = {
-  tokenId: Scalars['ID'];
+  tokenId: Scalars['ID']['input'];
 };
 
 export type CmsToken = {
   /** The appId of the app that the token is associated with. */
-  appId?: Maybe<Scalars['ID']>;
+  appId?: Maybe<Scalars['ID']['output']>;
   /** The day the token was created. */
-  created: Scalars['DateTime'];
+  created: Scalars['DateTime']['output'];
   /** The last time the token was used. */
-  lastUsed?: Maybe<Scalars['DateTime']>;
+  lastUsed?: Maybe<Scalars['DateTime']['output']>;
   /** A partial human-readable portion of the token */
-  mask: Scalars['String'];
+  mask: Scalars['String']['output'];
   /** The organizationId of the organization that the token is associated with. */
-  organizationId?: Maybe<Scalars['ID']>;
+  organizationId?: Maybe<Scalars['ID']['output']>;
   /** The permissions that the token grants. */
-  scope: Array<Maybe<Scalars['String']>>;
+  scope: Array<Maybe<Scalars['String']['output']>>;
   /** The ID of the token that was created */
-  tokenId: Scalars['ID'];
+  tokenId: Scalars['ID']['output'];
 };
 
 export type CmsUpdateMutation = {
   /** Removes the CMS token provided. */
-  delete: Scalars['String'];
+  delete: Scalars['String']['output'];
 };
 
 export type CardDisplay = BaseDisplay & {
-  accessibilityText?: Maybe<Scalars['String']>;
+  accessibilityText?: Maybe<Scalars['String']['output']>;
   buttons?: Maybe<Array<Maybe<CardDisplayButton>>>;
-  content?: Maybe<Scalars['String']>;
+  content?: Maybe<Scalars['String']['output']>;
   /** When present, if the image is clicked the provided website will open. */
-  imageActionUrl?: Maybe<Scalars['String']>;
-  largeImageUrl?: Maybe<Scalars['String']>;
-  payload?: Maybe<Scalars['JSON']>;
-  smallImageUrl?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
-  token?: Maybe<Scalars['String']>;
-  type: Scalars['String'];
+  imageActionUrl?: Maybe<Scalars['String']['output']>;
+  largeImageUrl?: Maybe<Scalars['String']['output']>;
+  payload?: Maybe<Scalars['JSON']['output']>;
+  smallImageUrl?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  token?: Maybe<Scalars['String']['output']>;
+  type: Scalars['String']['output'];
 };
 
 export type CardDisplayButton = {
-  openUrlAction: Scalars['String'];
-  title: Scalars['String'];
+  openUrlAction: Scalars['String']['output'];
+  title: Scalars['String']['output'];
 };
 
 export type CardDisplayButtonInput = {
-  openUrlAction: Scalars['String'];
-  title: Scalars['String'];
+  openUrlAction: Scalars['String']['input'];
+  title: Scalars['String']['input'];
 };
 
 export type CardDisplayInput = {
-  accessibilityText?: InputMaybe<Scalars['String']>;
+  accessibilityText?: InputMaybe<Scalars['String']['input']>;
   buttons?: InputMaybe<Array<InputMaybe<CardDisplayButtonInput>>>;
-  content?: InputMaybe<Scalars['String']>;
-  largeImageUrl?: InputMaybe<Scalars['String']>;
-  smallImageUrl?: InputMaybe<Scalars['String']>;
-  title?: InputMaybe<Scalars['String']>;
-  token?: InputMaybe<Scalars['String']>;
-  type: Scalars['String'];
+  content?: InputMaybe<Scalars['String']['input']>;
+  largeImageUrl?: InputMaybe<Scalars['String']['input']>;
+  smallImageUrl?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  token?: InputMaybe<Scalars['String']['input']>;
+  type: Scalars['String']['input'];
 };
 
 /** A channel that is specific for apps to run on the Actions On Google. */
 export type ChatWidgetAppChannel = BaseAppChannel & {
   /** Optional key used for basic authentication */
-  accountKey?: Maybe<Scalars['String']>;
+  accountKey?: Maybe<Scalars['String']['output']>;
   autoOpenOnPattern?: Maybe<WidgetAutoOpenOnPattern>;
-  autoOpenOnWidth?: Maybe<Scalars['String']>;
-  autocompleteSuggestionsUrl?: Maybe<Scalars['URL']>;
+  autoOpenOnWidth?: Maybe<Scalars['String']['output']>;
+  autocompleteSuggestionsUrl?: Maybe<Scalars['URL']['output']>;
   /** The web location for the avatar */
-  avatarUrl?: Maybe<Scalars['URL']>;
-  botName?: Maybe<Scalars['String']>;
+  avatarUrl?: Maybe<Scalars['URL']['output']>;
+  botName?: Maybe<Scalars['String']['output']>;
   chatButton?: Maybe<ChatWidgetChatButtonConfig>;
   configurableMessages?: Maybe<WidgetConfigurableMessagesConfig>;
   connection?: Maybe<ChatWidgetServerConfig>;
   cta?: Maybe<CtaConfig>;
-  direct?: Maybe<Scalars['Boolean']>;
+  direct?: Maybe<Scalars['Boolean']['output']>;
   /** URL for the directory listing. */
-  directoryListing?: Maybe<Scalars['String']>;
+  directoryListing?: Maybe<Scalars['String']['output']>;
   /** Widget is disabled */
-  disabled?: Maybe<Scalars['Boolean']>;
+  disabled?: Maybe<Scalars['Boolean']['output']>;
   /** URI where the channel can be accessed. */
-  endPoint?: Maybe<Scalars['String']>;
+  endPoint?: Maybe<Scalars['String']['output']>;
   footer?: Maybe<ChatWidgetFooterConfig>;
   header?: Maybe<ChatWidgetHeaderConfig>;
   /** The ID of the channel. */
-  id: Scalars['String'];
+  id: Scalars['String']['output'];
   input?: Maybe<ChatWidgetInputConfig>;
   /** The key that goes in the url when retrieving the chat widget to apply custom themes. */
-  key?: Maybe<Scalars['String']>;
+  key?: Maybe<Scalars['String']['output']>;
   menu?: Maybe<ChatWidgetMenuConfig>;
-  middlewareUrl?: Maybe<Scalars['String']>;
+  middlewareUrl?: Maybe<Scalars['String']['output']>;
   /** The display name for the channel. */
-  name?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']['output']>;
   /**
    * The backend for the URL
    * @deprecated Use connection
    */
-  serverUrl?: Maybe<Scalars['URLString']>;
-  sessionExpiration?: Maybe<Scalars['String']>;
+  serverUrl?: Maybe<Scalars['URLString']['output']>;
+  sessionExpiration?: Maybe<Scalars['String']['output']>;
   /** The lifecycle status of the app. */
   status?: Maybe<AppChannelStatus>;
   /** Theme for the widget */
   theme?: Maybe<ChatWidgetTheme>;
   /** The type of channel */
-  type: Scalars['String'];
+  type: Scalars['String']['output'];
   typingStatus?: Maybe<ChatWidgetTypingStatusConfig>;
   urls?: Maybe<ChatWidgetAppChannelUrlsConfig>;
   /** Retrieves any events that are related to this specific app */
@@ -2622,36 +2624,36 @@ export type ChatWidgetAppChannel = BaseAppChannel & {
    *
    * If the value is "*", then it will pick the first available NLU within app.nlu[]
    */
-  useNLU?: Maybe<Scalars['String']>;
+  useNLU?: Maybe<Scalars['String']['output']>;
 };
 
 
 /** A channel that is specific for apps to run on the Actions On Google. */
 export type ChatWidgetAppChannelUsageEventsArgs = {
-  from?: InputMaybe<Scalars['Int']>;
-  size?: InputMaybe<Scalars['Int']>;
+  from?: InputMaybe<Scalars['Int']['input']>;
+  size?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type ChatWidgetAppChannelInput = {
   /** Optional key used for basic authentication */
-  accountKey?: InputMaybe<Scalars['String']>;
+  accountKey?: InputMaybe<Scalars['String']['input']>;
   autoOpenOnPattern?: InputMaybe<WidgetAutoOpenOnPatternInput>;
-  autoOpenOnWidth?: InputMaybe<Scalars['String']>;
-  autocompleteSuggestionsUrl?: InputMaybe<Scalars['URL']>;
+  autoOpenOnWidth?: InputMaybe<Scalars['String']['input']>;
+  autocompleteSuggestionsUrl?: InputMaybe<Scalars['URL']['input']>;
   /** The web location for the avatar */
-  avatarUrl?: InputMaybe<Scalars['URL']>;
-  botName?: InputMaybe<Scalars['String']>;
+  avatarUrl?: InputMaybe<Scalars['URL']['input']>;
+  botName?: InputMaybe<Scalars['String']['input']>;
   chatButton?: InputMaybe<ChatWidgetChatButtonConfigInput>;
   configurableMessages?: InputMaybe<WidgetConfigurableMessagesConfigInput>;
   connection?: InputMaybe<ChatWidgetServerConfigInput>;
   cta?: InputMaybe<CtaConfigInput>;
-  direct?: InputMaybe<Scalars['Boolean']>;
+  direct?: InputMaybe<Scalars['Boolean']['input']>;
   /** URL for the directory listing. */
-  directoryListing?: InputMaybe<Scalars['String']>;
+  directoryListing?: InputMaybe<Scalars['String']['input']>;
   /** Widget is disabled */
-  disabled?: InputMaybe<Scalars['Boolean']>;
+  disabled?: InputMaybe<Scalars['Boolean']['input']>;
   /** URI where the channel can be accessed. */
-  endPoint?: InputMaybe<Scalars['String']>;
+  endPoint?: InputMaybe<Scalars['String']['input']>;
   footer?: InputMaybe<ChatWidgetFooterConfigInput>;
   header?: InputMaybe<ChatWidgetHeaderConfigInput>;
   /**
@@ -2664,23 +2666,23 @@ export type ChatWidgetAppChannelInput = {
    * updated.  Otherwise the channel will be inserted and an ID will be
    * generated.
    */
-  id?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['String']['input']>;
   input?: InputMaybe<ChatWidgetInputConfigInput>;
   menu?: InputMaybe<ChatWidgetMenuConfigInput>;
-  middlewareUrl?: InputMaybe<Scalars['URLString']>;
+  middlewareUrl?: InputMaybe<Scalars['URLString']['input']>;
   /** The display name for the channel. */
-  name?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']['input']>;
   /**
    * The backend for the URL
    *
    * @deprecated use connection
    */
-  serverUrl?: InputMaybe<Scalars['URLString']>;
-  sessionExpiration?: InputMaybe<Scalars['String']>;
+  serverUrl?: InputMaybe<Scalars['URLString']['input']>;
+  sessionExpiration?: InputMaybe<Scalars['String']['input']>;
   /** Theme for the widget */
   theme?: InputMaybe<ChatWidgetThemeInput>;
   /** The type of channel */
-  type: Scalars['String'];
+  type: Scalars['String']['input'];
   typingStatus?: InputMaybe<ChatWidgetTypingStatusConfigInput>;
   urls?: InputMaybe<ChatWidgetAppChannelUrlsConfigInput>;
   /**
@@ -2691,7 +2693,7 @@ export type ChatWidgetAppChannelInput = {
    *
    * If the value is "*", then it will pick the first available NLU within app.nlu[]
    */
-  useNLU?: InputMaybe<Scalars['String']>;
+  useNLU?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ChatWidgetAppChannelUrlBehaviorBase = {
@@ -2707,15 +2709,15 @@ export type ChatWidgetAppChannelUrlBehaviorNewTab = ChatWidgetAppChannelUrlBehav
 };
 
 export type ChatWidgetAppChannelUrlBehaviorNewWindow = ChatWidgetAppChannelUrlBehaviorBase & {
-  height?: Maybe<Scalars['Int']>;
+  height?: Maybe<Scalars['Int']['output']>;
   type: ChatWidgetAppChannelWidgetUrlBehaviorType;
-  width?: Maybe<Scalars['Int']>;
+  width?: Maybe<Scalars['Int']['output']>;
 };
 
 export type ChatWidgetAppChannelUrlBehaviorNewWindowWinowInput = {
-  height?: InputMaybe<Scalars['Int']>;
+  height?: InputMaybe<Scalars['Int']['input']>;
   type: ChatWidgetAppChannelWidgetUrlBehaviorType;
-  width?: InputMaybe<Scalars['Int']>;
+  width?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type ChatWidgetAppChannelUrlBehaviorSameWindow = ChatWidgetAppChannelUrlBehaviorBase & {
@@ -2724,12 +2726,12 @@ export type ChatWidgetAppChannelUrlBehaviorSameWindow = ChatWidgetAppChannelUrlB
 
 export type ChatWidgetAppChannelUrlPolicy = {
   behavior: ChatWidgetAppChannelUrlBehaviorBase;
-  pattern: Scalars['String'];
+  pattern: Scalars['String']['output'];
 };
 
 export type ChatWidgetAppChannelUrlPolicyInput = {
   behavior: ChatWidgetAppChannelUrlBehaviorInput;
-  pattern: Scalars['String'];
+  pattern: Scalars['String']['input'];
 };
 
 export type ChatWidgetAppChannelUrlsConfig = {
@@ -2749,25 +2751,25 @@ export enum ChatWidgetAppChannelWidgetUrlBehaviorType {
 }
 
 export type ChatWidgetBorderTheme = {
-  color?: Maybe<Scalars['String']>;
-  radius?: Maybe<Scalars['String']>;
-  width?: Maybe<Scalars['String']>;
+  color?: Maybe<Scalars['String']['output']>;
+  radius?: Maybe<Scalars['String']['output']>;
+  width?: Maybe<Scalars['String']['output']>;
 };
 
 export type ChatWidgetBorderThemeInput = {
-  color?: InputMaybe<Scalars['String']>;
-  radius?: InputMaybe<Scalars['String']>;
-  width?: InputMaybe<Scalars['String']>;
+  color?: InputMaybe<Scalars['String']['input']>;
+  radius?: InputMaybe<Scalars['String']['input']>;
+  width?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ChatWidgetBrandingConfig = {
-  enabled?: Maybe<Scalars['Boolean']>;
-  text?: Maybe<Scalars['String']>;
+  enabled?: Maybe<Scalars['Boolean']['output']>;
+  text?: Maybe<Scalars['String']['output']>;
 };
 
 export type ChatWidgetBrandingConfigInput = {
-  enabled?: InputMaybe<Scalars['Boolean']>;
-  text?: InputMaybe<Scalars['String']>;
+  enabled?: InputMaybe<Scalars['Boolean']['input']>;
+  text?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ChatWidgetBrandingTheme = {
@@ -2779,13 +2781,13 @@ export type ChatWidgetBrandingThemeInput = {
 };
 
 export type ChatWidgetButtonTheme = {
-  color?: Maybe<Scalars['String']>;
-  width?: Maybe<Scalars['String']>;
+  color?: Maybe<Scalars['String']['output']>;
+  width?: Maybe<Scalars['String']['output']>;
 };
 
 export type ChatWidgetButtonThemeInput = {
-  color?: InputMaybe<Scalars['String']>;
-  width?: InputMaybe<Scalars['String']>;
+  color?: InputMaybe<Scalars['String']['input']>;
+  width?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ChatWidgetCarouselTheme = {
@@ -2801,50 +2803,50 @@ export type ChatWidgetCarouselThemeInput = {
 };
 
 export type ChatWidgetChatButtonConfig = {
-  tabIndex?: Maybe<Scalars['String']>;
+  tabIndex?: Maybe<Scalars['String']['output']>;
 };
 
 export type ChatWidgetChatButtonConfigInput = {
-  tabIndex?: InputMaybe<Scalars['String']>;
+  tabIndex?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ChatWidgetChatButtonTheme = {
   /** Widget chat button color */
-  background?: Maybe<Scalars['String']>;
+  background?: Maybe<Scalars['String']['output']>;
   /** Widget margin */
   margin?: Maybe<ChatWidgetMarginsTheme>;
 };
 
 export type ChatWidgetChatButtonThemeInput = {
   /** Widget chat button color */
-  background?: InputMaybe<Scalars['String']>;
+  background?: InputMaybe<Scalars['String']['input']>;
   /** Widget margin */
   margin?: InputMaybe<ChatWidgetMarginsThemeInput>;
 };
 
 export type ChatWidgetClearButtonConfig = {
-  tabIndex?: Maybe<Scalars['String']>;
+  tabIndex?: Maybe<Scalars['String']['output']>;
 };
 
 export type ChatWidgetClearButtonConfigInput = {
-  tabIndex?: InputMaybe<Scalars['String']>;
+  tabIndex?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ChatWidgetContentTheme = {
-  background?: Maybe<Scalars['String']>;
+  background?: Maybe<Scalars['String']['output']>;
 };
 
 export type ChatWidgetContentThemeInput = {
-  background?: InputMaybe<Scalars['String']>;
+  background?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ChatWidgetCtaTheme = {
-  background?: Maybe<Scalars['String']>;
+  background?: Maybe<Scalars['String']['output']>;
   text?: Maybe<ChatWidgetTextTheme>;
 };
 
 export type ChatWidgetCtaThemeInput = {
-  background?: InputMaybe<Scalars['String']>;
+  background?: InputMaybe<Scalars['String']['input']>;
   text?: InputMaybe<ChatWidgetTextThemeInput>;
 };
 
@@ -2861,131 +2863,131 @@ export type ChatWidgetFooterConfigInput = {
 };
 
 export type ChatWidgetFooterTheme = {
-  background?: Maybe<Scalars['String']>;
+  background?: Maybe<Scalars['String']['output']>;
   border?: Maybe<ChatWidgetBorderTheme>;
   branding?: Maybe<ChatWidgetBrandingTheme>;
 };
 
 export type ChatWidgetFooterThemeInput = {
-  background?: InputMaybe<Scalars['String']>;
+  background?: InputMaybe<Scalars['String']['input']>;
   border?: InputMaybe<ChatWidgetBorderThemeInput>;
   branding?: InputMaybe<ChatWidgetBrandingThemeInput>;
 };
 
 export type ChatWidgetHeaderActionsConfig = {
-  cancel?: Maybe<Scalars['Boolean']>;
-  cancelTabIndex?: Maybe<Scalars['String']>;
-  minimize?: Maybe<Scalars['Boolean']>;
-  minimizeTabIndex?: Maybe<Scalars['String']>;
-  refresh?: Maybe<Scalars['Boolean']>;
-  refreshTabIndex?: Maybe<Scalars['String']>;
+  cancel?: Maybe<Scalars['Boolean']['output']>;
+  cancelTabIndex?: Maybe<Scalars['String']['output']>;
+  minimize?: Maybe<Scalars['Boolean']['output']>;
+  minimizeTabIndex?: Maybe<Scalars['String']['output']>;
+  refresh?: Maybe<Scalars['Boolean']['output']>;
+  refreshTabIndex?: Maybe<Scalars['String']['output']>;
 };
 
 export type ChatWidgetHeaderConfig = {
   actions?: Maybe<ChatWidgetHeaderActionsConfig>;
-  alignTextCenter?: Maybe<Scalars['Boolean']>;
+  alignTextCenter?: Maybe<Scalars['Boolean']['output']>;
   status?: Maybe<ChatWidgetHeaderStatusConfig>;
   subtitle?: Maybe<ChatWidgetHeaderSubtitleConfig>;
 };
 
 export type ChatWidgetHeaderConfigActionsInput = {
-  cancel?: InputMaybe<Scalars['Boolean']>;
-  cancelTabIndex?: InputMaybe<Scalars['String']>;
-  minimize?: InputMaybe<Scalars['Boolean']>;
-  minimizeTabIndex?: InputMaybe<Scalars['String']>;
-  refresh?: InputMaybe<Scalars['Boolean']>;
-  refreshTabIndex?: InputMaybe<Scalars['String']>;
+  cancel?: InputMaybe<Scalars['Boolean']['input']>;
+  cancelTabIndex?: InputMaybe<Scalars['String']['input']>;
+  minimize?: InputMaybe<Scalars['Boolean']['input']>;
+  minimizeTabIndex?: InputMaybe<Scalars['String']['input']>;
+  refresh?: InputMaybe<Scalars['Boolean']['input']>;
+  refreshTabIndex?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ChatWidgetHeaderConfigInput = {
   actions?: InputMaybe<ChatWidgetHeaderConfigActionsInput>;
-  alignTextCenter?: InputMaybe<Scalars['Boolean']>;
+  alignTextCenter?: InputMaybe<Scalars['Boolean']['input']>;
   status?: InputMaybe<ChatWidgetHeaderStatusConfigInput>;
   subtitle?: InputMaybe<ChatWidgetHeaderSubtitleConfigInput>;
 };
 
 export type ChatWidgetHeaderStatusConfig = {
-  away?: Maybe<Scalars['String']>;
-  connecting?: Maybe<Scalars['String']>;
-  offline?: Maybe<Scalars['String']>;
-  online?: Maybe<Scalars['String']>;
+  away?: Maybe<Scalars['String']['output']>;
+  connecting?: Maybe<Scalars['String']['output']>;
+  offline?: Maybe<Scalars['String']['output']>;
+  online?: Maybe<Scalars['String']['output']>;
 };
 
 export type ChatWidgetHeaderStatusConfigInput = {
-  away?: InputMaybe<Scalars['String']>;
-  connecting?: InputMaybe<Scalars['String']>;
-  offline?: InputMaybe<Scalars['String']>;
-  online?: InputMaybe<Scalars['String']>;
+  away?: InputMaybe<Scalars['String']['input']>;
+  connecting?: InputMaybe<Scalars['String']['input']>;
+  offline?: InputMaybe<Scalars['String']['input']>;
+  online?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ChatWidgetHeaderSubtitleConfig = {
-  enabled?: Maybe<Scalars['Boolean']>;
-  text?: Maybe<Scalars['String']>;
+  enabled?: Maybe<Scalars['Boolean']['output']>;
+  text?: Maybe<Scalars['String']['output']>;
 };
 
 export type ChatWidgetHeaderSubtitleConfigInput = {
-  enabled?: InputMaybe<Scalars['Boolean']>;
-  text?: InputMaybe<Scalars['String']>;
+  enabled?: InputMaybe<Scalars['Boolean']['input']>;
+  text?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ChatWidgetHeaderTheme = {
-  background?: Maybe<Scalars['String']>;
+  background?: Maybe<Scalars['String']['output']>;
   border?: Maybe<ChatWidgetBorderTheme>;
   subtitle?: Maybe<ChatWidgetTextTheme>;
   text?: Maybe<ChatWidgetTextTheme>;
 };
 
 export type ChatWidgetHeaderThemeInput = {
-  background?: InputMaybe<Scalars['String']>;
+  background?: InputMaybe<Scalars['String']['input']>;
   border?: InputMaybe<ChatWidgetBorderThemeInput>;
   subtitle?: InputMaybe<ChatWidgetTextThemeInput>;
   text?: InputMaybe<ChatWidgetTextThemeInput>;
 };
 
 export type ChatWidgetInputConfig = {
-  placeholder?: Maybe<Scalars['String']>;
-  tabIndex?: Maybe<Scalars['String']>;
+  placeholder?: Maybe<Scalars['String']['output']>;
+  tabIndex?: Maybe<Scalars['String']['output']>;
 };
 
 export type ChatWidgetInputConfigInput = {
-  placeholder?: InputMaybe<Scalars['String']>;
-  tabIndex?: InputMaybe<Scalars['String']>;
+  placeholder?: InputMaybe<Scalars['String']['input']>;
+  tabIndex?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ChatWidgetInputTheme = {
-  background?: Maybe<Scalars['String']>;
+  background?: Maybe<Scalars['String']['output']>;
   border?: Maybe<ChatWidgetBorderTheme>;
   placeholder?: Maybe<ChatWidgetTextTheme>;
   text?: Maybe<ChatWidgetTextTheme>;
 };
 
 export type ChatWidgetInputThemeInput = {
-  background?: InputMaybe<Scalars['String']>;
+  background?: InputMaybe<Scalars['String']['input']>;
   border?: InputMaybe<ChatWidgetBorderThemeInput>;
   placeholder?: InputMaybe<ChatWidgetTextThemeInput>;
   text?: InputMaybe<ChatWidgetTextThemeInput>;
 };
 
 export type ChatWidgetMarginsTheme = {
-  bottom?: Maybe<Scalars['String']>;
-  left?: Maybe<Scalars['String']>;
-  right?: Maybe<Scalars['String']>;
-  top?: Maybe<Scalars['String']>;
+  bottom?: Maybe<Scalars['String']['output']>;
+  left?: Maybe<Scalars['String']['output']>;
+  right?: Maybe<Scalars['String']['output']>;
+  top?: Maybe<Scalars['String']['output']>;
 };
 
 export type ChatWidgetMarginsThemeInput = {
-  bottom?: InputMaybe<Scalars['String']>;
-  left?: InputMaybe<Scalars['String']>;
-  right?: InputMaybe<Scalars['String']>;
-  top?: InputMaybe<Scalars['String']>;
+  bottom?: InputMaybe<Scalars['String']['input']>;
+  left?: InputMaybe<Scalars['String']['input']>;
+  right?: InputMaybe<Scalars['String']['input']>;
+  top?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ChatWidgetMenuButtonConfig = {
-  tabIndex?: Maybe<Scalars['String']>;
+  tabIndex?: Maybe<Scalars['String']['output']>;
 };
 
 export type ChatWidgetMenuButtonConfigInput = {
-  tabIndex?: InputMaybe<Scalars['String']>;
+  tabIndex?: InputMaybe<Scalars['String']['input']>;
 };
 
 export enum ChatWidgetMenuButtonLocation {
@@ -2996,63 +2998,63 @@ export enum ChatWidgetMenuButtonLocation {
 export type ChatWidgetMenuConfig = {
   button?: Maybe<ChatWidgetMenuButtonConfig>;
   items?: Maybe<Array<Maybe<ChatWidgetMenuItems>>>;
-  itemsTabIndex?: Maybe<Scalars['String']>;
+  itemsTabIndex?: Maybe<Scalars['String']['output']>;
   menuButtonLocation?: Maybe<ChatWidgetMenuButtonLocation>;
 };
 
 export type ChatWidgetMenuConfigInput = {
   button?: InputMaybe<ChatWidgetMenuButtonConfigInput>;
   items?: InputMaybe<Array<InputMaybe<ChatWidgetMenuItemConfigInput>>>;
-  itemsTabIndex?: InputMaybe<Scalars['String']>;
+  itemsTabIndex?: InputMaybe<Scalars['String']['input']>;
   menuButtonLocation?: InputMaybe<ChatWidgetMenuButtonLocation>;
 };
 
 export type ChatWidgetMenuItemConfig = {
-  label?: Maybe<Scalars['String']>;
-  subtitle?: Maybe<Scalars['String']>;
+  label?: Maybe<Scalars['String']['output']>;
+  subtitle?: Maybe<Scalars['String']['output']>;
 };
 
 export type ChatWidgetMenuItemConfigInput = {
   behavior?: InputMaybe<ChatWidgetAppChannelUrlBehaviorInput>;
-  body?: InputMaybe<Scalars['String']>;
-  imageUrl?: InputMaybe<Scalars['String']>;
-  label?: InputMaybe<Scalars['String']>;
-  subtitle?: InputMaybe<Scalars['String']>;
-  text?: InputMaybe<Scalars['String']>;
-  title?: InputMaybe<Scalars['String']>;
-  url?: InputMaybe<Scalars['String']>;
+  body?: InputMaybe<Scalars['String']['input']>;
+  imageUrl?: InputMaybe<Scalars['String']['input']>;
+  label?: InputMaybe<Scalars['String']['input']>;
+  subtitle?: InputMaybe<Scalars['String']['input']>;
+  text?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  url?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ChatWidgetMenuItemOpenUrl = {
   /** How the URL opens, defaults to defined behavior on URL opening config. */
   behavior?: Maybe<ChatWidgetAppChannelUrlBehaviorBase>;
   /** Display label for the URL */
-  text: Scalars['String'];
+  text: Scalars['String']['output'];
   /** URL to be opened */
-  url: Scalars['String'];
+  url: Scalars['String']['output'];
 };
 
 export type ChatWidgetMenuItemStaticImage = {
-  imageUrl?: Maybe<Scalars['String']>;
+  imageUrl?: Maybe<Scalars['String']['output']>;
 };
 
 export type ChatWidgetMenuItemStaticText = {
-  body?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
+  body?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
 };
 
 export type ChatWidgetMenuItemTheme = {
-  background?: Maybe<Scalars['String']>;
+  background?: Maybe<Scalars['String']['output']>;
   border?: Maybe<ChatWidgetBorderTheme>;
-  height?: Maybe<Scalars['String']>;
+  height?: Maybe<Scalars['String']['output']>;
   subtitle?: Maybe<ChatWidgetTextTheme>;
   text?: Maybe<ChatWidgetTextTheme>;
 };
 
 export type ChatWidgetMenuItemThemeInput = {
-  background?: InputMaybe<Scalars['String']>;
+  background?: InputMaybe<Scalars['String']['input']>;
   border?: InputMaybe<ChatWidgetBorderThemeInput>;
-  height?: InputMaybe<Scalars['String']>;
+  height?: InputMaybe<Scalars['String']['input']>;
   subtitle?: InputMaybe<ChatWidgetTextThemeInput>;
   text?: InputMaybe<ChatWidgetTextThemeInput>;
 };
@@ -3069,92 +3071,92 @@ export type ChatWidgetMenuThemeInput = {
 
 export type ChatWidgetMessageTheme = {
   /** Message bubble color */
-  bubbleColor?: Maybe<Scalars['String']>;
+  bubbleColor?: Maybe<Scalars['String']['output']>;
   /** Message text color */
   text?: Maybe<ChatWidgetTextTheme>;
 };
 
 export type ChatWidgetMessageThemeInput = {
   /** Message bubble color */
-  bubbleColor?: InputMaybe<Scalars['String']>;
+  bubbleColor?: InputMaybe<Scalars['String']['input']>;
   /** Message text color */
   text?: InputMaybe<ChatWidgetTextThemeInput>;
 };
 
 export type ChatWidgetMessagesTheme = {
-  maxWidth?: Maybe<Scalars['String']>;
+  maxWidth?: Maybe<Scalars['String']['output']>;
   mine?: Maybe<ChatWidgetMessageTheme>;
   others?: Maybe<ChatWidgetMessageTheme>;
   padding?: Maybe<ChatWidgetPaddingTheme>;
 };
 
 export type ChatWidgetMessagesThemeInput = {
-  maxWidth?: InputMaybe<Scalars['String']>;
+  maxWidth?: InputMaybe<Scalars['String']['input']>;
   mine?: InputMaybe<ChatWidgetMessageThemeInput>;
   others?: InputMaybe<ChatWidgetMessageThemeInput>;
   padding?: InputMaybe<ChatWidgetPaddingThemeInput>;
 };
 
 export type ChatWidgetPaddingTheme = {
-  bottom?: Maybe<Scalars['String']>;
-  left?: Maybe<Scalars['String']>;
-  right?: Maybe<Scalars['String']>;
-  top?: Maybe<Scalars['String']>;
+  bottom?: Maybe<Scalars['String']['output']>;
+  left?: Maybe<Scalars['String']['output']>;
+  right?: Maybe<Scalars['String']['output']>;
+  top?: Maybe<Scalars['String']['output']>;
 };
 
 export type ChatWidgetPaddingThemeInput = {
-  bottom?: InputMaybe<Scalars['String']>;
-  left?: InputMaybe<Scalars['String']>;
-  right?: InputMaybe<Scalars['String']>;
-  top?: InputMaybe<Scalars['String']>;
+  bottom?: InputMaybe<Scalars['String']['input']>;
+  left?: InputMaybe<Scalars['String']['input']>;
+  right?: InputMaybe<Scalars['String']['input']>;
+  top?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ChatWidgetSendButtonConfig = {
-  icon?: Maybe<Scalars['String']>;
-  tabIndex?: Maybe<Scalars['String']>;
+  icon?: Maybe<Scalars['String']['output']>;
+  tabIndex?: Maybe<Scalars['String']['output']>;
 };
 
 export type ChatWidgetSendButtonConfigInput = {
-  icon?: InputMaybe<Scalars['String']>;
-  tabIndex?: InputMaybe<Scalars['String']>;
+  icon?: InputMaybe<Scalars['String']['input']>;
+  tabIndex?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ChatWidgetServerConfig = {
-  accountKey?: Maybe<Scalars['String']>;
-  serverUrl?: Maybe<Scalars['URLString']>;
-  type?: Maybe<Scalars['String']>;
+  accountKey?: Maybe<Scalars['String']['output']>;
+  serverUrl?: Maybe<Scalars['URLString']['output']>;
+  type?: Maybe<Scalars['String']['output']>;
 };
 
 export type ChatWidgetServerConfigInput = {
-  accountKey?: InputMaybe<Scalars['String']>;
-  serverUrl?: InputMaybe<Scalars['URLString']>;
-  type?: InputMaybe<Scalars['String']>;
+  accountKey?: InputMaybe<Scalars['String']['input']>;
+  serverUrl?: InputMaybe<Scalars['URLString']['input']>;
+  type?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ChatWidgetSizeTheme = {
-  height?: Maybe<Scalars['String']>;
-  width?: Maybe<Scalars['String']>;
+  height?: Maybe<Scalars['String']['output']>;
+  width?: Maybe<Scalars['String']['output']>;
 };
 
 export type ChatWidgetSizeThemeInput = {
-  height?: InputMaybe<Scalars['String']>;
-  width?: InputMaybe<Scalars['String']>;
+  height?: InputMaybe<Scalars['String']['input']>;
+  width?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ChatWidgetTextTheme = {
-  color?: Maybe<Scalars['String']>;
-  fontFamily?: Maybe<Scalars['String']>;
-  fontSize?: Maybe<Scalars['String']>;
-  fontStyle?: Maybe<Scalars['String']>;
-  fontWeight?: Maybe<Scalars['String']>;
+  color?: Maybe<Scalars['String']['output']>;
+  fontFamily?: Maybe<Scalars['String']['output']>;
+  fontSize?: Maybe<Scalars['String']['output']>;
+  fontStyle?: Maybe<Scalars['String']['output']>;
+  fontWeight?: Maybe<Scalars['String']['output']>;
 };
 
 export type ChatWidgetTextThemeInput = {
-  color?: InputMaybe<Scalars['String']>;
-  fontFamily?: InputMaybe<Scalars['String']>;
-  fontSize?: InputMaybe<Scalars['String']>;
-  fontStyle?: InputMaybe<Scalars['String']>;
-  fontWeight?: InputMaybe<Scalars['String']>;
+  color?: InputMaybe<Scalars['String']['input']>;
+  fontFamily?: InputMaybe<Scalars['String']['input']>;
+  fontSize?: InputMaybe<Scalars['String']['input']>;
+  fontStyle?: InputMaybe<Scalars['String']['input']>;
+  fontWeight?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ChatWidgetTextTypingStatusTheme = {
@@ -3194,17 +3196,17 @@ export type ChatWidgetTheme = {
   /** ChatWidget minimizeButton styling */
   minimizeButton?: Maybe<ChatWidgetButtonTheme>;
   /** Primary color of ChatWidget */
-  primaryColor?: Maybe<Scalars['String']>;
+  primaryColor?: Maybe<Scalars['String']['output']>;
   /** ChatWidget refreshButton styling */
   refreshButton?: Maybe<ChatWidgetButtonTheme>;
   /** ChatWidget sendButton styling */
   sendButton?: Maybe<ChatWidgetButtonTheme>;
-  sessionExpiration?: Maybe<Scalars['String']>;
+  sessionExpiration?: Maybe<Scalars['String']['output']>;
   /** Widget size */
   size?: Maybe<ChatWidgetSizeTheme>;
   textTypingStatus?: Maybe<ChatWidgetTextTypingStatusTheme>;
   /** Widget z-index */
-  zIndex?: Maybe<Scalars['String']>;
+  zIndex?: Maybe<Scalars['String']['output']>;
 };
 
 export type ChatWidgetThemeInput = {
@@ -3237,79 +3239,79 @@ export type ChatWidgetThemeInput = {
   /** ChatWidget minimizeButton styling */
   minimizeButton?: InputMaybe<ChatWidgetButtonThemeInput>;
   /** Primary color of ChatWidget */
-  primaryColor?: InputMaybe<Scalars['String']>;
+  primaryColor?: InputMaybe<Scalars['String']['input']>;
   /** ChatWidget menuButton Styling */
   refreshButton?: InputMaybe<ChatWidgetButtonThemeInput>;
   /** ChatWidget sendButton styling */
   sendButton?: InputMaybe<ChatWidgetButtonThemeInput>;
-  sessionExpiration?: InputMaybe<Scalars['String']>;
+  sessionExpiration?: InputMaybe<Scalars['String']['input']>;
   /** Widget size */
   size?: InputMaybe<ChatWidgetSizeThemeInput>;
   textTypingStatus?: InputMaybe<ChatWidgetTextTypingStatusThemeInput>;
   /** Widget z-index */
-  zIndex?: InputMaybe<Scalars['String']>;
+  zIndex?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ChatWidgetTypingStatusConfig = {
-  textTypingStatusEnabled?: Maybe<Scalars['Boolean']>;
+  textTypingStatusEnabled?: Maybe<Scalars['Boolean']['output']>;
 };
 
 export type ChatWidgetTypingStatusConfigInput = {
-  textTypingStatusEnabled?: InputMaybe<Scalars['Boolean']>;
+  textTypingStatusEnabled?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type ChatbaseDataStream = {
-  type: Scalars['String'];
+  type: Scalars['String']['output'];
 };
 
 export type ChatbaseDataStreamInput = {
-  type: Scalars['String'];
+  type: Scalars['String']['input'];
 };
 
 export type ClearFaqReturn = {
   /** The task ID of the faq clear which can be queried to check if it's done. */
-  taskId: Scalars['ID'];
+  taskId: Scalars['ID']['output'];
 };
 
 export type CodeChallenge = {
-  codeChallenge: Scalars['String'];
-  codeChallengeMethod: Scalars['String'];
-  codeVerifier: Scalars['String'];
+  codeChallenge: Scalars['String']['output'];
+  codeChallengeMethod: Scalars['String']['output'];
+  codeVerifier: Scalars['String']['output'];
 };
 
 export type CompilableHandlerPath = HistoricalHandlerPath | PreviousHandlerPath;
 
 /** Attributes that can be overriden in the copyApp when creating the new app */
 export type CopyAppOverrideAttributes = {
-  description?: InputMaybe<Scalars['String']>;
-  name?: InputMaybe<Scalars['String']>;
-  summary?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  summary?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type CreateCmsReturn = {
   /** The appId of the app that the token is associated with. */
-  appId?: Maybe<Scalars['ID']>;
+  appId?: Maybe<Scalars['ID']['output']>;
   /** The day the token was created. */
-  created: Scalars['DateTime'];
+  created: Scalars['DateTime']['output'];
   /** The last time the token was used. */
-  lastUsed?: Maybe<Scalars['DateTime']>;
+  lastUsed?: Maybe<Scalars['DateTime']['output']>;
   /** A partial human-readable portion of the token */
-  mask: Scalars['String'];
+  mask: Scalars['String']['output'];
   /** The organizationId of the organization that the token is associated with. */
-  organizationId?: Maybe<Scalars['ID']>;
+  organizationId?: Maybe<Scalars['ID']['output']>;
   /** The permissions that the token grants. */
-  scope: Array<Maybe<Scalars['String']>>;
+  scope: Array<Maybe<Scalars['String']['output']>>;
   /** The authorization token that was generated for this app. */
-  token: Scalars['String'];
+  token: Scalars['String']['output'];
   /** The ID of the token that was created */
-  tokenId: Scalars['ID'];
+  tokenId: Scalars['ID']['output'];
 };
 
 export type CreateInteractionModelReturn = {
   /** The model that was created. */
   interactionModel: AlexaInteractionModel;
   /** The locale that the interaction model is for. */
-  locale: Scalars['String'];
+  locale: Scalars['String']['output'];
 };
 
 export type CreateOrgReturn = {
@@ -3319,38 +3321,38 @@ export type CreateOrgReturn = {
 
 export type CreateOrganizationInput = {
   /** The email XAPPineer that is in charge of handling the organization's account */
-  XAPPLead?: InputMaybe<Scalars['String']>;
+  XAPPLead?: InputMaybe<Scalars['String']['input']>;
   /** An event bus that is attatched to the organization to receive specific events related to the organization such as App status changes. */
-  awsEventBusArn?: InputMaybe<Scalars['String']>;
+  awsEventBusArn?: InputMaybe<Scalars['String']['input']>;
   /**
    * The email address of a user who can be contacted about issues
    * related to the organization.
    */
-  contact?: InputMaybe<Scalars['String']>;
+  contact?: InputMaybe<Scalars['String']['input']>;
   /** The organization contact's name. */
-  contactName?: InputMaybe<Scalars['String']>;
+  contactName?: InputMaybe<Scalars['String']['input']>;
   /** The organization contact's phone number. */
-  contactPhone?: InputMaybe<Scalars['String']>;
+  contactPhone?: InputMaybe<Scalars['String']['input']>;
   /**
    * Date in which the organization signed a contract to publish
    * apps.
    *
    * Format: ISO-8601 date format
    */
-  contractDate?: InputMaybe<Scalars['String']>;
+  contractDate?: InputMaybe<Scalars['String']['input']>;
   /** The human-readable description of the organization. */
-  description?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['String']['input']>;
   /**
    * Organization's IP rights which were loaded that give permissions to
    * publish apps on their behalf.
    */
   ipRights?: InputMaybe<IPrightsInput>;
   /** URL for the organization's logo. */
-  logoUrl?: InputMaybe<Scalars['String']>;
+  logoUrl?: InputMaybe<Scalars['String']['input']>;
   /** The human-readable name of the organization. */
-  name: Scalars['String'];
+  name: Scalars['String']['input'];
   /** Any notes that are related to the organization. */
-  notes?: InputMaybe<Scalars['String']>;
+  notes?: InputMaybe<Scalars['String']['input']>;
   /** Payment account information */
   paymentAccounts?: InputMaybe<PaymentAccountsInput>;
   /**
@@ -3359,17 +3361,17 @@ export type CreateOrganizationInput = {
    */
   publishingAccounts?: InputMaybe<PublishingAccountsInput>;
   /** A URL to the organization's website. */
-  website?: InputMaybe<Scalars['String']>;
+  website?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type CtaConfig = {
-  message?: Maybe<Scalars['String']>;
-  timeout?: Maybe<Scalars['Int']>;
+  message?: Maybe<Scalars['String']['output']>;
+  timeout?: Maybe<Scalars['Int']['output']>;
 };
 
 export type CtaConfigInput = {
-  message?: InputMaybe<Scalars['String']>;
-  timeout?: InputMaybe<Scalars['Int']>;
+  message?: InputMaybe<Scalars['String']['input']>;
+  timeout?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export enum CurrentTestState {
@@ -3380,11 +3382,11 @@ export enum CurrentTestState {
 }
 
 export type DashbotDataStream = {
-  type: Scalars['String'];
+  type: Scalars['String']['output'];
 };
 
 export type DashbotDataStreamInput = {
-  type: Scalars['String'];
+  type: Scalars['String']['input'];
 };
 
 /** Third party analytics integrations. */
@@ -3420,15 +3422,15 @@ export type DeleteHandlerReturn = {
 
 
 export type DeleteHandlerReturnGraphArgs = {
-  endDate?: InputMaybe<Scalars['DateTime']>;
-  startDate?: InputMaybe<Scalars['DateTime']>;
+  endDate?: InputMaybe<Scalars['DateTime']['input']>;
+  startDate?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
 export type DeleteIntentIdKey = {
   /** The appId that was deleted during a delete operation. */
-  appId: Scalars['String'];
+  appId: Scalars['String']['output'];
   /** The intentId that was updated during a delete operation. */
-  intentId: Scalars['String'];
+  intentId: Scalars['String']['output'];
 };
 
 export type DeleteIntentReturn = {
@@ -3440,8 +3442,8 @@ export type DeleteIntentReturn = {
 
 
 export type DeleteIntentReturnGraphArgs = {
-  endDate?: InputMaybe<Scalars['DateTime']>;
-  startDate?: InputMaybe<Scalars['DateTime']>;
+  endDate?: InputMaybe<Scalars['DateTime']['input']>;
+  startDate?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
 /**
@@ -3457,7 +3459,7 @@ export type DialogflowAdditionalInformationQuestions = {
    * If your Actions mainly sell alcohol or tobacco, you must implement
    * account linking and verify that the user meets legal age requirements.
    */
-  alcoholAndTobaccoRelatedContent?: Maybe<Scalars['Boolean']>;
+  alcoholAndTobaccoRelatedContent?: Maybe<Scalars['Boolean']['output']>;
   /**
    * Are children under the age of 13 one of the intended audience of your actions?
    *
@@ -3465,7 +3467,7 @@ export type DialogflowAdditionalInformationQuestions = {
    * program allows developers to designate that their Actions are family-friendly, so parents and kids
    * can find trusted, high-quality content more easily on teh Google Assistant.
    */
-  intendedForUnderThirteen?: Maybe<Scalars['Boolean']>;
+  intendedForUnderThirteen?: Maybe<Scalars['Boolean']['output']>;
 };
 
 /**
@@ -3481,7 +3483,7 @@ export type DialogflowAdditionalInformationQuestionsInput = {
    * If your Actions mainly sell alcohol or tobacco, you must implement
    * account linking and verify that the user meets legal age requirements.
    */
-  alcoholAndTobaccoRelatedContent?: InputMaybe<Scalars['Boolean']>;
+  alcoholAndTobaccoRelatedContent?: InputMaybe<Scalars['Boolean']['input']>;
   /**
    * Are childer under the age of 13 one of the intended audienced of your actions?
    *
@@ -3489,7 +3491,7 @@ export type DialogflowAdditionalInformationQuestionsInput = {
    * program allows develpers to dsignate that their Actions are family-friendly, so parents and kids
    * cand find trusted, high-quality content more easily on teh Google Assistant.
    */
-  intendedForUnderThirteen?: InputMaybe<Scalars['Boolean']>;
+  intendedForUnderThirteen?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** A channel that is specific for apps to run on the Dialogflow. */
@@ -3497,32 +3499,32 @@ export type DialogflowAppChannel = BaseAppChannel & {
   /** For "dialogflow" type channels only. */
   additionalInformationQuestions?: Maybe<DialogflowAdditionalInformationQuestions>;
   /** URL for the directory listing. */
-  directoryListing?: Maybe<Scalars['String']>;
+  directoryListing?: Maybe<Scalars['String']['output']>;
   /** URI where the channel can be accessed. */
-  endPoint?: Maybe<Scalars['String']>;
+  endPoint?: Maybe<Scalars['String']['output']>;
   /** Whether or not the credentials for the channel has been uploaded. */
-  hasCredentials: Scalars['Boolean'];
+  hasCredentials: Scalars['Boolean']['output'];
   /** The ID of the channel. */
-  id: Scalars['String'];
+  id: Scalars['String']['output'];
   /**
    * Boolean used to determine if the channel is currently being build on
    * dialogflow.
    */
-  isBuilding: Scalars['Boolean'];
-  modelManagementMode?: Maybe<Scalars['Boolean']>;
+  isBuilding: Scalars['Boolean']['output'];
+  modelManagementMode?: Maybe<Scalars['Boolean']['output']>;
   /** The display name for the channel. */
-  name?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']['output']>;
   /**
    * Query the text from the NLU. The channel must have valid credentials,
    * projectId, and nlu.
    */
   nluQuery: DialogflowNluQuery;
   /** The ID of the project on Dialogflow */
-  projectId: Scalars['ID'];
+  projectId: Scalars['ID']['output'];
   /** The lifecycle status of the app. */
   status?: Maybe<AppChannelStatus>;
   /** The type of channel */
-  type: Scalars['String'];
+  type: Scalars['String']['output'];
   /** Retrieves any events that are related to this specific app */
   usageEvents?: Maybe<TotalUsageEvents>;
   /**
@@ -3533,20 +3535,20 @@ export type DialogflowAppChannel = BaseAppChannel & {
    *
    * If the value is "*", then it will pick the first available NLU within app.nlu[]
    */
-  useNLU?: Maybe<Scalars['String']>;
+  useNLU?: Maybe<Scalars['String']['output']>;
 };
 
 
 /** A channel that is specific for apps to run on the Dialogflow. */
 export type DialogflowAppChannelNluQueryArgs = {
-  text: Scalars['String'];
+  text: Scalars['String']['input'];
 };
 
 
 /** A channel that is specific for apps to run on the Dialogflow. */
 export type DialogflowAppChannelUsageEventsArgs = {
-  from?: InputMaybe<Scalars['Int']>;
-  size?: InputMaybe<Scalars['Int']>;
+  from?: InputMaybe<Scalars['Int']['input']>;
+  size?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type DialogflowAppChannelInput = {
@@ -3555,9 +3557,9 @@ export type DialogflowAppChannelInput = {
   /** URL to find the credentials for accessing Google Cloud Services */
   dialogflowCredentials?: InputMaybe<DialogflowCredentialsInput>;
   /** URL for the directory listing. */
-  directoryListing?: InputMaybe<Scalars['String']>;
+  directoryListing?: InputMaybe<Scalars['String']['input']>;
   /** URI where the channel can be accessed. */
-  endPoint?: InputMaybe<Scalars['String']>;
+  endPoint?: InputMaybe<Scalars['String']['input']>;
   /**
    * The ID of the channel.
    *
@@ -3568,11 +3570,11 @@ export type DialogflowAppChannelInput = {
    * updated.  Otherwise the channel will be inserted and an ID will be
    * generated.
    */
-  id?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['String']['input']>;
   /** The display name for the channel. */
-  name?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']['input']>;
   /** The type of channel */
-  type: Scalars['String'];
+  type: Scalars['String']['input'];
   /**
    * ID of the NLU to use within app.nlu[].
    *
@@ -3581,7 +3583,7 @@ export type DialogflowAppChannelInput = {
    *
    * If the value is "*", then it will pick the first available NLU within app.nlu[]
    */
-  useNLU?: InputMaybe<Scalars['String']>;
+  useNLU?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type DialogflowAppNlu = BaseAppNlu & {
@@ -3589,23 +3591,23 @@ export type DialogflowAppNlu = BaseAppNlu & {
    * The URL of the JSON style credentials that provided
    * access to performing queries against the Dialogflow API
    */
-  credentialsURL?: Maybe<Scalars['String']>;
+  credentialsURL?: Maybe<Scalars['String']['output']>;
   /** The reference ID for the NLU */
-  id?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']['output']>;
   /**
    * Query the text from the NLU. The channel must have valid credentials,
    * projectId, and nlu.
    */
   nluQuery: DialogflowNluQuery;
   /** The project ID of the Dialogflow agent */
-  projectId?: Maybe<Scalars['String']>;
+  projectId?: Maybe<Scalars['String']['output']>;
   /** The type of NLU. */
-  type: Scalars['String'];
+  type: Scalars['String']['output'];
 };
 
 
 export type DialogflowAppNluNluQueryArgs = {
-  text: Scalars['String'];
+  text: Scalars['String']['input'];
 };
 
 export type DialogflowAppNluInput = {
@@ -3616,136 +3618,136 @@ export type DialogflowAppNluInput = {
    */
   dialogflowCredentials?: InputMaybe<DialogflowCredentialsInput>;
   /** The reference ID for the NLU */
-  id?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['String']['input']>;
   /** The project ID of the Dialogflow agent */
-  projectId?: InputMaybe<Scalars['String']>;
+  projectId?: InputMaybe<Scalars['String']['input']>;
   /** The type of NLU. */
-  type: Scalars['String'];
+  type: Scalars['String']['input'];
 };
 
 export type DialogflowCredentialsInput = {
-  auth_provider_x509_cert_url?: InputMaybe<Scalars['String']>;
-  auth_uri?: InputMaybe<Scalars['String']>;
-  client_email: Scalars['String'];
-  client_id?: InputMaybe<Scalars['String']>;
-  client_x509_cert_url?: InputMaybe<Scalars['String']>;
-  private_key: Scalars['String'];
-  private_key_id?: InputMaybe<Scalars['String']>;
-  project_id: Scalars['String'];
-  token_uri?: InputMaybe<Scalars['String']>;
-  type?: InputMaybe<Scalars['String']>;
+  auth_provider_x509_cert_url?: InputMaybe<Scalars['String']['input']>;
+  auth_uri?: InputMaybe<Scalars['String']['input']>;
+  client_email: Scalars['String']['input'];
+  client_id?: InputMaybe<Scalars['String']['input']>;
+  client_x509_cert_url?: InputMaybe<Scalars['String']['input']>;
+  private_key: Scalars['String']['input'];
+  private_key_id?: InputMaybe<Scalars['String']['input']>;
+  project_id: Scalars['String']['input'];
+  token_uri?: InputMaybe<Scalars['String']['input']>;
+  type?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** Attributes used for dialogflow publishing. */
 export type DialogflowIntegration = {
   /** The location of the credentials needed to upload to dialogflow. */
-  credentialsUrl: Scalars['String'];
+  credentialsUrl: Scalars['String']['output'];
 };
 
 /** Attributes used for dialogflow publishing. */
 export type DialogflowIntegrationInput = {
   /** The location of the credentials needed to upload to dialogflow. */
-  credentialsUrl: Scalars['String'];
+  credentialsUrl: Scalars['String']['input'];
 };
 
 export type DialogflowNluQuery = {
-  intentId: Scalars['String'];
+  intentId: Scalars['String']['output'];
   knowledgeAnswer?: Maybe<DialogflowNluQueryKnowledgeAnswer>;
   slots?: Maybe<Array<Maybe<NluRequestSlot>>>;
-  type: Scalars['String'];
+  type: Scalars['String']['output'];
 };
 
 export type DialogflowNluQueryKnowledgeAnswer = {
   /** Raw answer */
-  answer: Scalars['String'];
+  answer: Scalars['String']['output'];
   /** Raw question */
-  faqQuestion: Scalars['String'];
+  faqQuestion: Scalars['String']['output'];
   /** Confidence 0-1 */
-  matchConfidence: Scalars['Int'];
+  matchConfidence: Scalars['Int']['output'];
   /** Which knowledge base (optional) */
-  source?: Maybe<Scalars['String']>;
+  source?: Maybe<Scalars['String']['output']>;
 };
 
 export type DisplayImage = {
-  contentDescription?: Maybe<Scalars['String']>;
+  contentDescription?: Maybe<Scalars['String']['output']>;
   sources: Array<Maybe<DisplayImageSpecification>>;
 };
 
 export type DisplayImageInput = {
-  contentDescription?: InputMaybe<Scalars['String']>;
+  contentDescription?: InputMaybe<Scalars['String']['input']>;
   sources: Array<InputMaybe<DisplayImageSpecificationInput>>;
 };
 
 export type DisplayImageSpecification = {
-  height: Scalars['Int'];
-  imageUrl: Scalars['String'];
-  width: Scalars['Int'];
+  height: Scalars['Int']['output'];
+  imageUrl: Scalars['String']['output'];
+  width: Scalars['Int']['output'];
 };
 
 export type DisplayImageSpecificationInput = {
-  height: Scalars['Int'];
-  imageUrl: Scalars['String'];
-  width: Scalars['Int'];
+  height: Scalars['Int']['input'];
+  imageUrl: Scalars['String']['input'];
+  width: Scalars['Int']['input'];
 };
 
 export type DisplayListButton = {
-  title?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']['output']>;
 };
 
 export type DisplayListButtonInput = {
-  title?: InputMaybe<Scalars['String']>;
+  title?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type DisplayListItem = {
   buttons?: Maybe<Array<Maybe<DisplayListButton>>>;
-  description: Scalars['String'];
+  description: Scalars['String']['output'];
   image: DisplayImage;
-  synonyms?: Maybe<Array<Maybe<Scalars['String']>>>;
-  title: Scalars['String'];
-  token?: Maybe<Scalars['String']>;
-  url?: Maybe<Scalars['String']>;
+  synonyms?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  title: Scalars['String']['output'];
+  token?: Maybe<Scalars['String']['output']>;
+  url?: Maybe<Scalars['String']['output']>;
 };
 
 export type DisplayListItemInput = {
   buttons?: InputMaybe<Array<InputMaybe<DisplayListButtonInput>>>;
-  description: Scalars['String'];
+  description: Scalars['String']['input'];
   image: DisplayImageInput;
-  synonyms?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  title: Scalars['String'];
-  token?: InputMaybe<Scalars['String']>;
-  url?: InputMaybe<Scalars['String']>;
+  synonyms?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  title: Scalars['String']['input'];
+  token?: InputMaybe<Scalars['String']['input']>;
+  url?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type DisplayTextContent = {
-  primaryText?: Maybe<Scalars['String']>;
-  secondaryText?: Maybe<Scalars['String']>;
-  tertiaryText?: Maybe<Scalars['String']>;
+  primaryText?: Maybe<Scalars['String']['output']>;
+  secondaryText?: Maybe<Scalars['String']['output']>;
+  tertiaryText?: Maybe<Scalars['String']['output']>;
 };
 
 export type DisplayTextContentInput = {
-  primaryText?: InputMaybe<Scalars['String']>;
-  secondaryText?: InputMaybe<Scalars['String']>;
-  tertiaryText?: InputMaybe<Scalars['String']>;
+  primaryText?: InputMaybe<Scalars['String']['input']>;
+  secondaryText?: InputMaybe<Scalars['String']['input']>;
+  tertiaryText?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** Opportunity alert that sends the message to the user via email. */
 export type EmailOpportunityAlert = BaseOpportunityAlert & {
   alerts: Array<OpportunityAlertDetail>;
-  disabled?: Maybe<Scalars['Boolean']>;
+  disabled?: Maybe<Scalars['Boolean']['output']>;
   /** Email of the user to receive the alert. */
-  email: Scalars['EmailAddress'];
-  placeId?: Maybe<Scalars['String']>;
+  email: Scalars['EmailAddress']['output'];
+  placeId?: Maybe<Scalars['String']['output']>;
 };
 
 export type EmailOpportunityAlertInput = {
   /** Registered alerts */
   alerts: Array<OpportunityAlertDetailInput>;
   /** Temporarily disable the alert */
-  disabled?: InputMaybe<Scalars['Boolean']>;
+  disabled?: InputMaybe<Scalars['Boolean']['input']>;
   /** Email of the user to receive the alert. */
-  email: Scalars['EmailAddress'];
+  email: Scalars['EmailAddress']['input'];
   /** The Google PlaceID for the location */
-  placeId?: InputMaybe<Scalars['String']>;
+  placeId?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** URLs for each platform to call for utterance resolution. Each key corresponds to the specific platform. */
@@ -3765,32 +3767,32 @@ export type EndpointInput = {
 };
 
 export type EntitiesQuery = {
-  _id: Scalars['ID'];
+  _id: Scalars['ID']['output'];
   /** A subset of entities that are found in the query. */
   entities?: Maybe<Array<Maybe<GetEntitiesListEntity>>>;
   /** The total number of entities that were found. */
-  total: Scalars['Int'];
+  total: Scalars['Int']['output'];
 };
 
 export type Entity = {
-  _id: Scalars['ID'];
+  _id: Scalars['ID']['output'];
   /** The appId of the app that the slot is associated with. */
-  appId: Scalars['ID'];
+  appId: Scalars['ID']['output'];
   /** The date at which the entity was created. */
-  createdAt?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['String']['output']>;
   /** Optional ID if the slot type has a representation in Dialogflow. */
-  dialogflowId?: Maybe<Scalars['String']>;
+  dialogflowId?: Maybe<Scalars['String']['output']>;
   /** The name of the slot as it is to the user. */
-  displayName: Scalars['String'];
+  displayName: Scalars['String']['output'];
   /** The unique identification as it is in the database. */
-  entityId: Scalars['ID'];
+  entityId: Scalars['ID']['output'];
   intents: EntityIntentsSearchResult;
   /**
    * NLU specific metadata used when translating to the NLU entity.
    *
    * Use it to override the entity type for a specific NLU
    */
-  nlu?: Maybe<Scalars['JSON']>;
+  nlu?: Maybe<Scalars['JSON']['output']>;
   /**
    * The type of entity.
    * If not set, the default is 'VALUE_SYNONYMS' which uses a set of values
@@ -3801,7 +3803,7 @@ export type Entity = {
    */
   type?: Maybe<EntityType>;
   /** The date at which the entity was last updated. */
-  updatedAt?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['String']['output']>;
   /** A query for any errors that may be in the Entity. */
   validation: EntityValidation;
   /** The values that the slot can be. */
@@ -3810,19 +3812,19 @@ export type Entity = {
 
 
 export type EntityIntentsArgs = {
-  from?: InputMaybe<Scalars['Int']>;
-  size?: InputMaybe<Scalars['Int']>;
+  from?: InputMaybe<Scalars['Int']['input']>;
+  size?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type EntityErrorSystemNotification = BaseSystemNotification & {
   /** A time when the notification was received */
-  created: Scalars['DateTime'];
+  created: Scalars['DateTime']['output'];
   /** A unique identifier for the notification */
-  id: Scalars['ID'];
+  id: Scalars['ID']['output'];
   /** The custom level that the notification should be at. */
   level: SystemNotificationLevel;
   /** A details description of the notification */
-  message: Scalars['String'];
+  message: Scalars['String']['output'];
   /**
    * Meta data that is associated with the system notification.
    *
@@ -3830,38 +3832,38 @@ export type EntityErrorSystemNotification = BaseSystemNotification & {
    */
   meta?: Maybe<EntityErrorSystemNotificationMeta>;
   /** A title or name of the notification */
-  name: Scalars['String'];
+  name: Scalars['String']['output'];
 };
 
 export type EntityErrorSystemNotificationMeta = {
   /** The ID of the app that owns the handler */
-  appId: Scalars['ID'];
+  appId: Scalars['ID']['output'];
   /** The ID of the entity that contains the error. */
-  entityId: Scalars['ID'];
+  entityId: Scalars['ID']['output'];
 };
 
 export type EntityIntentsSearchResult = {
   intents?: Maybe<Array<Maybe<Intent>>>;
-  total: Scalars['Int'];
+  total: Scalars['Int']['output'];
 };
 
 export type EntitySuggestion = {
   /** The ending location of the word in the provided sentence. */
-  end: Scalars['Int'];
+  end: Scalars['Int']['output'];
   /**
    * The Stentor entityId that the word can map to.
    *
    * If this is blank then there is no entity that matches the word.
    */
-  entityId: Scalars['String'];
+  entityId: Scalars['String']['output'];
   /** A parsed suggestion for the word. */
-  ner: Scalars['String'];
+  ner: Scalars['String']['output'];
   /** The original word */
-  rawValue: Scalars['String'];
+  rawValue: Scalars['String']['output'];
   /** The starting location of the word in the provided sentence. */
-  start: Scalars['Int'];
+  start: Scalars['Int']['output'];
   /** The value of the entity. */
-  value: Scalars['String'];
+  value: Scalars['String']['output'];
 };
 
 export enum EntityType {
@@ -3873,66 +3875,66 @@ export type EntityValidation = {
   /** Any errors that may be associated with the object. */
   errors: Array<Maybe<EntityValidationError>>;
   /** Whether or not the full entity is valid. */
-  isValid: Scalars['Boolean'];
+  isValid: Scalars['Boolean']['output'];
 };
 
 export type EntityValidationError = {
   /** A description of the error message */
-  errorMessage: Scalars['String'];
+  errorMessage: Scalars['String']['output'];
   /** The property that is in error. */
-  propertyName?: Maybe<Scalars['String']>;
+  propertyName?: Maybe<Scalars['String']['output']>;
 };
 
 export type EntityValue = {
   /** Used by Alexa.  This value is returned as a reference, such as "LAX" */
-  canonicalId?: Maybe<Scalars['String']>;
+  canonicalId?: Maybe<Scalars['String']['output']>;
   /**
    * The name of the entity.
    * For example, for an entity called cities, a value would
    * be "Los Angeles".
    */
-  name: Scalars['String'];
+  name: Scalars['String']['output'];
   /**
    * List of potential synonyms for the entity.
    *
    * For example, "L.A."" & "City of Angels"
    */
-  synonyms?: Maybe<Array<Maybe<Scalars['String']>>>;
+  synonyms?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
 };
 
 export type EntityValueInput = {
   /** Used by Alexa.  This value is returned as a reference, such as "LAX" */
-  canonicalId?: InputMaybe<Scalars['String']>;
+  canonicalId?: InputMaybe<Scalars['String']['input']>;
   /**
    * The name of the entity.
    * For example, for an entity called cities, a value would
    * be "Los Angeles".
    */
-  name: Scalars['String'];
+  name: Scalars['String']['input'];
   /**
    * List of potential synonyms for the entity.
    *
    * For example, "L.A."" & "City of Angels"
    */
-  synonyms?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  synonyms?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export type EventFlag = {
   /** The flag that was set. */
   flag: RawQueryEventFlag;
   /** The date at which it was flagged. In ISO 8601 standard. */
-  flaggedOn: Scalars['String'];
+  flaggedOn: Scalars['String']['output'];
   /** A not set by the user who flagged it. */
-  note?: Maybe<Scalars['String']>;
+  note?: Maybe<Scalars['String']['output']>;
   /** The user who flagged the event. */
-  userEmail: Scalars['String'];
+  userEmail: Scalars['String']['output'];
 };
 
 export type EventResolutionInput = {
   /** A note that the user may want to add to the resolution for clarity. */
-  note?: InputMaybe<Scalars['String']>;
+  note?: InputMaybe<Scalars['String']['input']>;
   /** The Stentor event that this resolution is linked to. */
-  stentorEventId: Scalars['ID'];
+  stentorEventId: Scalars['ID']['input'];
   /**
    * The style of resolution that this is.
    *
@@ -3951,20 +3953,20 @@ export enum EventResolutionType {
 }
 
 export type EventResponse = {
-  displays?: Maybe<Scalars['JSON']>;
+  displays?: Maybe<Scalars['JSON']['output']>;
   outputSpeech?: Maybe<EventResponseObject>;
   reprompt?: Maybe<EventResponseObject>;
 };
 
 export type EventResponseObject = {
-  displayText?: Maybe<Scalars['String']>;
-  ssml?: Maybe<Scalars['String']>;
+  displayText?: Maybe<Scalars['String']['output']>;
+  ssml?: Maybe<Scalars['String']['output']>;
   suggestions?: Maybe<Array<Maybe<EventResponseSuggestion>>>;
 };
 
 export type EventResponseSuggestion = {
-  title?: Maybe<Scalars['String']>;
-  url?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']['output']>;
+  url?: Maybe<Scalars['String']['output']>;
 };
 
 /**
@@ -3975,125 +3977,125 @@ export type EventResponseSuggestion = {
  */
 export type EventSlots = {
   /** The value of the slot if it is a boolean. */
-  booleanValue?: Maybe<Scalars['Boolean']>;
+  booleanValue?: Maybe<Scalars['Boolean']['output']>;
   /** The iso 8601 value of the date value. */
-  dateValue?: Maybe<Scalars['String']>;
+  dateValue?: Maybe<Scalars['String']['output']>;
   /** The iso 8601 value of the end date value. */
-  endDateValue?: Maybe<Scalars['String']>;
+  endDateValue?: Maybe<Scalars['String']['output']>;
   /** The ID of the slot. */
-  id?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']['output']>;
   /** The value of a slot if it is an integer. */
-  integerValue?: Maybe<Scalars['Int']>;
+  integerValue?: Maybe<Scalars['Int']['output']>;
   /** The name of the slot. */
-  name?: Maybe<Scalars['String']>;
-  rawValue?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']['output']>;
+  rawValue?: Maybe<Scalars['String']['output']>;
   /** A stringified value of the slot. This is used if the type could not be determined or is not supported yet. */
-  slotValue?: Maybe<Scalars['String']>;
+  slotValue?: Maybe<Scalars['String']['output']>;
   /** The iso 8601 value of the start date value. */
-  startDateValue?: Maybe<Scalars['String']>;
+  startDateValue?: Maybe<Scalars['String']['output']>;
   /** String values of a slot array. */
-  stringArrayValue?: Maybe<Array<Maybe<Scalars['String']>>>;
+  stringArrayValue?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   /** The value of the slot if it is a string. */
-  stringValue?: Maybe<Scalars['String']>;
-  successfulMatch?: Maybe<Scalars['Boolean']>;
+  stringValue?: Maybe<Scalars['String']['output']>;
+  successfulMatch?: Maybe<Scalars['Boolean']['output']>;
 };
 
 export type EventStentorRequest = {
-  anonymous?: Maybe<Scalars['Boolean']>;
-  channel?: Maybe<Scalars['String']>;
-  intentId?: Maybe<Scalars['String']>;
-  isHealthCheck?: Maybe<Scalars['Boolean']>;
-  isNewSession?: Maybe<Scalars['Boolean']>;
-  locale?: Maybe<Scalars['String']>;
-  matchConfidence?: Maybe<Scalars['Float']>;
-  platform?: Maybe<Scalars['String']>;
-  rawQuery?: Maybe<Scalars['String']>;
+  anonymous?: Maybe<Scalars['Boolean']['output']>;
+  channel?: Maybe<Scalars['String']['output']>;
+  intentId?: Maybe<Scalars['String']['output']>;
+  isHealthCheck?: Maybe<Scalars['Boolean']['output']>;
+  isNewSession?: Maybe<Scalars['Boolean']['output']>;
+  locale?: Maybe<Scalars['String']['output']>;
+  matchConfidence?: Maybe<Scalars['Float']['output']>;
+  platform?: Maybe<Scalars['String']['output']>;
+  rawQuery?: Maybe<Scalars['String']['output']>;
   sessionAttributes?: Maybe<EventStentorRequestsSessionAttributes>;
-  sessionId?: Maybe<Scalars['String']>;
-  type?: Maybe<Scalars['String']>;
-  userId?: Maybe<Scalars['String']>;
+  sessionId?: Maybe<Scalars['String']['output']>;
+  type?: Maybe<Scalars['String']['output']>;
+  userId?: Maybe<Scalars['String']['output']>;
 };
 
 export type EventStentorRequestsSessionAttributes = {
-  channel?: Maybe<Scalars['String']>;
-  sessionId?: Maybe<Scalars['String']>;
-  userId?: Maybe<Scalars['String']>;
+  channel?: Maybe<Scalars['String']['output']>;
+  sessionId?: Maybe<Scalars['String']['output']>;
+  userId?: Maybe<Scalars['String']['output']>;
 };
 
 /** Execution events that were captured by Stentor. */
 export type Events = {
   /** The channel ID that threw the event. */
-  channel?: Maybe<Scalars['String']>;
+  channel?: Maybe<Scalars['String']['output']>;
   /** For intent request events, the handler that was currently fullfilling the request. */
-  currentHandler?: Maybe<Scalars['String']>;
+  currentHandler?: Maybe<Scalars['String']['output']>;
   /** The Stentor environment that it was running (dev, stage, prod, etc.) */
-  environment?: Maybe<Scalars['String']>;
+  environment?: Maybe<Scalars['String']['output']>;
   /** For error events, the error code that was sent with the error if there was one. */
-  errorCode?: Maybe<Scalars['Int']>;
+  errorCode?: Maybe<Scalars['Int']['output']>;
   /** For error events, the message that was sent with the error. */
-  errorMessage?: Maybe<Scalars['String']>;
+  errorMessage?: Maybe<Scalars['String']['output']>;
   /** The ID of the event that. */
-  eventId: Scalars['String'];
+  eventId: Scalars['String']['output'];
   /**
    * The index that the event is a part of.
    *
    * @deprecated The index is now part of the eventId.
    */
-  eventIndex: Scalars['String'];
+  eventIndex: Scalars['String']['output'];
   /** A more specific description of the event.  Can be thought of as a sub-section of eventType. */
-  eventName?: Maybe<Scalars['String']>;
+  eventName?: Maybe<Scalars['String']['output']>;
   /** The time that the event was sent. */
-  eventTime?: Maybe<Scalars['String']>;
+  eventTime?: Maybe<Scalars['String']['output']>;
   /** The type of event that was thrown. */
-  eventType?: Maybe<Scalars['String']>;
+  eventType?: Maybe<Scalars['String']['output']>;
   /** Flag history for the event.  Most recent at top. */
   flags?: Maybe<Array<Maybe<EventFlag>>>;
   /** Whether or not the event was a health check. */
-  isHealthCheck?: Maybe<Scalars['Boolean']>;
+  isHealthCheck?: Maybe<Scalars['Boolean']['output']>;
   /** Whether or not the event is the first in its session. */
-  isNewSession?: Maybe<Scalars['Boolean']>;
+  isNewSession?: Maybe<Scalars['Boolean']['output']>;
   /** A string or JSON parselable string of the payload of the event. */
-  payload?: Maybe<Scalars['String']>;
+  payload?: Maybe<Scalars['String']['output']>;
   /** The platform that the event was runnign on. */
-  platform?: Maybe<Scalars['String']>;
+  platform?: Maybe<Scalars['String']['output']>;
   /** The captured action before it was interpreted by the platform.  Only for INTENT_REQUEST events on platforms that support it. */
-  rawQuery?: Maybe<Scalars['String']>;
+  rawQuery?: Maybe<Scalars['String']['output']>;
   /** For intent requests, the intentId of the request. */
-  request?: Maybe<Scalars['String']>;
+  request?: Maybe<Scalars['String']['output']>;
   /** For completed intent requests, the response that was found. */
   response?: Maybe<EventResponse>;
   /** For intent request events, the handler that was chosen to fulfill the next request. */
-  selectedHandler?: Maybe<Scalars['String']>;
+  selectedHandler?: Maybe<Scalars['String']['output']>;
   /** The ID of a specific session that is associated with the event. */
-  sessionId?: Maybe<Scalars['String']>;
+  sessionId?: Maybe<Scalars['String']['output']>;
   /** For intent requests, the slots that were resolved in teh request. */
   slots?: Maybe<Array<Maybe<EventSlots>>>;
   /** The request that was pulled out of the event. */
   stentorRequest?: Maybe<EventStentorRequest>;
   /** The tag that is related to the query. */
-  tag?: Maybe<Array<Maybe<Scalars['String']>>>;
+  tag?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   /** The ID of the user which was making the request. */
-  userId?: Maybe<Scalars['String']>;
+  userId?: Maybe<Scalars['String']['output']>;
 };
 
 export type ExecutableHandlerPath = BaseHandlerPath & {
-  actions?: Maybe<Array<Maybe<Scalars['JSON']>>>;
+  actions?: Maybe<Array<Maybe<Scalars['JSON']['output']>>>;
   /** Conditions to be met. */
-  conditions?: Maybe<Scalars['PathConditions']>;
-  data?: Maybe<Scalars['JSON']>;
+  conditions?: Maybe<Scalars['PathConditions']['output']>;
+  data?: Maybe<Scalars['JSON']['output']>;
   /** The ID of the handler to forward or redirect the request to */
-  intentId: Scalars['String'];
+  intentId: Scalars['String']['output'];
   /**
    * Optional platform filter for the path.
    *
    * If set, the path will only apply to the specified platform.
    */
-  platform?: Maybe<Scalars['String']>;
+  platform?: Maybe<Scalars['String']['output']>;
   /**
    * Optional, if redirecting or forwarding to a handler that is expecting slots,
    * set these to pre-populate them on the request.
    */
-  slots?: Maybe<Scalars['JSON']>;
+  slots?: Maybe<Scalars['JSON']['output']>;
   /**
    * Type of path.
    *
@@ -4104,45 +4106,45 @@ export type ExecutableHandlerPath = BaseHandlerPath & {
    * through, requiring the new handler to handle the
    * request as is.
    */
-  type?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']['output']>;
 };
 
 export type ExpectedSlot = {
   /** The value of the slot if it is a boolean. */
-  booleanValue?: Maybe<Scalars['Boolean']>;
+  booleanValue?: Maybe<Scalars['Boolean']['output']>;
   /** The iso 8601 value of the date value. */
-  dateValue?: Maybe<Scalars['String']>;
+  dateValue?: Maybe<Scalars['String']['output']>;
   /** The iso 8601 value of the end date value. */
-  endDateValue?: Maybe<Scalars['String']>;
+  endDateValue?: Maybe<Scalars['String']['output']>;
   /** The value of a slot if it is a float. Integer values will also be included. */
-  floatValue?: Maybe<Scalars['Float']>;
+  floatValue?: Maybe<Scalars['Float']['output']>;
   /** The value of a slot if it is an integer. */
-  integerValue?: Maybe<Scalars['Int']>;
+  integerValue?: Maybe<Scalars['Int']['output']>;
   /** The name of the expected slot. */
-  name: Scalars['String'];
+  name: Scalars['String']['output'];
   /** The iso 8601 value of the start date value. */
-  startDateValue?: Maybe<Scalars['String']>;
+  startDateValue?: Maybe<Scalars['String']['output']>;
   /** String values of a slot array. */
-  stringArrayValue?: Maybe<Array<Maybe<Scalars['String']>>>;
+  stringArrayValue?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   /** The value of the slot if it is a string. */
-  stringValue?: Maybe<Scalars['String']>;
+  stringValue?: Maybe<Scalars['String']['output']>;
 };
 
 export type ExpectedUtteranceTestResult = {
   /** The intentId that is expected to be returned when the utterance is found. */
-  intentId: Scalars['String'];
+  intentId: Scalars['String']['output'];
   /** The slots that are expected to be returned. */
   matchedSlots?: Maybe<Array<Maybe<ExpectedSlot>>>;
   /** The request type expected. */
-  type?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']['output']>;
 };
 
 export type ExportAppMutationResponse = {
-  url: Scalars['URL'];
+  url: Scalars['URL']['output'];
 };
 
 export type ExportToCsvReturn = {
-  url: Scalars['URL'];
+  url: Scalars['URL']['output'];
 };
 
 export type FaqMutation = {
@@ -4172,19 +4174,19 @@ export type FaqMutationAddFaQsArgs = {
 
 
 export type FaqMutationExportToCsvArgs = {
-  includeTitle?: InputMaybe<Scalars['Boolean']>;
-  includeUrl?: InputMaybe<Scalars['Boolean']>;
+  includeTitle?: InputMaybe<Scalars['Boolean']['input']>;
+  includeUrl?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
 export type FaqMutationUpdateArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type FaqMutationUploadCsvArgs = {
-  file: Scalars['URL'];
-  hasTitle?: InputMaybe<Scalars['Boolean']>;
+  file: Scalars['URL']['input'];
+  hasTitle?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export enum FaqNotAddedReason {
@@ -4194,7 +4196,7 @@ export enum FaqNotAddedReason {
 
 export type FaqQuestionSuggestion = {
   /** The possible question */
-  question: Scalars['String'];
+  question: Scalars['String']['output'];
 };
 
 export type FaqQuestionSuggestions = {
@@ -4202,34 +4204,34 @@ export type FaqQuestionSuggestions = {
 };
 
 export type FaqSuggestionReturn = {
-  failedPutRequests: Scalars['Int'];
-  responses: Scalars['JSON'];
+  failedPutRequests: Scalars['Int']['output'];
+  responses: Scalars['JSON']['output'];
 };
 
 export type FacebookMessengerAppChannel = BaseAppChannel & {
   /** Human readable name for the avatar. */
-  avatarName?: Maybe<Scalars['String']>;
+  avatarName?: Maybe<Scalars['String']['output']>;
   /** URL to the facebook page's avatar. */
-  avatarUrl?: Maybe<Scalars['URL']>;
+  avatarUrl?: Maybe<Scalars['URL']['output']>;
   /** URL for the directory listing. */
-  directoryListing?: Maybe<Scalars['String']>;
+  directoryListing?: Maybe<Scalars['String']['output']>;
   /** URI where the channel can be accessed. */
-  endPoint?: Maybe<Scalars['String']>;
+  endPoint?: Maybe<Scalars['String']['output']>;
   /** AppId of the app that it's linked to. */
-  facebookAppId?: Maybe<Scalars['String']>;
+  facebookAppId?: Maybe<Scalars['String']['output']>;
   /** Human readable name for the Facebook app. */
-  facebookAppName?: Maybe<Scalars['String']>;
-  facebookAppSecret?: Maybe<Scalars['String']>;
+  facebookAppName?: Maybe<Scalars['String']['output']>;
+  facebookAppSecret?: Maybe<Scalars['String']['output']>;
   /** The ID of the channel. */
-  id: Scalars['String'];
+  id: Scalars['String']['output'];
   /** The display name for the channel. */
-  name?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']['output']>;
   /** The pages that are linked to the channel. */
   pages?: Maybe<Array<Maybe<FacebookPage>>>;
   /** The lifecycle status of the app. */
   status?: Maybe<AppChannelStatus>;
   /** The type of channel */
-  type: Scalars['String'];
+  type: Scalars['String']['output'];
   /** Retrieves any events that are related to this specific app */
   usageEvents?: Maybe<TotalUsageEvents>;
   /**
@@ -4240,29 +4242,29 @@ export type FacebookMessengerAppChannel = BaseAppChannel & {
    *
    * If the value is "*", then it will pick the first available NLU within app.nlu[]
    */
-  useNLU?: Maybe<Scalars['String']>;
+  useNLU?: Maybe<Scalars['String']['output']>;
 };
 
 
 export type FacebookMessengerAppChannelUsageEventsArgs = {
-  from?: InputMaybe<Scalars['Int']>;
-  size?: InputMaybe<Scalars['Int']>;
+  from?: InputMaybe<Scalars['Int']['input']>;
+  size?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type FacebookMessengerAppChannelInput = {
   /** Human readable name for the avatar. */
-  avatarName?: InputMaybe<Scalars['String']>;
+  avatarName?: InputMaybe<Scalars['String']['input']>;
   /** URL to the facebook page's avatar. */
-  avatarUrl?: InputMaybe<Scalars['URL']>;
+  avatarUrl?: InputMaybe<Scalars['URL']['input']>;
   /** URL for the directory listing. */
-  directoryListing?: InputMaybe<Scalars['String']>;
+  directoryListing?: InputMaybe<Scalars['String']['input']>;
   /** URI where the channel can be accessed. */
-  endPoint?: InputMaybe<Scalars['String']>;
+  endPoint?: InputMaybe<Scalars['String']['input']>;
   /** AppId of the app that it's linked to. */
-  facebookAppId?: InputMaybe<Scalars['String']>;
+  facebookAppId?: InputMaybe<Scalars['String']['input']>;
   /** Human readable name for the Facebook app. */
-  facebookAppName?: InputMaybe<Scalars['String']>;
-  facebookAppSecret?: InputMaybe<Scalars['String']>;
+  facebookAppName?: InputMaybe<Scalars['String']['input']>;
+  facebookAppSecret?: InputMaybe<Scalars['String']['input']>;
   /**
    * The ID of the channel.
    *
@@ -4273,13 +4275,13 @@ export type FacebookMessengerAppChannelInput = {
    * updated.  Otherwise the channel will be inserted and an ID will be
    * generated.
    */
-  id?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['String']['input']>;
   /** The display name for the channel. */
-  name?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']['input']>;
   /** The pages that are linked to the channel. */
   pages?: InputMaybe<Array<InputMaybe<FacebookPageInput>>>;
   /** The type of channel */
-  type: Scalars['String'];
+  type: Scalars['String']['input'];
   /**
    * ID of the NLU to use within app.nlu[].
    *
@@ -4288,108 +4290,108 @@ export type FacebookMessengerAppChannelInput = {
    *
    * If the value is "*", then it will pick the first available NLU within app.nlu[]
    */
-  useNLU?: InputMaybe<Scalars['String']>;
+  useNLU?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type FacebookPage = {
-  pageId: Scalars['ID'];
-  pageName?: Maybe<Scalars['String']>;
-  pageToken?: Maybe<Scalars['String']>;
+  pageId: Scalars['ID']['output'];
+  pageName?: Maybe<Scalars['String']['output']>;
+  pageToken?: Maybe<Scalars['String']['output']>;
 };
 
 export type FacebookPageInput = {
-  pageId: Scalars['ID'];
-  pageName?: InputMaybe<Scalars['String']>;
-  pageToken?: InputMaybe<Scalars['String']>;
+  pageId: Scalars['ID']['input'];
+  pageName?: InputMaybe<Scalars['String']['input']>;
+  pageToken?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type FaqQueryReturn = {
   faq: Array<Maybe<ScoredWebFaq>>;
-  total: Scalars['Int'];
+  total: Scalars['Int']['output'];
 };
 
 export type FirstTimeHandlerResponseSegment = HandlerResponseSegment & {
-  fistTime: Scalars['Boolean'];
+  fistTime: Scalars['Boolean']['output'];
   segment: ResponseOutput;
 };
 
 export type FlagEventReturn = {
-  message?: Maybe<Scalars['String']>;
+  message?: Maybe<Scalars['String']['output']>;
 };
 
 /** Statistics on the flagged events */
 export type FlagTotals = {
-  CONFIRMED_CORRECT: Scalars['Int'];
-  CORRECT: Scalars['Int'];
-  FLAGGED: Scalars['Int'];
-  HELPFUL: Scalars['Int'];
-  INCORRECT: Scalars['Int'];
-  INCORRECT_RESOLVED: Scalars['Int'];
-  NEEDS_HUMAN: Scalars['Int'];
-  OPTIMAL: Scalars['Int'];
+  CONFIRMED_CORRECT: Scalars['Int']['output'];
+  CORRECT: Scalars['Int']['output'];
+  FLAGGED: Scalars['Int']['output'];
+  HELPFUL: Scalars['Int']['output'];
+  INCORRECT: Scalars['Int']['output'];
+  INCORRECT_RESOLVED: Scalars['Int']['output'];
+  NEEDS_HUMAN: Scalars['Int']['output'];
+  OPTIMAL: Scalars['Int']['output'];
 };
 
 export type ForwardInput = {
-  paths: Array<InputMaybe<Scalars['JSON']>>;
+  paths: Array<InputMaybe<Scalars['JSON']['input']>>;
 };
 
 export type Geocode = {
-  latitude?: Maybe<Scalars['Float']>;
-  longitude?: Maybe<Scalars['Float']>;
+  latitude?: Maybe<Scalars['Float']['output']>;
+  longitude?: Maybe<Scalars['Float']['output']>;
 };
 
 export type GeocodeInput = {
-  latitude: Scalars['Float'];
-  longitude: Scalars['Float'];
+  latitude: Scalars['Float']['input'];
+  longitude: Scalars['Float']['input'];
 };
 
 /** The available app attributes that are from a Organization Get Apps query. */
 export type GetAppsListApp = {
-  _id: Scalars['ID'];
+  _id: Scalars['ID']['output'];
   /** The unique ID of the google action that the app is linked to. */
-  actionsOnGoogleId?: Maybe<Scalars['String']>;
+  actionsOnGoogleId?: Maybe<Scalars['String']['output']>;
   /** The category that the app will fall in to when published to Alexa. */
-  alexaCategory?: Maybe<Scalars['String']>;
+  alexaCategory?: Maybe<Scalars['String']['output']>;
   /** The unique ID of the alexa skill that the app is linked to. */
-  alexaSkillId?: Maybe<Scalars['String']>;
+  alexaSkillId?: Maybe<Scalars['String']['output']>;
   /** Unique identifier of the app in Stentor. */
-  appId: Scalars['String'];
+  appId: Scalars['String']['output'];
   /**
    * The description for the app.
    *
    * The description cannot be more than 4000 characters.
    */
-  description?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']['output']>;
   /**
    * Example phrases the help users know how to use the app.
    *
    * At least three are required for publication.
    */
-  examplePhrases?: Maybe<Array<Maybe<Scalars['String']>>>;
+  examplePhrases?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   /** The phrase a user must speak to wake the app up on a specific platform. */
-  invocationName?: Maybe<Scalars['String']>;
+  invocationName?: Maybe<Scalars['String']['output']>;
   /**
    * Keywords to help when searching directories for the app
    *
    * Max of 30 keywords are allowed.
    */
-  keywords?: Maybe<Scalars['String']>;
+  keywords?: Maybe<Scalars['String']['output']>;
   /**
    * A large icon for the app, 512x512 PNG
    *
    * Required for Alexa
    */
-  largeIcon?: Maybe<Scalars['String']>;
+  largeIcon?: Maybe<Scalars['String']['output']>;
   /** The human-readable name of the app. */
-  name: Scalars['String'];
+  name: Scalars['String']['output'];
   /** The ID of the organization that the app is linked to. */
-  organizationId: Scalars['String'];
+  organizationId: Scalars['String']['output'];
   /**
    * A small icon for the app, 108x108 PNG
    *
    * Required for Alexa
    */
-  smallIcon?: Maybe<Scalars['String']>;
+  smallIcon?: Maybe<Scalars['String']['output']>;
   /** The status that the app is currently in Stentor. */
   status?: Maybe<GetAppsListStatus>;
   /**
@@ -4397,42 +4399,42 @@ export type GetAppsListApp = {
    *
    * Shorter than the description, maximum 160 characters.
    */
-  summary?: Maybe<Scalars['String']>;
+  summary?: Maybe<Scalars['String']['output']>;
 };
 
 export type GetAppsListStatus = {
   /** The email of the user who last changed the status. */
-  email?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']['output']>;
   /** Any notes that was associated with the status change. */
-  notes?: Maybe<Scalars['String']>;
+  notes?: Maybe<Scalars['String']['output']>;
   /**
    * The time the status was last changed.
    *
    * Format: ISO 8601 timestamp
    */
-  timestamp: Scalars['String'];
+  timestamp: Scalars['String']['output'];
   /** The status level of the app. */
-  type: Scalars['String'];
+  type: Scalars['String']['output'];
 };
 
 export type GetAppsQuery = {
-  _id: Scalars['ID'];
+  _id: Scalars['ID']['output'];
   /** The apps that were discovered in the query. */
   apps: Array<Maybe<GetAppsListApp>>;
   /** The total number of apps that were found in the query */
-  total: Scalars['Int'];
+  total: Scalars['Int']['output'];
 };
 
 export type GetEntitiesListEntity = {
-  _id: Scalars['ID'];
+  _id: Scalars['ID']['output'];
   /** The appId of the app that the slot is associated with. */
-  appId: Scalars['ID'];
+  appId: Scalars['ID']['output'];
   /** Optional ID if the slot type has a representation in Dialogflow. */
-  dialogflowId?: Maybe<Scalars['String']>;
+  dialogflowId?: Maybe<Scalars['String']['output']>;
   /** The name of the slot as it is to the user. */
-  displayName: Scalars['String'];
+  displayName: Scalars['String']['output'];
   /** The unique identification as it is in the database. */
-  entityId: Scalars['ID'];
+  entityId: Scalars['ID']['output'];
   /**
    * The type of entity.
    * If not set, the default is 'VALUE_SYNONYMS' which uses a set of values
@@ -4447,37 +4449,37 @@ export type GetEntitiesListEntity = {
 };
 
 export type GetHandlersListHandler = {
-  _id: Scalars['ID'];
+  _id: Scalars['ID']['output'];
   /** The ID of the app that the handler is linked to. */
-  appId: Scalars['String'];
+  appId: Scalars['String']['output'];
   /** The location that the intent was last saved in Stentor's Handler Graph UI. */
   graphCoords?: Maybe<GraphCoords>;
   /** The unique identifier of the handler itself. */
-  intentId: Scalars['String'];
+  intentId: Scalars['String']['output'];
   /** The language code that the handler covers. */
-  langCode?: Maybe<Scalars['String']>;
+  langCode?: Maybe<Scalars['String']['output']>;
   /** The human-readable name of the handler. */
-  name?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']['output']>;
   /** The ID of the organization that the handler is linked to. */
-  organizationId: Scalars['String'];
+  organizationId: Scalars['String']['output'];
   /** The type of handler that this is. */
-  type: Scalars['String'];
+  type: Scalars['String']['output'];
 };
 
 export type GetIntentsListIntent = {
-  _id: Scalars['ID'];
+  _id: Scalars['ID']['output'];
   /** The ID of the app that the intent is linked to. */
-  appId: Scalars['String'];
+  appId: Scalars['String']['output'];
   /** The location that the intent was last saved in Stentor's Handler Graph UI. */
   graphCoords?: Maybe<GraphCoords>;
   /** The unique identifier of the intent itself. */
-  intentId: Scalars['String'];
+  intentId: Scalars['String']['output'];
   /** The language code that the intent covers. */
-  langCode?: Maybe<Scalars['String']>;
+  langCode?: Maybe<Scalars['String']['output']>;
   /** The human-readable name of the intent. */
-  name: Scalars['String'];
+  name: Scalars['String']['output'];
   /** The ID of the organization that the intent is linked to. */
-  organizationId: Scalars['String'];
+  organizationId: Scalars['String']['output'];
   /** The slots of the intent. */
   slots?: Maybe<Array<Maybe<Slot>>>;
   /**
@@ -4485,30 +4487,30 @@ export type GetIntentsListIntent = {
    *
    * For more information on syntax see https://github.com/alexa-js/alexa-utterances
    */
-  utterancePatterns?: Maybe<Array<Maybe<Scalars['String']>>>;
+  utterancePatterns?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
 };
 
 export type GoogleAnalyticsDataStream = {
-  type: Scalars['String'];
+  type: Scalars['String']['output'];
 };
 
 export type GoogleAnalyticsDataStreamInput = {
-  type: Scalars['String'];
+  type: Scalars['String']['input'];
 };
 
 export type GoogleBusinessMessagesAppChannel = BaseAppChannel & {
   /** URL for the directory listing. */
-  directoryListing?: Maybe<Scalars['String']>;
+  directoryListing?: Maybe<Scalars['String']['output']>;
   /** URI where the channel can be accessed. */
-  endPoint?: Maybe<Scalars['String']>;
+  endPoint?: Maybe<Scalars['String']['output']>;
   /** The ID of the channel. */
-  id: Scalars['String'];
+  id: Scalars['String']['output'];
   /** The display name for the channel. */
-  name?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']['output']>;
   /** The lifecycle status of the app. */
   status?: Maybe<AppChannelStatus>;
   /** The type of channel */
-  type: Scalars['String'];
+  type: Scalars['String']['output'];
   /** Retrieves any events that are related to this specific app */
   usageEvents?: Maybe<TotalUsageEvents>;
   /**
@@ -4519,26 +4521,26 @@ export type GoogleBusinessMessagesAppChannel = BaseAppChannel & {
    *
    * If the value is "*", then it will pick the first available NLU within app.nlu[]
    */
-  useNLU?: Maybe<Scalars['String']>;
+  useNLU?: Maybe<Scalars['String']['output']>;
 };
 
 
 export type GoogleBusinessMessagesAppChannelUsageEventsArgs = {
-  from?: InputMaybe<Scalars['Int']>;
-  size?: InputMaybe<Scalars['Int']>;
+  from?: InputMaybe<Scalars['Int']['input']>;
+  size?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type GoogleBusinessMessagesAppChannelInput = {
   /** URL for the directory listing. */
-  directoryListing?: InputMaybe<Scalars['String']>;
+  directoryListing?: InputMaybe<Scalars['String']['input']>;
   /** URI where the channel can be accessed. */
-  endPoint?: InputMaybe<Scalars['String']>;
+  endPoint?: InputMaybe<Scalars['String']['input']>;
   /** The ID of the channel. */
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
   /** The display name for the channel. */
-  name?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']['input']>;
   /** The type of channel */
-  type: Scalars['String'];
+  type: Scalars['String']['input'];
   /**
    * ID of the NLU to use within app.nlu[].
    *
@@ -4547,17 +4549,17 @@ export type GoogleBusinessMessagesAppChannelInput = {
    *
    * If the value is "*", then it will pick the first available NLU within app.nlu[]
    */
-  useNLU?: InputMaybe<Scalars['String']>;
+  useNLU?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type GooglePlatformAdditionalInformationQuestions = {
   /** Does the app contain content related to alcohol or tobacco? */
-  alcoholAndTobaccoRelatedContent: Scalars['Boolean'];
+  alcoholAndTobaccoRelatedContent: Scalars['Boolean']['output'];
 };
 
 export type GooglePlatformAdditionalInformationQuestionsInput = {
   /** Does the app contain content related to alcohol or tobacco? */
-  alcoholAndTobaccoRelatedContent: Scalars['Boolean'];
+  alcoholAndTobaccoRelatedContent: Scalars['Boolean']['input'];
 };
 
 export type GooglePlatformData = {
@@ -4567,7 +4569,7 @@ export type GooglePlatformData = {
    * The platform that the data is associated with
    * All Platform data has this. It determines the structure of the remaining data.
    */
-  platform: Scalars['String'];
+  platform: Scalars['String']['output'];
 };
 
 export type GooglePlatformDataInput = {
@@ -4577,25 +4579,25 @@ export type GooglePlatformDataInput = {
    * The platform that the data is associated with
    * All Platform data has this. It determines the structure of the remaining data.
    */
-  platform: Scalars['String'];
+  platform: Scalars['String']['input'];
 };
 
 export type GraphConnectionKeyDescription = {
   /** If true, the key will match for every string. */
-  catchAll?: Maybe<Scalars['Boolean']>;
+  catchAll?: Maybe<Scalars['Boolean']['output']>;
   /**
    * If it exists, it is an array of possible strings
    * that will be omitted in the case of a catch all key.
    *
    * Note, this must be used in conjunction with catchAll = true.
    */
-  excludedIntentIds?: Maybe<Array<Maybe<Scalars['String']>>>;
+  excludedIntentIds?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   /** If it exists, it is an array of possible strings that will match for the key. */
-  includedIntentIds?: Maybe<Array<Maybe<Scalars['String']>>>;
+  includedIntentIds?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   /** The key cannot be described with the current methods of description. */
-  indescribable?: Maybe<Scalars['Boolean']>;
+  indescribable?: Maybe<Scalars['Boolean']['output']>;
   /** If intentId exists, it is the only string that will match the key. */
-  intentId?: Maybe<Scalars['String']>;
+  intentId?: Maybe<Scalars['String']['output']>;
 };
 
 /** A connection is a link between one node to another. */
@@ -4603,29 +4605,29 @@ export type GraphConnections = {
   /** A detailed description of what this connection entails. */
   description?: Maybe<GraphConnectionKeyDescription>;
   /** The name of the node that this connection is coming from. */
-  from: Scalars['String'];
+  from: Scalars['String']['output'];
   /** The nid of the node that this connection is coming from. */
-  from_node: Scalars['Float'];
+  from_node: Scalars['Float']['output'];
   /** Unique identifier of the connection. */
-  id: Scalars['String'];
+  id: Scalars['String']['output'];
   /** The total number of times the handler was used to transfer to the other node. */
-  selectedCount: Scalars['Int'];
+  selectedCount: Scalars['Int']['output'];
   /** The name of the node that this connection is going to. */
-  to: Scalars['String'];
+  to: Scalars['String']['output'];
   /** The nid of the node that this connection is going to. */
-  to_node: Scalars['Float'];
+  to_node: Scalars['Float']['output'];
 };
 
 /** Used by Stentor's UI component to graph the intents/handlers of an app. */
 export type GraphCoords = {
-  x?: Maybe<Scalars['Float']>;
-  y?: Maybe<Scalars['Float']>;
+  x?: Maybe<Scalars['Float']['output']>;
+  y?: Maybe<Scalars['Float']['output']>;
 };
 
 /** Used by Stentor's UI component to graph the intents/handlers of an app. */
 export type GraphCoordsInput = {
-  x?: InputMaybe<Scalars['Float']>;
-  y?: InputMaybe<Scalars['Float']>;
+  x?: InputMaybe<Scalars['Float']['input']>;
+  y?: InputMaybe<Scalars['Float']['input']>;
 };
 
 export type GraphNode = {
@@ -4634,22 +4636,22 @@ export type GraphNode = {
   /** The handler that is associated with this node. */
   handler: Handler;
   /** The unique identifier of the intent/handler that the node represents. */
-  id: Scalars['String'];
+  id: Scalars['String']['output'];
   /** The unique identifier of the node. */
-  nid: Scalars['Float'];
+  nid: Scalars['Float']['output'];
   /** The total number of time this handler was called. */
-  totalCount: Scalars['Int'];
+  totalCount: Scalars['Int']['output'];
   /** A descriptor of what kind of node this is supposed to represent. */
-  type: Scalars['String'];
+  type: Scalars['String']['output'];
   /** Position on the x axis of a graph.  The top-left of the node. */
-  x: Scalars['Float'];
+  x: Scalars['Float']['output'];
   /** Position on the y axis of a graph.  The top-left of the node. */
-  y: Scalars['Float'];
+  y: Scalars['Float']['output'];
 };
 
 export type GraphNodeField = {
   /** The field names of the nodes. */
-  name: Scalars['String'];
+  name: Scalars['String']['output'];
 };
 
 export type GraphNodeFields = {
@@ -4665,7 +4667,7 @@ export type GraphNodeFields = {
  */
 export type Handler = {
   /** The ID of the app that the Handler is linked to. */
-  appId: Scalars['ID'];
+  appId: Scalars['ID']['output'];
   /**
    * Base content map for the handler.
    *
@@ -4677,63 +4679,63 @@ export type Handler = {
    *
    * Format: ISO 8601 date format.
    */
-  createdAt?: Maybe<Scalars['String']>;
-  data?: Maybe<Scalars['JSON']>;
+  createdAt?: Maybe<Scalars['String']['output']>;
+  data?: Maybe<Scalars['JSON']['output']>;
   /**
    * The locale that all the attributes in this intent are used for before
    * they are overridden.
    */
-  defaultLocale?: Maybe<Scalars['String']>;
+  defaultLocale?: Maybe<Scalars['String']['output']>;
   /** The unique ID of the intent in Dialogflow. */
-  dialogflowId?: Maybe<Scalars['ID']>;
+  dialogflowId?: Maybe<Scalars['ID']['output']>;
   forward?: Maybe<Array<Maybe<HandlerForward>>>;
   /** The location that the intent was last saved in Stentor's Handler Graph UI. */
   graphCoords?: Maybe<GraphCoords>;
   /** The unique identifier of the Handler itself. */
-  intentId: Scalars['ID'];
+  intentId: Scalars['ID']['output'];
   /** The language code that the intent covers. */
-  langCode?: Maybe<Scalars['String']>;
+  langCode?: Maybe<Scalars['String']['output']>;
   /** The human-readable name of the intent. */
-  name: Scalars['String'];
+  name: Scalars['String']['output'];
   /** The ID of the organization that the Handler is linked to. */
-  organizationId: Scalars['ID'];
+  organizationId: Scalars['ID']['output'];
   /** The permissions that the intent requires in order to work. */
   permissions?: Maybe<Array<Maybe<HandlerPermissions>>>;
   redirect?: Maybe<Array<Maybe<HandlerRedirect>>>;
   /** The slots defined within the utterance patterns and their Entity types. */
   slots?: Maybe<Array<Maybe<Slot>>>;
   /** The type of Handler that this is. */
-  type: Scalars['String'];
+  type: Scalars['String']['output'];
   /**
    * The date at which the Handler was last updated.
    *
    * Format: ISO 8601 date format.
    */
-  updatedAt?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['String']['output']>;
   /**
    * An array of utterance patterns.
    *
    * For more information on syntax see https://github.com/alexa-js/alexa-utterances
    */
-  utterancePatterns?: Maybe<Array<Maybe<Scalars['String']>>>;
+  utterancePatterns?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   /** A query for any errors that may be in the handler. */
   validation: HandlerValidation;
 };
 
 export type HandlerContent = {
   handlerResponse: Array<Maybe<HandlerResponse>>;
-  key: Scalars['String'];
+  key: Scalars['String']['output'];
 };
 
 export type HandlerErrorSystemNotification = BaseSystemNotification & {
   /** A time when the notification was received */
-  created: Scalars['DateTime'];
+  created: Scalars['DateTime']['output'];
   /** A unique identifier for the notification */
-  id: Scalars['ID'];
+  id: Scalars['ID']['output'];
   /** The custom level that the notification should be at. */
   level: SystemNotificationLevel;
   /** A details description of the notification */
-  message: Scalars['String'];
+  message: Scalars['String']['output'];
   /**
    * Meta data that is associated with the system notification.
    *
@@ -4741,24 +4743,24 @@ export type HandlerErrorSystemNotification = BaseSystemNotification & {
    */
   meta?: Maybe<HandlerErrorSystemNotificationMeta>;
   /** A title or name of the notification */
-  name: Scalars['String'];
+  name: Scalars['String']['output'];
 };
 
 export type HandlerErrorSystemNotificationMeta = {
   /** The ID of the app that owns the handler */
-  appId: Scalars['ID'];
+  appId: Scalars['ID']['output'];
   /** The ID of the handler that contains the error. */
-  intentId: Scalars['ID'];
+  intentId: Scalars['ID']['output'];
 };
 
 export type HandlerForward = {
-  key: Scalars['String'];
+  key: Scalars['String']['output'];
   paths: Array<Maybe<BaseHandlerPath>>;
 };
 
 export type HandlerForwardInput = {
-  key: Scalars['String'];
-  paths: Array<InputMaybe<Scalars['JSON']>>;
+  key: Scalars['String']['input'];
+  paths: Array<InputMaybe<Scalars['JSON']['input']>>;
 };
 
 export type HandlerMutation = {
@@ -4778,33 +4780,33 @@ export type HandlerMutationAddArgs = {
 
 
 export type HandlerMutationUpdateArgs = {
-  handlerId: Scalars['ID'];
+  handlerId: Scalars['ID']['input'];
 };
 
 export type HandlerPath = BaseHandlerPath & {
-  actions?: Maybe<Array<Maybe<Scalars['JSON']>>>;
+  actions?: Maybe<Array<Maybe<Scalars['JSON']['output']>>>;
   /** Conditions to be met. */
-  conditions?: Maybe<Scalars['PathConditions']>;
-  data?: Maybe<Scalars['JSON']>;
+  conditions?: Maybe<Scalars['PathConditions']['output']>;
+  data?: Maybe<Scalars['JSON']['output']>;
   /**
    * Optional platform filter for the path.
    *
    * If set, the path will only apply to the specified platform.
    */
-  platform?: Maybe<Scalars['String']>;
+  platform?: Maybe<Scalars['String']['output']>;
 };
 
 export type HandlerPathInput = {
-  actions?: InputMaybe<Array<InputMaybe<Scalars['JSON']>>>;
+  actions?: InputMaybe<Array<InputMaybe<Scalars['JSON']['input']>>>;
   /** Conditions to be met. */
-  conditions?: InputMaybe<Scalars['PathConditions']>;
-  data?: InputMaybe<Scalars['JSON']>;
+  conditions?: InputMaybe<Scalars['PathConditions']['input']>;
+  data?: InputMaybe<Scalars['JSON']['input']>;
   /**
    * Optional platform filter for the path.
    *
    * If set, the path will only apply to the specified platform.
    */
-  platform?: InputMaybe<Scalars['String']>;
+  platform?: InputMaybe<Scalars['String']['input']>;
 };
 
 export enum HandlerPermissions {
@@ -4817,34 +4819,34 @@ export enum HandlerPermissions {
 }
 
 export type HandlerRedirect = {
-  key: Scalars['String'];
+  key: Scalars['String']['output'];
   paths: Array<Maybe<BaseHandlerPath>>;
 };
 
 export type HandlerRedirectInput = {
-  key: Scalars['String'];
-  paths: Array<InputMaybe<Scalars['JSON']>>;
+  key: Scalars['String']['input'];
+  paths: Array<InputMaybe<Scalars['JSON']['input']>>;
 };
 
 export type HandlerResponse = {
   /** Description of the channel that will be */
   channel?: Maybe<HandlerResponseChannel>;
   /** Conditions to be met. */
-  conditions?: Maybe<Scalars['HandlerResponseConditions']>;
+  conditions?: Maybe<Scalars['HandlerResponseConditions']['output']>;
   /**
    * Optional active contexts which help influence the NLU.
    * https://cloud.google.com/dialogflow/es/docs/contexts-input-output
    * https://docs.aws.amazon.com/lex/latest/dg/context-mgmt-active-context.html
    */
   context?: Maybe<HandlerResponseContext>;
-  data?: Maybe<Scalars['JSON']>;
+  data?: Maybe<Scalars['JSON']['output']>;
   displays?: Maybe<Array<Maybe<BaseDisplay>>>;
   /**
    * Name of the response
    *
    * Used to help differentiate multiple responses.
    */
-  name?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']['output']>;
   /** What the assistant will say first as part of the response. */
   outputSpeech?: Maybe<ResponseOutput>;
   /**
@@ -4856,21 +4858,21 @@ export type HandlerResponse = {
   /** System responses to perform account links, control media, surface changes, and permission requests. */
   system?: Maybe<HandlerResponseSystem>;
   /** Used for tracking the response in third party analytics. */
-  tag?: Maybe<Scalars['String']>;
+  tag?: Maybe<Scalars['String']['output']>;
 };
 
 export type HandlerResponseActiveContext = {
   /** Name of the context */
-  name: Scalars['String'];
+  name: Scalars['String']['output'];
   /** Parameters passed around with the context */
-  parameters?: Maybe<Scalars['StringMap']>;
+  parameters?: Maybe<Scalars['StringMap']['output']>;
   timeToLive?: Maybe<HandlerResponseActiveContextTtl>;
 };
 
 export type HandlerResponseActiveContextTtl = {
   /** Not supported in Dialogflow */
-  timeToLiveInSeconds?: Maybe<Scalars['Int']>;
-  turnsToLive?: Maybe<Scalars['Int']>;
+  timeToLiveInSeconds?: Maybe<Scalars['Int']['output']>;
+  turnsToLive?: Maybe<Scalars['Int']['output']>;
 };
 
 export type HandlerResponseChannel = {
@@ -4878,7 +4880,7 @@ export type HandlerResponseChannel = {
    * String to match with the name of the channel that will match.  It can either be the exact name of the
    * channel or a regex string to match multiple.
    */
-  name?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']['output']>;
 };
 
 export type HandlerResponseContext = {
@@ -4887,7 +4889,7 @@ export type HandlerResponseContext = {
 };
 
 export type HandlerResponseDuration = {
-  amount?: Maybe<Scalars['Float']>;
+  amount?: Maybe<Scalars['Float']['output']>;
   format?: Maybe<HandlerResponseDurationFormat>;
 };
 
@@ -4920,7 +4922,7 @@ export enum HandlerResponseDurationFormat {
 }
 
 export type HandlerResponseDurationInput = {
-  amount?: InputMaybe<Scalars['Float']>;
+  amount?: InputMaybe<Scalars['Float']['input']>;
   format?: InputMaybe<HandlerResponseDurationFormat>;
 };
 
@@ -4940,17 +4942,17 @@ export type HandlerResponseSegment = {
 
 export type HandlerResponseSegmentInput = {
   activeWithin?: InputMaybe<HandlerResponseDurationInput>;
-  firstTime?: InputMaybe<Scalars['Boolean']>;
+  firstTime?: InputMaybe<Scalars['Boolean']['input']>;
   haveNotSeenWithin?: InputMaybe<HandlerResponseDurationInput>;
-  requestMatch?: InputMaybe<Scalars['JSON']>;
+  requestMatch?: InputMaybe<Scalars['JSON']['input']>;
   schedule?: InputMaybe<HandlerResponseScheduleInput>;
   segment: ResponseOutputInput;
-  slotMatch?: InputMaybe<Scalars['JSON']>;
-  storageMatch?: InputMaybe<Scalars['JSON']>;
+  slotMatch?: InputMaybe<Scalars['JSON']['input']>;
+  storageMatch?: InputMaybe<Scalars['JSON']['input']>;
 };
 
 export type HandlerResponseSegmentItem = {
-  key: Scalars['String'];
+  key: Scalars['String']['output'];
   segments: Array<Maybe<HandlerResponseSegment>>;
 };
 
@@ -4971,23 +4973,23 @@ export type HandlerValidation = {
   /** Any errors that may be associated with the object. */
   errors: Array<Maybe<HandlerValidationError>>;
   /** Whether or not the full handler is valid. */
-  isValid: Scalars['Boolean'];
+  isValid: Scalars['Boolean']['output'];
 };
 
 export type HandlerValidationError = {
   /** A description of the error message */
-  errorMessage: Scalars['String'];
+  errorMessage: Scalars['String']['output'];
   /** The property that is in error. */
-  propertyName?: Maybe<Scalars['String']>;
+  propertyName?: Maybe<Scalars['String']['output']>;
 };
 
 export type HandlersQuery = {
   /** Unique ID for the query type */
-  _id: Scalars['ID'];
+  _id: Scalars['ID']['output'];
   /** A subset of handlers that are found in the query. */
   handlers?: Maybe<Array<Maybe<GetHandlersListHandler>>>;
   /** The total number of handlers that were found. */
-  total: Scalars['Int'];
+  total: Scalars['Int']['output'];
 };
 
 export type HaveNotSeenWithinHandlerResponseSegment = HandlerResponseSegment & {
@@ -4996,49 +4998,49 @@ export type HaveNotSeenWithinHandlerResponseSegment = HandlerResponseSegment & {
 };
 
 export type HistoricalHandlerPath = BaseHandlerPath & {
-  actions?: Maybe<Array<Maybe<Scalars['JSON']>>>;
+  actions?: Maybe<Array<Maybe<Scalars['JSON']['output']>>>;
   /** Conditions to be met. */
-  conditions?: Maybe<Scalars['PathConditions']>;
-  data?: Maybe<Scalars['JSON']>;
+  conditions?: Maybe<Scalars['PathConditions']['output']>;
+  data?: Maybe<Scalars['JSON']['output']>;
   /**
    * The number of handlers to go back into the history of.
    *
    * This is typically just one and can be no more than 10.
    */
-  historicalIndex: Scalars['Int'];
+  historicalIndex: Scalars['Int']['output'];
   /**
    * Optional platform filter for the path.
    *
    * If set, the path will only apply to the specified platform.
    */
-  platform?: Maybe<Scalars['String']>;
+  platform?: Maybe<Scalars['String']['output']>;
 };
 
 /** Contains urls for IP rights contracts related to the app. */
 export type IpRights = {
   /** URL to the IP rights that are on Alexa. */
-  alexa?: Maybe<Scalars['String']>;
+  alexa?: Maybe<Scalars['String']['output']>;
 };
 
 /** Contains urls for IP rights contracts related to the app. */
 export type IpRightsInput = {
   /** URL to the IP rights that are on Alexa. */
-  alexa?: InputMaybe<Scalars['String']>;
+  alexa?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type IPrights = {
   /** The URL which can be used to download the Alexa IP rights document. */
-  alexa?: Maybe<Scalars['String']>;
+  alexa?: Maybe<Scalars['String']['output']>;
 };
 
 export type IPrightsInput = {
   /** The URL which can be used to download the Alexa IP rights document. */
-  alexa?: InputMaybe<Scalars['String']>;
+  alexa?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type InputHandlerContent = {
-  handlerResponse: Array<InputMaybe<Scalars['JSON']>>;
-  key: Scalars['String'];
+  handlerResponse: Array<InputMaybe<Scalars['JSON']['input']>>;
+  key: Scalars['String']['input'];
 };
 
 export type InputSlot = {
@@ -5052,7 +5054,7 @@ export type InputSlot = {
    * "state"
    * "street"
    */
-  inputText?: InputMaybe<Scalars['String']>;
+  inputText?: InputMaybe<Scalars['String']['input']>;
   /**
    * Is the slot a list of values.
    * Supported natively by Dialogflow and shims for Alexa.
@@ -5060,15 +5062,15 @@ export type InputSlot = {
    * items in the list.  Minimum value is 2.  Value defaults to 6 when set to true.
    * * NOTE: Only one isList slot is supported per utterance pattern.
    */
-  isList?: InputMaybe<Scalars['IntOrBoolean']>;
+  isList?: InputMaybe<Scalars['IntOrBoolean']['input']>;
   /**
    * The name of the slot, corresponds to how it is displayed in the
    * sample utterance.
    *
    * For example: "Play {Podcast}" where Podcast is the name.
    */
-  name: Scalars['String'];
-  nlu?: InputMaybe<Scalars['JSON']>;
+  name: Scalars['String']['input'];
+  nlu?: InputMaybe<Scalars['JSON']['input']>;
   /**
    * The slot will be obfuscated either fully or partially.
    *
@@ -5085,27 +5087,27 @@ export type InputSlot = {
    *
    * For legacy applications, SlotType is used.
    */
-  type?: InputMaybe<Scalars['String']>;
+  type?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type IntelligentSearchAppChannel = BaseAppChannel & {
-  autocompleteSuggestionsUrl?: Maybe<Scalars['URL']>;
+  autocompleteSuggestionsUrl?: Maybe<Scalars['URL']['output']>;
   connection?: Maybe<IntelligentSearchConnectionConfig>;
   /** URL for the directory listing. */
-  directoryListing?: Maybe<Scalars['String']>;
+  directoryListing?: Maybe<Scalars['String']['output']>;
   /** URI where the channel can be accessed. */
-  endPoint?: Maybe<Scalars['String']>;
+  endPoint?: Maybe<Scalars['String']['output']>;
   /** The ID of the channel. */
-  id: Scalars['String'];
+  id: Scalars['String']['output'];
   /** The key that goes in the url when retrieving the chat widget to apply custom themes. */
-  key?: Maybe<Scalars['String']>;
+  key?: Maybe<Scalars['String']['output']>;
   /** The display name for the channel. */
-  name?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']['output']>;
   /** The lifecycle status of the app. */
   status?: Maybe<AppChannelStatus>;
   theme?: Maybe<IntelligentSearchWidgetTheme>;
   /** The type of channel */
-  type: Scalars['String'];
+  type: Scalars['String']['output'];
   /** Retrieves any events that are related to this specific app */
   usageEvents?: Maybe<TotalUsageEvents>;
   /**
@@ -5116,22 +5118,22 @@ export type IntelligentSearchAppChannel = BaseAppChannel & {
    *
    * If the value is "*", then it will pick the first available NLU within app.nlu[]
    */
-  useNLU?: Maybe<Scalars['String']>;
+  useNLU?: Maybe<Scalars['String']['output']>;
 };
 
 
 export type IntelligentSearchAppChannelUsageEventsArgs = {
-  from?: InputMaybe<Scalars['Int']>;
-  size?: InputMaybe<Scalars['Int']>;
+  from?: InputMaybe<Scalars['Int']['input']>;
+  size?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type IntelligentSearchAppChannelInput = {
-  autocompleteSuggestionsUrl?: InputMaybe<Scalars['URL']>;
+  autocompleteSuggestionsUrl?: InputMaybe<Scalars['URL']['input']>;
   connection?: InputMaybe<IntelligentSearchConnectionConfigInput>;
   /** URL for the directory listing. */
-  directoryListing?: InputMaybe<Scalars['String']>;
+  directoryListing?: InputMaybe<Scalars['String']['input']>;
   /** URI where the channel can be accessed. */
-  endPoint?: InputMaybe<Scalars['String']>;
+  endPoint?: InputMaybe<Scalars['String']['input']>;
   /**
    * The ID of the channel.
    *
@@ -5142,14 +5144,14 @@ export type IntelligentSearchAppChannelInput = {
    * updated.  Otherwise the channel will be inserted and an ID will be
    * generated.
    */
-  id?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['String']['input']>;
   /** The key that goes in the url when retrieving the chat widget to apply custom themes. */
-  key?: InputMaybe<Scalars['String']>;
+  key?: InputMaybe<Scalars['String']['input']>;
   /** The display name for the channel. */
-  name?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']['input']>;
   theme?: InputMaybe<IntelligentSearchWidgetThemeInput>;
   /** The type of channel */
-  type: Scalars['String'];
+  type: Scalars['String']['input'];
   /**
    * ID of the NLU to use within app.nlu[].
    *
@@ -5158,21 +5160,21 @@ export type IntelligentSearchAppChannelInput = {
    *
    * If the value is "*", then it will pick the first available NLU within app.nlu[]
    */
-  useNLU?: InputMaybe<Scalars['String']>;
+  useNLU?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type IntelligentSearchConnectionConfig = {
   /** Optional key used for basic authentication. */
-  accountKey?: Maybe<Scalars['String']>;
+  accountKey?: Maybe<Scalars['String']['output']>;
   /** Backend URL */
-  serverUrl?: Maybe<Scalars['URLString']>;
+  serverUrl?: Maybe<Scalars['URLString']['output']>;
 };
 
 export type IntelligentSearchConnectionConfigInput = {
   /** Optional key used for basic authentication. */
-  accountKey?: InputMaybe<Scalars['String']>;
+  accountKey?: InputMaybe<Scalars['String']['input']>;
   /** Backend URL */
-  serverUrl?: InputMaybe<Scalars['URLString']>;
+  serverUrl?: InputMaybe<Scalars['URLString']['input']>;
 };
 
 export enum IntelligentSearchWidgetBorderStyle {
@@ -5182,29 +5184,29 @@ export enum IntelligentSearchWidgetBorderStyle {
 }
 
 export type IntelligentSearchWidgetBorderTheme = {
-  color?: Maybe<Scalars['String']>;
-  radius?: Maybe<Scalars['String']>;
+  color?: Maybe<Scalars['String']['output']>;
+  radius?: Maybe<Scalars['String']['output']>;
   style?: Maybe<IntelligentSearchWidgetBorderStyle>;
-  width?: Maybe<Scalars['String']>;
+  width?: Maybe<Scalars['String']['output']>;
 };
 
 export type IntelligentSearchWidgetBorderThemeInput = {
-  color?: InputMaybe<Scalars['String']>;
-  radius?: InputMaybe<Scalars['String']>;
+  color?: InputMaybe<Scalars['String']['input']>;
+  radius?: InputMaybe<Scalars['String']['input']>;
   style?: InputMaybe<IntelligentSearchWidgetBorderStyle>;
-  width?: InputMaybe<Scalars['String']>;
+  width?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type IntelligentSearchWidgetBubbleTheme = {
-  background?: Maybe<Scalars['String']>;
+  background?: Maybe<Scalars['String']['output']>;
 };
 
 export type IntelligentSearchWidgetBubbleThemeInput = {
-  background?: InputMaybe<Scalars['String']>;
+  background?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type IntelligentSearchWidgetCardTheme = {
-  background?: Maybe<Scalars['String']>;
+  background?: Maybe<Scalars['String']['output']>;
   border?: Maybe<IntelligentWidgetBorderTheme>;
   description?: Maybe<IntelligentSearchWidgetTextBlockTheme>;
   link?: Maybe<IntelligentSearchWidgetLinkBlockTheme>;
@@ -5214,7 +5216,7 @@ export type IntelligentSearchWidgetCardTheme = {
 };
 
 export type IntelligentSearchWidgetCardThemeInput = {
-  background?: InputMaybe<Scalars['String']>;
+  background?: InputMaybe<Scalars['String']['input']>;
   border?: InputMaybe<IntelligentWidgetBorderThemeInput>;
   description?: InputMaybe<IntelligentSearchWidgetTextBlockThemeInput>;
   link?: InputMaybe<IntelligentSearchWidgetLinkBlockThemeInput>;
@@ -5260,17 +5262,17 @@ export type IntelligentSearchWidgetListThemeInput = {
 };
 
 export type IntelligentSearchWidgetMarginTheme = {
-  bottom?: Maybe<Scalars['String']>;
-  left?: Maybe<Scalars['String']>;
-  right?: Maybe<Scalars['String']>;
-  top?: Maybe<Scalars['String']>;
+  bottom?: Maybe<Scalars['String']['output']>;
+  left?: Maybe<Scalars['String']['output']>;
+  right?: Maybe<Scalars['String']['output']>;
+  top?: Maybe<Scalars['String']['output']>;
 };
 
 export type IntelligentSearchWidgetMarginThemeInput = {
-  bottom?: InputMaybe<Scalars['String']>;
-  left?: InputMaybe<Scalars['String']>;
-  right?: InputMaybe<Scalars['String']>;
-  top?: InputMaybe<Scalars['String']>;
+  bottom?: InputMaybe<Scalars['String']['input']>;
+  left?: InputMaybe<Scalars['String']['input']>;
+  right?: InputMaybe<Scalars['String']['input']>;
+  top?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type IntelligentSearchWidgetMessageTheme = {
@@ -5292,17 +5294,17 @@ export type IntelligentSearchWidgetMessagesThemeInput = {
 };
 
 export type IntelligentSearchWidgetPaddingTheme = {
-  bottom?: Maybe<Scalars['String']>;
-  left?: Maybe<Scalars['String']>;
-  right?: Maybe<Scalars['String']>;
-  top?: Maybe<Scalars['String']>;
+  bottom?: Maybe<Scalars['String']['output']>;
+  left?: Maybe<Scalars['String']['output']>;
+  right?: Maybe<Scalars['String']['output']>;
+  top?: Maybe<Scalars['String']['output']>;
 };
 
 export type IntelligentSearchWidgetPaddingThemeInput = {
-  bottom?: InputMaybe<Scalars['String']>;
-  left?: InputMaybe<Scalars['String']>;
-  right?: InputMaybe<Scalars['String']>;
-  top?: InputMaybe<Scalars['String']>;
+  bottom?: InputMaybe<Scalars['String']['input']>;
+  left?: InputMaybe<Scalars['String']['input']>;
+  right?: InputMaybe<Scalars['String']['input']>;
+  top?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type IntelligentSearchWidgetTextBlockTheme = {
@@ -5318,25 +5320,25 @@ export type IntelligentSearchWidgetTextBlockThemeInput = {
 };
 
 export type IntelligentSearchWidgetTextTheme = {
-  color?: Maybe<Scalars['String']>;
-  fontFamily?: Maybe<Scalars['String']>;
-  fontSize?: Maybe<Scalars['String']>;
-  fontStyle?: Maybe<Scalars['String']>;
-  fontWeight?: Maybe<Scalars['String']>;
-  lineHeight?: Maybe<Scalars['IntOrString']>;
+  color?: Maybe<Scalars['String']['output']>;
+  fontFamily?: Maybe<Scalars['String']['output']>;
+  fontSize?: Maybe<Scalars['String']['output']>;
+  fontStyle?: Maybe<Scalars['String']['output']>;
+  fontWeight?: Maybe<Scalars['String']['output']>;
+  lineHeight?: Maybe<Scalars['IntOrString']['output']>;
 };
 
 export type IntelligentSearchWidgetTextThemeInput = {
-  color?: InputMaybe<Scalars['String']>;
-  fontFamily?: InputMaybe<Scalars['String']>;
-  fontSize?: InputMaybe<Scalars['String']>;
-  fontStyle?: InputMaybe<Scalars['String']>;
-  fontWeight?: InputMaybe<Scalars['String']>;
-  lineHeight?: InputMaybe<Scalars['String']>;
+  color?: InputMaybe<Scalars['String']['input']>;
+  fontFamily?: InputMaybe<Scalars['String']['input']>;
+  fontSize?: InputMaybe<Scalars['String']['input']>;
+  fontStyle?: InputMaybe<Scalars['String']['input']>;
+  fontWeight?: InputMaybe<Scalars['String']['input']>;
+  lineHeight?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type IntelligentSearchWidgetTheme = {
-  accentColor?: Maybe<Scalars['String']>;
+  accentColor?: Maybe<Scalars['String']['output']>;
   border?: Maybe<IntelligentWidgetBorderTheme>;
   card?: Maybe<IntelligentSearchWidgetCardTheme>;
   carousel?: Maybe<IntelligentSearchWidgetCarouselTheme>;
@@ -5345,7 +5347,7 @@ export type IntelligentSearchWidgetTheme = {
 };
 
 export type IntelligentSearchWidgetThemeInput = {
-  accentColor?: InputMaybe<Scalars['String']>;
+  accentColor?: InputMaybe<Scalars['String']['input']>;
   border?: InputMaybe<IntelligentSearchWidgetBorderThemeInput>;
   card?: InputMaybe<IntelligentSearchWidgetCardThemeInput>;
   carousel?: InputMaybe<IntelligentSearchWidgetCarouselThemeInput>;
@@ -5354,17 +5356,17 @@ export type IntelligentSearchWidgetThemeInput = {
 };
 
 export type IntelligentWidgetBorderTheme = {
-  color?: Maybe<Scalars['String']>;
-  radius?: Maybe<Scalars['String']>;
+  color?: Maybe<Scalars['String']['output']>;
+  radius?: Maybe<Scalars['String']['output']>;
   style?: Maybe<IntelligentSearchWidgetBorderStyle>;
-  width?: Maybe<Scalars['String']>;
+  width?: Maybe<Scalars['String']['output']>;
 };
 
 export type IntelligentWidgetBorderThemeInput = {
-  color?: InputMaybe<Scalars['String']>;
-  radius?: InputMaybe<Scalars['String']>;
+  color?: InputMaybe<Scalars['String']['input']>;
+  radius?: InputMaybe<Scalars['String']['input']>;
   style?: InputMaybe<IntelligentSearchWidgetBorderStyle>;
-  width?: InputMaybe<Scalars['String']>;
+  width?: InputMaybe<Scalars['String']['input']>;
 };
 
 /**
@@ -5373,11 +5375,11 @@ export type IntelligentWidgetBorderThemeInput = {
  * These are translated to their platform specific counterparts when publishing.
  */
 export type Intent = {
-  _id: Scalars['String'];
+  _id: Scalars['String']['output'];
   /** Retrieve the analytics aggregations of the intent. */
   analytics?: Maybe<Analytics>;
   /** The ID of the app that the intent is linked to. */
-  appId: Scalars['ID'];
+  appId: Scalars['ID']['output'];
   /**
    * Contexts the must be active to have this intent be weighted more heavily or selected.
    *
@@ -5396,29 +5398,29 @@ export type Intent = {
    *
    * Format: ISO 8601 date format.
    */
-  createdAt?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['String']['output']>;
   /**
    * The locale that all the attributes in this intent are used for before
    * they are overridden.
    */
-  defaultLocale?: Maybe<Scalars['String']>;
+  defaultLocale?: Maybe<Scalars['String']['output']>;
   /** The unique ID of the intent in Dialogflow. */
-  dialogflowId?: Maybe<Scalars['ID']>;
+  dialogflowId?: Maybe<Scalars['ID']['output']>;
   /** The location that the intent was last saved in Stentor's Handler Graph UI. */
   graphCoords?: Maybe<GraphCoords>;
   /** The unique identifier of the intent itself. */
-  intentId: Scalars['ID'];
+  intentId: Scalars['ID']['output'];
   /** The language code that the intent covers. */
-  langCode?: Maybe<Scalars['String']>;
+  langCode?: Maybe<Scalars['String']['output']>;
   /** The human-readable name of the intent. */
-  name: Scalars['String'];
-  nlu?: Maybe<Scalars['JSON']>;
+  name: Scalars['String']['output'];
+  nlu?: Maybe<Scalars['JSON']['output']>;
   /** The ID of the organization that the intent is linked to. */
-  organizationId: Scalars['ID'];
+  organizationId: Scalars['ID']['output'];
   /** The permissions that the intent requires in order to work. */
-  permissions?: Maybe<Array<Maybe<Scalars['String']>>>;
+  permissions?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   /** Slot type definition. */
-  slotTypes?: Maybe<Scalars['JSON']>;
+  slotTypes?: Maybe<Scalars['JSON']['output']>;
   /** The slots defined within the utterance patterns and their Entity types. */
   slots?: Maybe<Array<Maybe<Slot>>>;
   /**
@@ -5426,13 +5428,13 @@ export type Intent = {
    *
    * Format: ISO 8601 date format.
    */
-  updatedAt?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['String']['output']>;
   /**
    * An array of utterance patterns.
    *
    * For more information on syntax see https://github.com/alexa-js/alexa-utterances
    */
-  utterancePatterns?: Maybe<Array<Maybe<Scalars['String']>>>;
+  utterancePatterns?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   /** Retrieves suggestions of new possible utterances similar to the ones the intent already has. */
   utteranceSuggestions: UtteranceSuggestions;
   /** A query for any errors that may be in the Intent. */
@@ -5446,27 +5448,27 @@ export type Intent = {
  * These are translated to their platform specific counterparts when publishing.
  */
 export type IntentAnalyticsArgs = {
-  endDate?: InputMaybe<Scalars['DateTime']>;
-  startDate?: InputMaybe<Scalars['DateTime']>;
+  endDate?: InputMaybe<Scalars['DateTime']['input']>;
+  startDate?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
 export type IntentContext = {
-  name?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']['output']>;
 };
 
 export type IntentContextInput = {
-  name?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type IntentErrorSystemNotification = BaseSystemNotification & {
   /** A time when the notification was received */
-  created: Scalars['DateTime'];
+  created: Scalars['DateTime']['output'];
   /** A unique identifier for the notification */
-  id: Scalars['ID'];
+  id: Scalars['ID']['output'];
   /** The custom level that the notification should be at. */
   level: SystemNotificationLevel;
   /** A details description of the notification */
-  message: Scalars['String'];
+  message: Scalars['String']['output'];
   /**
    * Meta data that is associated with the system notification.
    *
@@ -5474,14 +5476,14 @@ export type IntentErrorSystemNotification = BaseSystemNotification & {
    */
   meta?: Maybe<IntentErrorSystemNotificationMeta>;
   /** A title or name of the notification */
-  name: Scalars['String'];
+  name: Scalars['String']['output'];
 };
 
 export type IntentErrorSystemNotificationMeta = {
   /** The ID of the app that owns the handler */
-  appId: Scalars['ID'];
+  appId: Scalars['ID']['output'];
   /** The ID of the handler that contains the error. */
-  intentId: Scalars['ID'];
+  intentId: Scalars['ID']['output'];
 };
 
 export type IntentMutation = {
@@ -5496,26 +5498,26 @@ export type IntentMutationAddArgs = {
 
 
 export type IntentMutationUpdateArgs = {
-  intentId: Scalars['ID'];
+  intentId: Scalars['ID']['input'];
 };
 
 export type IntentToHandlerPropsInput = {
   /** The type that the handler should be. */
-  type: Scalars['String'];
+  type: Scalars['String']['input'];
 };
 
 export type IntentValidation = {
   /** Any errors that may be associated with the object. */
   errors: Array<Maybe<IntentValidationError>>;
   /** Whether or not the full intent is valid. */
-  isValid: Scalars['Boolean'];
+  isValid: Scalars['Boolean']['output'];
 };
 
 export type IntentValidationError = {
   /** A description of the error message */
-  errorMessage: Scalars['String'];
+  errorMessage: Scalars['String']['output'];
   /** The property that is in error. */
-  propertyName?: Maybe<Scalars['String']>;
+  propertyName?: Maybe<Scalars['String']['output']>;
 };
 
 export type IntentsGraph = {
@@ -5527,11 +5529,11 @@ export type IntentsGraph = {
 
 export type IntentsQuery = {
   /** Unique ID for the query type */
-  _id: Scalars['ID'];
+  _id: Scalars['ID']['output'];
   /** A subset of intents that are found in the query. */
   intents?: Maybe<Array<Maybe<GetIntentsListIntent>>>;
   /** The total number of intents that were found. */
-  total: Scalars['Int'];
+  total: Scalars['Int']['output'];
 };
 
 export type JsonDependableHandlerResponse = HandlerResponse & {
@@ -5540,22 +5542,22 @@ export type JsonDependableHandlerResponse = HandlerResponse & {
    *
    * 'name' on Match is the JSON path
    */
-  JSONPathMatch?: Maybe<Scalars['JSON']>;
+  JSONPathMatch?: Maybe<Scalars['JSON']['output']>;
   /** Description of the channel that will be */
   channel?: Maybe<HandlerResponseChannel>;
   /** Conditions to be met. */
-  conditions?: Maybe<Scalars['HandlerResponseConditions']>;
+  conditions?: Maybe<Scalars['HandlerResponseConditions']['output']>;
   context?: Maybe<HandlerResponseContext>;
-  data?: Maybe<Scalars['JSON']>;
+  data?: Maybe<Scalars['JSON']['output']>;
   displays?: Maybe<Array<Maybe<BaseDisplay>>>;
   /** The name of the intent that the response is linked to. */
-  intent: Scalars['String'];
+  intent: Scalars['String']['output'];
   /**
    * Name of the response
    *
    * Used to help differentiate multiple responses.
    */
-  name?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']['output']>;
   /** What the assistant will say first as part of the response. */
   outputSpeech?: Maybe<ResponseOutput>;
   /**
@@ -5567,7 +5569,7 @@ export type JsonDependableHandlerResponse = HandlerResponse & {
   /** System responses to perform account links, control media, surface changes, and permission requests. */
   system?: Maybe<HandlerResponseSystem>;
   /** Used for tracking the response in third party analytics. */
-  tag?: Maybe<Scalars['String']>;
+  tag?: Maybe<Scalars['String']['output']>;
 };
 
 export type JsonDependentExecutableHandlerPath = BaseHandlerPath & {
@@ -5576,24 +5578,24 @@ export type JsonDependentExecutableHandlerPath = BaseHandlerPath & {
    *
    * 'name' on Match is the JSON path
    */
-  JSONPathMatch?: Maybe<Scalars['JSON']>;
-  actions?: Maybe<Array<Maybe<Scalars['JSON']>>>;
+  JSONPathMatch?: Maybe<Scalars['JSON']['output']>;
+  actions?: Maybe<Array<Maybe<Scalars['JSON']['output']>>>;
   /** Conditions to be met. */
-  conditions?: Maybe<Scalars['PathConditions']>;
-  data?: Maybe<Scalars['JSON']>;
+  conditions?: Maybe<Scalars['PathConditions']['output']>;
+  data?: Maybe<Scalars['JSON']['output']>;
   /** The ID of the handler to forward or redirect the request to */
-  intentId: Scalars['String'];
+  intentId: Scalars['String']['output'];
   /**
    * Optional platform filter for the path.
    *
    * If set, the path will only apply to the specified platform.
    */
-  platform?: Maybe<Scalars['String']>;
+  platform?: Maybe<Scalars['String']['output']>;
   /**
    * Optional, if redirecting or forwarding to a handler that is expecting slots,
    * set these to pre-populate them on the request.
    */
-  slots?: Maybe<Scalars['JSON']>;
+  slots?: Maybe<Scalars['JSON']['output']>;
   /**
    * Type of path.
    *
@@ -5604,7 +5606,7 @@ export type JsonDependentExecutableHandlerPath = BaseHandlerPath & {
    * through, requiring the new handler to handle the
    * request as is.
    */
-  type?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']['output']>;
 };
 
 /**
@@ -5623,28 +5625,28 @@ export type JsonDependentHistoricalHandlerPath = BaseHandlerPath & {
    *
    * 'name' on Match is the JSON path
    */
-  JSONPathMatch?: Maybe<Scalars['JSON']>;
-  actions?: Maybe<Array<Maybe<Scalars['JSON']>>>;
+  JSONPathMatch?: Maybe<Scalars['JSON']['output']>;
+  actions?: Maybe<Array<Maybe<Scalars['JSON']['output']>>>;
   /** Conditions to be met. */
-  conditions?: Maybe<Scalars['PathConditions']>;
-  data?: Maybe<Scalars['JSON']>;
+  conditions?: Maybe<Scalars['PathConditions']['output']>;
+  data?: Maybe<Scalars['JSON']['output']>;
   /**
    * The number of handlers to go back into the history of.
    *
    * This is typically just one and can be no more than 10.
    */
-  historicalIndex: Scalars['Int'];
+  historicalIndex: Scalars['Int']['output'];
   /**
    * Optional platform filter for the path.
    *
    * If set, the path will only apply to the specified platform.
    */
-  platform?: Maybe<Scalars['String']>;
+  platform?: Maybe<Scalars['String']['output']>;
   /**
    * Optional, if redirecting or forwarding to a handler that is expecting slots,
    * set these to pre-populate them on the request.
    */
-  slots?: Maybe<Scalars['JSON']>;
+  slots?: Maybe<Scalars['JSON']['output']>;
 };
 
 export type JsonDependentPreviousHandlerPath = BaseHandlerPath & {
@@ -5653,19 +5655,19 @@ export type JsonDependentPreviousHandlerPath = BaseHandlerPath & {
    *
    * 'name' on Match is the JSON path
    */
-  JSONPathMatch?: Maybe<Scalars['JSON']>;
-  actions?: Maybe<Array<Maybe<Scalars['JSON']>>>;
+  JSONPathMatch?: Maybe<Scalars['JSON']['output']>;
+  actions?: Maybe<Array<Maybe<Scalars['JSON']['output']>>>;
   /** Conditions to be met. */
-  conditions?: Maybe<Scalars['PathConditions']>;
-  data?: Maybe<Scalars['JSON']>;
+  conditions?: Maybe<Scalars['PathConditions']['output']>;
+  data?: Maybe<Scalars['JSON']['output']>;
   /**
    * Optional platform filter for the path.
    *
    * If set, the path will only apply to the specified platform.
    */
-  platform?: Maybe<Scalars['String']>;
+  platform?: Maybe<Scalars['String']['output']>;
   /** Set to true to request the previous handler paths. */
-  previousHandler: Scalars['Boolean'];
+  previousHandler: Scalars['Boolean']['output'];
 };
 
 export type KnnMutation = {
@@ -5674,20 +5676,20 @@ export type KnnMutation = {
 
 
 export type KnnMutationAddQuestionArgs = {
-  answer: Scalars['String'];
-  question: Scalars['String'];
+  answer: Scalars['String']['input'];
+  question: Scalars['String']['input'];
 };
 
 export type KnnRawQueryHit = {
-  _score: Scalars['Float'];
-  rawQuery: Scalars['String'];
-  rawQueryVector: Array<Maybe<Scalars['Float']>>;
+  _score: Scalars['Float']['output'];
+  rawQuery: Scalars['String']['output'];
+  rawQueryVector: Array<Maybe<Scalars['Float']['output']>>;
 };
 
 export type KnnRawQuerySearchOutput = {
-  aggs: Scalars['JSON'];
+  aggs: Scalars['JSON']['output'];
   hits: Array<Maybe<KnnRawQueryHit>>;
-  total: Scalars['Int'];
+  total: Scalars['Int']['output'];
 };
 
 export type KnnRawQuerySearchQuery = {
@@ -5696,21 +5698,21 @@ export type KnnRawQuerySearchQuery = {
 };
 
 export type KnnSearchHit = {
-  _score: Scalars['Float'];
-  answer: Scalars['String'];
-  answerVector: Array<Maybe<Scalars['Float']>>;
-  question: Scalars['String'];
-  questionVector: Array<Maybe<Scalars['Float']>>;
+  _score: Scalars['Float']['output'];
+  answer: Scalars['String']['output'];
+  answerVector: Array<Maybe<Scalars['Float']['output']>>;
+  question: Scalars['String']['output'];
+  questionVector: Array<Maybe<Scalars['Float']['output']>>;
 };
 
 export type KnnSearchInput = {
-  sentence: Scalars['String'];
-  vectors: Array<Maybe<Scalars['Float']>>;
+  sentence: Scalars['String']['output'];
+  vectors: Array<Maybe<Scalars['Float']['output']>>;
 };
 
 export type KnnSearchOutput = {
   hits: Array<Maybe<KnnSearchHit>>;
-  total: Scalars['Int'];
+  total: Scalars['Int']['output'];
 };
 
 export type KnnSearchQuery = {
@@ -5719,15 +5721,15 @@ export type KnnSearchQuery = {
 };
 
 export type KnnSuggSearchHit = {
-  _score: Scalars['Float'];
-  suggVector: Array<Maybe<Scalars['Float']>>;
-  suggestion: Scalars['String'];
+  _score: Scalars['Float']['output'];
+  suggVector: Array<Maybe<Scalars['Float']['output']>>;
+  suggestion: Scalars['String']['output'];
 };
 
 export type KnnSuggSearchOutput = {
-  aggs: Scalars['JSON'];
+  aggs: Scalars['JSON']['output'];
   hits: Array<Maybe<KnnSuggSearchHit>>;
-  total: Scalars['Int'];
+  total: Scalars['Int']['output'];
 };
 
 export type KnnSuggSearchQuery = {
@@ -5741,31 +5743,31 @@ export type KendraInstance = {
 
 
 export type KendraInstanceFaqsArgs = {
-  nextToken?: InputMaybe<Scalars['String']>;
+  nextToken?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type KendraInstanceFaq = {
   /** The date and time that the FAQ was created */
-  createdAt: Scalars['DateTime'];
+  createdAt: Scalars['DateTime']['output'];
   /** The file type used to create the FAQ */
-  fileFormat: Scalars['String'];
+  fileFormat: Scalars['String']['output'];
   /** The ID of the kendra FAQ */
-  id: Scalars['String'];
+  id: Scalars['String']['output'];
   /** The code for the language the FAQ is written in. */
-  languageCode: Scalars['String'];
+  languageCode: Scalars['String']['output'];
   /** The name of the kendra FAQ */
-  name: Scalars['String'];
+  name: Scalars['String']['output'];
   /** Current status of the FAQ */
   status: KendraInstanceFaqStatus;
   /** The date and time that the FAQ was last updated */
-  updatedAt: Scalars['DateTime'];
+  updatedAt: Scalars['DateTime']['output'];
 };
 
 export type KendraInstanceFaqList = {
   /** The faqs current synced to the Kendra instance */
   faqs: Array<Maybe<KendraInstanceFaq>>;
   /** The token to pass in to retrieve another page of FAQs. */
-  nextToken?: Maybe<Scalars['String']>;
+  nextToken?: Maybe<Scalars['String']['output']>;
 };
 
 export enum KendraInstanceFaqStatus {
@@ -5792,18 +5794,18 @@ export type LastActiveActiveWithinHandlerResponse = HandlerResponse & {
   /** Description of the channel that will be */
   channel?: Maybe<HandlerResponseChannel>;
   /** Conditions to be met. */
-  conditions?: Maybe<Scalars['HandlerResponseConditions']>;
+  conditions?: Maybe<Scalars['HandlerResponseConditions']['output']>;
   context?: Maybe<HandlerResponseContext>;
-  data?: Maybe<Scalars['JSON']>;
+  data?: Maybe<Scalars['JSON']['output']>;
   displays?: Maybe<Array<Maybe<BaseDisplay>>>;
   /** The name of the intent that the response is linked to. */
-  intent: Scalars['String'];
+  intent: Scalars['String']['output'];
   /**
    * Name of the response
    *
    * Used to help differentiate multiple responses.
    */
-  name?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']['output']>;
   /** What the assistant will say first as part of the response. */
   outputSpeech?: Maybe<ResponseOutput>;
   /**
@@ -5815,26 +5817,26 @@ export type LastActiveActiveWithinHandlerResponse = HandlerResponse & {
   /** System responses to perform account links, control media, surface changes, and permission requests. */
   system?: Maybe<HandlerResponseSystem>;
   /** Used for tracking the response in third party analytics. */
-  tag?: Maybe<Scalars['String']>;
+  tag?: Maybe<Scalars['String']['output']>;
 };
 
 export type LastActiveFirstTimeHandlerResponse = HandlerResponse & {
   /** Description of the channel that will be */
   channel?: Maybe<HandlerResponseChannel>;
   /** Conditions to be met. */
-  conditions?: Maybe<Scalars['HandlerResponseConditions']>;
+  conditions?: Maybe<Scalars['HandlerResponseConditions']['output']>;
   context?: Maybe<HandlerResponseContext>;
-  data?: Maybe<Scalars['JSON']>;
+  data?: Maybe<Scalars['JSON']['output']>;
   displays?: Maybe<Array<Maybe<BaseDisplay>>>;
-  firstTime: Scalars['Boolean'];
+  firstTime: Scalars['Boolean']['output'];
   /** The name of the intent that the response is linked to. */
-  intent: Scalars['String'];
+  intent: Scalars['String']['output'];
   /**
    * Name of the response
    *
    * Used to help differentiate multiple responses.
    */
-  name?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']['output']>;
   /** What the assistant will say first as part of the response. */
   outputSpeech?: Maybe<ResponseOutput>;
   /**
@@ -5846,7 +5848,7 @@ export type LastActiveFirstTimeHandlerResponse = HandlerResponse & {
   /** System responses to perform account links, control media, surface changes, and permission requests. */
   system?: Maybe<HandlerResponseSystem>;
   /** Used for tracking the response in third party analytics. */
-  tag?: Maybe<Scalars['String']>;
+  tag?: Maybe<Scalars['String']['output']>;
 };
 
 export type LastActiveHandlerResponse = LastActiveActiveWithinHandlerResponse | LastActiveFirstTimeHandlerResponse | LastActiveHaveNotSeenWithinHandlerResponse;
@@ -5857,19 +5859,19 @@ export type LastActiveHaveNotSeenWithinHandlerResponse = HandlerResponse & {
   /** Description of the channel that will be */
   channel?: Maybe<HandlerResponseChannel>;
   /** Conditions to be met. */
-  conditions?: Maybe<Scalars['HandlerResponseConditions']>;
+  conditions?: Maybe<Scalars['HandlerResponseConditions']['output']>;
   context?: Maybe<HandlerResponseContext>;
-  data?: Maybe<Scalars['JSON']>;
+  data?: Maybe<Scalars['JSON']['output']>;
   displays?: Maybe<Array<Maybe<BaseDisplay>>>;
   haveNotSeenWithin?: Maybe<HandlerResponseDuration>;
   /** The name of the intent that the response is linked to. */
-  intent: Scalars['String'];
+  intent: Scalars['String']['output'];
   /**
    * Name of the response
    *
    * Used to help differentiate multiple responses.
    */
-  name?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']['output']>;
   /** What the assistant will say first as part of the response. */
   outputSpeech?: Maybe<ResponseOutput>;
   /**
@@ -5881,30 +5883,30 @@ export type LastActiveHaveNotSeenWithinHandlerResponse = HandlerResponse & {
   /** System responses to perform account links, control media, surface changes, and permission requests. */
   system?: Maybe<HandlerResponseSystem>;
   /** Used for tracking the response in third party analytics. */
-  tag?: Maybe<Scalars['String']>;
+  tag?: Maybe<Scalars['String']['output']>;
 };
 
 /** A channel that is specific for apps to run on the Dialogflow. */
 export type LexConnectAppChannel = BaseAppChannel & {
   /** The name of the lex bot. */
-  botName?: Maybe<Scalars['String']>;
+  botName?: Maybe<Scalars['String']['output']>;
   /** The region that the bot is contained in. */
-  botRegion?: Maybe<Scalars['String']>;
+  botRegion?: Maybe<Scalars['String']['output']>;
   /** A description of the bot */
-  description?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']['output']>;
   /**
    * If true, user utterances are sent to Amazon Comprehend for
    * sentiment analysis.
    */
-  detectSentiment?: Maybe<Scalars['Boolean']>;
+  detectSentiment?: Maybe<Scalars['Boolean']['output']>;
   /** URL for the directory listing. */
-  directoryListing?: Maybe<Scalars['String']>;
+  directoryListing?: Maybe<Scalars['String']['output']>;
   /** Set to true to enable natural language understanding improvements. */
-  enableModelImprovements?: Maybe<Scalars['Boolean']>;
+  enableModelImprovements?: Maybe<Scalars['Boolean']['output']>;
   /** URI where the channel can be accessed. */
-  endPoint?: Maybe<Scalars['String']>;
+  endPoint?: Maybe<Scalars['String']['output']>;
   /** The ID of the channel. */
-  id: Scalars['String'];
+  id: Scalars['String']['output'];
   /**
    * The maximum time in seconds that Amazon Lex retains data
    * gathered in the conversation.
@@ -5912,29 +5914,29 @@ export type LexConnectAppChannel = BaseAppChannel & {
    * Defaults to 300 seconds (5 minutes), minimum value of 60 and
    * maximum value of 86400
    */
-  idleSessionTTLInSeconds?: Maybe<Scalars['Int']>;
+  idleSessionTTLInSeconds?: Maybe<Scalars['Int']['output']>;
   /** Used to determine if there is a kendra instance linked to this bot. */
-  isLinkedToKendra: Scalars['Boolean'];
+  isLinkedToKendra: Scalars['Boolean']['output'];
   /**
    * Items related to the kendra instance that is linked to this channel.
    * Returns null if there is no kendra instance linked to this channel.
    */
   kendraInstance?: Maybe<KendraInstance>;
   /** The ARN of the Lambda that acts as fulfillment for all the intents. */
-  lexFulfillmentLambdaARN?: Maybe<Scalars['String']>;
+  lexFulfillmentLambdaARN?: Maybe<Scalars['String']['output']>;
   /** The URL to the lex post text deployment. */
-  lexPostTextUrl?: Maybe<Scalars['String']>;
+  lexPostTextUrl?: Maybe<Scalars['String']['output']>;
   /** The role that is used to manage Lex on alternate accounts. */
-  managementRole?: Maybe<Scalars['String']>;
+  managementRole?: Maybe<Scalars['String']['output']>;
   /** The external ID if applicable that allows external accounts to assume the role. */
-  managementRoleExternalId?: Maybe<Scalars['String']>;
+  managementRoleExternalId?: Maybe<Scalars['String']['output']>;
   /** The display name for the channel. */
-  name?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']['output']>;
   /**
    * Match score must be higher than the set threshold otherwise it will fallback to the unknown inputs.
    * Defaults to 0.4
    */
-  nluIntentConfidenceThreshold?: Maybe<Scalars['Float']>;
+  nluIntentConfidenceThreshold?: Maybe<Scalars['Float']['output']>;
   /**
    * Query the text from the NLU. The channel must have valid credentials,
    * projectId, and nlu.
@@ -5943,7 +5945,7 @@ export type LexConnectAppChannel = BaseAppChannel & {
   /** The lifecycle status of the app. */
   status?: Maybe<AppChannelStatus>;
   /** The type of channel */
-  type: Scalars['String'];
+  type: Scalars['String']['output'];
   /** Retrieves any events that are related to this specific app */
   usageEvents?: Maybe<TotalUsageEvents>;
   /**
@@ -5954,40 +5956,40 @@ export type LexConnectAppChannel = BaseAppChannel & {
    *
    * If the value is "*", then it will pick the first available NLU within app.nlu[]
    */
-  useNLU?: Maybe<Scalars['String']>;
+  useNLU?: Maybe<Scalars['String']['output']>;
   /** The Amazon Polly voice ID that you want Polly to use. */
-  voiceId?: Maybe<Scalars['String']>;
+  voiceId?: Maybe<Scalars['String']['output']>;
 };
 
 
 /** A channel that is specific for apps to run on the Dialogflow. */
 export type LexConnectAppChannelNluQueryArgs = {
-  text: Scalars['String'];
+  text: Scalars['String']['input'];
 };
 
 
 /** A channel that is specific for apps to run on the Dialogflow. */
 export type LexConnectAppChannelUsageEventsArgs = {
-  from?: InputMaybe<Scalars['Int']>;
-  size?: InputMaybe<Scalars['Int']>;
+  from?: InputMaybe<Scalars['Int']['input']>;
+  size?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type LexConnectAppChannelInput = {
   /** The name of the lex bot. */
-  botName?: InputMaybe<Scalars['String']>;
+  botName?: InputMaybe<Scalars['String']['input']>;
   /** The region that the bot is contained in. */
-  botRegion?: InputMaybe<Scalars['String']>;
+  botRegion?: InputMaybe<Scalars['String']['input']>;
   /**
    * If true, user utterances are sent to Amazon Comprehend for
    * sentiment analysis.
    */
-  detectSentiment?: InputMaybe<Scalars['Boolean']>;
+  detectSentiment?: InputMaybe<Scalars['Boolean']['input']>;
   /** URL for the directory listing. */
-  directoryListing?: InputMaybe<Scalars['String']>;
+  directoryListing?: InputMaybe<Scalars['String']['input']>;
   /** Set to true to enable natural language understanding improvements. */
-  enableModelImprovements?: InputMaybe<Scalars['Boolean']>;
+  enableModelImprovements?: InputMaybe<Scalars['Boolean']['input']>;
   /** URI where the channel can be accessed. */
-  endPoint?: InputMaybe<Scalars['String']>;
+  endPoint?: InputMaybe<Scalars['String']['input']>;
   /**
    * The ID of the channel.
    *
@@ -5998,7 +6000,7 @@ export type LexConnectAppChannelInput = {
    * updated.  Otherwise the channel will be inserted and an ID will be
    * generated.
    */
-  id?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['String']['input']>;
   /**
    * The maximum time in seconds that Amazon Lex retains data
    * gathered in the conversation.
@@ -6006,22 +6008,22 @@ export type LexConnectAppChannelInput = {
    * Defaults to 300 seconds (5 minutes), minimum value of 60 and
    * maximum value of 86400
    */
-  idleSessionTTLInSeconds?: InputMaybe<Scalars['Int']>;
+  idleSessionTTLInSeconds?: InputMaybe<Scalars['Int']['input']>;
   /** The ARN of the Lambda that acts as fulfillment for all the intents. */
-  lexFulfillmentLambdaARN?: InputMaybe<Scalars['String']>;
+  lexFulfillmentLambdaARN?: InputMaybe<Scalars['String']['input']>;
   /** The role that is used to manage Lex on alternate accounts. */
-  managementRole?: InputMaybe<Scalars['String']>;
+  managementRole?: InputMaybe<Scalars['String']['input']>;
   /** The external ID if applicable that allows external accounts to assume the role. */
-  managementRoleExternalId?: InputMaybe<Scalars['String']>;
+  managementRoleExternalId?: InputMaybe<Scalars['String']['input']>;
   /** The display name for the channel. */
-  name?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']['input']>;
   /**
    * Match score must be higher than the set threshold otherwise it will fallback to the unknown inputs.
    * Defaults to 0.4
    */
-  nluIntentConfidenceThreshold?: InputMaybe<Scalars['Float']>;
+  nluIntentConfidenceThreshold?: InputMaybe<Scalars['Float']['input']>;
   /** The type of channel */
-  type: Scalars['String'];
+  type: Scalars['String']['input'];
   /**
    * ID of the NLU to use within app.nlu[].
    *
@@ -6030,53 +6032,53 @@ export type LexConnectAppChannelInput = {
    *
    * If the value is "*", then it will pick the first available NLU within app.nlu[]
    */
-  useNLU?: InputMaybe<Scalars['String']>;
+  useNLU?: InputMaybe<Scalars['String']['input']>;
   /** The Amazon Polly voice ID that you want Polly to use. */
-  voiceId?: InputMaybe<Scalars['String']>;
+  voiceId?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type LexNluQuery = {
   /** The intentId of the intent that is linked to this lex ID. */
-  intentId: Scalars['String'];
+  intentId: Scalars['String']['output'];
   knowledgeAnswer?: Maybe<LexNluQueryKnowledgeAnswer>;
   /** The intentId of the intent that is in the LexBot. */
-  lexIntentId: Scalars['String'];
+  lexIntentId: Scalars['String']['output'];
   slots?: Maybe<Array<Maybe<NluRequestSlot>>>;
-  type: Scalars['String'];
+  type: Scalars['String']['output'];
 };
 
 export type LexNluQueryKnowledgeAnswer = {
   /** Raw answer */
-  answer: Scalars['String'];
+  answer: Scalars['String']['output'];
   /** Raw question */
-  faqQuestion: Scalars['String'];
+  faqQuestion: Scalars['String']['output'];
   /** Confidence 0-1 */
-  matchConfidence: Scalars['Float'];
+  matchConfidence: Scalars['Float']['output'];
   /** Which knowledge base (optional) */
-  source?: Maybe<Scalars['String']>;
+  source?: Maybe<Scalars['String']['output']>;
 };
 
 /** A channel that is specific for apps to run on the Dialogflow. */
 export type LexV2ConnectAppChannel = BaseAppChannel & {
   /** The name of the lex bot. */
-  botName?: Maybe<Scalars['String']>;
+  botName?: Maybe<Scalars['String']['output']>;
   /** The region that the bot is contained in. */
-  botRegion?: Maybe<Scalars['String']>;
+  botRegion?: Maybe<Scalars['String']['output']>;
   /** A description of the bot */
-  description?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']['output']>;
   /**
    * If true, user utterances are sent to Amazon Comprehend for
    * sentiment analysis.
    */
-  detectSentiment?: Maybe<Scalars['Boolean']>;
+  detectSentiment?: Maybe<Scalars['Boolean']['output']>;
   /** URL for the directory listing. */
-  directoryListing?: Maybe<Scalars['String']>;
+  directoryListing?: Maybe<Scalars['String']['output']>;
   /** Set to true to enable natural language understanding improvements. */
-  enableModelImprovements?: Maybe<Scalars['Boolean']>;
+  enableModelImprovements?: Maybe<Scalars['Boolean']['output']>;
   /** URI where the channel can be accessed. */
-  endPoint?: Maybe<Scalars['String']>;
+  endPoint?: Maybe<Scalars['String']['output']>;
   /** The ID of the channel. */
-  id: Scalars['String'];
+  id: Scalars['String']['output'];
   /**
    * The maximum time in seconds that Amazon Lex retains data
    * gathered in the conversation.
@@ -6084,19 +6086,19 @@ export type LexV2ConnectAppChannel = BaseAppChannel & {
    * Defaults to 300 seconds (5 minutes), minimum value of 60 and
    * maximum value of 86400
    */
-  idleSessionTTLInSeconds?: Maybe<Scalars['Int']>;
+  idleSessionTTLInSeconds?: Maybe<Scalars['Int']['output']>;
   /** Used to determine if there is a kendra instance linked to this bot. */
-  isLinkedToKendra: Scalars['Boolean'];
+  isLinkedToKendra: Scalars['Boolean']['output'];
   /** The ARN of the Lambda that acts as fulfillment for all the intents. */
-  lexFulfillmentLambdaARN?: Maybe<Scalars['String']>;
+  lexFulfillmentLambdaARN?: Maybe<Scalars['String']['output']>;
   /** The URL to the lex post text deployment. */
-  lexPostTextUrl?: Maybe<Scalars['String']>;
+  lexPostTextUrl?: Maybe<Scalars['String']['output']>;
   /** The role that is used to manage Lex on alternate accounts. */
-  managementRole?: Maybe<Scalars['String']>;
+  managementRole?: Maybe<Scalars['String']['output']>;
   /** The external ID if applicable that allows external accounts to assume the role. */
-  managementRoleExternalId?: Maybe<Scalars['String']>;
+  managementRoleExternalId?: Maybe<Scalars['String']['output']>;
   /** The display name for the channel. */
-  name?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']['output']>;
   /**
    * Query the text from the NLU. The channel must have valid credentials,
    * projectId, and nlu.
@@ -6105,7 +6107,7 @@ export type LexV2ConnectAppChannel = BaseAppChannel & {
   /** The lifecycle status of the app. */
   status?: Maybe<AppChannelStatus>;
   /** The type of channel */
-  type: Scalars['String'];
+  type: Scalars['String']['output'];
   /** Retrieves any events that are related to this specific app */
   usageEvents?: Maybe<TotalUsageEvents>;
   /**
@@ -6116,40 +6118,40 @@ export type LexV2ConnectAppChannel = BaseAppChannel & {
    *
    * If the value is "*", then it will pick the first available NLU within app.nlu[]
    */
-  useNLU?: Maybe<Scalars['String']>;
+  useNLU?: Maybe<Scalars['String']['output']>;
   /** The Amazon Polly voice ID that you want Polly to use. */
-  voiceId?: Maybe<Scalars['String']>;
+  voiceId?: Maybe<Scalars['String']['output']>;
 };
 
 
 /** A channel that is specific for apps to run on the Dialogflow. */
 export type LexV2ConnectAppChannelNluQueryArgs = {
-  text: Scalars['String'];
+  text: Scalars['String']['input'];
 };
 
 
 /** A channel that is specific for apps to run on the Dialogflow. */
 export type LexV2ConnectAppChannelUsageEventsArgs = {
-  from?: InputMaybe<Scalars['Int']>;
-  size?: InputMaybe<Scalars['Int']>;
+  from?: InputMaybe<Scalars['Int']['input']>;
+  size?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type LexV2ConnectAppChannelInput = {
   /** The name of the lex bot. */
-  botName?: InputMaybe<Scalars['String']>;
+  botName?: InputMaybe<Scalars['String']['input']>;
   /** The region that the bot is contained in. */
-  botRegion?: InputMaybe<Scalars['String']>;
+  botRegion?: InputMaybe<Scalars['String']['input']>;
   /**
    * If true, user utterances are sent to Amazon Comprehend for
    * sentiment analysis.
    */
-  detectSentiment?: InputMaybe<Scalars['Boolean']>;
+  detectSentiment?: InputMaybe<Scalars['Boolean']['input']>;
   /** URL for the directory listing. */
-  directoryListing?: InputMaybe<Scalars['String']>;
+  directoryListing?: InputMaybe<Scalars['String']['input']>;
   /** Set to true to enable natural language understanding improvements. */
-  enableModelImprovements?: InputMaybe<Scalars['Boolean']>;
+  enableModelImprovements?: InputMaybe<Scalars['Boolean']['input']>;
   /** URI where the channel can be accessed. */
-  endPoint?: InputMaybe<Scalars['String']>;
+  endPoint?: InputMaybe<Scalars['String']['input']>;
   /**
    * The ID of the channel.
    *
@@ -6160,7 +6162,7 @@ export type LexV2ConnectAppChannelInput = {
    * updated.  Otherwise the channel will be inserted and an ID will be
    * generated.
    */
-  id?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['String']['input']>;
   /**
    * The maximum time in seconds that Amazon Lex retains data
    * gathered in the conversation.
@@ -6168,15 +6170,15 @@ export type LexV2ConnectAppChannelInput = {
    * Defaults to 300 seconds (5 minutes), minimum value of 60 and
    * maximum value of 86400
    */
-  idleSessionTTLInSeconds?: InputMaybe<Scalars['Int']>;
+  idleSessionTTLInSeconds?: InputMaybe<Scalars['Int']['input']>;
   /** The ARN of the Lambda that acts as fulfillment for all the intents. */
-  lexFulfillmentLambdaARN?: InputMaybe<Scalars['String']>;
+  lexFulfillmentLambdaARN?: InputMaybe<Scalars['String']['input']>;
   /** The role that is used to manage Lex on alternate accounts. */
-  managementRole?: InputMaybe<Scalars['String']>;
+  managementRole?: InputMaybe<Scalars['String']['input']>;
   /** The display name for the channel. */
-  name?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']['input']>;
   /** The type of channel */
-  type: Scalars['String'];
+  type: Scalars['String']['input'];
   /**
    * ID of the NLU to use within app.nlu[].
    *
@@ -6185,213 +6187,213 @@ export type LexV2ConnectAppChannelInput = {
    *
    * If the value is "*", then it will pick the first available NLU within app.nlu[]
    */
-  useNLU?: InputMaybe<Scalars['String']>;
+  useNLU?: InputMaybe<Scalars['String']['input']>;
   /** The Amazon Polly voice ID that you want Polly to use. */
-  voiceId?: InputMaybe<Scalars['String']>;
+  voiceId?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type LexV2NluQuery = {
   /** The intentId of the intent that is linked to this lex ID. */
-  intentId: Scalars['String'];
+  intentId: Scalars['String']['output'];
   knowledgeAnswer?: Maybe<LexV2NluQueryKnowledgeAnswer>;
   /** The intentId of the intent that is in the LexBot. */
-  lexIntentId: Scalars['String'];
+  lexIntentId: Scalars['String']['output'];
   slots?: Maybe<Array<Maybe<NluRequestSlot>>>;
-  type: Scalars['String'];
+  type: Scalars['String']['output'];
 };
 
 export type LexV2NluQueryKnowledgeAnswer = {
   /** Raw answer */
-  answer: Scalars['String'];
+  answer: Scalars['String']['output'];
   /** Raw question */
-  faqQuestion: Scalars['String'];
+  faqQuestion: Scalars['String']['output'];
   /** Confidence 0-1 */
-  matchConfidence: Scalars['Float'];
+  matchConfidence: Scalars['Float']['output'];
   /** Which knowledge base (optional) */
-  source?: Maybe<Scalars['String']>;
+  source?: Maybe<Scalars['String']['output']>;
 };
 
 export type LinkOutSuggestion = {
-  title: Scalars['String'];
-  url: Scalars['String'];
+  title: Scalars['String']['output'];
+  url: Scalars['String']['output'];
 };
 
 export type ListDisplay = BaseDisplay & {
   items?: Maybe<Array<Maybe<ListDisplayItem>>>;
   /** Used with itemsObject, it is then used to reference the current item in the list within the template. */
-  itemsName?: Maybe<Scalars['String']>;
+  itemsName?: Maybe<Scalars['String']['output']>;
   /**
    * Used when templating the list for automatic generation.
    *
    * When using itemsObject, the first item in the list is the template
    * and all other items in the list will be ignored.
    */
-  itemsObject?: Maybe<Scalars['String']>;
-  payload?: Maybe<Scalars['JSON']>;
+  itemsObject?: Maybe<Scalars['String']['output']>;
+  payload?: Maybe<Scalars['JSON']['output']>;
   /**
    * When itemsObject is provided, this is the amount of list items to display
    * along with the offset within the list.
    */
   range?: Maybe<ListDisplayRange>;
-  title?: Maybe<Scalars['String']>;
-  token?: Maybe<Scalars['String']>;
-  type: Scalars['String'];
+  title?: Maybe<Scalars['String']['output']>;
+  token?: Maybe<Scalars['String']['output']>;
+  type: Scalars['String']['output'];
 };
 
 export type ListDisplayButton = {
   /** Text to be displayed, also needs to be included in the interaction model */
-  title: Scalars['String'];
+  title: Scalars['String']['output'];
 };
 
 export type ListDisplayImage = {
   /** Describes the image for screen readers, referred to as ContentDescription in Alexa */
-  accessibilityText?: Maybe<Scalars['String']>;
+  accessibilityText?: Maybe<Scalars['String']['output']>;
   /** The height of the image */
-  height?: Maybe<Scalars['Int']>;
+  height?: Maybe<Scalars['Int']['output']>;
   /** When present, if the image is clicked the provided website will open. */
-  imageActionUrl?: Maybe<Scalars['String']>;
+  imageActionUrl?: Maybe<Scalars['String']['output']>;
   /** The location of the image, publicly accessible */
-  url: Scalars['String'];
+  url: Scalars['String']['output'];
   /** THe location of the smaller version of the image, publicly accessible */
-  urlIcon?: Maybe<Scalars['URL']>;
+  urlIcon?: Maybe<Scalars['URL']['output']>;
   /** The width of the image */
-  width?: Maybe<Scalars['Int']>;
+  width?: Maybe<Scalars['Int']['output']>;
 };
 
 export type ListDisplayImageInput = {
   /** Describes the image for screen readers, referred to as ContentDescription in Alexa */
-  accessibilityText?: InputMaybe<Scalars['String']>;
+  accessibilityText?: InputMaybe<Scalars['String']['input']>;
   /** The height of the image */
-  height?: InputMaybe<Scalars['Int']>;
+  height?: InputMaybe<Scalars['Int']['input']>;
   /** The location of the image, publicly accessible */
-  url: Scalars['String'];
+  url: Scalars['String']['input'];
   /** THe location of the smaller version of the image, publicly accessible */
-  urlIcon?: InputMaybe<Scalars['URL']>;
+  urlIcon?: InputMaybe<Scalars['URL']['input']>;
   /** The width of the image */
-  width?: InputMaybe<Scalars['Int']>;
+  width?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type ListDisplayInput = {
   items?: InputMaybe<Array<InputMaybe<ListDisplayItemInput>>>;
-  title?: InputMaybe<Scalars['String']>;
-  token?: InputMaybe<Scalars['String']>;
-  type: Scalars['String'];
+  title?: InputMaybe<Scalars['String']['input']>;
+  token?: InputMaybe<Scalars['String']['input']>;
+  type: Scalars['String']['input'];
 };
 
 export type ListDisplayItem = {
   buttons?: Maybe<Array<Maybe<ListDisplayButton>>>;
-  description?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']['output']>;
   image?: Maybe<ListDisplayImage>;
-  synonyms?: Maybe<Array<Maybe<Scalars['String']>>>;
-  title: Scalars['String'];
-  token?: Maybe<Scalars['String']>;
+  synonyms?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  title: Scalars['String']['output'];
+  token?: Maybe<Scalars['String']['output']>;
   /**
    * URL to open when the list item is selected.
    *
    * Not applicable to list type CAROUSEL or available on channels without a web browser available.
    */
-  url?: Maybe<Scalars['String']>;
+  url?: Maybe<Scalars['String']['output']>;
 };
 
 export type ListDisplayItemInput = {
-  description?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['String']['input']>;
   image?: InputMaybe<ListDisplayImageInput>;
-  synonyms?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  title: Scalars['String'];
-  token?: InputMaybe<Scalars['String']>;
+  synonyms?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  title: Scalars['String']['input'];
+  token?: InputMaybe<Scalars['String']['input']>;
   /**
    * URL to open when the list item is selected.
    *
    * Not applicable to list type CAROUSEL or available on channels without a web browser available.
    */
-  url?: InputMaybe<Scalars['String']>;
+  url?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ListDisplayRange = {
-  from: Scalars['Int'];
-  length: Scalars['Int'];
+  from: Scalars['Int']['output'];
+  length: Scalars['Int']['output'];
 };
 
 /** The attributes that override the App attributes by locale. See the documentation in the app for description on each. */
 export type LocaleApp = {
-  accountLinkType?: Maybe<Scalars['String']>;
-  actionsOnGoogleId?: Maybe<Scalars['String']>;
-  alexaCategory?: Maybe<Scalars['String']>;
-  alexaSkillId?: Maybe<Scalars['String']>;
+  accountLinkType?: Maybe<Scalars['String']['output']>;
+  actionsOnGoogleId?: Maybe<Scalars['String']['output']>;
+  alexaCategory?: Maybe<Scalars['String']['output']>;
+  alexaSkillId?: Maybe<Scalars['String']['output']>;
   dataStreams?: Maybe<DataStreams>;
-  description?: Maybe<Scalars['String']>;
-  dialogflowClientToken?: Maybe<Scalars['String']>;
-  dialogflowCrednetialsUrl?: Maybe<Scalars['String']>;
-  dialogflowDeveloperToken?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']['output']>;
+  dialogflowClientToken?: Maybe<Scalars['String']['output']>;
+  dialogflowCrednetialsUrl?: Maybe<Scalars['String']['output']>;
+  dialogflowDeveloperToken?: Maybe<Scalars['String']['output']>;
   endPoint?: Maybe<Endpoint>;
-  examplePhrases?: Maybe<Array<Maybe<Scalars['String']>>>;
-  icon?: Maybe<Scalars['String']>;
-  internalNotes?: Maybe<Scalars['String']>;
-  invocationName?: Maybe<Scalars['String']>;
-  ipRights?: Maybe<Scalars['String']>;
-  keywords?: Maybe<Array<Maybe<Scalars['String']>>>;
-  largeBanner?: Maybe<Scalars['String']>;
-  largeIcon?: Maybe<Scalars['String']>;
+  examplePhrases?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  icon?: Maybe<Scalars['String']['output']>;
+  internalNotes?: Maybe<Scalars['String']['output']>;
+  invocationName?: Maybe<Scalars['String']['output']>;
+  ipRights?: Maybe<Scalars['String']['output']>;
+  keywords?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  largeBanner?: Maybe<Scalars['String']['output']>;
+  largeIcon?: Maybe<Scalars['String']['output']>;
   location?: Maybe<Location>;
-  mediumIcon?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
+  mediumIcon?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
   platformData?: Maybe<PlatformData>;
-  privacyPolicyUrl?: Maybe<Scalars['String']>;
-  smallIcon?: Maybe<Scalars['String']>;
+  privacyPolicyUrl?: Maybe<Scalars['String']['output']>;
+  smallIcon?: Maybe<Scalars['String']['output']>;
   status?: Maybe<Status>;
-  stripeSubscriptionId?: Maybe<Scalars['String']>;
-  summary?: Maybe<Scalars['String']>;
-  templateType?: Maybe<Scalars['String']>;
-  termsOfUseUrl?: Maybe<Scalars['String']>;
-  testingInstructions?: Maybe<Scalars['String']>;
+  stripeSubscriptionId?: Maybe<Scalars['String']['output']>;
+  summary?: Maybe<Scalars['String']['output']>;
+  templateType?: Maybe<Scalars['String']['output']>;
+  termsOfUseUrl?: Maybe<Scalars['String']['output']>;
+  testingInstructions?: Maybe<Scalars['String']['output']>;
 };
 
 /** The attributes that override the App attributes by locale. See the documentation in the app for description on each. */
 export type LocaleAppInput = {
-  accountLinkType?: InputMaybe<Scalars['String']>;
-  actionsOnGoogleId?: InputMaybe<Scalars['String']>;
-  alexaCategory?: InputMaybe<Scalars['String']>;
-  alexaSkillId?: InputMaybe<Scalars['String']>;
+  accountLinkType?: InputMaybe<Scalars['String']['input']>;
+  actionsOnGoogleId?: InputMaybe<Scalars['String']['input']>;
+  alexaCategory?: InputMaybe<Scalars['String']['input']>;
+  alexaSkillId?: InputMaybe<Scalars['String']['input']>;
   dataStreams?: InputMaybe<DataStreamsInput>;
-  description?: InputMaybe<Scalars['String']>;
-  dialogflowClientToken?: InputMaybe<Scalars['String']>;
-  dialogflowCrednetialsUrl?: InputMaybe<Scalars['String']>;
-  dialogflowDeveloperToken?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  dialogflowClientToken?: InputMaybe<Scalars['String']['input']>;
+  dialogflowCrednetialsUrl?: InputMaybe<Scalars['String']['input']>;
+  dialogflowDeveloperToken?: InputMaybe<Scalars['String']['input']>;
   endPoint?: InputMaybe<EndpointInput>;
-  examplePhrases?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  icon?: InputMaybe<Scalars['String']>;
-  internalNotes?: InputMaybe<Scalars['String']>;
-  invocationName?: InputMaybe<Scalars['String']>;
-  ipRights?: InputMaybe<Scalars['String']>;
-  keywords?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  largeBanner?: InputMaybe<Scalars['String']>;
-  largeIcon?: InputMaybe<Scalars['String']>;
+  examplePhrases?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  icon?: InputMaybe<Scalars['String']['input']>;
+  internalNotes?: InputMaybe<Scalars['String']['input']>;
+  invocationName?: InputMaybe<Scalars['String']['input']>;
+  ipRights?: InputMaybe<Scalars['String']['input']>;
+  keywords?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  largeBanner?: InputMaybe<Scalars['String']['input']>;
+  largeIcon?: InputMaybe<Scalars['String']['input']>;
   location?: InputMaybe<LocationInput>;
-  mediumIcon?: InputMaybe<Scalars['String']>;
-  name?: InputMaybe<Scalars['String']>;
+  mediumIcon?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
   platformData?: InputMaybe<PlatformDataInput>;
-  privacyPolicyUrl?: InputMaybe<Scalars['String']>;
-  smallIcon?: InputMaybe<Scalars['String']>;
+  privacyPolicyUrl?: InputMaybe<Scalars['String']['input']>;
+  smallIcon?: InputMaybe<Scalars['String']['input']>;
   status?: InputMaybe<StatusInput>;
-  stripeSubscriptionId?: InputMaybe<Scalars['String']>;
-  summary?: InputMaybe<Scalars['String']>;
-  templateType?: InputMaybe<Scalars['String']>;
-  termsOfUseUrl?: InputMaybe<Scalars['String']>;
-  testingInstructions?: InputMaybe<Scalars['String']>;
+  stripeSubscriptionId?: InputMaybe<Scalars['String']['input']>;
+  summary?: InputMaybe<Scalars['String']['input']>;
+  templateType?: InputMaybe<Scalars['String']['input']>;
+  termsOfUseUrl?: InputMaybe<Scalars['String']['input']>;
+  testingInstructions?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type LocaleResponseOutput = {
-  displayText?: Maybe<Scalars['String']>;
-  ssm?: Maybe<Scalars['String']>;
+  displayText?: Maybe<Scalars['String']['output']>;
+  ssm?: Maybe<Scalars['String']['output']>;
   suggestions?: Maybe<Array<Maybe<SuggestionType>>>;
-  textToSpeech?: Maybe<Scalars['String']>;
+  textToSpeech?: Maybe<Scalars['String']['output']>;
 };
 
 export type LocaleResponseOutputInput = {
-  displayText?: InputMaybe<Scalars['String']>;
-  ssm?: InputMaybe<Scalars['String']>;
+  displayText?: InputMaybe<Scalars['String']['input']>;
+  ssm?: InputMaybe<Scalars['String']['input']>;
   suggestions?: InputMaybe<Array<InputMaybe<SuggestionTypeInput>>>;
-  textToSpeech?: InputMaybe<Scalars['String']>;
+  textToSpeech?: InputMaybe<Scalars['String']['input']>;
 };
 
 /**
@@ -6401,7 +6403,7 @@ export type LocaleResponseOutputInput = {
  */
 export type Location = {
   geocode?: Maybe<Geocode>;
-  streetAddress?: Maybe<Scalars['String']>;
+  streetAddress?: Maybe<Scalars['String']['output']>;
 };
 
 /**
@@ -6411,15 +6413,15 @@ export type Location = {
  */
 export type LocationInput = {
   geocode?: InputMaybe<GeocodeInput>;
-  streetAddress?: InputMaybe<Scalars['String']>;
+  streetAddress?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** A Range system to */
 export type MatchConfidenceRange = {
-  greaterThan?: InputMaybe<Scalars['Float']>;
-  greaterThanOrEqual?: InputMaybe<Scalars['Float']>;
-  lessThan?: InputMaybe<Scalars['Float']>;
-  lessThanOrEqual?: InputMaybe<Scalars['Float']>;
+  greaterThan?: InputMaybe<Scalars['Float']['input']>;
+  greaterThanOrEqual?: InputMaybe<Scalars['Float']['input']>;
+  lessThan?: InputMaybe<Scalars['Float']['input']>;
+  lessThanOrEqual?: InputMaybe<Scalars['Float']['input']>;
 };
 
 export type Mutation = {
@@ -6559,7 +6561,7 @@ export type Mutation = {
    * has an alexaSkillId.  To update it, remove the alexaSkillId and update the vendorId.
    */
   attachSmapiVendorToChannel?: Maybe<AlexaAppChannel>;
-  blowUpTheServers?: Maybe<Scalars['String']>;
+  blowUpTheServers?: Maybe<Scalars['String']['output']>;
   /**
    * Changes an intent to a handler.
    *
@@ -6570,9 +6572,9 @@ export type Mutation = {
    * Changes an orgs subscription if the user has one available.
    * @deprecated Use the OrgsMutation instead
    */
-  changeOrgSubscription?: Maybe<Scalars['String']>;
+  changeOrgSubscription?: Maybe<Scalars['String']['output']>;
   codeChallenge?: Maybe<CodeChallenge>;
-  confirmSignUp: Scalars['String'];
+  confirmSignUp: Scalars['String']['output'];
   /**
    * Copies an app from one organization to another organization.  This includes intents and entities.
    *
@@ -6605,13 +6607,13 @@ export type Mutation = {
    */
   createSkill: AlexaAppChannel;
   /** Deletes a channel from the specified app. */
-  deleteChannel: Scalars['String'];
+  deleteChannel: Scalars['String']['output'];
   /**
    * Delete the entity.
    *
    * Returns "Success" on successful delete.
    */
-  deleteEntity: Scalars['String'];
+  deleteEntity: Scalars['String']['output'];
   /**
    * Removes an handler.
    *
@@ -6633,16 +6635,16 @@ export type Mutation = {
    */
   deleteIntent: Array<Maybe<DeleteIntentIdKey>>;
   /** Deletes a nlu from the specified app. */
-  deleteNlu: Scalars['String'];
+  deleteNlu: Scalars['String']['output'];
   /** Will delete a test. */
-  deleteTest: Scalars['String'];
+  deleteTest: Scalars['String']['output'];
   /**
    * Will delete all tests for a specific app.
    *
    * This is an asynchronous process.  The actual deletion may take a couple minutes depending on
    * the amount of tests that needs to be deleted.
    */
-  deleteTestsOfApp: Scalars['String'];
+  deleteTestsOfApp: Scalars['String']['output'];
   /**
    * Flags a single specified event.
    *
@@ -6654,7 +6656,7 @@ export type Mutation = {
    *
    * Once complete, you can use the returned URL for 'createAppFromLexFile' and 'updateAppFromLexFile'.
    */
-  generateLexFileUploadUrl: Scalars['String'];
+  generateLexFileUploadUrl: Scalars['String']['output'];
   /** Mutations that are related to Organizations */
   org: OrgsMutation;
   /**
@@ -6662,8 +6664,8 @@ export type Mutation = {
    *
    * Before using this, a Lex channel in the app must already exist.
    */
-  pushLex: Scalars['String'];
-  resendConfirmationCode: Scalars['String'];
+  pushLex: Scalars['String']['output'];
+  resendConfirmationCode: Scalars['String']['output'];
   /**
    * Sets whether the app can be copyable from one organization to another.
    *
@@ -6671,8 +6673,8 @@ export type Mutation = {
    */
   setAppCopyable: App;
   /** Will start executing the tests. This is an asynchronous operation. Returns "Success" if the tests have begun. */
-  startTests: Scalars['String'];
-  startWebsiteCrawling: Scalars['String'];
+  startTests: Scalars['String']['output'];
+  startWebsiteCrawling: Scalars['String']['output'];
   /**
    * Submits an app for alexa certification.
    *
@@ -6686,7 +6688,7 @@ export type Mutation = {
    *
    * The channel requested must have a projectId associated with it.
    */
-  trainDialogflowAgent: Scalars['String'];
+  trainDialogflowAgent: Scalars['String']['output'];
   /**
    * Update an existing app.  Only the attributes included will be updated.
    *
@@ -6703,7 +6705,7 @@ export type Mutation = {
    * manually and attached to the channel of the app.  After this is created,
    * it can be updated using this.
    */
-  updateDialogflowAgent: Scalars['String'];
+  updateDialogflowAgent: Scalars['String']['output'];
   /**
    * Updates the attributes of the entity.
    *
@@ -6757,29 +6759,29 @@ export type Mutation = {
 
 
 export type MutationAddActionsOnGoogleChannelArgs = {
-  appId: Scalars['ID'];
+  appId: Scalars['ID']['input'];
   channel: ActionsOnGoogleAppChannelInput;
 };
 
 
 export type MutationAddAlexaChannelArgs = {
-  appId: Scalars['ID'];
+  appId: Scalars['ID']['input'];
   channel: AlexaAppChannelInput;
 };
 
 
 export type MutationAddAlexaCredentialsArgs = {
-  appId: Scalars['ID'];
-  channelId?: InputMaybe<Scalars['ID']>;
+  appId: Scalars['ID']['input'];
+  channelId?: InputMaybe<Scalars['ID']['input']>;
   credentials: AlexaCredentialsInput;
 };
 
 
 export type MutationAddAlexaCredentialsByCodeArgs = {
-  appId: Scalars['ID'];
-  channelId?: InputMaybe<Scalars['ID']>;
-  code: Scalars['String'];
-  redirectUri?: InputMaybe<Scalars['String']>;
+  appId: Scalars['ID']['input'];
+  channelId?: InputMaybe<Scalars['ID']['input']>;
+  code: Scalars['String']['input'];
+  redirectUri?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -6789,39 +6791,39 @@ export type MutationAddAppArgs = {
 
 
 export type MutationAddAppLocaleArgs = {
-  appId: Scalars['ID'];
+  appId: Scalars['ID']['input'];
   locale: AddLocaleEnum;
   localeObj: LocaleAppInput;
 };
 
 
 export type MutationAddChannelArgs = {
-  appId: Scalars['ID'];
+  appId: Scalars['ID']['input'];
   channel: AppChannelInput;
 };
 
 
 export type MutationAddChatWidgetChannelArgs = {
-  appId: Scalars['ID'];
+  appId: Scalars['ID']['input'];
   channel: ChatWidgetAppChannelInput;
 };
 
 
 export type MutationAddDialogflowChannelArgs = {
-  appId: Scalars['ID'];
+  appId: Scalars['ID']['input'];
   channel: DialogflowAppChannelInput;
 };
 
 
 export type MutationAddDialogflowCredentialsArgs = {
-  appId: Scalars['ID'];
-  channelId?: InputMaybe<Scalars['ID']>;
+  appId: Scalars['ID']['input'];
+  channelId?: InputMaybe<Scalars['ID']['input']>;
   credentials: DialogflowCredentialsInput;
 };
 
 
 export type MutationAddDialogflowNlusArgs = {
-  appId: Scalars['ID'];
+  appId: Scalars['ID']['input'];
   nlu: DialogflowAppNluInput;
 };
 
@@ -6832,98 +6834,98 @@ export type MutationAddEntityArgs = {
 
 
 export type MutationAddFacebookMessengerChannelArgs = {
-  appId: Scalars['ID'];
+  appId: Scalars['ID']['input'];
   channel: FacebookMessengerAppChannelInput;
 };
 
 
 export type MutationAddHandlerArgs = {
-  appId: Scalars['ID'];
+  appId: Scalars['ID']['input'];
   handler: AddHandlerInput;
 };
 
 
 export type MutationAddIntentArgs = {
-  appId: Scalars['ID'];
+  appId: Scalars['ID']['input'];
   intent: AddIntentInput;
 };
 
 
 export type MutationAddLexChannelArgs = {
-  appId: Scalars['ID'];
+  appId: Scalars['ID']['input'];
   channel: LexConnectAppChannelInput;
 };
 
 
 export type MutationAddUtteranceTestByEventArgs = {
-  eventId: Scalars['String'];
-  eventIndex: Scalars['String'];
+  eventId: Scalars['String']['input'];
+  eventIndex: Scalars['String']['input'];
   platform?: InputMaybe<TestPlatform>;
 };
 
 
 export type MutationAddUtteranceTestByStringArgs = {
-  appId: Scalars['ID'];
+  appId: Scalars['ID']['input'];
   platform?: InputMaybe<TestPlatform>;
-  testString: Scalars['String'];
+  testString: Scalars['String']['input'];
 };
 
 
 export type MutationAppArgs = {
-  organizationId?: InputMaybe<Scalars['ID']>;
+  organizationId?: InputMaybe<Scalars['ID']['input']>;
 };
 
 
 export type MutationAttachSmapiVendorArgs = {
-  orgId: Scalars['ID'];
-  vendorId: Scalars['ID'];
+  orgId: Scalars['ID']['input'];
+  vendorId: Scalars['ID']['input'];
 };
 
 
 export type MutationAttachSmapiVendorToChannelArgs = {
-  appId: Scalars['ID'];
-  channelId?: InputMaybe<Scalars['ID']>;
-  vendorId: Scalars['ID'];
+  appId: Scalars['ID']['input'];
+  channelId?: InputMaybe<Scalars['ID']['input']>;
+  vendorId: Scalars['ID']['input'];
 };
 
 
 export type MutationChangeIntentToHandlerArgs = {
-  appId: Scalars['ID'];
+  appId: Scalars['ID']['input'];
   handlerProps: IntentToHandlerPropsInput;
-  intentId: Scalars['ID'];
+  intentId: Scalars['ID']['input'];
 };
 
 
 export type MutationChangeOrgSubscriptionArgs = {
-  organizationId: Scalars['ID'];
+  organizationId: Scalars['ID']['input'];
   type: SubscriptionType;
 };
 
 
 export type MutationConfirmSignUpArgs = {
-  clientId: Scalars['ID'];
-  code: Scalars['String'];
+  clientId: Scalars['ID']['input'];
+  code: Scalars['String']['input'];
   origin?: InputMaybe<AuthVerifyOrigin>;
-  userName: Scalars['String'];
+  userName: Scalars['String']['input'];
 };
 
 
 export type MutationCopyAppArgs = {
-  appId: Scalars['ID'];
+  appId: Scalars['ID']['input'];
   overrideApp?: InputMaybe<CopyAppOverrideAttributes>;
-  toOrg: Scalars['ID'];
+  toOrg: Scalars['ID']['input'];
 };
 
 
 export type MutationCreateAppFromLexFileArgs = {
-  fileUrl: Scalars['String'];
-  organizationId: Scalars['ID'];
+  fileUrl: Scalars['String']['input'];
+  organizationId: Scalars['ID']['input'];
 };
 
 
 export type MutationCreateInteractionModelArgs = {
-  appId: Scalars['ID'];
-  channelId?: InputMaybe<Scalars['ID']>;
+  appId: Scalars['ID']['input'];
+  channelId?: InputMaybe<Scalars['ID']['input']>;
 };
 
 
@@ -6934,181 +6936,181 @@ export type MutationCreateOrgArgs = {
 
 
 export type MutationCreateSkillArgs = {
-  appId: Scalars['ID'];
-  channelId?: InputMaybe<Scalars['ID']>;
+  appId: Scalars['ID']['input'];
+  channelId?: InputMaybe<Scalars['ID']['input']>;
 };
 
 
 export type MutationDeleteChannelArgs = {
-  appId: Scalars['ID'];
-  channelId?: InputMaybe<Scalars['ID']>;
-  channelType: Scalars['String'];
+  appId: Scalars['ID']['input'];
+  channelId?: InputMaybe<Scalars['ID']['input']>;
+  channelType: Scalars['String']['input'];
 };
 
 
 export type MutationDeleteEntityArgs = {
-  appId: Scalars['ID'];
-  entityId: Scalars['ID'];
+  appId: Scalars['ID']['input'];
+  entityId: Scalars['ID']['input'];
 };
 
 
 export type MutationDeleteHandlerArgs = {
-  appId: Scalars['ID'];
-  handlerId: Scalars['ID'];
+  appId: Scalars['ID']['input'];
+  handlerId: Scalars['ID']['input'];
 };
 
 
 export type MutationDeleteIntentArgs = {
-  appId: Scalars['ID'];
-  intentId: Scalars['ID'];
+  appId: Scalars['ID']['input'];
+  intentId: Scalars['ID']['input'];
 };
 
 
 export type MutationDeleteNluArgs = {
-  appId: Scalars['ID'];
-  nluId?: InputMaybe<Scalars['ID']>;
-  nluType: Scalars['String'];
+  appId: Scalars['ID']['input'];
+  nluId?: InputMaybe<Scalars['ID']['input']>;
+  nluType: Scalars['String']['input'];
 };
 
 
 export type MutationDeleteTestArgs = {
-  createdOn: Scalars['String'];
-  testId: Scalars['ID'];
+  createdOn: Scalars['String']['input'];
+  testId: Scalars['ID']['input'];
 };
 
 
 export type MutationDeleteTestsOfAppArgs = {
-  appId: Scalars['ID'];
+  appId: Scalars['ID']['input'];
 };
 
 
 export type MutationFlagEventArgs = {
-  eventId: Scalars['ID'];
-  eventIndex?: InputMaybe<Scalars['String']>;
+  eventId: Scalars['ID']['input'];
+  eventIndex?: InputMaybe<Scalars['String']['input']>;
   flag: NewRawQueryFlag;
-  note?: InputMaybe<Scalars['String']>;
+  note?: InputMaybe<Scalars['String']['input']>;
 };
 
 
 export type MutationGenerateLexFileUploadUrlArgs = {
-  organizationId: Scalars['ID'];
+  organizationId: Scalars['ID']['input'];
 };
 
 
 export type MutationPushLexArgs = {
-  appId: Scalars['ID'];
-  channelId?: InputMaybe<Scalars['ID']>;
+  appId: Scalars['ID']['input'];
+  channelId?: InputMaybe<Scalars['ID']['input']>;
 };
 
 
 export type MutationResendConfirmationCodeArgs = {
-  clientId: Scalars['ID'];
+  clientId: Scalars['ID']['input'];
   origin?: InputMaybe<AuthVerifyOrigin>;
-  userName: Scalars['String'];
+  userName: Scalars['String']['input'];
 };
 
 
 export type MutationSetAppCopyableArgs = {
-  appId: Scalars['ID'];
-  isCopyable: Scalars['Boolean'];
+  appId: Scalars['ID']['input'];
+  isCopyable: Scalars['Boolean']['input'];
 };
 
 
 export type MutationStartTestsArgs = {
-  appId: Scalars['ID'];
-  channelIds?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  testType: Scalars['String'];
+  appId: Scalars['ID']['input'];
+  channelIds?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  testType: Scalars['String']['input'];
 };
 
 
 export type MutationStartWebsiteCrawlingArgs = {
-  appId: Scalars['ID'];
-  channelId: Scalars['String'];
+  appId: Scalars['ID']['input'];
+  channelId: Scalars['String']['input'];
   kendra?: InputMaybe<WebCrawlKendraInput>;
-  s3RegionalDomain?: InputMaybe<Scalars['String']>;
-  stealth?: InputMaybe<Scalars['Boolean']>;
-  webUrl: Scalars['URL'];
-  webUrlPatterns?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  s3RegionalDomain?: InputMaybe<Scalars['String']['input']>;
+  stealth?: InputMaybe<Scalars['Boolean']['input']>;
+  webUrl: Scalars['URL']['input'];
+  webUrlPatterns?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 
 export type MutationSubmitForAlexaCertArgs = {
-  appId: Scalars['ID'];
-  channelId?: InputMaybe<Scalars['ID']>;
-  dryRun?: InputMaybe<Scalars['Boolean']>;
+  appId: Scalars['ID']['input'];
+  channelId?: InputMaybe<Scalars['ID']['input']>;
+  dryRun?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
 export type MutationTrainDialogflowAgentArgs = {
-  appId: Scalars['ID'];
-  channelId?: InputMaybe<Scalars['ID']>;
+  appId: Scalars['ID']['input'];
+  channelId?: InputMaybe<Scalars['ID']['input']>;
 };
 
 
 export type MutationUpdateAppArgs = {
   app: UpdateAppInput;
-  appId: Scalars['ID'];
+  appId: Scalars['ID']['input'];
 };
 
 
 export type MutationUpdateDialogflowAgentArgs = {
-  appId: Scalars['ID'];
-  channelId?: InputMaybe<Scalars['ID']>;
+  appId: Scalars['ID']['input'];
+  channelId?: InputMaybe<Scalars['ID']['input']>;
 };
 
 
 export type MutationUpdateEntityArgs = {
-  appId: Scalars['ID'];
+  appId: Scalars['ID']['input'];
   entity: UpdateEntityInput;
-  entityId: Scalars['ID'];
+  entityId: Scalars['ID']['input'];
 };
 
 
 export type MutationUpdateHandlerArgs = {
-  appId: Scalars['ID'];
+  appId: Scalars['ID']['input'];
   handler: UpdateHandlerInput;
-  handlerId: Scalars['ID'];
+  handlerId: Scalars['ID']['input'];
 };
 
 
 export type MutationUpdateIntentArgs = {
-  appId: Scalars['ID'];
+  appId: Scalars['ID']['input'];
   intent: UpdateIntentInput;
-  intentId: Scalars['ID'];
+  intentId: Scalars['ID']['input'];
 };
 
 
 export type MutationUpdateOrgArgs = {
   org: UpdateOrganizationInput;
-  organizationId: Scalars['ID'];
+  organizationId: Scalars['ID']['input'];
 };
 
 
 export type MutationUpdateSkillArgs = {
-  appId: Scalars['ID'];
-  channelId?: InputMaybe<Scalars['ID']>;
+  appId: Scalars['ID']['input'];
+  channelId?: InputMaybe<Scalars['ID']['input']>;
 };
 
 
 export type MutationUpdateUtteranceTestArgs = {
-  createdOn: Scalars['String'];
-  testId: Scalars['ID'];
+  createdOn: Scalars['String']['input'];
+  testId: Scalars['ID']['input'];
   update: UtteranceTestUpdate;
 };
 
 
 export type MutationUploadAppTemplateArgs = {
-  appId?: InputMaybe<Scalars['ID']>;
-  organizationId: Scalars['ID'];
+  appId?: InputMaybe<Scalars['ID']['input']>;
+  organizationId: Scalars['ID']['input'];
   template: AppTemplateInput;
 };
 
 
 export type MutationWithdrawFromAlexaCertArgs = {
-  appId: Scalars['ID'];
-  channelId?: InputMaybe<Scalars['ID']>;
-  dryRun?: InputMaybe<Scalars['Boolean']>;
-  note?: InputMaybe<Scalars['String']>;
+  appId: Scalars['ID']['input'];
+  channelId?: InputMaybe<Scalars['ID']['input']>;
+  dryRun?: InputMaybe<Scalars['Boolean']['input']>;
+  note?: InputMaybe<Scalars['String']['input']>;
   reason?: InputMaybe<WithdrawFromAlexaCertReasons>;
 };
 
@@ -7148,34 +7150,34 @@ export type NluRequestSlot = {
    *
    * For example, "UVA"
    */
-  id?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']['output']>;
   /** Confidence on the slot match.  Range is between 0 - 1 where 1 is the highest confidence. */
-  matchConfidence?: Maybe<Scalars['Int']>;
-  name: Scalars['String'];
+  matchConfidence?: Maybe<Scalars['Int']['output']>;
+  name: Scalars['String']['output'];
   /**
    * The raw spoken value.
    *
    * For example, "cavaliers" or "red"
    */
-  rawValue?: Maybe<Scalars['String']>;
+  rawValue?: Maybe<Scalars['String']['output']>;
   /** If the entity resolution was successful or not. */
-  successfulMatch?: Maybe<Scalars['Boolean']>;
+  successfulMatch?: Maybe<Scalars['Boolean']['output']>;
 };
 
 export type OpportunityAlertDetail = {
   /** Whether or not to receive the messages during the business hours */
-  duringBusinessHours?: Maybe<Scalars['Boolean']>;
+  duringBusinessHours?: Maybe<Scalars['Boolean']['output']>;
   /** Whether or not to receive the messages outside the business hours */
-  outsideBusinessHours?: Maybe<Scalars['Boolean']>;
+  outsideBusinessHours?: Maybe<Scalars['Boolean']['output']>;
   /** Type of alert that it is. */
   type: OpportunityAlertDetailType;
 };
 
 export type OpportunityAlertDetailInput = {
   /** Whether or not to receive the messages during the business hours */
-  duringBusinessHours?: InputMaybe<Scalars['Boolean']>;
+  duringBusinessHours?: InputMaybe<Scalars['Boolean']['input']>;
   /** Whether or not to receive the messages outside the business hours */
-  outsideBusinessHours?: InputMaybe<Scalars['Boolean']>;
+  outsideBusinessHours?: InputMaybe<Scalars['Boolean']['input']>;
   /** Type of alert that it is. */
   type: OpportunityAlertDetailType;
 };
@@ -7193,9 +7195,9 @@ export type OrgAnalytics = {
 
 
 export type OrgAnalyticsUserArgs = {
-  byEnvironment?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  end: Scalars['DateTime'];
-  start: Scalars['DateTime'];
+  byEnvironment?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  end: Scalars['DateTime']['input'];
+  start: Scalars['DateTime']['input'];
 };
 
 export type OrgAppQuerySortByParameters = {
@@ -7211,9 +7213,9 @@ export enum OrgAppQuerySortByParametersOrder {
 }
 
 export type OrgMember = {
-  email: Scalars['String'];
+  email: Scalars['String']['output'];
   policy: OrgPolicy;
-  userId: Scalars['ID'];
+  userId: Scalars['ID']['output'];
 };
 
 export type OrgMembers = {
@@ -7240,26 +7242,26 @@ export type OrgMembersMutation = {
    */
   invite: Array<Maybe<PendingOrOrgMember>>;
   /** Removes a user from the organization. */
-  remove: Scalars['String'];
+  remove: Scalars['String']['output'];
   /** Removes the invitation for a user. */
-  removeInvite: Scalars['String'];
+  removeInvite: Scalars['String']['output'];
 };
 
 
 export type OrgMembersMutationInviteArgs = {
-  email: Scalars['String'];
-  roles: Array<InputMaybe<Scalars['String']>>;
+  email: Scalars['String']['input'];
+  roles: Array<InputMaybe<Scalars['String']['input']>>;
 };
 
 
 export type OrgMembersMutationRemoveArgs = {
-  userId: Scalars['ID'];
+  userId: Scalars['ID']['input'];
 };
 
 
 export type OrgMembersMutationRemoveInviteArgs = {
-  email: Scalars['String'];
-  invitationId: Scalars['ID'];
+  email: Scalars['String']['input'];
+  invitationId: Scalars['ID']['input'];
 };
 
 /** The time frame in which the items were metered. */
@@ -7277,14 +7279,14 @@ export enum OrgMeteredTimeFrame {
 export type OrgMutation = {
   cms: CmsMutation;
   /** Deletes the attributes of the organization. */
-  delete: Scalars['String'];
+  delete: Scalars['String']['output'];
   /**
    * Links an organization to an AWS subscription if one is available.
    *
    * Setting the subscription type to "FREE" will unlink the organization and
    * free up the subscription for another organization.
    */
-  linkToAWSSub: Scalars['String'];
+  linkToAWSSub: Scalars['String']['output'];
   /** Mutations related to the members of an organization. */
   members: OrgMembersMutation;
   /** Updates the attributes of the organization. */
@@ -7304,7 +7306,7 @@ export type OrgMutation = {
    *
    * Returns the updated organization.
    */
-  updateTier: Scalars['String'];
+  updateTier: Scalars['String']['output'];
 };
 
 
@@ -7333,30 +7335,30 @@ export type OrgMutationUpdateTierArgs = {
 };
 
 export type OrgPolicy = {
-  permissions: Array<Maybe<Scalars['String']>>;
-  roles: Array<Maybe<Scalars['String']>>;
+  permissions: Array<Maybe<Scalars['String']['output']>>;
+  roles: Array<Maybe<Scalars['String']['output']>>;
 };
 
 export type OrgUsageStat = {
   /** A CSV formatted output of the stats found. */
   csv: UsageStatCsvReturn;
   intervals: Array<Maybe<UsageStat>>;
-  newUsers: Scalars['Int'];
+  newUsers: Scalars['Int']['output'];
   /** ID of the organization that contains the app */
-  organizationId: Scalars['ID'];
-  returningUsers: Scalars['Int'];
-  totalSessions: Scalars['Int'];
-  totalUsers: Scalars['Int'];
+  organizationId: Scalars['ID']['output'];
+  returningUsers: Scalars['Int']['output'];
+  totalSessions: Scalars['Int']['output'];
+  totalUsers: Scalars['Int']['output'];
 };
 
 export type OrgUsageStats = {
-  docsCrawled: Scalars['Int'];
-  entities: Scalars['Int'];
-  handlers: Scalars['Int'];
-  intents: Scalars['Int'];
-  testsExecuted: Scalars['Int'];
-  totalDocs: Scalars['Int'];
-  uniqueSessions: Scalars['Int'];
+  docsCrawled: Scalars['Int']['output'];
+  entities: Scalars['Int']['output'];
+  handlers: Scalars['Int']['output'];
+  intents: Scalars['Int']['output'];
+  testsExecuted: Scalars['Int']['output'];
+  totalDocs: Scalars['Int']['output'];
+  uniqueSessions: Scalars['Int']['output'];
 };
 
 /**
@@ -7366,17 +7368,17 @@ export type OrgUsageStats = {
  */
 export type Organization = {
   /** The email XAPPineer that is in charge of handling the organization's account */
-  XAPPLead?: Maybe<Scalars['String']>;
-  _id: Scalars['ID'];
+  XAPPLead?: Maybe<Scalars['String']['output']>;
+  _id: Scalars['ID']['output'];
   analytics?: Maybe<OrgAnalytics>;
   /** The apps that the organization contains. */
   apps?: Maybe<GetAppsQuery>;
   /** Deprecated: The Auth0 Group that the organization is linked to. */
-  auth0GroupId?: Maybe<Scalars['ID']>;
+  auth0GroupId?: Maybe<Scalars['ID']['output']>;
   /** An event bus that is attatched to the organization to receive specific events related to the organization such as App status changes. */
-  awsEventBusArn?: Maybe<Scalars['String']>;
+  awsEventBusArn?: Maybe<Scalars['String']['output']>;
   /** An object of feature flags */
-  beta?: Maybe<Scalars['JSON']>;
+  beta?: Maybe<Scalars['JSON']['output']>;
   billingContact?: Maybe<BillingContact>;
   brandContact?: Maybe<BrandContact>;
   /**
@@ -7389,37 +7391,37 @@ export type Organization = {
    * The email address of a user who can be contacted about issues
    * related to the organization.
    */
-  contact?: Maybe<Scalars['String']>;
+  contact?: Maybe<Scalars['String']['output']>;
   /** The organization contact's name. */
-  contactName?: Maybe<Scalars['String']>;
+  contactName?: Maybe<Scalars['String']['output']>;
   /** The organization contact's phone number. */
-  contactPhone?: Maybe<Scalars['String']>;
+  contactPhone?: Maybe<Scalars['String']['output']>;
   /**
    * Date in which the organization signed a contract to publish
    * apps.
    *
    * Format: ISO-8601 date format
    */
-  contractDate?: Maybe<Scalars['String']>;
+  contractDate?: Maybe<Scalars['String']['output']>;
   /** The date at which the organization was created */
-  creationDate?: Maybe<Scalars['DateTime']>;
+  creationDate?: Maybe<Scalars['DateTime']['output']>;
   /** The human-readable description of the organization. */
-  description: Scalars['String'];
+  description: Scalars['String']['output'];
   /**
    * Organization's IP rights which were loaded that give permissions to
    * publish apps on their behalf.
    */
   ipRights?: Maybe<IPrights>;
   /** URL for the organization's logo. */
-  logoUrl?: Maybe<Scalars['String']>;
+  logoUrl?: Maybe<Scalars['String']['output']>;
   /** The members statics for the given time frame. */
   members: OrgMembers;
   /** The human-readable name of the organization. */
-  name: Scalars['String'];
+  name: Scalars['String']['output'];
   /** Any notes that are related to the organization. */
-  notes?: Maybe<Scalars['String']>;
+  notes?: Maybe<Scalars['String']['output']>;
   /** A unique ID to identify a specific organization. */
-  organizationId: Scalars['ID'];
+  organizationId: Scalars['ID']['output'];
   /** Payment account information */
   paymentAccounts?: Maybe<PaymentAccounts>;
   /**
@@ -7432,7 +7434,7 @@ export type Organization = {
   /** The usage statics for the given time frame. */
   usage: OrgUsageStats;
   /** A URL to the organization's website. */
-  website?: Maybe<Scalars['String']>;
+  website?: Maybe<Scalars['String']['output']>;
 };
 
 
@@ -7442,11 +7444,11 @@ export type Organization = {
  * apps in the Stentor platform.
  */
 export type OrganizationAppsArgs = {
-  byName?: InputMaybe<Scalars['String']>;
-  byStatusType?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  from?: InputMaybe<Scalars['Int']>;
+  byName?: InputMaybe<Scalars['String']['input']>;
+  byStatusType?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  from?: InputMaybe<Scalars['Int']['input']>;
   nuSortBy?: InputMaybe<Array<InputMaybe<OrgAppQuerySortByParameters>>>;
-  size?: InputMaybe<Scalars['Int']>;
+  size?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
@@ -7473,7 +7475,7 @@ export type OrgsMutationAddArgs = {
 
 
 export type OrgsMutationOrgArgs = {
-  organizationId: Scalars['ID'];
+  organizationId: Scalars['ID']['input'];
 };
 
 /** A collections query which returns a collection of organizations. */
@@ -7481,11 +7483,11 @@ export type OrgsQuery = {
   /** A subset of organizations that are viewed. */
   orgs?: Maybe<Array<Maybe<SearchedOrg>>>;
   /** The total number of organizations that were found in the query. */
-  total: Scalars['Int'];
+  total: Scalars['Int']['output'];
 };
 
 export type PaymentAccounts = {
-  _id: Scalars['ID'];
+  _id: Scalars['ID']['output'];
   /** Account information related to the AWS Marketplace payment platform. */
   aws?: Maybe<AwsPaymentAccount>;
   /**
@@ -7522,8 +7524,8 @@ export type PaymentAccountsInput = {
 export type PendingOrOrgMember = OrgMember | PendingOrgMember;
 
 export type PendingOrgMember = {
-  email: Scalars['String'];
-  invitationId: Scalars['ID'];
+  email: Scalars['String']['output'];
+  invitationId: Scalars['ID']['output'];
   policy: OrgPolicy;
 };
 
@@ -7546,22 +7548,22 @@ export type PlatformDataInput = {
 };
 
 export type PreviousHandlerPath = BaseHandlerPath & {
-  actions?: Maybe<Array<Maybe<Scalars['JSON']>>>;
+  actions?: Maybe<Array<Maybe<Scalars['JSON']['output']>>>;
   /** Conditions to be met. */
-  conditions?: Maybe<Scalars['PathConditions']>;
-  data?: Maybe<Scalars['JSON']>;
+  conditions?: Maybe<Scalars['PathConditions']['output']>;
+  data?: Maybe<Scalars['JSON']['output']>;
   /**
    * Optional platform filter for the path.
    *
    * If set, the path will only apply to the specified platform.
    */
-  platform?: Maybe<Scalars['String']>;
+  platform?: Maybe<Scalars['String']['output']>;
   /** Set to true to request the previous handler paths. */
-  previousHandler: Scalars['Boolean'];
+  previousHandler: Scalars['Boolean']['output'];
 };
 
 export type PublishingAccounts = {
-  _id: Scalars['ID'];
+  _id: Scalars['ID']['output'];
   /** Account information for a linked amazon SMAPI developer account. */
   smapi?: Maybe<SmapiAccount>;
 };
@@ -7579,7 +7581,7 @@ export type Query = {
   /** Fetches a list of apps */
   apps?: Maybe<AppsQuery>;
   /** These are the test types that are currently available to search and execute. */
-  availableTestTypes?: Maybe<Array<Maybe<Scalars['String']>>>;
+  availableTestTypes?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   entity?: Maybe<Entity>;
   /** Retrieve a batch of entities for the given word. */
   entitySuggestions?: Maybe<Suggestion>;
@@ -7600,65 +7602,65 @@ export type Query = {
 
 /** Top level query for Stentor. */
 export type QueryAppArgs = {
-  appId: Scalars['ID'];
+  appId: Scalars['ID']['input'];
 };
 
 
 /** Top level query for Stentor. */
 export type QueryEntityArgs = {
-  appId: Scalars['String'];
-  entityId: Scalars['String'];
+  appId: Scalars['String']['input'];
+  entityId: Scalars['String']['input'];
 };
 
 
 /** Top level query for Stentor. */
 export type QueryEntitySuggestionsArgs = {
-  appId: Scalars['String'];
-  text: Scalars['String'];
+  appId: Scalars['String']['input'];
+  text: Scalars['String']['input'];
 };
 
 
 /** Top level query for Stentor. */
 export type QueryHandlerArgs = {
-  appId: Scalars['ID'];
-  intentId: Scalars['ID'];
+  appId: Scalars['ID']['input'];
+  intentId: Scalars['ID']['input'];
 };
 
 
 /** Top level query for Stentor. */
 export type QueryIntentArgs = {
-  appId: Scalars['ID'];
-  intentId: Scalars['ID'];
+  appId: Scalars['ID']['input'];
+  intentId: Scalars['ID']['input'];
 };
 
 
 /** Top level query for Stentor. */
 export type QueryOrgArgs = {
-  organizationId: Scalars['ID'];
+  organizationId: Scalars['ID']['input'];
 };
 
 
 /** Top level query for Stentor. */
 export type QueryOrgsArgs = {
-  from?: InputMaybe<Scalars['Int']>;
-  size?: InputMaybe<Scalars['Int']>;
-  withIdOrName?: InputMaybe<Scalars['String']>;
+  from?: InputMaybe<Scalars['Int']['input']>;
+  size?: InputMaybe<Scalars['Int']['input']>;
+  withIdOrName?: InputMaybe<Scalars['String']['input']>;
 };
 
 
 /** Top level query for Stentor. */
 export type QueryProfileArgs = {
-  jwt?: InputMaybe<Scalars['String']>;
+  jwt?: InputMaybe<Scalars['String']['input']>;
 };
 
 
 /** Top level query for Stentor. */
 export type QueryTestsArgs = {
-  appId: Scalars['ID'];
-  from?: InputMaybe<Scalars['Int']>;
-  size?: InputMaybe<Scalars['Int']>;
-  sortBy?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  testType?: InputMaybe<Scalars['String']>;
+  appId: Scalars['ID']['input'];
+  from?: InputMaybe<Scalars['Int']['input']>;
+  size?: InputMaybe<Scalars['Int']['input']>;
+  sortBy?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  testType?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** Flags for events of raw queries. */
@@ -7691,29 +7693,29 @@ export enum RawQueryEventFlag {
 }
 
 export type RequestDependentExecutableHandlerPath = BaseHandlerPath & {
-  actions?: Maybe<Array<Maybe<Scalars['JSON']>>>;
+  actions?: Maybe<Array<Maybe<Scalars['JSON']['output']>>>;
   /** Conditions to be met. */
-  conditions?: Maybe<Scalars['PathConditions']>;
-  data?: Maybe<Scalars['JSON']>;
+  conditions?: Maybe<Scalars['PathConditions']['output']>;
+  data?: Maybe<Scalars['JSON']['output']>;
   /** The ID of the handler to forward or redirect the request to */
-  intentId: Scalars['String'];
+  intentId: Scalars['String']['output'];
   /**
    * Optional platform filter for the path.
    *
    * If set, the path will only apply to the specified platform.
    */
-  platform?: Maybe<Scalars['String']>;
+  platform?: Maybe<Scalars['String']['output']>;
   /**
    * Match data for the JSON path.
    *
    * 'name' on Match is the JSON path
    */
-  requestMatch?: Maybe<Scalars['JSON']>;
+  requestMatch?: Maybe<Scalars['JSON']['output']>;
   /**
    * Optional, if redirecting or forwarding to a handler that is expecting slots,
    * set these to pre-populate them on the request.
    */
-  slots?: Maybe<Scalars['JSON']>;
+  slots?: Maybe<Scalars['JSON']['output']>;
   /**
    * Type of path.
    *
@@ -7724,7 +7726,7 @@ export type RequestDependentExecutableHandlerPath = BaseHandlerPath & {
    * through, requiring the new handler to handle the
    * request as is.
    */
-  type?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']['output']>;
 };
 
 export type RequestDependentHandlerPath = RequestDependentExecutableHandlerPath | RequestDependentHistoricalHandlerPath | RequestDependentPreviousHandlerPath;
@@ -7733,18 +7735,18 @@ export type RequestDependentHandlerResponse = HandlerResponse & {
   /** Description of the channel that will be */
   channel?: Maybe<HandlerResponseChannel>;
   /** Conditions to be met. */
-  conditions?: Maybe<Scalars['HandlerResponseConditions']>;
+  conditions?: Maybe<Scalars['HandlerResponseConditions']['output']>;
   context?: Maybe<HandlerResponseContext>;
-  data?: Maybe<Scalars['JSON']>;
+  data?: Maybe<Scalars['JSON']['output']>;
   displays?: Maybe<Array<Maybe<BaseDisplay>>>;
   /** The name of the intent that the response is linked to. */
-  intent: Scalars['String'];
+  intent: Scalars['String']['output'];
   /**
    * Name of the response
    *
    * Used to help differentiate multiple responses.
    */
-  name?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']['output']>;
   /** What the assistant will say first as part of the response. */
   outputSpeech?: Maybe<ResponseOutput>;
   /**
@@ -7757,86 +7759,86 @@ export type RequestDependentHandlerResponse = HandlerResponse & {
    *
    * 'name' on Match is the JSON path
    */
-  requestMatch?: Maybe<Scalars['JSON']>;
+  requestMatch?: Maybe<Scalars['JSON']['output']>;
   segments?: Maybe<Array<Maybe<HandlerResponseSegmentItem>>>;
   /** System responses to perform account links, control media, surface changes, and permission requests. */
   system?: Maybe<HandlerResponseSystem>;
   /** Used for tracking the response in third party analytics. */
-  tag?: Maybe<Scalars['String']>;
+  tag?: Maybe<Scalars['String']['output']>;
 };
 
 export type RequestDependentHandlerResponseSegment = HandlerResponseSegment & {
-  requestMatch: Scalars['JSON'];
+  requestMatch: Scalars['JSON']['output'];
   segment: ResponseOutput;
 };
 
 export type RequestDependentHistoricalHandlerPath = BaseHandlerPath & {
-  actions?: Maybe<Array<Maybe<Scalars['JSON']>>>;
+  actions?: Maybe<Array<Maybe<Scalars['JSON']['output']>>>;
   /** Conditions to be met. */
-  conditions?: Maybe<Scalars['PathConditions']>;
-  data?: Maybe<Scalars['JSON']>;
+  conditions?: Maybe<Scalars['PathConditions']['output']>;
+  data?: Maybe<Scalars['JSON']['output']>;
   /**
    * The number of handlers to go back into the history of.
    *
    * This is typically just one and can be no more than 10.
    */
-  historicalIndex: Scalars['Int'];
+  historicalIndex: Scalars['Int']['output'];
   /**
    * Optional platform filter for the path.
    *
    * If set, the path will only apply to the specified platform.
    */
-  platform?: Maybe<Scalars['String']>;
+  platform?: Maybe<Scalars['String']['output']>;
   /**
    * Match data for the JSON path.
    *
    * 'name' on Match is the JSON path
    */
-  requestMatch?: Maybe<Scalars['JSON']>;
+  requestMatch?: Maybe<Scalars['JSON']['output']>;
   /**
    * Optional, if redirecting or forwarding to a handler that is expecting slots,
    * set these to pre-populate them on the request.
    */
-  slots?: Maybe<Scalars['JSON']>;
+  slots?: Maybe<Scalars['JSON']['output']>;
 };
 
 export type RequestDependentPreviousHandlerPath = BaseHandlerPath & {
-  actions?: Maybe<Array<Maybe<Scalars['JSON']>>>;
+  actions?: Maybe<Array<Maybe<Scalars['JSON']['output']>>>;
   /** Conditions to be met. */
-  conditions?: Maybe<Scalars['PathConditions']>;
-  data?: Maybe<Scalars['JSON']>;
+  conditions?: Maybe<Scalars['PathConditions']['output']>;
+  data?: Maybe<Scalars['JSON']['output']>;
   /**
    * Optional platform filter for the path.
    *
    * If set, the path will only apply to the specified platform.
    */
-  platform?: Maybe<Scalars['String']>;
+  platform?: Maybe<Scalars['String']['output']>;
   /** Set to true to request the previous handler paths. */
-  previousHandler: Scalars['Boolean'];
+  previousHandler: Scalars['Boolean']['output'];
   /**
    * Match data for the JSON path.
    *
    * 'name' on Match is the JSON path
    */
-  requestMatch?: Maybe<Scalars['JSON']>;
+  requestMatch?: Maybe<Scalars['JSON']['output']>;
 };
 
 export type ResponseOutput = {
-  defaultLocale?: Maybe<Scalars['String']>;
-  displayText?: Maybe<Scalars['String']>;
+  defaultLocale?: Maybe<Scalars['String']['output']>;
+  displayText?: Maybe<Scalars['String']['output']>;
   locales?: Maybe<ResponseOutputLocales>;
-  ssml?: Maybe<Scalars['String']>;
+  ssml?: Maybe<Scalars['String']['output']>;
   suggestions?: Maybe<Array<Maybe<SuggestionType>>>;
-  textToSpeech?: Maybe<Scalars['String']>;
+  textToSpeech?: Maybe<Scalars['String']['output']>;
 };
 
 export type ResponseOutputInput = {
-  defaultLocale?: InputMaybe<Scalars['String']>;
-  displayText?: InputMaybe<Scalars['String']>;
+  defaultLocale?: InputMaybe<Scalars['String']['input']>;
+  displayText?: InputMaybe<Scalars['String']['input']>;
   locales?: InputMaybe<ResponseOutputLocalesInput>;
-  ssml?: InputMaybe<Scalars['String']>;
+  ssml?: InputMaybe<Scalars['String']['input']>;
   suggestions?: InputMaybe<Array<InputMaybe<SuggestionTypeInput>>>;
-  textToSpeech?: InputMaybe<Scalars['String']>;
+  textToSpeech?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ResponseOutputLocales = {
@@ -7979,7 +7981,7 @@ export type ResponseOutputLocalesInput = {
 
 export type ResponseTypeCode = {
   /** The code of returned by the auth server. */
-  code?: InputMaybe<Scalars['String']>;
+  code?: InputMaybe<Scalars['String']['input']>;
   /** The origin of the code. */
   origin?: InputMaybe<AuthOrigin>;
 };
@@ -7988,18 +7990,18 @@ export type SchedulableDependentHandlerResponse = HandlerResponse & {
   /** Description of the channel that will be */
   channel?: Maybe<HandlerResponseChannel>;
   /** Conditions to be met. */
-  conditions?: Maybe<Scalars['HandlerResponseConditions']>;
+  conditions?: Maybe<Scalars['HandlerResponseConditions']['output']>;
   context?: Maybe<HandlerResponseContext>;
-  data?: Maybe<Scalars['JSON']>;
+  data?: Maybe<Scalars['JSON']['output']>;
   displays?: Maybe<Array<Maybe<BaseDisplay>>>;
   /** The name of the intent that the response is linked to. */
-  intent: Scalars['String'];
+  intent: Scalars['String']['output'];
   /**
    * Name of the response
    *
    * Used to help differentiate multiple responses.
    */
-  name?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']['output']>;
   /** What the assistant will say first as part of the response. */
   outputSpeech?: Maybe<ResponseOutput>;
   /**
@@ -8017,7 +8019,7 @@ export type SchedulableDependentHandlerResponse = HandlerResponse & {
   /** System responses to perform account links, control media, surface changes, and permission requests. */
   system?: Maybe<HandlerResponseSystem>;
   /** Used for tracking the response in third party analytics. */
-  tag?: Maybe<Scalars['String']>;
+  tag?: Maybe<Scalars['String']['output']>;
 };
 
 export enum ScheduleDaysOfWeek {
@@ -8036,17 +8038,17 @@ export type ScheduleHandlerResponseSegment = HandlerResponseSegment & {
 };
 
 export type ScheduleStart = {
-  dayOfWeek?: Maybe<Scalars['String']>;
-  format?: Maybe<Scalars['String']>;
-  time: Scalars['String'];
-  timeZone?: Maybe<Scalars['String']>;
+  dayOfWeek?: Maybe<Scalars['String']['output']>;
+  format?: Maybe<Scalars['String']['output']>;
+  time: Scalars['String']['output'];
+  timeZone?: Maybe<Scalars['String']['output']>;
 };
 
 export type ScheduleStartInput = {
-  dayOfWeek?: InputMaybe<Scalars['String']>;
-  format?: InputMaybe<Scalars['String']>;
-  time: Scalars['String'];
-  timeZone?: InputMaybe<Scalars['String']>;
+  dayOfWeek?: InputMaybe<Scalars['String']['input']>;
+  format?: InputMaybe<Scalars['String']['input']>;
+  time: Scalars['String']['input'];
+  timeZone?: InputMaybe<Scalars['String']['input']>;
 };
 
 export enum SchedulerDaysOfWeek {
@@ -8061,22 +8063,22 @@ export enum SchedulerDaysOfWeek {
 
 export type ScoredWebFaq = {
   /** ID of the webFAQ */
-  _id: Scalars['ID'];
+  _id: Scalars['ID']['output'];
   /** The score received based on the query presented. */
-  _score: Scalars['Float'];
+  _score: Scalars['Float']['output'];
   /** The answer of the FAQ questions */
-  answer: Scalars['String'];
-  associatedHandlerId?: Maybe<Scalars['String']>;
+  answer: Scalars['String']['output'];
+  associatedHandlerId?: Maybe<Scalars['String']['output']>;
   /** The time it was created. */
-  created: Scalars['String'];
+  created: Scalars['String']['output'];
   /** The name assigned to the question-answer page */
-  name: Scalars['String'];
+  name: Scalars['String']['output'];
   /** Questions that are linked to the answer */
-  questions: Array<Maybe<Scalars['String']>>;
+  questions: Array<Maybe<Scalars['String']['output']>>;
   /** The raw text of the FAQ page */
-  raw?: Maybe<Scalars['String']>;
+  raw?: Maybe<Scalars['String']['output']>;
   /** The URL that the FAQ came from */
-  url?: Maybe<Scalars['String']>;
+  url?: Maybe<Scalars['String']['output']>;
   /** A query for any errors that may be in the ScoredWebFAQ */
   validation: WebFaqValidation;
 };
@@ -8084,88 +8086,88 @@ export type ScoredWebFaq = {
 /** Organization that is returned from a Search query. */
 export type SearchedApp = {
   /** The unique ID of the google action that the app is linked to. */
-  actionsOnGoogleId?: Maybe<Scalars['String']>;
+  actionsOnGoogleId?: Maybe<Scalars['String']['output']>;
   /** The category that the app will fall in to when published to Alexa. */
-  alexaCategory?: Maybe<Scalars['String']>;
+  alexaCategory?: Maybe<Scalars['String']['output']>;
   /** The unique ID of the alexa skill that the app is linked to. */
-  alexaSkillId?: Maybe<Scalars['String']>;
+  alexaSkillId?: Maybe<Scalars['String']['output']>;
   /** The unique identifier for the app. */
-  appId: Scalars['String'];
+  appId: Scalars['String']['output'];
   /**
    * The description for the app.
    *
    * The description cannot be more than 4000 characters.
    */
-  description?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']['output']>;
   /**
    * Example phrases the help users know how to use the app.
    *
    * At least three are required for publication.
    */
-  examplePhrases?: Maybe<Array<Maybe<Scalars['String']>>>;
+  examplePhrases?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   /** The phrase a user must speak to wake the app up on a specific platform. */
-  invocationName?: Maybe<Scalars['String']>;
+  invocationName?: Maybe<Scalars['String']['output']>;
   /**
    * Keywords to help when searching directories for the app
    *
    * Max of 30 keywords are allowed.
    */
-  keywords?: Maybe<Scalars['String']>;
+  keywords?: Maybe<Scalars['String']['output']>;
   /**
    * A large icon for the app, 512x512 PNG
    *
    * Required for Alexa
    */
-  largeIcon?: Maybe<Scalars['String']>;
+  largeIcon?: Maybe<Scalars['String']['output']>;
   /** The name of the app. */
-  name: Scalars['String'];
+  name: Scalars['String']['output'];
   /** The unique identifier for the organization that the app is a part of. */
-  organizationId: Scalars['String'];
+  organizationId: Scalars['String']['output'];
   /**
    * A small icon for the app, 108x108 PNG
    *
    * Required for Alexa
    */
-  smallIcon?: Maybe<Scalars['String']>;
+  smallIcon?: Maybe<Scalars['String']['output']>;
   /** The status that the app is currently in Stentor. */
   status?: Maybe<SearchedAppStatus>;
   /** A short description of what the app does. */
-  summary?: Maybe<Scalars['String']>;
+  summary?: Maybe<Scalars['String']['output']>;
 };
 
 export type SearchedAppStatus = {
   /** The email of the user who last changed the status. */
-  email: Scalars['String'];
+  email: Scalars['String']['output'];
   /** Any notes that was associated with the status change. */
-  notes?: Maybe<Scalars['String']>;
+  notes?: Maybe<Scalars['String']['output']>;
   /**
    * The time the status was last changed.
    *
    * Format: ISO 8601
    */
-  timestamp: Scalars['String'];
+  timestamp: Scalars['String']['output'];
   /** The status level of the app. */
-  type: Scalars['String'];
+  type: Scalars['String']['output'];
 };
 
 /** Organization that is returned from a Search query. */
 export type SearchedOrg = {
   /** The email of the XAPPmedia employee which is the main contact for the organization. */
-  XAPPLead?: Maybe<Scalars['String']>;
+  XAPPLead?: Maybe<Scalars['String']['output']>;
   /** The contact email of the organization. */
-  contact?: Maybe<Scalars['String']>;
+  contact?: Maybe<Scalars['String']['output']>;
   /** The name of the contact. */
-  contactName?: Maybe<Scalars['String']>;
+  contactName?: Maybe<Scalars['String']['output']>;
   /** A human-readable description of the organization. */
-  description?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']['output']>;
   /** URL for the organization's logo. */
-  logoUrl?: Maybe<Scalars['String']>;
+  logoUrl?: Maybe<Scalars['String']['output']>;
   /** The name of the organization. */
-  name: Scalars['String'];
+  name: Scalars['String']['output'];
   /** Internal notes on the organization. */
-  notes?: Maybe<Scalars['String']>;
+  notes?: Maybe<Scalars['String']['output']>;
   /** The unique identifier for the organization. */
-  organizationId: Scalars['String'];
+  organizationId: Scalars['String']['output'];
   /** Payment account information */
   paymentAccounts?: Maybe<PaymentAccounts>;
   /** The type of subscription that the organization currently is under. */
@@ -8174,16 +8176,16 @@ export type SearchedOrg = {
 
 export type SelectedCount = {
   /** The number of times the 'selectedHandler' was selected from the current intent. */
-  count: Scalars['Int'];
+  count: Scalars['Int']['output'];
   /** The handler/intent ID that was selected during execution. */
-  selectedHandler: Scalars['String'];
+  selectedHandler: Scalars['String']['output'];
 };
 
 export type Sentences = {
   /** The ending position of the sentence in the phrase. */
-  end: Scalars['Int'];
+  end: Scalars['Int']['output'];
   /** The starting position of the sentence in the phrase. */
-  start: Scalars['Int'];
+  start: Scalars['Int']['output'];
 };
 
 export type ServiceOrderAccount = {
@@ -8192,11 +8194,11 @@ export type ServiceOrderAccount = {
    *
    * Format: ISO 8601 date.
    */
-  date?: Maybe<Scalars['String']>;
+  date?: Maybe<Scalars['String']['output']>;
   /** The number of apps that the organization is allowed to publish. */
-  numberOfApps?: Maybe<Scalars['Int']>;
+  numberOfApps?: Maybe<Scalars['Int']['output']>;
   /** The type of payment that the organization uses (check, card, etc.) */
-  paymentType?: Maybe<Scalars['String']>;
+  paymentType?: Maybe<Scalars['String']['output']>;
 };
 
 export type ServiceOrderAccountInput = {
@@ -8205,53 +8207,53 @@ export type ServiceOrderAccountInput = {
    *
    * Format: ISO 8601 date.
    */
-  date?: InputMaybe<Scalars['String']>;
+  date?: InputMaybe<Scalars['String']['input']>;
   /** The number of apps that the organization is allowed to publish. */
-  numberOfApps?: InputMaybe<Scalars['Int']>;
+  numberOfApps?: InputMaybe<Scalars['Int']['input']>;
   /** The type of payment that the organization uses (check, card, etc.) */
-  paymentType?: InputMaybe<Scalars['String']>;
+  paymentType?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type SimpleDisplay = BaseDisplay & {
-  backButtonVisible?: Maybe<Scalars['Boolean']>;
+  backButtonVisible?: Maybe<Scalars['Boolean']['output']>;
   backgroundImage?: Maybe<DisplayImage>;
   image?: Maybe<DisplayImage>;
   items?: Maybe<Array<Maybe<DisplayListItem>>>;
   listItems?: Maybe<Array<Maybe<DisplayListItem>>>;
-  payload?: Maybe<Scalars['JSON']>;
+  payload?: Maybe<Scalars['JSON']['output']>;
   textContent?: Maybe<DisplayTextContent>;
-  title?: Maybe<Scalars['String']>;
-  token?: Maybe<Scalars['String']>;
-  type: Scalars['String'];
+  title?: Maybe<Scalars['String']['output']>;
+  token?: Maybe<Scalars['String']['output']>;
+  type: Scalars['String']['output'];
 };
 
 export type SimpleDisplayInput = {
-  backButtonVisible?: InputMaybe<Scalars['Boolean']>;
+  backButtonVisible?: InputMaybe<Scalars['Boolean']['input']>;
   backgroundImage?: InputMaybe<DisplayImageInput>;
   image?: InputMaybe<DisplayImageInput>;
   listItems?: InputMaybe<Array<InputMaybe<DisplayListItemInput>>>;
   textContent?: InputMaybe<DisplayTextContentInput>;
-  title?: InputMaybe<Scalars['String']>;
-  token?: InputMaybe<Scalars['String']>;
-  type: Scalars['String'];
+  title?: InputMaybe<Scalars['String']['input']>;
+  token?: InputMaybe<Scalars['String']['input']>;
+  type: Scalars['String']['input'];
 };
 
 export type SimpleHandlerResponse = HandlerResponse & {
   /** Description of the channel that will be */
   channel?: Maybe<HandlerResponseChannel>;
   /** Conditions to be met. */
-  conditions?: Maybe<Scalars['HandlerResponseConditions']>;
+  conditions?: Maybe<Scalars['HandlerResponseConditions']['output']>;
   context?: Maybe<HandlerResponseContext>;
-  data?: Maybe<Scalars['JSON']>;
+  data?: Maybe<Scalars['JSON']['output']>;
   displays?: Maybe<Array<Maybe<BaseDisplay>>>;
   /** The name of the intent that the response is linked to. */
-  intent: Scalars['String'];
+  intent: Scalars['String']['output'];
   /**
    * Name of the response
    *
    * Used to help differentiate multiple responses.
    */
-  name?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']['output']>;
   /** What the assistant will say first as part of the response. */
   outputSpeech?: Maybe<ResponseOutput>;
   /**
@@ -8263,7 +8265,7 @@ export type SimpleHandlerResponse = HandlerResponse & {
   /** System responses to perform account links, control media, surface changes, and permission requests. */
   system?: Maybe<HandlerResponseSystem>;
   /** Used for tracking the response in third party analytics. */
-  tag?: Maybe<Scalars['String']>;
+  tag?: Maybe<Scalars['String']['output']>;
 };
 
 export type SimpleHandlerResponseSegment = HandlerResponseSegment & {
@@ -8271,7 +8273,7 @@ export type SimpleHandlerResponseSegment = HandlerResponseSegment & {
 };
 
 export type Slot = {
-  _id: Scalars['String'];
+  _id: Scalars['String']['output'];
   /**
    * Human readable description of what kind of information
    * the slot is expecting.  The text should be very brief.  For example:
@@ -8282,7 +8284,7 @@ export type Slot = {
    * "state"
    * "street"
    */
-  inputText?: Maybe<Scalars['String']>;
+  inputText?: Maybe<Scalars['String']['output']>;
   /**
    * Is the slot a list of values.
    * Supported natively by Dialogflow and shims for Alexa.
@@ -8290,15 +8292,15 @@ export type Slot = {
    * items in the list.  Minimum value is 2.  Value defaults to 6 when set to true.
    * * NOTE: Only one isList slot is supported per utterance pattern.
    */
-  isList?: Maybe<Scalars['IntOrBoolean']>;
+  isList?: Maybe<Scalars['IntOrBoolean']['output']>;
   /**
    * The name of the slot, corresponds to how it is displayed in the
    * sample utterance.
    *
    * For example: "Play {Podcast}" where Podcast is the name.
    */
-  name: Scalars['String'];
-  nlu?: Maybe<Scalars['JSON']>;
+  name: Scalars['String']['output'];
+  nlu?: Maybe<Scalars['JSON']['output']>;
   /**
    * The slot will be obfuscated either fully or partially.
    *
@@ -8315,33 +8317,33 @@ export type Slot = {
    *
    * For legacy applications, SlotType is used.
    */
-  type?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']['output']>;
 };
 
 export type SlotDependentExecutableHandlerPath = BaseHandlerPath & {
-  actions?: Maybe<Array<Maybe<Scalars['JSON']>>>;
+  actions?: Maybe<Array<Maybe<Scalars['JSON']['output']>>>;
   /** Conditions to be met. */
-  conditions?: Maybe<Scalars['PathConditions']>;
-  data?: Maybe<Scalars['JSON']>;
+  conditions?: Maybe<Scalars['PathConditions']['output']>;
+  data?: Maybe<Scalars['JSON']['output']>;
   /** The ID of the handler to forward or redirect the request to */
-  intentId: Scalars['String'];
+  intentId: Scalars['String']['output'];
   /**
    * Optional platform filter for the path.
    *
    * If set, the path will only apply to the specified platform.
    */
-  platform?: Maybe<Scalars['String']>;
+  platform?: Maybe<Scalars['String']['output']>;
   /**
    * Match data for the JSON path.
    *
    * 'name' on Match is the JSON path
    */
-  slotMatch?: Maybe<Scalars['JSON']>;
+  slotMatch?: Maybe<Scalars['JSON']['output']>;
   /**
    * Optional, if redirecting or forwarding to a handler that is expecting slots,
    * set these to pre-populate them on the request.
    */
-  slots?: Maybe<Scalars['JSON']>;
+  slots?: Maybe<Scalars['JSON']['output']>;
   /**
    * Type of path.
    *
@@ -8352,7 +8354,7 @@ export type SlotDependentExecutableHandlerPath = BaseHandlerPath & {
    * through, requiring the new handler to handle the
    * request as is.
    */
-  type?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']['output']>;
 };
 
 export type SlotDependentHandlerPath = SlotDependentExecutableHandlerPath | SlotDependentHistoricalHandlerPath | SlotDependentPreviousHandlerPath;
@@ -8361,18 +8363,18 @@ export type SlotDependentHandlerResponse = HandlerResponse & {
   /** Description of the channel that will be */
   channel?: Maybe<HandlerResponseChannel>;
   /** Conditions to be met. */
-  conditions?: Maybe<Scalars['HandlerResponseConditions']>;
+  conditions?: Maybe<Scalars['HandlerResponseConditions']['output']>;
   context?: Maybe<HandlerResponseContext>;
-  data?: Maybe<Scalars['JSON']>;
+  data?: Maybe<Scalars['JSON']['output']>;
   displays?: Maybe<Array<Maybe<BaseDisplay>>>;
   /** The name of the intent that the response is linked to. */
-  intent: Scalars['String'];
+  intent: Scalars['String']['output'];
   /**
    * Name of the response
    *
    * Used to help differentiate multiple responses.
    */
-  name?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']['output']>;
   /** What the assistant will say first as part of the response. */
   outputSpeech?: Maybe<ResponseOutput>;
   /**
@@ -8386,67 +8388,67 @@ export type SlotDependentHandlerResponse = HandlerResponse & {
    *
    * 'name' on Match is the JSON path
    */
-  slotMatch?: Maybe<Scalars['JSON']>;
+  slotMatch?: Maybe<Scalars['JSON']['output']>;
   /** System responses to perform account links, control media, surface changes, and permission requests. */
   system?: Maybe<HandlerResponseSystem>;
   /** Used for tracking the response in third party analytics. */
-  tag?: Maybe<Scalars['String']>;
+  tag?: Maybe<Scalars['String']['output']>;
 };
 
 export type SlotDependentHandlerResponseSegment = HandlerResponseSegment & {
   segment: ResponseOutput;
-  slotMatch: Scalars['JSON'];
+  slotMatch: Scalars['JSON']['output'];
 };
 
 export type SlotDependentHistoricalHandlerPath = BaseHandlerPath & {
-  actions?: Maybe<Array<Maybe<Scalars['JSON']>>>;
+  actions?: Maybe<Array<Maybe<Scalars['JSON']['output']>>>;
   /** Conditions to be met. */
-  conditions?: Maybe<Scalars['PathConditions']>;
-  data?: Maybe<Scalars['JSON']>;
+  conditions?: Maybe<Scalars['PathConditions']['output']>;
+  data?: Maybe<Scalars['JSON']['output']>;
   /**
    * The number of handlers to go back into the history of.
    *
    * This is typically just one and can be no more than 10.
    */
-  historicalIndex: Scalars['Int'];
+  historicalIndex: Scalars['Int']['output'];
   /**
    * Optional platform filter for the path.
    *
    * If set, the path will only apply to the specified platform.
    */
-  platform?: Maybe<Scalars['String']>;
+  platform?: Maybe<Scalars['String']['output']>;
   /**
    * Match data for the JSON path.
    *
    * 'name' on Match is the JSON path
    */
-  slotMatch?: Maybe<Scalars['JSON']>;
+  slotMatch?: Maybe<Scalars['JSON']['output']>;
   /**
    * Optional, if redirecting or forwarding to a handler that is expecting slots,
    * set these to pre-populate them on the request.
    */
-  slots?: Maybe<Scalars['JSON']>;
+  slots?: Maybe<Scalars['JSON']['output']>;
 };
 
 export type SlotDependentPreviousHandlerPath = BaseHandlerPath & {
-  actions?: Maybe<Array<Maybe<Scalars['JSON']>>>;
+  actions?: Maybe<Array<Maybe<Scalars['JSON']['output']>>>;
   /** Conditions to be met. */
-  conditions?: Maybe<Scalars['PathConditions']>;
-  data?: Maybe<Scalars['JSON']>;
+  conditions?: Maybe<Scalars['PathConditions']['output']>;
+  data?: Maybe<Scalars['JSON']['output']>;
   /**
    * Optional platform filter for the path.
    *
    * If set, the path will only apply to the specified platform.
    */
-  platform?: Maybe<Scalars['String']>;
+  platform?: Maybe<Scalars['String']['output']>;
   /** Set to true to request the previous handler paths. */
-  previousHandler: Scalars['Boolean'];
+  previousHandler: Scalars['Boolean']['output'];
   /**
    * Match data for the JSON path.
    *
    * 'name' on Match is the JSON path
    */
-  slotMatch?: Maybe<Scalars['JSON']>;
+  slotMatch?: Maybe<Scalars['JSON']['output']>;
 };
 
 export enum SlotObfuscation {
@@ -8456,21 +8458,21 @@ export enum SlotObfuscation {
 
 export type SmapiAccount = {
   /** The ID for the linked SMAPI developer account. */
-  vendorId: Scalars['ID'];
+  vendorId: Scalars['ID']['output'];
 };
 
 export type SmapiAccountInput = {
   /** The ID for the linked SMAPI developer account. */
-  vendorId: Scalars['ID'];
+  vendorId: Scalars['ID']['input'];
 };
 
 export type SmapiVendor = {
   /** The vendorId of the smapi vendor. */
-  id: Scalars['ID'];
+  id: Scalars['ID']['output'];
   /** The human readable name for the vendor. */
-  name: Scalars['String'];
+  name: Scalars['String']['output'];
   /** The permissions that the user has in the vendor. */
-  roles: Array<Maybe<Scalars['String']>>;
+  roles: Array<Maybe<Scalars['String']['output']>>;
 };
 
 /** These are the attributes that are available for sorting when querying apps of an organization. */
@@ -8483,9 +8485,9 @@ export enum SortableAppAttributes {
 
 export type Status = {
   /** The email of the user who last changed the status. */
-  email: Scalars['String'];
+  email: Scalars['String']['output'];
   /** Any notes that was associated with the status change. */
-  notes?: Maybe<Scalars['String']>;
+  notes?: Maybe<Scalars['String']['output']>;
   /** A brief history of the status changes. */
   statusHistory?: Maybe<Array<Maybe<StatusHistory>>>;
   /**
@@ -8493,46 +8495,46 @@ export type Status = {
    *
    * Format: UNIX timestamp
    */
-  timestamp: Scalars['Long'];
+  timestamp: Scalars['Long']['output'];
   /** The status level of the app. */
-  type: Scalars['String'];
+  type: Scalars['String']['output'];
 };
 
 export type StatusHistory = {
   /** The email of the user who changed the status. */
-  email: Scalars['String'];
+  email: Scalars['String']['output'];
   /** Any notes that was associated with the status change. */
-  notes?: Maybe<Scalars['String']>;
+  notes?: Maybe<Scalars['String']['output']>;
   /**
    * The time the status was changed.
    *
    * Format: UNIX timestamp
    */
-  timestamp: Scalars['Long'];
+  timestamp: Scalars['Long']['output'];
   /** The status level that the app was. */
-  type: Scalars['String'];
+  type: Scalars['String']['output'];
 };
 
 export type StatusHistoryInput = {
   /** The email of the user who changed the status. */
-  email: Scalars['String'];
+  email: Scalars['String']['input'];
   /** Any notes that was associated with the status change. */
-  notes?: InputMaybe<Scalars['String']>;
+  notes?: InputMaybe<Scalars['String']['input']>;
   /**
    * The time the status was changed.
    *
    * Format: UNIX timestamp
    */
-  timestamp: Scalars['Long'];
+  timestamp: Scalars['Long']['input'];
   /** The status level that the app was. */
-  type: Scalars['String'];
+  type: Scalars['String']['input'];
 };
 
 export type StatusInput = {
   /** The email of the user who last changed the status. */
-  email: Scalars['String'];
+  email: Scalars['String']['input'];
   /** Any notes that was associated with the status change. */
-  notes?: InputMaybe<Scalars['String']>;
+  notes?: InputMaybe<Scalars['String']['input']>;
   /** A brief history of the status changes. */
   statusHistory?: InputMaybe<Array<InputMaybe<StatusHistoryInput>>>;
   /**
@@ -8540,35 +8542,35 @@ export type StatusInput = {
    *
    * Format: UNIX timestamp
    */
-  timestamp: Scalars['Long'];
+  timestamp: Scalars['Long']['input'];
   /** The status level of the app. */
-  type: Scalars['String'];
+  type: Scalars['String']['input'];
 };
 
 export type StorageDependentExecutableHandlerPath = BaseHandlerPath & {
-  actions?: Maybe<Array<Maybe<Scalars['JSON']>>>;
+  actions?: Maybe<Array<Maybe<Scalars['JSON']['output']>>>;
   /** Conditions to be met. */
-  conditions?: Maybe<Scalars['PathConditions']>;
-  data?: Maybe<Scalars['JSON']>;
+  conditions?: Maybe<Scalars['PathConditions']['output']>;
+  data?: Maybe<Scalars['JSON']['output']>;
   /** The ID of the handler to forward or redirect the request to */
-  intentId: Scalars['String'];
+  intentId: Scalars['String']['output'];
   /**
    * Optional platform filter for the path.
    *
    * If set, the path will only apply to the specified platform.
    */
-  platform?: Maybe<Scalars['String']>;
+  platform?: Maybe<Scalars['String']['output']>;
   /**
    * Optional, if redirecting or forwarding to a handler that is expecting slots,
    * set these to pre-populate them on the request.
    */
-  slots?: Maybe<Scalars['JSON']>;
+  slots?: Maybe<Scalars['JSON']['output']>;
   /**
    * Match data for the JSON path.
    *
    * 'name' on Match is the JSON path
    */
-  storageMatch?: Maybe<Scalars['JSON']>;
+  storageMatch?: Maybe<Scalars['JSON']['output']>;
   /**
    * Type of path.
    *
@@ -8579,7 +8581,7 @@ export type StorageDependentExecutableHandlerPath = BaseHandlerPath & {
    * through, requiring the new handler to handle the
    * request as is.
    */
-  type?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']['output']>;
 };
 
 export type StorageDependentHandlerPath = StorageDependentExecutableHandlerPath | StorageDependentHistoricalHandlerPath | StorageDependentPreviousHandlerPath;
@@ -8588,18 +8590,18 @@ export type StorageDependentHandlerResponse = HandlerResponse & {
   /** Description of the channel that will be */
   channel?: Maybe<HandlerResponseChannel>;
   /** Conditions to be met. */
-  conditions?: Maybe<Scalars['HandlerResponseConditions']>;
+  conditions?: Maybe<Scalars['HandlerResponseConditions']['output']>;
   context?: Maybe<HandlerResponseContext>;
-  data?: Maybe<Scalars['JSON']>;
+  data?: Maybe<Scalars['JSON']['output']>;
   displays?: Maybe<Array<Maybe<BaseDisplay>>>;
   /** The name of the intent that the response is linked to. */
-  intent: Scalars['String'];
+  intent: Scalars['String']['output'];
   /**
    * Name of the response
    *
    * Used to help differentiate multiple responses.
    */
-  name?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']['output']>;
   /** What the assistant will say first as part of the response. */
   outputSpeech?: Maybe<ResponseOutput>;
   /**
@@ -8613,77 +8615,77 @@ export type StorageDependentHandlerResponse = HandlerResponse & {
    *
    * 'name' on Match is the JSON path
    */
-  storageMatch?: Maybe<Scalars['JSON']>;
+  storageMatch?: Maybe<Scalars['JSON']['output']>;
   /** System responses to perform account links, control media, surface changes, and permission requests. */
   system?: Maybe<HandlerResponseSystem>;
   /** Used for tracking the response in third party analytics. */
-  tag?: Maybe<Scalars['String']>;
+  tag?: Maybe<Scalars['String']['output']>;
 };
 
 export type StorageDependentHandlerResponseSegment = HandlerResponseSegment & {
   segment: ResponseOutput;
-  storageMatch?: Maybe<Scalars['JSON']>;
+  storageMatch?: Maybe<Scalars['JSON']['output']>;
 };
 
 export type StorageDependentHistoricalHandlerPath = BaseHandlerPath & {
-  actions?: Maybe<Array<Maybe<Scalars['JSON']>>>;
+  actions?: Maybe<Array<Maybe<Scalars['JSON']['output']>>>;
   /** Conditions to be met. */
-  conditions?: Maybe<Scalars['PathConditions']>;
-  data?: Maybe<Scalars['JSON']>;
+  conditions?: Maybe<Scalars['PathConditions']['output']>;
+  data?: Maybe<Scalars['JSON']['output']>;
   /**
    * The number of handlers to go back into the history of.
    *
    * This is typically just one and can be no more than 10.
    */
-  historicalIndex: Scalars['Int'];
+  historicalIndex: Scalars['Int']['output'];
   /**
    * Optional platform filter for the path.
    *
    * If set, the path will only apply to the specified platform.
    */
-  platform?: Maybe<Scalars['String']>;
+  platform?: Maybe<Scalars['String']['output']>;
   /**
    * Optional, if redirecting or forwarding to a handler that is expecting slots,
    * set these to pre-populate them on the request.
    */
-  slots?: Maybe<Scalars['JSON']>;
+  slots?: Maybe<Scalars['JSON']['output']>;
   /**
    * Match data for the JSON path.
    *
    * 'name' on Match is the JSON path
    */
-  storageMatch?: Maybe<Scalars['JSON']>;
+  storageMatch?: Maybe<Scalars['JSON']['output']>;
 };
 
 export type StorageDependentPreviousHandlerPath = BaseHandlerPath & {
-  actions?: Maybe<Array<Maybe<Scalars['JSON']>>>;
+  actions?: Maybe<Array<Maybe<Scalars['JSON']['output']>>>;
   /** Conditions to be met. */
-  conditions?: Maybe<Scalars['PathConditions']>;
-  data?: Maybe<Scalars['JSON']>;
+  conditions?: Maybe<Scalars['PathConditions']['output']>;
+  data?: Maybe<Scalars['JSON']['output']>;
   /**
    * Optional platform filter for the path.
    *
    * If set, the path will only apply to the specified platform.
    */
-  platform?: Maybe<Scalars['String']>;
+  platform?: Maybe<Scalars['String']['output']>;
   /** Set to true to request the previous handler paths. */
-  previousHandler: Scalars['Boolean'];
+  previousHandler: Scalars['Boolean']['output'];
   /**
    * Match data for the JSON path.
    *
    * 'name' on Match is the JSON path
    */
-  storageMatch?: Maybe<Scalars['JSON']>;
+  storageMatch?: Maybe<Scalars['JSON']['output']>;
 };
 
 export type StripePaymentAccount = {
   /** The Stripe customer ID linked to the organization. */
-  customerId: Scalars['ID'];
+  customerId: Scalars['ID']['output'];
 };
 
 export type StripePaymentAccountInput = {
   /** The Stripe customer ID linked to the organization. */
-  customerId: Scalars['ID'];
+  customerId: Scalars['ID']['input'];
 };
 
 export type StudioTierPaymentAccount = BaseStudioTierPaymentAccount & {
@@ -8724,34 +8726,34 @@ export type Suggestion = {
   intents: Array<Maybe<SuggestionIntent>>;
   sentences: Array<Maybe<Sentences>>;
   /** The original phrase that was entered. */
-  text: Scalars['String'];
+  text: Scalars['String']['output'];
   tokens: Array<Maybe<Tokens>>;
 };
 
 export type SuggestionIntent = {
   /** The ID of the app that the intent is linked to. */
-  appId: Scalars['ID'];
+  appId: Scalars['ID']['output'];
   /** The entity IDs of the entities in this suggestion that use this intent. */
-  entities: Array<Maybe<Scalars['String']>>;
+  entities: Array<Maybe<Scalars['String']['output']>>;
   /** The unique identifier of the intent itself. */
-  intentId: Scalars['ID'];
+  intentId: Scalars['ID']['output'];
   /** The human-readable name of the intent. */
-  name: Scalars['String'];
+  name: Scalars['String']['output'];
   /** The ID of the organization that the intent is linked to. */
-  organizationId: Scalars['ID'];
+  organizationId: Scalars['ID']['output'];
   /** The slots defined within the utterance patterns and their Entity types. */
   slots?: Maybe<Array<Maybe<Slot>>>;
 };
 
 export type SuggestionObject = {
-  title: Scalars['String'];
+  title: Scalars['String']['output'];
 };
 
 export type SuggestionType = LinkOutSuggestion | SuggestionObject;
 
 export type SuggestionTypeInput = {
-  title: Scalars['String'];
-  url?: InputMaybe<Scalars['String']>;
+  title: Scalars['String']['input'];
+  url?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type SuggestionsMutation = {
@@ -8760,12 +8762,12 @@ export type SuggestionsMutation = {
 
 
 export type SuggestionsMutationAddFaqSuggestionArgs = {
-  countToGenerate: Scalars['Int'];
+  countToGenerate: Scalars['Int']['input'];
   suggestion?: InputMaybe<AdminFaqSuggestionInput>;
 };
 
 export type SyncFaqToKendraReturn = {
-  executionId: Scalars['String'];
+  executionId: Scalars['String']['output'];
 };
 
 export enum SystemConditionType {
@@ -8786,23 +8788,23 @@ export enum SystemConditionType {
 }
 
 export type SystemDependentExecutableHandlerPath = BaseHandlerPath & {
-  actions?: Maybe<Array<Maybe<Scalars['JSON']>>>;
+  actions?: Maybe<Array<Maybe<Scalars['JSON']['output']>>>;
   /** Conditions to be met. */
-  conditions?: Maybe<Scalars['PathConditions']>;
-  data?: Maybe<Scalars['JSON']>;
+  conditions?: Maybe<Scalars['PathConditions']['output']>;
+  data?: Maybe<Scalars['JSON']['output']>;
   /** The ID of the handler to forward or redirect the request to */
-  intentId: Scalars['String'];
+  intentId: Scalars['String']['output'];
   /**
    * Optional platform filter for the path.
    *
    * If set, the path will only apply to the specified platform.
    */
-  platform?: Maybe<Scalars['String']>;
+  platform?: Maybe<Scalars['String']['output']>;
   /**
    * Optional, if redirecting or forwarding to a handler that is expecting slots,
    * set these to pre-populate them on the request.
    */
-  slots?: Maybe<Scalars['JSON']>;
+  slots?: Maybe<Scalars['JSON']['output']>;
   systemCondition?: Maybe<SystemConditionType>;
   /**
    * Type of path.
@@ -8814,7 +8816,7 @@ export type SystemDependentExecutableHandlerPath = BaseHandlerPath & {
    * through, requiring the new handler to handle the
    * request as is.
    */
-  type?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']['output']>;
 };
 
 export type SystemDependentHandlerPath = SystemDependentExecutableHandlerPath | SystemDependentHistoricalHandlerPath | SystemDependentPreviousHandlerPath;
@@ -8823,18 +8825,18 @@ export type SystemDependentHandlerResponse = HandlerResponse & {
   /** Description of the channel that will be */
   channel?: Maybe<HandlerResponseChannel>;
   /** Conditions to be met. */
-  conditions?: Maybe<Scalars['HandlerResponseConditions']>;
+  conditions?: Maybe<Scalars['HandlerResponseConditions']['output']>;
   context?: Maybe<HandlerResponseContext>;
-  data?: Maybe<Scalars['JSON']>;
+  data?: Maybe<Scalars['JSON']['output']>;
   displays?: Maybe<Array<Maybe<BaseDisplay>>>;
   /** The name of the intent that the response is linked to. */
-  intent: Scalars['String'];
+  intent: Scalars['String']['output'];
   /**
    * Name of the response
    *
    * Used to help differentiate multiple responses.
    */
-  name?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']['output']>;
   /** What the assistant will say first as part of the response. */
   outputSpeech?: Maybe<ResponseOutput>;
   /**
@@ -8847,67 +8849,67 @@ export type SystemDependentHandlerResponse = HandlerResponse & {
   system?: Maybe<HandlerResponseSystem>;
   systemCondition?: Maybe<SystemConditionType>;
   /** Used for tracking the response in third party analytics. */
-  tag?: Maybe<Scalars['String']>;
+  tag?: Maybe<Scalars['String']['output']>;
 };
 
 export type SystemDependentHistoricalHandlerPath = BaseHandlerPath & {
-  actions?: Maybe<Array<Maybe<Scalars['JSON']>>>;
+  actions?: Maybe<Array<Maybe<Scalars['JSON']['output']>>>;
   /** Conditions to be met. */
-  conditions?: Maybe<Scalars['PathConditions']>;
-  data?: Maybe<Scalars['JSON']>;
+  conditions?: Maybe<Scalars['PathConditions']['output']>;
+  data?: Maybe<Scalars['JSON']['output']>;
   /**
    * The number of handlers to go back into the history of.
    *
    * This is typically just one and can be no more than 10.
    */
-  historicalIndex: Scalars['Int'];
+  historicalIndex: Scalars['Int']['output'];
   /**
    * Optional platform filter for the path.
    *
    * If set, the path will only apply to the specified platform.
    */
-  platform?: Maybe<Scalars['String']>;
+  platform?: Maybe<Scalars['String']['output']>;
   /**
    * Optional, if redirecting or forwarding to a handler that is expecting slots,
    * set these to pre-populate them on the request.
    */
-  slots?: Maybe<Scalars['JSON']>;
+  slots?: Maybe<Scalars['JSON']['output']>;
   systemCondition?: Maybe<SystemConditionType>;
 };
 
 export type SystemDependentPreviousHandlerPath = BaseHandlerPath & {
-  actions?: Maybe<Array<Maybe<Scalars['JSON']>>>;
+  actions?: Maybe<Array<Maybe<Scalars['JSON']['output']>>>;
   /** Conditions to be met. */
-  conditions?: Maybe<Scalars['PathConditions']>;
-  data?: Maybe<Scalars['JSON']>;
+  conditions?: Maybe<Scalars['PathConditions']['output']>;
+  data?: Maybe<Scalars['JSON']['output']>;
   /**
    * Optional platform filter for the path.
    *
    * If set, the path will only apply to the specified platform.
    */
-  platform?: Maybe<Scalars['String']>;
+  platform?: Maybe<Scalars['String']['output']>;
   /** Set to true to request the previous handler paths. */
-  previousHandler: Scalars['Boolean'];
+  previousHandler: Scalars['Boolean']['output'];
   systemCondition?: Maybe<SystemConditionType>;
 };
 
 export type SystemNotification = BaseSystemNotification & {
   /** A time when the notification was received */
-  created: Scalars['DateTime'];
+  created: Scalars['DateTime']['output'];
   /** A unique identifier for the notification */
-  id: Scalars['ID'];
+  id: Scalars['ID']['output'];
   /** The custom level that the notification should be at. */
   level: SystemNotificationLevel;
   /** A details description of the notification */
-  message: Scalars['String'];
+  message: Scalars['String']['output'];
   /**
    * Meta data that is associated with the system notification.
    *
    * The meta data returned is dependent on the type of notification.
    */
-  meta?: Maybe<Scalars['JSON']>;
+  meta?: Maybe<Scalars['JSON']['output']>;
   /** A title or name of the notification */
-  name: Scalars['String'];
+  name: Scalars['String']['output'];
 };
 
 export enum SystemNotificationLevel {
@@ -8917,7 +8919,7 @@ export enum SystemNotificationLevel {
 }
 
 export type TaskResult = {
-  completed: Scalars['Boolean'];
+  completed: Scalars['Boolean']['output'];
 };
 
 export type TestConfig = {
@@ -8928,7 +8930,7 @@ export type TestConfig = {
    * slow down execution of the current batch but some tests will
    * still execute while this one is waiting.
    */
-  delayAfter?: Maybe<Scalars['Int']>;
+  delayAfter?: Maybe<Scalars['Int']['output']>;
   /**
    * The duration before a test executes that the runner should wait.
    *
@@ -8936,19 +8938,19 @@ export type TestConfig = {
    * slow down execution of the current batch but some tests will
    * still execute while this one is waiting.
    */
-  delayBefore?: Maybe<Scalars['Int']>;
+  delayBefore?: Maybe<Scalars['Int']['output']>;
 };
 
 export type TestFailureReason = {
   /** A more detailed description of the failure. */
-  details: Scalars['String'];
+  details: Scalars['String']['output'];
   /** The reason the test failed. */
-  reason: Scalars['String'];
+  reason: Scalars['String']['output'];
 };
 
 export type TestHistory = {
   /** The time that the test was executed. Format: ISO 8601 */
-  executed: Scalars['String'];
+  executed: Scalars['String']['output'];
   /** The result of the test during this execution. */
   results: TestPlatformResultByPlatform;
 };
@@ -8987,9 +8989,9 @@ export enum TestResult {
 /** The state that the test is currently in. */
 export type TestState = {
   /** The last time that the test was executed. Format: ISO 8601. */
-  executionStart: Scalars['String'];
+  executionStart: Scalars['String']['output'];
   /** The time that the ended. Format: ISO 8601 */
-  executionStop?: Maybe<Scalars['String']>;
+  executionStop?: Maybe<Scalars['String']['output']>;
   /** The current state of the test. */
   state: CurrentTestState;
 };
@@ -9002,15 +9004,15 @@ export type TextOpportunityAlert = BaseOpportunityAlert & {
    *
    * Keeping track of this for compliance purposes.
    */
-  consented: Scalars['Boolean'];
-  disabled?: Maybe<Scalars['Boolean']>;
+  consented: Scalars['Boolean']['output'];
+  disabled?: Maybe<Scalars['Boolean']['output']>;
   /**
    * Phone number of the user to receive the alert.
    *
    * It is assumed that this number belongs to a mobile device with web browsing capabilities.
    */
-  phoneNumber: Scalars['String'];
-  placeId?: Maybe<Scalars['String']>;
+  phoneNumber: Scalars['String']['output'];
+  placeId?: Maybe<Scalars['String']['output']>;
 };
 
 export type TextOpportunityAlertInput = {
@@ -9021,17 +9023,17 @@ export type TextOpportunityAlertInput = {
    *
    * Keeping track of this for compliance purposes.
    */
-  consented: Scalars['Boolean'];
+  consented: Scalars['Boolean']['input'];
   /** Temporarily disable the alert */
-  disabled?: InputMaybe<Scalars['Boolean']>;
+  disabled?: InputMaybe<Scalars['Boolean']['input']>;
   /**
    * Phone number of the user to receive the alert.
    *
    * It is assumed that this number belongs to a mobile device with web browsing capabilities.
    */
-  phoneNumber: Scalars['String'];
+  phoneNumber: Scalars['String']['input'];
   /** The Google PlaceID for the location */
-  placeId?: InputMaybe<Scalars['String']>;
+  placeId?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** Information needed to publish to specific platforms. */
@@ -9047,13 +9049,13 @@ export type ThirdPartyDeploymentsInput = {
 };
 
 export type Tokens = {
-  dep: Scalars['String'];
-  end: Scalars['Int'];
-  head: Scalars['Int'];
-  id: Scalars['Int'];
-  pos: Scalars['String'];
-  start: Scalars['Int'];
-  tag: Scalars['String'];
+  dep: Scalars['String']['output'];
+  end: Scalars['Int']['output'];
+  head: Scalars['Int']['output'];
+  id: Scalars['Int']['output'];
+  pos: Scalars['String']['output'];
+  start: Scalars['Int']['output'];
+  tag: Scalars['String']['output'];
 };
 
 export type TotalEvents = {
@@ -9062,19 +9064,19 @@ export type TotalEvents = {
   /** Statistics on the number of flags in a given query */
   flagTotals: FlagTotals;
   /** The total number of events that fit the last query. */
-  total: Scalars['Int'];
+  total: Scalars['Int']['output'];
 };
 
 export type TotalQueryAppTests = {
   /** The tests that were found in this query. */
   tests?: Maybe<Array<Maybe<AppTest>>>;
   /** The total number of app tests that fit the last query. */
-  total: Scalars['Int'];
+  total: Scalars['Int']['output'];
 };
 
 export type TotalUsageEvents = {
   /** The total number of events available */
-  total: Scalars['Int'];
+  total: Scalars['Int']['output'];
   /** The usage events retrieved in this query. */
   usageEvents?: Maybe<Array<Maybe<UsageEvents>>>;
 };
@@ -9083,14 +9085,14 @@ export type TotalWebContent = {
   /** The content that was downloaded for the app */
   content: Array<Maybe<WebContentWithHighlights>>;
   /** The total number of web content found. */
-  total: Scalars['Int'];
+  total: Scalars['Int']['output'];
 };
 
 export type TotalWebContentErrors = {
   /** Any errors that may have happened during content attempts */
   errors: Array<Maybe<WebContentErrors>>;
   /** The total number of web content found. */
-  total: Scalars['Int'];
+  total: Scalars['Int']['output'];
 };
 
 export type TotalWebContentSources = {
@@ -9099,89 +9101,89 @@ export type TotalWebContentSources = {
   /** The crawl sources that downloaded the content */
   sources: Array<Maybe<WebContentSources>>;
   /** The total number of web content found. */
-  total: Scalars['Int'];
+  total: Scalars['Int']['output'];
 };
 
 export type TotalWebContentSourcesLastCrawl = {
   documents: Array<Maybe<WebContent>>;
-  ended: Scalars['DateTime'];
+  ended: Scalars['DateTime']['output'];
   errors: Array<Maybe<WebContentErrors>>;
-  started: Scalars['DateTime'];
+  started: Scalars['DateTime']['output'];
 };
 
 export type TotalWebFaq = {
   faq: Array<Maybe<WebFaq>>;
   /** The total number of web content found. */
-  total: Scalars['Int'];
+  total: Scalars['Int']['output'];
 };
 
 export type TrialTierPaymentAccount = BaseStudioTierPaymentAccount & {
   /** The duration that the trial will last. */
-  durationMs: Scalars['Long'];
+  durationMs: Scalars['Long']['output'];
   /** The end date that the trial will end */
-  endDate: Scalars['DateTime'];
+  endDate: Scalars['DateTime']['output'];
   /** The time that the trial started. */
-  startDate: Scalars['DateTime'];
+  startDate: Scalars['DateTime']['output'];
   tier: StudioTierType;
 };
 
 /** A currently unsupported opportunity alert. */
 export type UnknownOpportunityAlert = BaseOpportunityAlert & {
   alerts: Array<OpportunityAlertDetail>;
-  disabled?: Maybe<Scalars['Boolean']>;
-  placeId?: Maybe<Scalars['String']>;
+  disabled?: Maybe<Scalars['Boolean']['output']>;
+  placeId?: Maybe<Scalars['String']['output']>;
 };
 
 export type UpdateAppChannelMutation = {
-  deleteScheduledEvent: Scalars['String'];
+  deleteScheduledEvent: Scalars['String']['output'];
   scheduleWeeklyWebCrawls: WebCrawlSchedule;
   syncFAQToKendra: SyncFaqToKendraReturn;
 };
 
 
 export type UpdateAppChannelMutationDeleteScheduledEventArgs = {
-  scheduleId: Scalars['ID'];
+  scheduleId: Scalars['ID']['input'];
 };
 
 
 export type UpdateAppChannelMutationScheduleWeeklyWebCrawlsArgs = {
   daysOfWeek: Array<InputMaybe<SchedulerDaysOfWeek>>;
-  stealth?: InputMaybe<Scalars['Boolean']>;
-  webUrl: Scalars['URL'];
-  webUrlPatterns?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  stealth?: InputMaybe<Scalars['Boolean']['input']>;
+  webUrl: Scalars['URL']['input'];
+  webUrlPatterns?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export type UpdateAppInput = {
   /** The type of the account linking. This tells us how to redeem the token for PII. */
-  accountLinkType?: InputMaybe<Scalars['String']>;
+  accountLinkType?: InputMaybe<Scalars['String']['input']>;
   /** The unique ID of the google action that the app is linked to. */
-  actionsOnGoogleId?: InputMaybe<Scalars['String']>;
+  actionsOnGoogleId?: InputMaybe<Scalars['String']['input']>;
   /** The category that the app will fall in to when published to Alexa. */
-  alexaCategory?: InputMaybe<Scalars['String']>;
+  alexaCategory?: InputMaybe<Scalars['String']['input']>;
   /** The unique ID of the alexa skill that the app is linked to. */
-  alexaSkillId?: InputMaybe<Scalars['String']>;
+  alexaSkillId?: InputMaybe<Scalars['String']['input']>;
   /** Unique identifier of the app in Stentor. This attribute will not be updated on an update request. */
-  appId?: InputMaybe<Scalars['ID']>;
+  appId?: InputMaybe<Scalars['ID']['input']>;
   /**
    * URL of the original banner image with aspect ratio of 16:9 and minimum dimensions of 1920x1080.
    *
    * Required by Actions on Google
    */
-  banner?: InputMaybe<Scalars['String']>;
-  beta?: InputMaybe<Scalars['JSON']>;
+  banner?: InputMaybe<Scalars['String']['input']>;
+  beta?: InputMaybe<Scalars['JSON']['input']>;
   /**
    * A description of the business and it's services.
    *
    * This can be used for LLM operations
    */
-  businessDescription?: InputMaybe<Scalars['String']>;
+  businessDescription?: InputMaybe<Scalars['String']['input']>;
   /**
    * A description of what they consider to be high value leads, prioritized queries that they
    * want to be notified immediately.
    *
    * This can be used for LLM operations
    */
-  businessHighValueLeadDescription?: InputMaybe<Scalars['String']>;
+  businessHighValueLeadDescription?: InputMaybe<Scalars['String']['input']>;
   /** The hours in which the business related to the app is open. */
   businessHours?: InputMaybe<Array<BusinessHoursInput>>;
   /**
@@ -9189,23 +9191,23 @@ export type UpdateAppInput = {
    *
    * The description cannot be more than 4000 characters.
    */
-  description?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['String']['input']>;
   /**
    * Example phrases the help users know how to use the app.
    *
    * At least three are required for publication.
    */
-  examplePhrases?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  examplePhrases?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /**
    * URL to the original icon file before transformation.
    *
    * Aspect ration must be 1:1 and minimum dimensions are 512x512.
    */
-  icon?: InputMaybe<Scalars['String']>;
+  icon?: InputMaybe<Scalars['String']['input']>;
   /** Allows stentor_admins to view and add notes to apps for internal use. */
-  internalNotes?: InputMaybe<Scalars['String']>;
+  internalNotes?: InputMaybe<Scalars['String']['input']>;
   /** The phrase a user must speak to wake the app up on a specific platform. */
-  invocationName?: InputMaybe<Scalars['String']>;
+  invocationName?: InputMaybe<Scalars['String']['input']>;
   /** Allows app-specific overriding of IPRights. */
   ipRights?: InputMaybe<IpRightsInput>;
   /**
@@ -9213,21 +9215,21 @@ export type UpdateAppInput = {
    *
    * Max of 30 keywords are allowed.
    */
-  keywords?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  keywords?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /**
    * Banner that is 1920x1080.
    *
    * Required by Actions on Google
    */
-  largeBanner?: InputMaybe<Scalars['String']>;
+  largeBanner?: InputMaybe<Scalars['String']['input']>;
   /**
    * A large icon for the app, 512x512 PNG
    *
    * Required for Alexa
    */
-  largeIcon?: InputMaybe<Scalars['String']>;
+  largeIcon?: InputMaybe<Scalars['String']['input']>;
   /** The Email address to send lead captures to. */
-  leadsContact?: InputMaybe<Scalars['EmailAddress']>;
+  leadsContact?: InputMaybe<Scalars['EmailAddress']['input']>;
   /** Physical location associated with the app. */
   location?: InputMaybe<LocationInput>;
   /**
@@ -9235,11 +9237,11 @@ export type UpdateAppInput = {
    *
    * Required for Actions On Google
    */
-  mediumIcon?: InputMaybe<Scalars['String']>;
+  mediumIcon?: InputMaybe<Scalars['String']['input']>;
   /** The human-readable name of the app. */
-  name?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']['input']>;
   /** The ID of the organization that the app is linked to. This attribute will not be updated on an update request. */
-  organizationId?: InputMaybe<Scalars['ID']>;
+  organizationId?: InputMaybe<Scalars['ID']['input']>;
   /** Google PlaceIds that correspond with the business. */
   places?: InputMaybe<Array<AppPlaceDescriptionInput>>;
   /**
@@ -9248,7 +9250,7 @@ export type UpdateAppInput = {
    */
   platformData?: InputMaybe<PlatformDataInput>;
   /** URL to the privacy policy for the app. */
-  privacyPolicyUrl?: InputMaybe<Scalars['String']>;
+  privacyPolicyUrl?: InputMaybe<Scalars['String']['input']>;
   /** A referenceId is an ID of the app in a difference service outside this API */
   refernceId?: InputMaybe<AppReferenceIdInput>;
   /**
@@ -9256,25 +9258,25 @@ export type UpdateAppInput = {
    *
    * Required for Alexa
    */
-  smallIcon?: InputMaybe<Scalars['String']>;
+  smallIcon?: InputMaybe<Scalars['String']['input']>;
   /** The subscription ID that is linked to this app in Stripe. */
-  stripeSubscriptionId?: InputMaybe<Scalars['String']>;
+  stripeSubscriptionId?: InputMaybe<Scalars['String']['input']>;
   /**
    * The summary of the app.
    *
    * Shorter than the description, maximum 160 characters.
    */
-  summary?: InputMaybe<Scalars['String']>;
+  summary?: InputMaybe<Scalars['String']['input']>;
   /** Type of template the app and its intents adhere to. */
-  templateType?: InputMaybe<Scalars['String']>;
+  templateType?: InputMaybe<Scalars['String']['input']>;
   /** URL to the terms of use for the app */
-  termsOfUseUrl?: InputMaybe<Scalars['String']>;
+  termsOfUseUrl?: InputMaybe<Scalars['String']['input']>;
   /** Instructions for platform testers on how to test the app. */
-  testingInstructions?: InputMaybe<Scalars['String']>;
+  testingInstructions?: InputMaybe<Scalars['String']['input']>;
   /** Contains fields related to publishing the app to various platforms such as dialogflow or alexa. */
   thirdPartyDeployments?: InputMaybe<ThirdPartyDeploymentsInput>;
   /** Primary website for the company or division of a company that the app is representing. */
-  website?: InputMaybe<Scalars['URLString']>;
+  website?: InputMaybe<Scalars['URLString']['input']>;
   /** Data related to what was found on the customers website */
   websiteData?: InputMaybe<AppWebsiteDataInput>;
 };
@@ -9288,8 +9290,8 @@ export type UpdateAppMutation = {
   channel: AppChannelMutation;
   cms: CmsMutation;
   /** Deletes the app. */
-  deleteApp: Scalars['String'];
-  deleteScheduledEvent: Scalars['String'];
+  deleteApp: Scalars['String']['output'];
+  deleteScheduledEvent: Scalars['String']['output'];
   /** Exports the app to a file. Returns the URL of the file to download. */
   exportApp: ExportAppMutationResponse;
   faq: FaqMutation;
@@ -9300,7 +9302,7 @@ export type UpdateAppMutation = {
   /** Operations that are related to updating intents */
   intent: IntentMutation;
   /** Clears all notifications from the app. */
-  removeAllNotifications: Scalars['String'];
+  removeAllNotifications: Scalars['String']['output'];
   /** Removes a notification from the app.  Returns a list of notifications that remain. */
   removeNotification: Array<Maybe<SystemNotification>>;
   scheduleWeeklyWebCrawls: WebCrawlSchedule;
@@ -9325,32 +9327,32 @@ export type UpdateAppMutationAddTextOpportunityAlertArgs = {
 
 
 export type UpdateAppMutationChangeStatusArgs = {
-  note?: InputMaybe<Scalars['String']>;
-  type: Scalars['String'];
+  note?: InputMaybe<Scalars['String']['input']>;
+  type: Scalars['String']['input'];
 };
 
 
 export type UpdateAppMutationDeleteScheduledEventArgs = {
-  scheduleId: Scalars['ID'];
+  scheduleId: Scalars['ID']['input'];
 };
 
 
 export type UpdateAppMutationFlagEventArgs = {
-  eventId: Scalars['ID'];
+  eventId: Scalars['ID']['input'];
   flag: NewRawQueryFlag;
-  note?: InputMaybe<Scalars['String']>;
+  note?: InputMaybe<Scalars['String']['input']>;
 };
 
 
 export type UpdateAppMutationRemoveNotificationArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type UpdateAppMutationScheduleWeeklyWebCrawlsArgs = {
   daysOfWeek: Array<InputMaybe<SchedulerDaysOfWeek>>;
-  webUrl: Scalars['URL'];
-  webUrlPatterns?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  webUrl: Scalars['URL']['input'];
+  webUrlPatterns?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 
@@ -9359,34 +9361,34 @@ export type UpdateAppMutationUpdateAppArgs = {
 };
 
 export type UpdateEntityInput = {
-  dialogflowId?: InputMaybe<Scalars['String']>;
-  displayName?: InputMaybe<Scalars['String']>;
-  nlu?: InputMaybe<Scalars['JSON']>;
-  type?: InputMaybe<Scalars['String']>;
+  dialogflowId?: InputMaybe<Scalars['String']['input']>;
+  displayName?: InputMaybe<Scalars['String']['input']>;
+  nlu?: InputMaybe<Scalars['JSON']['input']>;
+  type?: InputMaybe<Scalars['String']['input']>;
   values?: InputMaybe<Array<InputMaybe<EntityValueInput>>>;
 };
 
 export type UpdateFaq = {
   /** The answer for the questions. */
-  answer?: InputMaybe<Scalars['String']>;
+  answer?: InputMaybe<Scalars['String']['input']>;
   /** An ID to a Handler that is associated with the FAQ */
-  associatedHandlerId?: InputMaybe<Scalars['ID']>;
+  associatedHandlerId?: InputMaybe<Scalars['ID']['input']>;
   /** Set to true if the FAQ should be excluded from the auto-complete search. */
-  excludeFromAutoComplete?: InputMaybe<Scalars['Boolean']>;
+  excludeFromAutoComplete?: InputMaybe<Scalars['Boolean']['input']>;
   /** An ID linked to an external system in which the FAQ was derived from. */
-  externalFAQId?: InputMaybe<Scalars['ID']>;
+  externalFAQId?: InputMaybe<Scalars['ID']['input']>;
   /** Questions associated with the FAQ */
-  questions?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  questions?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /** The raw text */
-  raw?: InputMaybe<Scalars['String']>;
-  responses?: InputMaybe<Array<InputMaybe<Scalars['JSON']>>>;
+  raw?: InputMaybe<Scalars['String']['input']>;
+  responses?: InputMaybe<Array<InputMaybe<Scalars['JSON']['input']>>>;
   /** The URL where the FAQ can be found. */
-  url?: InputMaybe<Scalars['URL']>;
+  url?: InputMaybe<Scalars['URL']['input']>;
 };
 
 export type UpdateFaqMutation = {
   /** Permanently deletes the FAQ. */
-  deleteFAQ: Scalars['String'];
+  deleteFAQ: Scalars['String']['output'];
   /** Update attributes of the particular FAQ */
   updateFAQ: WebFaq;
 };
@@ -9404,32 +9406,32 @@ export type UpdateHandlerInput = {
    * All handlers have contextual help and cancel content
    */
   content?: InputMaybe<Array<InputMaybe<InputHandlerContent>>>;
-  data?: InputMaybe<Scalars['JSON']>;
+  data?: InputMaybe<Scalars['JSON']['input']>;
   /**
    * The locale that all the attributes in this intent are used for before
    * they are overridden.
    */
-  defaultLocale?: InputMaybe<Scalars['String']>;
+  defaultLocale?: InputMaybe<Scalars['String']['input']>;
   forward?: InputMaybe<Array<InputMaybe<HandlerForwardInput>>>;
   /** The location that the intent was last saved in Stentor's Handler Graph UI. */
   graphCoords?: InputMaybe<GraphCoordsInput>;
   /** The language code that the intent covers. */
-  langCode?: InputMaybe<Scalars['String']>;
+  langCode?: InputMaybe<Scalars['String']['input']>;
   /** The human-readable name of the intent. */
-  name: Scalars['String'];
+  name: Scalars['String']['input'];
   /** The permissions that the intent requires in order to work. */
   permissions?: InputMaybe<Array<InputMaybe<HandlerPermissions>>>;
   redirect?: InputMaybe<Array<InputMaybe<HandlerRedirectInput>>>;
   /** The slots defined within the utterance patterns and their Entity types. */
   slots?: InputMaybe<Array<InputMaybe<InputSlot>>>;
   /** The type of intent that this is. */
-  type?: InputMaybe<Scalars['String']>;
+  type?: InputMaybe<Scalars['String']['input']>;
   /**
    * An array of utterance patterns.
    *
    * For more information on syntax see https://github.com/alexa-js/alexa-utterances
    */
-  utterancePatterns?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  utterancePatterns?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export type UpdateHandlerMutationType = {
@@ -9457,7 +9459,7 @@ export type UpdateHandlerMutationType = {
 
 export type UpdateHandlerMutationTypeAddForwardArgs = {
   forward: ForwardInput;
-  key: Scalars['ID'];
+  key: Scalars['ID']['input'];
 };
 
 
@@ -9479,8 +9481,8 @@ export type UpdateHandlerReturn = {
 
 
 export type UpdateHandlerReturnGraphArgs = {
-  endDate?: InputMaybe<Scalars['DateTime']>;
-  startDate?: InputMaybe<Scalars['DateTime']>;
+  endDate?: InputMaybe<Scalars['DateTime']['input']>;
+  startDate?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
 export type UpdateIntentInput = {
@@ -9501,20 +9503,20 @@ export type UpdateIntentInput = {
    * The locale that all the attributes in this intent are used for before
    * they are overridden.
    */
-  defaultLocale?: InputMaybe<Scalars['String']>;
+  defaultLocale?: InputMaybe<Scalars['String']['input']>;
   /** deprecated: No longer used. */
-  dialogflowId?: InputMaybe<Scalars['String']>;
+  dialogflowId?: InputMaybe<Scalars['String']['input']>;
   /** The location that the intent was last saved in Stentor's Handler Graph UI. */
   graphCoords?: InputMaybe<GraphCoordsInput>;
   /** The language code that the intent covers. */
-  langCode?: InputMaybe<Scalars['String']>;
+  langCode?: InputMaybe<Scalars['String']['input']>;
   /** The name of the intent */
-  name?: InputMaybe<Scalars['String']>;
-  nlu?: InputMaybe<Scalars['JSON']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  nlu?: InputMaybe<Scalars['JSON']['input']>;
   /** The permissions that the intent requires in order to work. */
-  permissions?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  permissions?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /** Slot type definition. */
-  slotTypes?: InputMaybe<Scalars['JSON']>;
+  slotTypes?: InputMaybe<Scalars['JSON']['input']>;
   /**
    * The slots defined within the utterance patterns and their Entity types.
    *
@@ -9523,13 +9525,13 @@ export type UpdateIntentInput = {
    */
   slots?: InputMaybe<Array<InputMaybe<InputSlot>>>;
   /** The type of intent that this is. */
-  type?: InputMaybe<Scalars['String']>;
+  type?: InputMaybe<Scalars['String']['input']>;
   /**
    * An array of utterance patterns.
    *
    * For more information on syntax see https://github.com/alexa-js/alexa-utterances
    */
-  utterancePatterns?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  utterancePatterns?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export type UpdateIntentMutationType = {
@@ -9553,48 +9555,48 @@ export type UpdateIntentReturn = {
 
 
 export type UpdateIntentReturnGraphArgs = {
-  endDate?: InputMaybe<Scalars['DateTime']>;
-  startDate?: InputMaybe<Scalars['DateTime']>;
+  endDate?: InputMaybe<Scalars['DateTime']['input']>;
+  startDate?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
 export type UpdateOrganizationInput = {
   /** The email XAPPineer that is in charge of handling the organization's account */
-  XAPPLead?: InputMaybe<Scalars['String']>;
+  XAPPLead?: InputMaybe<Scalars['String']['input']>;
   /** An event bus that is attatched to the organization to receive specific events related to the organization such as App status changes. */
-  awsEventBusArn?: InputMaybe<Scalars['String']>;
+  awsEventBusArn?: InputMaybe<Scalars['String']['input']>;
   /** An object of feature flags */
-  beta?: InputMaybe<Scalars['JSON']>;
+  beta?: InputMaybe<Scalars['JSON']['input']>;
   billingContact?: InputMaybe<BillingContactInput>;
   brandContact?: InputMaybe<BrandContactInput>;
   /**
    * The email address of a user who can be contacted about issues
    * related to the organization.
    */
-  contact?: InputMaybe<Scalars['String']>;
+  contact?: InputMaybe<Scalars['String']['input']>;
   /** The organization contact's name. */
-  contactName?: InputMaybe<Scalars['String']>;
+  contactName?: InputMaybe<Scalars['String']['input']>;
   /** The organization contact's phone number. */
-  contactPhone?: InputMaybe<Scalars['String']>;
+  contactPhone?: InputMaybe<Scalars['String']['input']>;
   /**
    * Date in which the organization signed a contract to publish
    * apps.
    *
    * Format: ISO-8601 date format
    */
-  contractDate?: InputMaybe<Scalars['String']>;
+  contractDate?: InputMaybe<Scalars['String']['input']>;
   /** The human-readable description of the organization. */
-  description?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['String']['input']>;
   /**
    * Organization's IP rights which were loaded that give permissions to
    * publish apps on their behalf.
    */
   ipRights?: InputMaybe<IPrightsInput>;
   /** URL for the organization's logo. */
-  logoUrl?: InputMaybe<Scalars['String']>;
+  logoUrl?: InputMaybe<Scalars['String']['input']>;
   /** The human-readable name of the organization. */
-  name?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']['input']>;
   /** Any notes that are related to the organization. */
-  notes?: InputMaybe<Scalars['String']>;
+  notes?: InputMaybe<Scalars['String']['input']>;
   /** Payment account information */
   paymentAccounts?: InputMaybe<PaymentAccountsInput>;
   /**
@@ -9603,11 +9605,11 @@ export type UpdateOrganizationInput = {
    */
   publishingAccounts?: InputMaybe<PublishingAccountsInput>;
   /** A URL to the organization's website. */
-  website?: InputMaybe<Scalars['String']>;
+  website?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type UploadFaqReturn = {
-  faqsAdded: Scalars['Int'];
+  faqsAdded: Scalars['Int']['output'];
 };
 
 export type UploadedLexApp = {
@@ -9619,108 +9621,108 @@ export type UploadedLexApp = {
 
 export type Url = {
   /** The actual URL that serves the app. */
-  url: Scalars['String'];
+  url: Scalars['String']['output'];
 };
 
 export type UrlInput = {
   /** The actual URL that serves the app. */
-  url: Scalars['String'];
+  url: Scalars['String']['input'];
 };
 
 /** Events that have occurred in the platform. */
 export type UsageEvents = {
   /** The appId of the app that the event is related to if applicable. */
-  appId?: Maybe<Scalars['ID']>;
+  appId?: Maybe<Scalars['ID']['output']>;
   /** The channelId of the channel that the event is related to if applicable */
-  channelId?: Maybe<Scalars['ID']>;
+  channelId?: Maybe<Scalars['ID']['output']>;
   /** A detailed description of the event. */
-  description: Scalars['String'];
+  description: Scalars['String']['output'];
   /** The time and date in which the event occurred. */
-  eventTime: Scalars['DateTime'];
+  eventTime: Scalars['DateTime']['output'];
   /** A human-readable name for the event. */
-  name: Scalars['String'];
+  name: Scalars['String']['output'];
   /** The organizationId of the organization that the event is related to if applicable. */
-  organizationId?: Maybe<Scalars['ID']>;
+  organizationId?: Maybe<Scalars['ID']['output']>;
   /** Any payload that is connected to the event. */
-  payload?: Maybe<Scalars['JSON']>;
+  payload?: Maybe<Scalars['JSON']['output']>;
   /** The permission level of users who can see the event. */
-  permissionLevel?: Maybe<Scalars['String']>;
+  permissionLevel?: Maybe<Scalars['String']['output']>;
   /** The type of event that it is */
-  type: Scalars['String'];
+  type: Scalars['String']['output'];
   /** The email of the user which caused the event if applicable */
-  userEmail?: Maybe<Scalars['String']>;
+  userEmail?: Maybe<Scalars['String']['output']>;
   /** The userId of the user which caused the event if applicable. */
-  userId?: Maybe<Scalars['ID']>;
+  userId?: Maybe<Scalars['ID']['output']>;
 };
 
 export type UsageStat = {
   interval: AppUsageInterval;
   /** The ISO formatted date that the stats covers. */
-  isoDate: Scalars['String'];
-  newUsers: Scalars['Int'];
-  returningUsers: Scalars['Int'];
-  totalSessions: Scalars['Int'];
-  totalUsers: Scalars['Int'];
+  isoDate: Scalars['String']['output'];
+  newUsers: Scalars['Int']['output'];
+  returningUsers: Scalars['Int']['output'];
+  totalSessions: Scalars['Int']['output'];
+  totalUsers: Scalars['Int']['output'];
 };
 
 export type UsageStatCsvReturn = {
   /** The CSV formatted data */
-  csv: Scalars['String'];
+  csv: Scalars['String']['output'];
   /** The file location of the CSV data */
-  file: Scalars['URL'];
+  file: Scalars['URL']['output'];
 };
 
 export type UserEntitlements = {
   /** Specifies the number of pro tier entitlements that the user has available */
-  availablePro: Scalars['Int'];
+  availablePro: Scalars['Int']['output'];
   /** Specifies the number of standard tier entitlements that the user has available */
-  availableStandard: Scalars['Int'];
+  availableStandard: Scalars['Int']['output'];
   /** Specifies the number of trial tier entitlements that the user has available */
-  availableTrial: Scalars['Int'];
+  availableTrial: Scalars['Int']['output'];
   /** Specifies the number of pro tier entitlements the user currently has */
-  pro: Scalars['Int'];
+  pro: Scalars['Int']['output'];
   /** Specifies the number of standard tier entitlements the user currently has */
-  standard: Scalars['Int'];
+  standard: Scalars['Int']['output'];
   /** Specifies the number of trial tier entitlements the user currently has */
-  trial: Scalars['Int'];
+  trial: Scalars['Int']['output'];
 };
 
 /** The User Profile of a Stentor User */
 export type UserProfile = {
-  _id: Scalars['ID'];
+  _id: Scalars['ID']['output'];
   /** Email address of the user */
-  email: Scalars['String'];
+  email: Scalars['String']['output'];
   /** Determines whether or not the user's email address has been verified. */
-  emailVerified: Scalars['Boolean'];
+  emailVerified: Scalars['Boolean']['output'];
   /**
    * Requests the number of entitlements or subscriptions that the user
    * has available.
    */
   entitlements?: Maybe<UserEntitlements>;
   /** Icon URL to the profile picture. */
-  icon?: Maybe<Scalars['String']>;
+  icon?: Maybe<Scalars['String']['output']>;
   /** Identities of linked accounts. */
   identities: Array<Maybe<UserProfileIdentity>>;
   /** Determines whether or not the user is an admin of Stentor */
-  isAdmin: Scalars['Boolean'];
+  isAdmin: Scalars['Boolean']['output'];
   /** The authentication origin */
   origin: AuthOrigin;
   /** The user permissions that the user is allowed to perform in Stentor. */
   roles: Array<Maybe<UserProfileRole>>;
   /** User ID of the user in the system */
-  userId: Scalars['String'];
+  userId: Scalars['String']['output'];
 };
 
 export type UserProfileIdentity = {
-  provider: Scalars['String'];
-  userId: Scalars['String'];
+  provider: Scalars['String']['output'];
+  userId: Scalars['String']['output'];
 };
 
 export type UserProfileRole = {
   /** The organization ID of the organization that the user has the roles applied to. */
-  organizationId: Scalars['String'];
+  organizationId: Scalars['String']['output'];
   /** The user's roles that they are allowed to use on the organization. */
-  roles: Array<Maybe<Scalars['String']>>;
+  roles: Array<Maybe<Scalars['String']['output']>>;
 };
 
 export type Utils = {
@@ -9728,19 +9730,19 @@ export type Utils = {
    * Randomly generates an external ID that can be used by third party IAM roles so
    * stentor can securely assume it.
    */
-  generateExternalID: Scalars['String'];
+  generateExternalID: Scalars['String']['output'];
   /** Returns the result of a task */
   task: TaskResult;
 };
 
 
 export type UtilsTaskArgs = {
-  taskId: Scalars['ID'];
+  taskId: Scalars['ID']['input'];
 };
 
 export type UtteranceSuggestion = {
   /** The possible utterance */
-  utterance: Scalars['String'];
+  utterance: Scalars['String']['output'];
 };
 
 export type UtteranceSuggestions = {
@@ -9749,23 +9751,23 @@ export type UtteranceSuggestions = {
 
 export type UtteranceTest = {
   /** The unique identifier of the app that the test is linked to. */
-  appId: Scalars['ID'];
+  appId: Scalars['ID']['output'];
   /** The time that the test was created.  Format: ISO 8601 */
-  createdOn: Scalars['String'];
+  createdOn: Scalars['String']['output'];
   /** The expected result of the utterance test. */
   expectedResult?: Maybe<ExpectedUtteranceTestResult>;
   /** A list of the test history. */
   history?: Maybe<Array<Maybe<TestHistory>>>;
   /** The platform that the test should run on.  If not present, it will run on all platforms. */
-  platform?: Maybe<Scalars['String']>;
+  platform?: Maybe<Scalars['String']['output']>;
   /** The state that the test is currently in. If there is no state, then the test was never executed. */
   state?: Maybe<TestState>;
   /** The unique identifier for the test. */
-  testId: Scalars['ID'];
+  testId: Scalars['ID']['output'];
   /** The type of tests that this is. */
-  testType: Scalars['String'];
+  testType: Scalars['String']['output'];
   /** The utterance that the test is executing for. */
-  utterance?: Maybe<Scalars['String']>;
+  utterance?: Maybe<Scalars['String']['output']>;
 };
 
 export type UtteranceTestUpdate = {
@@ -9774,96 +9776,96 @@ export type UtteranceTestUpdate = {
   /** The expected result from the NLU. */
   expectedResult?: InputMaybe<UtteranceTestUpdateExpectedResult>;
   /** The specific platform that the test is intended for. Removing the platform will perform the test on all available platforms. */
-  platform?: InputMaybe<Scalars['String']>;
+  platform?: InputMaybe<Scalars['String']['input']>;
   /** The utterance that the test should execute for. */
-  utterance?: InputMaybe<Scalars['String']>;
+  utterance?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type UtteranceTestUpdateConfig = {
   /** The number of seconds after a test is executed to wait before continuing. */
-  delayAfter?: InputMaybe<Scalars['Int']>;
+  delayAfter?: InputMaybe<Scalars['Int']['input']>;
   /** The number of seconds before a test is executed to wait to execute */
-  delayBefore?: InputMaybe<Scalars['Int']>;
+  delayBefore?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type UtteranceTestUpdateExpectedResult = {
   /** The intentId of the intent that is expected to be returned. */
-  intentId?: InputMaybe<Scalars['String']>;
+  intentId?: InputMaybe<Scalars['String']['input']>;
   /** The slots that are expected to be returned. */
   matchedSlots?: InputMaybe<Array<InputMaybe<UtteranceTestUpdateMatchedSlot>>>;
   /** The expected request type. */
-  type?: InputMaybe<Scalars['String']>;
+  type?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type UtteranceTestUpdateMatchedSlot = {
   /** The value of the slot if it is a boolean. */
-  booleanValue?: InputMaybe<Scalars['Boolean']>;
+  booleanValue?: InputMaybe<Scalars['Boolean']['input']>;
   /** The iso 8601 value of the date value. */
-  dateValue?: InputMaybe<Scalars['String']>;
+  dateValue?: InputMaybe<Scalars['String']['input']>;
   /** The iso 8601 value of the end date value. */
-  endDateValue?: InputMaybe<Scalars['String']>;
+  endDateValue?: InputMaybe<Scalars['String']['input']>;
   /** The value of a slot if it is a float. Integer values will also be included. */
-  floatValue?: InputMaybe<Scalars['Float']>;
+  floatValue?: InputMaybe<Scalars['Float']['input']>;
   /** The value of a slot if it is an integer. */
-  integerValue?: InputMaybe<Scalars['Int']>;
+  integerValue?: InputMaybe<Scalars['Int']['input']>;
   /** The name of the expected slot. */
-  name?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']['input']>;
   /** The iso 8601 value of the start date value. */
-  startDateValue?: InputMaybe<Scalars['String']>;
+  startDateValue?: InputMaybe<Scalars['String']['input']>;
   /** String values of a slot array. */
-  stringArrayValue?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  stringArrayValue?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /** The value of the slot if it is a string. */
-  stringValue?: InputMaybe<Scalars['String']>;
+  stringValue?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type WebContent = BaseWebContent & {
   /** Unique ID for the web content */
-  _id: Scalars['String'];
+  _id: Scalars['String']['output'];
   /** The last time the website was updated. */
-  lastUpdated: Scalars['DateTime'];
+  lastUpdated: Scalars['DateTime']['output'];
   /** The name of the content */
-  name: Scalars['String'];
+  name: Scalars['String']['output'];
   /**
    * The raw-text of the content.
    *
    * For websites, this will be the text of the website with the HTML removed.
    */
-  text: Scalars['String'];
+  text: Scalars['String']['output'];
   /** The type of content that was parsed. */
   type: WebContentType;
   /** The full URL of the web content */
-  url: Scalars['String'];
+  url: Scalars['String']['output'];
 };
 
 export type WebContentErrors = {
   /** The time at which this was thrown. */
-  date: Scalars['DateTime'];
+  date: Scalars['DateTime']['output'];
   /** The details for the error. */
-  detail: Scalars['String'];
+  detail: Scalars['String']['output'];
   /**
    * The execution ID of the scrape execution that threw the error. It's possible
    * that this does not exist.
    */
-  executionId?: Maybe<Scalars['String']>;
+  executionId?: Maybe<Scalars['String']['output']>;
   /** The name of the error. */
-  name: Scalars['String'];
+  name: Scalars['String']['output'];
   /**
    * The url that was linked to the error. This could be missing depending on
    * the type of error caught (for example if the execution started without one).
    */
-  url?: Maybe<Scalars['String']>;
+  url?: Maybe<Scalars['String']['output']>;
 };
 
 export type WebContentHighlight = {
   /** The text that is highlighted from the match. */
-  text?: Maybe<Array<Maybe<Scalars['String']>>>;
+  text?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
 };
 
 export type WebContentSources = {
   /** The starting URL for the crawl */
-  webUrl: Scalars['String'];
+  webUrl: Scalars['String']['output'];
   /** The patterns that were used to during the crawl */
-  webUrlPatterns: Array<Maybe<Scalars['String']>>;
+  webUrlPatterns: Array<Maybe<Scalars['String']['output']>>;
 };
 
 export enum WebContentType {
@@ -9872,23 +9874,23 @@ export enum WebContentType {
 
 export type WebContentWithHighlights = BaseWebContent & {
   /** Unique ID for the web content */
-  _id: Scalars['String'];
+  _id: Scalars['String']['output'];
   /** The highlights found in the match query. */
   highlight?: Maybe<WebContentHighlight>;
   /** The last time the website was updated. */
-  lastUpdated: Scalars['DateTime'];
+  lastUpdated: Scalars['DateTime']['output'];
   /** The name of the content */
-  name: Scalars['String'];
+  name: Scalars['String']['output'];
   /**
    * The raw-text of the content.
    *
    * For websites, this will be the text of the website with the HTML removed.
    */
-  text: Scalars['String'];
+  text: Scalars['String']['output'];
   /** The type of content that was parsed. */
   type: WebContentType;
   /** The full URL of the web content */
-  url: Scalars['String'];
+  url: Scalars['String']['output'];
 };
 
 export type WebCrawlKendraInput = {
@@ -9896,46 +9898,46 @@ export type WebCrawlKendraInput = {
    * The account role that is allowed to listen to Kendra if the Kendra
    * instance is on another account.
    */
-  accountRole?: InputMaybe<Scalars['String']>;
+  accountRole?: InputMaybe<Scalars['String']['input']>;
   /** The ARN of the kendra data source. */
-  kendraDataSourceArn: Scalars['String'];
+  kendraDataSourceArn: Scalars['String']['input'];
 };
 
 export type WebCrawlMonthlySchedule = WebCrawlSchedule & {
   /** The day of hte month that the schedule is scheduled to run */
-  dayOfMonth: Scalars['Int'];
+  dayOfMonth: Scalars['Int']['output'];
   /** The event that is to be performed on the schedule. */
-  event: Scalars['String'];
+  event: Scalars['String']['output'];
   /** The parameters that the schedule holds. */
-  parameters: Scalars['JSON'];
+  parameters: Scalars['JSON']['output'];
   /** The ID of the schedule. */
-  scheduleId: Scalars['ID'];
+  scheduleId: Scalars['ID']['output'];
   /** The type of schedule that this is. ("weekly" is currently only option) */
-  type: Scalars['String'];
+  type: Scalars['String']['output'];
 };
 
 export type WebCrawlSchedule = {
   /** The event that is to be performed on the schedule. */
-  event: Scalars['String'];
+  event: Scalars['String']['output'];
   /** The parameters that the schedule holds. */
-  parameters: Scalars['JSON'];
+  parameters: Scalars['JSON']['output'];
   /** The ID of the schedule. */
-  scheduleId: Scalars['ID'];
+  scheduleId: Scalars['ID']['output'];
   /** The type of schedule that this is. ("weekly" is currently only option) */
-  type: Scalars['String'];
+  type: Scalars['String']['output'];
 };
 
 export type WebCrawlWeeklySchedule = WebCrawlSchedule & {
   /** The days of the week that the crawler is scheduled for. */
   daysOfWeek: Array<Maybe<ScheduleDaysOfWeek>>;
   /** The event that is to be performed on the schedule. */
-  event: Scalars['String'];
+  event: Scalars['String']['output'];
   /** The parameters that the schedule holds. */
-  parameters: Scalars['JSON'];
+  parameters: Scalars['JSON']['output'];
   /** The ID of the schedule. */
-  scheduleId: Scalars['ID'];
+  scheduleId: Scalars['ID']['output'];
   /** The type of schedule that this is. ("weekly" is currently only option) */
-  type: Scalars['String'];
+  type: Scalars['String']['output'];
 };
 
 export type WebCrawlerQuery = {
@@ -9948,48 +9950,48 @@ export type WebCrawlerQuery = {
 
 
 export type WebCrawlerQueryBlacklistedWebsiteArgs = {
-  website: Scalars['URL'];
+  website: Scalars['URL']['input'];
 };
 
 export type WebCrawlerSettings = {
-  addBlacklistedWebsite?: Maybe<Scalars['String']>;
-  removeBlacklistedWebsite?: Maybe<Scalars['String']>;
+  addBlacklistedWebsite?: Maybe<Scalars['String']['output']>;
+  removeBlacklistedWebsite?: Maybe<Scalars['String']['output']>;
 };
 
 
 export type WebCrawlerSettingsAddBlacklistedWebsiteArgs = {
-  website: Scalars['URL'];
+  website: Scalars['URL']['input'];
 };
 
 
 export type WebCrawlerSettingsRemoveBlacklistedWebsiteArgs = {
-  website: Scalars['URL'];
+  website: Scalars['URL']['input'];
 };
 
 export type WebFaq = {
   /** ID of the webFAQ */
-  _id: Scalars['ID'];
+  _id: Scalars['ID']['output'];
   /** The answer of the FAQ questions */
-  answer: Scalars['String'];
+  answer: Scalars['String']['output'];
   /** An ID to a Handler that is associated with the FAQ */
-  associatedHandlerId?: Maybe<Scalars['String']>;
+  associatedHandlerId?: Maybe<Scalars['String']['output']>;
   /** The time it was created. */
-  created: Scalars['String'];
+  created: Scalars['String']['output'];
   /** Set to true if the FAQ should be excluded from the auto-complete search. */
-  excludeFromAutoComplete?: Maybe<Scalars['Boolean']>;
+  excludeFromAutoComplete?: Maybe<Scalars['Boolean']['output']>;
   /** An ID linked to an external system in which the FAQ was derived from. */
-  externalFAQId?: Maybe<Scalars['ID']>;
+  externalFAQId?: Maybe<Scalars['ID']['output']>;
   /** Returns suggestions for further questions that answer the FAQ. */
   faqQuestionsSuggestions: FaqQuestionSuggestions;
   /** The name assigned to the question-answer page */
-  name: Scalars['String'];
+  name: Scalars['String']['output'];
   /** Questions that are linked to the answer */
-  questions: Array<Maybe<Scalars['String']>>;
+  questions: Array<Maybe<Scalars['String']['output']>>;
   /** The raw text of the FAQ page */
-  raw?: Maybe<Scalars['String']>;
+  raw?: Maybe<Scalars['String']['output']>;
   responses?: Maybe<Array<Maybe<HandlerResponse>>>;
   /** The URL that the FAQ came from */
-  url?: Maybe<Scalars['String']>;
+  url?: Maybe<Scalars['String']['output']>;
   /** A query for any errors that may be in the WebFAQ */
   validation: WebFaqValidation;
 };
@@ -9998,34 +10000,34 @@ export type WebFaqValidation = {
   /** Any errors that may be associated with the object. */
   errors: Array<Maybe<WebFaqValidationError>>;
   /** Whether or not the full FAQ is valid. */
-  isValid: Scalars['Boolean'];
+  isValid: Scalars['Boolean']['output'];
 };
 
 export type WebFaqValidationError = {
   /** A description of the error message */
-  errorMessage: Scalars['String'];
+  errorMessage: Scalars['String']['output'];
   /** The property that is in error. */
-  propertyName?: Maybe<Scalars['String']>;
+  propertyName?: Maybe<Scalars['String']['output']>;
 };
 
 export type WidgetAutoOpenOnPattern = {
-  minimumWidth?: Maybe<Scalars['String']>;
-  patterns?: Maybe<Array<Maybe<Scalars['String']>>>;
+  minimumWidth?: Maybe<Scalars['String']['output']>;
+  patterns?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
 };
 
 export type WidgetAutoOpenOnPatternInput = {
-  minimumWidth?: InputMaybe<Scalars['String']>;
-  patterns?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  minimumWidth?: InputMaybe<Scalars['String']['input']>;
+  patterns?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export type WidgetConfigurableMessageConfig = {
-  delay?: Maybe<Scalars['Int']>;
-  text?: Maybe<Scalars['String']>;
+  delay?: Maybe<Scalars['Int']['output']>;
+  text?: Maybe<Scalars['String']['output']>;
 };
 
 export type WidgetConfigurableMessageConfigInput = {
-  delay?: InputMaybe<Scalars['Int']>;
-  text?: InputMaybe<Scalars['String']>;
+  delay?: InputMaybe<Scalars['Int']['input']>;
+  text?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type WidgetConfigurableMessagesConfig = {
@@ -10046,19 +10048,19 @@ export enum WithdrawFromAlexaCertReasons {
 }
 
 export type StartCrawlMutationVariables = Exact<{
-  appId: Scalars['ID'];
-  url: Scalars['URL'];
-  pattern?: InputMaybe<Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>>;
-  channelId: Scalars['String'];
+  appId: Scalars['ID']['input'];
+  url: Scalars['URL']['input'];
+  pattern?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>> | InputMaybe<Scalars['String']['input']>>;
+  channelId: Scalars['String']['input'];
 }>;
 
 
 export type StartCrawlMutation = { startWebsiteCrawling: string };
 
 export type AddScheduledCrawlMutationVariables = Exact<{
-  appId: Scalars['ID'];
-  url: Scalars['URL'];
-  pattern?: InputMaybe<Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>>;
+  appId: Scalars['ID']['input'];
+  url: Scalars['URL']['input'];
+  pattern?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>> | InputMaybe<Scalars['String']['input']>>;
   daysOfWeek: Array<InputMaybe<SchedulerDaysOfWeek>> | InputMaybe<SchedulerDaysOfWeek>;
 }>;
 
@@ -10066,16 +10068,16 @@ export type AddScheduledCrawlMutationVariables = Exact<{
 export type AddScheduledCrawlMutation = { app: { update: { scheduleWeeklyWebCrawls: { dayOfMonth: number, scheduleId: string, type: string, event: string, parameters: any } | { daysOfWeek: Array<ScheduleDaysOfWeek | null>, scheduleId: string, type: string, event: string, parameters: any } } } };
 
 export type UpdateStatusMutationVariables = Exact<{
-  appId: Scalars['ID'];
-  type: Scalars['String'];
-  notes?: InputMaybe<Scalars['String']>;
+  appId: Scalars['ID']['input'];
+  type: Scalars['String']['input'];
+  notes?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
 export type UpdateStatusMutation = { app: { update: { changeStatus: { status?: { type: string, notes?: string | null, email: string, timestamp: any, statusHistory?: Array<{ type: string, email: string, timestamp: any, notes?: string | null } | null> | null } | null } } } };
 
 export type AddChatWidgetChannelMutationVariables = Exact<{
-  appId: Scalars['ID'];
+  appId: Scalars['ID']['input'];
   channel: ChatWidgetAppChannelInput;
 }>;
 
@@ -10088,80 +10090,80 @@ export type GetProfileQueryVariables = Exact<{ [key: string]: never; }>;
 export type GetProfileQuery = { profile?: { email: string } | null };
 
 export type GetOrgAnalyticsQueryVariables = Exact<{
-  orgId: Scalars['ID'];
-  startDate: Scalars['DateTime'];
-  endDate: Scalars['DateTime'];
+  orgId: Scalars['ID']['input'];
+  startDate: Scalars['DateTime']['input'];
+  endDate: Scalars['DateTime']['input'];
 }>;
 
 
 export type GetOrgAnalyticsQuery = { org?: { __typename: 'Organization', _id: string, name: string, analytics?: { user: { newUsers: number, returningUsers: number, totalSessions: number, totalUsers: number } } | null } | null };
 
 export type GetAppsForOrgQueryVariables = Exact<{
-  organizationId: Scalars['ID'];
-  from?: InputMaybe<Scalars['Int']>;
-  size?: InputMaybe<Scalars['Int']>;
+  organizationId: Scalars['ID']['input'];
+  from?: InputMaybe<Scalars['Int']['input']>;
+  size?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
 export type GetAppsForOrgQuery = { org?: { apps?: { total: number, apps: Array<{ appId: string, organizationId: string, name: string, largeIcon?: string | null, smallIcon?: string | null, description?: string | null, summary?: string | null, status?: { type: string, timestamp: string, notes?: string | null, email?: string | null } | null } | null> } | null } | null };
 
 export type GetAppOverviewQueryVariables = Exact<{
-  appId: Scalars['ID'];
-  start: Scalars['DateTime'];
-  end: Scalars['DateTime'];
-  env?: InputMaybe<Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>>;
+  appId: Scalars['ID']['input'];
+  start: Scalars['DateTime']['input'];
+  end: Scalars['DateTime']['input'];
+  env?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>> | InputMaybe<Scalars['String']['input']>>;
 }>;
 
 
-export type GetAppOverviewQuery = { app?: { __typename: 'App', _id: string, appId: string, name: string, description?: string | null, summary?: string | null, organizationId: string, invocationName?: string | null, templateType?: string | null, icon?: string | null, smallIcon?: string | null, largeIcon?: string | null, banner?: string | null, largeBanner?: string | null, status?: { type: string, timestamp: any, email: string, statusHistory?: Array<{ type: string, email: string, timestamp: any, notes?: string | null } | null> | null } | null, handlers?: { _id: string, total: number, handlers?: Array<{ _id: string, name?: string | null, intentId: string, type: string } | null> | null } | null, intents?: { _id: string, total: number, intents?: Array<{ _id: string, name: string, intentId: string } | null> | null } | null, entities?: { _id: string, total: number, entities?: Array<{ _id: string, entityId: string, displayName: string } | null> | null } | null, content?: { __typename: 'TotalWebContent', total: number, content: Array<{ __typename: 'WebContentWithHighlights', _id: string, name: string, url: string } | null> } | null, contentSources?: { __typename: 'TotalWebContentSources', total: number, sources: Array<{ __typename: 'WebContentSources', webUrl: string, webUrlPatterns: Array<string | null> } | null> } | null, faq?: { total: number } | null, channels?: Array<{ __typename: 'ActionsOnGoogleAppChannel', type: string, id: string, name?: string | null } | { __typename: 'AlexaAppChannel', type: string, id: string, name?: string | null } | { __typename: 'AppChannel', type: string, id: string, name?: string | null } | { __typename: 'ChatWidgetAppChannel', key?: string | null, type: string, id: string, name?: string | null, theme?: { primaryColor?: string | null } | null } | { __typename: 'DialogflowAppChannel', type: string, id: string, name?: string | null } | { __typename: 'FacebookMessengerAppChannel', type: string, id: string, name?: string | null } | { __typename: 'GoogleBusinessMessagesAppChannel', type: string, id: string, name?: string | null } | { __typename: 'IntelligentSearchAppChannel', key?: string | null, type: string, id: string, name?: string | null, theme?: { accentColor?: string | null } | null } | { __typename: 'LexConnectAppChannel', type: string, id: string, name?: string | null } | { __typename: 'LexV2ConnectAppChannel', type: string, id: string, name?: string | null } | null> | null, analytics?: { user: { totalUsers: number, totalSessions: number, returningUsers: number, newUsers: number } } | null } | null };
+export type GetAppOverviewQuery = { app?: { __typename: 'App', _id: string, appId: string, name: string, description?: string | null, summary?: string | null, organizationId: string, invocationName?: string | null, templateType?: string | null, icon?: string | null, smallIcon?: string | null, largeIcon?: string | null, banner?: string | null, largeBanner?: string | null, businessDescription?: string | null, businessHighValueLeadDescription?: string | null, status?: { type: string, timestamp: any, email: string, statusHistory?: Array<{ type: string, email: string, timestamp: any, notes?: string | null } | null> | null } | null, handlers?: { _id: string, total: number, handlers?: Array<{ _id: string, name?: string | null, intentId: string, type: string } | null> | null } | null, intents?: { _id: string, total: number, intents?: Array<{ _id: string, name: string, intentId: string } | null> | null } | null, entities?: { _id: string, total: number, entities?: Array<{ _id: string, entityId: string, displayName: string } | null> | null } | null, content?: { __typename: 'TotalWebContent', total: number, content: Array<{ __typename: 'WebContentWithHighlights', _id: string, name: string, url: string } | null> } | null, contentSources?: { __typename: 'TotalWebContentSources', total: number, sources: Array<{ __typename: 'WebContentSources', webUrl: string, webUrlPatterns: Array<string | null> } | null> } | null, faq?: { total: number } | null, channels?: Array<{ __typename: 'ActionsOnGoogleAppChannel', type: string, id: string, name?: string | null } | { __typename: 'AlexaAppChannel', type: string, id: string, name?: string | null } | { __typename: 'AppChannel', type: string, id: string, name?: string | null } | { __typename: 'ChatWidgetAppChannel', key?: string | null, type: string, id: string, name?: string | null, theme?: { primaryColor?: string | null } | null } | { __typename: 'DialogflowAppChannel', type: string, id: string, name?: string | null } | { __typename: 'FacebookMessengerAppChannel', type: string, id: string, name?: string | null } | { __typename: 'GoogleBusinessMessagesAppChannel', type: string, id: string, name?: string | null } | { __typename: 'IntelligentSearchAppChannel', key?: string | null, type: string, id: string, name?: string | null, theme?: { accentColor?: string | null } | null } | { __typename: 'LexConnectAppChannel', type: string, id: string, name?: string | null } | { __typename: 'LexV2ConnectAppChannel', type: string, id: string, name?: string | null } | null> | null, analytics?: { user: { totalUsers: number, totalSessions: number, returningUsers: number, newUsers: number } } | null } | null };
 
 export type GetAppContentQueryVariables = Exact<{
-  appId: Scalars['ID'];
-  size: Scalars['Int'];
-  from: Scalars['Int'];
+  appId: Scalars['ID']['input'];
+  size: Scalars['Int']['input'];
+  from: Scalars['Int']['input'];
 }>;
 
 
 export type GetAppContentQuery = { app?: { appId: string, contentSources?: { __typename: 'TotalWebContentSources', total: number, sources: Array<{ __typename: 'WebContentSources', webUrl: string, webUrlPatterns: Array<string | null> } | null> } | null, content?: { total: number, content: Array<{ _id: string, name: string, url: string, type: WebContentType, lastUpdated: any, text: string } | null> } | null, faq?: { total: number, faq: Array<{ name: string, raw?: string | null, answer: string, questions: Array<string | null> } | null> } | null } | null };
 
 export type GetAppAnalyticsQueryVariables = Exact<{
-  appId: Scalars['ID'];
-  startDate: Scalars['DateTime'];
-  endDate: Scalars['DateTime'];
+  appId: Scalars['ID']['input'];
+  startDate: Scalars['DateTime']['input'];
+  endDate: Scalars['DateTime']['input'];
 }>;
 
 
 export type GetAppAnalyticsQuery = { app?: { __typename: 'App', _id: string, name: string, analytics?: { user: { newUsers: number, returningUsers: number, totalSessions: number, totalUsers: number } } | null } | null };
 
 export type GetAppSchedulesQueryVariables = Exact<{
-  appId: Scalars['ID'];
+  appId: Scalars['ID']['input'];
 }>;
 
 
 export type GetAppSchedulesQuery = { app?: { schedules: { schedules: Array<{ scheduleId: string, type: string, event: string, parameters: any } | { scheduleId: string, type: string, event: string, parameters: any } | null> } } | null };
 
 export type GetAnalyticsAndEventsQueryVariables = Exact<{
-  appId: Scalars['ID'];
-  startDate: Scalars['DateTime'];
-  endDate: Scalars['DateTime'];
-  byTag?: InputMaybe<Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>>;
-  byRequestIntentId?: InputMaybe<Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>>;
-  byChannel?: InputMaybe<Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>>;
+  appId: Scalars['ID']['input'];
+  startDate: Scalars['DateTime']['input'];
+  endDate: Scalars['DateTime']['input'];
+  byTag?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>> | InputMaybe<Scalars['String']['input']>>;
+  byRequestIntentId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>> | InputMaybe<Scalars['String']['input']>>;
+  byChannel?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>> | InputMaybe<Scalars['String']['input']>>;
 }>;
 
 
 export type GetAnalyticsAndEventsQuery = { app?: { __typename: 'App', _id: string, appId: string, name: string, analytics?: { user: { newUsers: number, returningUsers: number, totalSessions: number, totalUsers: number } } | null, events?: { total: number } | null } | null };
 
 export type GetEventsQueryVariables = Exact<{
-  appId: Scalars['ID'];
-  startDate: Scalars['DateTime'];
-  endDate: Scalars['DateTime'];
-  size?: InputMaybe<Scalars['Int']>;
-  from?: InputMaybe<Scalars['Int']>;
-  byTag?: InputMaybe<Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>>;
-  byRequestIntentId?: InputMaybe<Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>>;
-  byChannel?: InputMaybe<Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>>;
-  byEnv?: InputMaybe<Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>>;
+  appId: Scalars['ID']['input'];
+  startDate: Scalars['DateTime']['input'];
+  endDate: Scalars['DateTime']['input'];
+  size?: InputMaybe<Scalars['Int']['input']>;
+  from?: InputMaybe<Scalars['Int']['input']>;
+  byTag?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>> | InputMaybe<Scalars['String']['input']>>;
+  byRequestIntentId?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>> | InputMaybe<Scalars['String']['input']>>;
+  byChannel?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>> | InputMaybe<Scalars['String']['input']>>;
+  byEnv?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>> | InputMaybe<Scalars['String']['input']>>;
 }>;
 
 
@@ -10484,6 +10486,8 @@ export const GetAppOverviewDocument = gql`
     largeIcon
     banner
     largeBanner
+    businessDescription
+    businessHighValueLeadDescription
     status {
       type
       timestamp
