@@ -1,3 +1,10 @@
+## [1.4.34](https://github.com/xapp-ai/xapp-cli/compare/v1.4.33...v1.4.34) (2023-06-14)
+
+
+### Bug Fixes
+
+* adding business description ([8da6e1b](https://github.com/xapp-ai/xapp-cli/commit/8da6e1b0493e2f14139f5a50ad88cdc3d1800443))
+
 ## [1.4.33](https://github.com/xapp-ai/xapp-cli/compare/v1.4.32...v1.4.33) (2023-06-13)
 
 
