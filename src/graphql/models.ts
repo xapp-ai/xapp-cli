@@ -4857,8 +4857,14 @@ export type HandlerResponse = {
   segments?: Maybe<Array<Maybe<HandlerResponseSegmentItem>>>;
   /** System responses to perform account links, control media, surface changes, and permission requests. */
   system?: Maybe<HandlerResponseSystem>;
-  /** Used for tracking the response in third party analytics. */
+  /**
+   * Used for tracking the response in third party analytics.
+   *
+   * @deprecated(reason: Tags can be arrays now. Use tags instead)
+   */
   tag?: Maybe<Scalars['String']['output']>;
+  /** Used for tracking the response in third party analytics. */
+  tags?: Maybe<Array<Scalars['String']['output']>>;
 };
 
 export type HandlerResponseActiveContext = {
@@ -5568,8 +5574,14 @@ export type JsonDependableHandlerResponse = HandlerResponse & {
   segments?: Maybe<Array<Maybe<HandlerResponseSegmentItem>>>;
   /** System responses to perform account links, control media, surface changes, and permission requests. */
   system?: Maybe<HandlerResponseSystem>;
-  /** Used for tracking the response in third party analytics. */
+  /**
+   * Used for tracking the response in third party analytics.
+   *
+   * @deprecated(reason: Tags can be arrays now. Use tags instead.  This one will only return the top tag if it's an array.)
+   */
   tag?: Maybe<Scalars['String']['output']>;
+  /** Used for tracking the response in third party analytics. */
+  tags?: Maybe<Array<Scalars['String']['output']>>;
 };
 
 export type JsonDependentExecutableHandlerPath = BaseHandlerPath & {
@@ -5816,8 +5828,14 @@ export type LastActiveActiveWithinHandlerResponse = HandlerResponse & {
   segments?: Maybe<Array<Maybe<HandlerResponseSegmentItem>>>;
   /** System responses to perform account links, control media, surface changes, and permission requests. */
   system?: Maybe<HandlerResponseSystem>;
-  /** Used for tracking the response in third party analytics. */
+  /**
+   * Used for tracking the response in third party analytics.
+   *
+   * @deprecated(reason: Tags can be arrays now. Use tags instead.  This one will only return the top tag if it's an array.)
+   */
   tag?: Maybe<Scalars['String']['output']>;
+  /** Used for tracking the response in third party analytics. */
+  tags?: Maybe<Array<Scalars['String']['output']>>;
 };
 
 export type LastActiveFirstTimeHandlerResponse = HandlerResponse & {
@@ -5847,8 +5865,14 @@ export type LastActiveFirstTimeHandlerResponse = HandlerResponse & {
   segments?: Maybe<Array<Maybe<HandlerResponseSegmentItem>>>;
   /** System responses to perform account links, control media, surface changes, and permission requests. */
   system?: Maybe<HandlerResponseSystem>;
-  /** Used for tracking the response in third party analytics. */
+  /**
+   * Used for tracking the response in third party analytics.
+   *
+   * @deprecated(reason: Tags can be arrays now. Use tags instead.  This one will only return the top tag if it's an array.)
+   */
   tag?: Maybe<Scalars['String']['output']>;
+  /** Used for tracking the response in third party analytics. */
+  tags?: Maybe<Array<Scalars['String']['output']>>;
 };
 
 export type LastActiveHandlerResponse = LastActiveActiveWithinHandlerResponse | LastActiveFirstTimeHandlerResponse | LastActiveHaveNotSeenWithinHandlerResponse;
@@ -5882,8 +5906,14 @@ export type LastActiveHaveNotSeenWithinHandlerResponse = HandlerResponse & {
   segments?: Maybe<Array<Maybe<HandlerResponseSegmentItem>>>;
   /** System responses to perform account links, control media, surface changes, and permission requests. */
   system?: Maybe<HandlerResponseSystem>;
-  /** Used for tracking the response in third party analytics. */
+  /**
+   * Used for tracking the response in third party analytics.
+   *
+   * @deprecated(reason: Tags can be arrays now. Use tags instead.  This one will only return the top tag if it's an array.)
+   */
   tag?: Maybe<Scalars['String']['output']>;
+  /** Used for tracking the response in third party analytics. */
+  tags?: Maybe<Array<Scalars['String']['output']>>;
 };
 
 /** A channel that is specific for apps to run on the Dialogflow. */
@@ -6657,6 +6687,7 @@ export type Mutation = {
    * Once complete, you can use the returned URL for 'createAppFromLexFile' and 'updateAppFromLexFile'.
    */
   generateLexFileUploadUrl: Scalars['String']['output'];
+  onboarding: OnboardingMutation;
   /** Mutations that are related to Organizations */
   org: OrgsMutation;
   /**
@@ -6674,6 +6705,11 @@ export type Mutation = {
   setAppCopyable: App;
   /** Will start executing the tests. This is an asynchronous operation. Returns "Success" if the tests have begun. */
   startTests: Scalars['String']['output'];
+  /**
+   * Crawls a website and retrieves the FAQs found on the website. It saves the FAQs to a database, and downloads the items to S3.
+   *
+   * @deprecated(reason: "All app-specific mutations are migrating to the UpdateAppMutation type. Please refer to the corresponding mutation there.")
+   */
   startWebsiteCrawling: Scalars['String']['output'];
   /**
    * Submits an app for alexa certification.
@@ -7164,6 +7200,41 @@ export type NluRequestSlot = {
   successfulMatch?: Maybe<Scalars['Boolean']['output']>;
 };
 
+export type OnboardingMutation = {
+  /**
+   * Downloads a website and retrieves specific details outlining the websites details like icon, primary/secondary colors,
+   * and what technologies that the website uses.
+   */
+  startRetrieveWebsiteDetails: StartRetreiveWebsiteDetailsResult;
+  /**
+   * Downloads a website and retrieves specific details outlining the websites details like icon, primary/secondary colors,
+   * and what technologies that the website uses.
+   *
+   * This downloads the details in a syncronous fashion and risks timeouts.
+   */
+  startRetrieveWebsiteDetailsSync: StartRetreiveWebsiteDetailsSyncResult;
+};
+
+
+export type OnboardingMutationStartRetrieveWebsiteDetailsArgs = {
+  webUrl: Scalars['URL']['input'];
+};
+
+
+export type OnboardingMutationStartRetrieveWebsiteDetailsSyncArgs = {
+  webUrl: Scalars['URL']['input'];
+};
+
+export type OnboardingQuery = {
+  /** Returns the execution data for gathering website details. */
+  webDetailsExecution: WebDetailsExecution;
+};
+
+
+export type OnboardingQueryWebDetailsExecutionArgs = {
+  executionId: Scalars['ID']['input'];
+};
+
 export type OpportunityAlertDetail = {
   /** Whether or not to receive the messages during the business hours */
   duringBusinessHours?: Maybe<Scalars['Boolean']['output']>;
@@ -7589,6 +7660,7 @@ export type Query = {
   handler?: Maybe<Handler>;
   /** Retrieve a specific intent */
   intent?: Maybe<Intent>;
+  onboarding: OnboardingQuery;
   /** Fetches a single organization */
   org?: Maybe<Organization>;
   /** Fetches a list of organizations */
@@ -7763,8 +7835,14 @@ export type RequestDependentHandlerResponse = HandlerResponse & {
   segments?: Maybe<Array<Maybe<HandlerResponseSegmentItem>>>;
   /** System responses to perform account links, control media, surface changes, and permission requests. */
   system?: Maybe<HandlerResponseSystem>;
-  /** Used for tracking the response in third party analytics. */
+  /**
+   * Used for tracking the response in third party analytics.
+   *
+   * @deprecated(reason: Tags can be arrays now. Use tags instead.  This one will only return the top tag if it's an array.)
+   */
   tag?: Maybe<Scalars['String']['output']>;
+  /** Used for tracking the response in third party analytics. */
+  tags?: Maybe<Array<Scalars['String']['output']>>;
 };
 
 export type RequestDependentHandlerResponseSegment = HandlerResponseSegment & {
@@ -8018,8 +8096,14 @@ export type SchedulableDependentHandlerResponse = HandlerResponse & {
   segments?: Maybe<Array<Maybe<HandlerResponseSegmentItem>>>;
   /** System responses to perform account links, control media, surface changes, and permission requests. */
   system?: Maybe<HandlerResponseSystem>;
-  /** Used for tracking the response in third party analytics. */
+  /**
+   * Used for tracking the response in third party analytics.
+   *
+   * @deprecated(reason: Tags can be arrays now. Use tags instead.  This one will only return the top tag if it's an array.)
+   */
   tag?: Maybe<Scalars['String']['output']>;
+  /** Used for tracking the response in third party analytics. */
+  tags?: Maybe<Array<Scalars['String']['output']>>;
 };
 
 export enum ScheduleDaysOfWeek {
@@ -8264,8 +8348,14 @@ export type SimpleHandlerResponse = HandlerResponse & {
   segments?: Maybe<Array<Maybe<HandlerResponseSegmentItem>>>;
   /** System responses to perform account links, control media, surface changes, and permission requests. */
   system?: Maybe<HandlerResponseSystem>;
-  /** Used for tracking the response in third party analytics. */
+  /**
+   * Used for tracking the response in third party analytics.
+   *
+   * @deprecated(reason: Tags can be arrays now. Use tags instead.  This one will only return the top tag if it's an array.)
+   */
   tag?: Maybe<Scalars['String']['output']>;
+  /** Used for tracking the response in third party analytics. */
+  tags?: Maybe<Array<Scalars['String']['output']>>;
 };
 
 export type SimpleHandlerResponseSegment = HandlerResponseSegment & {
@@ -8391,8 +8481,14 @@ export type SlotDependentHandlerResponse = HandlerResponse & {
   slotMatch?: Maybe<Scalars['JSON']['output']>;
   /** System responses to perform account links, control media, surface changes, and permission requests. */
   system?: Maybe<HandlerResponseSystem>;
-  /** Used for tracking the response in third party analytics. */
+  /**
+   * Used for tracking the response in third party analytics.
+   *
+   * @deprecated(reason: Tags can be arrays now. Use tags instead.  This one will only return the top tag if it's an array.)
+   */
   tag?: Maybe<Scalars['String']['output']>;
+  /** Used for tracking the response in third party analytics. */
+  tags?: Maybe<Array<Scalars['String']['output']>>;
 };
 
 export type SlotDependentHandlerResponseSegment = HandlerResponseSegment & {
@@ -8482,6 +8578,20 @@ export enum SortableAppAttributes {
   /** Sort by most recent status time */
   StatusTime = 'STATUS_TIME'
 }
+
+export type StartRetreiveWebsiteDetailsResult = {
+  /** The execution ID of the website to crawl. */
+  executionId: Scalars['ID']['output'];
+};
+
+export type StartRetreiveWebsiteDetailsSyncResult = {
+  /**
+   * The website details downloaded.
+   *
+   * null on error
+   */
+  result?: Maybe<WebsiteData>;
+};
 
 export type Status = {
   /** The email of the user who last changed the status. */
@@ -8618,8 +8728,14 @@ export type StorageDependentHandlerResponse = HandlerResponse & {
   storageMatch?: Maybe<Scalars['JSON']['output']>;
   /** System responses to perform account links, control media, surface changes, and permission requests. */
   system?: Maybe<HandlerResponseSystem>;
-  /** Used for tracking the response in third party analytics. */
+  /**
+   * Used for tracking the response in third party analytics.
+   *
+   * @deprecated(reason: Tags can be arrays now. Use tags instead.  This one will only return the top tag if it's an array.)
+   */
   tag?: Maybe<Scalars['String']['output']>;
+  /** Used for tracking the response in third party analytics. */
+  tags?: Maybe<Array<Scalars['String']['output']>>;
 };
 
 export type StorageDependentHandlerResponseSegment = HandlerResponseSegment & {
@@ -8848,8 +8964,14 @@ export type SystemDependentHandlerResponse = HandlerResponse & {
   /** System responses to perform account links, control media, surface changes, and permission requests. */
   system?: Maybe<HandlerResponseSystem>;
   systemCondition?: Maybe<SystemConditionType>;
-  /** Used for tracking the response in third party analytics. */
+  /**
+   * Used for tracking the response in third party analytics.
+   *
+   * @deprecated(reason: Tags can be arrays now. Use tags instead.  This one will only return the top tag if it's an array.)
+   */
   tag?: Maybe<Scalars['String']['output']>;
+  /** Used for tracking the response in third party analytics. */
+  tags?: Maybe<Array<Scalars['String']['output']>>;
 };
 
 export type SystemDependentHistoricalHandlerPath = BaseHandlerPath & {
@@ -9306,6 +9428,8 @@ export type UpdateAppMutation = {
   /** Removes a notification from the app.  Returns a list of notifications that remain. */
   removeNotification: Array<Maybe<SystemNotification>>;
   scheduleWeeklyWebCrawls: WebCrawlSchedule;
+  /** Crawls a website and retrieves the FAQs found on the website. It saves the FAQs to a database, and downloads the items to S3. */
+  startWebsiteCrawling: Scalars['String']['output'];
   /**
    * Update an existing app.  Only the attributes included will be updated.
    *
@@ -9351,6 +9475,16 @@ export type UpdateAppMutationRemoveNotificationArgs = {
 
 export type UpdateAppMutationScheduleWeeklyWebCrawlsArgs = {
   daysOfWeek: Array<InputMaybe<SchedulerDaysOfWeek>>;
+  webUrl: Scalars['URL']['input'];
+  webUrlPatterns?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type UpdateAppMutationStartWebsiteCrawlingArgs = {
+  channelId: Scalars['String']['input'];
+  kendra?: InputMaybe<WebCrawlKendraInput>;
+  s3RegionalDomain?: InputMaybe<Scalars['String']['input']>;
+  stealth?: InputMaybe<Scalars['Boolean']['input']>;
   webUrl: Scalars['URL']['input'];
   webUrlPatterns?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
@@ -9612,6 +9746,15 @@ export type UploadFaqReturn = {
   faqsAdded: Scalars['Int']['output'];
 };
 
+export type UploadUrlResult = {
+  /**
+   * The URL that files can be uploaded to.
+   *
+   * Pass this URL to other endpoints once the file has been uploaded to use it.
+   */
+  url: Scalars['URL']['output'];
+};
+
 export type UploadedLexApp = {
   app?: Maybe<App>;
   entities?: Maybe<Array<Maybe<Entity>>>;
@@ -9733,11 +9876,18 @@ export type Utils = {
   generateExternalID: Scalars['String']['output'];
   /** Returns the result of a task */
   task: TaskResult;
+  /** Retrieve a URL that files can be uploaded to. */
+  uploadURL: UploadUrlResult;
 };
 
 
 export type UtilsTaskArgs = {
   taskId: Scalars['ID']['input'];
+};
+
+
+export type UtilsUploadUrlArgs = {
+  contentType: Scalars['String']['input'];
 };
 
 export type UtteranceSuggestion = {
@@ -9954,7 +10104,17 @@ export type WebCrawlerQueryBlacklistedWebsiteArgs = {
 };
 
 export type WebCrawlerSettings = {
-  addBlacklistedWebsite?: Maybe<Scalars['String']['output']>;
+  addBlacklistedWebsite: Scalars['String']['output'];
+  /**
+   * Allows blacklist of websites with wildcards.
+   *
+   * Blacklisting websites including subdomains:
+   * *.mainDomain.topLevelDomain
+   *
+   * Blacklisting websites with extension:
+   * *.jpg
+   */
+  addBlacklistedWebsitePath: Scalars['String']['output'];
   removeBlacklistedWebsite?: Maybe<Scalars['String']['output']>;
 };
 
@@ -9964,8 +10124,20 @@ export type WebCrawlerSettingsAddBlacklistedWebsiteArgs = {
 };
 
 
+export type WebCrawlerSettingsAddBlacklistedWebsitePathArgs = {
+  website: Scalars['String']['input'];
+};
+
+
 export type WebCrawlerSettingsRemoveBlacklistedWebsiteArgs = {
   website: Scalars['URL']['input'];
+};
+
+export type WebDetailsExecution = {
+  /** Whether or not the execution details are still being gathered. */
+  completed: Scalars['Boolean']['output'];
+  /** The data that has been gathered so far. */
+  data: WebsiteData;
 };
 
 export type WebFaq = {
@@ -10008,6 +10180,80 @@ export type WebFaqValidationError = {
   errorMessage: Scalars['String']['output'];
   /** The property that is in error. */
   propertyName?: Maybe<Scalars['String']['output']>;
+};
+
+export type WebsiteData = {
+  business?: Maybe<WebsiteDataBusinessData>;
+  detectedTechnologies: Array<WebsiteDataDetectedTechnology>;
+  schema: Scalars['JSON']['output'];
+  site?: Maybe<WebsiteDataDescriptiveData>;
+};
+
+export type WebsiteDataBusinessData = {
+  address?: Maybe<WebsiteDataBusinessDataAddress>;
+  geo?: Maybe<WebsiteDataBusinessDataGeo>;
+  name?: Maybe<Scalars['String']['output']>;
+  phoneNumbers?: Maybe<Array<WebsiteDataPhoneNumber>>;
+  serviceArea?: Maybe<WebsiteDataBusinessDataAreasServed>;
+  services?: Maybe<Array<WebsiteDataBusinessDataService>>;
+  /** How the business describes themselves */
+  typeRaw?: Maybe<Scalars['String']['output']>;
+};
+
+export type WebsiteDataBusinessDataAddress = {
+  country?: Maybe<Scalars['String']['output']>;
+  formated?: Maybe<Scalars['String']['output']>;
+  /** City, Town or Locality.  This is typically from the "city" of "city", "state" */
+  locality?: Maybe<Scalars['String']['output']>;
+  postalCode?: Maybe<Scalars['String']['output']>;
+  /** Typically the state. */
+  region?: Maybe<Scalars['String']['output']>;
+  streetAddress?: Maybe<Scalars['String']['output']>;
+};
+
+export type WebsiteDataBusinessDataAreasServed = {
+  locality?: Maybe<Scalars['String']['output']>;
+};
+
+export type WebsiteDataBusinessDataGeo = {
+  lat: Scalars['String']['output'];
+  lon: Scalars['String']['output'];
+};
+
+export enum WebsiteDataBusinessDataService {
+  HomeConstructionServices = 'HOME_CONSTRUCTION_SERVICES',
+  HomeServices = 'HOME_SERVICES',
+  ProfessionalServices = 'PROFESSIONAL_SERVICES'
+}
+
+export type WebsiteDataCallsToAction = {
+  callToAction: Scalars['String']['output'];
+  url?: Maybe<Scalars['String']['output']>;
+};
+
+export type WebsiteDataDescriptiveData = {
+  /** Calls to action detected on the website such as "Free Quote" or "Schedule Consultation" */
+  callsToAction?: Maybe<Array<WebsiteDataCallsToAction>>;
+  /** A description of the organization found on the website */
+  description?: Maybe<Scalars['String']['output']>;
+  /** The likely logo for the website */
+  logo?: Maybe<Scalars['String']['output']>;
+  /** The phone numbers found on the website. */
+  phoneNumbers?: Maybe<Array<WebsiteDataPhoneNumber>>;
+  /** The primary color of the website */
+  primaryColor?: Maybe<Scalars['String']['output']>;
+  /** The secondary color of the website */
+  secondaryColor?: Maybe<Scalars['String']['output']>;
+};
+
+export type WebsiteDataDetectedTechnology = {
+  installed: Scalars['Boolean']['output'];
+  technology: Scalars['String']['output'];
+};
+
+export type WebsiteDataPhoneNumber = {
+  number?: Maybe<Scalars['String']['output']>;
+  purpose?: Maybe<Scalars['String']['output']>;
 };
 
 export type WidgetAutoOpenOnPattern = {
@@ -10083,6 +10329,21 @@ export type AddChatWidgetChannelMutationVariables = Exact<{
 
 
 export type AddChatWidgetChannelMutation = { addChatWidgetChannel: { __typename: 'ChatWidgetAppChannel', id: string, type: string, endPoint?: string | null, useNLU?: string | null, directoryListing?: string | null, direct?: boolean | null, disabled?: boolean | null, accountKey?: string | null, botName?: string | null, avatarUrl?: any | null, key?: string | null, serverUrl?: any | null, middlewareUrl?: string | null, autocompleteSuggestionsUrl?: any | null, autoOpenOnWidth?: string | null, status?: { type: string } | null, cta?: { message?: string | null, timeout?: number | null } | null, urls?: { policies: Array<{ pattern: string, behavior: { type: ChatWidgetAppChannelWidgetUrlBehaviorType } | { width?: number | null, height?: number | null, type: ChatWidgetAppChannelWidgetUrlBehaviorType } | { type: ChatWidgetAppChannelWidgetUrlBehaviorType } } | null>, defaultBehavior: { type: ChatWidgetAppChannelWidgetUrlBehaviorType } | { width?: number | null, height?: number | null, type: ChatWidgetAppChannelWidgetUrlBehaviorType } | { type: ChatWidgetAppChannelWidgetUrlBehaviorType } } | null, header?: { status?: { online?: string | null, offline?: string | null, away?: string | null, connecting?: string | null } | null, actions?: { minimize?: boolean | null, cancel?: boolean | null } | null } | null, theme?: { primaryColor?: string | null, border?: { color?: string | null, width?: string | null, radius?: string | null } | null, carousel?: { button?: { color?: string | null } | null, subtitle?: { color?: string | null, fontFamily?: string | null, fontSize?: string | null, fontWeight?: string | null } | null, title?: { color?: string | null, fontFamily?: string | null, fontSize?: string | null, fontWeight?: string | null } | null } | null, chatButton?: { background?: string | null, margin?: { top?: string | null, right?: string | null, bottom?: string | null, left?: string | null } | null } | null, content?: { background?: string | null } | null, cta?: { background?: string | null, text?: { color?: string | null, fontFamily?: string | null, fontSize?: string | null } | null } | null, footer?: { background?: string | null } | null, header?: { background?: string | null, border?: { color?: string | null, radius?: string | null, width?: string | null } | null, text?: { color?: string | null, fontFamily?: string | null, fontSize?: string | null } | null } | null, input?: { background?: string | null, border?: { color?: string | null, width?: string | null, radius?: string | null } | null, text?: { color?: string | null, fontFamily?: string | null, fontSize?: string | null } | null } | null, menu?: { item?: { height?: string | null, background?: string | null, text?: { color?: string | null, fontSize?: string | null, fontFamily?: string | null, fontWeight?: string | null, fontStyle?: string | null } | null } | null } | null, menuButton?: { color?: string | null } | null, messages?: { maxWidth?: string | null, mine?: { bubbleColor?: string | null, text?: { color?: string | null, fontSize?: string | null, fontFamily?: string | null, fontWeight?: string | null, fontStyle?: string | null } | null } | null, others?: { bubbleColor?: string | null, text?: { color?: string | null, fontSize?: string | null, fontFamily?: string | null, fontWeight?: string | null, fontStyle?: string | null } | null } | null, padding?: { left?: string | null, right?: string | null, bottom?: string | null, top?: string | null } | null } | null, minimizeButton?: { color?: string | null } | null, cancelButton?: { color?: string | null } | null, sendButton?: { color?: string | null } | null, size?: { width?: string | null, height?: string | null } | null } | null } };
+
+export type AddAppMutationVariables = Exact<{
+  app?: InputMaybe<AppInput>;
+}>;
+
+
+export type AddAppMutation = { addApp?: { appId: string, name: string, organizationId: string } | null };
+
+export type UpdateAppByMutationVariables = Exact<{
+  appId: Scalars['ID']['input'];
+  app: UpdateAppInput;
+}>;
+
+
+export type UpdateAppByMutation = { updateApp?: { appId: string, name: string, organizationId: string } | null };
 
 export type GetProfileQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -10418,6 +10679,24 @@ export const AddChatWidgetChannelDocument = gql`
         height
       }
     }
+  }
+}
+    `;
+export const AddAppDocument = gql`
+    mutation addApp($app: AppInput) {
+  addApp(app: $app) {
+    appId
+    name
+    organizationId
+  }
+}
+    `;
+export const UpdateAppByDocument = gql`
+    mutation updateAppBy($appId: ID!, $app: UpdateAppInput!) {
+  updateApp(appId: $appId, app: $app) {
+    appId
+    name
+    organizationId
   }
 }
     `;

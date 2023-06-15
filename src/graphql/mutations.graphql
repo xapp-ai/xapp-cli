@@ -257,3 +257,19 @@ mutation addChatWidgetChannel(
     }
   }
 }
+
+mutation addApp($app: AppInput) {
+  addApp(app: $app) {
+    appId
+    name
+    organizationId
+  }
+}
+
+mutation updateAppBy($appId: ID!, $app: UpdateAppInput!) {
+  updateApp(appId: $appId, app: $app) {
+    appId
+    name
+    organizationId
+  }
+}
