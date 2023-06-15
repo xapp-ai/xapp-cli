@@ -23,7 +23,9 @@ import {
     GetProfileDocument,
     GetProfileQuery,
     StartCrawlDocument,
+    UpdateAppByDocument,
     UpdateStatusDocument,
+    UpdateAppInput,
     UpdateStatusMutation,
     WebCrawlMonthlySchedule,
     WebCrawlSchedule,
@@ -35,7 +37,6 @@ import {
     AddIntentMutation,
     ExportApp as ExportAppMutation,
     ImportApp as ImportAppMutation,
-    UpdateAppMutation,
     UpdateEntityMutation,
     UpdateIntentMutation
 } from "./graphql/mutations";
@@ -153,8 +154,8 @@ export class XAPPClient {
         });
     }
 
-    public updateApp(app: App): Promise<App> {
-        return this.client.mutation(UpdateAppMutation, {
+    public updateApp(app: UpdateAppInput): Promise<GraphqlApp> {
+        return this.client.mutation(UpdateAppByDocument, {
             appId: app.appId,
             app
         }).toPromise().then((response) => {

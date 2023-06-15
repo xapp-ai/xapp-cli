@@ -2,23 +2,7 @@
 import { gql } from "@urql/core";
 
 export const AddAppMutation = gql`
-mutation addApp($app: AppInput) {
-	addApp(app: $app) {
-    appId
-    name
-    organizationId
-  }
-}
-`;
 
-export const UpdateAppMutation = gql`
-mutation updateApp($appId: ID, $app: UpdateAppInput) {
-  updateApp(appId: $appId, app: $app) {
-    appId
-    name
-    organizationId
-  }
-}
 `;
 
 export const AddIntentMutation = gql`
@@ -61,7 +45,7 @@ mutation updateEntity($entityId: ID!, $appId: ID!, $entity: UpdateEntityInput) {
 `;
 
 export const ExportApp = gql`
-mutation exportApp($appId:ID!, $organizationId:ID!){
+mutation exportApp($appId:ID!, $organizationId:ID!) {
   app(organizationId:$organizationId) {
     update(appId:$appId) {
       exportApp {

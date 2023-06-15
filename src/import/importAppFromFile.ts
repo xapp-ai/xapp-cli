@@ -5,6 +5,8 @@ import { existsSync, readFileSync } from "fs";
 import { log } from "stentor-logger";
 import { App, Intent, Handler, Entity } from "stentor-models";
 
+import { UpdateAppInput } from "../graphql/models"
+
 import { getXAPPClient } from "../getXAPPClient";
 import { getUserToken } from "../getUserToken";
 
@@ -45,7 +47,7 @@ export async function importAppFromFile(file: string, options: { appId: string }
 
     // Get the existing app, we will need it for the organizationId
     // It is also a test of if the user has access to this app.
-    let existingApp: App;
+    let existingApp: Partial<App>;
     try {
         const data = await client.getApp(appId);
         existingApp = data.app;
@@ -54,17 +56,27 @@ export async function importAppFromFile(file: string, options: { appId: string }
         throw e;
     }
 
+    // clean it up
+    delete existingApp.channels;
+    delete existingApp.channels;
+    delete existingApp.dialogflowClientToken;
+    delete existingApp.dialogflowDeveloperToken;
+    delete existingApp.endPoint;
+    delete existingApp.platformData;
+    delete existingApp.nlu;
+    // and this
+    delete app.channels;
+    delete app.channels;
+    delete app.dialogflowClientToken;
+    delete app.dialogflowDeveloperToken;
+    delete app.endPoint;
+    delete app.platformData;
+    delete app.nlu;
+
     const organizationId = existingApp.organizationId;
     // Update the app!
     // The app must already exist
-    const appToUpdate = { ...existingApp, ...app, appId, organizationId };
-    // clean it up
-    delete appToUpdate.channels;
-    delete appToUpdate.dialogflowClientToken;
-    delete appToUpdate.dialogflowDeveloperToken;
-    delete appToUpdate.endPoint;
-    delete appToUpdate.platformData;
-    delete appToUpdate.nlu;
+    const appToUpdate: Omit<UpdateAppInput, "platformData"> = { ...existingApp, ...app, appId, organizationId };
 
     client.updateApp(appToUpdate);
     log().info(`App updated`);

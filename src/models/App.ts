@@ -10,6 +10,8 @@ export interface App {
     organizationId: string;
     invocationName?: string;
     actionsOnGoogleId?: string;
+    businessDescription?: string;
+    businessHighValueLeadDescription?: string;
 }
 
 // This is a very simple version
