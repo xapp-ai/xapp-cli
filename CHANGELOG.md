@@ -1,3 +1,12 @@
+## [1.4.36](https://github.com/xapp-ai/xapp-cli/compare/v1.4.35...v1.4.36) (2023-06-15)
+
+
+### Bug Fixes
+
+* **deps:** update dependency chalk to v5 ([#722](https://github.com/xapp-ai/xapp-cli/issues/722)) ([7db0f49](https://github.com/xapp-ai/xapp-cli/commit/7db0f49b98abcf4680b24125213d88004d5ca0f4))
+* **deps:** update dependency open to v9 ([#723](https://github.com/xapp-ai/xapp-cli/issues/723)) ([72b1a3e](https://github.com/xapp-ai/xapp-cli/commit/72b1a3e797ea935b304bcaf5c6240a021ea6ef38))
+* UpdateApp on XAPPClient to include more information ([#724](https://github.com/xapp-ai/xapp-cli/issues/724)) ([a2681dd](https://github.com/xapp-ai/xapp-cli/commit/a2681dd4b213e739ab988e2c83796cd6cd6a7a28))
+
 ## [1.4.35](https://github.com/xapp-ai/xapp-cli/compare/v1.4.34...v1.4.35) (2023-06-14)
 
 
