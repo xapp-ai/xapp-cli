@@ -2,9 +2,14 @@
 import { gql } from "@urql/core";
 
 export const AddAppMutation = gql`
-
+mutation addApp($app: AppInput) {
+	addApp(app: $app) {
+    appId
+    name
+    organizationId
+  }
+}
 `;
-
 export const AddIntentMutation = gql`
 mutation addIntent($appId: ID!, $intent: AddIntentInput!){
     addIntent(appId: $appId, intent: $intent) {
