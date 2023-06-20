@@ -1,3 +1,10 @@
+## [1.4.44](https://github.com/xapp-ai/xapp-cli/compare/v1.4.43...v1.4.44) (2023-06-20)
+
+
+### Bug Fixes
+
+* GraphQL Mutation and Chalk Revert ([#737](https://github.com/xapp-ai/xapp-cli/issues/737)) ([514c3d2](https://github.com/xapp-ai/xapp-cli/commit/514c3d290eeecf64be54697c25629c761058fba6))
+
 ## [1.4.43](https://github.com/xapp-ai/xapp-cli/compare/v1.4.42...v1.4.43) (2023-06-20)
 
 
