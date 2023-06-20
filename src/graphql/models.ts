@@ -9404,6 +9404,8 @@ export type UpdateAppInput = {
 };
 
 export type UpdateAppMutation = {
+  /** Takes a document at a given URL and uploads it to the backed knowledgebase. */
+  addDocumentToKnowledgebase: Scalars['String']['output'];
   addEmailOpportunityAlert: App;
   addTextOpportunityAlert: App;
   /** Updates the status of the app. */
@@ -9437,6 +9439,12 @@ export type UpdateAppMutation = {
    * be ignored as they are to remain constant.
    */
   updateApp: App;
+};
+
+
+export type UpdateAppMutationAddDocumentToKnowledgebaseArgs = {
+  makePublic?: InputMaybe<Scalars['Boolean']['input']>;
+  url: Scalars['URL']['input'];
 };
 
 

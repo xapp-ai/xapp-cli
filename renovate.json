@@ -1,7 +1,7 @@
 {
   "extends": ["config:base", "schedule:daily"],
   "statusCheckVerify": true,
-  "ignoreDeps": ["open"],
+  "ignoreDeps": ["open", "chalk"],
   "packageRules": [
     {
       "depTypeList": ["devDependencies"],
