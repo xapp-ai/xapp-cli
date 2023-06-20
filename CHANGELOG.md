@@ -1,3 +1,54 @@
+## [1.4.42](https://github.com/xapp-ai/xapp-cli/compare/v1.4.41...v1.4.42) (2023-06-20)
+
+
+### Bug Fixes
+
+* **deps:** update stentor to v1.45.107 ([4722fca](https://github.com/xapp-ai/xapp-cli/commit/4722fca5b0bff371d1347bf9ecba9d9a755f0e49))
+
+## [1.4.41](https://github.com/xapp-ai/xapp-cli/compare/v1.4.40...v1.4.41) (2023-06-20)
+
+
+### Bug Fixes
+
+* **deps:** update stentor to v1.45.106 ([2072b52](https://github.com/xapp-ai/xapp-cli/commit/2072b522fa2941e5d0e98b1c2a2ceccf0ff9d1bc))
+
+## [1.4.40](https://github.com/xapp-ai/xapp-cli/compare/v1.4.39...v1.4.40) (2023-06-19)
+
+
+### Bug Fixes
+
+* **deps:** update stentor to v1.57.168 ([ed9fc1d](https://github.com/xapp-ai/xapp-cli/commit/ed9fc1d748b9cfea9f0dbe377724cd17e49a172e))
+
+## [1.4.39](https://github.com/xapp-ai/xapp-cli/compare/v1.4.38...v1.4.39) (2023-06-19)
+
+
+### Bug Fixes
+
+* **deps:** update stentor to v1.57.167 ([276ab89](https://github.com/xapp-ai/xapp-cli/commit/276ab89e39576d8737b1e51231770cc069d3ac53))
+
+## [1.4.38](https://github.com/xapp-ai/xapp-cli/compare/v1.4.37...v1.4.38) (2023-06-16)
+
+
+### Bug Fixes
+
+* **deps:** update stentor to v1.57.166 ([a3e014a](https://github.com/xapp-ai/xapp-cli/commit/a3e014a76f10e53275eb1ad387f738176c2c7ec8))
+
+## [1.4.37](https://github.com/xapp-ai/xapp-cli/compare/v1.4.36...v1.4.37) (2023-06-15)
+
+
+### Bug Fixes
+
+* **deps:** update stentor to v1.57.165 ([f687c50](https://github.com/xapp-ai/xapp-cli/commit/f687c50501894e40026d0eeb63164d4b5ec8f390))
+
+## [1.4.36](https://github.com/xapp-ai/xapp-cli/compare/v1.4.35...v1.4.36) (2023-06-15)
+
+
+### Bug Fixes
+
+* **deps:** update dependency chalk to v5 ([#722](https://github.com/xapp-ai/xapp-cli/issues/722)) ([7db0f49](https://github.com/xapp-ai/xapp-cli/commit/7db0f49b98abcf4680b24125213d88004d5ca0f4))
+* **deps:** update dependency open to v9 ([#723](https://github.com/xapp-ai/xapp-cli/issues/723)) ([72b1a3e](https://github.com/xapp-ai/xapp-cli/commit/72b1a3e797ea935b304bcaf5c6240a021ea6ef38))
+* UpdateApp on XAPPClient to include more information ([#724](https://github.com/xapp-ai/xapp-cli/issues/724)) ([a2681dd](https://github.com/xapp-ai/xapp-cli/commit/a2681dd4b213e739ab988e2c83796cd6cd6a7a28))
+
 ## [1.4.35](https://github.com/xapp-ai/xapp-cli/compare/v1.4.34...v1.4.35) (2023-06-14)
 
 
