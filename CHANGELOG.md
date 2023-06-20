@@ -1,3 +1,10 @@
+## [1.4.43](https://github.com/xapp-ai/xapp-cli/compare/v1.4.42...v1.4.43) (2023-06-20)
+
+
+### Bug Fixes
+
+* Reverting back to v8 open because ESM migration is too time consuming ([#736](https://github.com/xapp-ai/xapp-cli/issues/736)) ([6c6a470](https://github.com/xapp-ai/xapp-cli/commit/6c6a470061410fa2c832f5dd74015528e6b10230))
+
 ## [1.4.42](https://github.com/xapp-ai/xapp-cli/compare/v1.4.41...v1.4.42) (2023-06-20)
 
 
