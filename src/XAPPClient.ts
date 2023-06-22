@@ -1,6 +1,6 @@
 /*! Copyright (c) 2022, XAPP AI*/
 import { Client } from "@urql/core";
-import { Handler, Entity, Intent } from "stentor-models";
+import { Entity, Intent } from "stentor-models";
 
 import { getGraphQLClient } from "./graphql/getGraphQLClient";
 import {
@@ -20,16 +20,20 @@ import {
     GetEventsDocument,
     GetEventsQuery,
     GetEventsQueryVariables,
+    GetHandlerDocument,
     GetProfileDocument,
     GetProfileQuery,
+    Handler,
     StartCrawlDocument,
     UpdateAppByDocument,
-    UpdateStatusDocument,
     UpdateAppInput,
+    UpdateHandlerDocument,
+    UpdateHandlerInput,
+    UpdateStatusDocument,
     UpdateStatusMutation,
     WebCrawlMonthlySchedule,
     WebCrawlSchedule,
-    WebCrawlWeeklySchedule,
+    WebCrawlWeeklySchedule
 } from "./graphql/models";
 import {
     AddAppMutation,
@@ -40,7 +44,7 @@ import {
     UpdateEntityMutation,
     UpdateIntentMutation
 } from "./graphql/mutations";
-import { GetIntent, GetHandler, GetEntity, GetAppWithChannels } from "./graphql/queries";
+import { GetIntent, GetEntity, GetAppWithChannels } from "./graphql/queries";
 import { App, Channel, ExportApp, GraphqlApp, ImportApp } from "./models";
 
 export interface HandlerDescription {
@@ -421,11 +425,21 @@ export class XAPPClient {
      * @returns 
      */
     public getHandler(appId: string, intentId: string): Promise<Handler> {
-        return this.client.query(GetHandler, {
+        return this.client.query(GetHandlerDocument, {
             appId,
             intentId
         }).toPromise().then((response) => {
             return response.data.handler;
+        });
+    }
+
+    public updateHandler(appId: string, handlerId: string, handler: UpdateHandlerInput): Promise<Handler> {
+        return this.client.mutation(UpdateHandlerDocument, {
+            appId,
+            handlerId,
+            handler
+        }).toPromise().then((response) => {
+            return response.data.updateHandler;
         });
     }
 

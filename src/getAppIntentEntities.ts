@@ -1,20 +1,21 @@
 /*! Copyright (c) 2022, XAPP AI*/
+import * as fs from "fs";
 
 import log from "stentor-logger";
 import { Entity, Handler, Intent } from "stentor-models";
-import { App } from "./models";
+
 import { getAppId } from "./getAppId";
 import { getUserToken } from "./getUserToken";
 import { getXAPPClient } from "./getXAPPClient";
-
-import * as fs from "fs";
+import { App } from "./models";
+import { convertGraphQLHandler } from "./utils/convert";
 
 export interface FullApp { app: App; intents?: Intent[]; handlers?: Handler[]; entities?: Entity[]; token: string }
 
 /**
  * Fetch the app, intents, and entities
  *
- * @deprecated - Use getStentorApp
+ * @deprecated - Use getStentorApp.  The handlers returned by this are not perfect.
  * @param appId
  * @param options
  * @returns
@@ -91,7 +92,13 @@ export async function getAppIntentEntities(
         let handlers: Handler[];
 
         try {
-            handlers = await Promise.all(getHandlersPromise);
+            const graphQLHandlers = await Promise.all(getHandlersPromise);
+
+            // convert these to the normal handler
+            handlers = graphQLHandlers.map((value) => {
+                return convertGraphQLHandler(value);
+            });
+
         } catch (err) {
             log.error("Error retrieving handlers. Try running $xapp login again");
             log.error(err);

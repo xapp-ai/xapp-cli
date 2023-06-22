@@ -5,7 +5,7 @@ import { getAppId } from "../getAppId";
 import { getUserToken } from "../getUserToken";
 import { getXAPPClient } from "../getXAPPClient";
 
-export async function info(appId: string): Promise<void> {
+export async function info(appId: string, handlerId?: string): Promise<void> {
 
     const token = await getUserToken();
 
@@ -64,4 +64,12 @@ export async function info(appId: string): Promise<void> {
     log.info(unansweredQueries.reduce((prev, curr) => {
         return `${prev}\n\t\t"${curr}"`;
     }, "Sample of unanswered..."));
+
+
+    if (handlerId) {
+        log.info(`Retrieving handler with ID ${handlerId}`);
+        const handler = await client.getHandler(appId, handlerId);
+
+        log.info(`Handler info: ${handlerId} ${handler.name} ${handler.type}`);
+    }
 }

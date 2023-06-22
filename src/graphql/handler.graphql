@@ -1,0 +1,206 @@
+fragment HandlerParts on Handler {
+  __typename
+  appId
+  intentId
+  organizationId
+  createdAt
+  updatedAt
+  name
+  langCode
+  utterancePatterns
+  dialogflowId
+  type
+  defaultLocale
+  graphCoords {
+    x
+    y
+  }
+  permissions
+  slots {
+    name
+    type
+    isList
+    nlu
+    _id
+  }
+  validation {
+    isValid
+    errors {
+      errorMessage
+      propertyName
+    }
+  }
+  content {
+    __typename
+    key
+    handlerResponse {
+      __typename
+      displays {
+        __typename
+        type
+        token
+        title
+        ... on ListDisplay {
+          itemsName
+          itemsObject
+          range {
+            length
+            from
+          }
+          items {
+            token
+            url
+            synonyms
+            image {
+              url
+              urlIcon
+              imageActionUrl
+              accessibilityText
+              width
+              height
+            }
+            title
+            description
+            buttons {
+              title
+            }
+          }
+        }
+        ... on CardDisplay {
+          content
+          smallImageUrl
+          largeImageUrl
+          imageActionUrl
+          accessibilityText
+          buttons {
+            title
+            openUrlAction
+          }
+        }
+      }
+      outputSpeech {
+        ssml
+        textToSpeech
+        displayText
+        suggestions {
+          __typename
+          ... on SuggestionObject {
+            title
+          }
+          ... on LinkOutSuggestion {
+            title
+            url
+          }
+        }
+      }
+      segments {
+        key
+        segments {
+          segment {
+            ssml
+            displayText
+          }
+        }
+      }
+      reprompt {
+        ssml
+        textToSpeech
+        displayText
+        suggestions {
+          __typename
+        }
+      }
+      context {
+        active {
+          name
+          parameters
+          timeToLive {
+            timeToLiveInSeconds
+            turnsToLive
+          }
+        }
+      }
+      ... on SchedulableDependentHandlerResponse {
+        schedule {
+          start {
+            format
+            dayOfWeek
+            time
+            timeZone
+          }
+          duration {
+            format
+            amount
+          }
+        }
+      }
+      name
+      tag
+      system
+      data
+      channel {
+        name
+      }
+      conditions
+      ... on SchedulableDependentHandlerResponse {
+        schedule {
+          start {
+            time
+            format
+            dayOfWeek
+            timeZone
+          }
+          duration {
+            format
+            amount
+          }
+        }
+      }
+    }
+  }
+  data
+  forward {
+    key
+    paths {
+      actions
+      conditions
+      data
+      platform
+      ... on ExecutableHandlerPath {
+        intentId
+        slots
+        type
+      }
+    }
+  }
+  redirect {
+    key
+    paths {
+      actions
+      conditions
+      data
+      platform
+      ... on ExecutableHandlerPath {
+        intentId
+        slots
+        type
+      }
+    }
+  }
+}
+
+query getHandler($appId: ID!, $intentId: ID!) {
+  handler(appId: $appId, intentId: $intentId) {
+    ...HandlerParts
+  }
+}
+
+mutation updateHandler(
+  $appId: ID!
+  $handlerId: ID!
+  $handler: UpdateHandlerInput!
+) {
+  updateHandler(appId: $appId, handlerId: $handlerId, handler: $handler) {
+    ...HandlerParts
+  }
+}

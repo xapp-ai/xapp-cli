@@ -77,10 +77,10 @@ program.command("whoami")
         log().info(`If above is masked, run the following to unmask: STENTOR_LOG_PII=true xapp whoami`);
     });
 
-program.command("info <appId>")
+program.command("info <appId> [handlerId]")
     .description("Returns basic information about the provided appId")
-    .action(async (appId: string) => {
-        await info(appId);
+    .action(async (appId: string, handlerId?: string) => {
+        await info(appId, handlerId);
     });
 
 program.command("profile")
