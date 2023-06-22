@@ -1,3 +1,10 @@
+## [1.4.50](https://github.com/xapp-ai/xapp-cli/compare/v1.4.49...v1.4.50) (2023-06-22)
+
+
+### Bug Fixes
+
+* Adds UpdateHandler Mutation to XAPPClient  ([#744](https://github.com/xapp-ai/xapp-cli/issues/744)) ([47fef8c](https://github.com/xapp-ai/xapp-cli/commit/47fef8c7418b117b1d46525c0180be23ba4ca7f0))
+
 ## [1.4.49](https://github.com/xapp-ai/xapp-cli/compare/v1.4.48...v1.4.49) (2023-06-22)
 
 
