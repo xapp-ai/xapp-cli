@@ -1,3 +1,10 @@
+## [1.4.48](https://github.com/xapp-ai/xapp-cli/compare/v1.4.47...v1.4.48) (2023-06-22)
+
+
+### Bug Fixes
+
+* **deps:** update dependency graphql to v16.7.0 ([#741](https://github.com/xapp-ai/xapp-cli/issues/741)) ([86d8c38](https://github.com/xapp-ai/xapp-cli/commit/86d8c38928cd946e78f59df07c4a2aa72c74d6bf))
+
 ## [1.4.47](https://github.com/xapp-ai/xapp-cli/compare/v1.4.46...v1.4.47) (2023-06-22)
 
 
