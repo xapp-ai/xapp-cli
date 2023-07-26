@@ -2941,7 +2941,7 @@ __metadata:
     request-promise-native: 1.0.9
     stentor-constants: 1.57.190
     stentor-guards: 1.57.190
-    stentor-handler: 1.57.190
+    stentor-handler: 1.57.191
     stentor-interaction-model: 1.57.190
     stentor-locales: 1.57.190
     stentor-logger: 1.57.190
@@ -11136,9 +11136,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stentor-conditional@npm:1.57.190":
-  version: 1.57.190
-  resolution: "stentor-conditional@npm:1.57.190"
+"stentor-conditional@npm:1.57.191":
+  version: 1.57.191
+  resolution: "stentor-conditional@npm:1.57.191"
   dependencies:
     stentor-logger: 1.57.190
     vm2: 3.9.19
@@ -11147,7 +11147,7 @@ __metadata:
   dependenciesMeta:
     vm2:
       optional: true
-  checksum: 5b64c6b847123df67c36b771ad72d17e505712262a601885a9f7729d7fc77c047d894b39c4bd859d11881c67aea64bbef85aa07cc6df9f2eed7b8b60dd81f0dc
+  checksum: 11234dc88695d59067eb72a4b2751ca58979184a0720dc7c0412c326ffe413747d0cc28d40cd299f49b5d59bb2bbca11ffad19bb26da74dca8c738e68131f975
   languageName: node
   linkType: hard
 
@@ -11169,27 +11169,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stentor-context@npm:1.57.190":
-  version: 1.57.190
-  resolution: "stentor-context@npm:1.57.190"
+"stentor-context@npm:1.57.191":
+  version: 1.57.191
+  resolution: "stentor-context@npm:1.57.191"
   dependencies:
     "@xapp/patterns": 2.0.1
     stentor-constants: 1.57.190
     stentor-guards: 1.57.190
-    stentor-response: 1.57.190
+    stentor-response: 1.57.191
     stentor-storage: 1.57.190
   peerDependencies:
     stentor-models: 1.x
-  checksum: 2f138fc654a64e7d1212f0747c6d2cb0bed3318c9a190c822be38d804415edeea0dfa32797a0950219b1aed02471b6ac06d48544054ad67e18ac68dfc3c07fc3
+  checksum: 3ececf978e4ead86e2d685eb363e3e95d9506358f88b38f3fdabd5c0e6dccc44ef05eb129b3d33dc03f5a017641da20fd468ea8d2f4ed6f6fc160947922b276c
   languageName: node
   linkType: hard
 
-"stentor-determiner@npm:1.57.190":
-  version: 1.57.190
-  resolution: "stentor-determiner@npm:1.57.190"
+"stentor-determiner@npm:1.57.191":
+  version: 1.57.191
+  resolution: "stentor-determiner@npm:1.57.191"
   dependencies:
     jsonpath-plus: 7.2.0
-    stentor-conditional: 1.57.190
+    stentor-conditional: 1.57.191
     stentor-constants: 1.57.190
     stentor-guards: 1.57.190
     stentor-interaction-model: 1.57.190
@@ -11200,7 +11200,7 @@ __metadata:
     stentor-utils: 1.57.190
   peerDependencies:
     stentor-models: 1.x
-  checksum: 6e17cc65af572bf97e5c195eb6f433b736abd465952ba5ad9504d791cc94cdf48a3f58409c3d665c9eefdf4eedbbded8f1b7fc1156b4146e0e1deb61147c4e3b
+  checksum: 430615be622b57279aea8c7791e7e52122c708995b427995841a19e76ba3b3b8d9a64b16d084cdf5dc9f41f87eac83f23bed7e29e117d554d84796f629be9c28
   languageName: node
   linkType: hard
 
@@ -11226,25 +11226,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stentor-handler@npm:1.57.190":
-  version: 1.57.190
-  resolution: "stentor-handler@npm:1.57.190"
+"stentor-handler@npm:1.57.191":
+  version: 1.57.191
+  resolution: "stentor-handler@npm:1.57.191"
   dependencies:
     "@xapp/patterns": 2.0.1
-    stentor-conditional: 1.57.190
+    stentor-conditional: 1.57.191
     stentor-constants: 1.57.190
-    stentor-context: 1.57.190
+    stentor-context: 1.57.191
     stentor-guards: 1.57.190
     stentor-history: 1.57.190
     stentor-interaction-model: 1.57.190
     stentor-locales: 1.57.190
     stentor-logger: 1.57.190
-    stentor-response: 1.57.190
+    stentor-response: 1.57.191
     stentor-storage: 1.57.190
     stentor-utils: 1.57.190
   peerDependencies:
     stentor-models: 1.x
-  checksum: 7083180251f228c19c367b7932bca7ed5800e439292c5c7438610e8add6d3f5dddd94fbfe8b40c8062728cf0509b166632537a1fbc71c8e5b0b68b09de959445
+  checksum: 64be3d8fad535bb87299ef880a906a7619830ac994f2915a4705277b30518cb2e0ab8c72e369b46e5c654eea927cc5d85b3699525f52a907bf0d3099d84087eb
   languageName: node
   linkType: hard
 
@@ -11329,19 +11329,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stentor-response@npm:1.57.190":
-  version: 1.57.190
-  resolution: "stentor-response@npm:1.57.190"
+"stentor-response@npm:1.57.191":
+  version: 1.57.191
+  resolution: "stentor-response@npm:1.57.191"
   dependencies:
     "@xapp/patterns": 2.0.1
     lodash.template: 4.5.0
-    stentor-determiner: 1.57.190
+    stentor-determiner: 1.57.191
     stentor-locales: 1.57.190
     stentor-media: 1.57.190
     stentor-utils: 1.57.190
   peerDependencies:
     stentor-models: 1.x
-  checksum: 02b71743c2eaf45a9163546985acf018c8dff5f23c33c32ae1602df3d6ac342fb68556b37ceebdd92ce547facea01b216ddbfab0b411b1b03194469498cc296d
+  checksum: bcf0a83bdd54402ebac42bae4810d074dab2820cb0c61dbaa72a84ba67d0c9aed35b36f3e1665de0dc32d47c9f8348c0b2d95c42cd70a3dba6d4bad8771cc150
   languageName: node
   linkType: hard
 
