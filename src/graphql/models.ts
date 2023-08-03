@@ -18,6 +18,7 @@ export type Scalars = {
   Float: { input: number; output: number; }
   DateTime: { input: any; output: any; }
   EmailAddress: { input: any; output: any; }
+  EntityNLU: { input: any; output: any; }
   HandlerResponseConditions: { input: any; output: any; }
   IntOrBoolean: { input: any; output: any; }
   IntOrString: { input: any; output: any; }
@@ -27,6 +28,18 @@ export type Scalars = {
   StringMap: { input: any; output: any; }
   URL: { input: any; output: any; }
   URLString: { input: any; output: any; }
+  XAPPLead_String_maxLength_50_format_email: { input: any; output: any; }
+  awsEventBusArn_String_maxLength_200_pattern_arnawsusgovcneventsaz0909eventbus: { input: any; output: any; }
+  businessDescription_String_maxLength_4000: { input: any; output: any; }
+  contactName_String_maxLength_50: { input: any; output: any; }
+  contactPhone_String_maxLength_50: { input: any; output: any; }
+  contact_String_maxLength_50_format_email: { input: any; output: any; }
+  contractDate_String_format_ISO8601: { input: any; output: any; }
+  description_String_maxLength_4000: { input: any; output: any; }
+  keywords_List_String_NotNull_maxLength_50: { input: any; output: any; }
+  name_String_NotNull_maxLength_50: { input: any; output: any; }
+  notes_String_maxLength_4000: { input: any; output: any; }
+  templateType_String_maxLength_50: { input: any; output: any; }
   time_String_NotNull_format_date: { input: any; output: any; }
 };
 
@@ -192,9 +205,14 @@ export type AddEntityInput = {
   appId: Scalars['ID']['input'];
   dialogflowId?: InputMaybe<Scalars['String']['input']>;
   displayName: Scalars['String']['input'];
-  nlu?: InputMaybe<Scalars['JSON']['input']>;
-  type?: InputMaybe<Scalars['String']['input']>;
-  values?: InputMaybe<Array<InputMaybe<EntityValueInput>>>;
+  /**
+   * A unique identifier for the entity.  If one is not provided then
+   * it will be derived from the display name.
+   */
+  entityId?: InputMaybe<Scalars['ID']['input']>;
+  nlu?: InputMaybe<Scalars['EntityNLU']['input']>;
+  type?: InputMaybe<EntityType>;
+  values?: InputMaybe<Array<EntityValueInput>>;
 };
 
 export type AddFaq = {
@@ -237,6 +255,19 @@ export type AddHandlerInput = {
    * All handlers have contextual help and cancel content
    */
   content?: InputMaybe<Array<InputMaybe<InputHandlerContent>>>;
+  /**
+   * Contexts the must be active to have this handler be weighted more heavily or selected.
+   *
+   * For Amazon Lex, the contexts are required to be selected.
+   *
+   * https://docs.aws.amazon.com/lex/latest/dg/API_PutIntent.html#lex-PutIntent-request-inputContexts
+   *
+   * For Dialogflow ES, these are more heavily weighted towards matching.
+   *
+   * https://cloud.google.com/dialogflow/es/docs/contexts-input-output#input_contexts}
+   * https://cloud.google.com/dialogflow/es/docs/reference/rest/v2/projects.agent.intents#Intent}
+   */
+  contexts?: InputMaybe<Array<InputMaybe<IntentContextInput>>>;
   data?: InputMaybe<Scalars['JSON']['input']>;
   /**
    * The locale that all the attributes in this intent are used for before
@@ -309,7 +340,7 @@ export type AddIntentInput = {
   name: Scalars['String']['input'];
   nlu?: InputMaybe<Scalars['JSON']['input']>;
   /** The permissions that the intent requires in order to work. */
-  permissions?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  permissions?: InputMaybe<Array<Scalars['String']['input']>>;
   /** Slot type definition. */
   slotTypes?: InputMaybe<Scalars['JSON']['input']>;
   /** The slots defined within the utterance patterns and their Entity types. */
@@ -321,7 +352,7 @@ export type AddIntentInput = {
    *
    * For more information on syntax see https://github.com/alexa-js/alexa-utterances
    */
-  utterancePatterns?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  utterancePatterns?: InputMaybe<Array<Scalars['String']['input']>>;
 };
 
 export type AddIntentReturn = {
@@ -527,6 +558,8 @@ export type AdminLaboratory = {
   knnSearch: KnnSearchQuery;
   /** This uses KNN to search for suggestions to things. */
   knnSuggSearch: KnnSuggSearchQuery;
+  /** Execute the multi intent Prompt */
+  multiIntent?: Maybe<Scalars['JSON']['output']>;
   /** This attempts to generate a valid answer based on a question for an app. */
   provideAnswer?: Maybe<Scalars['JSON']['output']>;
   /** This queries the Kendra instance available and returns the results. */
@@ -601,6 +634,13 @@ export type AdminLaboratoryKnnSuggSearchArgs = {
   minScore?: InputMaybe<Scalars['Float']['input']>;
   searchString: Scalars['String']['input'];
   size?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type AdminLaboratoryMultiIntentArgs = {
+  max_tokens?: InputMaybe<Scalars['Int']['input']>;
+  temperature?: InputMaybe<Scalars['Float']['input']>;
+  text: Scalars['String']['input'];
 };
 
 
@@ -3314,45 +3354,94 @@ export type CreateInteractionModelReturn = {
   locale: Scalars['String']['output'];
 };
 
+export type CreateOrgCreateAppInput = {
+  /** The new app that will be created upon org creation. */
+  app: CreateOrganizationAppInput;
+  /** Entities that are to be added to the app. */
+  entities?: InputMaybe<Array<UpdateEntityInput>>;
+  /** Handlers that are to be added to the app. */
+  handlers?: InputMaybe<Array<AddHandlerInput>>;
+  /** Intents that are to be added to the app. */
+  intents?: InputMaybe<Array<AddIntentInput>>;
+};
+
 export type CreateOrgReturn = {
+  /** The returned app after app creation. */
   app?: Maybe<App>;
   org: Organization;
 };
 
+/** Attributes that are linked to an app when creating one. */
+export type CreateOrganizationAppInput = {
+  /** URL of the original banner image with aspect ratio of 16:9 and minimum dimensions of 1920x1080. */
+  banner?: InputMaybe<Scalars['URL']['input']>;
+  /** A description of the business and it's services. */
+  businessDescription?: InputMaybe<Scalars['businessDescription_String_maxLength_4000']['input']>;
+  /**
+   * The description for the app.
+   *
+   * The description cannot be more than 4000 characters.
+   */
+  description?: InputMaybe<Scalars['description_String_maxLength_4000']['input']>;
+  /**
+   * URL to the original icon file before transformation.
+   *
+   * Aspect ration must be 1:1 and minimum dimensions are 512x512.
+   */
+  icon?: InputMaybe<Scalars['URL']['input']>;
+  /**
+   * Keywords to help when searching directories for the app
+   *
+   * Max of 30 keywords are allowed.
+   */
+  keywords?: InputMaybe<Array<Scalars['keywords_List_String_NotNull_maxLength_50']['input']>>;
+  /** The human-readable name of the app. */
+  name: Scalars['name_String_NotNull_maxLength_50']['input'];
+  /** Type of template the app and its intents adhere to. */
+  templateType?: InputMaybe<Scalars['templateType_String_maxLength_50']['input']>;
+  /** Primary website for the company or division of a company that the app is representing. */
+  website?: InputMaybe<Scalars['URL']['input']>;
+};
+
 export type CreateOrganizationInput = {
   /** The email XAPPineer that is in charge of handling the organization's account */
-  XAPPLead?: InputMaybe<Scalars['String']['input']>;
+  XAPPLead?: InputMaybe<Scalars['XAPPLead_String_maxLength_50_format_email']['input']>;
   /** An event bus that is attatched to the organization to receive specific events related to the organization such as App status changes. */
-  awsEventBusArn?: InputMaybe<Scalars['String']['input']>;
+  awsEventBusArn?: InputMaybe<Scalars['awsEventBusArn_String_maxLength_200_pattern_arnawsusgovcneventsaz0909eventbus']['input']>;
   /**
    * The email address of a user who can be contacted about issues
    * related to the organization.
    */
-  contact?: InputMaybe<Scalars['String']['input']>;
+  contact?: InputMaybe<Scalars['contact_String_maxLength_50_format_email']['input']>;
   /** The organization contact's name. */
-  contactName?: InputMaybe<Scalars['String']['input']>;
+  contactName?: InputMaybe<Scalars['contactName_String_maxLength_50']['input']>;
   /** The organization contact's phone number. */
-  contactPhone?: InputMaybe<Scalars['String']['input']>;
+  contactPhone?: InputMaybe<Scalars['contactPhone_String_maxLength_50']['input']>;
   /**
    * Date in which the organization signed a contract to publish
    * apps.
    *
    * Format: ISO-8601 date format
    */
-  contractDate?: InputMaybe<Scalars['String']['input']>;
+  contractDate?: InputMaybe<Scalars['contractDate_String_format_ISO8601']['input']>;
   /** The human-readable description of the organization. */
-  description?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['description_String_maxLength_4000']['input']>;
   /**
    * Organization's IP rights which were loaded that give permissions to
    * publish apps on their behalf.
    */
   ipRights?: InputMaybe<IPrightsInput>;
   /** URL for the organization's logo. */
-  logoUrl?: InputMaybe<Scalars['String']['input']>;
+  logoUrl?: InputMaybe<Scalars['URL']['input']>;
   /** The human-readable name of the organization. */
-  name: Scalars['String']['input'];
+  name: Scalars['name_String_NotNull_maxLength_50']['input'];
   /** Any notes that are related to the organization. */
-  notes?: InputMaybe<Scalars['String']['input']>;
+  notes?: InputMaybe<Scalars['notes_String_maxLength_4000']['input']>;
+  /**
+   * A unique ID for the organization. If one is not provided then the ID will
+   * be based off the name.
+   */
+  organizationId?: InputMaybe<Scalars['ID']['input']>;
   /** Payment account information */
   paymentAccounts?: InputMaybe<PaymentAccountsInput>;
   /**
@@ -3361,7 +3450,7 @@ export type CreateOrganizationInput = {
    */
   publishingAccounts?: InputMaybe<PublishingAccountsInput>;
   /** A URL to the organization's website. */
-  website?: InputMaybe<Scalars['String']['input']>;
+  website?: InputMaybe<Scalars['URL']['input']>;
 };
 
 export type CtaConfig = {
@@ -3792,7 +3881,7 @@ export type Entity = {
    *
    * Use it to override the entity type for a specific NLU
    */
-  nlu?: Maybe<Scalars['JSON']['output']>;
+  nlu?: Maybe<Scalars['EntityNLU']['output']>;
   /**
    * The type of entity.
    * If not set, the default is 'VALUE_SYNONYMS' which uses a set of values
@@ -3807,7 +3896,7 @@ export type Entity = {
   /** A query for any errors that may be in the Entity. */
   validation: EntityValidation;
   /** The values that the slot can be. */
-  values?: Maybe<Array<Maybe<EntityValue>>>;
+  values?: Maybe<Array<EntityValue>>;
 };
 
 
@@ -3899,7 +3988,7 @@ export type EntityValue = {
    *
    * For example, "L.A."" & "City of Angels"
    */
-  synonyms?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  synonyms?: Maybe<Array<Scalars['String']['output']>>;
 };
 
 export type EntityValueInput = {
@@ -3916,7 +4005,7 @@ export type EntityValueInput = {
    *
    * For example, "L.A."" & "City of Angels"
    */
-  synonyms?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  synonyms?: InputMaybe<Array<Scalars['String']['input']>>;
 };
 
 export type EventFlag = {
@@ -4674,6 +4763,19 @@ export type Handler = {
    * All handlers have contextual help and cancel content
    */
   content?: Maybe<Array<Maybe<HandlerContent>>>;
+  /**
+   * Contexts the must be active to have this intent be weighted more heavily or selected.
+   *
+   * For Amazon Lex, the contexts are required to be selected.
+   *
+   * https://docs.aws.amazon.com/lex/latest/dg/API_PutIntent.html#lex-PutIntent-request-inputContexts
+   *
+   * For Dialogflow ES, these are more heavily weighted towards matching.
+   *
+   * https://cloud.google.com/dialogflow/es/docs/contexts-input-output#input_contexts}
+   * https://cloud.google.com/dialogflow/es/docs/reference/rest/v2/projects.agent.intents#Intent}
+   */
+  contexts?: Maybe<Array<Maybe<IntentContext>>>;
   /**
    * The date in which the Handler was created.
    *
@@ -5440,7 +5542,7 @@ export type Intent = {
    *
    * For more information on syntax see https://github.com/alexa-js/alexa-utterances
    */
-  utterancePatterns?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  utterancePatterns?: Maybe<Array<Scalars['String']['output']>>;
   /** Retrieves suggestions of new possible utterances similar to the ones the intent already has. */
   utteranceSuggestions: UtteranceSuggestions;
   /** A query for any errors that may be in the Intent. */
@@ -6626,7 +6728,8 @@ export type Mutation = {
    * Add an organization.  An organization is used to maintain
    * apps. The user who creates the organization will be the owner and
    * be able to create applications and invite users to view/edit those applications.
-   * @deprecated Use the OrgsMutation instead
+   *
+   * @deprecated(reason: "Use the OrgsMutation instead")
    */
   createOrg?: Maybe<CreateOrgReturn>;
   /**
@@ -7206,22 +7309,10 @@ export type OnboardingMutation = {
    * and what technologies that the website uses.
    */
   startRetrieveWebsiteDetails: StartRetreiveWebsiteDetailsResult;
-  /**
-   * Downloads a website and retrieves specific details outlining the websites details like icon, primary/secondary colors,
-   * and what technologies that the website uses.
-   *
-   * This downloads the details in a syncronous fashion and risks timeouts.
-   */
-  startRetrieveWebsiteDetailsSync: StartRetreiveWebsiteDetailsSyncResult;
 };
 
 
 export type OnboardingMutationStartRetrieveWebsiteDetailsArgs = {
-  webUrl: Scalars['URL']['input'];
-};
-
-
-export type OnboardingMutationStartRetrieveWebsiteDetailsSyncArgs = {
   webUrl: Scalars['URL']['input'];
 };
 
@@ -7533,13 +7624,13 @@ export type OrganizationUsageArgs = {
 };
 
 export type OrgsMutation = {
-  /** @deprecated Use the OrgsMutation instead */
-  add?: Maybe<CreateOrgReturn>;
+  add: CreateOrgReturn;
   org: OrgMutation;
 };
 
 
 export type OrgsMutationAddArgs = {
+  app?: InputMaybe<CreateOrgCreateAppInput>;
   appTemplate?: InputMaybe<AppTemplateInput>;
   org: CreateOrganizationInput;
 };
@@ -9505,9 +9596,14 @@ export type UpdateAppMutationUpdateAppArgs = {
 export type UpdateEntityInput = {
   dialogflowId?: InputMaybe<Scalars['String']['input']>;
   displayName?: InputMaybe<Scalars['String']['input']>;
-  nlu?: InputMaybe<Scalars['JSON']['input']>;
-  type?: InputMaybe<Scalars['String']['input']>;
-  values?: InputMaybe<Array<InputMaybe<EntityValueInput>>>;
+  /**
+   * A unique identifier for the entity.  If one is not provided then
+   * it will be derived from the display name.
+   */
+  entityId?: InputMaybe<Scalars['ID']['input']>;
+  nlu?: InputMaybe<Scalars['EntityNLU']['input']>;
+  type?: InputMaybe<EntityType>;
+  values?: InputMaybe<Array<EntityValueInput>>;
 };
 
 export type UpdateFaq = {
@@ -9548,6 +9644,19 @@ export type UpdateHandlerInput = {
    * All handlers have contextual help and cancel content
    */
   content?: InputMaybe<Array<InputMaybe<InputHandlerContent>>>;
+  /**
+   * Contexts the must be active to have this handler be weighted more heavily or selected.
+   *
+   * For Amazon Lex, the contexts are required to be selected.
+   *
+   * https://docs.aws.amazon.com/lex/latest/dg/API_PutIntent.html#lex-PutIntent-request-inputContexts
+   *
+   * For Dialogflow ES, these are more heavily weighted towards matching.
+   *
+   * https://cloud.google.com/dialogflow/es/docs/contexts-input-output#input_contexts}
+   * https://cloud.google.com/dialogflow/es/docs/reference/rest/v2/projects.agent.intents#Intent}
+   */
+  contexts?: InputMaybe<Array<InputMaybe<IntentContextInput>>>;
   data?: InputMaybe<Scalars['JSON']['input']>;
   /**
    * The locale that all the attributes in this intent are used for before
@@ -9656,7 +9765,7 @@ export type UpdateIntentInput = {
   name?: InputMaybe<Scalars['String']['input']>;
   nlu?: InputMaybe<Scalars['JSON']['input']>;
   /** The permissions that the intent requires in order to work. */
-  permissions?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  permissions?: InputMaybe<Array<Scalars['String']['input']>>;
   /** Slot type definition. */
   slotTypes?: InputMaybe<Scalars['JSON']['input']>;
   /**
@@ -9673,7 +9782,7 @@ export type UpdateIntentInput = {
    *
    * For more information on syntax see https://github.com/alexa-js/alexa-utterances
    */
-  utterancePatterns?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  utterancePatterns?: InputMaybe<Array<Scalars['String']['input']>>;
 };
 
 export type UpdateIntentMutationType = {
@@ -10146,6 +10255,8 @@ export type WebDetailsExecution = {
   completed: Scalars['Boolean']['output'];
   /** The data that has been gathered so far. */
   data: WebsiteData;
+  /** The website that is being crawled. */
+  siteCrawled: Scalars['URL']['output'];
 };
 
 export type WebFaq = {
@@ -10403,7 +10514,7 @@ export type GetAppOverviewQueryVariables = Exact<{
 }>;
 
 
-export type GetAppOverviewQuery = { app?: { __typename: 'App', _id: string, appId: string, name: string, description?: string | null, summary?: string | null, organizationId: string, invocationName?: string | null, templateType?: string | null, icon?: string | null, smallIcon?: string | null, largeIcon?: string | null, banner?: string | null, largeBanner?: string | null, businessDescription?: string | null, businessHighValueLeadDescription?: string | null, status?: { type: string, timestamp: any, email: string, statusHistory?: Array<{ type: string, email: string, timestamp: any, notes?: string | null } | null> | null } | null, handlers?: { _id: string, total: number, handlers?: Array<{ _id: string, name?: string | null, intentId: string, type: string } | null> | null } | null, intents?: { _id: string, total: number, intents?: Array<{ _id: string, name: string, intentId: string } | null> | null } | null, entities?: { _id: string, total: number, entities?: Array<{ _id: string, entityId: string, displayName: string } | null> | null } | null, content?: { __typename: 'TotalWebContent', total: number, content: Array<{ __typename: 'WebContentWithHighlights', _id: string, name: string, url: string } | null> } | null, contentSources?: { __typename: 'TotalWebContentSources', total: number, sources: Array<{ __typename: 'WebContentSources', webUrl: string, webUrlPatterns: Array<string | null> } | null> } | null, faq?: { total: number } | null, channels?: Array<{ __typename: 'ActionsOnGoogleAppChannel', type: string, id: string, name?: string | null } | { __typename: 'AlexaAppChannel', type: string, id: string, name?: string | null } | { __typename: 'AppChannel', type: string, id: string, name?: string | null } | { __typename: 'ChatWidgetAppChannel', key?: string | null, type: string, id: string, name?: string | null, theme?: { primaryColor?: string | null } | null } | { __typename: 'DialogflowAppChannel', type: string, id: string, name?: string | null } | { __typename: 'FacebookMessengerAppChannel', type: string, id: string, name?: string | null } | { __typename: 'GoogleBusinessMessagesAppChannel', type: string, id: string, name?: string | null } | { __typename: 'IntelligentSearchAppChannel', key?: string | null, type: string, id: string, name?: string | null, theme?: { accentColor?: string | null } | null } | { __typename: 'LexConnectAppChannel', type: string, id: string, name?: string | null } | { __typename: 'LexV2ConnectAppChannel', type: string, id: string, name?: string | null } | null> | null, analytics?: { user: { totalUsers: number, totalSessions: number, returningUsers: number, newUsers: number } } | null } | null };
+export type GetAppOverviewQuery = { app?: { __typename: 'App', _id: string, appId: string, name: string, description?: string | null, summary?: string | null, organizationId: string, invocationName?: string | null, templateType?: string | null, icon?: string | null, smallIcon?: string | null, largeIcon?: string | null, banner?: string | null, largeBanner?: string | null, website?: any | null, businessDescription?: string | null, businessHighValueLeadDescription?: string | null, status?: { type: string, timestamp: any, email: string, statusHistory?: Array<{ type: string, email: string, timestamp: any, notes?: string | null } | null> | null } | null, handlers?: { _id: string, total: number, handlers?: Array<{ _id: string, name?: string | null, intentId: string, type: string } | null> | null } | null, intents?: { _id: string, total: number, intents?: Array<{ _id: string, name: string, intentId: string } | null> | null } | null, entities?: { _id: string, total: number, entities?: Array<{ _id: string, entityId: string, displayName: string } | null> | null } | null, content?: { __typename: 'TotalWebContent', total: number, content: Array<{ __typename: 'WebContentWithHighlights', _id: string, name: string, url: string } | null> } | null, contentSources?: { __typename: 'TotalWebContentSources', total: number, sources: Array<{ __typename: 'WebContentSources', webUrl: string, webUrlPatterns: Array<string | null> } | null> } | null, faq?: { total: number } | null, channels?: Array<{ __typename: 'ActionsOnGoogleAppChannel', type: string, id: string, name?: string | null } | { __typename: 'AlexaAppChannel', type: string, id: string, name?: string | null } | { __typename: 'AppChannel', type: string, id: string, name?: string | null } | { __typename: 'ChatWidgetAppChannel', key?: string | null, type: string, id: string, name?: string | null, theme?: { primaryColor?: string | null } | null } | { __typename: 'DialogflowAppChannel', type: string, id: string, name?: string | null } | { __typename: 'FacebookMessengerAppChannel', type: string, id: string, name?: string | null } | { __typename: 'GoogleBusinessMessagesAppChannel', type: string, id: string, name?: string | null } | { __typename: 'IntelligentSearchAppChannel', key?: string | null, type: string, id: string, name?: string | null, theme?: { accentColor?: string | null } | null } | { __typename: 'LexConnectAppChannel', type: string, id: string, name?: string | null } | { __typename: 'LexV2ConnectAppChannel', type: string, id: string, name?: string | null } | null> | null, analytics?: { user: { totalUsers: number, totalSessions: number, returningUsers: number, newUsers: number } } | null } | null };
 
 export type GetAppContentQueryVariables = Exact<{
   appId: Scalars['ID']['input'];
@@ -10997,6 +11108,7 @@ export const GetAppOverviewDocument = gql`
     largeIcon
     banner
     largeBanner
+    website
     businessDescription
     businessHighValueLeadDescription
     status {
