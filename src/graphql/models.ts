@@ -7351,6 +7351,21 @@ export enum OpportunityAlertDetailType {
   UnansweredQuestion = 'UNANSWERED_QUESTION'
 }
 
+export type OrgAcceptToSReturn = {
+  updatedOrg: Organization;
+};
+
+export type OrgAcceptedTermsOfService = {
+  /** The ISO date in which the user accepted the terms. */
+  acceptedOn: Scalars['DateTime']['output'];
+  /** The email address of the user that accepted the terms */
+  email: Scalars['String']['output'];
+  /** The URL of the terms sheet that was accepted. */
+  url: Scalars['URL']['output'];
+  /** The user that accepted the terms of service */
+  userId: Scalars['String']['output'];
+};
+
 export type OrgAnalytics = {
   user: OrgUsageStat;
 };
@@ -7439,6 +7454,8 @@ export enum OrgMeteredTimeFrame {
 }
 
 export type OrgMutation = {
+  /** Notifies us that the user has accepted the Terms of Service. */
+  acceptTos: OrgAcceptToSReturn;
   cms: CmsMutation;
   /** Deletes the attributes of the organization. */
   delete: Scalars['String']['output'];
@@ -7532,6 +7549,9 @@ export type Organization = {
   /** The email XAPPineer that is in charge of handling the organization's account */
   XAPPLead?: Maybe<Scalars['String']['output']>;
   _id: Scalars['ID']['output'];
+  /** Returns true if the org has accepted the latest version of the terms of service. */
+  acceptedLatestTermsOfService: Scalars['Boolean']['output'];
+  acceptedTermsOfService: Array<OrgAcceptedTermsOfService>;
   analytics?: Maybe<OrgAnalytics>;
   /** The apps that the organization contains. */
   apps?: Maybe<GetAppsQuery>;
@@ -8327,7 +8347,7 @@ export type SearchedAppStatus = {
 
 /** Organization that is returned from a Search query. */
 export type SearchedOrg = {
-  /** The email of the XAPPmedia employee which is the main contact for the organization. */
+  /** The email of the XAPP employee which is the main contact for the organization. */
   XAPPLead?: Maybe<Scalars['String']['output']>;
   /** The contact email of the organization. */
   contact?: Maybe<Scalars['String']['output']>;
@@ -10310,6 +10330,8 @@ export type WebsiteData = {
 
 export type WebsiteDataBusinessData = {
   address?: Maybe<WebsiteDataBusinessDataAddress>;
+  /** Category related to the business of the website. */
+  category?: Maybe<Scalars['String']['output']>;
   geo?: Maybe<WebsiteDataBusinessDataGeo>;
   name?: Maybe<Scalars['String']['output']>;
   phoneNumbers?: Maybe<Array<WebsiteDataPhoneNumber>>;
