@@ -1,3 +1,10 @@
+## [1.4.84](https://github.com/xapp-ai/xapp-cli/compare/v1.4.83...v1.4.84) (2023-08-24)
+
+
+### Bug Fixes
+
+* Queries Website from App ([#778](https://github.com/xapp-ai/xapp-cli/issues/778)) ([91b3597](https://github.com/xapp-ai/xapp-cli/commit/91b3597617c349633c5188b5de2d5c6f64b709e3))
+
 ## [1.4.83](https://github.com/xapp-ai/xapp-cli/compare/v1.4.82...v1.4.83) (2023-08-18)
 
 
