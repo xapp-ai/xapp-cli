@@ -331,3 +331,723 @@ query getEvents(
     }
   }
 }
+
+query getAppChannel($appId: ID!, $channelId: ID!) {
+  app(appId: $appId) {
+    __typename
+    appId
+    organizationId
+    invocationName
+    channel(id: $channelId) {
+      __typename
+      type
+      name
+      id
+      directoryListing
+      endPoint
+      status {
+        type
+      }
+      useNLU
+      ... on DialogflowAppChannel {
+        hasCredentials
+        additionalInformationQuestions {
+          intendedForUnderThirteen
+          alcoholAndTobaccoRelatedContent
+        }
+      }
+      ... on AlexaAppChannel {
+        invocationName
+        hasCredentials
+        skillId
+        vendorId
+        category
+        distributionMode
+        isAvailableWorldwide
+        distributionCountries
+        permissions {
+          name
+        }
+        vendors {
+          id
+          name
+          roles
+        }
+        useManifest
+        privacyAndCompliance {
+          allowsPurchases
+          containsAds
+          isChildDirected
+          isExportCompliant
+          usesPersonalInfo
+        }
+      }
+      ... on ActionsOnGoogleAppChannel {
+        hasCredentials
+        additionalInformationQuestions {
+          intendedForUnderThirteen
+          alcoholAndTobaccoRelatedContent
+        }
+      }
+      ... on LexConnectAppChannel {
+        voiceId
+        nluIntentConfidenceThreshold
+        idleSessionTTLInSeconds
+        detectSentiment
+        isLinkedToKendra
+        lexPostTextUrl
+        enableModelImprovements
+        botName
+      }
+      ... on LexV2ConnectAppChannel {
+        voiceId
+        idleSessionTTLInSeconds
+        detectSentiment
+        isLinkedToKendra
+        lexPostTextUrl
+        enableModelImprovements
+        botId
+        botName
+        botRegion
+        lexFulfillmentLambdaARN
+        managementRole
+        managementRoleExternalId
+      }
+      ... on ChatWidgetAppChannel {
+        cta {
+          message
+          timeout
+          delay
+          animation
+          animationTimeout
+          mobile {
+            applyAtLessThanWidth
+            message
+            timeout
+            delay
+            animation
+            animationTimeout
+          }
+        }
+        name
+        direct
+        disabled
+        accountKey
+        botName
+        avatarUrl
+        key
+        menu {
+          menuButtonLocation
+          items {
+            ... on ChatWidgetMenuItemConfig {
+              label
+              subtitle
+            }
+            ... on ChatWidgetMenuItemStaticText {
+              title
+              body
+            }
+            ... on ChatWidgetMenuItemStaticImage {
+              imageUrl
+            }
+            ... on ChatWidgetMenuItemOpenURL {
+              url
+              text
+              behavior {
+                type
+                ... on ChatWidgetAppChannelUrlBehaviorNewWindow {
+                  width
+                  height
+                }
+              }
+            }
+          }
+          itemsTabIndex
+          button {
+            tabIndex
+          }
+        }
+        serverUrl
+        middlewareUrl
+        autocompleteSuggestionsUrl
+        configurableMessages {
+          items {
+            delay
+            text
+          }
+        }
+        urls {
+          policies {
+            pattern
+            behavior {
+              type
+              ... on ChatWidgetAppChannelUrlBehaviorNewWindow {
+                width
+                height
+              }
+            }
+          }
+          defaultBehavior {
+            type
+            ... on ChatWidgetAppChannelUrlBehaviorNewWindow {
+              width
+              height
+            }
+          }
+        }
+        autoOpenOnWidth
+        autoOpenOnPattern {
+          minimumWidth
+          patterns
+        }
+        chatButton {
+          tabIndex
+        }
+        header {
+          status {
+            online
+            offline
+            away
+            connecting
+          }
+          subtitle {
+            enabled
+            text
+          }
+          actions {
+            refresh
+            refreshTabIndex
+            minimize
+            minimizeTabIndex
+            cancel
+            cancelTabIndex
+          }
+          alignTextCenter
+        }
+        footer {
+          branding {
+            enabled
+            text
+          }
+          sendButton {
+            icon
+            tabIndex
+          }
+          clearButton {
+            tabIndex
+          }
+        }
+        typingStatus {
+          textTypingStatusEnabled
+        }
+        theme {
+          border {
+            color
+            width
+            radius
+          }
+          carousel {
+            button {
+              color
+            }
+            subtitle {
+              color
+              fontFamily
+              fontSize
+              fontWeight
+            }
+            title {
+              color
+              fontFamily
+              fontSize
+              fontWeight
+            }
+          }
+          chatButton {
+            background
+            margin {
+              top
+              right
+              bottom
+              left
+            }
+          }
+          content {
+            background
+          }
+          cta {
+            background
+            text {
+              color
+              fontFamily
+              fontSize
+            }
+          }
+          footer {
+            background
+            border {
+              color
+              radius
+              width
+            }
+            branding {
+              text {
+                color
+                fontFamily
+                fontSize
+                fontStyle
+                fontWeight
+              }
+            }
+          }
+          header {
+            background
+            border {
+              color
+              radius
+              width
+            }
+            text {
+              color
+              fontFamily
+              fontSize
+              fontStyle
+              fontWeight
+            }
+            subtitle {
+              color
+              fontFamily
+              fontSize
+              fontStyle
+              fontWeight
+            }
+          }
+          input {
+            background
+            border {
+              color
+              width
+              radius
+            }
+            text {
+              color
+              fontFamily
+              fontSize
+            }
+            placeholder {
+              color
+              fontFamily
+              fontSize
+              fontWeight
+              fontStyle
+            }
+          }
+          menu {
+            item {
+              height
+              background
+              text {
+                color
+                fontSize
+                fontFamily
+                fontWeight
+                fontStyle
+              }
+            }
+          }
+          menuButton {
+            color
+          }
+          messages {
+            mine {
+              bubbleColor
+              text {
+                color
+                fontSize
+                fontFamily
+                fontWeight
+                fontStyle
+              }
+            }
+            others {
+              bubbleColor
+              text {
+                color
+                fontSize
+                fontFamily
+                fontWeight
+                fontStyle
+              }
+            }
+            padding {
+              left
+              right
+              bottom
+              top
+            }
+            maxWidth
+          }
+          minimizeButton {
+            color
+          }
+          cancelButton {
+            color
+          }
+          refreshButton {
+            color
+          }
+          primaryColor
+          zIndex
+          sendButton {
+            color
+            width
+          }
+          size {
+            width
+            height
+          }
+          textTypingStatus {
+            text {
+              color
+              fontFamily
+              fontSize
+              fontStyle
+              fontWeight
+            }
+          }
+        }
+        input {
+          placeholder
+        }
+        connection {
+          type
+          serverUrl
+        }
+      }
+      ... on IntelligentSearchAppChannel {
+        type
+        name
+        key
+        autocompleteSuggestionsUrl
+        connection {
+          serverUrl
+        }
+        theme {
+          accentColor
+          border {
+            color
+            width
+            radius
+            style
+          }
+          card {
+            background
+            border {
+              color
+              width
+              radius
+              style
+            }
+            description {
+              margin {
+                bottom
+                left
+                right
+                top
+              }
+              padding {
+                bottom
+                left
+                right
+                top
+              }
+              text {
+                color
+                fontFamily
+                fontSize
+                fontStyle
+                fontWeight
+                lineHeight
+              }
+            }
+            link {
+              margin {
+                bottom
+                left
+                right
+                top
+              }
+              padding {
+                bottom
+                left
+                right
+                top
+              }
+              text {
+                default {
+                  color
+                  fontFamily
+                  fontSize
+                  fontStyle
+                  fontWeight
+                  lineHeight
+                }
+              }
+            }
+            margin {
+              bottom
+              left
+              right
+              top
+            }
+            padding {
+              bottom
+              left
+              right
+              top
+            }
+            title {
+              margin {
+                bottom
+                left
+                right
+                top
+              }
+              padding {
+                bottom
+                left
+                right
+                top
+              }
+              text {
+                color
+                fontFamily
+                fontSize
+                fontStyle
+                fontWeight
+                lineHeight
+              }
+            }
+          }
+          carousel {
+            card {
+              background
+              border {
+                color
+                width
+                radius
+                style
+              }
+              description {
+                margin {
+                  bottom
+                  left
+                  right
+                  top
+                }
+                padding {
+                  bottom
+                  left
+                  right
+                  top
+                }
+                text {
+                  color
+                  fontFamily
+                  fontSize
+                  fontStyle
+                  fontWeight
+                  lineHeight
+                }
+              }
+              link {
+                margin {
+                  bottom
+                  left
+                  right
+                  top
+                }
+                padding {
+                  bottom
+                  left
+                  right
+                  top
+                }
+                text {
+                  default {
+                    color
+                    fontFamily
+                    fontSize
+                    fontStyle
+                    fontWeight
+                    lineHeight
+                  }
+                }
+              }
+              margin {
+                bottom
+                left
+                right
+                top
+              }
+              padding {
+                bottom
+                left
+                right
+                top
+              }
+              title {
+                margin {
+                  bottom
+                  left
+                  right
+                  top
+                }
+                padding {
+                  bottom
+                  left
+                  right
+                  top
+                }
+                text {
+                  color
+                  fontFamily
+                  fontSize
+                  fontStyle
+                  fontWeight
+                  lineHeight
+                }
+              }
+            }
+          }
+          list {
+            card {
+              background
+              border {
+                color
+                width
+                radius
+                style
+              }
+              description {
+                margin {
+                  bottom
+                  left
+                  right
+                  top
+                }
+                padding {
+                  bottom
+                  left
+                  right
+                  top
+                }
+                text {
+                  color
+                  fontFamily
+                  fontSize
+                  fontStyle
+                  fontWeight
+                  lineHeight
+                }
+              }
+              link {
+                margin {
+                  bottom
+                  left
+                  right
+                  top
+                }
+                padding {
+                  bottom
+                  left
+                  right
+                  top
+                }
+                text {
+                  default {
+                    color
+                    fontFamily
+                    fontSize
+                    fontStyle
+                    fontWeight
+                    lineHeight
+                  }
+                }
+              }
+              margin {
+                bottom
+                left
+                right
+                top
+              }
+              padding {
+                bottom
+                left
+                right
+                top
+              }
+              title {
+                margin {
+                  bottom
+                  left
+                  right
+                  top
+                }
+                padding {
+                  bottom
+                  left
+                  right
+                  top
+                }
+                text {
+                  color
+                  fontFamily
+                  fontSize
+                  fontStyle
+                  fontWeight
+                  lineHeight
+                }
+              }
+            }
+          }
+          messages {
+            others {
+              bubble {
+                background
+              }
+              text {
+                color
+                fontFamily
+                fontSize
+                fontStyle
+                fontWeight
+                lineHeight
+              }
+            }
+          }
+        }
+      }
+      ... on AppChannel {
+        id
+        type
+      }
+      ... on FormWidgetAppChannel {
+        type
+        name
+        id
+        autoGreeting
+        directoryListing
+        useNLU
+        connection {
+          serverUrl
+          accountKey
+        }
+        theme {
+          accentColor
+        }
+        attributes
+      }
+    }
+  }
+}
