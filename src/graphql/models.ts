@@ -39,6 +39,7 @@ export type Scalars = {
   keywords_List_String_NotNull_maxLength_50: { input: any; output: any; }
   name_String_NotNull_maxLength_50: { input: any; output: any; }
   notes_String_maxLength_4000: { input: any; output: any; }
+  settlingTimeSeconds_Int_max_5_exclusiveMin_0: { input: any; output: any; }
   templateType_String_maxLength_50: { input: any; output: any; }
   time_String_NotNull_format_date: { input: any; output: any; }
 };
@@ -106,7 +107,11 @@ export type ActionsOnGoogleAdditionalInformationQuestionsInput = {
 
 /** A channel that is specific for apps to run on the Actions On Google. */
 export type ActionsOnGoogleAppChannel = BaseAppChannel & {
-  /** For "actions-on-google" type channels only. */
+  /**
+   * For "actions-on-google" type channels only.
+   *
+   * @deprecated: Actions-on-google is no longer supported at all.  It is gone.
+   */
   additionalInformationQuestions?: Maybe<ActionsOnGoogleAdditionalInformationQuestions>;
   /** Deprecated: DO NOT USE. IT WILL BE REMOVED */
   credentialsURL?: Maybe<Scalars['String']['output']>;
@@ -147,7 +152,11 @@ export type ActionsOnGoogleAppChannelUsageEventsArgs = {
 };
 
 export type ActionsOnGoogleAppChannelInput = {
-  /** For "actions-on-google" type channels only. */
+  /**
+   * For "actions-on-google" type channels only.
+   *
+   * @deprecated: Actions-on-google is no longer supported at all.  It is gone.
+   */
   additionalInformationQuestions?: InputMaybe<ActionsOnGoogleAdditionalInformationQuestionsInput>;
   /** URL for the directory listing. */
   directoryListing?: InputMaybe<Scalars['String']['input']>;
@@ -210,6 +219,8 @@ export type AddEntityInput = {
    * it will be derived from the display name.
    */
   entityId?: InputMaybe<Scalars['ID']['input']>;
+  /** Whether or not to exclude the entity from autocomplete suggestions. */
+  excludeFromSuggestions?: InputMaybe<Scalars['Boolean']['input']>;
   nlu?: InputMaybe<Scalars['EntityNLU']['input']>;
   type?: InputMaybe<EntityType>;
   values?: InputMaybe<Array<EntityValueInput>>;
@@ -545,6 +556,8 @@ export type AdminFaqSuggestionInput = {
 
 export type AdminLaboratory = {
   chatSuggestions: AdminChatSuggestionReturn;
+  /** This will return stats on the documents requested. */
+  docsKendra?: Maybe<Scalars['JSON']['output']>;
   /** Return entities that would fill a given search string. */
   entitySearch: EntitiesQuery;
   eventsSearch: AdminTotalEvents;
@@ -578,6 +591,11 @@ export type AdminLaboratoryChatSuggestionsArgs = {
   queryText: Scalars['String']['input'];
   size?: InputMaybe<Scalars['Int']['input']>;
   types?: InputMaybe<Array<InputMaybe<AdminChatSuggestionType>>>;
+};
+
+
+export type AdminLaboratoryDocsKendraArgs = {
+  appId: Scalars['ID']['input'];
 };
 
 
@@ -1211,6 +1229,12 @@ export type App = {
   businessHighValueLeadDescription?: Maybe<Scalars['String']['output']>;
   /** The hours in which the business related to the app is open. */
   businessHours: Array<BusinessHours>;
+  /** Whether or not the app can capture leads. */
+  canCaptureLeads: Scalars['Boolean']['output'];
+  /** The leads that have been caught recently. */
+  caughtLeads: CaughtLeadsResult;
+  /** The opportunity alerts that have been caught recently. */
+  caughtOpportunityAlerts: CaughtOpportunityAlertsResult;
   /** Returns an App channel based on the provided ID. */
   channel?: Maybe<BaseAppChannel>;
   /** The Channels that are available to the app. */
@@ -1270,6 +1294,8 @@ export type App = {
    * Aspect ration must be 1:1 and minimum dimensions are 512x512.
    */
   icon?: Maybe<Scalars['String']['output']>;
+  /** Retrieve the data for an integration. */
+  integration: Integration;
   /** The intents that are associated with the app. */
   intents?: Maybe<IntentsQuery>;
   /** Allows stentor_admins to view and add notes to apps for internal use. */
@@ -1300,6 +1326,8 @@ export type App = {
   largeIcon?: Maybe<Scalars['String']['output']>;
   /** The Email address to send lead captures to. */
   leadsContact?: Maybe<Scalars['EmailAddress']['output']>;
+  /** The phone number of a leads user. */
+  leadsContactPhone?: Maybe<Scalars['String']['output']>;
   /**
    * This is a series of locales that the apps supports.  These can override the
    * items that are in the original App.  The items in the main app are used as defaults if they
@@ -1343,6 +1371,8 @@ export type App = {
   smallIcon?: Maybe<Scalars['String']['output']>;
   /** The status that the app is currently in Stentor. */
   status?: Maybe<Status>;
+  /** The product that is linked to the subscription to this app in Stripe. */
+  stripeProductId?: Maybe<Scalars['String']['output']>;
   /** The subscription ID that is linked to this app in Stripe. */
   stripeSubscriptionId?: Maybe<Scalars['String']['output']>;
   /**
@@ -1361,12 +1391,24 @@ export type App = {
   testingInstructions?: Maybe<Scalars['String']['output']>;
   /** Contains fields related to publishing the app to various platforms such as dialogflow or alexa. */
   thirdPartyDeployments?: Maybe<ThirdPartyDeployments>;
+  /** The usage statistics related to the app. */
+  usage: AppUsageStats;
   /** Retrieves any events that are related to this specific app */
   usageEvents?: Maybe<TotalUsageEvents>;
   /** Primary website for the company or division of a company that the app is representing. */
   website?: Maybe<Scalars['URL']['output']>;
   /** Data related to what was found on the customers website */
   websiteData?: Maybe<AppWebsiteData>;
+};
+
+
+export type AppCaughtLeadsArgs = {
+  nextKey?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type AppCaughtOpportunityAlertsArgs = {
+  nextKey?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -1459,6 +1501,11 @@ export type AppHandlersArgs = {
   withId?: InputMaybe<Scalars['String']['input']>;
   withIdOrName?: InputMaybe<Scalars['String']['input']>;
   withName?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type AppIntegrationArgs = {
+  type: IntegrationType;
 };
 
 
@@ -1588,6 +1635,7 @@ export type AppChannelMutation = {
    * @return The channel that was just added
    */
   addFacebookMessengerChannel: FacebookMessengerAppChannel;
+  addFormWidgetChannel: FormWidgetAppChannel;
   /**
    * Adds or updates a Google Business Message channel to the specified app
    *
@@ -1644,6 +1692,11 @@ export type AppChannelMutationAddDialogflowChannelArgs = {
 
 export type AppChannelMutationAddFacebookMessengerChannelArgs = {
   channel: FacebookMessengerAppChannelInput;
+};
+
+
+export type AppChannelMutationAddFormWidgetChannelArgs = {
+  channel: FormWidgetAppChannelInput;
 };
 
 
@@ -1787,6 +1840,8 @@ export type AppInput = {
   largeIcon?: InputMaybe<Scalars['String']['input']>;
   /** The Email address to send lead captures to. */
   leadsContact?: InputMaybe<Scalars['EmailAddress']['input']>;
+  /** The phone number of a leads user. */
+  leadsContactPhone?: InputMaybe<Scalars['String']['input']>;
   /** Physical location associated with the app. */
   location?: InputMaybe<LocationInput>;
   /**
@@ -1818,6 +1873,8 @@ export type AppInput = {
   smallIcon?: InputMaybe<Scalars['String']['input']>;
   /** The status that the app is currently in Stentor. */
   status?: InputMaybe<StatusInput>;
+  /** The product that is linked to the subscription to this app in Stripe. */
+  stripeProductId?: InputMaybe<Scalars['String']['input']>;
   /** The subscription ID that is linked to this app in Stripe. */
   stripeSubscriptionId?: InputMaybe<Scalars['String']['input']>;
   /**
@@ -2218,6 +2275,7 @@ export type AppTemplateInput = {
    * Required for Alexa
    */
   smallIcon?: InputMaybe<Scalars['String']['input']>;
+  stripeProductId?: InputMaybe<Scalars['String']['input']>;
   /** The subscription ID that is linked to this app in Stripe. */
   stripeSubscriptionId?: InputMaybe<Scalars['String']['input']>;
   /**
@@ -2286,6 +2344,11 @@ export type AppUsageStat = {
   returningUsers: Scalars['Int']['output'];
   totalSessions: Scalars['Int']['output'];
   totalUsers: Scalars['Int']['output'];
+};
+
+export type AppUsageStats = {
+  /** The kendra documents that are currently downloaded to the app. */
+  kendraDocs: MeteredStat;
 };
 
 export type AppWebsiteData = {
@@ -2573,6 +2636,11 @@ export type CmsUpdateMutation = {
   delete: Scalars['String']['output'];
 };
 
+export enum CtaAnimation {
+  Bounce = 'bounce',
+  Wiggle = 'wiggle'
+}
+
 export type CardDisplay = BaseDisplay & {
   accessibilityText?: Maybe<Scalars['String']['output']>;
   buttons?: Maybe<Array<Maybe<CardDisplayButton>>>;
@@ -2606,6 +2674,32 @@ export type CardDisplayInput = {
   title?: InputMaybe<Scalars['String']['input']>;
   token?: InputMaybe<Scalars['String']['input']>;
   type: Scalars['String']['input'];
+};
+
+export type CaughtLead = {
+  /** The lead that was sent to the app. */
+  lead?: Maybe<Lead>;
+};
+
+export type CaughtLeadsResult = {
+  /** The leads that were found. */
+  leads: Array<CaughtLead>;
+  /** The key to retrieve more leads or null if there are none left. */
+  nextKey?: Maybe<Scalars['String']['output']>;
+};
+
+export type CaughtOpportunityAlert = {
+  /** The type of opportunity alert that was found. */
+  oppAlertType: Scalars['String']['output'];
+  /** The sessionId of the chat session that threw the opportunity alert. */
+  sessionId: Scalars['String']['output'];
+};
+
+export type CaughtOpportunityAlertsResult = {
+  /** The key to retrieve more opportunity alerts or null if there are none left. */
+  nextKey?: Maybe<Scalars['String']['output']>;
+  /** The opportunity alerts that were found. */
+  oppAlerts: Array<CaughtOpportunityAlert>;
 };
 
 /** A channel that is specific for apps to run on the Actions On Google. */
@@ -2741,7 +2835,9 @@ export type ChatWidgetAppChannelUrlBehaviorBase = {
 };
 
 export type ChatWidgetAppChannelUrlBehaviorInput = {
+  height?: InputMaybe<Scalars['Int']['input']>;
   type: ChatWidgetAppChannelWidgetUrlBehaviorType;
+  width?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type ChatWidgetAppChannelUrlBehaviorNewTab = ChatWidgetAppChannelUrlBehaviorBase & {
@@ -2754,6 +2850,7 @@ export type ChatWidgetAppChannelUrlBehaviorNewWindow = ChatWidgetAppChannelUrlBe
   width?: Maybe<Scalars['Int']['output']>;
 };
 
+/** @deprecated(reason: "Use ChatWidgetAppChannelUrlBehaviorInput") */
 export type ChatWidgetAppChannelUrlBehaviorNewWindowWinowInput = {
   height?: InputMaybe<Scalars['Int']['input']>;
   type: ChatWidgetAppChannelWidgetUrlBehaviorType;
@@ -2843,10 +2940,14 @@ export type ChatWidgetCarouselThemeInput = {
 };
 
 export type ChatWidgetChatButtonConfig = {
+  /** URL to an image for the button. Recommended to be 24x24 in size. */
+  imageUrl?: Maybe<Scalars['String']['output']>;
   tabIndex?: Maybe<Scalars['String']['output']>;
 };
 
 export type ChatWidgetChatButtonConfigInput = {
+  /** URL to an image for the button. Recommended to be 24x24 in size. */
+  imageUrl?: InputMaybe<Scalars['URLString']['input']>;
   tabIndex?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -2882,6 +2983,7 @@ export type ChatWidgetContentThemeInput = {
 
 export type ChatWidgetCtaTheme = {
   background?: Maybe<Scalars['String']['output']>;
+  border?: Maybe<ChatWidgetBorderTheme>;
   text?: Maybe<ChatWidgetTextTheme>;
 };
 
@@ -3454,12 +3556,30 @@ export type CreateOrganizationInput = {
 };
 
 export type CtaConfig = {
+  /** Animation to perform on the button after the delay */
+  animation?: Maybe<CtaAnimation>;
+  /** How long to keep the animation going, in milliseconds.  If an animation exists */
+  animationTimeout?: Maybe<Scalars['Int']['output']>;
+  /** The delay, in milliseconds, to wait until the message is displayed */
+  delay?: Maybe<Scalars['Int']['output']>;
+  /**
+   * Message to display in the chat bubble.
+   *
+   * An empty message will not display the chat bubble.
+   */
   message?: Maybe<Scalars['String']['output']>;
+  /** CTA Config that is used when mobile devices load it. */
+  mobile?: Maybe<MobileCtaConfig>;
+  /** How long, in milliseconds, to display the message */
   timeout?: Maybe<Scalars['Int']['output']>;
 };
 
 export type CtaConfigInput = {
+  animation?: InputMaybe<CtaAnimation>;
+  animationTimeout?: InputMaybe<Scalars['Int']['input']>;
+  delay?: InputMaybe<Scalars['Int']['input']>;
   message?: InputMaybe<Scalars['String']['input']>;
+  mobile?: InputMaybe<MobileCtaConfigInput>;
   timeout?: InputMaybe<Scalars['Int']['input']>;
 };
 
@@ -3641,7 +3761,11 @@ export type DialogflowAppChannelUsageEventsArgs = {
 };
 
 export type DialogflowAppChannelInput = {
-  /** For "actions-on-google" type channels only. */
+  /**
+   * For "actions-on-google" type channels only.
+   *
+   * @deprecated: Actions-on-google is no longer supported at all.  It is gone.
+   */
   additionalInformationQuestions?: InputMaybe<DialogflowAdditionalInformationQuestionsInput>;
   /** URL to find the credentials for accessing Google Cloud Services */
   dialogflowCredentials?: InputMaybe<DialogflowCredentialsInput>;
@@ -3875,6 +3999,8 @@ export type Entity = {
   displayName: Scalars['String']['output'];
   /** The unique identification as it is in the database. */
   entityId: Scalars['ID']['output'];
+  /** Whether or not to exclude the entity from autocomplete suggestions. */
+  excludeFromSuggestions: Scalars['Boolean']['output'];
   intents: EntityIntentsSearchResult;
   /**
    * NLU specific metadata used when translating to the NLU entity.
@@ -4418,6 +4544,100 @@ export type FlagTotals = {
   INCORRECT_RESOLVED: Scalars['Int']['output'];
   NEEDS_HUMAN: Scalars['Int']['output'];
   OPTIMAL: Scalars['Int']['output'];
+};
+
+export type FormWidgetAppChannel = BaseAppChannel & {
+  /** Extra custom values */
+  attributes?: Maybe<Scalars['StringMap']['output']>;
+  /** The auto-greeting string (intent we start the widget with) */
+  autoGreeting?: Maybe<Scalars['String']['output']>;
+  /** Used for autocomplete suggestions. */
+  autocompleteSuggestionsUrl?: Maybe<Scalars['URLString']['output']>;
+  connection?: Maybe<FormWidgetConnectionConfig>;
+  /** URL for the directory listing. */
+  directoryListing?: Maybe<Scalars['String']['output']>;
+  /** URI where the channel can be accessed. */
+  endPoint?: Maybe<Scalars['String']['output']>;
+  /** The ID of the channel. */
+  id: Scalars['String']['output'];
+  /** The display name for the channel. */
+  name?: Maybe<Scalars['String']['output']>;
+  /** The lifecycle status of the app. */
+  status?: Maybe<AppChannelStatus>;
+  /** Theme for the search bar. */
+  theme?: Maybe<FormWidgetTheme>;
+  /** The type of channel */
+  type: Scalars['String']['output'];
+  /** Retrieves any events that are related to this specific app */
+  usageEvents?: Maybe<TotalUsageEvents>;
+  /**
+   * ID of the NLU to use within app.nlu[].
+   *
+   * If it exists, the channel will use the provided NLU at runtime
+   * to convert the raw text to an Intent
+   *
+   * If the value is "*", then it will pick the first available NLU within app.nlu[]
+   */
+  useNLU?: Maybe<Scalars['String']['output']>;
+};
+
+
+export type FormWidgetAppChannelUsageEventsArgs = {
+  from?: InputMaybe<Scalars['Int']['input']>;
+  size?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type FormWidgetAppChannelInput = {
+  /** Extra custom values */
+  attributes?: InputMaybe<Scalars['StringMap']['input']>;
+  /** The auto-greeting string (intent we start the widget with) */
+  autoGreeting?: InputMaybe<Scalars['String']['input']>;
+  /** Used for autocomplete suggestions. */
+  autocompleteSuggestionsUrl?: InputMaybe<Scalars['URL']['input']>;
+  connection?: InputMaybe<FormWidgetConnectionConfigInput>;
+  /** URL for the directory listing. */
+  directoryListing?: InputMaybe<Scalars['String']['input']>;
+  /** URI where the channel can be accessed. */
+  endPoint?: InputMaybe<Scalars['String']['input']>;
+  /** The ID of the channel. */
+  id: Scalars['String']['input'];
+  /** The display name for the channel. */
+  name?: InputMaybe<Scalars['String']['input']>;
+  /** Theme for the search bar. */
+  theme?: InputMaybe<FormWidgetThemeInput>;
+  /** The type of channel */
+  type: Scalars['String']['input'];
+  /**
+   * ID of the NLU to use within app.nlu[].
+   *
+   * If it exists, the channel will use the provided NLU at runtime
+   * to convert the raw text to an Intent
+   *
+   * If the value is "*", then it will pick the first available NLU within app.nlu[]
+   */
+  useNLU?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type FormWidgetConnectionConfig = {
+  /** Key used for basic authentication. */
+  accountKey?: Maybe<Scalars['String']['output']>;
+  /** Backend URL */
+  serverUrl?: Maybe<Scalars['URLString']['output']>;
+};
+
+export type FormWidgetConnectionConfigInput = {
+  /** Key used for basic authentication. */
+  accountKey?: InputMaybe<Scalars['String']['input']>;
+  /** Backend URL */
+  serverUrl?: InputMaybe<Scalars['URLString']['input']>;
+};
+
+export type FormWidgetTheme = {
+  accentColor?: Maybe<Scalars['String']['output']>;
+};
+
+export type FormWidgetThemeInput = {
+  accentColor?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ForwardInput = {
@@ -5196,6 +5416,62 @@ export type InputSlot = {
    * For legacy applications, SlotType is used.
    */
   type?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type Integration = {
+  /** Determines if the app integration is currently working. */
+  isActive: Scalars['Boolean']['output'];
+  /** Determines if the user is allowed to integrate with a given service based on their subscription level. */
+  isAllowed: Scalars['Boolean']['output'];
+  /** Determines if the app is currently linked to the integration. */
+  isLinked: Scalars['Boolean']['output'];
+};
+
+export enum IntegrationType {
+  Jobber = 'jobber',
+  Lacrm = 'lacrm',
+  Servicefusion = 'servicefusion',
+  Servicetitan = 'servicetitan',
+  Surefire = 'surefire',
+  TestCognito = 'test_cognito'
+}
+
+export type IntegrationsMutation = {
+  /**
+   * Adds a new Service Titan Integration to the app.
+   *
+   * These attributes are to be generated on Service Titan's website and added here.
+   */
+  addServiceTitanIntegration: Integration;
+  /** Adds a Surefire integration for the given app. */
+  addSurefireIntegration: Integration;
+  /**
+   * Disconnects the integration from the app.
+   *
+   * The user will not be able to retrieve leads through this integration anymore after this.
+   */
+  disconnect: Integration;
+};
+
+
+export type IntegrationsMutationAddServiceTitanIntegrationArgs = {
+  bookingProviderId: Scalars['ID']['input'];
+  clientId: Scalars['ID']['input'];
+  clientSecret: Scalars['String']['input'];
+  serviceTitanAppId: Scalars['ID']['input'];
+  tenantId: Scalars['ID']['input'];
+};
+
+
+export type IntegrationsMutationAddSurefireIntegrationArgs = {
+  dataMap: Scalars['String']['input'];
+  endpoint: Scalars['URLString']['input'];
+  token: Scalars['String']['input'];
+};
+
+
+export type IntegrationsMutationDisconnectArgs = {
+  type: IntegrationType;
 };
 
 export type IntelligentSearchAppChannel = BaseAppChannel & {
@@ -6018,6 +6294,40 @@ export type LastActiveHaveNotSeenWithinHandlerResponse = HandlerResponse & {
   tags?: Maybe<Array<Scalars['String']['output']>>;
 };
 
+export type Lead = {
+  /** The company related to the lead. */
+  company?: Maybe<Scalars['String']['output']>;
+  /** Fields that are important to the lead. */
+  fields: Array<LeadField>;
+  source?: Maybe<Scalars['String']['output']>;
+  transcript?: Maybe<Array<LeadTranscript>>;
+};
+
+export type LeadField = {
+  name: Scalars['String']['output'];
+  value?: Maybe<Scalars['String']['output']>;
+};
+
+export type LeadTranscript = {
+  /** The time the message was created */
+  createdTime: Scalars['String']['output'];
+  /** Who the message is from */
+  from?: Maybe<LeadTranscriptUserProfile>;
+  /** A simple version of the message.  It will not include displays or SSML if the original message includes it. */
+  message: Scalars['String']['output'];
+  /** Who the message is two, it can be to multiple recipients. */
+  to?: Maybe<Array<LeadTranscriptUserProfile>>;
+};
+
+export type LeadTranscriptUserProfile = {
+  /** The email of the user. */
+  email?: Maybe<Scalars['String']['output']>;
+  /** Unique userId */
+  id: Scalars['String']['output'];
+  /** The first name, or given name, of the user. */
+  name?: Maybe<Scalars['String']['output']>;
+};
+
 /** A channel that is specific for apps to run on the Dialogflow. */
 export type LexConnectAppChannel = BaseAppChannel & {
   /** The name of the lex bot. */
@@ -6192,6 +6502,8 @@ export type LexNluQueryKnowledgeAnswer = {
 
 /** A channel that is specific for apps to run on the Dialogflow. */
 export type LexV2ConnectAppChannel = BaseAppChannel & {
+  /** The ID to the lex bot */
+  botId?: Maybe<Scalars['String']['output']>;
   /** The name of the lex bot. */
   botName?: Maybe<Scalars['String']['output']>;
   /** The region that the bot is contained in. */
@@ -6269,6 +6581,8 @@ export type LexV2ConnectAppChannelUsageEventsArgs = {
 };
 
 export type LexV2ConnectAppChannelInput = {
+  /** The ID to the lex bot */
+  botId?: InputMaybe<Scalars['String']['input']>;
   /** The name of the lex bot. */
   botName?: InputMaybe<Scalars['String']['input']>;
   /** The region that the bot is contained in. */
@@ -6473,6 +6787,7 @@ export type LocaleApp = {
   privacyPolicyUrl?: Maybe<Scalars['String']['output']>;
   smallIcon?: Maybe<Scalars['String']['output']>;
   status?: Maybe<Status>;
+  stripeProductId?: Maybe<Scalars['String']['output']>;
   stripeSubscriptionId?: Maybe<Scalars['String']['output']>;
   summary?: Maybe<Scalars['String']['output']>;
   templateType?: Maybe<Scalars['String']['output']>;
@@ -6507,6 +6822,7 @@ export type LocaleAppInput = {
   privacyPolicyUrl?: InputMaybe<Scalars['String']['input']>;
   smallIcon?: InputMaybe<Scalars['String']['input']>;
   status?: InputMaybe<StatusInput>;
+  stripeProductId?: InputMaybe<Scalars['String']['input']>;
   stripeSubscriptionId?: InputMaybe<Scalars['String']['input']>;
   summary?: InputMaybe<Scalars['String']['input']>;
   templateType?: InputMaybe<Scalars['String']['input']>;
@@ -6554,6 +6870,53 @@ export type MatchConfidenceRange = {
   greaterThanOrEqual?: InputMaybe<Scalars['Float']['input']>;
   lessThan?: InputMaybe<Scalars['Float']['input']>;
   lessThanOrEqual?: InputMaybe<Scalars['Float']['input']>;
+};
+
+export type MeteredStat = {
+  /** The current number consumed. */
+  current: Scalars['Int']['output'];
+  /** Whether or not the current meter has reached its limit. */
+  isAllowed: Scalars['Boolean']['output'];
+  /**
+   * The maximum limit that is allowed.
+   *
+   * A negative number means there is no limit.
+   */
+  limit: Scalars['Int']['output'];
+  /**
+   * The remaining number.
+   *
+   * A negative number means there is  no limit hence all remaining.
+   */
+  remaining: Scalars['Int']['output'];
+};
+
+export type MobileCtaConfig = {
+  /** Animation to perform on the button after the delay */
+  animation?: Maybe<CtaAnimation>;
+  /** How long to keep the animation going, in milliseconds.  If an animation exists */
+  animationTimeout?: Maybe<Scalars['Int']['output']>;
+  /** Apply this config when */
+  applyAtLessThanWidth?: Maybe<Scalars['String']['output']>;
+  /** The delay, in milliseconds, to wait until the message is displayed */
+  delay?: Maybe<Scalars['Int']['output']>;
+  /**
+   * Message to display in the chat bubble.
+   *
+   * An empty message will not display the chat bubble.
+   */
+  message?: Maybe<Scalars['String']['output']>;
+  /** How long, in milliseconds, to display the message */
+  timeout?: Maybe<Scalars['Int']['output']>;
+};
+
+export type MobileCtaConfigInput = {
+  animation?: InputMaybe<CtaAnimation>;
+  animationTimeout?: InputMaybe<Scalars['Int']['input']>;
+  applyAtLessThanWidth?: InputMaybe<Scalars['String']['input']>;
+  delay?: InputMaybe<Scalars['Int']['input']>;
+  message?: InputMaybe<Scalars['String']['input']>;
+  timeout?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type Mutation = {
@@ -7167,6 +7530,7 @@ export type MutationStartWebsiteCrawlingArgs = {
   channelId: Scalars['String']['input'];
   kendra?: InputMaybe<WebCrawlKendraInput>;
   s3RegionalDomain?: InputMaybe<Scalars['String']['input']>;
+  settlingTimeSeconds?: InputMaybe<Scalars['settlingTimeSeconds_Int_max_5_exclusiveMin_0']['input']>;
   stealth?: InputMaybe<Scalars['Boolean']['input']>;
   webUrl: Scalars['URL']['input'];
   webUrlPatterns?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -7348,6 +7712,7 @@ export enum OpportunityAlertDetailType {
   AgentRequested = 'AGENT_REQUESTED',
   BuyingIntent = 'BUYING_INTENT',
   ChatStarted = 'CHAT_STARTED',
+  NewSession = 'NEW_SESSION',
   UnansweredQuestion = 'UNANSWERED_QUESTION'
 }
 
@@ -7758,6 +8123,8 @@ export type PublishingAccountsInput = {
 /** Top level query for Stentor. */
 export type Query = {
   admin: AdminQuery;
+  /** The version that the API is currently in. */
+  apiVersion: Scalars['String']['output'];
   /** Fetches a single app */
   app?: Maybe<App>;
   /** Fetches a list of apps */
@@ -8927,6 +9294,7 @@ export enum StudioTierType {
 }
 
 export enum SubscriptionType {
+  AppSub = 'APP_SUB',
   /** OCS Bronze tier */
   Bronze = 'BRONZE',
   /** OCS Bronze Light tier */
@@ -9463,6 +9831,8 @@ export type UpdateAppInput = {
   largeIcon?: InputMaybe<Scalars['String']['input']>;
   /** The Email address to send lead captures to. */
   leadsContact?: InputMaybe<Scalars['EmailAddress']['input']>;
+  /** The phone number of a leads user. */
+  leadsContactPhone?: InputMaybe<Scalars['String']['input']>;
   /** Physical location associated with the app. */
   location?: InputMaybe<LocationInput>;
   /**
@@ -9492,6 +9862,8 @@ export type UpdateAppInput = {
    * Required for Alexa
    */
   smallIcon?: InputMaybe<Scalars['String']['input']>;
+  /** The product that is linked to the subscription to this app in Stripe. */
+  stripeProductId?: InputMaybe<Scalars['String']['input']>;
   /** The subscription ID that is linked to this app in Stripe. */
   stripeSubscriptionId?: InputMaybe<Scalars['String']['input']>;
   /**
@@ -9534,6 +9906,7 @@ export type UpdateAppMutation = {
   flagEvent: FlagEventReturn;
   /** Operations that are related to updating handlers */
   handler: HandlerMutation;
+  integration: IntegrationsMutation;
   /** Operations that are related to updating intents */
   intent: IntentMutation;
   /** Clears all notifications from the app. */
@@ -9554,6 +9927,7 @@ export type UpdateAppMutation = {
 
 
 export type UpdateAppMutationAddDocumentToKnowledgebaseArgs = {
+  locationId?: InputMaybe<Scalars['String']['input']>;
   makePublic?: InputMaybe<Scalars['Boolean']['input']>;
   url: Scalars['URL']['input'];
 };
@@ -9603,6 +9977,7 @@ export type UpdateAppMutationStartWebsiteCrawlingArgs = {
   channelId: Scalars['String']['input'];
   kendra?: InputMaybe<WebCrawlKendraInput>;
   s3RegionalDomain?: InputMaybe<Scalars['String']['input']>;
+  settlingTimeSeconds?: InputMaybe<Scalars['settlingTimeSeconds_Int_max_5_exclusiveMin_0']['input']>;
   stealth?: InputMaybe<Scalars['Boolean']['input']>;
   webUrl: Scalars['URL']['input'];
   webUrlPatterns?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -9621,6 +9996,8 @@ export type UpdateEntityInput = {
    * it will be derived from the display name.
    */
   entityId?: InputMaybe<Scalars['ID']['input']>;
+  /** Whether or not to exclude the entity from autocomplete suggestions. */
+  excludeFromSuggestions?: InputMaybe<Scalars['Boolean']['input']>;
   nlu?: InputMaybe<Scalars['EntityNLU']['input']>;
   type?: InputMaybe<EntityType>;
   values?: InputMaybe<Array<EntityValueInput>>;
@@ -10536,7 +10913,7 @@ export type GetAppOverviewQueryVariables = Exact<{
 }>;
 
 
-export type GetAppOverviewQuery = { app?: { __typename: 'App', _id: string, appId: string, name: string, description?: string | null, summary?: string | null, organizationId: string, invocationName?: string | null, templateType?: string | null, icon?: string | null, smallIcon?: string | null, largeIcon?: string | null, banner?: string | null, largeBanner?: string | null, website?: any | null, businessDescription?: string | null, businessHighValueLeadDescription?: string | null, status?: { type: string, timestamp: any, email: string, statusHistory?: Array<{ type: string, email: string, timestamp: any, notes?: string | null } | null> | null } | null, handlers?: { _id: string, total: number, handlers?: Array<{ _id: string, name?: string | null, intentId: string, type: string } | null> | null } | null, intents?: { _id: string, total: number, intents?: Array<{ _id: string, name: string, intentId: string } | null> | null } | null, entities?: { _id: string, total: number, entities?: Array<{ _id: string, entityId: string, displayName: string } | null> | null } | null, content?: { __typename: 'TotalWebContent', total: number, content: Array<{ __typename: 'WebContentWithHighlights', _id: string, name: string, url: string } | null> } | null, contentSources?: { __typename: 'TotalWebContentSources', total: number, sources: Array<{ __typename: 'WebContentSources', webUrl: string, webUrlPatterns: Array<string | null> } | null> } | null, faq?: { total: number } | null, channels?: Array<{ __typename: 'ActionsOnGoogleAppChannel', type: string, id: string, name?: string | null } | { __typename: 'AlexaAppChannel', type: string, id: string, name?: string | null } | { __typename: 'AppChannel', type: string, id: string, name?: string | null } | { __typename: 'ChatWidgetAppChannel', key?: string | null, type: string, id: string, name?: string | null, theme?: { primaryColor?: string | null } | null } | { __typename: 'DialogflowAppChannel', type: string, id: string, name?: string | null } | { __typename: 'FacebookMessengerAppChannel', type: string, id: string, name?: string | null } | { __typename: 'GoogleBusinessMessagesAppChannel', type: string, id: string, name?: string | null } | { __typename: 'IntelligentSearchAppChannel', key?: string | null, type: string, id: string, name?: string | null, theme?: { accentColor?: string | null } | null } | { __typename: 'LexConnectAppChannel', type: string, id: string, name?: string | null } | { __typename: 'LexV2ConnectAppChannel', type: string, id: string, name?: string | null } | null> | null, analytics?: { user: { totalUsers: number, totalSessions: number, returningUsers: number, newUsers: number } } | null } | null };
+export type GetAppOverviewQuery = { app?: { __typename: 'App', _id: string, appId: string, name: string, description?: string | null, summary?: string | null, organizationId: string, invocationName?: string | null, templateType?: string | null, icon?: string | null, smallIcon?: string | null, largeIcon?: string | null, banner?: string | null, largeBanner?: string | null, website?: any | null, businessDescription?: string | null, businessHighValueLeadDescription?: string | null, status?: { type: string, timestamp: any, email: string, statusHistory?: Array<{ type: string, email: string, timestamp: any, notes?: string | null } | null> | null } | null, handlers?: { _id: string, total: number, handlers?: Array<{ _id: string, name?: string | null, intentId: string, type: string } | null> | null } | null, intents?: { _id: string, total: number, intents?: Array<{ _id: string, name: string, intentId: string } | null> | null } | null, entities?: { _id: string, total: number, entities?: Array<{ _id: string, entityId: string, displayName: string } | null> | null } | null, content?: { __typename: 'TotalWebContent', total: number, content: Array<{ __typename: 'WebContentWithHighlights', _id: string, name: string, url: string } | null> } | null, contentSources?: { __typename: 'TotalWebContentSources', total: number, sources: Array<{ __typename: 'WebContentSources', webUrl: string, webUrlPatterns: Array<string | null> } | null> } | null, faq?: { total: number } | null, channels?: Array<{ __typename: 'ActionsOnGoogleAppChannel', type: string, id: string, name?: string | null } | { __typename: 'AlexaAppChannel', type: string, id: string, name?: string | null } | { __typename: 'AppChannel', type: string, id: string, name?: string | null } | { __typename: 'ChatWidgetAppChannel', key?: string | null, type: string, id: string, name?: string | null, theme?: { primaryColor?: string | null } | null } | { __typename: 'DialogflowAppChannel', type: string, id: string, name?: string | null } | { __typename: 'FacebookMessengerAppChannel', type: string, id: string, name?: string | null } | { __typename: 'FormWidgetAppChannel', type: string, id: string, name?: string | null } | { __typename: 'GoogleBusinessMessagesAppChannel', type: string, id: string, name?: string | null } | { __typename: 'IntelligentSearchAppChannel', key?: string | null, type: string, id: string, name?: string | null, theme?: { accentColor?: string | null } | null } | { __typename: 'LexConnectAppChannel', type: string, id: string, name?: string | null } | { __typename: 'LexV2ConnectAppChannel', type: string, id: string, name?: string | null } | null> | null, analytics?: { user: { totalUsers: number, totalSessions: number, returningUsers: number, newUsers: number } } | null } | null };
 
 export type GetAppContentQueryVariables = Exact<{
   appId: Scalars['ID']['input'];
@@ -10589,6 +10966,14 @@ export type GetEventsQueryVariables = Exact<{
 
 
 export type GetEventsQuery = { app?: { __typename: 'App', _id: string, appId: string, name: string, events?: { total: number, events?: Array<{ eventId: string, channel?: string | null, platform?: string | null, userId?: string | null, sessionId?: string | null, eventTime?: string | null, currentHandler?: string | null, selectedHandler?: string | null, environment?: string | null, eventType?: string | null, eventName?: string | null, request?: string | null, rawQuery?: string | null, errorCode?: number | null, errorMessage?: string | null, payload?: string | null, slots?: Array<{ name?: string | null, rawValue?: string | null, slotValue?: string | null } | null> | null, stentorRequest?: { intentId?: string | null, rawQuery?: string | null, matchConfidence?: number | null } | null, response?: { displays?: any | null, outputSpeech?: { displayText?: string | null, ssml?: string | null, suggestions?: Array<{ title?: string | null, url?: string | null } | null> | null } | null, reprompt?: { displayText?: string | null, ssml?: string | null, suggestions?: Array<{ title?: string | null, url?: string | null } | null> | null } | null } | null } | null> | null } | null } | null };
+
+export type GetAppChannelQueryVariables = Exact<{
+  appId: Scalars['ID']['input'];
+  channelId: Scalars['ID']['input'];
+}>;
+
+
+export type GetAppChannelQuery = { app?: { __typename: 'App', appId: string, organizationId: string, invocationName?: string | null, channel?: { __typename: 'ActionsOnGoogleAppChannel', hasCredentials: boolean, type: string, name?: string | null, id: string, directoryListing?: string | null, endPoint?: string | null, useNLU?: string | null, additionalInformationQuestions?: { intendedForUnderThirteen?: boolean | null, alcoholAndTobaccoRelatedContent?: boolean | null } | null, status?: { type: string } | null } | { __typename: 'AlexaAppChannel', invocationName?: string | null, hasCredentials: boolean, skillId?: string | null, vendorId?: string | null, category?: AlexaSkillCategories | null, distributionMode?: AlexaDistributionMode | null, isAvailableWorldwide?: boolean | null, distributionCountries?: Array<AlexaDistrubutionCountry | null> | null, useManifest?: boolean | null, type: string, name?: string | null, id: string, directoryListing?: string | null, endPoint?: string | null, useNLU?: string | null, permissions?: Array<{ name?: AlexaChannelPermissionType | null } | null> | null, vendors?: Array<{ id: string, name: string, roles: Array<string | null> } | null> | null, privacyAndCompliance?: { allowsPurchases?: boolean | null, containsAds?: boolean | null, isChildDirected?: boolean | null, isExportCompliant?: boolean | null, usesPersonalInfo?: boolean | null } | null, status?: { type: string } | null } | { __typename: 'AppChannel', id: string, type: string, name?: string | null, directoryListing?: string | null, endPoint?: string | null, useNLU?: string | null, status?: { type: string } | null } | { __typename: 'ChatWidgetAppChannel', name?: string | null, direct?: boolean | null, disabled?: boolean | null, accountKey?: string | null, botName?: string | null, avatarUrl?: any | null, key?: string | null, serverUrl?: any | null, middlewareUrl?: string | null, autocompleteSuggestionsUrl?: any | null, autoOpenOnWidth?: string | null, type: string, id: string, directoryListing?: string | null, endPoint?: string | null, useNLU?: string | null, cta?: { message?: string | null, timeout?: number | null, delay?: number | null, animation?: CtaAnimation | null, animationTimeout?: number | null, mobile?: { applyAtLessThanWidth?: string | null, message?: string | null, timeout?: number | null, delay?: number | null, animation?: CtaAnimation | null, animationTimeout?: number | null } | null } | null, menu?: { menuButtonLocation?: ChatWidgetMenuButtonLocation | null, itemsTabIndex?: string | null, items?: Array<{ label?: string | null, subtitle?: string | null } | { url: string, text: string, behavior?: { type: ChatWidgetAppChannelWidgetUrlBehaviorType } | { width?: number | null, height?: number | null, type: ChatWidgetAppChannelWidgetUrlBehaviorType } | { type: ChatWidgetAppChannelWidgetUrlBehaviorType } | null } | { imageUrl?: string | null } | { title?: string | null, body?: string | null } | null> | null, button?: { tabIndex?: string | null } | null } | null, configurableMessages?: { items?: Array<{ delay?: number | null, text?: string | null } | null> | null } | null, urls?: { policies: Array<{ pattern: string, behavior: { type: ChatWidgetAppChannelWidgetUrlBehaviorType } | { width?: number | null, height?: number | null, type: ChatWidgetAppChannelWidgetUrlBehaviorType } | { type: ChatWidgetAppChannelWidgetUrlBehaviorType } } | null>, defaultBehavior: { type: ChatWidgetAppChannelWidgetUrlBehaviorType } | { width?: number | null, height?: number | null, type: ChatWidgetAppChannelWidgetUrlBehaviorType } | { type: ChatWidgetAppChannelWidgetUrlBehaviorType } } | null, autoOpenOnPattern?: { minimumWidth?: string | null, patterns?: Array<string | null> | null } | null, chatButton?: { tabIndex?: string | null } | null, header?: { alignTextCenter?: boolean | null, status?: { online?: string | null, offline?: string | null, away?: string | null, connecting?: string | null } | null, subtitle?: { enabled?: boolean | null, text?: string | null } | null, actions?: { refresh?: boolean | null, refreshTabIndex?: string | null, minimize?: boolean | null, minimizeTabIndex?: string | null, cancel?: boolean | null, cancelTabIndex?: string | null } | null } | null, footer?: { branding?: { enabled?: boolean | null, text?: string | null } | null, sendButton?: { icon?: string | null, tabIndex?: string | null } | null, clearButton?: { tabIndex?: string | null } | null } | null, typingStatus?: { textTypingStatusEnabled?: boolean | null } | null, theme?: { primaryColor?: string | null, zIndex?: string | null, border?: { color?: string | null, width?: string | null, radius?: string | null } | null, carousel?: { button?: { color?: string | null } | null, subtitle?: { color?: string | null, fontFamily?: string | null, fontSize?: string | null, fontWeight?: string | null } | null, title?: { color?: string | null, fontFamily?: string | null, fontSize?: string | null, fontWeight?: string | null } | null } | null, chatButton?: { background?: string | null, margin?: { top?: string | null, right?: string | null, bottom?: string | null, left?: string | null } | null } | null, content?: { background?: string | null } | null, cta?: { background?: string | null, text?: { color?: string | null, fontFamily?: string | null, fontSize?: string | null } | null } | null, footer?: { background?: string | null, border?: { color?: string | null, radius?: string | null, width?: string | null } | null, branding?: { text?: { color?: string | null, fontFamily?: string | null, fontSize?: string | null, fontStyle?: string | null, fontWeight?: string | null } | null } | null } | null, header?: { background?: string | null, border?: { color?: string | null, radius?: string | null, width?: string | null } | null, text?: { color?: string | null, fontFamily?: string | null, fontSize?: string | null, fontStyle?: string | null, fontWeight?: string | null } | null, subtitle?: { color?: string | null, fontFamily?: string | null, fontSize?: string | null, fontStyle?: string | null, fontWeight?: string | null } | null } | null, input?: { background?: string | null, border?: { color?: string | null, width?: string | null, radius?: string | null } | null, text?: { color?: string | null, fontFamily?: string | null, fontSize?: string | null } | null, placeholder?: { color?: string | null, fontFamily?: string | null, fontSize?: string | null, fontWeight?: string | null, fontStyle?: string | null } | null } | null, menu?: { item?: { height?: string | null, background?: string | null, text?: { color?: string | null, fontSize?: string | null, fontFamily?: string | null, fontWeight?: string | null, fontStyle?: string | null } | null } | null } | null, menuButton?: { color?: string | null } | null, messages?: { maxWidth?: string | null, mine?: { bubbleColor?: string | null, text?: { color?: string | null, fontSize?: string | null, fontFamily?: string | null, fontWeight?: string | null, fontStyle?: string | null } | null } | null, others?: { bubbleColor?: string | null, text?: { color?: string | null, fontSize?: string | null, fontFamily?: string | null, fontWeight?: string | null, fontStyle?: string | null } | null } | null, padding?: { left?: string | null, right?: string | null, bottom?: string | null, top?: string | null } | null } | null, minimizeButton?: { color?: string | null } | null, cancelButton?: { color?: string | null } | null, refreshButton?: { color?: string | null } | null, sendButton?: { color?: string | null, width?: string | null } | null, size?: { width?: string | null, height?: string | null } | null, textTypingStatus?: { text?: { color?: string | null, fontFamily?: string | null, fontSize?: string | null, fontStyle?: string | null, fontWeight?: string | null } | null } | null } | null, input?: { placeholder?: string | null } | null, connection?: { type?: string | null, serverUrl?: any | null } | null, status?: { type: string } | null } | { __typename: 'DialogflowAppChannel', hasCredentials: boolean, type: string, name?: string | null, id: string, directoryListing?: string | null, endPoint?: string | null, useNLU?: string | null, additionalInformationQuestions?: { intendedForUnderThirteen?: boolean | null, alcoholAndTobaccoRelatedContent?: boolean | null } | null, status?: { type: string } | null } | { __typename: 'FacebookMessengerAppChannel', type: string, name?: string | null, id: string, directoryListing?: string | null, endPoint?: string | null, useNLU?: string | null, status?: { type: string } | null } | { __typename: 'FormWidgetAppChannel', type: string, name?: string | null, id: string, autoGreeting?: string | null, directoryListing?: string | null, useNLU?: string | null, attributes?: any | null, endPoint?: string | null, connection?: { serverUrl?: any | null, accountKey?: string | null } | null, theme?: { accentColor?: string | null } | null, status?: { type: string } | null } | { __typename: 'GoogleBusinessMessagesAppChannel', type: string, name?: string | null, id: string, directoryListing?: string | null, endPoint?: string | null, useNLU?: string | null, status?: { type: string } | null } | { __typename: 'IntelligentSearchAppChannel', type: string, name?: string | null, key?: string | null, autocompleteSuggestionsUrl?: any | null, id: string, directoryListing?: string | null, endPoint?: string | null, useNLU?: string | null, connection?: { serverUrl?: any | null } | null, theme?: { accentColor?: string | null, border?: { color?: string | null, width?: string | null, radius?: string | null, style?: IntelligentSearchWidgetBorderStyle | null } | null, card?: { background?: string | null, border?: { color?: string | null, width?: string | null, radius?: string | null, style?: IntelligentSearchWidgetBorderStyle | null } | null, description?: { margin?: { bottom?: string | null, left?: string | null, right?: string | null, top?: string | null } | null, padding?: { bottom?: string | null, left?: string | null, right?: string | null, top?: string | null } | null, text?: { color?: string | null, fontFamily?: string | null, fontSize?: string | null, fontStyle?: string | null, fontWeight?: string | null, lineHeight?: any | null } | null } | null, link?: { margin?: { bottom?: string | null, left?: string | null, right?: string | null, top?: string | null } | null, padding?: { bottom?: string | null, left?: string | null, right?: string | null, top?: string | null } | null, text?: { default?: { color?: string | null, fontFamily?: string | null, fontSize?: string | null, fontStyle?: string | null, fontWeight?: string | null, lineHeight?: any | null } | null } | null } | null, margin?: { bottom?: string | null, left?: string | null, right?: string | null, top?: string | null } | null, padding?: { bottom?: string | null, left?: string | null, right?: string | null, top?: string | null } | null, title?: { margin?: { bottom?: string | null, left?: string | null, right?: string | null, top?: string | null } | null, padding?: { bottom?: string | null, left?: string | null, right?: string | null, top?: string | null } | null, text?: { color?: string | null, fontFamily?: string | null, fontSize?: string | null, fontStyle?: string | null, fontWeight?: string | null, lineHeight?: any | null } | null } | null } | null, carousel?: { card?: { background?: string | null, border?: { color?: string | null, width?: string | null, radius?: string | null, style?: IntelligentSearchWidgetBorderStyle | null } | null, description?: { margin?: { bottom?: string | null, left?: string | null, right?: string | null, top?: string | null } | null, padding?: { bottom?: string | null, left?: string | null, right?: string | null, top?: string | null } | null, text?: { color?: string | null, fontFamily?: string | null, fontSize?: string | null, fontStyle?: string | null, fontWeight?: string | null, lineHeight?: any | null } | null } | null, link?: { margin?: { bottom?: string | null, left?: string | null, right?: string | null, top?: string | null } | null, padding?: { bottom?: string | null, left?: string | null, right?: string | null, top?: string | null } | null, text?: { default?: { color?: string | null, fontFamily?: string | null, fontSize?: string | null, fontStyle?: string | null, fontWeight?: string | null, lineHeight?: any | null } | null } | null } | null, margin?: { bottom?: string | null, left?: string | null, right?: string | null, top?: string | null } | null, padding?: { bottom?: string | null, left?: string | null, right?: string | null, top?: string | null } | null, title?: { margin?: { bottom?: string | null, left?: string | null, right?: string | null, top?: string | null } | null, padding?: { bottom?: string | null, left?: string | null, right?: string | null, top?: string | null } | null, text?: { color?: string | null, fontFamily?: string | null, fontSize?: string | null, fontStyle?: string | null, fontWeight?: string | null, lineHeight?: any | null } | null } | null } | null } | null, list?: { card?: { background?: string | null, border?: { color?: string | null, width?: string | null, radius?: string | null, style?: IntelligentSearchWidgetBorderStyle | null } | null, description?: { margin?: { bottom?: string | null, left?: string | null, right?: string | null, top?: string | null } | null, padding?: { bottom?: string | null, left?: string | null, right?: string | null, top?: string | null } | null, text?: { color?: string | null, fontFamily?: string | null, fontSize?: string | null, fontStyle?: string | null, fontWeight?: string | null, lineHeight?: any | null } | null } | null, link?: { margin?: { bottom?: string | null, left?: string | null, right?: string | null, top?: string | null } | null, padding?: { bottom?: string | null, left?: string | null, right?: string | null, top?: string | null } | null, text?: { default?: { color?: string | null, fontFamily?: string | null, fontSize?: string | null, fontStyle?: string | null, fontWeight?: string | null, lineHeight?: any | null } | null } | null } | null, margin?: { bottom?: string | null, left?: string | null, right?: string | null, top?: string | null } | null, padding?: { bottom?: string | null, left?: string | null, right?: string | null, top?: string | null } | null, title?: { margin?: { bottom?: string | null, left?: string | null, right?: string | null, top?: string | null } | null, padding?: { bottom?: string | null, left?: string | null, right?: string | null, top?: string | null } | null, text?: { color?: string | null, fontFamily?: string | null, fontSize?: string | null, fontStyle?: string | null, fontWeight?: string | null, lineHeight?: any | null } | null } | null } | null } | null, messages?: { others?: { bubble?: { background?: string | null } | null, text?: { color?: string | null, fontFamily?: string | null, fontSize?: string | null, fontStyle?: string | null, fontWeight?: string | null, lineHeight?: any | null } | null } | null } | null } | null, status?: { type: string } | null } | { __typename: 'LexConnectAppChannel', voiceId?: string | null, nluIntentConfidenceThreshold?: number | null, idleSessionTTLInSeconds?: number | null, detectSentiment?: boolean | null, isLinkedToKendra: boolean, lexPostTextUrl?: string | null, enableModelImprovements?: boolean | null, botName?: string | null, type: string, name?: string | null, id: string, directoryListing?: string | null, endPoint?: string | null, useNLU?: string | null, status?: { type: string } | null } | { __typename: 'LexV2ConnectAppChannel', voiceId?: string | null, idleSessionTTLInSeconds?: number | null, detectSentiment?: boolean | null, isLinkedToKendra: boolean, lexPostTextUrl?: string | null, enableModelImprovements?: boolean | null, botId?: string | null, botName?: string | null, botRegion?: string | null, lexFulfillmentLambdaARN?: string | null, managementRole?: string | null, managementRoleExternalId?: string | null, type: string, name?: string | null, id: string, directoryListing?: string | null, endPoint?: string | null, useNLU?: string | null, status?: { type: string } | null } | null } | null };
 
 export const HandlerPartsFragmentDoc = gql`
     fragment HandlerParts on Handler {
@@ -11381,6 +11766,727 @@ export const GetEventsDocument = gql`
         errorCode
         errorMessage
         payload
+      }
+    }
+  }
+}
+    `;
+export const GetAppChannelDocument = gql`
+    query getAppChannel($appId: ID!, $channelId: ID!) {
+  app(appId: $appId) {
+    __typename
+    appId
+    organizationId
+    invocationName
+    channel(id: $channelId) {
+      __typename
+      type
+      name
+      id
+      directoryListing
+      endPoint
+      status {
+        type
+      }
+      useNLU
+      ... on DialogflowAppChannel {
+        hasCredentials
+        additionalInformationQuestions {
+          intendedForUnderThirteen
+          alcoholAndTobaccoRelatedContent
+        }
+      }
+      ... on AlexaAppChannel {
+        invocationName
+        hasCredentials
+        skillId
+        vendorId
+        category
+        distributionMode
+        isAvailableWorldwide
+        distributionCountries
+        permissions {
+          name
+        }
+        vendors {
+          id
+          name
+          roles
+        }
+        useManifest
+        privacyAndCompliance {
+          allowsPurchases
+          containsAds
+          isChildDirected
+          isExportCompliant
+          usesPersonalInfo
+        }
+      }
+      ... on ActionsOnGoogleAppChannel {
+        hasCredentials
+        additionalInformationQuestions {
+          intendedForUnderThirteen
+          alcoholAndTobaccoRelatedContent
+        }
+      }
+      ... on LexConnectAppChannel {
+        voiceId
+        nluIntentConfidenceThreshold
+        idleSessionTTLInSeconds
+        detectSentiment
+        isLinkedToKendra
+        lexPostTextUrl
+        enableModelImprovements
+        botName
+      }
+      ... on LexV2ConnectAppChannel {
+        voiceId
+        idleSessionTTLInSeconds
+        detectSentiment
+        isLinkedToKendra
+        lexPostTextUrl
+        enableModelImprovements
+        botId
+        botName
+        botRegion
+        lexFulfillmentLambdaARN
+        managementRole
+        managementRoleExternalId
+      }
+      ... on ChatWidgetAppChannel {
+        cta {
+          message
+          timeout
+          delay
+          animation
+          animationTimeout
+          mobile {
+            applyAtLessThanWidth
+            message
+            timeout
+            delay
+            animation
+            animationTimeout
+          }
+        }
+        name
+        direct
+        disabled
+        accountKey
+        botName
+        avatarUrl
+        key
+        menu {
+          menuButtonLocation
+          items {
+            ... on ChatWidgetMenuItemConfig {
+              label
+              subtitle
+            }
+            ... on ChatWidgetMenuItemStaticText {
+              title
+              body
+            }
+            ... on ChatWidgetMenuItemStaticImage {
+              imageUrl
+            }
+            ... on ChatWidgetMenuItemOpenURL {
+              url
+              text
+              behavior {
+                type
+                ... on ChatWidgetAppChannelUrlBehaviorNewWindow {
+                  width
+                  height
+                }
+              }
+            }
+          }
+          itemsTabIndex
+          button {
+            tabIndex
+          }
+        }
+        serverUrl
+        middlewareUrl
+        autocompleteSuggestionsUrl
+        configurableMessages {
+          items {
+            delay
+            text
+          }
+        }
+        urls {
+          policies {
+            pattern
+            behavior {
+              type
+              ... on ChatWidgetAppChannelUrlBehaviorNewWindow {
+                width
+                height
+              }
+            }
+          }
+          defaultBehavior {
+            type
+            ... on ChatWidgetAppChannelUrlBehaviorNewWindow {
+              width
+              height
+            }
+          }
+        }
+        autoOpenOnWidth
+        autoOpenOnPattern {
+          minimumWidth
+          patterns
+        }
+        chatButton {
+          tabIndex
+        }
+        header {
+          status {
+            online
+            offline
+            away
+            connecting
+          }
+          subtitle {
+            enabled
+            text
+          }
+          actions {
+            refresh
+            refreshTabIndex
+            minimize
+            minimizeTabIndex
+            cancel
+            cancelTabIndex
+          }
+          alignTextCenter
+        }
+        footer {
+          branding {
+            enabled
+            text
+          }
+          sendButton {
+            icon
+            tabIndex
+          }
+          clearButton {
+            tabIndex
+          }
+        }
+        typingStatus {
+          textTypingStatusEnabled
+        }
+        theme {
+          border {
+            color
+            width
+            radius
+          }
+          carousel {
+            button {
+              color
+            }
+            subtitle {
+              color
+              fontFamily
+              fontSize
+              fontWeight
+            }
+            title {
+              color
+              fontFamily
+              fontSize
+              fontWeight
+            }
+          }
+          chatButton {
+            background
+            margin {
+              top
+              right
+              bottom
+              left
+            }
+          }
+          content {
+            background
+          }
+          cta {
+            background
+            text {
+              color
+              fontFamily
+              fontSize
+            }
+          }
+          footer {
+            background
+            border {
+              color
+              radius
+              width
+            }
+            branding {
+              text {
+                color
+                fontFamily
+                fontSize
+                fontStyle
+                fontWeight
+              }
+            }
+          }
+          header {
+            background
+            border {
+              color
+              radius
+              width
+            }
+            text {
+              color
+              fontFamily
+              fontSize
+              fontStyle
+              fontWeight
+            }
+            subtitle {
+              color
+              fontFamily
+              fontSize
+              fontStyle
+              fontWeight
+            }
+          }
+          input {
+            background
+            border {
+              color
+              width
+              radius
+            }
+            text {
+              color
+              fontFamily
+              fontSize
+            }
+            placeholder {
+              color
+              fontFamily
+              fontSize
+              fontWeight
+              fontStyle
+            }
+          }
+          menu {
+            item {
+              height
+              background
+              text {
+                color
+                fontSize
+                fontFamily
+                fontWeight
+                fontStyle
+              }
+            }
+          }
+          menuButton {
+            color
+          }
+          messages {
+            mine {
+              bubbleColor
+              text {
+                color
+                fontSize
+                fontFamily
+                fontWeight
+                fontStyle
+              }
+            }
+            others {
+              bubbleColor
+              text {
+                color
+                fontSize
+                fontFamily
+                fontWeight
+                fontStyle
+              }
+            }
+            padding {
+              left
+              right
+              bottom
+              top
+            }
+            maxWidth
+          }
+          minimizeButton {
+            color
+          }
+          cancelButton {
+            color
+          }
+          refreshButton {
+            color
+          }
+          primaryColor
+          zIndex
+          sendButton {
+            color
+            width
+          }
+          size {
+            width
+            height
+          }
+          textTypingStatus {
+            text {
+              color
+              fontFamily
+              fontSize
+              fontStyle
+              fontWeight
+            }
+          }
+        }
+        input {
+          placeholder
+        }
+        connection {
+          type
+          serverUrl
+        }
+      }
+      ... on IntelligentSearchAppChannel {
+        type
+        name
+        key
+        autocompleteSuggestionsUrl
+        connection {
+          serverUrl
+        }
+        theme {
+          accentColor
+          border {
+            color
+            width
+            radius
+            style
+          }
+          card {
+            background
+            border {
+              color
+              width
+              radius
+              style
+            }
+            description {
+              margin {
+                bottom
+                left
+                right
+                top
+              }
+              padding {
+                bottom
+                left
+                right
+                top
+              }
+              text {
+                color
+                fontFamily
+                fontSize
+                fontStyle
+                fontWeight
+                lineHeight
+              }
+            }
+            link {
+              margin {
+                bottom
+                left
+                right
+                top
+              }
+              padding {
+                bottom
+                left
+                right
+                top
+              }
+              text {
+                default {
+                  color
+                  fontFamily
+                  fontSize
+                  fontStyle
+                  fontWeight
+                  lineHeight
+                }
+              }
+            }
+            margin {
+              bottom
+              left
+              right
+              top
+            }
+            padding {
+              bottom
+              left
+              right
+              top
+            }
+            title {
+              margin {
+                bottom
+                left
+                right
+                top
+              }
+              padding {
+                bottom
+                left
+                right
+                top
+              }
+              text {
+                color
+                fontFamily
+                fontSize
+                fontStyle
+                fontWeight
+                lineHeight
+              }
+            }
+          }
+          carousel {
+            card {
+              background
+              border {
+                color
+                width
+                radius
+                style
+              }
+              description {
+                margin {
+                  bottom
+                  left
+                  right
+                  top
+                }
+                padding {
+                  bottom
+                  left
+                  right
+                  top
+                }
+                text {
+                  color
+                  fontFamily
+                  fontSize
+                  fontStyle
+                  fontWeight
+                  lineHeight
+                }
+              }
+              link {
+                margin {
+                  bottom
+                  left
+                  right
+                  top
+                }
+                padding {
+                  bottom
+                  left
+                  right
+                  top
+                }
+                text {
+                  default {
+                    color
+                    fontFamily
+                    fontSize
+                    fontStyle
+                    fontWeight
+                    lineHeight
+                  }
+                }
+              }
+              margin {
+                bottom
+                left
+                right
+                top
+              }
+              padding {
+                bottom
+                left
+                right
+                top
+              }
+              title {
+                margin {
+                  bottom
+                  left
+                  right
+                  top
+                }
+                padding {
+                  bottom
+                  left
+                  right
+                  top
+                }
+                text {
+                  color
+                  fontFamily
+                  fontSize
+                  fontStyle
+                  fontWeight
+                  lineHeight
+                }
+              }
+            }
+          }
+          list {
+            card {
+              background
+              border {
+                color
+                width
+                radius
+                style
+              }
+              description {
+                margin {
+                  bottom
+                  left
+                  right
+                  top
+                }
+                padding {
+                  bottom
+                  left
+                  right
+                  top
+                }
+                text {
+                  color
+                  fontFamily
+                  fontSize
+                  fontStyle
+                  fontWeight
+                  lineHeight
+                }
+              }
+              link {
+                margin {
+                  bottom
+                  left
+                  right
+                  top
+                }
+                padding {
+                  bottom
+                  left
+                  right
+                  top
+                }
+                text {
+                  default {
+                    color
+                    fontFamily
+                    fontSize
+                    fontStyle
+                    fontWeight
+                    lineHeight
+                  }
+                }
+              }
+              margin {
+                bottom
+                left
+                right
+                top
+              }
+              padding {
+                bottom
+                left
+                right
+                top
+              }
+              title {
+                margin {
+                  bottom
+                  left
+                  right
+                  top
+                }
+                padding {
+                  bottom
+                  left
+                  right
+                  top
+                }
+                text {
+                  color
+                  fontFamily
+                  fontSize
+                  fontStyle
+                  fontWeight
+                  lineHeight
+                }
+              }
+            }
+          }
+          messages {
+            others {
+              bubble {
+                background
+              }
+              text {
+                color
+                fontFamily
+                fontSize
+                fontStyle
+                fontWeight
+                lineHeight
+              }
+            }
+          }
+        }
+      }
+      ... on AppChannel {
+        id
+        type
+      }
+      ... on FormWidgetAppChannel {
+        type
+        name
+        id
+        autoGreeting
+        directoryListing
+        useNLU
+        connection {
+          serverUrl
+          accountKey
+        }
+        theme {
+          accentColor
+        }
+        attributes
       }
     }
   }

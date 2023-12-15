@@ -6,10 +6,12 @@ import { getGraphQLClient } from "./graphql/getGraphQLClient";
 import {
     AddChatWidgetChannelDocument,
     AddScheduledCrawlDocument,
+    BaseAppChannel,
     ChatWidgetAppChannelInput,
     GetAnalyticsAndEventsDocument,
     GetAnalyticsAndEventsQuery,
     GetAnalyticsAndEventsQueryVariables,
+    GetAppChannelDocument,
     GetAppContentDocument,
     GetAppOverviewDocument,
     GetAppOverviewQuery,
@@ -344,6 +346,24 @@ export class XAPPClient {
                 const error = response.error || `Unabled to get app channels, unknown error`;
                 throw error;
             }
+        });
+    }
+
+    public getAppChannel(appId: string, channelId: string): Promise<BaseAppChannel> {
+        return this.client.query(GetAppChannelDocument, {
+            appId,
+            channelId
+        }).toPromise().then<BaseAppChannel[]>((response) => {
+            if (response.data) {
+                return response.data.app.channel;
+            } else {
+                const error = response.error || `Unabled to get app channels, unknown error`;
+                throw error;
+            }
+        }).then((channels) => {
+            return channels.find((channel) => {
+                return channel.id === channelId;
+            })
         });
     }
 
