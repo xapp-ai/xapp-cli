@@ -1,3 +1,10 @@
+## [1.5.4](https://github.com/xapp-ai/xapp-cli/compare/v1.5.3...v1.5.4) (2023-12-19)
+
+
+### Bug Fixes
+
+* XAPP Client, getAppChannel and updateChatWidgetChannel ([#842](https://github.com/xapp-ai/xapp-cli/issues/842)) ([f0fd561](https://github.com/xapp-ai/xapp-cli/commit/f0fd561a43edf1d038695bf432511cbb310615c5))
+
 ## [1.5.3](https://github.com/xapp-ai/xapp-cli/compare/v1.5.2...v1.5.3) (2023-12-19)
 
 
