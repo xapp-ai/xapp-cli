@@ -48,6 +48,7 @@ import {
 } from "./graphql/mutations";
 import { GetIntent, GetEntity, GetAppWithChannels } from "./graphql/queries";
 import { App, Channel, ExportApp, GraphqlApp, ImportApp } from "./models";
+import { cleanObj, removeKey } from "./utils/clean";
 
 export interface HandlerDescription {
     intentId: string;
@@ -353,17 +354,13 @@ export class XAPPClient {
         return this.client.query(GetAppChannelDocument, {
             appId,
             channelId
-        }).toPromise().then<BaseAppChannel[]>((response) => {
-            if (response.data) {
+        }).toPromise().then<BaseAppChannel>((response) => {
+            if (response.data?.app) {
                 return response.data.app.channel;
             } else {
-                const error = response.error || `Unabled to get app channels, unknown error`;
+                const error = response.error || `Unabled to get app channel, unknown error`;
                 throw error;
             }
-        }).then((channels) => {
-            return channels.find((channel) => {
-                return channel.id === channelId;
-            })
         });
     }
 
@@ -380,7 +377,10 @@ export class XAPPClient {
     }
 
     public updateChatWidgetChannel(appId: string, channel: ChatWidgetAppChannelInput): Promise<Channel> {
-        return this.client.mutation(AddChatWidgetChannelDocument, { appId, channel })
+        // need to clean off __typename
+        const cleaned = cleanObj(removeKey(removeKey(channel, "__typename"), "key"));
+
+        return this.client.mutation(AddChatWidgetChannelDocument, { appId, channel: cleaned })
             .toPromise().then((response) => {
                 if (response.data) {
                     return response.data.addChatWidgetChannel;
