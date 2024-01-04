@@ -1,3 +1,10 @@
+## [1.5.11](https://github.com/xapp-ai/xapp-cli/compare/v1.5.10...v1.5.11) (2024-01-04)
+
+
+### Bug Fixes
+
+* **deps:** update dependency moment to v2.30.1 ([#855](https://github.com/xapp-ai/xapp-cli/issues/855)) ([9de1a00](https://github.com/xapp-ai/xapp-cli/commit/9de1a001e7494b1ac30917cae5ffe3a1a78483ea))
+
 ## [1.5.10](https://github.com/xapp-ai/xapp-cli/compare/v1.5.9...v1.5.10) (2023-12-25)
 
 
