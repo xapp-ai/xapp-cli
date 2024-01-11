@@ -2988,16 +2988,16 @@ __metadata:
     "@urql/core": 3.2.2
     "@xapp/config": 0.2.3
     "@xapp/stentor-actions-on-google": 1.52.61
-    "@xapp/stentor-alexa": 1.52.61
+    "@xapp/stentor-alexa": 1.52.62
     "@xapp/stentor-alexa-lib": 1.52.61
     "@xapp/stentor-app": 1.52.61
     "@xapp/stentor-chat-widget": 1.63.0
     "@xapp/stentor-dialogflow": 1.52.61
-    "@xapp/stentor-handler-media": 1.52.61
-    "@xapp/stentor-interaction-model-profiler": 1.52.61
-    "@xapp/stentor-lex-lib": 1.52.61
+    "@xapp/stentor-handler-media": 1.52.62
+    "@xapp/stentor-interaction-model-profiler": 1.52.62
+    "@xapp/stentor-lex-lib": 1.52.62
     "@xapp/stentor-service-dialogflow": 1.52.61
-    "@xapp/stentor-service-lex": 1.52.61
+    "@xapp/stentor-service-lex": 1.52.62
     adm-zip: 0.5.10
     aws-sdk: 2.1529.0
     chai: 5.0.0
@@ -3092,9 +3092,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@xapp/stentor-alexa@npm:1.52.61":
-  version: 1.52.61
-  resolution: "@xapp/stentor-alexa@npm:1.52.61"
+"@xapp/stentor-alexa@npm:1.52.62":
+  version: 1.52.62
+  resolution: "@xapp/stentor-alexa@npm:1.52.62"
   dependencies:
     "@xapp/patterns": 2.0.1
     "@xapp/stentor-alexa-lib": 1.52.61
@@ -3116,7 +3116,7 @@ __metadata:
     stentor-request: 1.x
     stentor-response: 1.x
     stentor-utils: 1.x
-  checksum: 0698300e16017ca05bf0edfed8eff87c3118e901a48d65d14218596f0cbfc6ce59eb1ecb6c16f84be9b647e582b0669933f15768413f2fcf8bb990ef298c49fa
+  checksum: a68f223f98b90e9e4457d619b6064b4da4f897d5937cc9c9568f8a1e0df0379db0ddab5ba935d9d91e6ec941197acf3eb349b1e041b350a70664ae525af72064
   languageName: node
   linkType: hard
 
@@ -3167,11 +3167,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@xapp/stentor-handler-media@npm:1.52.61":
-  version: 1.52.61
-  resolution: "@xapp/stentor-handler-media@npm:1.52.61"
+"@xapp/stentor-handler-media@npm:1.52.62":
+  version: 1.52.62
+  resolution: "@xapp/stentor-handler-media@npm:1.52.62"
   dependencies:
-    "@xapp/stentor-media-manager": 1.52.61
+    "@xapp/stentor-media-manager": 1.52.62
     moment-timezone: 0.5.44
   peerDependencies:
     stentor-context: 1.x
@@ -3185,29 +3185,29 @@ __metadata:
     stentor-response: 1.x
     stentor-time: 1.x
     stentor-utils: 1.x
-  checksum: 0a2df546dbad8a98014be78c1ba2bf7545c087ef801c53c85be82f41eea78123d265c68cbb24a912bf19d4b9a5d9ba3275b522c019a67e73f5ec8c592695e85c
+  checksum: 37b98aa1fd9f691ac4386b508dd7afdba5ca2006c807ccf2ec3a70788f024af7169836b76a174100c168da66361ab2b28bf74f2fa126054f8bee772c179ec137
   languageName: node
   linkType: hard
 
-"@xapp/stentor-interaction-model-profiler@npm:1.52.61":
-  version: 1.52.61
-  resolution: "@xapp/stentor-interaction-model-profiler@npm:1.52.61"
+"@xapp/stentor-interaction-model-profiler@npm:1.52.62":
+  version: 1.52.62
+  resolution: "@xapp/stentor-interaction-model-profiler@npm:1.52.62"
   dependencies:
     "@xapp/stentor-service-dialogflow": 1.52.61
-    "@xapp/stentor-service-smapi": 1.52.61
+    "@xapp/stentor-service-smapi": 1.52.62
     lodash.isequal: 4.5.0
   peerDependencies:
     stentor-interaction-model: 1.x
     stentor-models: 1.x
     stentor-request: 1.x
     stentor-utils: 1.x
-  checksum: 25accd32a9bf46f07fd170f22635740c90041f98e00261457766d0b954fde7ce504478f334b0fcb3a3013d182123222be28f63f63417eef2a4a5a948ac0a859d
+  checksum: 0f3bcf86a5dd9448ed40b5934fca84af563cd5ae988b05803f4bdbb25e56fde67dfb43830b1862d52ba096fffda127a080252c9c370ae83464c12b7509016a93
   languageName: node
   linkType: hard
 
-"@xapp/stentor-lex-lib@npm:1.52.61":
-  version: 1.52.61
-  resolution: "@xapp/stentor-lex-lib@npm:1.52.61"
+"@xapp/stentor-lex-lib@npm:1.52.62":
+  version: 1.52.62
+  resolution: "@xapp/stentor-lex-lib@npm:1.52.62"
   dependencies:
     "@xapp/stentor-alexa-lib": 1.52.61
     lodash.merge: 4.6.2
@@ -3217,13 +3217,13 @@ __metadata:
     stentor-models: 1.x
     stentor-request: 1.x
     stentor-utils: 1.x
-  checksum: 3187d6daca5917638519c10c36ac74b6818100a19c17ab0fc8d7d1e01e74b161a62b5cc0d32472a91699b3e97e1c169f719ebee61d9ed1be61acd40dce66d48f
+  checksum: 1316fc67581aad1ab6e78b70c168f45e4309bbe38d69d7d5bcdf064d8a06fd5b6446d13ed8f3530d0e3775ca4e458a3caddf1d0232c4d4e3ce49377dc92e1cf5
   languageName: node
   linkType: hard
 
-"@xapp/stentor-media-manager@npm:1.52.61":
-  version: 1.52.61
-  resolution: "@xapp/stentor-media-manager@npm:1.52.61"
+"@xapp/stentor-media-manager@npm:1.52.62":
+  version: 1.52.62
+  resolution: "@xapp/stentor-media-manager@npm:1.52.62"
   dependencies:
     "@xapp/stentor-service-rss-feed": 1.52.61
     "@xapp/stentor-service-social-radio": 1.52.61
@@ -3237,7 +3237,7 @@ __metadata:
     stentor-media: 1.x
     stentor-models: 1.x
     stentor-utils: 1.x
-  checksum: ebb6840687a647afe72081b77e008e0fa397f8e761e4ae6420d4664ed2631792c297884e93325b600c8077c8bd5720b6fbe00b396e77df57bfb70fbef7a1dba1
+  checksum: b3e4a5850049549ac1f98b670ed8e9fd4c2cdf5356c40ecd55afa8bd502288bd119c2188c26f774167a67c1912433d2ab05b1b0891e73eb65273a9a6bd4b344a
   languageName: node
   linkType: hard
 
@@ -3260,12 +3260,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@xapp/stentor-service-lex@npm:1.52.61":
-  version: 1.52.61
-  resolution: "@xapp/stentor-service-lex@npm:1.52.61"
+"@xapp/stentor-service-lex@npm:1.52.62":
+  version: 1.52.62
+  resolution: "@xapp/stentor-service-lex@npm:1.52.62"
   dependencies:
     "@xapp/stentor-alexa-lib": 1.52.61
-    "@xapp/stentor-lex-lib": 1.52.61
+    "@xapp/stentor-lex-lib": 1.52.62
     lodash.merge: 4.6.2
     uuid: 9.0.1
   peerDependencies:
@@ -3275,7 +3275,7 @@ __metadata:
     stentor-history: 1.x
     stentor-media: 1.x
     stentor-models: 1.x
-  checksum: cc99c4b15323bed5fc391ab909ee93e4452de1c801172349f2f2ee0f3a5b834aeedff7d52b037cb814b4e225ac8755b6e5e15b294ff1fa4bf63406d17701f5ea
+  checksum: c84c3347fa3340924c6ff15f1524dbf3fd973ec8309b7561c092980b85801f8f5b5e793f869b4c2263ff44f84b06f0d3dee42feefba1901e6a2bdd2e4699808c
   languageName: node
   linkType: hard
 
@@ -3295,11 +3295,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@xapp/stentor-service-smapi@npm:1.52.61":
-  version: 1.52.61
-  resolution: "@xapp/stentor-service-smapi@npm:1.52.61"
+"@xapp/stentor-service-smapi@npm:1.52.62":
+  version: 1.52.62
+  resolution: "@xapp/stentor-service-smapi@npm:1.52.62"
   dependencies:
-    "@xapp/stentor-alexa": 1.52.61
+    "@xapp/stentor-alexa": 1.52.62
     "@xapp/stentor-app": 1.52.61
     isomorphic-fetch: 3.0.0
   peerDependencies:
@@ -3307,7 +3307,7 @@ __metadata:
     stentor-logger: 1.x
     stentor-models: 1.x
     stentor-service-fetch: 1.x
-  checksum: 8bf042ad50313bde91f27d7ce135bf6efeb33f938371e86a0c3ea6a2d628b6ca8c83a077b3e1b9c58c6dbcbef9eefe26413b576fec82555bf23670c246ca9ca0
+  checksum: bb49acc2710ca6f956da58cdb2f97af8b26881d66194fcde44ffca2da7e2c1afb80e36be855eeca4bf55110758583ee4ddca3b1ce12cfc0a238952ad0b5d34b3
   languageName: node
   linkType: hard
 
