@@ -1,3 +1,27 @@
+## [1.5.26](https://github.com/xapp-ai/xapp-cli/compare/v1.5.25...v1.5.26) (2024-01-23)
+
+
+### Bug Fixes
+
+* **deps:** update dependency dotenv to v16.3.2 ([#885](https://github.com/xapp-ai/xapp-cli/issues/885)) ([261167a](https://github.com/xapp-ai/xapp-cli/commit/261167a2444753bdc72e7aa9327bc7d422b18fa1))
+* **deps:** update dependency stentor-handler to v1.58.90 ([c43c1bf](https://github.com/xapp-ai/xapp-cli/commit/c43c1bf3535dc54ab2c6ec8a425df9b06e44a837))
+* **deps:** update stentor ([9949f21](https://github.com/xapp-ai/xapp-cli/commit/9949f2143a08fdceba1150945e8a6d3898935948))
+* **deps:** update stentor ([6cbf845](https://github.com/xapp-ai/xapp-cli/commit/6cbf84551409791f8977ed29432c069a3b31f9ee))
+* **deps:** update stentor ([2b28ca7](https://github.com/xapp-ai/xapp-cli/commit/2b28ca708e753192f5420642aad9a97ecb428fc3))
+* **deps:** update stentor to v1.52.64 ([aca840c](https://github.com/xapp-ai/xapp-cli/commit/aca840ce102922559d52bc4e199fdec0f5242878))
+* **deps:** update stentor to v1.52.66 ([dc95bcd](https://github.com/xapp-ai/xapp-cli/commit/dc95bcdc433d1a009fa1e87eecb5c3523615d263))
+* **deps:** update stentor to v1.52.72 ([5b811b5](https://github.com/xapp-ai/xapp-cli/commit/5b811b5f671d67cdd5825afaef5e4bb46fbcac95))
+* **deps:** update stentor to v1.52.76 ([#881](https://github.com/xapp-ai/xapp-cli/issues/881)) ([3cb7bd0](https://github.com/xapp-ai/xapp-cli/commit/3cb7bd03a29a2ef286a650e59292dfca64f45c48))
+* **deps:** update stentor to v1.52.77 ([71fd214](https://github.com/xapp-ai/xapp-cli/commit/71fd214e7ca5df73fbb0a1552ded1d391a45abfa))
+* **deps:** update stentor to v1.52.78 ([52ca33e](https://github.com/xapp-ai/xapp-cli/commit/52ca33e9ee333c49def15ca6011db4549e54067a))
+* **deps:** update stentor to v1.52.79 ([47314a0](https://github.com/xapp-ai/xapp-cli/commit/47314a0e1dc6c1135d5aab38699d5c6a7701d1d6))
+* **deps:** update stentor to v1.52.80 ([075127c](https://github.com/xapp-ai/xapp-cli/commit/075127cb010eaca8762813440a868524394dbbe1))
+* **deps:** update stentor to v1.52.81 ([c3a0f6d](https://github.com/xapp-ai/xapp-cli/commit/c3a0f6dd6f58f30a21a1077b2fbdaac51498946e))
+* **deps:** update stentor to v1.52.82 ([fa8db84](https://github.com/xapp-ai/xapp-cli/commit/fa8db844866c53ddf6447b1020e81697711c9dcd))
+* **deps:** update stentor to v1.58.81 ([abc658a](https://github.com/xapp-ai/xapp-cli/commit/abc658a5529fea391291e77c60b862fd7df87f4b))
+* **deps:** update stentor to v1.58.92 ([704b14e](https://github.com/xapp-ai/xapp-cli/commit/704b14eff3d501f360465775728c3aff7917ae4d))
+* Surefire Integration & Add Lex Channel to XAPPClient ([#892](https://github.com/xapp-ai/xapp-cli/issues/892)) ([656d686](https://github.com/xapp-ai/xapp-cli/commit/656d686ff0082a3a1db48ba7444a0026c6b7d828))
+
 ## [1.5.25](https://github.com/xapp-ai/xapp-cli/compare/v1.5.24...v1.5.25) (2024-01-12)
 
 
