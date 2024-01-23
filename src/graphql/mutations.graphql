@@ -271,5 +271,73 @@ mutation updateAppBy($appId: ID!, $app: UpdateAppInput!) {
     appId
     name
     organizationId
+    description
+    keywords
+    largeIcon
+    mediumIcon
+    smallIcon
+    summary
+    templateType
+    internalNotes
+    website
+    websiteData {
+      callsToAction
+      primaryColor
+      secondaryColor
+    }
+  }
+}
+
+mutation addLexV2Channel($appId: ID!, $channel: LexV2ConnectAppChannelInput!) {
+  app {
+    update(appId: $appId) {
+      channel {
+        addLexV2Channel(channel: $channel) {
+          __typename
+          id
+          type
+          name
+          endPoint
+          status {
+            type
+          }
+          botId
+          botName
+          botRegion
+          detectSentiment
+          enableModelImprovements
+          idleSessionTTLInSeconds
+          isLinkedToKendra
+          lexFulfillmentLambdaARN
+          lexPostTextUrl
+          managementRole
+          managementRoleExternalId
+          voiceId
+        }
+      }
+    }
+  }
+}
+
+mutation addSurefireIntegration(
+  $appId: ID!
+  $token: String!
+  $endpoint: URLString!
+  $dataMap: String!
+) {
+  app {
+    update(appId: $appId) {
+      integration {
+        addSurefireIntegration(
+          token: $token
+          endpoint: $endpoint
+          dataMap: $dataMap
+        ) {
+          isLinked
+          isActive
+          isActive
+        }
+      }
+    }
   }
 }

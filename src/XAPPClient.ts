@@ -5,7 +5,9 @@ import { Entity, Intent } from "stentor-models";
 import { getGraphQLClient } from "./graphql/getGraphQLClient";
 import {
     AddChatWidgetChannelDocument,
+    AddLexV2ChannelDocument,
     AddScheduledCrawlDocument,
+    AddSurefireIntegrationDocument,
     BaseAppChannel,
     ChatWidgetAppChannelInput,
     GetAnalyticsAndEventsDocument,
@@ -26,6 +28,8 @@ import {
     GetProfileDocument,
     GetProfileQuery,
     Handler,
+    LexV2ConnectAppChannel,
+    LexV2ConnectAppChannelInput,
     StartCrawlDocument,
     UpdateAppByDocument,
     UpdateAppInput,
@@ -138,6 +142,11 @@ export class XAPPClient {
         this.client = getGraphQLClient(props.userToken, props.url);
     }
 
+    /**
+     * Get profile of the current signed in user.
+     * 
+     * @returns Profile of the current signed in user.
+     */
     public getProfile(): Promise<GetProfileQuery> {
         return this.client.query(GetProfileDocument, {}).toPromise().then((response) => {
             return response.data;
@@ -148,6 +157,12 @@ export class XAPPClient {
     // APP
     //
 
+    /**
+     * Create an app
+     * 
+     * @param app 
+     * @returns 
+     */
     public createApp(app: App): Promise<App> {
         return this.client.mutation(AddAppMutation, {
             app
@@ -389,6 +404,46 @@ export class XAPPClient {
                     throw error;
                 }
             });
+    }
+
+    /**
+     * Create a Lex Channel for the App
+     * @param appId 
+     * @param channel 
+     * @returns 
+     */
+    public createLexChannel(appId: string, channel: LexV2ConnectAppChannelInput): Promise<LexV2ConnectAppChannel> {
+
+        const cleaned = cleanObj(removeKey(removeKey(channel, "__typename"), "key"));
+
+        return this.client.mutation(AddLexV2ChannelDocument, { appId, channel: cleaned }).toPromise().then((response) => {
+            if (response.data) {
+                return response.data.addLexV2ConnectChannel;
+            } else {
+                const error = response.error || `Unable to create Lex channel, unknown error`;
+                throw error;
+            }
+        });
+    }
+
+    /**
+     * Adds a surefire integration to an app.
+     * 
+     * @param appId 
+     * @param token 
+     * @param endpoint 
+     * @param dataMap 
+     * @returns 
+     */
+    public addSurefireIntegration(appId: string, token: string, endpoint: string, dataMap: string): Promise<boolean> {
+        return this.client.mutation(AddSurefireIntegrationDocument, { appId, token, endpoint, dataMap }).toPromise().then((response) => {
+            if (response.data) {
+                return response.data.addSurefireIntegration.isLinked;
+            } else {
+                const error = response.error || `Unable to add Surefire integration, unknown error`;
+                throw error;
+            }
+        });
     }
 
     ///
