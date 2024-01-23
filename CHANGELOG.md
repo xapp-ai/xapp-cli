@@ -1,3 +1,10 @@
+## [1.5.29](https://github.com/xapp-ai/xapp-cli/compare/v1.5.28...v1.5.29) (2024-01-23)
+
+
+### Bug Fixes
+
+* Error in XAPPClient Surefire Integration ([#895](https://github.com/xapp-ai/xapp-cli/issues/895)) ([bccd9f6](https://github.com/xapp-ai/xapp-cli/commit/bccd9f6b13f04d04b7d51c19b5824eebb5d57ff9))
+
 ## [1.5.28](https://github.com/xapp-ai/xapp-cli/compare/v1.5.27...v1.5.28) (2024-01-23)
 
 
