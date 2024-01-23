@@ -1396,7 +1396,7 @@ export type App = {
   /** Retrieves any events that are related to this specific app */
   usageEvents?: Maybe<TotalUsageEvents>;
   /** Primary website for the company or division of a company that the app is representing. */
-  website?: Maybe<Scalars['URL']['output']>;
+  website?: Maybe<Scalars['String']['output']>;
   /** Data related to what was found on the customers website */
   websiteData?: Maybe<AppWebsiteData>;
 };
@@ -10880,7 +10880,25 @@ export type UpdateAppByMutationVariables = Exact<{
 }>;
 
 
-export type UpdateAppByMutation = { updateApp?: { appId: string, name: string, organizationId: string } | null };
+export type UpdateAppByMutation = { updateApp?: { appId: string, name: string, organizationId: string, description?: string | null, keywords?: Array<string | null> | null, largeIcon?: string | null, mediumIcon?: string | null, smallIcon?: string | null, summary?: string | null, templateType?: string | null, internalNotes?: string | null, website?: string | null, websiteData?: { callsToAction?: Array<string> | null, primaryColor?: string | null, secondaryColor?: string | null } | null } | null };
+
+export type AddLexV2ChannelMutationVariables = Exact<{
+  appId: Scalars['ID']['input'];
+  channel: LexV2ConnectAppChannelInput;
+}>;
+
+
+export type AddLexV2ChannelMutation = { app: { update: { channel: { addLexV2Channel: { __typename: 'LexV2ConnectAppChannel', id: string, type: string, name?: string | null, endPoint?: string | null, botId?: string | null, botName?: string | null, botRegion?: string | null, detectSentiment?: boolean | null, enableModelImprovements?: boolean | null, idleSessionTTLInSeconds?: number | null, isLinkedToKendra: boolean, lexFulfillmentLambdaARN?: string | null, lexPostTextUrl?: string | null, managementRole?: string | null, managementRoleExternalId?: string | null, voiceId?: string | null, status?: { type: string } | null } } } } };
+
+export type AddSurefireIntegrationMutationVariables = Exact<{
+  appId: Scalars['ID']['input'];
+  token: Scalars['String']['input'];
+  endpoint: Scalars['URLString']['input'];
+  dataMap: Scalars['String']['input'];
+}>;
+
+
+export type AddSurefireIntegrationMutation = { app: { update: { integration: { addSurefireIntegration: { isLinked: boolean, isActive: boolean } } } } };
 
 export type GetProfileQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -10913,7 +10931,7 @@ export type GetAppOverviewQueryVariables = Exact<{
 }>;
 
 
-export type GetAppOverviewQuery = { app?: { __typename: 'App', _id: string, appId: string, name: string, description?: string | null, summary?: string | null, organizationId: string, invocationName?: string | null, templateType?: string | null, icon?: string | null, smallIcon?: string | null, largeIcon?: string | null, banner?: string | null, largeBanner?: string | null, website?: any | null, businessDescription?: string | null, businessHighValueLeadDescription?: string | null, status?: { type: string, timestamp: any, email: string, statusHistory?: Array<{ type: string, email: string, timestamp: any, notes?: string | null } | null> | null } | null, handlers?: { _id: string, total: number, handlers?: Array<{ _id: string, name?: string | null, intentId: string, type: string } | null> | null } | null, intents?: { _id: string, total: number, intents?: Array<{ _id: string, name: string, intentId: string } | null> | null } | null, entities?: { _id: string, total: number, entities?: Array<{ _id: string, entityId: string, displayName: string } | null> | null } | null, content?: { __typename: 'TotalWebContent', total: number, content: Array<{ __typename: 'WebContentWithHighlights', _id: string, name: string, url: string } | null> } | null, contentSources?: { __typename: 'TotalWebContentSources', total: number, sources: Array<{ __typename: 'WebContentSources', webUrl: string, webUrlPatterns: Array<string | null> } | null> } | null, faq?: { total: number } | null, channels?: Array<{ __typename: 'ActionsOnGoogleAppChannel', type: string, id: string, name?: string | null } | { __typename: 'AlexaAppChannel', type: string, id: string, name?: string | null } | { __typename: 'AppChannel', type: string, id: string, name?: string | null } | { __typename: 'ChatWidgetAppChannel', key?: string | null, type: string, id: string, name?: string | null, theme?: { primaryColor?: string | null } | null } | { __typename: 'DialogflowAppChannel', type: string, id: string, name?: string | null } | { __typename: 'FacebookMessengerAppChannel', type: string, id: string, name?: string | null } | { __typename: 'FormWidgetAppChannel', type: string, id: string, name?: string | null } | { __typename: 'GoogleBusinessMessagesAppChannel', type: string, id: string, name?: string | null } | { __typename: 'IntelligentSearchAppChannel', key?: string | null, type: string, id: string, name?: string | null, theme?: { accentColor?: string | null } | null } | { __typename: 'LexConnectAppChannel', type: string, id: string, name?: string | null } | { __typename: 'LexV2ConnectAppChannel', type: string, id: string, name?: string | null } | null> | null, analytics?: { user: { totalUsers: number, totalSessions: number, returningUsers: number, newUsers: number } } | null } | null };
+export type GetAppOverviewQuery = { app?: { __typename: 'App', _id: string, appId: string, name: string, description?: string | null, summary?: string | null, organizationId: string, invocationName?: string | null, templateType?: string | null, icon?: string | null, smallIcon?: string | null, largeIcon?: string | null, banner?: string | null, largeBanner?: string | null, website?: string | null, businessDescription?: string | null, businessHighValueLeadDescription?: string | null, status?: { type: string, timestamp: any, email: string, statusHistory?: Array<{ type: string, email: string, timestamp: any, notes?: string | null } | null> | null } | null, handlers?: { _id: string, total: number, handlers?: Array<{ _id: string, name?: string | null, intentId: string, type: string } | null> | null } | null, intents?: { _id: string, total: number, intents?: Array<{ _id: string, name: string, intentId: string } | null> | null } | null, entities?: { _id: string, total: number, entities?: Array<{ _id: string, entityId: string, displayName: string } | null> | null } | null, content?: { __typename: 'TotalWebContent', total: number, content: Array<{ __typename: 'WebContentWithHighlights', _id: string, name: string, url: string } | null> } | null, contentSources?: { __typename: 'TotalWebContentSources', total: number, sources: Array<{ __typename: 'WebContentSources', webUrl: string, webUrlPatterns: Array<string | null> } | null> } | null, faq?: { total: number } | null, channels?: Array<{ __typename: 'ActionsOnGoogleAppChannel', type: string, id: string, name?: string | null } | { __typename: 'AlexaAppChannel', type: string, id: string, name?: string | null } | { __typename: 'AppChannel', type: string, id: string, name?: string | null } | { __typename: 'ChatWidgetAppChannel', key?: string | null, type: string, id: string, name?: string | null, theme?: { primaryColor?: string | null } | null } | { __typename: 'DialogflowAppChannel', type: string, id: string, name?: string | null } | { __typename: 'FacebookMessengerAppChannel', type: string, id: string, name?: string | null } | { __typename: 'FormWidgetAppChannel', type: string, id: string, name?: string | null } | { __typename: 'GoogleBusinessMessagesAppChannel', type: string, id: string, name?: string | null } | { __typename: 'IntelligentSearchAppChannel', key?: string | null, type: string, id: string, name?: string | null, theme?: { accentColor?: string | null } | null } | { __typename: 'LexConnectAppChannel', type: string, id: string, name?: string | null } | { __typename: 'LexV2ConnectAppChannel', type: string, id: string, name?: string | null } | null> | null, analytics?: { user: { totalUsers: number, totalSessions: number, returningUsers: number, newUsers: number } } | null } | null };
 
 export type GetAppContentQueryVariables = Exact<{
   appId: Scalars['ID']['input'];
@@ -11447,6 +11465,67 @@ export const UpdateAppByDocument = gql`
     appId
     name
     organizationId
+    description
+    keywords
+    largeIcon
+    mediumIcon
+    smallIcon
+    summary
+    templateType
+    internalNotes
+    website
+    websiteData {
+      callsToAction
+      primaryColor
+      secondaryColor
+    }
+  }
+}
+    `;
+export const AddLexV2ChannelDocument = gql`
+    mutation addLexV2Channel($appId: ID!, $channel: LexV2ConnectAppChannelInput!) {
+  app {
+    update(appId: $appId) {
+      channel {
+        addLexV2Channel(channel: $channel) {
+          __typename
+          id
+          type
+          name
+          endPoint
+          status {
+            type
+          }
+          botId
+          botName
+          botRegion
+          detectSentiment
+          enableModelImprovements
+          idleSessionTTLInSeconds
+          isLinkedToKendra
+          lexFulfillmentLambdaARN
+          lexPostTextUrl
+          managementRole
+          managementRoleExternalId
+          voiceId
+        }
+      }
+    }
+  }
+}
+    `;
+export const AddSurefireIntegrationDocument = gql`
+    mutation addSurefireIntegration($appId: ID!, $token: String!, $endpoint: URLString!, $dataMap: String!) {
+  app {
+    update(appId: $appId) {
+      integration {
+        addSurefireIntegration(token: $token, endpoint: $endpoint, dataMap: $dataMap) {
+          isLinked
+          isActive
+          isActive
+        }
+      }
+    }
   }
 }
     `;
