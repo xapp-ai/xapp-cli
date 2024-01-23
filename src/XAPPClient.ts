@@ -438,7 +438,7 @@ export class XAPPClient {
     public addSurefireIntegration(appId: string, token: string, endpoint: string, dataMap: string): Promise<boolean> {
         return this.client.mutation(AddSurefireIntegrationDocument, { appId, token, endpoint, dataMap }).toPromise().then((response) => {
             if (response.data) {
-                return response.data.addSurefireIntegration.isLinked;
+                return response.data.app.update.integration.isLinked;
             } else {
                 const error = response.error || `Unable to add Surefire integration, unknown error`;
                 throw error;
@@ -509,10 +509,12 @@ export class XAPPClient {
     }
 
     public updateHandler(appId: string, handlerId: string, handler: UpdateHandlerInput): Promise<Handler> {
+
+        const cleaned = cleanObj(removeKey(removeKey(handler, "__typename"), "key"));
         return this.client.mutation(UpdateHandlerDocument, {
             appId,
             handlerId,
-            handler
+            handler: cleaned
         }).toPromise().then((response) => {
             return response.data.updateHandler;
         });
