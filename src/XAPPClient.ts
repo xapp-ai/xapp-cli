@@ -52,7 +52,7 @@ import {
 } from "./graphql/mutations";
 import { GetIntent, GetEntity, GetAppWithChannels } from "./graphql/queries";
 import { App, Channel, ExportApp, GraphqlApp, ImportApp } from "./models";
-import { cleanObj, removeKey } from "./utils/clean";
+import { cleanHandler, cleanObj, removeKey } from "./utils/clean";
 
 export interface HandlerDescription {
     intentId: string;
@@ -508,13 +508,21 @@ export class XAPPClient {
         });
     }
 
-    public updateHandler(appId: string, handlerId: string, handler: UpdateHandlerInput): Promise<Handler> {
+    public updateHandler(appId: string, handlerId: string, handler: Handler | UpdateHandlerInput): Promise<Handler> {
+
+        const cleaned = cleanHandler(handler);
+
         return this.client.mutation(UpdateHandlerDocument, {
             appId,
             handlerId,
-            handler
+            handler: cleaned
         }).toPromise().then((response) => {
-            return response.data.updateHandler;
+            if (response.data) {
+                return response.data.updateHandler;
+            } else {
+                const error = response.error || `Unable to update handler, unknown error`;
+                throw error;
+            }
         });
     }
 
