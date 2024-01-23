@@ -1,3 +1,10 @@
+## [1.5.31](https://github.com/xapp-ai/xapp-cli/compare/v1.5.30...v1.5.31) (2024-01-23)
+
+
+### Bug Fixes
+
+* **deps:** update dependency stentor-handler to v1.58.94 ([#896](https://github.com/xapp-ai/xapp-cli/issues/896)) ([aac5983](https://github.com/xapp-ai/xapp-cli/commit/aac5983dcf5d22e37c057778ff2406d20e3d7824))
+
 ## [1.5.30](https://github.com/xapp-ai/xapp-cli/compare/v1.5.29...v1.5.30) (2024-01-23)
 
 
