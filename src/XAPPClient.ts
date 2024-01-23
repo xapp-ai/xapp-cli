@@ -509,12 +509,10 @@ export class XAPPClient {
     }
 
     public updateHandler(appId: string, handlerId: string, handler: UpdateHandlerInput): Promise<Handler> {
-
-        const cleaned = cleanObj(removeKey(removeKey(handler, "__typename"), "key"));
         return this.client.mutation(UpdateHandlerDocument, {
             appId,
             handlerId,
-            handler: cleaned
+            handler
         }).toPromise().then((response) => {
             return response.data.updateHandler;
         });
