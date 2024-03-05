@@ -1,3 +1,11 @@
+## [1.5.81](https://github.com/xapp-ai/xapp-cli/compare/v1.5.80...v1.5.81) (2024-03-05)
+
+
+### Bug Fixes
+
+* **deps:** update dependency express to v4.18.3 ([#956](https://github.com/xapp-ai/xapp-cli/issues/956)) ([f8ac349](https://github.com/xapp-ai/xapp-cli/commit/f8ac3497e51ca7e8240a2e40c29de6e799811d58))
+* **deps:** update stentor ([#960](https://github.com/xapp-ai/xapp-cli/issues/960)) ([7d76041](https://github.com/xapp-ai/xapp-cli/commit/7d76041db584d6cf892d11571d2c72959cbed1c4))
+
 ## [1.5.80](https://github.com/xapp-ai/xapp-cli/compare/v1.5.79...v1.5.80) (2024-03-04)
 
 
