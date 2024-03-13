@@ -1,3 +1,10 @@
+## [1.5.94](https://github.com/xapp-ai/xapp-cli/compare/v1.5.93...v1.5.94) (2024-03-13)
+
+
+### Bug Fixes
+
+* Get App Orgs by Status ([#975](https://github.com/xapp-ai/xapp-cli/issues/975)) ([bd7a0b3](https://github.com/xapp-ai/xapp-cli/commit/bd7a0b3d235e2063fd13b8662001b2e1a9f13d53))
+
 ## [1.5.93](https://github.com/xapp-ai/xapp-cli/compare/v1.5.92...v1.5.93) (2024-03-13)
 
 
