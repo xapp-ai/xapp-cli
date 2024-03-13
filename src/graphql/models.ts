@@ -2677,6 +2677,8 @@ export type CardDisplayInput = {
 };
 
 export type CaughtLead = {
+  /** The date that the lead was sent. */
+  date: Scalars['DateTime']['output'];
   /** The lead that was sent to the app. */
   lead?: Maybe<Lead>;
 };
@@ -4560,6 +4562,8 @@ export type FormWidgetAppChannel = BaseAppChannel & {
   endPoint?: Maybe<Scalars['String']['output']>;
   /** The ID of the channel. */
   id: Scalars['String']['output'];
+  /** The key that goes in the url when retrieving the form widget to apply custom themes. */
+  key?: Maybe<Scalars['String']['output']>;
   /** The display name for the channel. */
   name?: Maybe<Scalars['String']['output']>;
   /** The lifecycle status of the app. */
@@ -4604,7 +4608,7 @@ export type FormWidgetAppChannelInput = {
   /** The display name for the channel. */
   name?: InputMaybe<Scalars['String']['input']>;
   /** Theme for the search bar. */
-  theme?: InputMaybe<FormWidgetThemeInput>;
+  theme?: InputMaybe<Scalars['JSON']['input']>;
   /** The type of channel */
   type: Scalars['String']['input'];
   /**
@@ -4634,6 +4638,8 @@ export type FormWidgetConnectionConfigInput = {
 
 export type FormWidgetTheme = {
   accentColor?: Maybe<Scalars['String']['output']>;
+  /** Debug console that will allow people to attach and retrieve any data they want in the form widget. */
+  data?: Maybe<Scalars['JSON']['output']>;
 };
 
 export type FormWidgetThemeInput = {
@@ -4845,7 +4851,7 @@ export type GoogleBusinessMessagesAppChannelInput = {
   /** URI where the channel can be accessed. */
   endPoint?: InputMaybe<Scalars['String']['input']>;
   /** The ID of the channel. */
-  id: Scalars['String']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
   /** The display name for the channel. */
   name?: InputMaybe<Scalars['String']['input']>;
   /** The type of channel */
