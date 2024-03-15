@@ -1,3 +1,10 @@
+## [1.5.95](https://github.com/xapp-ai/xapp-cli/compare/v1.5.94...v1.5.95) (2024-03-15)
+
+
+### Bug Fixes
+
+* **deps:** update dependency adm-zip to v0.5.12 ([#976](https://github.com/xapp-ai/xapp-cli/issues/976)) ([18fccff](https://github.com/xapp-ai/xapp-cli/commit/18fccff15059a56609338bb4c8e31bd315a37bf8))
+
 ## [1.5.94](https://github.com/xapp-ai/xapp-cli/compare/v1.5.93...v1.5.94) (2024-03-13)
 
 
