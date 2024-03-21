@@ -1,3 +1,10 @@
+## [1.5.103](https://github.com/xapp-ai/xapp-cli/compare/v1.5.102...v1.5.103) (2024-03-21)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @types/dialogflow to v4 ([#985](https://github.com/xapp-ai/xapp-cli/issues/985)) ([14ee86f](https://github.com/xapp-ai/xapp-cli/commit/14ee86f0be407ed14340a88cc34fee6a952ade8e))
+
 ## [1.5.102](https://github.com/xapp-ai/xapp-cli/compare/v1.5.101...v1.5.102) (2024-03-21)
 
 
