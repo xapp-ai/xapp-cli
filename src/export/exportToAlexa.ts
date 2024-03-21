@@ -5,7 +5,7 @@ import { hasAudioPlayerHandlerProps } from "@xapp/stentor-handler-media";
 import { TranslateToAlexaInteractionModel, TranslateToAlexaSkillManifest } from "@xapp/stentor-alexa";
 import { existsSync, mkdirSync, writeFileSync } from "fs";
 import { resolve } from "path";
-import { getAppIntentEntities } from "../getAppIntentEntities";
+import { getStentorApp } from "../getStentorApp";
 import { ExportOptions } from "../models/options";
 
 export async function exportToAlexa(targetDirectory: string, options?: ExportOptions): Promise<void> {
@@ -20,13 +20,14 @@ export async function exportToAlexa(targetDirectory: string, options?: ExportOpt
         );
     }
 
-    const { app, intents, entities } = await getAppIntentEntities(appId);
+    const { app, intents, entities, handlers } = await getStentorApp(appId);
 
     const exportDirName = `${app.organizationId}-${app.appId}-alexa-${new Date().getTime()}`;
     const exportPath = resolve(path, exportDirName);
     mkdirSync(exportPath);
 
     log().info(`Exporting ${app.name} for Alexa to ${exportPath}`);
+    log().info(`Found ${intents.length} intents, ${entities.length} entities, and ${handlers.length} handlers.`);
 
     const playsAudio = hasAudioPlayerHandlerProps(intents);
     const alexaSkill = new TranslateToAlexaSkillManifest({ playsMedia: playsAudio }).translate({ app, intents });
