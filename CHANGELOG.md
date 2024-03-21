@@ -1,3 +1,10 @@
+## [1.5.101](https://github.com/xapp-ai/xapp-cli/compare/v1.5.100...v1.5.101) (2024-03-21)
+
+
+### Bug Fixes
+
+* pass through status on get apps for org ([3da772a](https://github.com/xapp-ai/xapp-cli/commit/3da772a79d132681c4a25363a3a6cbdf645a7f01))
+
 ## [1.5.100](https://github.com/xapp-ai/xapp-cli/compare/v1.5.99...v1.5.100) (2024-03-21)
 
 
