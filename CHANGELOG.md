@@ -1,3 +1,10 @@
+## [1.5.100](https://github.com/xapp-ai/xapp-cli/compare/v1.5.99...v1.5.100) (2024-03-21)
+
+
+### Bug Fixes
+
+* alexa export ([727b4f2](https://github.com/xapp-ai/xapp-cli/commit/727b4f202cb20d628a331fcda8b4a839579cc1a1))
+
 ## [1.5.99](https://github.com/xapp-ai/xapp-cli/compare/v1.5.98...v1.5.99) (2024-03-20)
 
 
