@@ -1,5 +1,5 @@
-/*! Copyright (c) 2022, XAPP AI*/ 
- /* eslint-disable */
+/*! Copyright (c) 2022, XAPP AI*/
+/* eslint-disable */
 import gql from 'graphql-tag';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
@@ -11560,9 +11560,9 @@ export const GetOrgAnalyticsDocument = gql`
 }
     `;
 export const GetAppsForOrgDocument = gql`
-    query getAppsForOrg($organizationId: ID!, $from: Int = 0, $size: Int = 10) {
+query getAppsForOrg($organizationId: ID!, $from: Int = 0, $size: Int = 10, $byStatusType: [String]) {
   org(organizationId: $organizationId) {
-    apps(from: $from, size: $size) {
+    apps(from: $from, size: $size, byStatusType: $byStatusType ) {
       total
       apps {
         appId
@@ -11583,6 +11583,8 @@ export const GetAppsForOrgDocument = gql`
   }
 }
     `;
+
+
 export const GetAppOverviewDocument = gql`
     query getAppOverview($appId: ID!, $start: DateTime!, $end: DateTime!, $env: [String]) {
   app(appId: $appId) {

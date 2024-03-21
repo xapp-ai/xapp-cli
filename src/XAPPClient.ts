@@ -250,12 +250,12 @@ export class XAPPClient {
      * @param size - Total number of apps to return per page
      * @returns 
      */
-    public getAppsForOrg(organizationId: string, size = 10, from = 0, status?: string[]): Promise<GetAppsForOrgQuery> {
+    public getAppsForOrg(organizationId: string, size = 10, from = 0, byStatusType?: string[]): Promise<GetAppsForOrgQuery> {
         return this.client.query(GetAppsForOrgDocument, {
             organizationId,
             from,
             size,
-            status
+            byStatusType
         }).toPromise().then((response) => {
             return response.data;
         });
