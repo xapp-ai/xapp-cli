@@ -1,3 +1,10 @@
+## [1.5.110](https://github.com/xapp-ai/xapp-cli/compare/v1.5.109...v1.5.110) (2024-03-26)
+
+
+### Bug Fixes
+
+* **deps:** update stentor to v1.59.28 ([ffe389c](https://github.com/xapp-ai/xapp-cli/commit/ffe389ce4a08d35c1452dde962babc3fbf2411ed))
+
 ## [1.5.109](https://github.com/xapp-ai/xapp-cli/compare/v1.5.108...v1.5.109) (2024-03-26)
 
 
