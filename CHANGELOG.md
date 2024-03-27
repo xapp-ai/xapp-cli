@@ -1,3 +1,10 @@
+## [1.5.113](https://github.com/xapp-ai/xapp-cli/compare/v1.5.112...v1.5.113) (2024-03-27)
+
+
+### Bug Fixes
+
+* Create Handler on XAPPClient ([#999](https://github.com/xapp-ai/xapp-cli/issues/999)) ([f777803](https://github.com/xapp-ai/xapp-cli/commit/f77780341cbe03714af90946b417530992c3fb35))
+
 ## [1.5.112](https://github.com/xapp-ai/xapp-cli/compare/v1.5.111...v1.5.112) (2024-03-27)
 
 
