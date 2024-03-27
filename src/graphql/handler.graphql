@@ -204,3 +204,9 @@ mutation updateHandler(
     ...HandlerParts
   }
 }
+
+mutation createHandler($appId: ID!, $handler: AddHandlerInput!) {
+  addHandler(appId: $appId, handler: $handler) {
+    ...HandlerParts
+  }
+}
