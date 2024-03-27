@@ -5,11 +5,13 @@ import { Entity, Intent } from "stentor-models";
 import { getGraphQLClient } from "./graphql/getGraphQLClient";
 import {
     AddChatWidgetChannelDocument,
+    AddHandlerInput,
     AddLexV2ChannelDocument,
     AddScheduledCrawlDocument,
     AddSurefireIntegrationDocument,
     BaseAppChannel,
     ChatWidgetAppChannelInput,
+    CreateHandlerDocument,
     GetAnalyticsAndEventsDocument,
     GetAnalyticsAndEventsQuery,
     GetAnalyticsAndEventsQueryVariables,
@@ -52,7 +54,7 @@ import {
 } from "./graphql/mutations";
 import { GetIntent, GetEntity, GetAppWithChannels } from "./graphql/queries";
 import { App, Channel, ExportApp, GraphqlApp, ImportApp } from "./models";
-import { cleanHandler, cleanObj, removeKey } from "./utils/clean";
+import { cleanForAddHandler, cleanForUpdateHandler, cleanObj, removeKey } from "./utils/clean";
 
 export interface HandlerDescription {
     intentId: string;
@@ -509,9 +511,12 @@ export class XAPPClient {
         });
     }
 
+    /**
+     * Update an existing handler
+     */
     public updateHandler(appId: string, handlerId: string, handler: Handler | UpdateHandlerInput): Promise<Handler> {
 
-        const cleaned = cleanHandler(handler);
+        const cleaned = cleanForUpdateHandler(handler);
 
         return this.client.mutation(UpdateHandlerDocument, {
             appId,
@@ -522,6 +527,26 @@ export class XAPPClient {
                 return response.data.updateHandler;
             } else {
                 const error = response.error || `Unable to update handler, unknown error`;
+                throw error;
+            }
+        });
+    }
+
+    /**
+     * Create a new handler
+     */
+    public createHandler(appId: string, handler: Handler | AddHandlerInput): Promise<Handler> {
+
+        const cleaned = cleanForAddHandler(handler);
+
+        return this.client.mutation(CreateHandlerDocument, {
+            appId,
+            handler: cleaned
+        }).toPromise().then((response) => {
+            if (response.data) {
+                return response.data.createHandler;
+            } else {
+                const error = response.error || `Unable to create handler, unknown error`;
                 throw error;
             }
         });

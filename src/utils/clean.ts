@@ -1,5 +1,5 @@
 /*! Copyright (c) 2023, XAPP AI*/
-import { Handler, UpdateHandlerInput } from "../graphql/models"
+import { AddHandlerInput, Handler, UpdateHandlerInput } from "../graphql/models"
 
 /**
  * Removes all empty strings, nulls, and undefined(s) from the provided object.
@@ -90,7 +90,7 @@ function isHandler(handler: Handler | UpdateHandlerInput): handler is Handler {
     return (handler as Handler).organizationId !== undefined;
 }
 
-export function cleanHandler(handler: Handler | UpdateHandlerInput): UpdateHandlerInput {
+export function cleanForUpdateHandler(handler: Handler | UpdateHandlerInput): UpdateHandlerInput {
     const cleaned = prepareDataGQL(handler);
 
     if (isHandler(cleaned)) {
@@ -101,6 +101,22 @@ export function cleanHandler(handler: Handler | UpdateHandlerInput): UpdateHandl
         delete cleaned.updatedAt;
         delete cleaned.createdAt;
         delete cleaned.intentId;
+    }
+
+    return cleaned;
+}
+
+export function cleanForAddHandler(handler: Handler | AddHandlerInput): AddHandlerInput {
+    const cleaned = prepareDataGQL(handler);
+
+    if (isHandler(cleaned)) {
+        delete cleaned.organizationId;
+        delete cleaned.appId;
+        delete cleaned.validation;
+        delete cleaned.dialogflowId;
+        delete cleaned.updatedAt;
+        delete cleaned.createdAt;
+        //  delete cleaned.intentId;
     }
 
     return cleaned;
