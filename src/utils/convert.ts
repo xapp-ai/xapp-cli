@@ -1,6 +1,7 @@
 /*! Copyright (c) 2023, XAPP AI*/
 import { Content, Handler } from "stentor-models";
-import { Handler as GraphQLHandler } from "../graphql/models";
+import { Handler as GraphQLHandler, HandlerContent, HandlerResponse, BaseDisplay, ResponseOutput, SuggestionType, SuggestionObject } from "../graphql/models";
+import { toResponseOutput } from "stentor-utils";
 
 /**
  * Converts the GraphQL style Handler to the stentor-models pattern.
@@ -29,4 +30,88 @@ export function convertGraphQLHandler(graphql: GraphQLHandler): Handler {
     }
 
     return handler;
+}
+
+export function convertToGraphQLHandler(handler: Handler): Omit<GraphQLHandler, "validation"> {
+
+    const { name, appId, intentId, organizationId, type, data, content } = handler;
+
+    const graphqlContent: HandlerContent[] = Object.keys(content).map((key) => {
+
+        const rawContent = content[key];
+
+        // filter 
+        const handlerResponse: HandlerResponse[] = rawContent.map((response) => {
+
+            const displays: BaseDisplay[] = response.displays.filter((display) => {
+                return !!(display as BaseDisplay).type;
+            }).map((display) => {
+                return display as BaseDisplay;
+            });
+
+            // Make sure we have good suggestion chips
+
+            const responseOutput = toResponseOutput(response.outputSpeech);
+
+            const suggestions: SuggestionType[] = responseOutput.suggestions.map((suggestion) => {
+                if (typeof suggestion === "string") {
+                    return {
+                        title: suggestion
+                    } as SuggestionObject;
+                } else if (typeof suggestion === "object") {
+                    return suggestion as SuggestionType;
+                }
+            });
+
+            const outputSpeech: ResponseOutput = {
+                ...responseOutput,
+                suggestions,
+                locales: {}
+            };
+
+            const repromptOutput = toResponseOutput(response.reprompt);
+
+            const repromptSuggestions: SuggestionType[] = repromptOutput.suggestions.map((suggestion) => {
+                if (typeof suggestion === "string") {
+                    return {
+                        title: suggestion
+                    } as SuggestionObject;
+                } else if (typeof suggestion === "object") {
+                    return suggestion as SuggestionType;
+                }
+            });
+
+            const reprompt: ResponseOutput = {
+                ...repromptOutput,
+                suggestions: repromptSuggestions,
+                locales: {}
+            };
+
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore It isn't perfect but close enough, segments are the problem now
+            const resp: HandlerResponse = {
+                ...response,
+                outputSpeech,
+                reprompt,
+                displays
+            }
+            return resp;
+        });
+        return {
+            key,
+            handlerResponse
+        }
+    });
+
+    const graphqlHandler: Omit<GraphQLHandler, "validation"> = {
+        name,
+        intentId,
+        appId,
+        organizationId,
+        type,
+        data,
+        content: graphqlContent
+    }
+
+    return graphqlHandler;
 }
