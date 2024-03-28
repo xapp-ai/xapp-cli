@@ -1,3 +1,10 @@
+## [1.5.116](https://github.com/xapp-ai/xapp-cli/compare/v1.5.115...v1.5.116) (2024-03-28)
+
+
+### Bug Fixes
+
+* Convert To GraphQLHandler ([#1000](https://github.com/xapp-ai/xapp-cli/issues/1000)) ([2567138](https://github.com/xapp-ai/xapp-cli/commit/256713869c9f08af6a4a71dcea9a3ebc0cce8da7))
+
 ## [1.5.115](https://github.com/xapp-ai/xapp-cli/compare/v1.5.114...v1.5.115) (2024-03-27)
 
 
