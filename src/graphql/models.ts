@@ -10939,6 +10939,7 @@ export type GetAppsForOrgQueryVariables = Exact<{
   organizationId: Scalars['ID']['input'];
   from?: InputMaybe<Scalars['Int']['input']>;
   size?: InputMaybe<Scalars['Int']['input']>;
+  byStatusType?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>> | InputMaybe<Scalars['String']['input']>>;
 }>;
 
 
@@ -11582,9 +11583,9 @@ export const GetOrgAnalyticsDocument = gql`
 }
     `;
 export const GetAppsForOrgDocument = gql`
-    query getAppsForOrg($organizationId: ID!, $from: Int = 0, $size: Int = 10) {
+    query getAppsForOrg($organizationId: ID!, $from: Int = 0, $size: Int = 10, $byStatusType: [String]) {
   org(organizationId: $organizationId) {
-    apps(from: $from, size: $size) {
+    apps(from: $from, size: $size, byStatusType: $byStatusType) {
       total
       apps {
         appId
