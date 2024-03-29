@@ -1,3 +1,10 @@
+## [1.5.118](https://github.com/xapp-ai/xapp-cli/compare/v1.5.117...v1.5.118) (2024-03-29)
+
+
+### Bug Fixes
+
+* Adding missing status type ([13674df](https://github.com/xapp-ai/xapp-cli/commit/13674df0f7c8d19c53c587211e72eb920482893a))
+
 ## [1.5.117](https://github.com/xapp-ai/xapp-cli/compare/v1.5.116...v1.5.117) (2024-03-28)
 
 
