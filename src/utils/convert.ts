@@ -77,32 +77,37 @@ export function convertToGraphQLHandler(handler: Handler): Omit<GraphQLHandler, 
                 locales: {}
             };
 
-            const repromptOutput = toResponseOutput(response.reprompt);
 
-            const repromptSuggestions: SuggestionType[] = (repromptOutput.suggestions || []).map((suggestion) => {
-                if (typeof suggestion === "string") {
-                    return {
-                        title: suggestion
-                    } as SuggestionObject;
-                } else if (typeof suggestion === "object") {
-                    return suggestion as SuggestionType;
-                }
-            });
-
-            const reprompt: ResponseOutput = {
-                ...repromptOutput,
-                suggestions: repromptSuggestions,
-                locales: {}
-            };
 
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore It isn't perfect but close enough, segments are the problem now
             const resp: HandlerResponse = {
                 ...response,
                 outputSpeech,
-                reprompt,
                 displays
+            };
+
+            const repromptOutput = toResponseOutput(response.reprompt);
+            if (repromptOutput) {
+                const repromptSuggestions: SuggestionType[] = (repromptOutput.suggestions || []).map((suggestion) => {
+                    if (typeof suggestion === "string") {
+                        return {
+                            title: suggestion
+                        } as SuggestionObject;
+                    } else if (typeof suggestion === "object") {
+                        return suggestion as SuggestionType;
+                    }
+                });
+
+                const reprompt: ResponseOutput = {
+                    ...repromptOutput,
+                    suggestions: repromptSuggestions,
+                    locales: {}
+                };
+
+                resp.reprompt = reprompt;
             }
+
             return resp;
         });
         return {
