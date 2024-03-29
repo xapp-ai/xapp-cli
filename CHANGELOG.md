@@ -1,3 +1,10 @@
+## [1.5.121](https://github.com/xapp-ai/xapp-cli/compare/v1.5.120...v1.5.121) (2024-03-29)
+
+
+### Bug Fixes
+
+* crash in graphql convert ([fdda674](https://github.com/xapp-ai/xapp-cli/commit/fdda674dba7576a10cbff3b27cc533267f1fb512))
+
 ## [1.5.120](https://github.com/xapp-ai/xapp-cli/compare/v1.5.119...v1.5.120) (2024-03-29)
 
 
