@@ -1,6 +1,14 @@
 /*! Copyright (c) 2023, XAPP AI*/
 import { Content, Handler } from "stentor-models";
-import { Handler as GraphQLHandler, HandlerContent, HandlerResponse, BaseDisplay, ResponseOutput, SuggestionType, SuggestionObject } from "../graphql/models";
+import {
+    Handler as GraphQLHandler,
+    HandlerContent,
+    HandlerResponse,
+    BaseDisplay,
+    ResponseOutput,
+    SuggestionType,
+    SuggestionObject
+} from "../graphql/models";
 import { toResponseOutput } from "stentor-utils";
 
 /**
