@@ -43,7 +43,7 @@ export function convertToGraphQLHandler(handler: Handler): Omit<GraphQLHandler, 
         // filter 
         const handlerResponse: HandlerResponse[] = rawContent.map((response) => {
 
-            const displays: BaseDisplay[] = response.displays.filter((display) => {
+            const displays: BaseDisplay[] = (response.displays || []).filter((display) => {
                 return !!(display as BaseDisplay).type;
             }).map((display) => {
                 return display as BaseDisplay;
@@ -53,7 +53,7 @@ export function convertToGraphQLHandler(handler: Handler): Omit<GraphQLHandler, 
 
             const responseOutput = toResponseOutput(response.outputSpeech);
 
-            const suggestions: SuggestionType[] = responseOutput.suggestions.map((suggestion) => {
+            const suggestions: SuggestionType[] = (responseOutput.suggestions || []).map((suggestion) => {
                 if (typeof suggestion === "string") {
                     return {
                         title: suggestion
@@ -71,7 +71,7 @@ export function convertToGraphQLHandler(handler: Handler): Omit<GraphQLHandler, 
 
             const repromptOutput = toResponseOutput(response.reprompt);
 
-            const repromptSuggestions: SuggestionType[] = repromptOutput.suggestions.map((suggestion) => {
+            const repromptSuggestions: SuggestionType[] = (repromptOutput.suggestions || []).map((suggestion) => {
                 if (typeof suggestion === "string") {
                     return {
                         title: suggestion
