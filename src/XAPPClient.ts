@@ -544,7 +544,7 @@ export class XAPPClient {
             handler: cleaned
         }).toPromise().then((response) => {
             if (response.data) {
-                return response.data.createHandler;
+                return response.data.addHandler;
             } else {
                 const error = response.error || `Unable to create handler, unknown error`;
                 throw error;
