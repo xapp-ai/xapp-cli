@@ -1,3 +1,17 @@
+## [1.5.123](https://github.com/xapp-ai/xapp-cli/compare/v1.5.122...v1.5.123) (2024-04-01)
+
+
+### Bug Fixes
+
+* **deps:** update stentor ([460e5fd](https://github.com/xapp-ai/xapp-cli/commit/460e5fd630ad31965fdc73219a304a1c6e78b030))
+
+## [1.5.122](https://github.com/xapp-ai/xapp-cli/compare/v1.5.121...v1.5.122) (2024-03-29)
+
+
+### Bug Fixes
+
+* option reprompt on handler conversion ([89d55a8](https://github.com/xapp-ai/xapp-cli/commit/89d55a85c8dea721ff2b0a80e361af5ed897830d))
+
 ## [1.5.121](https://github.com/xapp-ai/xapp-cli/compare/v1.5.120...v1.5.121) (2024-03-29)
 
 
