@@ -1,3 +1,10 @@
+## [1.5.124](https://github.com/xapp-ai/xapp-cli/compare/v1.5.123...v1.5.124) (2024-04-01)
+
+
+### Bug Fixes
+
+* return created handler in XAPPClient ([06613d9](https://github.com/xapp-ai/xapp-cli/commit/06613d90d72ed6a01cd836b6f8defd569fdc15e5))
+
 ## [1.5.123](https://github.com/xapp-ai/xapp-cli/compare/v1.5.122...v1.5.123) (2024-04-01)
 
 
