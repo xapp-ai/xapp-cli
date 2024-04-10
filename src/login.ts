@@ -23,7 +23,7 @@ async function getCode(challenge: string): Promise<string> {
 
         const basePath = profile.basePath || 'https://api.xapp.ai';
         const authPath = profile.authPath || 'https://auth.xapp.ai';
-        const clientId = profile.clientId || '1jla9939g04f6ip54b51sgc0mu';
+        const clientId = profile.clientId || '1h8mjojsn6k3vup08uk91rgagm';
 
         const path = profile.path || 'authorize';
         const port = profile.port || DEFAULT_LISTENING_PORT;
