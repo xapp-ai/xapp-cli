@@ -1,3 +1,10 @@
+## [1.5.135](https://github.com/xapp-ai/xapp-cli/compare/v1.5.134...v1.5.135) (2024-04-10)
+
+
+### Bug Fixes
+
+* Updating default clientId after our user pool migration. ([#1022](https://github.com/xapp-ai/xapp-cli/issues/1022)) ([b4ce199](https://github.com/xapp-ai/xapp-cli/commit/b4ce1991e95825aff339976acb1043f5950ca8b7))
+
 ## [1.5.134](https://github.com/xapp-ai/xapp-cli/compare/v1.5.133...v1.5.134) (2024-04-10)
 
 
