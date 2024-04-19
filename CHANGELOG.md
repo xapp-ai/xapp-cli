@@ -1,3 +1,11 @@
+## [1.5.145](https://github.com/xapp-ai/xapp-cli/compare/v1.5.144...v1.5.145) (2024-04-19)
+
+
+### Bug Fixes
+
+* **deps:** update dependency aws-sdk to v2.1602.0 ([#1024](https://github.com/xapp-ai/xapp-cli/issues/1024)) ([993e15e](https://github.com/xapp-ai/xapp-cli/commit/993e15ef994e7d1a8645fd207718c4385f9b628f))
+* **deps:** update dependency inquirer to v9.2.19 ([#1029](https://github.com/xapp-ai/xapp-cli/issues/1029)) ([8c5f5b6](https://github.com/xapp-ai/xapp-cli/commit/8c5f5b6117ab9884ea3cb2804828a12623add41b))
+
 ## [1.5.144](https://github.com/xapp-ai/xapp-cli/compare/v1.5.143...v1.5.144) (2024-04-19)
 
 
