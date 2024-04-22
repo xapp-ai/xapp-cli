@@ -1,3 +1,11 @@
+## [1.5.149](https://github.com/xapp-ai/xapp-cli/compare/v1.5.148...v1.5.149) (2024-04-22)
+
+
+### Bug Fixes
+
+* Client Secret and Refresh Token ([#1038](https://github.com/xapp-ai/xapp-cli/issues/1038)) ([d040d91](https://github.com/xapp-ai/xapp-cli/commit/d040d9189c620c0395d91ff29e75a85617b99f0c))
+* **deps:** update dependency aws-sdk to v2.1603.0 ([#1034](https://github.com/xapp-ai/xapp-cli/issues/1034)) ([49b1b1b](https://github.com/xapp-ai/xapp-cli/commit/49b1b1b7cfde593b49afda39da63f25bbfd0f077))
+
 ## [1.5.148](https://github.com/xapp-ai/xapp-cli/compare/v1.5.147...v1.5.148) (2024-04-22)
 
 
