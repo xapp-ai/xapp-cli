@@ -4,7 +4,7 @@ import log from "stentor-logger";
 import { createHash, randomBytes } from "crypto";
 import express from "express";
 import open from "open";
-import request from "request";
+import request, { OptionsWithUrl } from "request";
 import { getConfig, getConfigProfile } from "./getConfig";
 import { saveConfig } from "./saveConfig";
 import { TokenResponse } from "./TokenResponse";
@@ -50,6 +50,7 @@ async function getCode(challenge: string): Promise<string> {
         });
         // Open the url
         log.info(`Opening the login page in a browser.`);
+        log.debug(`${get}`);
         open(get);
     });
 }
@@ -66,21 +67,75 @@ async function getToken(code: string, verifier: string): Promise<TokenResponse> 
         const profile = getConfigProfile();
 
         const authPath = profile.authPath || 'https://auth.xapp.ai';
-        const clientId = profile.clientId || '1jla9939g04f6ip54b51sgc0mu';
+        const clientId = profile.clientId || '1h8mjojsn6k3vup08uk91rgagm';
         const port = profile.port || DEFAULT_LISTENING_PORT;
         const path = profile.path || "authorize";
         const tokenPath = profile.tokenPath || "oauth2/token"
+
+        const clientSecret: string = profile.clientSecret || undefined;
+
+        const grant_type = profile.grantType || "authorization_code";
+
         // Exchange it for a token, code based on example provided by Auth0
+        const options: OptionsWithUrl = {
+            method: "POST",
+            url: `${authPath}/${tokenPath}`,
+            headers: { "content-type": "application/x-www-form-urlencoded" },
+            form: {
+                grant_type,
+                client_id: clientId,
+                code_verifier: `${verifier}`,
+                code: `${code}`,
+                redirect_uri: `http://localhost:${port}/${path}`
+            }
+        };
+
+        if (clientSecret && typeof options.form === "object") {
+            options.form.client_secret = clientSecret;
+        }
+
+        request(options, (error, response, body) => {
+
+            const code = response.statusCode;
+
+            if (code !== 200) {
+                reject(new Error(body));
+                return;
+            }
+            if (error) {
+                reject(error);
+            } else {
+                const token = JSON.parse(body);
+                // Another opportunity for an error
+                if (token.error) {
+                    reject(new Error(`${token.error} ${token.error_description}`));
+                } else {
+                    resolve(token);
+                }
+            }
+        });
+    });
+}
+
+export async function refreshToken(refreshToken: string): Promise<TokenResponse> {
+    return new Promise((resolve, reject) => {
+
+        const profile = getConfigProfile();
+
+        const authPath = profile.authPath || 'https://auth.xapp.ai';
+        const clientId = profile.clientId || '1jla9939g04f6ip54b51sgc0mu';
+        const tokenPath = profile.tokenPath || "oauth2/token"
+        const clientSecret: string = profile.clientSecret || undefined;
+
         const options = {
             method: "POST",
             url: `${authPath}/${tokenPath}`,
             headers: { "content-type": "application/x-www-form-urlencoded" },
             form: {
-                grant_type: "authorization_code",
+                grant_type: "refresh_token",
                 client_id: clientId,
-                code_verifier: `${verifier}`,
-                code: `${code}`,
-                redirect_uri: `http://localhost:${port}/${path}`
+                client_secret: clientSecret,
+                refresh_token: refreshToken
             }
         };
 
@@ -126,7 +181,9 @@ export async function login(): Promise<string> {
             .update(buffer)
             .digest();
     }
+
     const challenge = base64URLEncode(sha256(verifier));
+
     log.info(`Ok, logging you in.`);
     const code = await getCode(challenge);
     log.info(`Got the code from the redirect, converting it to an access token.`);

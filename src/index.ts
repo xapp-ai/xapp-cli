@@ -65,6 +65,8 @@ program.command("set")
         } else {
             // Checks out
             saveConfig(config);
+
+            log().info(`Current profile set to ${config.currentProfile}`);
         }
     });
 
