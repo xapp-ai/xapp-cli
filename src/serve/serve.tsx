@@ -72,8 +72,10 @@ export async function serve(props?: { url?: string, port?: string, appId?: strin
         express.static(path.resolve(__dirname, ".", "dist"), { maxAge: "30d" })
     );
 
-    app.listen(port, () => {
+    app.listen(port, async () => {
         log.info(`Temporary server setup listening on port ${port} to serve the widget locally.`);
-        open(`http://localhost:${port}`);
+        await open(`http://localhost:${port}`).catch((e) => {
+            log.error(`Error opening the browser: ${e}`);
+        });
     });
 }

@@ -17,7 +17,7 @@ const DEFAULT_LISTENING_PORT = 8787;
  * @param challenge The challenge code to be used later for verification.
  */
 async function getCode(challenge: string): Promise<string> {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
 
         const profile = getConfigProfile();
 
@@ -37,7 +37,7 @@ async function getCode(challenge: string): Promise<string> {
             log.info(`Temporary server setup listening on port ${port} to catch the redirect URL.`)
         );
 
-        app.get(`/${path}`, (req, res) => {
+        app.get(`/${path}`, async (req, res) => {
             if (req.query.code) {
                 res.send("Received access code, please return to the console.  You may close this page.");
                 server.close();
@@ -51,7 +51,9 @@ async function getCode(challenge: string): Promise<string> {
         // Open the url
         log.info(`Opening the login page in a browser.`);
         log.debug(`${get}`);
-        open(get);
+        await open(get).catch((e) => {
+            log.error(`Error opening the browser: ${e}`);
+        });
     });
 }
 
