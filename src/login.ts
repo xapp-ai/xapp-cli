@@ -51,8 +51,9 @@ async function getCode(challenge: string): Promise<string> {
         // Open the url
         log.info(`Opening the login page in a browser.`);
         log.debug(`${get}`);
-        await open(get).catch((e) => {
+        await open(get, { wait: true }).catch((e) => {
             log.error(`Error opening the browser: ${e}`);
+            log.info(`Could not open ${get}`);
         });
     });
 }
