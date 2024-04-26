@@ -1,10 +1,10 @@
 /*! Copyright (c) 2022, XAPP AI */
 
-import log from "stentor-logger";
-import { getAppId } from "./getAppId";
-import { getUserToken } from "./getUserToken";
-import { getXAPPClient } from "./getXAPPClient";
-import { ExportApp } from "./models";
+import { log } from "stentor-logger";
+import { getAppId } from "./getAppId.js";
+import { getUserToken } from "./getUserToken.js";
+import { getXAPPClient } from "./getXAPPClient.js";
+import { ExportApp } from "./models/index.js";
 
 export async function getStentorApp(appId?: string, options: { withChannels?: boolean, token?: string } = { withChannels: false }): Promise<ExportApp> {
 
@@ -16,7 +16,7 @@ export async function getStentorApp(appId?: string, options: { withChannels?: bo
         appId = getAppId();
     }
 
-    log.info(`Retrieving app with ID: ${appId}`);
+    log().info(`Retrieving app with ID: ${appId}`);
 
     const client = await getXAPPClient(token, appId);
 

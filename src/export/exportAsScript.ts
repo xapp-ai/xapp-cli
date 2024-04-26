@@ -2,14 +2,14 @@
 
 import { isExecutablePath } from "stentor-guards";
 import { isSlotDependable, UtteranceGenerator } from "stentor-interaction-model";
-import log from "stentor-logger";
+import { log } from "stentor-logger";
 import { Handler, Intent } from "stentor-models";
 import { findValueForKey, hasForwards, toMap } from "stentor-utils";
 import { Document, Packer, PageNumberFormat } from "docx";
 import { existsSync, writeFileSync } from "fs";
 import { resolve } from "path";
-import { ExportOptions } from "../models/options";
-import { getStentorApp } from "../getStentorApp";
+import { ExportOptions } from "../models/options.js";
+import { getStentorApp } from "../getStentorApp.js";
 
 const XML_REGEX = /<.*\/>/;
 
@@ -41,7 +41,7 @@ function convertHandlerToPage(handler: Handler, intents: (Intent | Handler)[]): 
     // Grab the output speech off the first response
     const responses = handler.content ? handler.content[intentId] : undefined;
     if (!Array.isArray(responses)) {
-        log.info(`Could not generate page for ${intentId},  It did not have content for itself`);
+        log().info(`Could not generate page for ${intentId},  It did not have content for itself`);
         return undefined;
     }
     const firstResponse = responses[0];
@@ -165,7 +165,7 @@ export async function exportAsScript(output: string, options: ExportOptions): Pr
     const { appId } = options;
     const { app, intents, handlers } = await getStentorApp(appId);
 
-    log.info(`Found ${handlers.length} handlers`);
+    log().info(`Found ${handlers.length} handlers`);
 
     const pages: Page[] = [];
 
@@ -176,12 +176,12 @@ export async function exportAsScript(output: string, options: ExportOptions): Pr
                 pages.push(page);
             }
         } catch (error) {
-            log.info(error.stack);
+            log().info(error.stack);
             throw Error(error);
         }
     });
 
-    log.info(`Generated ${pages.length} pages`);
+    log().info(`Generated ${pages.length} pages`);
 
     // Sort the pages by name
     pages.sort((a, b) => {
@@ -197,7 +197,7 @@ export async function exportAsScript(output: string, options: ExportOptions): Pr
     });
 
     if (!output) {
-        log.info("Output Directory is required to generate the document");
+        log().info("Output Directory is required to generate the document");
         return;
     }
 

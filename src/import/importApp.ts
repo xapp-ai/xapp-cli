@@ -1,9 +1,9 @@
 /*! Copyright (c) 2022, XAPP AI*/
 import { log } from "stentor-logger";
-import { ImportApp } from "../models";
-import { getUserToken } from "../getUserToken";
-import { getConfigProfile } from "../getConfig";
-import { XAPPClient } from "../XAPPClient";
+import { ImportApp } from "../models/index.js";
+import { getUserToken } from "../getUserToken.js";
+import { getConfigProfile } from "../getConfig.js";
+import { XAPPClient } from "../XAPPClient.js";
 
 export async function importApp(uri: string, options: ImportApp): Promise<void> {
 

@@ -1,5 +1,7 @@
 /*! Copyright (c) 2023, XAPP AI*/
 import { Content, Handler } from "stentor-models";
+import { toResponseOutput } from "stentor-utils";
+
 import {
     Handler as GraphQLHandler,
     HandlerContent,
@@ -8,8 +10,8 @@ import {
     ResponseOutput,
     SuggestionType,
     SuggestionObject
-} from "../graphql/models";
-import { toResponseOutput } from "stentor-utils";
+} from "../graphql/models.js";
+
 
 /**
  * Converts the GraphQL style Handler to the stentor-models pattern.

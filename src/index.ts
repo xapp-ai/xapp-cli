@@ -1,43 +1,46 @@
 #!/usr/bin/env node
 /*! Copyright (c) 2022, XAPP AI*/
-require("dotenv").config(); // process the .env file
+
 
 // For the CLI, we want the log level to always be info
 process.env.STENTOR_LOG_LEVEL = "info";
 // It will only last this execution
 
+// let it be overridden by 
+require("dotenv").config(); // process the .env file
+
 import program from "commander";
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkg = require("../package.json");
 
-import { info } from "./analyze";
-import { copy } from "./copy";
-import { exportApp, exportAsScript, exportToAlexa, exportToDialogflow, exportToLex } from "./export";
-import { getConfig } from "./getConfig";
-import { login } from "./login";
-import { logout } from "./logout";
-import { Options } from "./Options";
-import { pullFromDialogflowV2 } from "./pull";
-import { pushToDialogflowV2, pushToLexV2 } from "./push";
-import { pushToLex } from "./push/pushToLex";
-import { saveConfig } from "./saveConfig";
+import { info } from "./analyze/index.js";
+import { copy } from "./copy.js";
+import { exportApp, exportAsScript, exportToAlexa, exportToDialogflow, exportToLex } from "./export/index.js";
+import { getConfig } from "./getConfig.js";
+import { login } from "./login.js";
+import { logout } from "./logout.js";
+import { Options } from "./Options.js";
+import { pullFromDialogflowV2 } from "./pull/index.js";
+import { pushToDialogflowV2, pushToLexV2 } from "./push/index.js";
+import { pushToLex } from "./push/pushToLex.js";
+import { saveConfig } from "./saveConfig.js";
 import { log } from "stentor-logger";
-import { importApp, importAppFromFile } from "./import";
-import { importFromDialogflow } from "./import";
-import { profile, ProfileOptions } from "./profile";
-import { ExportOptions } from "./models/options";
-import { generateTypes, GenerateTypesOptions } from "./types";
-import { getUserToken } from "./getUserToken";
-import { XAPPClient } from "./XAPPClient";
-import { createChannelLexV2 } from "./create/channelLexV2";
-import { serve } from "./serve";
-import { exportOrg } from "./org/exportOrg";
+import { importApp, importAppFromFile } from "./import/index.js";
+import { importFromDialogflow } from "./import/index.js";
+import { profile, ProfileOptions } from "./profile/index.js";
+import { ExportOptions } from "./models/options.js";
+import { generateTypes, GenerateTypesOptions } from "./types/index.js";
+import { getUserToken } from "./getUserToken.js";
+import { XAPPClient } from "./XAPPClient.js";
+import { createChannelLexV2 } from "./create/channelLexV2.js";
+import { serve } from "./serve/index.js";
+import { exportOrg } from "./org/exportOrg.js";
 
 // A couple of exports for if you use it not like a CLI
-export { getStentorApp } from "./getStentorApp";
-export { getXAPPClient } from "./getXAPPClient";
-export { XAPPClient } from "./XAPPClient";
-export { getUserToken } from "./getUserToken"
+export { getStentorApp } from "./getStentorApp.js";
+export { getXAPPClient } from "./getXAPPClient.js";
+export { XAPPClient } from "./XAPPClient.js";
+export { getUserToken } from "./getUserToken.js"
 
 program.version(pkg.version);
 

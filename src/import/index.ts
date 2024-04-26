@@ -1,4 +1,4 @@
 /*! Copyright (c) 2022, XAPP AI*/
-export * from "./importApp";
-export * from "./importFromDialogflow";
-export * from "./importAppFromFile";
+export * from "./importApp.js";
+export * from "./importFromDialogflow.js";
+export * from "./importAppFromFile.js";

@@ -2,10 +2,10 @@
 import { log } from "stentor-logger";
 import { existsSync, mkdirSync, writeFileSync } from "fs";
 import { resolve } from "path";
-import { getStentorApp } from "../getStentorApp";
-import { ExportOptions } from "../models/options";
-import { getXAPPClient } from "../getXAPPClient";
-import { getUserToken } from "../getUserToken";
+import { getStentorApp } from "../getStentorApp.js";
+import { ExportOptions } from "../models/options.js";
+import { getXAPPClient } from "../getXAPPClient.js";
+import { getUserToken } from "../getUserToken.js";
 
 /**
  * Exports an app to the provided directory.

@@ -2,9 +2,9 @@
 
 import { log } from "stentor-logger";
 import { Handler, Intent } from "stentor-models";
-import { getAppIntentEntities } from "./getAppIntentEntities";
-import { getXAPPClient } from "./getXAPPClient";
-import { Options } from "./Options";
+import { getAppIntentEntities } from "./getAppIntentEntities.js";
+import { getXAPPClient } from "./getXAPPClient.js";
+import { Options } from "./Options.js";
 
 export async function copy(appId: string, newAppId: string, intentId: string | undefined, options: Options): Promise<void> {
     if (!newAppId) {

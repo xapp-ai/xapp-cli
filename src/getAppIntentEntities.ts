@@ -1,14 +1,15 @@
 /*! Copyright (c) 2022, XAPP AI*/
 import * as fs from "fs";
 
-import log from "stentor-logger";
+import { log } from "stentor-logger";
+
 import { Entity, Handler, Intent } from "stentor-models";
 
-import { getAppId } from "./getAppId";
-import { getUserToken } from "./getUserToken";
-import { getXAPPClient } from "./getXAPPClient";
-import { App } from "./models";
-import { convertGraphQLHandler } from "./utils/convert";
+import { getAppId } from "./getAppId.js";
+import { getUserToken } from "./getUserToken.js";
+import { getXAPPClient } from "./getXAPPClient.js";
+import { App } from "./models/index.js";
+import { convertGraphQLHandler } from "./utils/convert.js";
 
 export interface FullApp { app: App; intents?: Intent[]; handlers?: Handler[]; entities?: Entity[]; token: string }
 
@@ -36,7 +37,7 @@ export async function getAppIntentEntities(
 
     const { excludeEntities, excludeHandlers, excludeIntents } = options;
 
-    log.info(`Retrieving app with ID: ${appId}`);
+    log().info(`Retrieving app with ID: ${appId}`);
 
     const client = await getXAPPClient(token, appId);
 
@@ -60,8 +61,8 @@ export async function getAppIntentEntities(
         try {
             intents = await Promise.all(getIntentsPromise);
         } catch (err) {
-            log.error("Error retrieving intents. Try running $xapp login again");
-            log.error(err);
+            log().error("Error retrieving intents. Try running $xapp login again");
+            log().error(err);
         }
 
         value.intents = intents;
@@ -77,8 +78,8 @@ export async function getAppIntentEntities(
         try {
             entities = await Promise.all(getEntitiesPromise);
         } catch (err) {
-            log.error("Error retrieving entities. Try running $xapp login again");
-            log.error(err);
+            log().error("Error retrieving entities. Try running $xapp login again");
+            log().error(err);
         }
 
         value.entities = entities;
@@ -100,8 +101,8 @@ export async function getAppIntentEntities(
             });
 
         } catch (err) {
-            log.error("Error retrieving handlers. Try running $xapp login again");
-            log.error(err);
+            log().error("Error retrieving handlers. Try running $xapp login again");
+            log().error(err);
         }
 
         value.handlers = handlers;

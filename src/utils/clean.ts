@@ -1,5 +1,5 @@
 /*! Copyright (c) 2023, XAPP AI*/
-import { AddHandlerInput, Handler, UpdateHandlerInput } from "../graphql/models"
+import { AddHandlerInput, Handler, UpdateHandlerInput } from "../graphql/models.js"
 
 /**
  * Removes all empty strings, nulls, and undefined(s) from the provided object.

@@ -1,12 +1,12 @@
 /*! Copyright (c) 2022, XAPP AI*/
 import { DialogflowV2Service } from "@xapp/stentor-service-dialogflow";
-import log from "stentor-logger";
+import { log } from "stentor-logger";
 
-import { getConfigProfile } from "../getConfig";
-import { getGoogleCredentials } from "../getGoogleCredentials";
-import { getUserToken } from "../getUserToken";
-import { getGraphQLClient } from "../graphql/getGraphQLClient";
-import { AddAppMutation, AddEntityMutation, AddIntentMutation } from "../graphql/mutations";
+import { getConfigProfile } from "../getConfig.js";
+import { getGoogleCredentials } from "../getGoogleCredentials.js";
+import { getUserToken } from "../getUserToken.js";
+import { getGraphQLClient } from "../graphql/getGraphQLClient.js";
+import { AddAppMutation, AddEntityMutation, AddIntentMutation } from "../graphql/mutations.js";
 
 export async function importFromDialogflow(credentialsPath: string, options: { organizationId: string }): Promise<void> {
 
@@ -32,9 +32,9 @@ export async function importFromDialogflow(credentialsPath: string, options: { o
 
     const { app, intents, entities } = await service.import();
 
-    log.info(`Retrieved ${app.name} with ${intents.length} intents & ${entities.length} entities.`);
+    log().info(`Retrieved ${app.name} with ${intents.length} intents & ${entities.length} entities.`);
 
-    log.info(`Creating app on organization with ID ${organizationId}`);
+    log().info(`Creating app on organization with ID ${organizationId}`);
 
     const token = await getUserToken();
     const profile = await getConfigProfile();
@@ -51,7 +51,7 @@ export async function importFromDialogflow(credentialsPath: string, options: { o
 
     const newApp = appReturn.data.addApp as { appId: string; name: string; organizationId: string };
     const { appId } = newApp;
-    log.info(`App ${newApp.name} created with id ${newApp.appId}`);
+    log().info(`App ${newApp.name} created with id ${newApp.appId}`);
 
     const addIntentPromises = intents.map((rawIntent) => {
         const intent = { ...rawIntent };
@@ -64,7 +64,7 @@ export async function importFromDialogflow(credentialsPath: string, options: { o
 
     const intentReturns = await Promise.all(addIntentPromises);
 
-    log.info(`${intentReturns.length} intents added`);
+    log().info(`${intentReturns.length} intents added`);
 
     const addEntityPromises = entities.map((rawEntity) => {
         const entity = { ...rawEntity };
@@ -81,7 +81,7 @@ export async function importFromDialogflow(credentialsPath: string, options: { o
 
     const entityReturns = await Promise.all(addEntityPromises);
 
-    log.info(`${entityReturns.length} entities added`);
+    log().info(`${entityReturns.length} entities added`);
 
     // TODO: ADD THE CHANNEL!!!
 

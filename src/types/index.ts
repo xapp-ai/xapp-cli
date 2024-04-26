@@ -1,2 +1,2 @@
 /*! Copyright (c) 2022, XAPP AI*/
-export * from "./generateTypes";
+export * from "./generateTypes.js";

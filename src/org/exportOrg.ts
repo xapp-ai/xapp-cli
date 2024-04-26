@@ -6,9 +6,9 @@ import { resolve } from "path";
 import { createObjectCsvWriter, } from "csv-writer";
 import { log } from "stentor-logger";
 
-import { XAPPClient } from "../XAPPClient";
-import { getUserToken } from "../getUserToken";
-import { getConfigProfile } from "../getConfig";
+import { XAPPClient } from "../XAPPClient.js";
+import { getUserToken } from "../getUserToken.js";
+import { getConfigProfile } from "../getConfig.js";
 
 export interface ExportOrgOptions {
     delimiter?: string;

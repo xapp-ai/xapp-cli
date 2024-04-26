@@ -5,10 +5,9 @@ import { existsSync, readFileSync } from "fs";
 import { log } from "stentor-logger";
 import { App, Intent, Handler, Entity } from "stentor-models";
 
-import { UpdateAppInput } from "../graphql/models"
-
-import { getXAPPClient } from "../getXAPPClient";
-import { getUserToken } from "../getUserToken";
+import { UpdateAppInput } from "../graphql/models.js"
+import { getXAPPClient } from "../getXAPPClient.js";
+import { getUserToken } from "../getUserToken.js";
 
 /**
  * Imports an app from the provided file

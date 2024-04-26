@@ -12,8 +12,8 @@ import { convertToUtteranceTest, UtteranceProfiler, UtteranceTest } from "@xapp/
 import { NLUService } from "stentor-models";
 import { DialogflowV2Service } from "@xapp/stentor-service-dialogflow";
 import { LexService, LexServiceV2 } from "@xapp/stentor-service-lex";
-import { getGoogleCredentials } from "../getGoogleCredentials";
-import { getStentorApp } from "../getStentorApp";
+import { getGoogleCredentials } from "../getGoogleCredentials.js";
+import { getStentorApp } from "../getStentorApp.js";
 
 export interface ProfileOptions {
     platform: string;

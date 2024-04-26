@@ -3,13 +3,13 @@
 import { LexServiceV2, LexSyncStatusV2 } from "@xapp/stentor-service-lex";
 import { isIntent } from "stentor-guards";
 import { Handler } from "stentor-models";
-import { getAppIntentEntitiesFromExport } from "../getAppIntentEntities";
-import { getStentorApp } from "../getStentorApp";
+import { getAppIntentEntitiesFromExport } from "../getAppIntentEntities.js";
+import { getStentorApp } from "../getStentorApp.js";
 
-import log from "stentor-logger";
+import { log } from "stentor-logger";
 
 function sleep(ms: number): Promise<void> {
-    log.info("Snoozing for ms milliseconds ... zzzzz");
+    log().info("Snoozing for ms milliseconds ... zzzzz");
     return new Promise((resolve) => {
         setTimeout(() => {
             resolve();
@@ -75,19 +75,19 @@ export async function pushToLexV2(options?: { appId?: string; lang?: string; aws
         }
     });
 
-    log.info(`Syncing app ${app.appId} with ${mergedIntents.length} intents and ${entities.length} entities to LEX V2`);
+    log().info(`Syncing app ${app.appId} with ${mergedIntents.length} intents and ${entities.length} entities to LEX V2`);
     let responseStatus: LexSyncStatusV2 = await lexSyncerV2.sync(app.appId, mergedIntents, entities);
-    log.info(`Synced app ${app.appId} finished with status\n ${JSON.stringify(responseStatus, undefined, 2)}}`);
+    log().info(`Synced app ${app.appId} finished with status\n ${JSON.stringify(responseStatus, undefined, 2)}}`);
 
     if (responseStatus.state !== "FAILED") {
         await sleep(3);
         responseStatus = await lexSyncerV2.getStatus();
-        log.info(`App ${app.appId} new status\n ${JSON.stringify(responseStatus, undefined, 2)}}`);
+        log().info(`App ${app.appId} new status\n ${JSON.stringify(responseStatus, undefined, 2)}}`);
         await sleep(3);
         const nluResponse = lexSyncerV2.query("hello");
-        log.info(`App ${app.appId} nlu response\n ${JSON.stringify(nluResponse, undefined, 2)}}`);
+        log().info(`App ${app.appId} nlu response\n ${JSON.stringify(nluResponse, undefined, 2)}}`);
     } else {
-        log.info(`FAILED`);
-        log.info(responseStatus.message);
+        log().info(`FAILED`);
+        log().info(responseStatus.message);
     }
 }

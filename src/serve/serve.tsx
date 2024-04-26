@@ -1,15 +1,25 @@
 /*! Copyright (c) 2022, XAPP AI*/
-import open from "open";
+
 import path from "path";
 import fs from "fs";
-import log from "stentor-logger";
+import { log } from "stentor-logger";
 import express from "express";
 import { WidgetEnv } from "@xapp/stentor-chat-widget";
 
-import { getAppId } from "../getAppId";
-import { getUserToken } from "../getUserToken";
-import { getXAPPClient } from "../getXAPPClient";
+import { getAppId } from "../getAppId.js";
+import { getUserToken } from "../getUserToken.js";
+import { getXAPPClient } from "../getXAPPClient.js";
 
+let open: typeof import('open').default;
+
+async function loadOpen(): Promise<void> {
+    try {
+        const module = await import('open');
+        open = module.default;
+    } catch (e) {
+        log().error(`Error loading open: ${e}`);
+    }
+}
 
 export async function serve(props?: { url?: string, port?: string, appId?: string, key?: string }): Promise<void> {
 
@@ -18,9 +28,9 @@ export async function serve(props?: { url?: string, port?: string, appId?: strin
 
     const appId = props.appId || getAppId();
 
-    log.info(`Starting widget server for ${appId} at http://localhost:${port}...`);
+    log().info(`Starting widget server for ${appId} at http://localhost:${port}...`);
 
-    log.info(`Setting widget server URL to ${url}`);
+    log().info(`Setting widget server URL to ${url}`);
     const config: WidgetEnv = {
         connection: {
             serverUrl: url,
@@ -72,8 +82,11 @@ export async function serve(props?: { url?: string, port?: string, appId?: strin
         express.static(path.resolve(__dirname, ".", "dist"), { maxAge: "30d" })
     );
 
-    app.listen(port, () => {
-        log.info(`Temporary server setup listening on port ${port} to serve the widget locally.`);
-        open(`http://localhost:${port}`);
+    app.listen(port, async () => {
+        log().info(`Temporary server setup listening on port ${port} to serve the widget locally.`);
+
+        await loadOpen();
+
+        await open(`http://localhost:${port}`);
     });
 }

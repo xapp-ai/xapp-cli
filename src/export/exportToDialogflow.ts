@@ -1,6 +1,6 @@
 /*! Copyright (c) 2022, XAPP AI*/
 
-import log from "stentor-logger";
+import { log } from "stentor-logger";
 import {
     ExportEntityAndEntityEntries,
     ExportIntentAndIntentUserSays,
@@ -10,8 +10,8 @@ import {
 } from "@xapp/stentor-dialogflow/lib/v1";
 import { existsSync, mkdirSync, writeFileSync } from "fs";
 import { resolve } from "path";
-import { getAppIntentEntities } from "../getAppIntentEntities";
-import { ExportOptions } from "../models/options";
+import { getAppIntentEntities } from "../getAppIntentEntities.js";
+import { ExportOptions } from "../models/options.js";
 
 /**
  * Create a Dialogflow zip from the intents and the app
@@ -25,8 +25,8 @@ import { ExportOptions } from "../models/options";
 export async function exportToDialogflow(output: string, options: ExportOptions): Promise<void> {
     const { appId } = options;
     const { app, intents } = await getAppIntentEntities(appId);
-    log.info(`Exporting ${app.appId} to Dialogflow`);
-    log.info(`Found ${app.name} with ${intents.length} intents/handlers`);
+    log().info(`Exporting ${app.appId} to Dialogflow`);
+    log().info(`Found ${app.name} with ${intents.length} intents/handlers`);
 
     const path = resolve(output);
     if (!existsSync(path)) {
@@ -37,7 +37,7 @@ export async function exportToDialogflow(output: string, options: ExportOptions)
     const exportDirName = `${app.appId}-${new Date().getTime()}`;
     const exportPath = resolve(path, exportDirName);
     mkdirSync(exportPath);
-    log.info(`Exporting ${app.name} to ${exportPath}`);
+    log().info(`Exporting ${app.name} to ${exportPath}`);
 
     // Start the translations
 
@@ -85,24 +85,24 @@ export async function exportToDialogflow(output: string, options: ExportOptions)
     exportIntents.forEach(intent => {
         const exportIntent = intent.intent;
         const exportIntentPath = intentFolder + "/" + exportIntent.name + ".json";
-        log.info("Creating intent file: " + exportIntentPath);
+        log().info("Creating intent file: " + exportIntentPath);
         writeFileSync(exportIntentPath, JSON.stringify(exportIntent, undefined, "  "));
 
         const userSays = intent.userSays;
         const exportUserSaysPath = intentFolder + "/" + exportIntent.name + "_usersays_en.json";
-        log.info(`Creating usersays file: ${exportUserSaysPath}`);
+        log().info(`Creating usersays file: ${exportUserSaysPath}`);
         writeFileSync(exportUserSaysPath, JSON.stringify(userSays, undefined, 2));
     });
 
     exportEntities.forEach(entity => {
         const exportEntity = entity.entity;
         const exportEntityPath = `${entityFolder}/${exportEntity.name}.json`;
-        log.info("Creating entity file: " + exportEntityPath);
+        log().info("Creating entity file: " + exportEntityPath);
         writeFileSync(exportEntityPath, JSON.stringify(exportEntity, undefined, 2));
 
         const entries = entity.entries;
         const exportEntriesPath = `${entityFolder}/${exportEntity.name}_entries_en.json`;
-        log.info(`Creating entries file: ${exportEntriesPath}`);
+        log().info(`Creating entries file: ${exportEntriesPath}`);
         writeFileSync(exportEntriesPath, JSON.stringify(entries, undefined, 2));
     });
 }

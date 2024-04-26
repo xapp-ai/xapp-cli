@@ -1,9 +1,10 @@
 /*! Copyright (c) 2022, XAPP AI*/
 
-import log from "stentor-logger";
+import { log } from "stentor-logger";
 import { DialogflowV2Service } from "@xapp/stentor-service-dialogflow";
-import { getAppIntentEntities } from "../getAppIntentEntities";
-import { getGoogleCredentials } from "../getGoogleCredentials";
+
+import { getAppIntentEntities } from "../getAppIntentEntities.js";
+import { getGoogleCredentials } from "../getGoogleCredentials.js";
 
 export async function pushToDialogflowV2(
     credentialsPath: string,
@@ -16,7 +17,7 @@ export async function pushToDialogflowV2(
 ): Promise<void> {
     const { appId, beta } = options;
     const { app, intents, entities } = await getAppIntentEntities(appId);
-    log.info(`Pushing ${app.name} with ${intents.length} intents & ${entities.length} entities.`);
+    log().info(`Pushing ${app.name} with ${intents.length} intents & ${entities.length} entities.`);
 
     const actionsOnGoogleId: string = options.id;
 
@@ -42,9 +43,9 @@ export async function pushToDialogflowV2(
 
     try {
         const result = await service.updateModel(intents, entities);
-        log.info(result);
+        log().info(result);
     } catch (e) {
-        log.error(`Error updating model`);
-        log.error(e);
+        log().error(`Error updating model`);
+        log().error(e);
     }
 }

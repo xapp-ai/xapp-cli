@@ -2,8 +2,8 @@
 import { writeFileSync } from "fs";
 import moment from "moment";
 
-import { Config } from "./Config";
-import { getConfigPath } from "./getConfigPath";
+import { Config } from "./Config.js";
+import { getConfigPath } from "./getConfigPath.js";
 
 /**
  * Saves the config file to the home directory.

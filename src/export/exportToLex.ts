@@ -1,6 +1,6 @@
 /*! Copyright (c) 2022, XAPP AI*/
 import { isIntent } from "stentor-guards";
-import log from "stentor-logger";
+import { log } from "stentor-logger";
 import { Intent } from "stentor-models";
 import {
     TranslateToLexImportExportBot,
@@ -9,8 +9,8 @@ import {
 } from "@xapp/stentor-lex-lib";
 import { existsSync, mkdirSync, writeFileSync } from "fs";
 import { resolve } from "path";
-import { getAppIntentEntities } from "../getAppIntentEntities";
-import { ExportOptions } from "../models/options";
+import { getAppIntentEntities } from "../getAppIntentEntities.js";
+import { ExportOptions } from "../models/options.js";
 
 export async function exportToLex(output: string, options: ExportOptions): Promise<void> {
 
@@ -20,8 +20,8 @@ export async function exportToLex(output: string, options: ExportOptions): Promi
     const filtered: Intent[] = intents.filter((potential) => {
         return isIntent(potential);
     });
-    log.info(`Exporting ${app.appId} to Lex`);
-    log.info(`Found ${app.name} with ${filtered.length} intents and ${entities.length} entities.`);
+    log().info(`Exporting ${app.appId} to Lex`);
+    log().info(`Found ${app.name} with ${filtered.length} intents and ${entities.length} entities.`);
 
     const path = resolve(output);
     if (!existsSync(path)) {
@@ -32,7 +32,7 @@ export async function exportToLex(output: string, options: ExportOptions): Promi
     const exportDirName = `${app.appId}-lex-${new Date().getTime()}`;
     const exportPath = resolve(path, exportDirName);
     mkdirSync(exportPath);
-    log.info(`Exporting ${app.name} to ${exportPath}`);
+    log().info(`Exporting ${app.name} to ${exportPath}`);
 
     const bot = new TranslateToLexImportExportBot().translate({ app, intents: filtered, entities });
 
@@ -48,6 +48,6 @@ export async function exportToLex(output: string, options: ExportOptions): Promi
     // Write the file
     writeFileSync(exportPath + `/${app.appId}-lex.json`, JSON.stringify(resource, undefined, 2));
 
-    log.info(`Export complete.`);
+    log().info(`Export complete.`);
 
 }

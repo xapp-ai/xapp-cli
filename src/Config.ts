@@ -1,6 +1,6 @@
 /*! Copyright (c) 2022, XAPP AI*/
 
-import { TokenResponse } from "./TokenResponse";
+import { TokenResponse } from "./TokenResponse.js";
 
 export interface ConfigProfile {
     /**

@@ -1,6 +1,5 @@
 /*! Copyright (c) 2022, XAPP AI*/
-import { App as _GraphqlApp } from "../graphql/models";
-
+import { App as _GraphqlApp } from "../graphql/models.js";
 
 export type GraphqlApp = Omit<_GraphqlApp, "_id" | "cmsTokens" | "faqQuery">;
 

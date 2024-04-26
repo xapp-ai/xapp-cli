@@ -2,8 +2,8 @@
 import { readFileSync } from "fs";
 import { log } from "stentor-logger";
 
-import { Config, ConfigProfile } from "./Config";
-import { getConfigPath } from "./getConfigPath";
+import { Config, ConfigProfile } from "./Config.js";
+import { getConfigPath } from "./getConfigPath.js";
 
 /**
  * Gets the config.  Will create a new one if one does not exist.

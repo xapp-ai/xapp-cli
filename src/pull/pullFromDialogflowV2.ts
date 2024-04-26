@@ -5,11 +5,11 @@ import {
 } from "@xapp/stentor-dialogflow";
 import { DialogflowV2Service } from "@xapp/stentor-service-dialogflow";
 import { log } from "stentor-logger";
-import { getGoogleCredentials } from "../getGoogleCredentials";
-import { getAppIntentEntities } from "../getAppIntentEntities";
+import { getGoogleCredentials } from "../getGoogleCredentials.js";
+import { getAppIntentEntities } from "../getAppIntentEntities.js";
 
-import { getXAPPClient } from "../getXAPPClient";
-import { getUserToken } from "../getUserToken";
+import { getXAPPClient } from "../getXAPPClient.js";
+import { getUserToken } from "../getUserToken.js";
 
 export async function pullFromDialogflowV2(
     credentialsPath: string,

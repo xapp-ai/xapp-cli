@@ -2,7 +2,7 @@
 import { Client } from "@urql/core";
 import { Entity, Intent } from "stentor-models";
 
-import { getGraphQLClient } from "./graphql/getGraphQLClient";
+import { getGraphQLClient } from "./graphql/getGraphQLClient.js";
 import {
     AddChatWidgetChannelDocument,
     AddHandlerInput,
@@ -42,7 +42,7 @@ import {
     WebCrawlMonthlySchedule,
     WebCrawlSchedule,
     WebCrawlWeeklySchedule
-} from "./graphql/models";
+} from "./graphql/models.js";
 import {
     AddAppMutation,
     AddEntityMutation,
@@ -51,10 +51,10 @@ import {
     ImportApp as ImportAppMutation,
     UpdateEntityMutation,
     UpdateIntentMutation
-} from "./graphql/mutations";
-import { GetIntent, GetEntity, GetAppWithChannels } from "./graphql/queries";
-import { App, Channel, ExportApp, GraphqlApp, ImportApp } from "./models";
-import { cleanForAddHandler, cleanForUpdateHandler, cleanObj, removeKey } from "./utils/clean";
+} from "./graphql/mutations.js";
+import { GetIntent, GetEntity, GetAppWithChannels } from "./graphql/queries.js";
+import { App, Channel, ExportApp, GraphqlApp, ImportApp } from "./models/index.js";
+import { cleanForAddHandler, cleanForUpdateHandler, cleanObj, removeKey } from "./utils/clean.js";
 
 export interface HandlerDescription {
     intentId: string;

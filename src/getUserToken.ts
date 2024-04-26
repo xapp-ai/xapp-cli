@@ -1,8 +1,8 @@
 /*! Copyright (c) 2022, XAPP AI*/
-import log from "stentor-logger";
+import { log } from "stentor-logger";
 
-import { getConfigProfile } from "./getConfig";
-import { login } from "./login";
+import { getConfigProfile } from "./getConfig.js";
+import { login } from "./login.js";
 
 function getTokenExpiration(token: string): number {
     const payload = token.split('.')[1];
@@ -36,13 +36,13 @@ export async function getUserToken(): Promise<string> {
     if (profile?.token?.access_token) {
         // see if it is expired
         if (isTokenExpired(profile.token.access_token)) {
-            log.info("Token is expired, refreshing it for you free of charge...");
+            log().info("Token is expired, refreshing it for you free of charge...");
 
             // refresh the token
             token = await login();
         } else {
             const expiration = getTokenExpiration(profile.token.access_token);
-            log.info(`Current token is still valid, it expires ${new Date(expiration * 1000).toISOString()}`);
+            log().info(`Current token is still valid, it expires ${new Date(expiration * 1000).toISOString()}`);
             token = profile.token.access_token;
         }
         token = profile?.token?.access_token;

@@ -9,10 +9,9 @@ import { resolve } from "path";
 import { log } from "stentor-logger";
 import { isIntent } from "stentor-guards";
 import { Intent } from "stentor-models";
-import { getStentorApp } from "../getStentorApp";
+import { getStentorApp } from "../getStentorApp.js";
 
 const DELAY_IN_MS = 1000;
-
 
 /**
  * Private helper to add a delay to the promise chain

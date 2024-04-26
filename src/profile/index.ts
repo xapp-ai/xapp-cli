@@ -1,3 +1,3 @@
 /*! Copyright (c) 2022, XAPP AI*/
 
-export * from "./profile";
+export * from "./profile.js";

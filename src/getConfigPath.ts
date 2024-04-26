@@ -1,12 +1,11 @@
 /*! Copyright (c) 2022, XAPP AI*/
-import log from "stentor-logger";
+import { log } from "stentor-logger";
 import moment from "moment";
 import { homedir } from "os";
 import { join } from "path";
 import { existsSync, mkdirSync, writeFileSync } from "fs";
 
-import { Config } from "./Config";
-
+import { Config } from "./Config.js";
 
 function getRootConfigPath(name = ".xapp"): string {
     return join(homedir(), name);
@@ -23,7 +22,7 @@ export function getConfigPath(name = ".xapp"): string {
 
     if (!existsSync(configPath)) {
         // Create one
-        log.info("Configuration did not exist, creating initial one....");
+        log().info("Configuration did not exist, creating initial one....");
         const rootConfigPath = getRootConfigPath();
         mkdirSync(rootConfigPath);
 

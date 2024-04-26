@@ -1,13 +1,24 @@
 /*! Copyright (c) 2022, XAPP AI*/
 
-import log from "stentor-logger";
+import { log } from "stentor-logger";
 import { createHash, randomBytes } from "crypto";
 import express from "express";
-import open from "open";
 import request, { OptionsWithUrl } from "request";
-import { getConfig, getConfigProfile } from "./getConfig";
-import { saveConfig } from "./saveConfig";
-import { TokenResponse } from "./TokenResponse";
+
+import { getConfig, getConfigProfile } from "./getConfig.js";
+import { saveConfig } from "./saveConfig.js";
+import { TokenResponse } from "./TokenResponse.js";
+
+let open: typeof import('open').default;
+
+async function loadOpen(): Promise<void> {
+    try {
+        const module = await import('open');
+        open = module.default;
+    } catch (e) {
+        log().error(`Error loading open: ${e}`);
+    }
+}
 
 const DEFAULT_LISTENING_PORT = 8787;
 
@@ -17,7 +28,7 @@ const DEFAULT_LISTENING_PORT = 8787;
  * @param challenge The challenge code to be used later for verification.
  */
 async function getCode(challenge: string): Promise<string> {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
 
         const profile = getConfigProfile();
 
@@ -34,7 +45,7 @@ async function getCode(challenge: string): Promise<string> {
         const app = express();
 
         const server = app.listen(port, () =>
-            log.info(`Temporary server setup listening on port ${port} to catch the redirect URL.`)
+            log().info(`Temporary server setup listening on port ${port} to catch the redirect URL.`)
         );
 
         app.get(`/${path}`, (req, res) => {
@@ -49,9 +60,13 @@ async function getCode(challenge: string): Promise<string> {
             }
         });
         // Open the url
-        log.info(`Opening the login page in a browser.`);
-        log.debug(`${get}`);
-        open(get);
+        log().info(`Opening the login page in a browser.`);
+        log().debug(`${get}`);
+        await loadOpen();
+
+        if (open) {
+            await open(get);
+        }
     });
 }
 
@@ -184,24 +199,24 @@ export async function login(): Promise<string> {
 
     const challenge = base64URLEncode(sha256(verifier));
 
-    log.info(`Ok, logging you in.`);
+    log().info(`Ok, logging you in.`);
     const code = await getCode(challenge);
-    log.info(`Got the code from the redirect, converting it to an access token.`);
+    log().info(`Got the code from the redirect, converting it to an access token.`);
     let token: TokenResponse;
     try {
         token = await getToken(code, verifier);
     } catch (e) {
-        log.warn(`Error retrieving access token: ${e}`);
+        log().warn(`Error retrieving access token: ${e}`);
         throw e;
     }
-    log.info(`And got the token, saving it to use in the future.`);
+    log().info(`And got the token, saving it to use in the future.`);
     // Save it on the config
     const config = getConfig();
     const currentProfile: string = config.currentProfile || "default";
     config.profiles[currentProfile] = { ...config.profiles[currentProfile], token };
     saveConfig(config);
 
-    log.info(`You are logged in. Enjoy`);
+    log().info(`You are logged in. Enjoy`);
     // Return it
     return token.access_token;
 }
