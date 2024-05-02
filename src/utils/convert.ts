@@ -44,7 +44,7 @@ export function convertToGraphQLHandler(handler: Handler): Omit<GraphQLHandler, 
 
     const { name, appId, intentId, organizationId, type, data, content } = handler;
 
-    const graphqlContent: HandlerContent[] = Object.keys(content).map((key) => {
+    const graphqlContent: HandlerContent[] = Object.keys(content || {}).map((key) => {
 
         const rawContent = content[key];
 
