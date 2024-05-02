@@ -1,3 +1,10 @@
+## [1.5.160](https://github.com/xapp-ai/xapp-cli/compare/v1.5.159...v1.5.160) (2024-05-02)
+
+
+### Bug Fixes
+
+* Crash on Handler Conversion when No Content ([#1052](https://github.com/xapp-ai/xapp-cli/issues/1052)) ([6f8e86c](https://github.com/xapp-ai/xapp-cli/commit/6f8e86c8595e815aa7b2a9b50a35563caf6d351e))
+
 ## [1.5.159](https://github.com/xapp-ai/xapp-cli/compare/v1.5.158...v1.5.159) (2024-05-01)
 
 
