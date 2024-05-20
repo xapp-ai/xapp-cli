@@ -1,3 +1,11 @@
+## [1.5.169](https://github.com/xapp-ai/xapp-cli/compare/v1.5.168...v1.5.169) (2024-05-20)
+
+
+### Bug Fixes
+
+* **deps:** update stentor ([#1068](https://github.com/xapp-ai/xapp-cli/issues/1068)) ([153579a](https://github.com/xapp-ai/xapp-cli/commit/153579a436e99b5e47dcc9f1bb482927310e4f49))
+* update yarn to v3.8.2 ([#1054](https://github.com/xapp-ai/xapp-cli/issues/1054)) ([7314e2d](https://github.com/xapp-ai/xapp-cli/commit/7314e2dbe2f9e701d023937064a6d62deffa3442))
+
 ## [1.5.168](https://github.com/xapp-ai/xapp-cli/compare/v1.5.167...v1.5.168) (2024-05-09)
 
 
