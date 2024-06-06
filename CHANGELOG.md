@@ -1,3 +1,10 @@
+## [1.5.191](https://github.com/xapp-ai/xapp-cli/compare/v1.5.190...v1.5.191) (2024-06-06)
+
+
+### Bug Fixes
+
+* Small Lex V2 Fixes to allow botId ([#1097](https://github.com/xapp-ai/xapp-cli/issues/1097)) ([8d48894](https://github.com/xapp-ai/xapp-cli/commit/8d488945273c80faeebdf640b38192d55a5bb7d2))
+
 ## [1.5.190](https://github.com/xapp-ai/xapp-cli/compare/v1.5.189...v1.5.190) (2024-06-06)
 
 
