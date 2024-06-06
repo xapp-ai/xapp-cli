@@ -480,6 +480,12 @@ export type AdminAppMutationUpdateArgs = {
   appId: Scalars['ID']['input'];
 };
 
+export enum AdminAppProduct {
+  StudioComplete = 'STUDIO_COMPLETE',
+  StudioMax = 'STUDIO_MAX',
+  StudioScheduler = 'STUDIO_SCHEDULER'
+}
+
 export type AdminChatSuggestion = {
   answer?: Maybe<Scalars['String']['output']>;
   format: Array<Maybe<AdminChatSuggestionFormat>>;
@@ -719,12 +725,32 @@ export type AdminTotalEvents = {
 };
 
 export type AdminUpdateAppMutation = {
+  /**
+   * Adds the product tier to an app without the user requiring to purchase the tier.
+   *
+   * This *adds* privileges to the app, it does not remove any existing privileges for paid subscription.
+   *
+   * You can only have one manual product tier at once.
+   *
+   * So if a user has paid for a "Leads" tier and you add a "Scheduler" tier, the user will have both "Leads" and "Scheduler" privileges applied
+   * too the app.
+   *
+   * WARNING: The automatic scheduling is currently not implemented as this is currently in the demo stage.
+   */
+  addAppProduct: App;
   /** Adds a notification that users of the app are capable of seeing. */
   addNotification: SystemNotification;
   /** Removes all notifications associated with an app. */
   removeAllNotifications: Scalars['String']['output'];
   /** Removes a notification from the app list */
   removeNotification?: Maybe<Array<Maybe<SystemNotification>>>;
+};
+
+
+export type AdminUpdateAppMutationAddAppProductArgs = {
+  durationInDays?: InputMaybe<Scalars['Int']['input']>;
+  indefinite?: InputMaybe<Scalars['Boolean']['input']>;
+  product: AdminAppProduct;
 };
 
 
@@ -2358,6 +2384,12 @@ export type AppWebsiteData = {
    * These can be used as suggestion chips.
    */
   callsToAction?: Maybe<Array<Scalars['String']['output']>>;
+  /** The detected Content Management System (CMS) of the website. */
+  cms?: Maybe<Scalars['String']['output']>;
+  /** The last time that the crawl was completed that gathered this data. */
+  crawlDate?: Maybe<Scalars['DateTime']['output']>;
+  /** The executionId of the last crawl that collected this data. */
+  crawlExecutionId?: Maybe<Scalars['String']['output']>;
   /** Primary theme color, hex value, based on an image of the website. */
   primaryColor?: Maybe<Scalars['String']['output']>;
   /** Secondary color, hex value, that complements the primary color on the website. */
@@ -2371,6 +2403,12 @@ export type AppWebsiteDataInput = {
    * These can be used as suggestion chips.
    */
   callsToAction?: InputMaybe<Array<Scalars['String']['input']>>;
+  /** The detected Content Management System (CMS) of the website. */
+  cms?: InputMaybe<Scalars['String']['input']>;
+  /** The last time that the crawl was completed that gathered this data. */
+  crawlDate?: InputMaybe<Scalars['DateTime']['input']>;
+  /** The executionId of the last crawl that collected this data. */
+  crawlExecutionId?: InputMaybe<Scalars['String']['input']>;
   /** Primary theme color, hex value, based on an image of the website. */
   primaryColor?: InputMaybe<Scalars['String']['input']>;
   /** Secondary color, hex value, that complements the primary color on the website. */
@@ -2677,10 +2715,21 @@ export type CardDisplayInput = {
 };
 
 export type CaughtLead = {
+  /** The company related to the lead. */
+  company?: Maybe<Scalars['String']['output']>;
   /** The date that the lead was sent. */
   date: Scalars['DateTime']['output'];
+  /** The integrations that the lead was successfully sent to. */
+  integrationSent?: Maybe<Array<LeadSentToIntegration>>;
   /** The lead that was sent to the app. */
   lead?: Maybe<Lead>;
+  /** Third party reference ID. */
+  refId?: Maybe<Scalars['ID']['output']>;
+  /** The session that the lead is related to. */
+  sessionId?: Maybe<Scalars['ID']['output']>;
+  source?: Maybe<Scalars['String']['output']>;
+  /** The user that the lead is related to. */
+  userId?: Maybe<Scalars['ID']['output']>;
 };
 
 export type CaughtLeadsResult = {
@@ -4566,9 +4615,10 @@ export type FormWidgetAppChannel = BaseAppChannel & {
   key?: Maybe<Scalars['String']['output']>;
   /** The display name for the channel. */
   name?: Maybe<Scalars['String']['output']>;
+  sideButtonLabel?: Maybe<Scalars['String']['output']>;
   /** The lifecycle status of the app. */
   status?: Maybe<AppChannelStatus>;
-  /** Theme for the search bar. */
+  /** Theme for the Form Widget */
   theme?: Maybe<FormWidgetTheme>;
   /** The type of channel */
   type: Scalars['String']['output'];
@@ -4604,11 +4654,12 @@ export type FormWidgetAppChannelInput = {
   /** URI where the channel can be accessed. */
   endPoint?: InputMaybe<Scalars['String']['input']>;
   /** The ID of the channel. */
-  id: Scalars['String']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
   /** The display name for the channel. */
   name?: InputMaybe<Scalars['String']['input']>;
+  sideButtonLabel?: InputMaybe<Scalars['String']['input']>;
   /** Theme for the search bar. */
-  theme?: InputMaybe<Scalars['JSON']['input']>;
+  theme?: InputMaybe<FormWidgetThemeInput>;
   /** The type of channel */
   type: Scalars['String']['input'];
   /**
@@ -4620,6 +4671,46 @@ export type FormWidgetAppChannelInput = {
    * If the value is "*", then it will pick the first available NLU within app.nlu[]
    */
   useNLU?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type FormWidgetCardTheme = {
+  backgroundColor?: Maybe<Scalars['String']['output']>;
+  color?: Maybe<Scalars['String']['output']>;
+  fontSize?: Maybe<Scalars['String']['output']>;
+};
+
+export type FormWidgetCardThemeInput = {
+  backgroundColor?: InputMaybe<Scalars['String']['input']>;
+  color?: InputMaybe<Scalars['String']['input']>;
+  fontSize?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type FormWidgetCheckboxTheme = {
+  backgroundColor?: Maybe<Scalars['String']['output']>;
+  color?: Maybe<Scalars['String']['output']>;
+  fontSize?: Maybe<Scalars['String']['output']>;
+};
+
+export type FormWidgetCheckboxThemeInput = {
+  backgroundColor?: InputMaybe<Scalars['String']['input']>;
+  color?: InputMaybe<Scalars['String']['input']>;
+  fontSize?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type FormWidgetChipsTheme = {
+  backgroundColor?: Maybe<Scalars['String']['output']>;
+  backgroundColorSelected?: Maybe<Scalars['String']['output']>;
+  color?: Maybe<Scalars['String']['output']>;
+  colorSelected?: Maybe<Scalars['String']['output']>;
+  fontSize?: Maybe<Scalars['String']['output']>;
+};
+
+export type FormWidgetChipsThemeInput = {
+  backgroundColor?: InputMaybe<Scalars['String']['input']>;
+  backgroundColorSelected?: InputMaybe<Scalars['String']['input']>;
+  color?: InputMaybe<Scalars['String']['input']>;
+  colorSelected?: InputMaybe<Scalars['String']['input']>;
+  fontSize?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type FormWidgetConnectionConfig = {
@@ -4636,14 +4727,102 @@ export type FormWidgetConnectionConfigInput = {
   serverUrl?: InputMaybe<Scalars['URLString']['input']>;
 };
 
+export type FormWidgetDateTheme = {
+  backgroundColor?: Maybe<Scalars['String']['output']>;
+  backgroundColorSelected?: Maybe<Scalars['String']['output']>;
+  color?: Maybe<Scalars['String']['output']>;
+  fontSize?: Maybe<Scalars['String']['output']>;
+};
+
+export type FormWidgetDateThemeInput = {
+  backgroundColor?: InputMaybe<Scalars['String']['input']>;
+  backgroundColorSelected?: InputMaybe<Scalars['String']['input']>;
+  color?: InputMaybe<Scalars['String']['input']>;
+  fontSize?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type FormWidgetDropdownTheme = {
+  backgroundColor?: Maybe<Scalars['String']['output']>;
+  color?: Maybe<Scalars['String']['output']>;
+  fontSize?: Maybe<Scalars['String']['output']>;
+};
+
+export type FormWidgetDropdownThemeInput = {
+  backgroundColor?: InputMaybe<Scalars['String']['input']>;
+  color?: InputMaybe<Scalars['String']['input']>;
+  fontSize?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type FormWidgetSideButtonTheme = {
+  backgroundColor?: Maybe<Scalars['String']['output']>;
+  color?: Maybe<Scalars['String']['output']>;
+  fontSize?: Maybe<Scalars['String']['output']>;
+  minLength?: Maybe<Scalars['String']['output']>;
+  postion?: Maybe<Scalars['String']['output']>;
+  top?: Maybe<Scalars['String']['output']>;
+};
+
+export type FormWidgetSideButtonThemeInput = {
+  backgroundColor?: InputMaybe<Scalars['String']['input']>;
+  color?: InputMaybe<Scalars['String']['input']>;
+  fontSize?: InputMaybe<Scalars['String']['input']>;
+  minLength?: InputMaybe<Scalars['String']['input']>;
+  postion?: InputMaybe<Scalars['String']['input']>;
+  top?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type FormWidgetTextTheme = {
+  backgroundColor?: Maybe<Scalars['String']['output']>;
+  color?: Maybe<Scalars['String']['output']>;
+  fontSize?: Maybe<Scalars['String']['output']>;
+};
+
+export type FormWidgetTextThemeInput = {
+  backgroundColor?: InputMaybe<Scalars['String']['input']>;
+  color?: InputMaybe<Scalars['String']['input']>;
+  fontSize?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type FormWidgetTheme = {
   accentColor?: Maybe<Scalars['String']['output']>;
-  /** Debug console that will allow people to attach and retrieve any data they want in the form widget. */
+  backgroundColor?: Maybe<Scalars['String']['output']>;
+  card?: Maybe<FormWidgetCardTheme>;
+  checkbox?: Maybe<FormWidgetCheckboxTheme>;
+  chips?: Maybe<FormWidgetChipsTheme>;
+  /**
+   * Debug console that will allow people to attach and retrieve any data they want in the form widget.
+   *
+   * @deprecated This is a temporary solution and will be removed in the future. Please use attributes instead.
+   */
   data?: Maybe<Scalars['JSON']['output']>;
+  date?: Maybe<FormWidgetDateTheme>;
+  dropdown?: Maybe<FormWidgetDropdownTheme>;
+  headerBackgroundColor?: Maybe<Scalars['String']['output']>;
+  headerTextColor?: Maybe<Scalars['String']['output']>;
+  primaryButtonColor?: Maybe<Scalars['String']['output']>;
+  primaryButtonTextColor?: Maybe<Scalars['String']['output']>;
+  secondaryButtonColor?: Maybe<Scalars['String']['output']>;
+  secondaryButtonTextColor?: Maybe<Scalars['String']['output']>;
+  sideButton?: Maybe<FormWidgetSideButtonTheme>;
+  text?: Maybe<FormWidgetTextTheme>;
 };
 
 export type FormWidgetThemeInput = {
   accentColor?: InputMaybe<Scalars['String']['input']>;
+  backgroundColor?: InputMaybe<Scalars['String']['input']>;
+  card?: InputMaybe<FormWidgetCardThemeInput>;
+  checkbox?: InputMaybe<FormWidgetCheckboxThemeInput>;
+  chips?: InputMaybe<FormWidgetChipsThemeInput>;
+  date?: InputMaybe<FormWidgetDateThemeInput>;
+  dropdown?: InputMaybe<FormWidgetDropdownThemeInput>;
+  headerBackgroundColor?: InputMaybe<Scalars['String']['input']>;
+  headerTextColor?: InputMaybe<Scalars['String']['input']>;
+  primaryButtonColor?: InputMaybe<Scalars['String']['input']>;
+  primaryButtonTextColor?: InputMaybe<Scalars['String']['input']>;
+  secondaryButtonColor?: InputMaybe<Scalars['String']['input']>;
+  secondaryButtonTextColor?: InputMaybe<Scalars['String']['input']>;
+  sideButton?: InputMaybe<FormWidgetSideButtonThemeInput>;
+  text?: InputMaybe<FormWidgetTextThemeInput>;
 };
 
 export type ForwardInput = {
@@ -6308,17 +6487,43 @@ export type LastActiveHaveNotSeenWithinHandlerResponse = HandlerResponse & {
 };
 
 export type Lead = {
-  /** The company related to the lead. */
-  company?: Maybe<Scalars['String']['output']>;
   /** Fields that are important to the lead. */
   fields: Array<LeadField>;
-  source?: Maybe<Scalars['String']['output']>;
   transcript?: Maybe<Array<LeadTranscript>>;
 };
 
 export type LeadField = {
   name: Scalars['String']['output'];
   value?: Maybe<Scalars['String']['output']>;
+};
+
+export type LeadSentToIntegration = {
+  /** The date that the integration was sent. */
+  date: Scalars['DateTime']['output'];
+  /**
+   * The error message detailing what happened.
+   *
+   * If the last attempt was successful, this will be null.
+   */
+  errorMessage?: Maybe<Scalars['String']['output']>;
+  /**
+   * The name of the error that occurred.
+   *
+   * If the last attempt was successful, this will be null.
+   */
+  errorName?: Maybe<Scalars['String']['output']>;
+  /**
+   * The integration that the lead was sent to.
+   *
+   * @see IntegrationType
+   */
+  integrationId: Scalars['String']['output'];
+  /**
+   * Whether the last attempt was an error.
+   *
+   * If the last attempt was successful, this will be false.
+   */
+  wasError: Scalars['Boolean']['output'];
 };
 
 export type LeadTranscript = {
@@ -10369,12 +10574,36 @@ export type UserProfile = {
    * has available.
    */
   entitlements?: Maybe<UserEntitlements>;
+  /**
+   * The first name for the user
+   *
+   * This is an optional parameter. It may not exist.
+   */
+  firstName?: Maybe<Scalars['String']['output']>;
+  /**
+   * The full name of the user that includes first, middle, and last name.
+   *
+   * This is an optional parameter. It may not exist.
+   */
+  fullName?: Maybe<Scalars['String']['output']>;
   /** Icon URL to the profile picture. */
   icon?: Maybe<Scalars['String']['output']>;
   /** Identities of linked accounts. */
   identities: Array<Maybe<UserProfileIdentity>>;
   /** Determines whether or not the user is an admin of Stentor */
   isAdmin: Scalars['Boolean']['output'];
+  /**
+   * The last name for the user.
+   *
+   * This is an optional parameter. It may not exist.
+   */
+  lastName?: Maybe<Scalars['String']['output']>;
+  /**
+   * The middle name for the user
+   *
+   * This is an optional parameter. It may not exist.
+   */
+  middleName?: Maybe<Scalars['String']['output']>;
   /** The authentication origin */
   origin: AuthOrigin;
   /** The user permissions that the user is allowed to perform in Stentor. */
@@ -10665,6 +10894,10 @@ export type WebDetailsExecution = {
   completed: Scalars['Boolean']['output'];
   /** The data that has been gathered so far. */
   data: WebsiteData;
+  /** The executionId of the crawl */
+  excutionId: Scalars['String']['output'];
+  /** The date and time that the crawl was last updated. */
+  lastUpdated: Scalars['DateTime']['output'];
   /** The website that is being crawled. */
   siteCrawled: Scalars['URL']['output'];
 };

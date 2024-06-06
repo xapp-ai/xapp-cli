@@ -140,6 +140,8 @@ query getAppWithChannelData($appId: ID!) {
         lexPostTextUrl
         enableModelImprovements
         botName
+        managementRole
+        managementRoleExternalId
       }
       ... on ChatWidgetAppChannel {
         cta {

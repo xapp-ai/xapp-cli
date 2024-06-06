@@ -22,11 +22,12 @@ function sleep(ms: number): Promise<void> {
  *
  * @param options
  */
-export async function pushToLexV2(options?: { appId?: string; lang?: string; awsRole?: string; fulfillment?: string; file?: string; botName?: string }): Promise<void> {
-    const { appId, awsRole, fulfillment, file, botName } = options;
+export async function pushToLexV2(options?: { appId?: string; lang?: string; awsRole?: string; fulfillment?: string; file?: string; botName?: string, id?: string }): Promise<void> {
+    const { appId, fulfillment, file, botName, id: botId } = options;
+    let awsRole = options.awsRole;
 
-    if (!botName) {
-        throw new Error("Please specify bot name");
+    if (!botName && !botId) {
+        throw new Error("Please specify bot name (--botName) or bot id (--id)");
     }
 
     const { app, intents = [], entities = [], handlers = [] } =
@@ -37,6 +38,8 @@ export async function pushToLexV2(options?: { appId?: string; lang?: string; aws
         return ch.type === "lex-connect" || ch.type === "lex-v2";
     });
 
+    console.log(lexChannel);
+
     let kendraRole: string;
     let kendraIndexARN: string;
     let fulfillmentARN: string;
@@ -45,6 +48,11 @@ export async function pushToLexV2(options?: { appId?: string; lang?: string; aws
         kendraRole = (lexChannel as any).kendraRole;
         kendraIndexARN = (lexChannel as any).kendraIndexARN;
         fulfillmentARN = (lexChannel as any).lexFulfillmentLambdaARN;
+
+        if (!awsRole && (lexChannel as any).managementRole) {
+            awsRole = (lexChannel as any).managementRole;
+        }
+
     } else {
         throw new Error(`This app doesn't have a Lex channel: ${appId}`);
     }
@@ -62,6 +70,7 @@ export async function pushToLexV2(options?: { appId?: string; lang?: string; aws
     const mergedIntents = intents.concat(filteredHandlers);
 
     const lexSyncerV2 = new LexServiceV2({
+        botId,
         botName,
         fulfillmentARN: fulfillment || fulfillmentARN,
         kendraRole,
@@ -70,7 +79,7 @@ export async function pushToLexV2(options?: { appId?: string; lang?: string; aws
             region: "us-east-1",
             role: {
                 arn: awsRole,
-                externalId: undefined, // cross-account use not supported for non-user credentials yet.
+                externalId: lexChannel ? (lexChannel as any).managementRoleExternalId : undefined, // cross-account use not supported for non-user credentials yet.
             },
         }
     });
