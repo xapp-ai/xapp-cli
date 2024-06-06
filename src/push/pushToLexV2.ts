@@ -38,8 +38,6 @@ export async function pushToLexV2(options?: { appId?: string; lang?: string; aws
         return ch.type === "lex-connect" || ch.type === "lex-v2";
     });
 
-    console.log(lexChannel);
-
     let kendraRole: string;
     let kendraIndexARN: string;
     let fulfillmentARN: string;
