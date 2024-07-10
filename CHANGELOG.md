@@ -1,3 +1,10 @@
+## [1.5.217](https://github.com/xapp-ai/xapp-cli/compare/v1.5.216...v1.5.217) (2024-07-10)
+
+
+### Bug Fixes
+
+* Actually Refreshing the Token ([#1133](https://github.com/xapp-ai/xapp-cli/issues/1133)) ([4500f02](https://github.com/xapp-ai/xapp-cli/commit/4500f0233278cfe4f96f2d50fa2ede4c6a1f6109))
+
 ## [1.5.216](https://github.com/xapp-ai/xapp-cli/compare/v1.5.215...v1.5.216) (2024-07-10)
 
 
