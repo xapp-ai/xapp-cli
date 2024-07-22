@@ -1,0 +1,55 @@
+{
+  "__typename": "Handler",
+  "appId": "veritone",
+  "intentId": "TutorialOneHandler",
+  "organizationId": "veritone",
+  "createdAt": "2019-06-07T15:37:11.210Z",
+  "name": "ℹ️ Tutorial One",
+  "langCode": "en-US",
+  "utterancePatterns": [],
+  "dialogflowId": "projects/veritone-c4d4e/agent/intents/552eee00-40c2-4bd8-8548-5b1eff497911",
+  "type": "InSessionIntent",
+  "defaultLocale": null,
+  "graphCoords": {
+    "x": 1090,
+    "y": 260,
+    "__typename": "GraphCoords"
+  },
+  "permissions": null,
+  "slots": [],
+  "content": [
+    {
+      "__typename": "HandlerContent",
+      "key": "TutorialOneHandler",
+      "handlerResponse": [
+        {
+          "__typename": "SimpleHandlerResponse",
+          "displays": null,
+          "outputSpeech": {
+            "ssml": "<speak>Ok, for the best results or if I am not understanding you correctly, always start with the phrase \"air check\" and then follow it with the phrase you are looking for.  For example \"air check jeep\" or \"air check state farm\". Give it a try.</speak>",
+            "textToSpeech": null,
+            "displayText": "Ok, for the best results or if I am not understanding you correctly, always start with the phrase \"air check\" and then follow it with the phrase you are looking for.  For example \"air check jeep\" or \"air check state farm\". Give it a try.",
+            "suggestions": [],
+            "__typename": "ResponseOutput"
+          },
+          "segments": null,
+          "reprompt": {
+            "ssml": "<speak>Tell me to air check a phrase.</speak>",
+            "textToSpeech": null,
+            "displayText": "Tell me to air check a phrase.",
+            "suggestions": [],
+            "__typename": "ResponseOutput"
+          },
+          "name": null,
+          "tag": null,
+          "system": null,
+          "data": null,
+          "conditions": null
+        }
+      ]
+    }
+  ],
+  "data": {},
+  "forward": [],
+  "redirect": null
+}

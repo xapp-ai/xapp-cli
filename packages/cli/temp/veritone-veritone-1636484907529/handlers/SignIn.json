@@ -1,0 +1,91 @@
+{
+  "__typename": "Handler",
+  "appId": "veritone",
+  "intentId": "SignIn",
+  "organizationId": "veritone",
+  "createdAt": "2019-08-13T15:39:59.345Z",
+  "name": "🔐 Sign In Response",
+  "langCode": "en-US",
+  "utterancePatterns": [],
+  "dialogflowId": null,
+  "type": "InSessionIntent",
+  "defaultLocale": null,
+  "graphCoords": {
+    "x": 210,
+    "y": 350,
+    "__typename": "GraphCoords"
+  },
+  "permissions": null,
+  "slots": [],
+  "content": [
+    {
+      "__typename": "HandlerContent",
+      "key": "SignIn",
+      "handlerResponse": [
+        {
+          "__typename": "SystemDependentHandlerResponse",
+          "displays": null,
+          "outputSpeech": {
+            "ssml": "<speak>Welcome, now let's try your first air check.  For me to best understand what you want I recommend you always start your request with air check, for example, \"air check Jeep\".  Go ahead and give it a try.</speak>",
+            "textToSpeech": null,
+            "displayText": "Welcome, now let's try your first air check.  For me to best understand what you want I recommend you always start your request with air check, for example, \"air check Jeep\".  Go ahead and give it a try.",
+            "suggestions": [],
+            "__typename": "ResponseOutput"
+          },
+          "segments": null,
+          "reprompt": {
+            "ssml": "<speak>Try your first air check.</speak>",
+            "textToSpeech": null,
+            "displayText": "Try your first air check.",
+            "suggestions": [],
+            "__typename": "ResponseOutput"
+          },
+          "name": "Account Link Success",
+          "tag": "ACCOUNT_LINK_SUCCESS",
+          "system": null,
+          "data": null,
+          "conditions": null
+        },
+        {
+          "__typename": "SystemDependentHandlerResponse",
+          "displays": null,
+          "outputSpeech": {
+            "ssml": "<speak>We are having trouble authenticating you. Please unlink and link your account again.</speak>",
+            "textToSpeech": null,
+            "displayText": "We are having trouble authenticating you. Please unlink & link your account again.",
+            "suggestions": [],
+            "__typename": "ResponseOutput"
+          },
+          "segments": null,
+          "reprompt": null,
+          "name": "Account Link Not Accepted",
+          "tag": "ACCOUNT_LINK_DENIED",
+          "system": null,
+          "data": null,
+          "conditions": null
+        },
+        {
+          "__typename": "SimpleHandlerResponse",
+          "displays": null,
+          "outputSpeech": {
+            "ssml": "<speak>Thanks.</speak>",
+            "textToSpeech": null,
+            "displayText": "Thanks.",
+            "suggestions": [],
+            "__typename": "ResponseOutput"
+          },
+          "segments": null,
+          "reprompt": null,
+          "name": "Account Link Denied",
+          "tag": "ACCOUNT_LINK_DENIED",
+          "system": null,
+          "data": null,
+          "conditions": null
+        }
+      ]
+    }
+  ],
+  "data": {},
+  "forward": [],
+  "redirect": null
+}

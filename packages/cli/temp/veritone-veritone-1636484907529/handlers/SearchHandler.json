@@ -1,0 +1,365 @@
+{
+  "__typename": "Handler",
+  "appId": "veritone",
+  "intentId": "SearchHandler",
+  "organizationId": "veritone",
+  "createdAt": "2019-05-30T21:49:47.848Z",
+  "name": "🔍 Search",
+  "langCode": "en-US",
+  "utterancePatterns": [
+    "${_PRE_} ${brand}",
+    "${_PRE_} ${brand} ${date}",
+    "${_PRE_} ${brand} ${date} on ${station}",
+    "${_PRE_} ${brand} ${query}",
+    "${_PRE_} ${brand} ${station} ${date}",
+    "${_PRE_} ${brand} and ${query}",
+    "${_PRE_} ${brand} and ${query} for ${station} on ${date}",
+    "${_PRE_} ${brand} and ${query} in ${market} {market|}",
+    "${_PRE_} ${brand} and ${query} on ${station}",
+    "${_PRE_} ${brand} and ${query} on ${station} from ${date}",
+    "${_PRE_} ${brand} at ${start_noon_midnight} in ${market}",
+    "${_PRE_} ${brand} at ${start_noon_midnight} on ${station}",
+    "${_PRE_} ${brand} for ${station} ${date}",
+    "${_PRE_} ${brand} for the ${station}",
+    "${_PRE_} ${brand} from ${date} in market ${market}",
+    "${_PRE_} ${brand} from ${market} {market|}",
+    "${_PRE_} ${brand} from ${station}",
+    "${_PRE_} ${brand} in ${date} in ${market}",
+    "${_PRE_} ${brand} in ${date} in market ${market}",
+    "${_PRE_} ${brand} in ${market}",
+    "${_PRE_} ${brand} in ${market} market {${date}|}",
+    "${_PRE_} ${brand} it ran {from|on} ${date}",
+    "${_PRE_} ${brand} on ${station}",
+    "${_PRE_} ${brand} on ${station} ${date}",
+    "${_PRE_} ${brand} on ${station} ${date} {in ${market} market|}",
+    "${_PRE_} ${brand} {in|at|from|for} ${market}",
+    "${_PRE_} ${brand} {it|which} ran ${date} {at some point|}",
+    "${_PRE_} ${date} for {${brand}|${query}}",
+    "${_PRE_} ${market} for {${brand}|${query}}",
+    "${_PRE_} ${market} for {${brand}|${query}} {${date}|}",
+    "${_PRE_} ${person}",
+    "${_PRE_} ${person} and ${query}",
+    "${_PRE_} ${person} and ${query} ${date}",
+    "${_PRE_} ${query} ${brand}",
+    "${_PRE_} ${query} and ${person}",
+    "${_PRE_} ${query} and ${person} ${date}",
+    "${_PRE_} ${query} on ${station}",
+    "${_PRE_} from ${date} for {${brand}|${query}}",
+    "${_PRE_} in ${market} for {${brand}|${query}}",
+    "${_PRE_} on ${station} for ${query}",
+    "${_PRE_} on ${station} {for|for phrase} {${brand}|${query}} {${date}|}",
+    "${_PRE_} phrase {${brand}|${query}}",
+    "${_PRE_} the ${query} in ${date}",
+    "${_PRE_} the phrase ${query} in ${market}",
+    "${_PRE_} {${brand}|${query}} ${date} in ${market}",
+    "${_PRE_} {${brand}|${query}} ${market}",
+    "${_PRE_} {${brand}|${query}} ${station}",
+    "${_PRE_} {${brand}|${query}} from ${date}",
+    "${_PRE_} {${brand}|${query}} from ${date} {at ${start_noon_midnight}|}",
+    "${_PRE_} {${brand}|${query}} in ${date} on ${station}",
+    "${_PRE_} {${brand}|${query}} in ${market}",
+    "${_PRE_} {${brand}|${query}} in ${market} ${date}",
+    "${_PRE_} {${brand}|${query}} in ${market} {from|on} ${date}",
+    "${_PRE_} {${brand}|${query}} it ran ${date}",
+    "${_PRE_} {${brand}|${query}} it ran ${date} on ${station}",
+    "${_PRE_} {${brand}|${query}} on ${date} {at ${start_noon_midnight}|}",
+    "${_PRE_} {${brand}|${query}} on ${station}",
+    "${_PRE_} {${brand}|${query}} on ${station} from ${date}",
+    "${_PRE_} {${brand}|${query}} on ${station} on ${date}",
+    "${_PRE_} {${brand}|${query}} on ${station} {and ${station_one}|} ${date}",
+    "${_PRE_} {${brand}|${query}} on ${station} {and ${station_one}|} {for|from} ${date}",
+    "${_PRE_} {${brand}|${query}} {for|from} ${date} {on|for} ${station}",
+    "${_PRE_} {${brand}|${query}} {from|on} ${date} in ${market}",
+    "${_PRE_} {${brand}|${query}} {on|for|from} ${date} on ${station}",
+    "${_PRE_} {${brand}|${query}} {on|for} ${station} in ${market} ${date}",
+    "${_PRE_} {${brand}|${query}} {on|for} ${station} in ${market} {${date}|}",
+    "${_PRE_} {${brand}|${query}} {on|for} ${station} {and ${station_one}|}",
+    "${_PRE_} {${brand}|${query}} {which|it} ran on ${station} {at some point|}",
+    "${_PRE_} {${brand}|${query}}{ which ran ${date}| it ran ${date}| it ran ${date}}",
+    "${_PRE_} {${brand}|${query}}{ which ran in ${market}| it ran ${market}| it ran ${market}}",
+    "${_PRE_} {on|} ${station} for {${brand}|${query}}",
+    "${_PRE_} {on|} ${station} for {${brand}|${query}} ${date}",
+    "${_PRE_} {on|} ${station} {for|for phrase} {${brand}|${query}}",
+    "${_PRE_} {on|} ${station} {for|for phrase} {${brand}|${query}} ${date}",
+    "${_PRE_} {on|} ${station} {for|for phrase} {${brand}|${query}} this ${date}",
+    "${brand} on ${station}",
+    "${brand} on ${station} ${date} in ${market} {market|}",
+    "${brand} {on|for} ${station} in ${market} ${date}",
+    "${check} ${query} ${date}",
+    "${check} ${query} ${date} on ${station}",
+    "${check} ${query} and ${brand}",
+    "${check} ${station}",
+    "${check} {${query}|${brand}}",
+    "${filter_carrier} ${brand} ${field}",
+    "${filter_carrier} ${check}",
+    "${filter_carrier} ${check} in ${market}",
+    "${filter_carrier} ${check} that include {${brand}|${query}} the spots ran on ${station}",
+    "${filter_carrier} ${check} with phrase {${brand}|${query}}",
+    "${filter_carrier} ${check} {on|for} ${station}",
+    "${filter_carrier} {a spot|some spots} with{ ${phrase}|}{${brand}|${query}}",
+    "${yes_no} can you pull ${check} {for|for phrase|phrase} {${brand}|${query}} {on|for} ${station}",
+    "${yes_no} can you pull ${check} {for|for phrase} {${brand}|${query}} ${market}",
+    "${yes_no} can you pull ${check} {for|for phrase} {${brand}|${query}} in ${market}",
+    "for phrase {${brand}|${query}}",
+    "i need to ${check} some spots {for|for phrase|with phrase} {${brand}|${query}}",
+    "i need to pull ${check} for {${brand}|${query}}",
+    "phrase {${brand}|${query}} in ${market}",
+    "the phrase {${brand}|${query}} {on|for} ${station} {and ${station_one}|}",
+    "{${check}|} ${brand} in ${market} ${date}",
+    "{${check}|} ${brand} in ${market} {on|from} ${date}",
+    "{${check}|} ${brand} on ${station}",
+    "{${check}|} ${brand} on ${station} ${date}",
+    "{${check}|} ${brand} on ${station} {for|on} ${date}",
+    "{${filter_carrier}|} ${field} {${brand}|${person}|${query}}",
+    "{${filter_carrier}|} ${field} {of|with|} {${person}|${brand}|${query}}",
+    "{${filter_carrier}|} ${field} {of|with|} {${person}|${brand}|${query}} {in|from} ${date}",
+    "{${filter_carrier}|} ${media} {of|with} ${brand} ${field}",
+    "{${filter_carrier}|} ${media} {of|with} ${field} of ${person}",
+    "{${filter_carrier}|} ${media} {of|with} ${field} {${query}|${brand}}",
+    "{${filter_carrier}|} ${media} {of|with} ${person} ${field}",
+    "{${filter_carrier}|} ${media} {of|with} ${person} {in|from|} ${date}",
+    "{${filter_carrier}|} ${media} {of|with} the ${brand} ${field}",
+    "{${filter_carrier}|} ${media} {of|with} the ${brand} ${field} {in|from} ${date}",
+    "{${filter_carrier}|} ${media} {of|with} the ${field} {${brand}|${person}|${query}}",
+    "{${filter_carrier}|} ${media} {of|with} {${person}|${query}}",
+    "{${filter_carrier}|} ${person} and ${query}",
+    "{${filter_carrier}|} ${person} and ${query} from ${date}",
+    "{${filter_carrier}|} {${brand}|${person}|${query}} ${field}",
+    "{${filter_carrier}|} {${brand}|${query}|${person}} ${field} {in|on|from|} ${date}",
+    "{${yes_no} |} {for|${phrase}} {${brand}|${query}}{ in ${market}|}",
+    "{${yes_no} |}i need an ${check}{ for| ${phrase}|}{${brand}|${query}}",
+    "{${yes_no} |}i need to pull ${check}{ for| ${phrase}|}{${brand}|${query}}",
+    "{${yes_no} |}the spot contained{ ${phrase}|}{${brand}|${query}}",
+    "{${yes_no} |}{${filter_carrier}} {a|an} ${check} with{ ${phrase}|}{${brand}|${query}}",
+    "{${yes_no}|} can you pull ${check} {for|for phrase|phrase} {${brand}|${query}} ${date}",
+    "{${yes_no}|} can you pull ${check} {for|for phrase|phrase} {${brand}|${query}} from ${date}"
+  ],
+  "dialogflowId": "projects/veritone-c4d4e/agent/intents/252dd844-8575-4926-aede-59ff164d9e06",
+  "type": "SearchHandler",
+  "defaultLocale": null,
+  "graphCoords": {
+    "x": 800,
+    "y": 410,
+    "__typename": "GraphCoords"
+  },
+  "permissions": null,
+  "slots": [
+    {
+      "name": "query",
+      "type": "STENTOR.SEARCH_QUERY",
+      "isList": null,
+      "nlu": null,
+      "_id": "query-STENTOR.SEARCH_QUERY",
+      "__typename": "Slot"
+    },
+    {
+      "name": "date",
+      "type": "STENTOR.DATE_TIME",
+      "isList": null,
+      "nlu": null,
+      "_id": "date-STENTOR.DATE_TIME",
+      "__typename": "Slot"
+    },
+    {
+      "name": "station",
+      "type": "STATION",
+      "isList": false,
+      "nlu": null,
+      "_id": "station-STATION",
+      "__typename": "Slot"
+    },
+    {
+      "name": "check",
+      "type": "SEARCH_PRODUCT",
+      "isList": null,
+      "nlu": null,
+      "_id": "check-SEARCH_PRODUCT",
+      "__typename": "Slot"
+    },
+    {
+      "name": "filter_carrier",
+      "type": "FILTER_CARRIER",
+      "isList": null,
+      "nlu": null,
+      "_id": "filter_carrier-FILTER_CARRIER",
+      "__typename": "Slot"
+    },
+    {
+      "name": "yes_no",
+      "type": "YES_NO",
+      "isList": null,
+      "nlu": null,
+      "_id": "yes_no-YES_NO",
+      "__typename": "Slot"
+    },
+    {
+      "name": "station_one",
+      "type": "STATION",
+      "isList": false,
+      "nlu": null,
+      "_id": "station_one-STATION",
+      "__typename": "Slot"
+    },
+    {
+      "name": "start_noon_midnight",
+      "type": "NOON___MIDNIGHT",
+      "isList": null,
+      "nlu": null,
+      "_id": "start_noon_midnight-NOON___MIDNIGHT",
+      "__typename": "Slot"
+    },
+    {
+      "name": "brand",
+      "type": "BRANDS",
+      "isList": null,
+      "nlu": null,
+      "_id": "brand-BRANDS",
+      "__typename": "Slot"
+    },
+    {
+      "name": "market",
+      "type": "MARKETS",
+      "isList": null,
+      "nlu": null,
+      "_id": "market-MARKETS",
+      "__typename": "Slot"
+    },
+    {
+      "name": "phrase",
+      "type": "PHRASE",
+      "isList": null,
+      "nlu": null,
+      "_id": "phrase-PHRASE",
+      "__typename": "Slot"
+    },
+    {
+      "name": "field",
+      "type": "FIELD",
+      "isList": null,
+      "nlu": null,
+      "_id": "field-FIELD",
+      "__typename": "Slot"
+    },
+    {
+      "name": "media",
+      "type": "MEDIA",
+      "isList": null,
+      "nlu": null,
+      "_id": "media-MEDIA",
+      "__typename": "Slot"
+    },
+    {
+      "name": "person",
+      "type": "STENTOR.SEARCH_QUERY",
+      "isList": null,
+      "nlu": null,
+      "_id": "person-STENTOR.SEARCH_QUERY",
+      "__typename": "Slot"
+    }
+  ],
+  "content": [
+    {
+      "__typename": "HandlerContent",
+      "key": "SearchHandler",
+      "handlerResponse": [
+        {
+          "__typename": "SimpleHandlerResponse",
+          "displays": null,
+          "outputSpeech": {
+            "ssml": "<speak>Air checks are currently being built.  Try another.</speak>",
+            "textToSpeech": null,
+            "displayText": "Air checks are currently being built.  Try another.",
+            "suggestions": [],
+            "__typename": "ResponseOutput"
+          },
+          "segments": null,
+          "reprompt": {
+            "ssml": "<speak>Try another air check.</speak>",
+            "textToSpeech": null,
+            "displayText": "Try another air check.",
+            "suggestions": [],
+            "__typename": "ResponseOutput"
+          },
+          "name": "Placeholder",
+          "tag": null,
+          "system": null,
+          "data": null,
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "__typename": "HandlerContent",
+      "key": "RefineIntent",
+      "handlerResponse": [
+        {
+          "__typename": "SimpleHandlerResponse",
+          "displays": null,
+          "outputSpeech": {
+            "ssml": "<speak>Ok, you can refine by giving me a time period to look within or a specific station.</speak>",
+            "textToSpeech": null,
+            "displayText": "Ok, you can refine by giving me a time period to look within or a specific station.",
+            "suggestions": [
+              null
+            ],
+            "__typename": "ResponseOutput"
+          },
+          "segments": null,
+          "reprompt": {
+            "ssml": "<speak>Try giving me a date range or a particular station.</speak>",
+            "textToSpeech": null,
+            "displayText": "Try giving me a date range or a particular station.",
+            "suggestions": [],
+            "__typename": "ResponseOutput"
+          },
+          "name": null,
+          "tag": null,
+          "system": null,
+          "data": null,
+          "conditions": null
+        }
+      ]
+    },
+    {
+      "__typename": "HandlerContent",
+      "key": "CancelIntent|StopIntent",
+      "handlerResponse": [
+        {
+          "__typename": "SimpleHandlerResponse",
+          "displays": null,
+          "outputSpeech": {
+            "ssml": "<speak>Ok, goodbye.</speak>",
+            "textToSpeech": null,
+            "displayText": "Ok, goodbye.",
+            "suggestions": [],
+            "__typename": "ResponseOutput"
+          },
+          "segments": null,
+          "reprompt": null,
+          "name": "Search Goodbye",
+          "tag": null,
+          "system": null,
+          "data": null,
+          "conditions": null
+        }
+      ]
+    }
+  ],
+  "data": {},
+  "forward": [],
+  "redirect": [
+    {
+      "key": "SearchHandler",
+      "paths": [
+        {
+          "actions": null,
+          "conditions": null,
+          "data": null,
+          "platform": null,
+          "__typename": "SystemDependentExecutableHandlerPath"
+        }
+      ],
+      "__typename": "HandlerRedirect"
+    }
+  ]
+}

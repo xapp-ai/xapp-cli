@@ -1,0 +1,5950 @@
+{
+  "resource": {
+    "name": "IVA_Dev",
+    "version": "mvqE",
+    "intents": [
+      {
+        "name": "Address",
+        "version": "mvqE",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "{city}",
+          "{state}",
+          "{city} {state}",
+          "near {city}",
+          "near {state}",
+          "near {city} {state}",
+          "near {zip} {city}",
+          "near {zip} {state}",
+          "near {zip} {city} {state}",
+          "{zip} {city}",
+          "{zip} {state}",
+          "{zip} {city} {state}",
+          "near {city} {zip}",
+          "near {state} {zip}",
+          "near {city} {state} {zip}",
+          "{city} {zip}",
+          "{state} {zip}",
+          "{city} {state} {zip}",
+          "near {pa_city}",
+          "near {pa_city} PA",
+          "{pa_city}",
+          "{pa_city} PA",
+          "{zip} {pa_city}",
+          "{zip} {pa_city} PA",
+          "{pa_city} {zip}",
+          "{pa_city} PA {zip}",
+          "near {zip} {pa_city}",
+          "near {zip} {pa_city} PA",
+          "near {pa_city} {zip}",
+          "near {pa_city} PA {zip}"
+        ],
+        "inputContexts": [
+          {
+            "name": "expecting_address"
+          }
+        ],
+        "slots": [
+          {
+            "name": "city",
+            "slotConstraint": "Optional",
+            "slotType": "AMAZON.US_CITY"
+          },
+          {
+            "name": "state",
+            "slotConstraint": "Optional",
+            "slotType": "AMAZON.US_STATE"
+          },
+          {
+            "name": "zip",
+            "slotConstraint": "Optional",
+            "slotType": "AMAZON.NUMBER"
+          },
+          {
+            "name": "pa_city",
+            "slotConstraint": "Optional",
+            "slotType": "CITIES_PA"
+          }
+        ]
+      },
+      {
+        "name": "Age",
+        "version": "mvqE",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "{age} years old",
+          "i am {age}",
+          "i am {age} years old"
+        ],
+        "inputContexts": [
+          {
+            "name": "expecting_age"
+          }
+        ],
+        "slots": [
+          {
+            "name": "age",
+            "slotConstraint": "Optional",
+            "slotType": "AMAZON.NUMBER"
+          }
+        ]
+      },
+      {
+        "name": "AgeOnly",
+        "version": "mvqE",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "{age}"
+        ],
+        "inputContexts": [
+          {
+            "name": "expecting_age_only"
+          }
+        ],
+        "slots": [
+          {
+            "name": "age",
+            "slotConstraint": "Optional",
+            "slotType": "AMAZON.NUMBER"
+          }
+        ]
+      },
+      {
+        "name": "AlphanumericInput",
+        "version": "mvqE",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "{alphanumeric_input}"
+        ],
+        "inputContexts": [
+          {
+            "name": "expecting_code"
+          }
+        ],
+        "slots": [
+          {
+            "name": "alphanumeric_input",
+            "slotConstraint": "Optional",
+            "slotType": "AMAZON.AlphaNumeric"
+          }
+        ]
+      },
+      {
+        "name": "AnotherNumber",
+        "version": "mvqE",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "another number",
+          "a different number",
+          "different number",
+          "another one"
+        ]
+      },
+      {
+        "name": "DateANDTime",
+        "version": "mvqE",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "{date} {time}",
+          "{date} at {time}"
+        ],
+        "inputContexts": [
+          {
+            "name": "expecting_date"
+          }
+        ],
+        "slots": [
+          {
+            "name": "date",
+            "slotConstraint": "Optional",
+            "slotType": "AMAZON.DATE"
+          },
+          {
+            "name": "time",
+            "slotConstraint": "Optional",
+            "slotType": "AMAZON.TIME"
+          }
+        ]
+      },
+      {
+        "name": "DeliveryMechanismChange",
+        "version": "mvqE",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "change my {delivery_mechanism} address",
+          "change my {delivery_mechanism}",
+          "change the {delivery_mechanism} address",
+          "change the {delivery_mechanism}",
+          "change {delivery_mechanism} address",
+          "change {delivery_mechanism}",
+          "use a different {delivery_mechanism} address",
+          "use a different {delivery_mechanism}"
+        ],
+        "slots": [
+          {
+            "name": "delivery_mechanism",
+            "slotConstraint": "Optional",
+            "slotType": "DELIVERY_MECHANISM"
+          }
+        ]
+      },
+      {
+        "name": "Duration",
+        "version": "mvqE",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "{duration}",
+          "for about {duration} now",
+          "for about {duration}",
+          "for {duration} now",
+          "for {duration}",
+          "going on {duration} now",
+          "going on {duration}"
+        ],
+        "inputContexts": [
+          {
+            "name": "expecting_duration"
+          }
+        ],
+        "slots": [
+          {
+            "name": "duration",
+            "slotConstraint": "Optional",
+            "slotType": "AMAZON.DURATION"
+          }
+        ]
+      },
+      {
+        "name": "Name",
+        "version": "mvqE",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "{f_name}",
+          "{f_name} {l_name}",
+          "{l_name}",
+          "my name is {f_name} {l_name}",
+          "my name is {f_name}"
+        ],
+        "inputContexts": [
+          {
+            "name": "expecting_name"
+          }
+        ],
+        "slots": [
+          {
+            "name": "f_name",
+            "slotConstraint": "Optional",
+            "slotType": "AMAZON.US_FIRST_NAME"
+          },
+          {
+            "name": "l_name",
+            "slotConstraint": "Optional",
+            "slotType": "AMAZON.US_LAST_NAME"
+          }
+        ]
+      },
+      {
+        "name": "NumberOnFile",
+        "version": "mvqE",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "the number on file",
+          "my saved number"
+        ]
+      },
+      {
+        "name": "OCNo",
+        "version": "mvqE",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "{no}",
+          "{no} thanks",
+          "{no} thank you"
+        ],
+        "slots": [
+          {
+            "name": "no",
+            "slotConstraint": "Optional",
+            "slotType": "NO"
+          }
+        ]
+      },
+      {
+        "name": "OCYes",
+        "version": "mvqE",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "{yes}",
+          "{yes} thanks",
+          "{yes} thank you",
+          "{yes} please"
+        ],
+        "slots": [
+          {
+            "name": "yes",
+            "slotConstraint": "Optional",
+            "slotType": "YES"
+          }
+        ]
+      },
+      {
+        "name": "PhoneNumber",
+        "version": "mvqE",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "my number is {phone_number}",
+          "my phone number is {phone_number}"
+        ],
+        "inputContexts": [
+          {
+            "name": "expecting_phone_number"
+          }
+        ],
+        "slots": [
+          {
+            "name": "phone_number",
+            "slotConstraint": "Optional",
+            "slotType": "AMAZON.PhoneNumber"
+          }
+        ]
+      },
+      {
+        "name": "PhoneNumberOnly",
+        "version": "mvqE",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "{phone_number}"
+        ],
+        "inputContexts": [
+          {
+            "name": "expecting_phone_number"
+          }
+        ],
+        "slots": [
+          {
+            "name": "phone_number",
+            "slotConstraint": "Optional",
+            "slotType": "AMAZON.PhoneNumber"
+          }
+        ]
+      },
+      {
+        "name": "PlanName",
+        "version": "mvqE",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "the {plan} plan",
+          "the {plan}",
+          "{plan} plan",
+          "{plan}"
+        ],
+        "slots": [
+          {
+            "name": "plan",
+            "slotConstraint": "Optional",
+            "slotType": "PLAN"
+          }
+        ]
+      },
+      {
+        "name": "BuiltIn_RepeatIntent",
+        "version": "mvqE",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "parentIntentSignature": "AMAZON.RepeatIntent"
+      },
+      {
+        "name": "Restart",
+        "version": "mvqE",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "please restart please",
+          "please restart",
+          "I want to restart please",
+          "I want to restart",
+          "can i restart please",
+          "can i restart",
+          "restart please",
+          "restart",
+          "please start over please",
+          "please start over",
+          "I want to start over please",
+          "I want to start over",
+          "can i start over please",
+          "can i start over",
+          "start over please",
+          "start over"
+        ]
+      },
+      {
+        "name": "SearchElsewhere",
+        "version": "mvqE",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "{differentLocation}"
+        ],
+        "slots": [
+          {
+            "name": "differentLocation",
+            "slotConstraint": "Optional",
+            "slotType": "DIFFERENT_LOCATION"
+          }
+        ]
+      },
+      {
+        "name": "SearchTest",
+        "version": "mvqE",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "search"
+        ]
+      },
+      {
+        "name": "SearchType",
+        "version": "mvqE",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "search_type"
+        ],
+        "slots": [
+          {
+            "name": "search_type",
+            "slotConstraint": "Optional",
+            "slotType": "SEARCH_TYPE"
+          }
+        ]
+      },
+      {
+        "name": "ServiceOnly",
+        "version": "mvqE",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "coverage for {benefit}",
+          "coverage for {subcategory}",
+          "coverage for {category}",
+          "for {benefit}",
+          "for {subcategory}",
+          "for {category}",
+          "{benefit}",
+          "{subcategory}",
+          "{category}",
+          "coverage for {benefit} {doctor}",
+          "coverage for {subcategory} {doctor}",
+          "coverage for {category} {doctor}",
+          "for {benefit} {doctor}",
+          "for {subcategory} {doctor}",
+          "for {category} {doctor}",
+          "{benefit} {doctor}",
+          "{subcategory} {doctor}",
+          "{category} {doctor}"
+        ],
+        "inputContexts": [
+          {
+            "name": "expecting_coverage"
+          }
+        ],
+        "slots": [
+          {
+            "name": "benefit",
+            "slotConstraint": "Optional",
+            "slotType": "SERVICE_BENEFIT"
+          },
+          {
+            "name": "subcategory",
+            "slotConstraint": "Optional",
+            "slotType": "SERVICE_SUBCATEGORY"
+          },
+          {
+            "name": "category",
+            "slotConstraint": "Optional",
+            "slotType": "SERVICE_CATEGORY"
+          },
+          {
+            "name": "doctor",
+            "slotConstraint": "Optional",
+            "slotType": "DOCTOR"
+          }
+        ]
+      },
+      {
+        "name": "SexOnly",
+        "version": "mvqE",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "{sex}"
+        ],
+        "slots": [
+          {
+            "name": "sex",
+            "slotConstraint": "Optional",
+            "slotType": "SEX"
+          }
+        ]
+      },
+      {
+        "name": "SocialSecurityNumber",
+        "version": "mvqE",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "the last four of my social is {number}"
+        ],
+        "slots": [
+          {
+            "name": "number",
+            "slotConstraint": "Optional",
+            "slotType": "AMAZON.NUMBER"
+          }
+        ]
+      },
+      {
+        "name": "TextIntent",
+        "version": "mvqE",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "send me a text",
+          "message it",
+          "give me a text",
+          "text it"
+        ]
+      },
+      {
+        "name": "ThatsAllIntent",
+        "version": "mvqE",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "that's all",
+          "that is all",
+          "thats all",
+          "nothing else"
+        ]
+      },
+      {
+        "name": "Visit",
+        "version": "mvqE",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "{visit}"
+        ],
+        "slots": [
+          {
+            "name": "visit",
+            "slotConstraint": "Optional",
+            "slotType": "VISIT_TYPE"
+          }
+        ]
+      },
+      {
+        "name": "ZipCode",
+        "version": "mvqE",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "my zip code is {zip}",
+          "my zip is {zip}",
+          "{yes} my zip code is {zip}"
+        ],
+        "inputContexts": [
+          {
+            "name": "expecting_address"
+          }
+        ],
+        "slots": [
+          {
+            "name": "zip",
+            "slotConstraint": "Optional",
+            "slotType": "AMAZON.NUMBER"
+          },
+          {
+            "name": "yes",
+            "slotConstraint": "Optional",
+            "slotType": "YES"
+          }
+        ]
+      },
+      {
+        "name": "ZipCodeOnly",
+        "version": "mvqE",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "{zip}"
+        ],
+        "inputContexts": [
+          {
+            "name": "expecting_number"
+          }
+        ],
+        "slots": [
+          {
+            "name": "zip",
+            "slotConstraint": "Optional",
+            "slotType": "AMAZON.NUMBER"
+          }
+        ]
+      }
+    ],
+    "slotTypes": [
+      {
+        "version": "mvqE",
+        "name": "PEDIATRICIAN",
+        "valueSelectionStrategy": "ORIGINAL_VALUE",
+        "enumerationValues": [
+          {
+            "value": "child"
+          },
+          {
+            "value": "pediatrician"
+          }
+        ]
+      },
+      {
+        "version": "mvqE",
+        "name": "DOCTOR",
+        "valueSelectionStrategy": "ORIGINAL_VALUE",
+        "enumerationValues": [
+          {
+            "value": "doctor",
+            "synonyms": [
+              "doctor",
+              "doc",
+              "DR"
+            ]
+          },
+          {
+            "value": "physicians",
+            "synonyms": [
+              "physicians",
+              "physician"
+            ]
+          },
+          {
+            "value": "provider"
+          }
+        ]
+      },
+      {
+        "version": "mvqE",
+        "name": "ESCALATIONCONNECT",
+        "valueSelectionStrategy": "ORIGINAL_VALUE",
+        "enumerationValues": [
+          {
+            "value": "Call Me Later",
+            "synonyms": [
+              "Call Me Later",
+              "Later",
+              "call me back"
+            ]
+          },
+          {
+            "value": "Connect Now",
+            "synonyms": [
+              "Connect Now",
+              "Now",
+              "Call now"
+            ]
+          }
+        ]
+      },
+      {
+        "version": "mvqE",
+        "name": "SEARCH_TYPE",
+        "valueSelectionStrategy": "ORIGINAL_VALUE",
+        "enumerationValues": [
+          {
+            "value": "Address"
+          },
+          {
+            "value": "Zip Code"
+          },
+          {
+            "value": "Current Location"
+          }
+        ]
+      },
+      {
+        "version": "mvqE",
+        "name": "ACCOUNT_TYPE",
+        "valueSelectionStrategy": "ORIGINAL_VALUE",
+        "enumerationValues": [
+          {
+            "value": "Medical",
+            "synonyms": [
+              "Medical",
+              "Medical Claims"
+            ]
+          },
+          {
+            "value": "Pharmacy",
+            "synonyms": [
+              "Pharmacy",
+              "Pharmacy Claims"
+            ]
+          },
+          {
+            "value": "All",
+            "synonyms": [
+              "All",
+              "All Claims"
+            ]
+          }
+        ]
+      },
+      {
+        "version": "mvqE",
+        "name": "VISIT_TYPE",
+        "valueSelectionStrategy": "ORIGINAL_VALUE",
+        "enumerationValues": [
+          {
+            "value": "office",
+            "synonyms": [
+              "office",
+              "office visit"
+            ]
+          },
+          {
+            "value": "freestanding facility"
+          },
+          {
+            "value": "outpatient services"
+          },
+          {
+            "value": "inpatient services"
+          }
+        ]
+      },
+      {
+        "version": "mvqE",
+        "name": "CLAIMNEXTSTEP",
+        "valueSelectionStrategy": "ORIGINAL_VALUE",
+        "enumerationValues": [
+          {
+            "value": "Next 3 claims"
+          },
+          {
+            "value": "Search by Date"
+          },
+          {
+            "value": "Speak to Representative"
+          }
+        ]
+      },
+      {
+        "version": "mvqE",
+        "name": "CONTACT_REASON",
+        "valueSelectionStrategy": "ORIGINAL_VALUE",
+        "enumerationValues": [
+          {
+            "value": "bill"
+          },
+          {
+            "value": "charge"
+          }
+        ]
+      },
+      {
+        "version": "mvqE",
+        "name": "DIFFERENT_LOCATION",
+        "valueSelectionStrategy": "ORIGINAL_VALUE",
+        "enumerationValues": [
+          {
+            "value": "Search Elsewhere"
+          }
+        ]
+      },
+      {
+        "version": "mvqE",
+        "name": "CARDTYPE",
+        "valueSelectionStrategy": "ORIGINAL_VALUE",
+        "enumerationValues": [
+          {
+            "value": "id",
+            "synonyms": [
+              "id",
+              "identity"
+            ]
+          },
+          {
+            "value": "customer"
+          },
+          {
+            "value": "insurance"
+          }
+        ]
+      },
+      {
+        "version": "mvqE",
+        "name": "ESCALATIONWORDS",
+        "valueSelectionStrategy": "ORIGINAL_VALUE",
+        "enumerationValues": [
+          {
+            "value": "frustrated"
+          },
+          {
+            "value": "frustrating"
+          },
+          {
+            "value": "angry",
+            "synonyms": [
+              "angry"
+            ]
+          },
+          {
+            "value": "disappointed"
+          },
+          {
+            "value": "disappointing"
+          }
+        ]
+      },
+      {
+        "version": "mvqE",
+        "name": "AGENT",
+        "valueSelectionStrategy": "ORIGINAL_VALUE",
+        "enumerationValues": [
+          {
+            "value": "agent"
+          },
+          {
+            "value": "representative"
+          },
+          {
+            "value": "associate"
+          },
+          {
+            "value": "live person"
+          }
+        ]
+      },
+      {
+        "version": "mvqE",
+        "name": "RELATIVE_PREPOSITION",
+        "valueSelectionStrategy": "ORIGINAL_VALUE",
+        "enumerationValues": [
+          {
+            "value": "near",
+            "synonyms": [
+              "near",
+              "near me",
+              "nearby"
+            ]
+          },
+          {
+            "value": "adjacent"
+          },
+          {
+            "value": "close",
+            "synonyms": [
+              "close",
+              "close by"
+            ]
+          },
+          {
+            "value": "next to"
+          },
+          {
+            "value": "area",
+            "synonyms": [
+              "area",
+              "in my area"
+            ]
+          }
+        ]
+      },
+      {
+        "version": "mvqE",
+        "name": "DELIVERY_MECHANISM",
+        "valueSelectionStrategy": "ORIGINAL_VALUE",
+        "enumerationValues": [
+          {
+            "value": "Print"
+          },
+          {
+            "value": "Mail",
+            "synonyms": [
+              "Mail",
+              "post"
+            ]
+          },
+          {
+            "value": "Email",
+            "synonyms": [
+              "Email",
+              "digital"
+            ]
+          }
+        ]
+      },
+      {
+        "version": "mvqE",
+        "name": "SEARCH_CARRIER",
+        "valueSelectionStrategy": "ORIGINAL_VALUE",
+        "enumerationValues": [
+          {
+            "value": "find",
+            "synonyms": [
+              "find",
+              "find a",
+              "find an",
+              "i want to find",
+              "we want to find",
+              "i need to find",
+              "we need to find"
+            ]
+          },
+          {
+            "value": "look for",
+            "synonyms": [
+              "look for",
+              "i am looking for",
+              "we are looking for"
+            ]
+          },
+          {
+            "value": "search for",
+            "synonyms": [
+              "search for",
+              "search for a"
+            ]
+          },
+          {
+            "value": "where is",
+            "synonyms": [
+              "where is",
+              "where is the"
+            ]
+          },
+          {
+            "value": "i need",
+            "synonyms": [
+              "i need",
+              "i need a"
+            ]
+          }
+        ]
+      },
+      {
+        "version": "mvqE",
+        "name": "SERVICE_SUBCATEGORY",
+        "valueSelectionStrategy": "ORIGINAL_VALUE",
+        "enumerationValues": [
+          {
+            "value": "30-day supply at network mail-order pharmacy"
+          },
+          {
+            "value": "30-day supply at network retail pharmacy"
+          },
+          {
+            "value": "90-day supply at network mail-order pharmacy"
+          },
+          {
+            "value": "90-day supply at network retail pharmacy"
+          },
+          {
+            "value": "Advanced Imaging (MRI/MRA,CT/CTA Scan, PET Scan)"
+          },
+          {
+            "value": "All Diabetic Supplies",
+            "synonyms": [
+              "All Diabetic Supplies",
+              "Diabetic Supplies",
+              "Shoes"
+            ]
+          },
+          {
+            "value": "Benefits per Calendar Year"
+          },
+          {
+            "value": "Benefits per Contract Year"
+          },
+          {
+            "value": "Benefits per Plan Year"
+          },
+          {
+            "value": "Biotech/Specialty Injectables"
+          },
+          {
+            "value": "Drug Coverage"
+          },
+          {
+            "value": "Hearing Aids"
+          },
+          {
+            "value": "Individual Only Deductible"
+          },
+          {
+            "value": "Individual/Family Deductible"
+          },
+          {
+            "value": "Medical Services Other"
+          },
+          {
+            "value": "Chiropractic/Spinal Manipulations",
+            "synonyms": [
+              "Chiropractic/Spinal Manipulations",
+              "Chiropractic Group",
+              "Chiropractic Medicine",
+              "Chiropractor"
+            ]
+          },
+          {
+            "value": "Coverage Gap"
+          },
+          {
+            "value": "out of pocket",
+            "synonyms": [
+              "out of pocket",
+              "out-of-pocket"
+            ]
+          },
+          {
+            "value": "Outpatient Hospital Services"
+          },
+          {
+            "value": "Outpatient Lab and Pathology",
+            "synonyms": [
+              "Outpatient Lab and Pathology",
+              "Allopathic & Osteopathic Physicians/Pathology, Anatomic Pathology & Clinical Pathology",
+              "Anatomic & Clinical Pathology",
+              "Anatomic Pathology",
+              "Anatomic Pathology & Clinical Pathology",
+              "Anatomic Pathology & Laboratory Medicine",
+              "Chemical Pathology",
+              "Clinical & Laboratory Pathology",
+              "Clinical Medical Laboratory",
+              "Clinical Pathology",
+              "Cytopathology",
+              "Dermatopathology",
+              "Dermatopathology Laboratory",
+              "Forensic Pathology",
+              "Hematopathology",
+              "Hospital Pathology",
+              "Immunopathology",
+              "Lab Draw Site",
+              "Lab Test",
+              "Lab Work",
+              "Laboratory",
+              "Laboratory - Genetic",
+              "Laboratory Genetics & Genomics",
+              "Laboratory Group",
+              "Laboratory Services",
+              "Medical Microbiology Pathology",
+              "Molecular Genetic Pathology",
+              "Neuropathology",
+              "Oral Pathology",
+              "Pathology",
+              "Pathology - Hospital-Based",
+              "Pathology Recertification",
+              "Pathology Services",
+              "Pediatric Pathology",
+              "Radioisotopic Pathology",
+              "Reference Lab",
+              "Speech & Language Therapy/Pathology",
+              "Speech Therapy/Pathology",
+              "Speech-Language Pathology"
+            ]
+          },
+          {
+            "value": "Outpatient Radiology/X-ray Services",
+            "synonyms": [
+              "Outpatient Radiology/X-ray Services",
+              "Allopathic & Osteopathic Physicians/Radiology, Radiation Oncology",
+              "Radiation Oncology",
+              "Radiation Therapy"
+            ]
+          },
+          {
+            "value": "Outpatient Rehabilitation Therapy"
+          },
+          {
+            "value": "Outpatient Surgery Services",
+            "synonyms": [
+              "Outpatient Surgery Services",
+              "Ambulatory Surgical Center",
+              "Ambulatory Surgical Center Group",
+              "D&A Outpatient Clinic",
+              "Freestanding Outpatient Facility",
+              "Hospital Outpatient Center - Off-Campus",
+              "Hospital SubUnit - Outpatient",
+              "Outpatient Surgery"
+            ]
+          },
+          {
+            "value": "Physical, Occupational, Speech & Cognitive Therapy",
+            "synonyms": [
+              "Physical, Occupational, Speech & Cognitive Therapy",
+              "Athletic Trainer",
+              "Children's Psychosocial Rehabilitation",
+              "Hand Therapy",
+              "Head Injury Rehabilitation",
+              "Hospital SubUnit - Rehabilitation",
+              "Individual Therapy",
+              "In-Home Therapy",
+              "Inpatient Rehabilitation Facility",
+              "Massage Therapy",
+              "Physiatry (Physical Medicine & Rehabilitation)",
+              "Physical Disability",
+              "Physical Medicine & Rehabilitation",
+              "PT/OT (Early Intervention)",
+              "PT/OT/ST Group",
+              "Rehabilitation",
+              "Rehabilitation Center",
+              "Rehabilitation Hospital",
+              "Rehabilitation Products",
+              "Rehabilitation Services",
+              "Therapy Clinic",
+              "Therapy Group (PT/OT/SLP/RT)"
+            ]
+          },
+          {
+            "value": "Physician and Primary Care Services",
+            "synonyms": [
+              "Physician and Primary Care Services",
+              "pcp",
+              "pcp exam",
+              "pcp visit",
+              "postpartum depression",
+              "primary care",
+              "Primary Care Services",
+              "Primary Care Services (PCP)"
+            ]
+          },
+          {
+            "value": "Podiatry Services"
+          },
+          {
+            "value": "Preventive Colonoscopy"
+          },
+          {
+            "value": "Virtual Care",
+            "synonyms": [
+              "Virtual Care",
+              "MD Live",
+              "virtual medical visit"
+            ]
+          },
+          {
+            "value": "Vision Care and Eyeglasses",
+            "synonyms": [
+              "Vision Care and Eyeglasses",
+              "Eye Glasses",
+              "Eyeglasses",
+              "Eyeware",
+              "Glasses",
+              "Ocular Prosthetics",
+              "Optical Supplies",
+              "Vision Rehabilitation"
+            ]
+          },
+          {
+            "value": "Restorative Services"
+          },
+          {
+            "value": "Routine Radiology (X-Ray)",
+            "synonyms": [
+              "Routine Radiology (X-Ray)",
+              "Radiation Oncology - Hospital-Based",
+              "Radiation Therapy - Hospital-Based",
+              "Therapeutic Radiology",
+              "X-Rays"
+            ]
+          }
+        ]
+      },
+      {
+        "version": "mvqE",
+        "name": "YES",
+        "valueSelectionStrategy": "ORIGINAL_VALUE",
+        "enumerationValues": [
+          {
+            "value": "yes"
+          },
+          {
+            "value": "yeah"
+          },
+          {
+            "value": "sure"
+          },
+          {
+            "value": "yup"
+          }
+        ]
+      },
+      {
+        "version": "mvqE",
+        "name": "SERVICE_CATEGORY",
+        "valueSelectionStrategy": "ORIGINAL_VALUE",
+        "enumerationValues": [
+          {
+            "value": "Behavioral Health Services",
+            "synonyms": [
+              "Behavioral Health Services",
+              "Adult BH HCBS Community Psychiatric Support & Treatment",
+              "Children’s Community Psychiatric Support & Treatment",
+              "Psychiatric Rehab Services - Adult"
+            ]
+          },
+          {
+            "value": "Benefits"
+          },
+          {
+            "value": "Emergency Services",
+            "synonyms": [
+              "Emergency Services",
+              "Emergency Visit",
+              "Paramedicine"
+            ]
+          },
+          {
+            "value": "Hearing Services",
+            "synonyms": [
+              "Hearing Services",
+              "Deafness or Hard-of-Hearing",
+              "Hearing",
+              "Hearing Aid Equipment",
+              "Hearing Aid Equipment Group",
+              "Hearing Aid Fitter",
+              "Hearing Aid Manufacturer",
+              "Hearing Aids",
+              "Hearing Instrument Specialist"
+            ]
+          },
+          {
+            "value": "Home Health Care",
+            "synonyms": [
+              "Home Health Care",
+              "care at home",
+              "Home Care",
+              "Homecare"
+            ]
+          },
+          {
+            "value": "Hospital Services",
+            "synonyms": [
+              "Hospital Services",
+              "Hospital"
+            ]
+          },
+          {
+            "value": "Medical Equipment (DME)",
+            "synonyms": [
+              "Medical Equipment (DME)",
+              "Medical Equipment",
+              "Medical Equipment Supplies"
+            ]
+          },
+          {
+            "value": "Cancer and Radiation Therapy"
+          },
+          {
+            "value": "Chiropractic"
+          },
+          {
+            "value": "Deductables"
+          },
+          {
+            "value": "Dental Services",
+            "synonyms": [
+              "Dental Services",
+              "Adult Dentures Only",
+              "Dental Clinic",
+              "Dental Hygienist",
+              "Dental Implantology",
+              "Dentistry/Forensic",
+              "Dept Public Health - IDPH",
+              "Family Dentistry",
+              "General Dentist",
+              "General Dentistry",
+              "Inclusive Dental Provider",
+              "Indian Health Service Dental",
+              "Main Dentist",
+              "Orthodontist & Dentofacial Orthopedics",
+              "Other Dentist",
+              "Pediatric Dentist",
+              "Pediatric Dentistry",
+              "Pedodontics",
+              "Prosthodontist",
+              "Public Health Dental Hygiene",
+              "TMJ Disorders",
+              "Tribal 638 Dental",
+              "Dentist",
+              "Orthodontist"
+            ]
+          },
+          {
+            "value": "Diabetic Supplies",
+            "synonyms": [
+              "Diabetic Supplies",
+              "Diabetes Supplies",
+              "Diabetic Care",
+              "Diabetic Medicine"
+            ]
+          },
+          {
+            "value": "Other Medical Services"
+          },
+          {
+            "value": "Outpatient Diagnostics",
+            "synonyms": [
+              "Outpatient Diagnostics",
+              "Diagnostics"
+            ]
+          },
+          {
+            "value": "Pharmacy, Rx , Drug and Perscriptions",
+            "synonyms": [
+              "Pharmacy, Rx , Drug and Perscriptions",
+              "24-Hour Pharmacy",
+              "90 Day Retail",
+              "Chain Pharmacy",
+              "Clinical Pharmacist",
+              "Clinical Pharmacology",
+              "drug",
+              "Drugs",
+              "Drugstore",
+              "Extended Day Supply",
+              "Immunization Pharmacy",
+              "Indian Health Service Pharmacy",
+              "Medical Specialty Pharmacy",
+              "Pharmacist",
+              "Pharmacy",
+              "Pharmacy Services",
+              "Prescriptions",
+              "Retail Pharmacy",
+              "Rx"
+            ]
+          },
+          {
+            "value": "Preventive Services"
+          },
+          {
+            "value": "Specific Benefits",
+            "synonyms": [
+              "Specific Benefits",
+              "Medical Coverage"
+            ]
+          },
+          {
+            "value": "Therapy Services",
+            "synonyms": [
+              "Therapy Services",
+              "Eye Movement Desensitization & Reprocessing (EMDR)",
+              "Pediatric Physical Medicine & Rehabilitation Specialist",
+              "Pediatric Rehabilitation Medicine",
+              "Therapy"
+            ]
+          },
+          {
+            "value": "Urgently Needed Services",
+            "synonyms": [
+              "Urgently Needed Services",
+              "Urgent"
+            ]
+          },
+          {
+            "value": "Vision",
+            "synonyms": [
+              "Vision",
+              "Ocularist",
+              "Optician",
+              "Primary Care Vision",
+              "vision",
+              "Vision Care Services",
+              "Vision Services"
+            ]
+          }
+        ]
+      },
+      {
+        "version": "mvqE",
+        "name": "PHARMACISTS",
+        "valueSelectionStrategy": "ORIGINAL_VALUE",
+        "enumerationValues": [
+          {
+            "value": "pharmacist"
+          },
+          {
+            "value": "pharmacy"
+          }
+        ]
+      },
+      {
+        "version": "mvqE",
+        "name": "SEX",
+        "valueSelectionStrategy": "ORIGINAL_VALUE",
+        "enumerationValues": [
+          {
+            "value": "male",
+            "synonyms": [
+              "male",
+              "M"
+            ]
+          },
+          {
+            "value": "female",
+            "synonyms": [
+              "female",
+              "F"
+            ]
+          }
+        ]
+      },
+      {
+        "version": "mvqE",
+        "name": "PLAN",
+        "valueSelectionStrategy": "ORIGINAL_VALUE",
+        "enumerationValues": [
+          {
+            "value": "Keystone HMO"
+          },
+          {
+            "value": "Keystone 65"
+          },
+          {
+            "value": "Keystone RX"
+          },
+          {
+            "value": "Keystone Health Plan East HMO"
+          },
+          {
+            "value": "Keystone 65 Basic RX HMO",
+            "synonyms": [
+              "Keystone 65 Basic RX HMO",
+              "Keystone 65 Basic RXHMO"
+            ]
+          }
+        ]
+      },
+      {
+        "version": "mvqE",
+        "name": "CITIES_PA",
+        "valueSelectionStrategy": "ORIGINAL_VALUE",
+        "enumerationValues": [
+          {
+            "value": "Akron"
+          },
+          {
+            "value": "Aldan"
+          },
+          {
+            "value": "Aliquippa"
+          },
+          {
+            "value": "Allentown"
+          },
+          {
+            "value": "Allison Park"
+          },
+          {
+            "value": "Altoona"
+          },
+          {
+            "value": "Ambler"
+          },
+          {
+            "value": "Ambridge"
+          },
+          {
+            "value": "Amity Gardens"
+          },
+          {
+            "value": "Ancient Oaks"
+          },
+          {
+            "value": "Annville"
+          },
+          {
+            "value": "Archbald"
+          },
+          {
+            "value": "Ardmore"
+          },
+          {
+            "value": "Arlington Heights"
+          },
+          {
+            "value": "Arnold"
+          },
+          {
+            "value": "Audubon"
+          },
+          {
+            "value": "Avalon"
+          },
+          {
+            "value": "Baden"
+          },
+          {
+            "value": "Baldwin"
+          },
+          {
+            "value": "Bangor"
+          },
+          {
+            "value": "Beaver"
+          },
+          {
+            "value": "Beaver Falls"
+          },
+          {
+            "value": "Bellefonte"
+          },
+          {
+            "value": "Bellevue"
+          },
+          {
+            "value": "Berwick"
+          },
+          {
+            "value": "Berwyn"
+          },
+          {
+            "value": "Bethel Park"
+          },
+          {
+            "value": "Bethlehem"
+          },
+          {
+            "value": "Birdsboro"
+          },
+          {
+            "value": "Blakely"
+          },
+          {
+            "value": "Blandon"
+          },
+          {
+            "value": "Bloomsburg"
+          },
+          {
+            "value": "Blue Bell"
+          },
+          {
+            "value": "Boalsburg"
+          },
+          {
+            "value": "Boiling Springs"
+          },
+          {
+            "value": "Boothwyn"
+          },
+          {
+            "value": "Boyertown"
+          },
+          {
+            "value": "Bradford"
+          },
+          {
+            "value": "Breinigsville"
+          },
+          {
+            "value": "Brentwood"
+          },
+          {
+            "value": "Bridgeport"
+          },
+          {
+            "value": "Bridgeville"
+          },
+          {
+            "value": "Bristol"
+          },
+          {
+            "value": "Brittany Farms-The Highlands",
+            "synonyms": [
+              "Brittany Farms-The Highlands",
+              "Brittany Farms",
+              "The Highlands"
+            ]
+          },
+          {
+            "value": "Brookhaven"
+          },
+          {
+            "value": "Brookville"
+          },
+          {
+            "value": "Broomall"
+          },
+          {
+            "value": "Bryn Mawr"
+          },
+          {
+            "value": "Butler"
+          },
+          {
+            "value": "California"
+          },
+          {
+            "value": "Camp Hill"
+          },
+          {
+            "value": "Campbelltown"
+          },
+          {
+            "value": "Canonsburg"
+          },
+          {
+            "value": "Carbondale"
+          },
+          {
+            "value": "Carlisle"
+          },
+          {
+            "value": "Carnegie"
+          },
+          {
+            "value": "Carnot-Moon"
+          },
+          {
+            "value": "Carroll Valley"
+          },
+          {
+            "value": "Castle Shannon"
+          },
+          {
+            "value": "Catasauqua"
+          },
+          {
+            "value": "Chalfont"
+          },
+          {
+            "value": "Chambersburg"
+          },
+          {
+            "value": "Charleroi"
+          },
+          {
+            "value": "Chester"
+          },
+          {
+            "value": "Chesterbrook"
+          },
+          {
+            "value": "Churchville"
+          },
+          {
+            "value": "Clairton"
+          },
+          {
+            "value": "Clarion"
+          },
+          {
+            "value": "Clarks Summit"
+          },
+          {
+            "value": "Clearfield"
+          },
+          {
+            "value": "Clifton Heights"
+          },
+          {
+            "value": "Coatesville"
+          },
+          {
+            "value": "Collegeville"
+          },
+          {
+            "value": "Collingdale"
+          },
+          {
+            "value": "Colonial Park"
+          },
+          {
+            "value": "Columbia"
+          },
+          {
+            "value": "Connellsville"
+          },
+          {
+            "value": "Conshohocken"
+          },
+          {
+            "value": "Coraopolis"
+          },
+          {
+            "value": "Cornwall"
+          },
+          {
+            "value": "Corry"
+          },
+          {
+            "value": "Crafton"
+          },
+          {
+            "value": "Croydon"
+          },
+          {
+            "value": "Dallastown"
+          },
+          {
+            "value": "Danville"
+          },
+          {
+            "value": "Darby"
+          },
+          {
+            "value": "Denver"
+          },
+          {
+            "value": "Dickson City"
+          },
+          {
+            "value": "Donora"
+          },
+          {
+            "value": "Dormont"
+          },
+          {
+            "value": "Dorneyville"
+          },
+          {
+            "value": "Downingtown"
+          },
+          {
+            "value": "Doylestown"
+          },
+          {
+            "value": "Drexel Hill"
+          },
+          {
+            "value": "DuBois"
+          },
+          {
+            "value": "Dunmore"
+          },
+          {
+            "value": "Duquesne"
+          },
+          {
+            "value": "Duryea"
+          },
+          {
+            "value": "Eagleville"
+          },
+          {
+            "value": "East Petersburg"
+          },
+          {
+            "value": "East Stroudsburg"
+          },
+          {
+            "value": "East York"
+          },
+          {
+            "value": "Eastlawn Gardens"
+          },
+          {
+            "value": "Easton"
+          },
+          {
+            "value": "Economy"
+          },
+          {
+            "value": "Edinboro"
+          },
+          {
+            "value": "Edwardsville"
+          },
+          {
+            "value": "Elim"
+          },
+          {
+            "value": "Elizabethtown"
+          },
+          {
+            "value": "Ellwood City"
+          },
+          {
+            "value": "Emerald Lakes"
+          },
+          {
+            "value": "Emmaus"
+          },
+          {
+            "value": "Enola"
+          },
+          {
+            "value": "Ephrata"
+          },
+          {
+            "value": "Erie"
+          },
+          {
+            "value": "Exeter"
+          },
+          {
+            "value": "Exton"
+          },
+          {
+            "value": "Fairless Hills"
+          },
+          {
+            "value": "Farrell"
+          },
+          {
+            "value": "Fleetwood"
+          },
+          {
+            "value": "Flourtown"
+          },
+          {
+            "value": "Folcroft"
+          },
+          {
+            "value": "Folsom"
+          },
+          {
+            "value": "Forest Hills"
+          },
+          {
+            "value": "Fort Washington"
+          },
+          {
+            "value": "Forty Fort"
+          },
+          {
+            "value": "Fountain Hill"
+          },
+          {
+            "value": "Fox Chapel"
+          },
+          {
+            "value": "Frackville"
+          },
+          {
+            "value": "Franklin"
+          },
+          {
+            "value": "Franklin Park"
+          },
+          {
+            "value": "Freeland"
+          },
+          {
+            "value": "Fullerton"
+          },
+          {
+            "value": "Gettysburg"
+          },
+          {
+            "value": "Gilbertsville"
+          },
+          {
+            "value": "Glassport"
+          },
+          {
+            "value": "Glenolden"
+          },
+          {
+            "value": "Glenshaw"
+          },
+          {
+            "value": "Glenside"
+          },
+          {
+            "value": "Grantley"
+          },
+          {
+            "value": "Green Tree"
+          },
+          {
+            "value": "Greencastle"
+          },
+          {
+            "value": "Greensburg"
+          },
+          {
+            "value": "Greenville"
+          },
+          {
+            "value": "Grove City"
+          },
+          {
+            "value": "Hamburg"
+          },
+          {
+            "value": "Hanover"
+          },
+          {
+            "value": "Harleysville"
+          },
+          {
+            "value": "Harrisburg"
+          },
+          {
+            "value": "Hatboro"
+          },
+          {
+            "value": "Hatfield"
+          },
+          {
+            "value": "Hazleton"
+          },
+          {
+            "value": "Hellertown"
+          },
+          {
+            "value": "Hemlock Farms"
+          },
+          {
+            "value": "Hermitage"
+          },
+          {
+            "value": "Hershey"
+          },
+          {
+            "value": "Hollidaysburg"
+          },
+          {
+            "value": "Homeacre-Lyndora"
+          },
+          {
+            "value": "Honesdale"
+          },
+          {
+            "value": "Horsham"
+          },
+          {
+            "value": "Hummelstown"
+          },
+          {
+            "value": "Huntingdon"
+          },
+          {
+            "value": "Indian Mountain Lake"
+          },
+          {
+            "value": "Indiana"
+          },
+          {
+            "value": "Irwin"
+          },
+          {
+            "value": "Jeannette"
+          },
+          {
+            "value": "Jefferson Hills"
+          },
+          {
+            "value": "Jenkintown"
+          },
+          {
+            "value": "Jersey Shore"
+          },
+          {
+            "value": "Jessup"
+          },
+          {
+            "value": "Jim Thorpe"
+          },
+          {
+            "value": "Johnstown"
+          },
+          {
+            "value": "Kane"
+          },
+          {
+            "value": "Kenmar"
+          },
+          {
+            "value": "Kennett Square"
+          },
+          {
+            "value": "King of Prussia"
+          },
+          {
+            "value": "Kingston"
+          },
+          {
+            "value": "Kittanning"
+          },
+          {
+            "value": "Kulpsville"
+          },
+          {
+            "value": "Kutztown"
+          },
+          {
+            "value": "Kutztown University"
+          },
+          {
+            "value": "Lancaster"
+          },
+          {
+            "value": "Lansdale"
+          },
+          {
+            "value": "Lansdowne"
+          },
+          {
+            "value": "Lansford"
+          },
+          {
+            "value": "Larksville"
+          },
+          {
+            "value": "Latrobe"
+          },
+          {
+            "value": "Laureldale"
+          },
+          {
+            "value": "Lawnton"
+          },
+          {
+            "value": "Lawrence Park"
+          },
+          {
+            "value": "Lebanon"
+          },
+          {
+            "value": "Lehighton"
+          },
+          {
+            "value": "Lemoyne"
+          },
+          {
+            "value": "Leola"
+          },
+          {
+            "value": "Level Green"
+          },
+          {
+            "value": "Levittown"
+          },
+          {
+            "value": "Lewisburg"
+          },
+          {
+            "value": "Lewistown"
+          },
+          {
+            "value": "Linglestown"
+          },
+          {
+            "value": "Lionville"
+          },
+          {
+            "value": "Lititz"
+          },
+          {
+            "value": "Littlestown"
+          },
+          {
+            "value": "Lock Haven"
+          },
+          {
+            "value": "Lorane"
+          },
+          {
+            "value": "Lower Allen"
+          },
+          {
+            "value": "Lower Burrell"
+          },
+          {
+            "value": "Loyalhanna"
+          },
+          {
+            "value": "Mahanoy City"
+          },
+          {
+            "value": "Malvern"
+          },
+          {
+            "value": "Manheim"
+          },
+          {
+            "value": "Manor"
+          },
+          {
+            "value": "Maple Glen"
+          },
+          {
+            "value": "Marienville"
+          },
+          {
+            "value": "Maytown"
+          },
+          {
+            "value": "McKees Rocks"
+          },
+          {
+            "value": "McKeesport"
+          },
+          {
+            "value": "McMurray"
+          },
+          {
+            "value": "Meadville"
+          },
+          {
+            "value": "Mechanicsburg"
+          },
+          {
+            "value": "Media"
+          },
+          {
+            "value": "Meridian"
+          },
+          {
+            "value": "Middletown"
+          },
+          {
+            "value": "Mifflinburg"
+          },
+          {
+            "value": "Millersville"
+          },
+          {
+            "value": "Millvale"
+          },
+          {
+            "value": "Milton"
+          },
+          {
+            "value": "Minersville"
+          },
+          {
+            "value": "Monaca"
+          },
+          {
+            "value": "Monessen"
+          },
+          {
+            "value": "Monongahela"
+          },
+          {
+            "value": "Monroeville"
+          },
+          {
+            "value": "Montgomeryville"
+          },
+          {
+            "value": "Montoursville"
+          },
+          {
+            "value": "Moosic"
+          },
+          {
+            "value": "Morrisville"
+          },
+          {
+            "value": "Mount Carmel"
+          },
+          {
+            "value": "Mount Joy"
+          },
+          {
+            "value": "Mount Pleasant"
+          },
+          {
+            "value": "Mountain Top"
+          },
+          {
+            "value": "Munhall"
+          },
+          {
+            "value": "Murrysville"
+          },
+          {
+            "value": "Nanticoke"
+          },
+          {
+            "value": "Narberth"
+          },
+          {
+            "value": "Nazareth"
+          },
+          {
+            "value": "New Brighton"
+          },
+          {
+            "value": "New Castle"
+          },
+          {
+            "value": "New Cumberland"
+          },
+          {
+            "value": "New Freedom"
+          },
+          {
+            "value": "New Holland"
+          },
+          {
+            "value": "New Kensington"
+          },
+          {
+            "value": "Newtown Grant"
+          },
+          {
+            "value": "Norristown"
+          },
+          {
+            "value": "North Braddock"
+          },
+          {
+            "value": "North East"
+          },
+          {
+            "value": "Northampton"
+          },
+          {
+            "value": "Northern Cambria"
+          },
+          {
+            "value": "Northumberland"
+          },
+          {
+            "value": "Northwest Harborcreek"
+          },
+          {
+            "value": "Norwood"
+          },
+          {
+            "value": "Oakmont"
+          },
+          {
+            "value": "Oil City"
+          },
+          {
+            "value": "Old Forge"
+          },
+          {
+            "value": "Olyphant"
+          },
+          {
+            "value": "Oreland"
+          },
+          {
+            "value": "Oxford"
+          },
+          {
+            "value": "Palmer Heights"
+          },
+          {
+            "value": "Palmerton"
+          },
+          {
+            "value": "Palmyra"
+          },
+          {
+            "value": "Paoli"
+          },
+          {
+            "value": "Park Forest Village"
+          },
+          {
+            "value": "Parkesburg"
+          },
+          {
+            "value": "Parkville"
+          },
+          {
+            "value": "Paxtonia"
+          },
+          {
+            "value": "Pen Argyl"
+          },
+          {
+            "value": "Penn Estates"
+          },
+          {
+            "value": "Penn Wynne"
+          },
+          {
+            "value": "Pennsburg"
+          },
+          {
+            "value": "Pennside"
+          },
+          {
+            "value": "Perkasie"
+          },
+          {
+            "value": "Philadelphia"
+          },
+          {
+            "value": "Phoenixville"
+          },
+          {
+            "value": "Pittsburgh"
+          },
+          {
+            "value": "Pittston"
+          },
+          {
+            "value": "Plains"
+          },
+          {
+            "value": "Pleasant Hills"
+          },
+          {
+            "value": "Plum"
+          },
+          {
+            "value": "Plymouth"
+          },
+          {
+            "value": "Plymouth Meeting"
+          },
+          {
+            "value": "Pocono Woodland Lakes"
+          },
+          {
+            "value": "Port Vue"
+          },
+          {
+            "value": "Pottsgrove"
+          },
+          {
+            "value": "Pottstown"
+          },
+          {
+            "value": "Pottsville"
+          },
+          {
+            "value": "Progress"
+          },
+          {
+            "value": "Prospect Park"
+          },
+          {
+            "value": "Punxsutawney"
+          },
+          {
+            "value": "Quakertown"
+          },
+          {
+            "value": "Reading"
+          },
+          {
+            "value": "Red Lion"
+          },
+          {
+            "value": "Reiffton"
+          },
+          {
+            "value": "Richboro"
+          },
+          {
+            "value": "Ridgway"
+          },
+          {
+            "value": "Ridley Park"
+          },
+          {
+            "value": "Rochester"
+          },
+          {
+            "value": "Royersford"
+          },
+          {
+            "value": "Rutherford"
+          },
+          {
+            "value": "Sanatoga"
+          },
+          {
+            "value": "Saw Creek"
+          },
+          {
+            "value": "Sayre"
+          },
+          {
+            "value": "Schlusser"
+          },
+          {
+            "value": "Schnecksville"
+          },
+          {
+            "value": "Schuylkill Haven"
+          },
+          {
+            "value": "Scottdale"
+          },
+          {
+            "value": "Scranton"
+          },
+          {
+            "value": "Selinsgrove"
+          },
+          {
+            "value": "Sellersville"
+          },
+          {
+            "value": "Sewickley"
+          },
+          {
+            "value": "Shamokin"
+          },
+          {
+            "value": "Shanor-Northvue"
+          },
+          {
+            "value": "Sharon"
+          },
+          {
+            "value": "Sharon Hill"
+          },
+          {
+            "value": "Sharpsville"
+          },
+          {
+            "value": "Shenandoah"
+          },
+          {
+            "value": "Shillington"
+          },
+          {
+            "value": "Shiloh"
+          },
+          {
+            "value": "Shippensburg"
+          },
+          {
+            "value": "Shrewsbury"
+          },
+          {
+            "value": "Sierra View"
+          },
+          {
+            "value": "Sinking Spring"
+          },
+          {
+            "value": "Skippack"
+          },
+          {
+            "value": "Skyline View"
+          },
+          {
+            "value": "Slatington"
+          },
+          {
+            "value": "Slippery Rock"
+          },
+          {
+            "value": "Somerset"
+          },
+          {
+            "value": "Souderton"
+          },
+          {
+            "value": "South Park Township"
+          },
+          {
+            "value": "South Williamsport"
+          },
+          {
+            "value": "Spring House"
+          },
+          {
+            "value": "Spry"
+          },
+          {
+            "value": "St Marys"
+          },
+          {
+            "value": "State College"
+          },
+          {
+            "value": "Steelton"
+          },
+          {
+            "value": "Stowe"
+          },
+          {
+            "value": "Stroudsburg"
+          },
+          {
+            "value": "Sugarcreek"
+          },
+          {
+            "value": "Sunbury"
+          },
+          {
+            "value": "Swarthmore"
+          },
+          {
+            "value": "Swissvale"
+          },
+          {
+            "value": "Swoyersville"
+          },
+          {
+            "value": "Tamaqua"
+          },
+          {
+            "value": "Tarentum"
+          },
+          {
+            "value": "Taylor"
+          },
+          {
+            "value": "Telford"
+          },
+          {
+            "value": "Thompsonville"
+          },
+          {
+            "value": "Thorndale"
+          },
+          {
+            "value": "Throop"
+          },
+          {
+            "value": "Titusville"
+          },
+          {
+            "value": "Trappe"
+          },
+          {
+            "value": "Treasure Lake"
+          },
+          {
+            "value": "Trevose"
+          },
+          {
+            "value": "Trooper"
+          },
+          {
+            "value": "Turtle Creek"
+          },
+          {
+            "value": "Tyrone"
+          },
+          {
+            "value": "Uniontown"
+          },
+          {
+            "value": "Upland"
+          },
+          {
+            "value": "Upper St Clair"
+          },
+          {
+            "value": "Valley Green"
+          },
+          {
+            "value": "Vandergrift"
+          },
+          {
+            "value": "Village Green-Green Ridge"
+          },
+          {
+            "value": "Village Shires"
+          },
+          {
+            "value": "Warminster Heights"
+          },
+          {
+            "value": "Warren"
+          },
+          {
+            "value": "Washington"
+          },
+          {
+            "value": "Waynesboro"
+          },
+          {
+            "value": "Waynesburg"
+          },
+          {
+            "value": "Weigelstown"
+          },
+          {
+            "value": "Wescosville"
+          },
+          {
+            "value": "West Chester"
+          },
+          {
+            "value": "West Hazleton"
+          },
+          {
+            "value": "West Mifflin"
+          },
+          {
+            "value": "West Pittston"
+          },
+          {
+            "value": "West Reading"
+          },
+          {
+            "value": "West View"
+          },
+          {
+            "value": "West York"
+          },
+          {
+            "value": "Westmont"
+          },
+          {
+            "value": "White Oak"
+          },
+          {
+            "value": "Whitehall"
+          },
+          {
+            "value": "Whitfield"
+          },
+          {
+            "value": "Wilkes-Barre"
+          },
+          {
+            "value": "Wilkinsburg"
+          },
+          {
+            "value": "Williamsport"
+          },
+          {
+            "value": "Willow Grove"
+          },
+          {
+            "value": "Willow Street"
+          },
+          {
+            "value": "Wilson"
+          },
+          {
+            "value": "Windber"
+          },
+          {
+            "value": "Woodbourne"
+          },
+          {
+            "value": "Woodlyn"
+          },
+          {
+            "value": "Wyndmoor"
+          },
+          {
+            "value": "Wyomissing"
+          },
+          {
+            "value": "Yeadon"
+          },
+          {
+            "value": "York"
+          },
+          {
+            "value": "Zelienople"
+          }
+        ]
+      },
+      {
+        "version": "mvqE",
+        "name": "SERVICE_BENEFIT",
+        "valueSelectionStrategy": "ORIGINAL_VALUE",
+        "enumerationValues": [
+          {
+            "value": "30-day supply at a network retail pharmacy",
+            "synonyms": [
+              "30-day supply at a network retail pharmacy",
+              "30 day"
+            ]
+          },
+          {
+            "value": "ACA Preventive Drugs"
+          },
+          {
+            "value": "Acupuncture",
+            "synonyms": [
+              "Acupuncture",
+              "Acupuncture",
+              "Acupuncture Services"
+            ]
+          },
+          {
+            "value": "Adv. Imaging (MRI/MRA,CT/CTA Scan, PET Scan)",
+            "synonyms": [
+              "Adv. Imaging (MRI/MRA,CT/CTA Scan, PET Scan)",
+              "Breast MRI Accreditation Program (BMRAP)",
+              "Breast Ultrasound (BUAP)",
+              "cat scan",
+              "CT Scan",
+              "Free Standing Imaging Center",
+              "Imaging",
+              "Imaging Center",
+              "Imaging Facility",
+              "Mammography (MAP)",
+              "mra",
+              "MRI",
+              "MRI Center",
+              "PET Scan",
+              "Ultrasound Accreditation Program",
+              "Ultrasound Technologist",
+              "Ultrasound Technology"
+            ]
+          },
+          {
+            "value": "Air"
+          },
+          {
+            "value": "All other drugs"
+          },
+          {
+            "value": "Ambulance",
+            "synonyms": [
+              "Ambulance",
+              "Ambulance",
+              "Ambulance - Emergency Land",
+              "Ambulance - Water Craft",
+              "Ambulance Group",
+              "Ground Ambulance"
+            ]
+          },
+          {
+            "value": "Ambulance (Non-Emergency)",
+            "synonyms": [
+              "Ambulance (Non-Emergency)",
+              "Adult Day Transportation",
+              "Ambulance - Air Transportation",
+              "Ambulance/Transportation Services",
+              "ECF Community Transportation",
+              "Medical Transport Services",
+              "Non-Acute/Non-Medical Transportation",
+              "Transportation",
+              "Transportation Vendor"
+            ]
+          },
+          {
+            "value": "Annual Allowance"
+          },
+          {
+            "value": "Annual Maximum"
+          },
+          {
+            "value": "Annual Plan Maximum"
+          },
+          {
+            "value": "Basic Services"
+          },
+          {
+            "value": "Benefit Frequency"
+          },
+          {
+            "value": "Biologicals, Investigational/Experimental Drugs",
+            "synonyms": [
+              "Biologicals, Investigational/Experimental Drugs",
+              "Biologicals",
+              "Experimental Drugs",
+              "Investigational Drugs"
+            ]
+          },
+          {
+            "value": "Bitewing X-rays"
+          },
+          {
+            "value": "Blood, Blood Plasma",
+            "synonyms": [
+              "Blood, Blood Plasma",
+              "Blood",
+              "Blood Plasma"
+            ]
+          },
+          {
+            "value": "Diabetic Supplies (i.e., test strips)",
+            "synonyms": [
+              "Diabetic Supplies (i.e., test strips)",
+              "test strips"
+            ]
+          },
+          {
+            "value": "Diabetic Supplies and Monitors",
+            "synonyms": [
+              "Diabetic Supplies and Monitors",
+              "Supplies and Monitors"
+            ]
+          },
+          {
+            "value": "Diagnostic & Preventive Services",
+            "synonyms": [
+              "Diagnostic & Preventive Services",
+              "allergy testing",
+              "antibody testing",
+              "Blood Pressure Screening",
+              "Bone Density",
+              "covid test",
+              "covid testing",
+              "covid19 test",
+              "covid19 testing",
+              "Diabetes Screening",
+              "Diagnostic & Treatment Center",
+              "Diagnostic Center",
+              "Diagnostic Laboratory",
+              "Diagnostic Laboratory Immunology",
+              "Diagnostic Medical Physics",
+              "Diagnostic Services",
+              "Diagnostic Testing",
+              "Diagnostic Ultrasound",
+              "ecg",
+              "eeg",
+              "Electrodiagnostic Medicine Clinic",
+              "endoscopy",
+              "genetic exam",
+              "genetic testing and counseling",
+              "Independent Diagnostic Testing Facility",
+              "Independent Diagnostic Testing Facility (IDTF)",
+              "Neurodiagnostic Services",
+              "Services",
+              "Sleep Disorder Diagnostics Group",
+              "sleep studies",
+              "ultrasound",
+              "Ultrasound - Breast",
+              "Ultrasound - Echocardiography",
+              "Ultrasound - General",
+              "Ultrasound - Vascular",
+              "Ultrasound (UAP)",
+              "VFCA Diagnostic"
+            ]
+          },
+          {
+            "value": "Diagnostic Medical (EKG)",
+            "synonyms": [
+              "Diagnostic Medical (EKG)",
+              "EKG"
+            ]
+          },
+          {
+            "value": "Diagnostic Procedures",
+            "synonyms": [
+              "Diagnostic Procedures",
+              "Outpatient Lab and Pathology"
+            ]
+          },
+          {
+            "value": "Dialysis",
+            "synonyms": [
+              "Dialysis",
+              "Dialysis",
+              "Dialysis Center",
+              "Dialysis Clinic",
+              "Dialysis Services",
+              "Dialysis/Renal Care-Medicare",
+              "Hospital Based Renal Dialysis",
+              "Kidney Dialysis"
+            ]
+          },
+          {
+            "value": "Dispense as Written (DAW) Provision"
+          },
+          {
+            "value": "Dispensing Limits"
+          },
+          {
+            "value": "Drugs used for Cosmetic Purposes"
+          },
+          {
+            "value": "Durable Medical Equipment (DME)",
+            "synonyms": [
+              "Durable Medical Equipment (DME)",
+              "Adaptive Medical Equipment",
+              "Assistive Technology",
+              "Assistive Technology Services",
+              "Batteries",
+              "BiPAP",
+              "Bone Growth Stimulator",
+              "brace",
+              "Bras (Mastectomy & Lymphedema)",
+              "Breast Prosthetics",
+              "breast pump",
+              "Breast Pumps & Accessories",
+              "cane",
+              "canes",
+              "cervical collar",
+              "Conserving Devices",
+              "Continuous Passive Motion (CPM) Devices",
+              "CPAP",
+              "cpap supplies",
+              "CPAP/BiPAP/DPAP",
+              "crutch",
+              "crutches",
+              "Customized Equipment",
+              "Diabetic Shoes & Inserts",
+              "DME",
+              "DME & Supplies",
+              "DME & Supplies Group",
+              "DME Technology",
+              "DME Training in Usage, Repair & Modification",
+              "DME, Orthotics & Prosthetics",
+              "DPAP",
+              "Durable Medical Equipment & Medical Supplies Supplier",
+              "Durable Medical Equipment & Supplies",
+              "ECF Assistive Technology, Adaptive Equipment & Supplies",
+              "Environmental Aids & Assistive Adaptive Technology",
+              "Garments (Lymphedema)",
+              "HELiOS",
+              "helmet therapy",
+              "Home Infusion",
+              "Home Infusion Pharmacy",
+              "Home Infusion Services",
+              "Home Infusion Therapy",
+              "Home Infusion Therapy Group",
+              "Home Infusion/IV Therapy",
+              "Home IV Infusion",
+              "Home Medical Equipment (HME)",
+              "Hospital - Infusion Therapy",
+              "hospital bed",
+              "Infusion Center",
+              "Infusion Therapy",
+              "Insulin Pumps",
+              "IV Therapy - Infusion Therapy",
+              "Lymphedema Pump",
+              "Mail Order Durable Medical Equipment",
+              "Mail Order Supplies",
+              "Mattresses",
+              "Mattresses (Therapeutic)",
+              "Medical Equipment & Supplies",
+              "Medical Supply - Insulin Pumps",
+              "Medical Supply - Medical Foods",
+              "Medical Supply - Soft Goods",
+              "mobility chair",
+              "Monitors (Apnea)",
+              "Nebulizer",
+              "Optical Dispensers",
+              "Orthotics",
+              "Orthotics & Prosthetics",
+              "Orthotics & Prosthetics Group",
+              "ostomy supplies",
+              "Oximeter",
+              "Oxygen Concentrator",
+              "Pediatric Products",
+              "Post-Surgical Pain-Reducing Pumps",
+              "Prosthetic & Orthotic",
+              "Prosthetics",
+              "Prosthetics and Orthotics",
+              "Respiratory Equipment",
+              "Specialized Medical Equipment & Supplies",
+              "Suction Pumps",
+              "TENS Unit",
+              "traction equipment",
+              "Vents for the Home",
+              "walker",
+              "wheel chair",
+              "wheelchair",
+              "Wheelchairs (Parts/Repairs)",
+              "Wheelchairs (Specialty)",
+              "Wheelchairs (Standard)",
+              "Wigs"
+            ]
+          },
+          {
+            "value": "Emergency Care"
+          },
+          {
+            "value": "Emergency Room",
+            "synonyms": [
+              "Emergency Room",
+              "Allopathic & Osteopathic Physicians/Emergency Medicine",
+              "Complex Trauma",
+              "Emergency Medical Services",
+              "Emergency Medicine",
+              "Emergency Medicine - Hospital-Based",
+              "Emergency Response Systems",
+              "Emergency Room Physician",
+              "ER",
+              "Free Standing Emergency Room",
+              "Freestanding Emergency Department",
+              "Freestanding Emergency Room",
+              "Pediatric Emergency Medicine",
+              "Personal Emergency Response System (PERS)",
+              "Trauma & Critical Care",
+              "Trauma Center"
+            ]
+          },
+          {
+            "value": "Endodontics",
+            "synonyms": [
+              "Endodontics",
+              "Endodontics",
+              "Endodontist"
+            ]
+          },
+          {
+            "value": "Facility"
+          },
+          {
+            "value": "Fillings",
+            "synonyms": [
+              "Fillings",
+              "Basic Restorative (Fillings)"
+            ]
+          },
+          {
+            "value": "Fluoride Treatments",
+            "synonyms": [
+              "Fluoride Treatments",
+              "Floride"
+            ]
+          },
+          {
+            "value": "Formulary"
+          },
+          {
+            "value": "Frames",
+            "synonyms": [
+              "Frames",
+              "Davis Collection Designer Frames"
+            ]
+          },
+          {
+            "value": "Freestanding"
+          },
+          {
+            "value": "Generic Drugs",
+            "synonyms": [
+              "Generic Drugs",
+              "Generic"
+            ]
+          },
+          {
+            "value": "Generic Tier Drugs",
+            "synonyms": [
+              "Generic Tier Drugs",
+              "Generic Tier"
+            ]
+          },
+          {
+            "value": "Generics (including brand drugs treated as generic)"
+          },
+          {
+            "value": "Glucometers, Glucose Meter",
+            "synonyms": [
+              "Glucometers, Glucose Meter",
+              "Glucometers"
+            ]
+          },
+          {
+            "value": "Ground"
+          },
+          {
+            "value": "Hearing Aids Fitting and Evaluation",
+            "synonyms": [
+              "Hearing Aids Fitting and Evaluation",
+              "Hearing Aid Supplier"
+            ]
+          },
+          {
+            "value": "Home Health",
+            "synonyms": [
+              "Home Health",
+              "ADHD",
+              "Adult Day Health Care",
+              "Adult Day Health Care Center",
+              "Adult Day Health Services",
+              "Adult Day Health Services - Medical",
+              "Ancillary Pre-Natal Care",
+              "Assisted Living Facility",
+              "Assisted Living Residence",
+              "Assistive Services",
+              "Certified Home Agency",
+              "Day Habilitation",
+              "ECF Minor Home Modifications",
+              "ECF Personal Assistance",
+              "ECF Supportive Home Care",
+              "Family Caregiver Stipend",
+              "Habilitation",
+              "Habilitative Services",
+              "HCBS/Personal Care-Ind",
+              "HCBS/Supportive Home Care",
+              "Home Care Services",
+              "Home Care Services Support Agency",
+              "Home Health & Hospice",
+              "Home Health Agency",
+              "Home Health Aide",
+              "Home Health Care",
+              "Home Health Care Facility",
+              "Home Health High Risk Obstetric Care",
+              "Home Health Leader",
+              "Home Health Services",
+              "Home IV Therapy",
+              "Home Modification",
+              "Home Modifications Contractor",
+              "Home Modifications/Repair",
+              "Home Sleep Testing",
+              "Homelessness",
+              "Homemaker Services",
+              "Independent Living",
+              "In-Home Parenteral Hyperalimenta",
+              "In-Home Respite",
+              "Intensive Psychiatric Community Home I/DD (IPCH)",
+              "Licensed Home Care Agency",
+              "Monitoring Services",
+              "Monitors (Home INR Anti-Coagulation)",
+              "Non-Institutional Home Health",
+              "Personal Assistance Services",
+              "Personal Care",
+              "Personal Care Agency",
+              "Personal Care Attendant Services",
+              "Personal Care I",
+              "Personal Care II",
+              "Personal Care Management",
+              "Personal Care Management Agency",
+              "Personal Care Services",
+              "Pest Control",
+              "Primary Care Medical Home",
+              "Residential Care/Assisted Living",
+              "Residential Personal Care II",
+              "SNF Swing Bed",
+              "Special Skills Home I/DD (SSH)",
+              "Structured/Supported Day Services"
+            ]
+          },
+          {
+            "value": "Hospice",
+            "synonyms": [
+              "Hospice",
+              "Home Hospice Care",
+              "Hospice & Palliative Medicine",
+              "Hospice Ancillary Facility",
+              "Hospice Care - Outpatient",
+              "Hospice Facility"
+            ]
+          },
+          {
+            "value": "Hospital Based"
+          },
+          {
+            "value": "Initial Coverage Limit",
+            "synonyms": [
+              "Initial Coverage Limit",
+              "Initial Coverage"
+            ]
+          },
+          {
+            "value": "Injectable Fertility Drugs"
+          },
+          {
+            "value": "Injections",
+            "synonyms": [
+              "Injections",
+              "Allergy Serum",
+              "covid",
+              "covid 19",
+              "covid vaccine",
+              "covid19",
+              "covid19 shot",
+              "covid19 vaccine",
+              "flu shot",
+              "flu vaccine",
+              "Immunization",
+              "Injectables",
+              "shingles shot",
+              "shingles vaccine",
+              "TDAP shot",
+              "TDAP vaccine",
+              "tetanus shot",
+              "tetanus vaccine",
+              "Vaccine"
+            ]
+          },
+          {
+            "value": "Inpatient Hospital Services",
+            "synonyms": [
+              "Inpatient Hospital Services",
+              "Blood Bank",
+              "Blood Banking",
+              "Blood Banking & Transfusion Medicine",
+              "Blood Products Supplier"
+            ]
+          },
+          {
+            "value": "Inpatient Professional Services (includes Maternity)",
+            "synonyms": [
+              "Inpatient Professional Services (includes Maternity)",
+              " bariatric surgery",
+              "Beds (Bariatric/Hospital)",
+              "Chemical Dependency Hospital",
+              "childbirth",
+              "General Acute Care Hospital",
+              "Hospital - Tertiary",
+              "Hospital Detox/Rehab Hospital/Unit",
+              "Hospital SubUnit - SPU",
+              "Hospital-Based",
+              "Inpatient Chemical Dependency Treatment Center",
+              "Inpatient Hospital Services",
+              "Inpatient Services",
+              "Maternal Infant Health Program",
+              "Maternity",
+              "Operating Room Technician",
+              "Organ Transplant Center",
+              "Organ Transplant Center - Bone Marrow",
+              "Organ Transplant Center - Cornea",
+              "Organ Transplant Center - Heart",
+              "Organ Transplant Center - Heart/Lung",
+              "Organ Transplant Center - Intestine",
+              "Organ Transplant Center - Kidney",
+              "Organ Transplant Center - Liver",
+              "Organ Transplant Center - Lung",
+              "Organ Transplant Center - Pancreas",
+              "Organ Transplant Facility",
+              "Pregnancy",
+              "Short Procedure Unit (SPU)",
+              "Tracheotomy Care",
+              "Transplant Facility",
+              "Transplant Hepatology"
+            ]
+          },
+          {
+            "value": "Insulin"
+          },
+          {
+            "value": "Insulin Needles and Syringes"
+          },
+          {
+            "value": "Insulin Pump"
+          },
+          {
+            "value": "Insurance"
+          },
+          {
+            "value": "Lancets"
+          },
+          {
+            "value": "Lens and Coatings Options",
+            "synonyms": [
+              "Lens and Coatings Options",
+              "Anti-Reflective Premium Lenses",
+              "Anti-Reflective Standard Lenses",
+              "Anti-Reflective Ultimate Lenses",
+              "Anti-Reflective Ultra Lenses",
+              "Bifocal Lenses",
+              "Blue Light Lenses",
+              "Coating Options",
+              "Coatings",
+              "Eyewear",
+              "High-Index 1.74 Lenses",
+              "High-Index Lenses",
+              "Lens Coatings",
+              "Lens Options",
+              "Lens,Lenses",
+              "Lenses (1 pair/every 2 years)",
+              "Lenticular Lenses",
+              "Photosensitive Lenses",
+              "Photosensitive Lenses - Multifocal Vision",
+              "Photosensitive Lenses - Single Vision",
+              "Polarized Lenses",
+              "Polish",
+              "Polycarbonate Lenses",
+              "Polycarbonate Lenses - Multifocal Vision",
+              "Polycarbonate Lenses - Single Vision",
+              "Preferred Provider",
+              "Premium Progressive Lenses",
+              "Progressive",
+              "Scratch-Protection Plan Multifocal Vision Lenses",
+              "Scratch-Protection Plan Single Vision Lenses",
+              "Scratch-Resistant Coating Multifocal Lenses",
+              "Scratch-Resistant Coating Single-Vision Lenses",
+              "Scratch-Resistant Lenses",
+              "Single Vision Lenses",
+              "Standard Progressive Lenses",
+              "Standard Provider",
+              "Tinted Plastic Lenses",
+              "Tints",
+              "Transition",
+              "Trifocal Lenses",
+              "Ultimate Progressive Lenses",
+              "Ultra Progressive Lenses",
+              "UV-Coated Lenses"
+            ]
+          },
+          {
+            "value": "Lifetime Maximum"
+          },
+          {
+            "value": "Liquid and Gas Oxygen",
+            "synonyms": [
+              "Liquid and Gas Oxygen",
+              "O2",
+              "Oxygen"
+            ]
+          },
+          {
+            "value": "Major Services"
+          },
+          {
+            "value": "Mandatory Mail for Maintenance Drugs"
+          },
+          {
+            "value": "Maternity Hospital Services"
+          },
+          {
+            "value": "Medicare Covered Hearing Exams"
+          },
+          {
+            "value": "Medicare Covered Podiatry"
+          },
+          {
+            "value": "Members must select a Primary Dental Office (PDO)"
+          },
+          {
+            "value": "Mental Health",
+            "synonyms": [
+              "Mental Health",
+              "24-Hour Psychiatric Residential Treatment Center - Adult",
+              "24-Hour Psychiatric Residential Treatment Center - Child",
+              "ABA Therapy Psychology",
+              "Acupuncture Detoxification Treatment",
+              "Acute Mental Health/Psychiatric Partial Hospitalization",
+              "Acute Treatment Services (ATS) for Substance Use Disorders - Level 3.7",
+              "Addiction Counselor",
+              "Addiction Drug Counselor",
+              "Addiction Medicine",
+              "Addiction Psychiatry",
+              "Addiction Treatment",
+              "ADHD/ODD",
+              "Administratively Necessary Day (AND)",
+              "Adolescent Psychiatry",
+              "Adoption",
+              "Adult & Adolescent Psychiatry",
+              "Adult & Adolescent Psychology",
+              "Adult Mental Health Rehabilitation (AMHR)",
+              "Adult Psychiatry",
+              "Adult Psychology",
+              "Agency After School Respite Care (FSS)",
+              "Agency Hired Respite Care (FSS)",
+              "Agency Weekend Recreation Respite Care (FSS)",
+              "Alcohol & Drug Counselor",
+              "Alcohol & Substance Abuse",
+              "Alcohol Rehabilitation",
+              "Alcohol/Chemical Dependency",
+              "Alcohol/Substance Abuse Center",
+              "Alzheimer/Dementia Habilitation Therapy",
+              "Ambulatory Services/Partial Care",
+              "Ambulatory Withdrawal Management with Extended On-site Monitoring/Ambulatory Detoxification ASAM 2 - WM",
+              "Anger Issues",
+              "Anxiety",
+              "Anxiety Disorders/Phobias",
+              "Applied Behavior Analysis (ABA)",
+              "Applied Behavior Analysis (ABA) Services",
+              "Applied Behavior Analyst",
+              "Approved Autism Evaluation Center",
+              "ARC-GROW IIC",
+              "Art Therapy",
+              "Assertive Community Treatment",
+              "Assistant Behavior Analyst",
+              "Assistant Behavior Analyst (Autism Spectrum)",
+              "Assistive Devices (FSS)",
+              "Athletic Training",
+              "Attendant Care",
+              "Attention Deficit Hyperactivity Disorder - ADHD",
+              "Autism & ADD",
+              "Autism & ADD Center",
+              "Autism Behavior Interventionist",
+              "Autism Spectrum",
+              "Autism Spectrum Disorder",
+              "Autism/Developmental Disorders",
+              "Behavior Analyst",
+              "Behavior Modification",
+              "Behavior Technician",
+              "Behavioral Counseling",
+              "Behavioral Health",
+              "Behavioral Health - Inpatient",
+              "Behavioral Health - Outpatient",
+              "Behavioral Health - Sub Acute",
+              "Behavioral Health Counseling",
+              "Behavioral Health Inpatient Services",
+              "Behavioral Health Rehab Agency",
+              "Behavioral Medicine",
+              "Behavioral Services",
+              "Behavioral Therapy",
+              "Behavioral Therapy for Autism",
+              "Behavioral Treatment Licensed Supervisor",
+              "BH Crisis Intervention Services",
+              "BH Crisis Respite Services - Adult",
+              "BH Crisis Respite Services - Child",
+              "BH Crisis Services - Mobile - Adult",
+              "BH Crisis Services - Mobile - Child",
+              "BH Crisis Stabilization Services - Adult",
+              "BH Crisis Stabilization Services - Child",
+              "BH IDD Crisis Prevention/Intervention/Stabilization",
+              "BH Rehab Provider Agency",
+              "BH Rehab Service Agency",
+              "BH Residential Treatment Center",
+              "Biofeedback",
+              "BioPsychoSocial (BPS) Assessment",
+              "Bipolar Disorder",
+              "Bi-Polar Disorder",
+              "Board Cert Assist Behav Analys",
+              "Board Certified Behavioral Analyst",
+              "Buprenorphine Prescriber",
+              "Cardiac Rehabilitation Facility",
+              "Care Transitional Assistance",
+              "CD/SUD Agencies",
+              "Certified Addiction Counselor",
+              "Certified Addiction Counselor - Adult",
+              "Certified Addiction Counselor - Child",
+              "Certified Addiction Drug Counselor",
+              "Certified Behavioral Analyst",
+              "Certified Clinical Social Worker",
+              "Certified Professional Counselor",
+              "Certified Social Emotional Learning",
+              "Certified Social Worker",
+              "Chemical Dependence Inpatient Rehabilitative Services",
+              "Chemical Dependence Outpatient (CD-OP) Clinic",
+              "Chemical Dependency",
+              "Chemical Dependency Assessment",
+              "Chemical Dependency Counseling",
+              "Chemical Dependency Counselor",
+              "Chemical Dependency Outpatient Facility",
+              "Child & Adolescent Issues",
+              "Child & Adolescent Mental Health",
+              "Child & Adolescent Psychiatry",
+              "Child & Adult Psychology",
+              "Child & Family Psychiatry",
+              "Child Psychiatry",
+              "Child Psychology",
+              "Child Residential & Day Treatment",
+              "Child Welfare",
+              "Child, Youth & Adult Psychiatry",
+              "Child, Youth & Adult Psychology",
+              "Child, Youth & Family Psychology",
+              "Children Family Treatment Support Services (CFTSS)",
+              "Children Family Treatment Support Services (CFTSS) Foster Care Only",
+              "Christian Counseling",
+              "Chronic Illness",
+              "Clinical Nurse Specialist - BH",
+              "Clinical Nurse Specialist - BH - Adult",
+              "Clinical Nurse Specialist - BH - Child",
+              "Clinical Nurse Specialist - Mental Health",
+              "Clinical Psychology",
+              "Clinical Psychotherapist (LCP)",
+              "Clinical Services",
+              "Clinical Social Work",
+              "Clinical Social Worker",
+              "Clinical Support Services (CSS) for Substance Use Disorders - Level 3.5",
+              "Clinically Managed High Intensity Residential Services (Adult)/Medium Intensity (Adolescent)",
+              "Clinically Managed High-Intensive Residential",
+              "Clinically Managed Low Intensity Residential Services",
+              "Clinically Managed Low-Intensive Residential",
+              "Clinically Managed Medium-Intensive Residential",
+              "Clinically Managed Residential Social Detox",
+              "Cognitive Behavioral Therapy (CBT)",
+              "Cognitive Therapy",
+              "Cognitive/Behavioral Therapy",
+              "Cognitively Disabled",
+              "Community Behavioral Health Center",
+              "Community Behavioral Health Services",
+              "Community Crisis Stabilization (CCS)",
+              "Community Health Workers (CHW)",
+              "Community Mental Health Agency",
+              "Community Mental Health Center",
+              "Community Mental Health Center - Child",
+              "Community Mental Health Services",
+              "Community Psychiatric Support & Treatment - Child",
+              "Community Psychiatric Support & Treatment - Foster Care",
+              "Community Psychiatric Support & Treatment (CPST)",
+              "Community Residential Services",
+              "Community Resources",
+              "Community Support Development, Organization & Navigation",
+              "Community Support Program (CSP)",
+              "Community Support Services",
+              "Community Transition Services",
+              "Community-Based Acute Treatment (CBAT) for Children and Adolescents",
+              "Community-Based Day",
+              "Companion",
+              "Comprehensive Behavioral Health Assessment",
+              "Comprehensive Inpatient Rehabilitation",
+              "Comprehensive Psychiatric Emergency Program (CPEP)",
+              "Consumer Directed Services",
+              "Continuing Day Treatment (CDT)",
+              "Co-occurring (MH/SU) Diagnosis",
+              "Co-occurring Disorders",
+              "Co-occurring MH/D&A",
+              "Co-occurring MH/ID",
+              "Counseling",
+              "Counselor",
+              "County Agency",
+              "Court-Ordered Evaluations",
+              "Court-Ordered Services",
+              "Crisis Intervention",
+              "Crisis Intervention - Child",
+              "Crisis Intervention - Foster Care",
+              "Crisis Receiving Center",
+              "Crisis Stabilization",
+              "Crisis Stabilization and Assessment Program I/DD (CSAP)",
+              "Crisis Stabilization Inpatient",
+              "Crisis Stabilization Unit",
+              "CSOC Summer Camp Services",
+              "Day Camp - Qualified",
+              "Day Services",
+              "Day Supports",
+              "Day Treatment - Mental Health and/or Substance Abuse",
+              "Day Treatment - Partial Hospitalization",
+              "Decision Making Support",
+              "Department of Mental Health and Substance Abuse Services (DMHSAS)",
+              "Depression",
+              "Depression & Mood Disorders",
+              "Detention Alternative Program (DAP)",
+              "Detoxification - Substance Use (SU)",
+              "Developmental Disabilities Psychology",
+              "Developmental Rehab",
+              "Developmental-Behavioral Pediatrics",
+              "Dialectical Behavior Therapy (DBT)",
+              "Divorce Custody Issues",
+              "Doctor of Social Work",
+              "Domestic Violence",
+              "Dual Diagnosis Acute Residential Treatment (DDART)",
+              "Early Childhood Intervention",
+              "Early Intervention Services",
+              "Early Intervention/BH Provider",
+              "Eating Disorder Facility",
+              "Eating Disorders",
+              "Eating DOS Inpatient Acute Hospital",
+              "Eating DOS Inpatient Rehab",
+              "Eating DOS Residential Treatment Center",
+              "Educational Advocacy (FSS)",
+              "Elder Issues",
+              "Elderly",
+              "Electroconvulsive Therapy (ECT)",
+              "Emergency Diagnostic Residential Unit (EDRU)",
+              "Emergency Services Program (ESP) - Adults",
+              "Emergency/Ancillary Facility",
+              "Enhanced Acute Treatment Services (EATS) for Substance Use Disorders",
+              "Environmental Modification (FSS)",
+              "EPSDT MH Wraparound",
+              "Evaluation & Treatment Centers",
+              "Evaluation & Treatment Services",
+              "Extended Acute Psych Facility",
+              "Facility-Based Day",
+              "Faith-Based Counseling",
+              "Faith-Based/Spiritual",
+              "Family Functional Therapy - Foster Care (FFT-FC)",
+              "Family Functional Therapy (FFT)",
+              "Family Peer Support - Child",
+              "Family Peer Support - Foster Care",
+              "Family Support & Training (FST)",
+              "Family Support Organization (FSO)",
+              "Family Therapy",
+              "Family/Couple Therapy",
+              "Family-Based Mental Health Services",
+              "Focused Treatment Licensed Supervisor",
+              "Freestanding Psychiatric Hospital for Adults",
+              "Freestanding Psychiatric Hospital for Children",
+              "Functional Family Therapy",
+              "Gay/Lesbian/Bisexual/Transgender",
+              "gender counseling",
+              "Gender Dysphoria",
+              "Gender Identity Disorder",
+              "General Behavioral Health",
+              "General Counseling",
+              "General Mental Health",
+              "Geriatric Behavioral Health",
+              "Geriatric Mental Health",
+              "Geriatric/Older Adults",
+              "GID",
+              "Grief",
+              "Grief & Loss",
+              "Grief/End of Life Issues",
+              "Group Home",
+              "Group Therapy",
+              "Harm Reduction Services",
+              "HCBS/Behavioral Therapy",
+              "Home & Community Based Services (HCBS)",
+              "Home Based Family Therapy (HBFT)",
+              "Home Health Choice Network",
+              "Home Rehabilitation/Skilled Nursing ",
+              "Hospital SubUnit - Psychiatric",
+              "Hypnotherapy",
+              "Independent Living Center (ILC)",
+              "Individual & Family Support",
+              "Individual Education & Training",
+              "In-Home Behavioral Services",
+              "In-Home Day",
+              "Inpatient 24-Hour Residential Substance Abuse Detox - Adult",
+              "Inpatient 24-Hour Residential Substance Abuse Detox - Child",
+              "Inpatient 24-Hour Residential Substance Abuse Treatment - Adult",
+              "Inpatient 24-Hour Residential Substance Abuse Treatment - Child",
+              "Inpatient Alcohol & Drug Detox",
+              "Inpatient Detox",
+              "Inpatient Electroconvulsive Therapy (ECT)",
+              "Inpatient Hospital",
+              "Inpatient Medical Detox/Medically Managed Inpatient Withdrawal Management (Hospital) ASAM 4 – WM",
+              "Inpatient Mental Health",
+              "Inpatient Mental Health/Substance Abuse",
+              "Inpatient Physician",
+              "Inpatient Private Psychiatric Hospital",
+              "Inpatient Psych Unit/Hospital",
+              "Inpatient Psychiatric Hospital - Adult",
+              "Inpatient Psychiatric Hospital - Child",
+              "Inpatient Psychiatric Hospital Care",
+              "Inpatient Psychiatric Hospital Free Standing",
+              "Inpatient Psychiatric Rehab",
+              "Inpatient Psychiatric Treatment Center",
+              "Inpatient Rehab Hospital",
+              "Inpatient Rehab/LTAC Hospital",
+              "Inpatient Respite Care",
+              "Inpatient Substance Abuse Facility - Adult",
+              "Inpatient Substance Abuse Facility - Child",
+              "Inpatient Substance Use Disorder Services - Level 4",
+              "Inpatient Substance Use Disorder Treatment",
+              "Institutions Mental Diseases",
+              "Integrated Care - Behavioral Health/Physical Health",
+              "Intensive Behavioral Health Services",
+              "Intensive Community Treatment",
+              "Intensive Community-Based Acute Treatment (ICBAT) for Children & Adolescents",
+              "Intensive Community-Based Treatment - Child",
+              "Intensive Family Intervention",
+              "Intensive Individual Support - AU",
+              "Intensive In-Home",
+              "Intensive Outpatient - Substance Use (SU)",
+              "Intensive Outpatient Eating DOS",
+              "Intensive Outpatient Mental Health Adult",
+              "Intensive Outpatient Mental Health Child",
+              "Intensive Outpatient Program - Mental Health and/or Substance Abuse",
+              "Intensive Outpatient Program (IOP)",
+              "Intensive Outpatient/Partial Hospitalization - Adult",
+              "Intensive Outpatient/Partial Hospitalization - Child",
+              "Intensive Psychiatric Rehabilitation Treatment (IPRT)",
+              "Intensive Residential",
+              "Intensive Residential Treatment Services (IRTS)",
+              "Intermediate Care Facility",
+              "Intermediate Unit (IU)",
+              "Involuntary Commitment - Mental Health",
+              "Justice System Services",
+              "LCMHP",
+              "LCP",
+              "Lesbian, Gay, Bisexual, Transgender (LGBTQ+) Issues",
+              "Lesbian, Gay, Bisexual, Transgender, Queer (LGBTQ+)",
+              "Lesbian, Gay, Bisexual, Transgender, Questioning, and Intersex (LGBTQI)",
+              "LGBTQ+ Friendly",
+              "Licensed Addiction Counselor",
+              "Licensed Addiction Drug Counselor",
+              "Licensed Baccalaureate Social Worker (LBSW)",
+              "Licensed Behavior Analyst (Autism Spectrum)",
+              "Licensed Clinical Addiction Counselor",
+              "Licensed Clinical Alcohol & Drug Counselor",
+              "Licensed Clinical Mental Health Professional (LCMHP)",
+              "Licensed Clinical Psychotherapist (LCP)",
+              "Licensed Clinical Social Worker",
+              "Licensed Clinical Social Worker - Adult",
+              "Licensed Clinical Social Worker - Child",
+              "Licensed Creative Art Therapist",
+              "Licensed Independent Social Worker (LISW)",
+              "Licensed Independent Substance Abuse Counselor",
+              "Licensed Marriage & Family Therapist",
+              "Licensed Marriage & Family Therapist - Adult",
+              "Licensed Marriage & Family Therapist - Child",
+              "Licensed Master Social Worker (LMSW)",
+              "Licensed Master's Level Psychologist (LMLP)",
+              "Licensed Mental Health Counselor (LMHC)",
+              "Licensed Mental Health Professional (LMHP)",
+              "Licensed Professional Clinical Counselor",
+              "Licensed Professional Counselor",
+              "Licensed Professional Counselor - Adult",
+              "Licensed Professional Counselor - Child",
+              "Licensed Psychiatric Practitioner",
+              "Licensed Psychoanalyst",
+              "Licensed Psycho-educational Specialist",
+              "Limited Licensed Psychologist",
+              "Limited Partnership",
+              "Long Term Care Residential Services SUD",
+              "Long-Term Services & Support (LTSS)",
+              "Marriage & Family Therapist",
+              "marriage counseling",
+              "Marriage Therapy",
+              "MAT Provider",
+              "MAT Provider with Navigation",
+              "Medical Illness & Therapy",
+              "Medical Illness Counseling",
+              "Medical Psychology",
+              "Medically Monitored Co-occurring",
+              "Medically Monitored Intensive Inpatient Services (Adult)/High Intensity Inpatient Services (Adolescent)",
+              "Medicare Certified Mental Health",
+              "Medication Dispensing Device",
+              "Medication Management",
+              "Medication-Assisted Treatment (MAT)",
+              "Medication-Assisted Treatment Clinic",
+              "Mental Health & Chemical Dependency",
+              "Mental Health Agency (Outpatient)",
+              "Mental Health Case Management",
+              "Mental Health Case Management - Adult",
+              "Mental Health Case Management - Child",
+              "Mental Health Clinic/Center",
+              "Mental Health Clinic/Center (Including Community Mental Health Center)",
+              "Mental Health Counseling",
+              "Mental Health Crisis Intervention",
+              "Mental Health Facility (Inpatient)",
+              "Mental Health Family-Based",
+              "Mental Health Hospital",
+              "Mental Health Inpatient",
+              "Mental Health Licensed Residential Housing",
+              "Mental Health Outpatient",
+              "Mental Health Outpatient Non-Residential - Child",
+              "Mental Health Outpatient Services",
+              "Mental Health Outpatient Services - Non-Residential",
+              "Mental Health Partial Hospitalization",
+              "Mental Health Professional (LCMHP)",
+              "Mental Health Rehab",
+              "Mental Health Rehab (legacy MHR)",
+              "Mental Health Services",
+              "Mental Health Short-Term Residential",
+              "Mental Health Skill Building",
+              "Mental Health Substance Abuse Residential Respite",
+              "Mental Health TCM",
+              "Mental Health Treats Adolescent (13-17)",
+              "Mental Health Treats Child (0-3)",
+              "Mental Health Treats Child (1-5)",
+              "Mental Health Treats Child (4-7)",
+              "Mental Health Treats Child (6-12)",
+              "Mental Health Treats Child (8-12)",
+              "Mental Health/Chemical Dependency Residential Facility",
+              "Mental Health/Substance Abuse Facility",
+              "mental illness",
+              "Mental Retardation Developmental Disabilities Waiver (MRDD)",
+              "Mental/Rehab Center",
+              "Methadone Maintenance",
+              "Methadone Maintenance Clinic",
+              "MH Acute Psych",
+              "MH Crisis Intervention",
+              "MH Non-Licensed/Non-Credentialed Service Provider",
+              "Mobile Mental Health Provider",
+              "Mobile Response & Stabilization Services (MRSS)",
+              "MSW",
+              "Multipurpose Senior Services Program (MSSP)",
+              "Multisystemic Therapy (MST)",
+              "Music Therapy",
+              "Neuropsychological Testing",
+              "Neuropsychological Testing - Adolescent",
+              "Neuropsychological Testing - Adult",
+              "Neuropsychological Testing - Child",
+              "Non Licensed BH Staff",
+              "Non-Medical Detoxification",
+              "Non-Medical Detoxification/Non-Hospital Based Withdrawal Management ASAM 3.7 - WM",
+              "Non-Medical Group Home",
+              "Nurse Practitioner - Mental Health",
+              "Observation Beds - BH",
+              "Observation/Holding Beds",
+              "Obsessive-Compulsive Disorder (OCD)",
+              "ODD",
+              "Office-Based Opioid Treatment",
+              "One-to-One Aide - Qualified",
+              "Opiate Substitution Treatment",
+              "Opioid Addiction Treatment",
+              "Opioid Clinic",
+              "Opioid Replacement Therapy",
+              "Opioid Treatment Program",
+              "Opioid Treatment Services",
+              "Opioid Treatment Services (Methadone Maintenance)",
+              "Opioid Treatment Services (Non-Methadone Maintenance)",
+              "Other Licensed Practitioner - Child",
+              "Other Licensed Practitioner - Foster Care",
+              "Outpatient - Substance Use (SU)",
+              "Outpatient Electroconvulsive Therapy",
+              "Outpatient Electroconvulsive Therapy (ECT)",
+              "Outpatient ER/PCP Services",
+              "Outpatient Medical Detox",
+              "Outpatient Mental Health Clinic",
+              "Outpatient Mental Health Hospital",
+              "Outpatient Mental Health Independent Clinic",
+              "Outpatient Mental Health Services - Day Treatment",
+              "Outpatient Mental Health/Substance Abuse",
+              "Outpatient Psychiatric Facility",
+              "Outpatient Rehabilitation Center",
+              "Outpatient Rehabilitation Facility",
+              "Outpatient Substance Abuse - Day Treatment",
+              "Outpatient Substance Abuse Clinic",
+              "Outpatient Substance Abuse Disorder",
+              "Outpatient Substance Abuse Services & Treatment",
+              "Outpatient Substance Abuse Services & Treatment - Adult",
+              "Outpatient Substance Abuse Services & Treatment - Child",
+              "Outpatient Substance Use Disorder Treatment Clinic",
+              "Overnight Camp - Qualified",
+              "Overnight Respite Care (FSS)",
+              "Panic Disorders & Phobias",
+              "Parent Training/Skills Building",
+              "Parent/Pregnant Female Services - SUD",
+              "Parent-Child Interaction Therapy",
+              "Partial Care",
+              "Partial Care (Mental Health)",
+              "Partial Care (Substance Use Disorder)",
+              "Partial Care/Hospital - Substance Use (SU-PHP)",
+              "Partial Care/Hospital (PHP)",
+              "Partial Hospitalization",
+              "Partial Hospitalization Eating DOS",
+              "Partial Hospitalization Mental Health Adult",
+              "Partial Hospitalization Mental Health Child",
+              "Pastoral Psychotherapy",
+              "Pediatric Behavior Treatment",
+              "Pediatric Behavioral Development",
+              "Pediatric Behavioral Health",
+              "Pediatric Neuropsychology",
+              "Pediatric Psychiatry",
+              "Pediatric Psychology",
+              "Pediatric Residential Treatment Facility",
+              "Peer Support",
+              "Peer Support Services",
+              "Peer Support Services - SA",
+              "Peer Support Services - Vet",
+              "Peer-To-Peer Self Directed E&CS Navigation",
+              "Permanent Housing",
+              "Personality Disorders",
+              "Personalized Recovery Oriented Services (PROS)",
+              "Physical/Occupational Therapy",
+              "Play Therapy",
+              "Pool",
+              "Postpartum Depression/Psychosis",
+              "Post-Partum Disorder",
+              "Post-Traumatic Stress Disorder",
+              "Pregnant Female Medical Assistance",
+              "Pregnant Mental Health Substance Use Disorder Services",
+              "Prescribed Medication Rehab Services",
+              "Prescribing Psychiatric Clinical Nurse Specialist",
+              "Pre-Vocational Services",
+              "Private Mental Health",
+              "Professional Counseling",
+              "Professional Counselor",
+              "Professional Early Intervention",
+              "Program of Assertive Community Treatments (PACT)",
+              "Provider/facility sees patients with behavioral health needs",
+              "Psych Hos/Art 31 Non-St OP SA",
+              "Psych Rehab",
+              "Psychiatric Community Home (PCH)",
+              "Psychiatric Day Treatment",
+              "Psychiatric DPU",
+              "Psychiatric Hospital Unit",
+              "Psychiatric Outpatient",
+              "Psychiatric Pediatric",
+              "Psychiatric Rehab - Illness Management & Recovery",
+              "Psychiatric Rehab - Peer Support Services",
+              "Psychiatric Rehab - Psychosocial",
+              "Psychiatric Rehab - Substance Abuse",
+              "Psychiatric Rehab - Supported Housing Services",
+              "Psychiatric Residential Treatment Center",
+              "Psychiatric Residential Treatment Hospital Affiliation",
+              "Psychiatric Short Term Hospital",
+              "Psychiatric Social Work",
+              "Psychiatric/Mental Health Nurse Practitioner",
+              "Psychiatry",
+              "Psychiatry & Neurology",
+              "Psychological Assistance",
+              "Psychological Counseling",
+              "Psychological Examiner",
+              "Psychological Testing",
+              "Psychological Testing - Adolescent",
+              "Psychological Testing - Adult",
+              "Psychological Testing - Child",
+              "Psychology",
+              "Psychology - All Other",
+              "Psychology - Developmental",
+              "Psychology - Non-Declared",
+              "Psychology Counseling",
+              "Psychology Intern",
+              "Psychosocial Rehab - Child",
+              "Psychosocial Rehab - Foster Care",
+              "Psychosocial Rehabilitation (PSR)",
+              "Psychosomatic Medicine",
+              "Psychotropic Injections",
+              "Public Health/Welfare Agency & Clinic",
+              "Rational Emotive BH Treatment (REBT)",
+              "Reactive Attachment Disorder/Attachment Issues",
+              "Recovery Learning Community (RLC)",
+              "Referral to Community Services",
+              "Rehabilitation & Opioid Treatment Programs (OTP)",
+              "Rehabilitation DPU",
+              "Rehabilitation Facility",
+              "Rehabilitation Medicine",
+              "relationship counseling",
+              "Residential Mental Health Treatment",
+              "Residential Psychiatric Treatment Center",
+              "Residential Rehabilitation Services for Youth (RRSY)",
+              "Residential Services",
+              "Residential Substance Abuse Treatment Center",
+              "Residential Supports",
+              "Residential Treatment - Long Term  - Substance Use (SU)",
+              "Residential Treatment - Short Term - Substance Use (SU)",
+              "Residential Treatment - Short Term - Substance Use (SU-SJI)",
+              "Residential Treatment Center",
+              "Residential Treatment Center - Co-occurring Behavioral Health/Developmental Disability I/DD",
+              "Residential Treatment Center - Co-occurring Behavioral Health/Substance Use (SU)",
+              "Residential Treatment Center (RTC)",
+              "Residential Treatment Facility",
+              "Respite Care In-Home (CRCF)",
+              "SA Licensed Residential Housing",
+              "SA Residential - Short-Term",
+              "Schizophrenia/Psychosis",
+              "School Psychologist",
+              "School Psychology",
+              "School-Based Health Programs",
+              "School-Based Mental Health Services",
+              "SED Children",
+              "Self Hired Respite Care (FSS)",
+              "Senior Psychiatric Examiner",
+              "Serious Mental Illness",
+              "Serves IDD",
+              "Service Coordinator - BCW",
+              "Service Facilitator",
+              "Severe Emotional Disturbance Waiver - Child",
+              "Sex Offender Therapy",
+              "Sexual Abuse",
+              "Sexual Disorders/Dysfunction",
+              "Sexual Physical Abuse Child & Adolescent",
+              "Short-Term Medically Manged Detoxification",
+              "Short-Term Residential Treatment",
+              "Skilled Nursing Rehabilitation Facility",
+              "Smoking Cessation",
+              "Social Innovating Finance",
+              "Social Service Agency Program",
+              "Social Work",
+              "Social Work Services",
+              "Social Worker",
+              "South Jersey Initiative (SJI)",
+              "Specialing",
+              "Specialized Consultative Training",
+              "Specialized Crisis",
+              "Specialty Services (OOH)",
+              "Structured Outpatient Addictions Program (SOAP)",
+              "Subacute/Intermediate Care",
+              "Suboxone - Comprehensive Program",
+              "Suboxone Program",
+              "Suboxone Treatment",
+              "Subs Use Res Fac 17+ beds",
+              "Substance Abuse",
+              "Substance Abuse - Both",
+              "Substance Abuse Agency (Outpatient)",
+              "Substance Abuse Care Coordination (OBOT)",
+              "Substance Abuse Center Crossover Clinic or Other Group",
+              "Substance Abuse Center Crossover Substance & Alcohol Abuse Center",
+              "Substance Abuse Contingency Management",
+              "Substance Abuse Counselor",
+              "Substance Abuse Counselor - Adult",
+              "Substance Abuse Counselor - Child",
+              "Substance Abuse Facility (Inpatient)",
+              "Substance Abuse Freestanding - Both",
+              "Substance Abuse Hospital",
+              "Substance Abuse Inpatient Medically Supervised Withdrawal",
+              "Substance Abuse Inpatient Rehab",
+              "Substance Abuse Inpatient Rehab Services",
+              "Substance Abuse Intensive Outpatient",
+              "Substance Abuse Intensive Outpatient - Adult",
+              "Substance Abuse Intensive Outpatient - Child",
+              "Substance Abuse Medically Maintained Withdrawal",
+              "Substance Abuse Medically Managed Acute Detox",
+              "Substance Abuse Methadone",
+              "Substance Abuse Outpatient",
+              "Substance Abuse Outpatient Clinical Services",
+              "Substance Abuse Outpatient Medically Supervised Withdrawal",
+              "Substance Abuse Partial Hospitalization",
+              "Substance Abuse Partial Hospitalization - Adult",
+              "Substance Abuse Partial Hospitalization - Child",
+              "Substance Abuse Rehabilitation",
+              "Substance Abuse Residential Treatment Center",
+              "Substance Abuse Targeted Case Management",
+              "Substance Abuse Treatment",
+              "Substance Abuse Treatment Center",
+              "Substance Abuse Treatment Residence",
+              "Substance Use Disorder Intensive Outpatient (IOP) ASAM 2.1",
+              "Substance Use Disorder Outpatient (OP) ASAM 1",
+              "Substance Use Disorder Partial Care (PC) ASAM 2.5",
+              "Substance Use Disorder Short Term Residential (STR) ASAM 3.7",
+              "Support Management",
+              "Telemedicine Provider - Behavioral Health",
+              "TelePsych",
+              "Texas Health Steps",
+              "The Incredible Years",
+              "Therapeutic Behavioral Program",
+              "Therapeutic Day Care - Child",
+              "Therapeutic Day Treatment",
+              "Therapeutic Education",
+              "Therapeutic Foster Care (TFC)",
+              "Therapeutic Group Home",
+              "Therapeutic Intervention - SUD",
+              "Therapeutic Mentoring Services",
+              "Therapeutic Training & Support",
+              "Therapist - Multi-Specialty Group",
+              "Therapy - Multi-Specialty Group",
+              "Transitional Care Unit (TCU)",
+              "Transitional Housing - Moms with Kids",
+              "Transitional Housing - Pregnant",
+              "Transitional Living Skills",
+              "Transportation Non-Emergency Medically Necessary",
+              "Transportation Non-Emergency Non-Medically Necessary",
+              "Trauma/Physical/Sexual Abuse Issues",
+              "Trauma-Focused Cognitive Behavioral Therapy (TF-CBT)",
+              "Treatment Home",
+              "Twelve Step Program",
+              "Urgent Care Appointments",
+              "Vehicle Modifications (FSS)",
+              "VFCA Behavioral Health (BH)",
+              "Violent Offender Services",
+              "Weight Control Center",
+              "Weight Management/Education",
+              "Withdrawal & Stabilization Services (Detoxification)",
+              "Youth Mobile Crisis Intervention",
+              "Youth Peer Support & Training - Child",
+              "Youth Peer Support & Training - Foster Care",
+              "Youth Support",
+              "Youth Support & Training"
+            ]
+          },
+          {
+            "value": "Brand Name Drugs"
+          },
+          {
+            "value": "Bridges, Dentures, Partials",
+            "synonyms": [
+              "Bridges, Dentures, Partials",
+              "Bridges",
+              "Dentures",
+              "Partials"
+            ]
+          },
+          {
+            "value": "Cardiac, Pulmonary Rehabilitation",
+            "synonyms": [
+              "Cardiac, Pulmonary Rehabilitation",
+              "Cardiac",
+              "Pulmonary Rehabilitation"
+            ]
+          },
+          {
+            "value": "Chemotherapy"
+          },
+          {
+            "value": "Chiropractic Care",
+            "synonyms": [
+              "Chiropractic Care",
+              "Spinal Manipulations"
+            ]
+          },
+          {
+            "value": "Cleanings",
+            "synonyms": [
+              "Cleanings",
+              "Cleanings"
+            ]
+          },
+          {
+            "value": "Cognitive Therapy"
+          },
+          {
+            "value": "Coinsurance"
+          },
+          {
+            "value": "Colonoscopy"
+          },
+          {
+            "value": "colorectal screening"
+          },
+          {
+            "value": "Compound Medications"
+          },
+          {
+            "value": "Contact Lenses"
+          },
+          {
+            "value": "Contraceptives",
+            "synonyms": [
+              "Contraceptives",
+              "birth control",
+              "birthcontrol",
+              "IUD"
+            ]
+          },
+          {
+            "value": "Crowns"
+          },
+          {
+            "value": "Deductible"
+          },
+          {
+            "value": "Deductible (Aggregate)"
+          },
+          {
+            "value": "Deductible (Embedded)"
+          },
+          {
+            "value": "Deductible (Individual/Family)"
+          },
+          {
+            "value": "Deductible (per child)"
+          },
+          {
+            "value": "Deductible (per person)"
+          },
+          {
+            "value": "Deductible (undefined)"
+          },
+          {
+            "value": "Dental Anesthesia"
+          },
+          {
+            "value": "Dental Restorative Services",
+            "synonyms": [
+              "Dental Restorative Services",
+              "Restorative Services"
+            ]
+          },
+          {
+            "value": "Non-Federal Legend Drugs"
+          },
+          {
+            "value": "Nutritional Counseling",
+            "synonyms": [
+              "Nutritional Counseling",
+              "Dietitian",
+              "Dietitian/Nutritional Services",
+              "Dietitian/Nutritionist",
+              "Dietitians & Nutritionists",
+              "Licensed Dietitian",
+              "Nutrition",
+              "Nutrition Services",
+              "Nutritionist",
+              "Registered Dietitian"
+            ]
+          },
+          {
+            "value": "Observation",
+            "synonyms": [
+              "Observation",
+              "Observation Services",
+              "Observation Stay"
+            ]
+          },
+          {
+            "value": "Occupational Therapy",
+            "synonyms": [
+              "Occupational Therapy",
+              "Free Standing Occupational Therapy",
+              "Occupational Medicine",
+              "Occupational Therapy Services",
+              "Pediatric Occupational Therapy",
+              "Physical/Occupational/Hand Therapy",
+              "Preventive Medicine/Occupational-Environmental Medicine"
+            ]
+          },
+          {
+            "value": "Office Visit",
+            "synonyms": [
+              "Office Visit",
+              "Doctor Visit",
+              "pediatrician",
+              "podiatrist",
+              "prenatal testing",
+              "preventive visit",
+              "std"
+            ]
+          },
+          {
+            "value": "Oral Surgery",
+            "synonyms": [
+              "Oral Surgery",
+              "Dental Surgery",
+              "Dentistry/Oral Surgery",
+              "Oral & Maxillofacial Surgeon",
+              "Oral & Maxillofacial Surgery"
+            ]
+          },
+          {
+            "value": "Orthodontics",
+            "synonyms": [
+              "Orthodontics",
+              "Cosmetic Orthodontic Services"
+            ]
+          },
+          {
+            "value": "Other Tier Drugs",
+            "synonyms": [
+              "Other Tier Drugs",
+              "Other Tier"
+            ]
+          },
+          {
+            "value": "Out-of-Pocket Maximum",
+            "synonyms": [
+              "Out-of-Pocket Maximum",
+              "MOOP"
+            ]
+          },
+          {
+            "value": "Out-of-Pocket Maximum (Aggregate)"
+          },
+          {
+            "value": "Out-of-Pocket Maximum (Embedded)"
+          },
+          {
+            "value": "Out-of-Pocket Maximum (Individual/Family)"
+          },
+          {
+            "value": "Out-of-Pocket Maximum (per child)"
+          },
+          {
+            "value": "Out-of-Pocket Maximum (per person)"
+          },
+          {
+            "value": "Out-of-Pocket Maximum (undefined)"
+          },
+          {
+            "value": "Outpatient Ambulatory Surgical Center",
+            "synonyms": [
+              "Outpatient Ambulatory Surgical Center",
+              "Bariatric Surgery Center"
+            ]
+          },
+          {
+            "value": "Outpatient Professional Services",
+            "synonyms": [
+              "Outpatient Professional Services",
+              "Ambulatory Infusion Center",
+              "Ambulatory Infusion Suite",
+              "Ambulatory Infusion Therapy Center"
+            ]
+          },
+          {
+            "value": "Outpatient Surgery",
+            "synonyms": [
+              "Outpatient Surgery",
+              "Abortion"
+            ]
+          },
+          {
+            "value": "Over-The-Counter Drugs (Non-Prescription)"
+          },
+          {
+            "value": "Periodontics",
+            "synonyms": [
+              "Periodontics",
+              "Periodontia",
+              "Periodontist"
+            ]
+          },
+          {
+            "value": "Physical Therapy",
+            "synonyms": [
+              "Physical Therapy",
+              "Childrens Choice (CCW) Physical Therapy Rehab Center - Other",
+              "Free Standing Physical Therapy",
+              "Pediatric Physical Therapy",
+              "Physical Therapy Services",
+              "Physical Therapy/Rehab",
+              "PT"
+            ]
+          },
+          {
+            "value": "Physical, Speech, and Occupational Therapy",
+            "synonyms": [
+              "Physical, Speech, and Occupational Therapy",
+              "Physical",
+              "Speech"
+            ]
+          },
+          {
+            "value": "Plan Deductible",
+            "synonyms": [
+              "Plan Deductible",
+              "Deductible"
+            ]
+          },
+          {
+            "value": "Please see your Evidence of Coverage (EOC)"
+          },
+          {
+            "value": "Premium Digital Hearing Aids",
+            "synonyms": [
+              "Premium Digital Hearing Aids",
+              "Premium Digital"
+            ]
+          },
+          {
+            "value": "Prescribed Tobacco Cessation Drugs (RX and OTC)"
+          },
+          {
+            "value": "Primary Care Physician",
+            "synonyms": [
+              "Primary Care Physician",
+              "Adolescent Medicine",
+              "Adolescent Medicine (Internal Medicine)",
+              "Adolescent Medicine (Pediatrics)",
+              "Adult Health Nurse Practitioner",
+              "Adult Medicine",
+              "Adult Primary Care",
+              "Advanced Medical Home Tier 1",
+              "Advanced Medical Home Tier 2",
+              "Advanced Medical Home Tier 3",
+              "Advanced Medical Home Tier 4",
+              "Advanced Practice Nurse",
+              "After Hours Provider",
+              "Allopathic & Osteopathic Physicians/Family Medicine",
+              "Allopathic & Osteopathic Physicians/Family Medicine, Geriatric Medicine",
+              "Allopathic & Osteopathic Physicians/General Practice",
+              "Allopathic & Osteopathic Physicians/Internal Medicine",
+              "Ancillary Group",
+              "Assistant Physician",
+              "Certified Nurse Midwife",
+              "Certified Nurse Practitioner",
+              "Certified Nursing Assistant",
+              "Certified Physician Assistant",
+              "Certified Registered Nurse Practitioner",
+              "Child Abuse Pediatrics",
+              "Children's Other Licensed Practitioner",
+              "Christian Science Practitioner",
+              "Clinical Nurse Specialist",
+              "Concierge Medicine",
+              "Correctional Medicine",
+              "Developmental Pediatrics",
+              "Developmental Pediatrics Services",
+              "Diabetes Prevention Program",
+              "Diabetic Education",
+              "Disease Prevention",
+              "Essential Provider - Federally Qualified Health Center (FQHC)",
+              "Essential Provider - Local Health Department",
+              "Essential Provider - North Carolina Veterans Home",
+              "Family Medicine",
+              "Family Medicine Specialist",
+              "Family Nurse Practitioner",
+              "Family Planning",
+              "Family Planning Services",
+              "Family Practice",
+              "Family Practice (North Hills only)",
+              "Family Practice Nurse Practitioner",
+              "Family Practice with Obstetrics",
+              "Federally Qualified Health Center (FQHC)",
+              "General Medicine",
+              "General Practice",
+              "General Preventive Medicine",
+              "Geriatric Medicine",
+              "Geriatric Medicine (Family Medicine)",
+              "Geriatric Medicine (Internal Medicine)",
+              "Geriatrics",
+              "HIV Experienced Provider",
+              "HIV Specialist",
+              "HIV/AIDS",
+              "HIV/AIDS Center",
+              "HIV/AIDS Issues",
+              "HIV/AIDS Specialist",
+              "Hospital Medicine",
+              "Hospitalist",
+              "Host HMO",
+              "IHS Provider Prac Spec",
+              "Indian Health Care Provider",
+              "Indian Health Care Provider - Indian Tribe",
+              "Indian Health Care Provider - Tribal Organization",
+              "Indian Health Care Provider - Urban Indian Organization",
+              "Indian Health Service",
+              "Individual Support Services",
+              "Integrative Medicine",
+              "Internal Medicine",
+              "Licensed Midwife",
+              "Licensed Practical Nurse",
+              "Maternal-Child Health & Family Planning",
+              "MCR Diabetic Prevention Program",
+              "Medical Group",
+              "Medicare Diabetes Prevention Program",
+              "Midwife",
+              "Midwifery",
+              "Midwifery (ARNP)",
+              "Neonatal Nurse Practitioner",
+              "No Specific Medical Specialty",
+              "Nurse Delegation",
+              "Nurse Midwife",
+              "Nurse Practitioner",
+              "Nurse Practitioner - Adult Health",
+              "Nurse Practitioner - Geriatrics",
+              "Nurse Practitioner - PCP",
+              "Nurse Practitioner Primary Care",
+              "Nurse Registry",
+              "Nursing Service Related Providers Technician Personal Care Attendant",
+              "Obstetrics & Gynecology Nurse Practitioner",
+              "Oriental Medicine",
+              "Osteopathic Manipulative Medicine",
+              "Other Registered Nurse",
+              "Patient-Centered Medical Home",
+              "Pediatric Adolescent Medicine",
+              "Pediatric Nurse Practitioner",
+              "Pediatrics",
+              "Physician Assistant",
+              "Physician Assistant/Nurse Practitioner",
+              "Physician Organization",
+              "Podiatric Medicine & Surgery",
+              "Pre-Diabetes Services",
+              "Preferred PCP",
+              "Preventive Health - Immunizations",
+              "Preventive Medicine",
+              "Preventive Nursing Services",
+              "Provider/facility sees members of the aged population",
+              "Provider/facility sees patients diagnosed as HIV positive",
+              "Provider/facility sees patients who are disabled",
+              "Public Health",
+              "Public Health - Welfare Agency",
+              "Public Health & General Preventive Medicine",
+              "Public Health Services",
+              "Public Health-Preventive Care",
+              "Registered Nurse",
+              "Registered Nurse First Assistant",
+              "RHC (Provider-Based)",
+              "Ryan White Provider HIV/AIDS",
+              "TennCare Kids",
+              "Travel Medicine",
+              "Tribal 638 Provider",
+              "VFCA Institutional",
+              "VFCA Primary Care",
+              "Visiting Nurse",
+              "Waiver Provider",
+              "Women's Health Nurse Practitioner",
+              "AIDS"
+            ]
+          },
+          {
+            "value": "Specialist Services",
+            "synonyms": [
+              "Specialist Services",
+              "Adult Scoliosis",
+              "Adult Scoliosis Center",
+              "Advanced Diabetes Management",
+              "Advanced Heart Failure & Transplant Cardiology",
+              "Advanced Registered Nurse Practitioner",
+              "Aerospace Medicine",
+              "Allergist",
+              "Allergy",
+              "Allergy & Immunology",
+              "Allergy Treatment",
+              "Allopathic & Osteopathic Physicians/Allergy & Immunology",
+              "Allopathic & Osteopathic Physicians/Anesthesiology",
+              "Allopathic & Osteopathic Physicians/Colon & Rectal Surgery",
+              "Allopathic & Osteopathic Physicians/Dermatology",
+              "Allopathic & Osteopathic Physicians/Internal Medicine, Cardiovascular Disease",
+              "Allopathic & Osteopathic Physicians/Internal Medicine, Gastroenterology",
+              "Allopathic & Osteopathic Physicians/Internal Medicine, Nephrology",
+              "Allopathic & Osteopathic Physicians/Internal Medicine, Pulmonary Disease",
+              "Allopathic & Osteopathic Physicians/Neurological Surgery",
+              "Allopathic & Osteopathic Physicians/Nuclear Medicine",
+              "Allopathic & Osteopathic Physicians/Obstetrics & Gynecology",
+              "Allopathic & Osteopathic Physicians/Obstetrics & Gynecology, Gynecology",
+              "Allopathic & Osteopathic Physicians/Ophthalmology",
+              "Allopathic & Osteopathic Physicians/Orthopaedic Surgery",
+              "Allopathic & Osteopathic Physicians/Orthopaedic Surgery/Hand Surgery",
+              "Allopathic & Osteopathic Physicians/Otolaryngology/Otology & Neurotology",
+              "Allopathic & Osteopathic Physicians/Pediatrics",
+              "Allopathic & Osteopathic Physicians/Physical Medicine & Rehabilitation",
+              "Allopathic & Osteopathic Physicians/Plastic Surgery",
+              "Allopathic & Osteopathic Physicians/Psychiatry",
+              "Allopathic & Osteopathic Physicians/Psychiatry and Neurology, Addiction Medicine",
+              "Allopathic & Osteopathic Physicians/Psychiatry and Neurology, Addiction Psychiatry",
+              "Allopathic & Osteopathic Physicians/Psychiatry and Neurology, Neurology",
+              "Allopathic & Osteopathic Physicians/Surgery",
+              "Allopathic & Osteopathic Physicians/Thoracic Surgery (Cardiothoracic Vascular Surgery)",
+              "Allopathic & Osteopathic Physicians/Urology",
+              "Andrology",
+              "Anesthesiologist",
+              "Anesthesiology",
+              "Anesthesiology - Hospital-Based",
+              "Anesthesiology Assistant",
+              "Anesthesiology Critical Care",
+              "Anesthesiology Services",
+              "Anticoagulation Clinic",
+              "Arthritis Treatment Center",
+              "Bariatric Medicine",
+              "Bariatric Surgery",
+              "Birthing Center",
+              "Birthing Services",
+              "Blindness or Visual Impairment",
+              "Brain & Spinal Injury Medicine",
+              "Brain Injury",
+              "Brain Injury Medicine",
+              "Breast Surgery",
+              "Burn Care Services",
+              "Burn Care Treatment",
+              "Cancer",
+              "Cancer Center",
+              "Cancer Treatment Services",
+              "Cardiac Anesthesia & Transesophageal Echocardiograpy (TEE)",
+              "Cardiac Catheterization Lab",
+              "Cardiac Electrophysiology",
+              "Cardiac Event Monitor",
+              "Cardiac Monitoring Services",
+              "Cardiac Surgery",
+              "Cardio Evaluation",
+              "Cardiologist",
+              "Cardiology",
+              "Cardiology Center",
+              "Cardiology Diagnostic Services",
+              "Cardiology Services",
+              "Cardiothoracic Surgery",
+              "Cardiovascular Disease",
+              "Cardiovascular Perfusion",
+              "Cardiovascular Surgery",
+              "Certified Anesthesiology Assistant",
+              "Certified Lactation Consultant",
+              "Certified Registered Nurse Anesthetist",
+              "Certified Registered Nurse Practitioner OBGYN",
+              "Certified Surgery Assistant",
+              "Child & Adolescent Neurology",
+              "Child Neurology",
+              "Children's HCBS Palliative Care Pain & Symptom Management",
+              "Cleft Lip/Cleft Palate Craniofacial Center",
+              "Clinical & Laboratory Dermatological Immunology",
+              "Clinical & Laboratory Immunology",
+              "Clinical Biochemical & Molecular Genetics",
+              "Clinical Biochemical Genetics",
+              "Clinical Cardiac Electrophysiology",
+              "Clinical Cytogenetics",
+              "Clinical Genetics",
+              "Clinical Molecular Genetics",
+              "Clinical Neurophysiology",
+              "Clinical Specialist",
+              "CNS - Advanced Diabetes Management",
+              "Colon & Rectal Surgery",
+              "Complex General Surgical Oncology",
+              "Complex Pediatric Otolaryngology",
+              "Congenital Cardiac Disease",
+              "Congenital Cardiac Surgery",
+              "Congenital Heart Disease",
+              "cpap treatment",
+              "Critical Care",
+              "Critical Care Medicine",
+              "Critical Care Medicine - Hospital-Based",
+              "Dermatological Immunology",
+              "Dermatological Immunology/Diagnostic Laboratory Immunology",
+              "dermatologist",
+              "Dermatology",
+              "Dermatopathology - Hospital-Based",
+              "Developmental Disabilities",
+              "Diabetes",
+              "Diabetic Nurse Practitioner",
+              "Diabetology",
+              "Diagnostic Cardiac Monitoring",
+              "Diagnostic Treatment Center",
+              "Ear, Nose & Throat",
+              "EKG Interpretation",
+              "Endocrinologist",
+              "Endocrinology",
+              "Endocrinology & Metabolism",
+              "Endocrinology, Diabetes & Metabolism",
+              "Endoscopic Surgery",
+              "ENT",
+              "Environmental Investigation",
+              "Environmental Modifications",
+              "Epilepsy",
+              "Eyes (Artificial)",
+              "Facial Plastic Surgery",
+              "Family Doctor",
+              "Female Pelvic Medicine & Reconstructive Surgery",
+              "fertility exam",
+              "Fetal Monitoring Services",
+              "Foot & Ankle Surgery",
+              "Foot Surgery",
+              "Forensic Psychiatry",
+              "Gastroenterologist",
+              "Gastroenterology",
+              "General Surgery",
+              "General Surgical Oncology",
+              "Genetic Counseling",
+              "Genetic Counselor",
+              "Genetic Medicine",
+              "Genetic Services",
+              "Genetic Testing",
+              "Genetics",
+              "Genetics & Infertility",
+              "Geriatric Nurse Practitioner",
+              "Geriatric Oncology",
+              "Geriatric Psychiatry",
+              "Geriatric Psychiatry Program",
+              "GI",
+              "Gynecologic Oncology",
+              "gynecologist",
+              "Gynecology",
+              "Gynecology - No Obstetrics",
+              "Gynecology Nurse Practitioner",
+              "Hand Surgery",
+              "Head & Neck Surgery",
+              "Heart Failure Specialist",
+              "Hematologic Pathology",
+              "Hematology",
+              "Hematology & Oncology",
+              "Hemophilia Center",
+              "Hemophilia Factor Drug Products",
+              "Hepatology",
+              "High Risk Obstetrics",
+              "Hip Replacement",
+              "Hospital - Transplant Surgery",
+              "Hyperbaric Medicine",
+              "Immunization Practice",
+              "Immunology",
+              "Infectious Disease",
+              "Infectious Disease Services",
+              "Infectious Medicine",
+              "Infertility",
+              "Interventional Cardiology",
+              "Kidney",
+              "Kidney Center",
+              "Kidney Transplant",
+              "Kidney Treatment",
+              "Knee Replacement",
+              "Lactation Counseling",
+              "Lead Poisoning Treatment Center",
+              "Legal Medicine",
+              "Lithotripsy",
+              "Lithotripsy Services",
+              "Lithotripsy/Kidney",
+              "Maternal & Fetal Medicine",
+              "Medical Biochemical Genetics",
+              "Medical Genetics",
+              "Medical Genetics (PhD)",
+              "Medical Microbiology",
+              "Medical Oncology",
+              "Medical Toxicology",
+              "Medical Toxicology - Hospital-Based",
+              "Metabolism",
+              "MOHS Micrographic Surgery",
+              "Multi-Specialty Group",
+              "Naturopathic Medicine",
+              "Naturopathy",
+              "Neonatal & Perinatal Medicine",
+              "Neonatology",
+              "Neonatology/Perinatology",
+              "Nephrologists",
+              "Nephrology",
+              "Neuro-Oncology",
+              "Neuro-Ophthalmology",
+              "Neuroanesthesia",
+              "Neurodevelopmental Disabilities",
+              "Neurodevelopmental Disorders",
+              "Neurointerventional Radiology",
+              "Neurological Oncology",
+              "Neurological Surgery",
+              "Neurologist",
+              "Neurology",
+              "Neurology - Hearing",
+              "Neurology with Special Qualifications in Child Neurology",
+              "Neuromuscular Medicine",
+              "Neuromusculoskeletal Medicine",
+              "Neuromusculoskeletal Medicine & OMM",
+              "Neuromusculoskeletal Medicine & Osteopathic Manipulative Medicine",
+              "Neurophysiology",
+              "Neuropsychiatry",
+              "Neuropsychology",
+              "Neurosurgery",
+              "Neurotology",
+              "Nuclear Cardiology",
+              "Nuclear Medicine",
+              "Nuclear Medicine - Hospital-Based",
+              "Nuclear Medicine Services",
+              "Nuclear Radiology - Hospital-Based",
+              "Nurse Anesthetist",
+              "Nurse Anesthetist - Hospital-Based",
+              "Nurse Practitioner - Acute Care",
+              "Nurse Practitioner - Gynecology",
+              "Nurse Practitioner - Neonatal Critical Care",
+              "Nurse Practitioner - Nursing Home",
+              "Nurse Practitioner - Psychiatric",
+              "Obstetric & Gynecologic Surgery",
+              "Obstetric Nurse Practitioner",
+              "Obstetrician",
+              "Obstetrics",
+              "Obstetrics & Gynecology",
+              "Obstetrics - No Gynecology",
+              "Obstetrics Only",
+              "Oculoplastic Reconstructive Surgery",
+              "Oculoplastic Surgery",
+              "Office Visit",
+              "Oncologist",
+              "Oncology",
+              "Oncology Facility",
+              "Oncology Medicine",
+              "Ophthalmalogic Plastic Surgery",
+              "Ophthalmic Pathology",
+              "Ophthalmologist",
+              "Ophthalmology",
+              "Ophthalmology - Cornea",
+              "Ophthalmology - Plastic & Reconstructive",
+              "Oral Surgery",
+              "Orthopaedic Sports Medicine",
+              "Orthopaedic Surgery",
+              "Orthopaedics",
+              "orthopedic",
+              "Orthopedic Clinic",
+              "Orthopedic Hand Surgery",
+              "Orthopedic Oncology",
+              "Orthopedic Sports Medicine",
+              "Orthopedic Surgery",
+              "Orthopedic Technology",
+              "Orthopedic Trauma",
+              "Orthopedics",
+              "Osteopathy",
+              "Other Master Therapist",
+              "Other Medical Professionals",
+              "Otolaryngologists",
+              "Otolaryngology",
+              "Otolaryngology (ENT)",
+              "Otolaryngology/Facial Plastic Surgery",
+              "Otology",
+              "Otorhinolaryngology",
+              "Pain Management",
+              "Pain Management - Hospital-Based",
+              "Pain Medicine",
+              "Palliative Medicine",
+              "Pediatric Allergy",
+              "Pediatric Allergy & Immunology",
+              "Pediatric Anatomic Pathology",
+              "Pediatric Anesthesiology",
+              "Pediatric Audiology",
+              "Pediatric Cardiology",
+              "Pediatric Cardiothoracic Surgery",
+              "Pediatric Cardiovascular Disease",
+              "Pediatric Cardiovascular Surgery",
+              "Pediatric Critical Care",
+              "Pediatric Critical Care Medicine",
+              "Pediatric Critical Care/Intensive Care",
+              "Pediatric Dermatology",
+              "Pediatric Developmental",
+              "Pediatric Developmental Behavioral Specialist",
+              "Pediatric Emergency Medicine - Hospital-Based",
+              "Pediatric Endocrinology",
+              "Pediatric Gastroenterology",
+              "Pediatric General Surgery",
+              "Pediatric Genetics",
+              "Pediatric Genetics & Genomics",
+              "Pediatric Hematology",
+              "Pediatric Hematology & Oncology",
+              "Pediatric Hepatology",
+              "Pediatric HIV Treatment Center",
+              "Pediatric Hospital Medicine",
+              "Pediatric Hospitalist",
+              "Pediatric Immunology",
+              "Pediatric Infectious Diseases",
+              "Pediatric Internal Medicine",
+              "Pediatric Interventional Cardiology",
+              "Pediatric Interventional Radiology",
+              "Pediatric Medical Oncology",
+              "Pediatric Metabolism",
+              "Pediatric Nephrology",
+              "Pediatric Neurodevelopmental Disabilities",
+              "Pediatric Neurological Surgery",
+              "Pediatric Neurology",
+              "Pediatric Neuroradiology",
+              "Pediatric Neurosurgery",
+              "Pediatric Oncology",
+              "Pediatric Ophthalmic Plastic & Reconstructive Surgery",
+              "Pediatric Ophthalmology",
+              "Pediatric Oral & Maxillofacial Surgery",
+              "Pediatric Orthopaedics",
+              "Pediatric Orthopedic Sports Medicine",
+              "Pediatric Orthopedic Surgery",
+              "Pediatric Orthopedics",
+              "Pediatric Otolaryngology",
+              "Pediatric Otolaryngology (ENT)",
+              "Pediatric Otorhinolaryngology",
+              "Pediatric Palliative Care",
+              "Pediatric Pathology - Hospital-Based",
+              "Pediatric Physical Medicine",
+              "Pediatric Physical Medicine & Rehabilitation",
+              "Pediatric PKU / Lead Poisoning",
+              "Pediatric Plastic & Reconstructive Surgery",
+              "Pediatric Plastic Surgery",
+              "Pediatric Pulmonology",
+              "Pediatric Rheumatology",
+              "Pediatric Specialist",
+              "Pediatric Specialist - Labor & Delivery",
+              "Pediatric Sports Medicine",
+              "Pediatric Surgery",
+              "Pediatric Surgery Center",
+              "Pediatric Tertiary Center",
+              "Pediatric Thoracic Surgery",
+              "Pediatric Transplant Hepatology",
+              "Pediatric Transplant Surgery",
+              "Pediatric Urologic Surgery",
+              "Pediatric Urological Surgery",
+              "Pediatric Urology",
+              "Pediatrics (North Hills only)",
+              "Pedorthics",
+              "Perinatology",
+              "Pharmacologist",
+              "Pharmacology",
+              "Phototherapy Lights",
+              "Phototherapy Services",
+              "Physiatry",
+              "Plastic & Reconstructive Surgery",
+              "Plastic Maxillofacial Surgery",
+              "Plastic Surgery",
+              "Plastic Surgery within the Head & Neck",
+              "Podiatric Medicine",
+              "Podiatric Surgery",
+              "Podiatry",
+              "Prenatal Care",
+              "Preventive Medicine, Undersea & Hyperbaric Medicine",
+              "Proctologist",
+              "Proctology",
+              "Psychiatric Nurse Practitioner",
+              "Psychiatric Nurse Practitioner - Adult",
+              "Psychiatric Nurse Practitioner - Child",
+              "Psychiatric/Behavioral Health Clinical Nurse Specialist",
+              "Psychiatrist",
+              "Pulmonary & Critical Care Medicine",
+              "Pulmonary Disease",
+              "Pulmonary Medicine",
+              "Pulmonologist",
+              "Pulmonology",
+              "Radiological Physics",
+              "Radiologist",
+              "Reconstructive Plastic Surgery",
+              "Reconstructive Rearfoot & Ankle Surgery",
+              "Reproductive Endocrinology",
+              "Reproductive Endocrinology & Infertility",
+              "Reproductive Genetics",
+              "Reproductive Health Services",
+              "Reproductive Lab",
+              "Reproductive Medicine/Endocrinology",
+              "Respiratory Therapy",
+              "Retina Specialist (Ophthalmology)",
+              "Retinal Disease",
+              "Rheumatology",
+              "Sickle Cell Disease Center",
+              "skin screening",
+              "Sleep Center",
+              "Sleep Disorder Clinic",
+              "Sleep Disorder Diagnostics",
+              "Sleep Disorder Medicine",
+              "Sleep Disorder Services",
+              "Sleep Disorders",
+              "Sleep Laboratory",
+              "Sleep Medicine",
+              "Specialist",
+              "Specialist Office Visit",
+              "specialists",
+              "Spina Bifida",
+              "Spina Bifida Center",
+              "Spinal Cord Injury Center",
+              "Spinal Cord Injury Medicine",
+              "Spine Center of Excellence",
+              "Spine Surgery",
+              "Sports Medicine",
+              "Surgeon",
+              "Surgery",
+              "Surgery Center",
+              "Surgery of the Hand",
+              "Surgical Assistant",
+              "Surgical Critical Care",
+              "Surgical Critical Care Medicine",
+              "Surgical Oncology",
+              "Surgical Pathology",
+              "Surgical Technologist",
+              "Therapeutic Medical Physics",
+              "Thoracic & Cardiac Surgery",
+              "Thoracic Cardiovascular Surgery",
+              "Thoracic Surgery",
+              "Transfusion Medicine",
+              "Transplant Surgery",
+              "Trauma Surgery",
+              "Undersea & Hyperbaric Medicine",
+              "Undersea & Hyperbaric Medicine (Preventive Medicine)",
+              "Urogynecology",
+              "Urological Surgery",
+              "Urology",
+              "Vascular & Thoracic Surgery",
+              "Vascular Laboratory",
+              "Vascular Medicine",
+              "Vascular Neurology",
+              "Vascular Surgery",
+              "VFCA Maternity",
+              "Vitreoretinal Surgery",
+              "Women's Health",
+              "Women's Health Services",
+              "Wound Care",
+              "Wound Care Center"
+            ]
+          },
+          {
+            "value": "Speech Therapy",
+            "synonyms": [
+              "Speech Therapy",
+              "Hearing & Speech Services",
+              "Pediatric Speech Therapy",
+              "Speech & Hearing Therapy",
+              "Speech Therapy (Early Intervention)",
+              "Speech Therapy Services"
+            ]
+          },
+          {
+            "value": "Standard Digital Hearing Aids",
+            "synonyms": [
+              "Standard Digital Hearing Aids",
+              "Standard Digital"
+            ]
+          },
+          {
+            "value": "Standard Imaging X-Rays, Radiology",
+            "synonyms": [
+              "Standard Imaging X-Rays, Radiology",
+              "Allopathic & Osteopathic Physicians/Radiology, Diagnostic Radiology",
+              "Diagnostic Radiology",
+              "Diagnostic Radiology/Spec Comp Nuclear Radiology",
+              "Free Standing Radiology Facility",
+              "Freestanding Radiology Center - FRC",
+              "Interventional & Diagnostic Radiology",
+              "Interventional Radiology",
+              "mammogram",
+              "Mobile Imaging Provider/Technical",
+              "Mobile Radiology Unit",
+              "Neuroradiology",
+              "Neuroradiology Services",
+              "Nuclear Radiology",
+              "Pediatric Radiology",
+              "Portable X-Ray Supplier",
+              "Radiology",
+              "Radiology - Hospital-Based",
+              "Radiology Center",
+              "Radiology Facility",
+              "Radiology Facility Group",
+              "Radiology Services",
+              "Routine Radiology",
+              "Vascular & Interventional Radiology",
+              "X-Ray",
+              "X-Ray Facility"
+            ]
+          },
+          {
+            "value": "Telebehavioral Health"
+          },
+          {
+            "value": "Teledermatology"
+          },
+          {
+            "value": "Telemedicine",
+            "synonyms": [
+              "Telemedicine",
+              "MDLive",
+              "teledoc",
+              "Telehealth",
+              "Telehealth Services Available",
+              "Telemedicine Provider",
+              "Telemonitoring",
+              "Virtual Services",
+              "Virtual Services Only"
+            ]
+          },
+          {
+            "value": "Tier 1 Generic Drugs"
+          },
+          {
+            "value": "Tier 1 Low-Cost Generic Drugs"
+          },
+          {
+            "value": "Tier 1 Preferred Generic Drugs"
+          },
+          {
+            "value": "Tier 2 Generic Drugs"
+          },
+          {
+            "value": "Tier 2 Preferred Brand Drugs"
+          },
+          {
+            "value": "Tier 2 Preferred Brand Preferred Brand Drugs"
+          },
+          {
+            "value": "Tier 3 Non-Preferred Brand Drugs"
+          },
+          {
+            "value": "Tier 3 Non-Preferred Drugs"
+          },
+          {
+            "value": "Tier 3 Preferred Brand Drugs"
+          },
+          {
+            "value": "Tier 4 Non-Preferred Drugs"
+          },
+          {
+            "value": "Tier 5 Self-Administered Specialty Drugs"
+          },
+          {
+            "value": "Tier 5 Specialty Drugs"
+          },
+          {
+            "value": "True Out-of-Pocket Cost (TrOOP)"
+          },
+          {
+            "value": "Urgent Care",
+            "synonyms": [
+              "Urgent Care",
+              "Mobile Urgent Care",
+              "Pediatric Urgent Care Center",
+              "Urgent Care Center",
+              "Urgent Care Clinic",
+              "Urgent Care Services",
+              "Urgent Care Visit"
+            ]
+          },
+          {
+            "value": "Weight Control Drugs"
+          },
+          {
+            "value": "Worldwide Coverage",
+            "synonyms": [
+              "Worldwide Coverage",
+              "Worldwide"
+            ]
+          },
+          {
+            "value": "Worldwide Coverage (copay waived if admitted)"
+          },
+          {
+            "value": "Private Duty Nursing"
+          },
+          {
+            "value": "Prosthodontics",
+            "synonyms": [
+              "Prosthodontics",
+              "Prosthodontics"
+            ]
+          },
+          {
+            "value": "Retail Clinic",
+            "synonyms": [
+              "Retail Clinic",
+              "Retail Health Center",
+              "Retail-Based Health"
+            ]
+          },
+          {
+            "value": "Retail Health Clinic Visit",
+            "synonyms": [
+              "Retail Health Clinic Visit",
+              "Clinic",
+              "Community Health Clinic",
+              "Essential Provider - Free and Charitable Clinic",
+              "Essential Provider - Rural Health Clinic",
+              "Family Community Clinic",
+              "Federally Funded Health Clinic",
+              "General Clinic Services",
+              "HIV Clinic",
+              "Immunization Clinic",
+              "Limited Services Clinic",
+              "MH Clinic Treatment (State OPR)",
+              "Outpatient Pediatric AIDS Clinic",
+              "Retail Clinic",
+              "Rural Health Clinic",
+              "Rural Health Clinic (Provider-Based)",
+              "Rural Health Clinic/Center",
+              "School-Based Health Clinic",
+              "VA Hospital/Military Clinic",
+              "Walk-In Clinic",
+              "Walk-In Services"
+            ]
+          },
+          {
+            "value": "Retin-A (up to Age 35)",
+            "synonyms": [
+              "Retin-A (up to Age 35)",
+              "Retin-A (up to Age 25)"
+            ]
+          },
+          {
+            "value": "Root Canals",
+            "synonyms": [
+              "Root Canals",
+              "Root Canal"
+            ]
+          },
+          {
+            "value": "Routine Eye Exam",
+            "synonyms": [
+              "Routine Eye Exam",
+              "Exams",
+              "Eye Exam",
+              "Optometric Supplier",
+              "Optometry",
+              "Optometry - Medical Services",
+              "Therapeutic Optometry"
+            ]
+          },
+          {
+            "value": "Routine Hearing Exam",
+            "synonyms": [
+              "Routine Hearing Exam",
+              "Audiology",
+              "Audiology Ancillary Facility",
+              "Audiology Center",
+              "Audiology Services",
+              "Hearing Exam"
+            ]
+          },
+          {
+            "value": "Routine Podiatry"
+          },
+          {
+            "value": "Sealants"
+          },
+          {
+            "value": "Shoes and Inserts"
+          },
+          {
+            "value": "Simple Extractions",
+            "synonyms": [
+              "Simple Extractions",
+              "extraction",
+              "extractions"
+            ]
+          },
+          {
+            "value": "Skilled Nursing Facility",
+            "synonyms": [
+              "Skilled Nursing Facility",
+              "Acute Care",
+              "Adult Care - Level 1",
+              "Adult Care - Level 2",
+              "Adult Family Care Home",
+              "Care Management Organization (CMO)",
+              "Children's HCBS Palliative Care Bereavement Services",
+              "Children's HCBS Palliative Care Expressive Therapy",
+              "Children's HCBS Palliative Care Massage Therapy",
+              "Comprehensive Personal Care Home",
+              "Congregate Nursing",
+              "Consumer Directed Personal Care Fiscal Intermediaries",
+              "Convenient Care Clinic",
+              "County Nursing Facility",
+              "Custodial Care",
+              "Extended Care",
+              "In-Nursing Home Therapy",
+              "Long Term Acute Care (LTAC)",
+              "Long Term Care Facility",
+              "Nursing Facility",
+              "Nursing Home",
+              "Nursing Services",
+              "Palliative Care",
+              "Pediatric Extended Care Center",
+              "Perinatal Care",
+              "Prescribed Pediatric Extended Care (PPEC)",
+              "Private Duty Nursing",
+              "Private Nursing Facility",
+              "Respite Care",
+              "Specialty Therapeutic Foster Care",
+              "State Nursing Facility"
+            ]
+          }
+        ]
+      },
+      {
+        "version": "mvqE",
+        "name": "SYMPTOMS",
+        "valueSelectionStrategy": "ORIGINAL_VALUE",
+        "enumerationValues": [
+          {
+            "value": "Upper abdominal pain"
+          },
+          {
+            "value": "Lower abdominal pain"
+          },
+          {
+            "value": "Abscess (Collection of pus)"
+          },
+          {
+            "value": "Alcohol abuse"
+          },
+          {
+            "value": "Anxiety (Nervousness)"
+          },
+          {
+            "value": "Arm ache or pain"
+          },
+          {
+            "value": "Back ache or pain"
+          },
+          {
+            "value": "Bleeding tendency"
+          },
+          {
+            "value": "Blood in vomit"
+          },
+          {
+            "value": "Bloody diarrhea"
+          },
+          {
+            "value": "Pain or soreness of breast"
+          },
+          {
+            "value": "Calf pain"
+          },
+          {
+            "value": "Chest pressure"
+          },
+          {
+            "value": "Chills"
+          },
+          {
+            "value": "Change in behavior"
+          },
+          {
+            "value": "Constipation"
+          },
+          {
+            "value": "Cough"
+          },
+          {
+            "value": "Dark stools"
+          },
+          {
+            "value": "Depressed"
+          },
+          {
+            "value": "Diarrhea"
+          },
+          {
+            "value": "Dizziness"
+          },
+          {
+            "value": "Double vision (Diplopia)"
+          },
+          {
+            "value": "Ear pressure"
+          },
+          {
+            "value": "Pain in the ear"
+          },
+          {
+            "value": "Elbow ache or pain"
+          },
+          {
+            "value": "Eye pain (Irritation)"
+          },
+          {
+            "value": "Facial pain"
+          },
+          {
+            "value": "Fainting"
+          },
+          {
+            "value": "Fever"
+          },
+          {
+            "value": "Fever in the returning traveler"
+          },
+          {
+            "value": "Fever of unknown origin"
+          },
+          {
+            "value": "Flank pain"
+          },
+          {
+            "value": "Frequent urination (Frequency)"
+          },
+          {
+            "value": "Foot pain"
+          },
+          {
+            "value": "Cranky, crying, fussy, irritable child"
+          },
+          {
+            "value": "Groin pain"
+          },
+          {
+            "value": "Delusions or hallucinations"
+          },
+          {
+            "value": "Hand, finger ache or pain"
+          },
+          {
+            "value": "Head injury"
+          },
+          {
+            "value": "Headache"
+          },
+          {
+            "value": "Heel pain"
+          },
+          {
+            "value": "Heat illness"
+          },
+          {
+            "value": "Hip pain"
+          },
+          {
+            "value": "Hives"
+          },
+          {
+            "value": "Hoarse voice"
+          },
+          {
+            "value": "Hypothermia (Low temperature)"
+          },
+          {
+            "value": "Incontinence (leaking urine)"
+          },
+          {
+            "value": "Insect sting"
+          },
+          {
+            "value": "Insomnia (Trouble sleeping)"
+          },
+          {
+            "value": "Skin itching"
+          },
+          {
+            "value": "Joint pain"
+          },
+          {
+            "value": "Kidney pain (Flank pain)"
+          },
+          {
+            "value": "Knee pain"
+          },
+          {
+            "value": "Laceration"
+          },
+          {
+            "value": "Leg ache or pain"
+          },
+          {
+            "value": "Swelling of both legs"
+          },
+          {
+            "value": "Lethargy (Sluggishness)"
+          },
+          {
+            "value": "Mouth pain"
+          },
+          {
+            "value": "Muscle pain"
+          },
+          {
+            "value": "Nail Injury"
+          },
+          {
+            "value": "Nasal bleeding"
+          },
+          {
+            "value": "Nasal injury"
+          },
+          {
+            "value": "Nausea"
+          },
+          {
+            "value": "Neck ache or pain"
+          },
+          {
+            "value": "Neck swelling"
+          },
+          {
+            "value": "Numbness"
+          },
+          {
+            "value": "Obesity"
+          },
+          {
+            "value": "Overdose"
+          },
+          {
+            "value": "Painful urination"
+          },
+          {
+            "value": "Heart pulsations and palpitations"
+          },
+          {
+            "value": "Pelvic pain"
+          },
+          {
+            "value": "Penile discharge"
+          },
+          {
+            "value": "Penis pain"
+          },
+          {
+            "value": "Poisoning"
+          },
+          {
+            "value": "Pregnancy problem"
+          },
+          {
+            "value": "Psychiatric problem"
+          },
+          {
+            "value": "Puncture wound"
+          },
+          {
+            "value": "Rash"
+          },
+          {
+            "value": "Rectal pain"
+          },
+          {
+            "value": "Rectal swelling"
+          },
+          {
+            "value": "Scrotal pain"
+          },
+          {
+            "value": "Scrotal swelling"
+          },
+          {
+            "value": "Seizure"
+          },
+          {
+            "value": "Shortness of breath"
+          },
+          {
+            "value": "Shoulder ache or pain"
+          },
+          {
+            "value": "Sinus pain and pressure"
+          },
+          {
+            "value": "Skin trauma"
+          },
+          {
+            "value": "Snake bite"
+          },
+          {
+            "value": "Sore throat"
+          },
+          {
+            "value": "Speech problem"
+          },
+          {
+            "value": "Spider bite"
+          },
+          {
+            "value": "Substance abuse (Drug abuse)"
+          },
+          {
+            "value": "Suicidal tendencies"
+          },
+          {
+            "value": "Swallowing problem (Dysphagia)"
+          },
+          {
+            "value": "Swelling"
+          },
+          {
+            "value": "Toe pain"
+          },
+          {
+            "value": "Tooth pain"
+          },
+          {
+            "value": "Trauma"
+          },
+          {
+            "value": "Traveler's diarrhea"
+          },
+          {
+            "value": "Unsteady gait (Trouble walking)"
+          },
+          {
+            "value": "Vaginal bleeding"
+          },
+          {
+            "value": "Vaginal bleeding after menopause"
+          },
+          {
+            "value": "Vaginal bleeding during pregnancy"
+          },
+          {
+            "value": "Vaginal discharge"
+          },
+          {
+            "value": "Vaginal itching"
+          },
+          {
+            "value": "Vaginal pain"
+          },
+          {
+            "value": "Vertigo (Room spinning)"
+          },
+          {
+            "value": "Visual problems"
+          },
+          {
+            "value": "Vomiting"
+          },
+          {
+            "value": "General weakness"
+          },
+          {
+            "value": "Weakness (Muscle localized)"
+          },
+          {
+            "value": "Tired"
+          },
+          {
+            "value": "Wrist pain"
+          },
+          {
+            "value": "Throat pain"
+          },
+          {
+            "value": "Tremors"
+          },
+          {
+            "value": "Weight loss, unexplained"
+          },
+          {
+            "value": "Tongue swelling"
+          },
+          {
+            "value": "Inconsolable baby"
+          },
+          {
+            "value": "Wheezing (Noisy breathing)"
+          },
+          {
+            "value": "Swollen lymph nodes (Large lymph nodes)"
+          },
+          {
+            "value": "Failure to thrive"
+          },
+          {
+            "value": "Behavioral problem"
+          },
+          {
+            "value": "Itchy rash (Pruritic rash)"
+          },
+          {
+            "value": "Headache after trauma"
+          },
+          {
+            "value": "Learning difficulties"
+          },
+          {
+            "value": "Blood in urine (Hematuria)"
+          },
+          {
+            "value": "Urinary retention (Inability to urinate)"
+          },
+          {
+            "value": "Liver failure (Cirrhosis)"
+          },
+          {
+            "value": "Choking"
+          },
+          {
+            "value": "Painful rash"
+          },
+          {
+            "value": "Ingestion"
+          },
+          {
+            "value": "Melena (Black stools from blood)"
+          },
+          {
+            "value": "Vomiting coffee ground material"
+          },
+          {
+            "value": "Ringing in ears (Tinnitus)"
+          },
+          {
+            "value": "Mouth ulcers"
+          },
+          {
+            "value": "Mouth swelling"
+          },
+          {
+            "value": "Eye redness"
+          },
+          {
+            "value": "Sneezing"
+          },
+          {
+            "value": "Bleeding gums"
+          },
+          {
+            "value": "Loss of balance"
+          },
+          {
+            "value": "Bleeding in brain"
+          },
+          {
+            "value": "Cyanosis (Blue skin coloration)"
+          },
+          {
+            "value": "Muscle spasm"
+          },
+          {
+            "value": "Drooling"
+          },
+          {
+            "value": "Abdominal swelling (Stomach swelling)"
+          },
+          {
+            "value": "Skin growths"
+          },
+          {
+            "value": "Hand numbness (paresthesias)"
+          },
+          {
+            "value": "Ankle pain"
+          },
+          {
+            "value": "Hemoptysis (Coughing blood)"
+          },
+          {
+            "value": "Jaundice (Yellowing skin)"
+          },
+          {
+            "value": "Night sweats"
+          },
+          {
+            "value": "Flatulence (Passing gas)"
+          },
+          {
+            "value": "Blister (Pocket of fluid)"
+          },
+          {
+            "value": "Hair loss (Baldness)"
+          },
+          {
+            "value": "Jaw pain"
+          },
+          {
+            "value": "Impotence"
+          },
+          {
+            "value": "Heart murmur (Abnormal heart sound)"
+          },
+          {
+            "value": "Pustule (Collection of pus)"
+          },
+          {
+            "value": "Skin pain"
+          },
+          {
+            "value": "Hot skin"
+          },
+          {
+            "value": "Skin swelling"
+          },
+          {
+            "value": "Lip swelling"
+          },
+          {
+            "value": "Eye swelling"
+          },
+          {
+            "value": "Foot swelling"
+          },
+          {
+            "value": "Visual flashing lights"
+          },
+          {
+            "value": "Eye floaters"
+          },
+          {
+            "value": "Amenorrhea (No menstruation)"
+          },
+          {
+            "value": "Blurry vision"
+          },
+          {
+            "value": "Painful gums"
+          },
+          {
+            "value": "Swollen gums"
+          },
+          {
+            "value": "Low blood sugar"
+          },
+          {
+            "value": "Low blood pressure"
+          },
+          {
+            "value": "Darkening of the skin (Hyperpigmentation)"
+          },
+          {
+            "value": "Low heart rate"
+          },
+          {
+            "value": "Foot itching"
+          },
+          {
+            "value": "Hot flashes"
+          },
+          {
+            "value": "Infertility (Female)"
+          },
+          {
+            "value": "Increased facial hair"
+          },
+          {
+            "value": "Arm swelling"
+          },
+          {
+            "value": "Calf swelling"
+          },
+          {
+            "value": "Ear swelling"
+          },
+          {
+            "value": "Wrist swelling"
+          },
+          {
+            "value": "Maroon stools"
+          },
+          {
+            "value": "Arm cut (laceration)"
+          },
+          {
+            "value": "Hand cut (laceration)"
+          },
+          {
+            "value": "Leg cut (laceration)"
+          },
+          {
+            "value": "Foot cut (laceration)"
+          },
+          {
+            "value": "Arm itching"
+          },
+          {
+            "value": "Hand redness"
+          },
+          {
+            "value": "Foot redness"
+          },
+          {
+            "value": "Arm redness"
+          },
+          {
+            "value": "Leg redness"
+          },
+          {
+            "value": "Hand itching"
+          },
+          {
+            "value": "Leg itching"
+          },
+          {
+            "value": "Steatorrhea (Excess fat in stool)"
+          },
+          {
+            "value": "Upper leg pain"
+          },
+          {
+            "value": "Armpit pain"
+          },
+          {
+            "value": "Sweating"
+          },
+          {
+            "value": "Nasal congestion"
+          },
+          {
+            "value": "Joint stiffness"
+          },
+          {
+            "value": "Skin sores"
+          },
+          {
+            "value": "Chest burning"
+          },
+          {
+            "value": "Memory loss"
+          },
+          {
+            "value": "Arm numbness (paresthesias)"
+          },
+          {
+            "value": "Leg numbness (paresthesias)"
+          },
+          {
+            "value": "Foot numbness (paresthesias)"
+          },
+          {
+            "value": "Face numbness (paresthesias)"
+          },
+          {
+            "value": "Dementia"
+          },
+          {
+            "value": "Facial droop (weakness)"
+          },
+          {
+            "value": "Limping in a child"
+          },
+          {
+            "value": "Increased thirst"
+          },
+          {
+            "value": "Increased urination (polyuria)"
+          },
+          {
+            "value": "Shin pain"
+          },
+          {
+            "value": "Stings"
+          },
+          {
+            "value": "Sleep disorders"
+          },
+          {
+            "value": "Drooping eyelid (Ptosis)"
+          },
+          {
+            "value": "Snoring"
+          },
+          {
+            "value": "Dry skin"
+          },
+          {
+            "value": "Itchy eyes"
+          },
+          {
+            "value": "Elbow swelling"
+          },
+          {
+            "value": "Chest pain"
+          },
+          {
+            "value": "Skin infection"
+          },
+          {
+            "value": "Stomach and abdominal pain"
+          },
+          {
+            "value": "Anger"
+          },
+          {
+            "value": "Hurts to breathe"
+          },
+          {
+            "value": "Difficulty breathing"
+          },
+          {
+            "value": "Pulling at ears"
+          },
+          {
+            "value": "Skin bumps"
+          },
+          {
+            "value": "Congestion in chest or lungs"
+          },
+          {
+            "value": "Discharge from ear"
+          },
+          {
+            "value": "Low back ache or pain"
+          },
+          {
+            "value": "Unusual color or odor of urine"
+          },
+          {
+            "value": "Penis inflammation or swelling"
+          },
+          {
+            "value": "Excessive appetite"
+          },
+          {
+            "value": "Retaining fluid"
+          },
+          {
+            "value": "Lump or mass of breast"
+          },
+          {
+            "value": "Neck stiffness or tightness"
+          },
+          {
+            "value": "Agitated"
+          },
+          {
+            "value": "Confusion"
+          },
+          {
+            "value": "Headache and weakness"
+          },
+          {
+            "value": "Confusion and headache"
+          },
+          {
+            "value": "Nipple discharge"
+          },
+          {
+            "value": "Shoulder stiffness or tightness"
+          },
+          {
+            "value": "Arm stiffness or tightness"
+          },
+          {
+            "value": "High blood pressure"
+          },
+          {
+            "value": "High blood sugar"
+          },
+          {
+            "value": "Rapid Breathing"
+          }
+        ]
+      },
+      {
+        "version": "mvqE",
+        "name": "NO",
+        "valueSelectionStrategy": "ORIGINAL_VALUE",
+        "enumerationValues": [
+          {
+            "value": "no"
+          },
+          {
+            "value": "naw"
+          },
+          {
+            "value": "nope"
+          }
+        ]
+      }
+    ],
+    "childDirected": false,
+    "locale": "en-US",
+    "abortStatement": {
+      "messages": [
+        {
+          "contentType": "SSML",
+          "content": "<speak>Ok, goodbye.</speak>"
+        }
+      ]
+    }
+  },
+  "metadata": {
+    "schemaVersion": "1.0",
+    "importType": "LEX",
+    "importFormat": "JSON"
+  }
+}

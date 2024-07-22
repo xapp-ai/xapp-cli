@@ -1,0 +1,51 @@
+{
+  "__typename": "Handler",
+  "appId": "veritone",
+  "intentId": "CancelIntent",
+  "organizationId": "veritone",
+  "createdAt": "2019-05-22T16:45:18.413Z",
+  "name": "🚫 Global Cancel",
+  "langCode": "en-US",
+  "utterancePatterns": [
+    "cancel {please|}"
+  ],
+  "dialogflowId": "projects/veritone-c4d4e/agent/intents/f5e59388-5ab5-4bab-b992-f7f3b034773d",
+  "type": "InSessionIntent",
+  "defaultLocale": null,
+  "graphCoords": {
+    "x": 790,
+    "y": 120,
+    "__typename": "GraphCoords"
+  },
+  "permissions": null,
+  "slots": [],
+  "content": [
+    {
+      "__typename": "HandlerContent",
+      "key": "CancelIntent",
+      "handlerResponse": [
+        {
+          "__typename": "SimpleHandlerResponse",
+          "displays": null,
+          "outputSpeech": {
+            "ssml": "<speak>Ok, goodbye.</speak>",
+            "textToSpeech": null,
+            "displayText": "Ok, goodbye.",
+            "suggestions": [],
+            "__typename": "ResponseOutput"
+          },
+          "segments": null,
+          "reprompt": null,
+          "name": "Goodbye",
+          "tag": null,
+          "system": null,
+          "data": null,
+          "conditions": null
+        }
+      ]
+    }
+  ],
+  "data": {},
+  "forward": [],
+  "redirect": null
+}

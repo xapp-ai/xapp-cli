@@ -1,0 +1,32 @@
+{
+  "__typename": "Intent",
+  "appId": "veritone",
+  "intentId": "GoPlay",
+  "organizationId": "veritone",
+  "createdAt": "2020-02-12T17:48:13.169Z",
+  "name": "▶️ Go Play",
+  "langCode": "en-US",
+  "utterancePatterns": [
+    "{play|go} ${back_forward}",
+    "{play|go} ${back_forward} ${duration}",
+    "{play|go} ${duration} ${back_forward}"
+  ],
+  "dialogflowId": "projects/veritone-c4d4e/agent/intents/953901be-6229-4f08-ba87-3fad30811b1a",
+  "defaultLocale": null,
+  "permissions": null,
+  "slotTypes": {},
+  "slots": [
+    {
+      "__typename": "Slot",
+      "name": "duration",
+      "type": "STENTOR.DURATION",
+      "isList": null
+    },
+    {
+      "__typename": "Slot",
+      "name": "back_forward",
+      "type": "DIRECTION",
+      "isList": null
+    }
+  ]
+}

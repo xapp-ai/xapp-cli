@@ -1,0 +1,49 @@
+{
+  "__typename": "Handler",
+  "appId": "veritone",
+  "intentId": "ExternalHelpHandler",
+  "organizationId": "veritone",
+  "createdAt": "2019-07-03T19:57:29.921Z",
+  "name": "🤷 Need External Help",
+  "langCode": "en-US",
+  "utterancePatterns": [],
+  "dialogflowId": null,
+  "type": "InSessionIntent",
+  "defaultLocale": null,
+  "graphCoords": {
+    "x": 1090,
+    "y": 160,
+    "__typename": "GraphCoords"
+  },
+  "permissions": null,
+  "slots": [],
+  "content": [
+    {
+      "__typename": "HandlerContent",
+      "key": "ExternalHelpHandler",
+      "handlerResponse": [
+        {
+          "__typename": "SimpleHandlerResponse",
+          "displays": null,
+          "outputSpeech": {
+            "ssml": "<speak>Ok, I might not be able to help you then.</speak>",
+            "textToSpeech": null,
+            "displayText": "Ok, I might not be able to help you then.",
+            "suggestions": [],
+            "__typename": "ResponseOutput"
+          },
+          "segments": null,
+          "reprompt": null,
+          "name": null,
+          "tag": null,
+          "system": null,
+          "data": null,
+          "conditions": null
+        }
+      ]
+    }
+  ],
+  "data": {},
+  "forward": [],
+  "redirect": null
+}

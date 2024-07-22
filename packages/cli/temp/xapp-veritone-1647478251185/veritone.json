@@ -1,0 +1,1902 @@
+{
+  "app": {
+    "__typename": "App",
+    "_id": "veritone",
+    "appId": "veritone",
+    "name": "Veritone",
+    "description": null,
+    "summary": null,
+    "organizationId": "xapp",
+    "invocationName": null,
+    "templateType": "OC_STUDIO_STARTER_TEMPLATE",
+    "icon": "https://assets.xapp.ai/prod/xapp/veritone/icons/cf7eb2f0-4e37-4bcd-b382-0b7ae6c387cd.png",
+    "smallIcon": "https://assets.xapp.ai/prod/xapp/veritone/icons/108x108/cf7eb2f0-4e37-4bcd-b382-0b7ae6c387cd.png",
+    "largeIcon": "https://assets.xapp.ai/prod/xapp/veritone/icons/512x512/cf7eb2f0-4e37-4bcd-b382-0b7ae6c387cd.png",
+    "banner": "https://assets.xapp.ai/prod/xapp/veritone/banners/1e0cddab-afe6-47da-a3fc-62317551e286.png",
+    "largeBanner": "https://assets.xapp.ai/prod/xapp/veritone/banners/1920x1080/1e0cddab-afe6-47da-a3fc-62317551e286.png",
+    "status": null,
+    "handlers": {
+      "_id": "veritone-handlers-list",
+      "total": 13,
+      "handlers": [
+        {
+          "_id": "veritone-AIPlatform-handlers",
+          "name": "AIPlatform",
+          "intentId": "AIPlatform",
+          "type": "ConversationHandler",
+          "__typename": "GetHandlersListHandler"
+        },
+        {
+          "_id": "veritone-Discovery-handlers",
+          "name": "Discovery",
+          "intentId": "Discovery",
+          "type": "VideoHandler",
+          "__typename": "GetHandlersListHandler"
+        },
+        {
+          "_id": "veritone-Industries-handlers",
+          "name": "Industries",
+          "intentId": "Industries",
+          "type": "ConversationHandler",
+          "__typename": "GetHandlersListHandler"
+        },
+        {
+          "_id": "veritone-LeadFlow-handlers",
+          "name": "LeadFlow",
+          "intentId": "LeadFlow",
+          "type": "ConversationHandler",
+          "__typename": "GetHandlersListHandler"
+        },
+        {
+          "_id": "veritone-Solutions-handlers",
+          "name": "Solutions",
+          "intentId": "Solutions",
+          "type": "ConversationHandler",
+          "__typename": "GetHandlersListHandler"
+        },
+        {
+          "_id": "veritone-Zendesk-handlers",
+          "name": "Zendesk",
+          "intentId": "Zendesk",
+          "type": "ZendeskTicketHandler",
+          "__typename": "GetHandlersListHandler"
+        },
+        {
+          "_id": "veritone-HelpIntent-handlers",
+          "name": "ℹ️ Global Help",
+          "intentId": "HelpIntent",
+          "type": "ConversationHandler",
+          "__typename": "GetHandlersListHandler"
+        },
+        {
+          "_id": "veritone-CancelIntent-handlers",
+          "name": "❌ Cancel",
+          "intentId": "CancelIntent",
+          "type": "ConversationHandler",
+          "__typename": "GetHandlersListHandler"
+        },
+        {
+          "_id": "veritone-OCSearch-handlers",
+          "name": "❓ Search",
+          "intentId": "OCSearch",
+          "type": "QuestionAnsweringHandler",
+          "__typename": "GetHandlersListHandler"
+        },
+        {
+          "_id": "veritone-InputUnknown-handlers",
+          "name": "❔ Unknown Input",
+          "intentId": "InputUnknown",
+          "type": "ConversationHandler",
+          "__typename": "GetHandlersListHandler"
+        },
+        {
+          "_id": "veritone-ByeIntent-handlers",
+          "name": "👋 Bye",
+          "intentId": "ByeIntent",
+          "type": "ConversationHandler",
+          "__typename": "GetHandlersListHandler"
+        },
+        {
+          "_id": "veritone-LaunchRequest-handlers",
+          "name": "👋 Welcome",
+          "intentId": "LaunchRequest",
+          "type": "ConversationHandler",
+          "__typename": "GetHandlersListHandler"
+        },
+        {
+          "_id": "veritone-OCAgent-handlers",
+          "name": "💁 Agent",
+          "intentId": "OCAgent",
+          "type": "ConversationHandler",
+          "__typename": "GetHandlersListHandler"
+        }
+      ],
+      "__typename": "HandlersQuery"
+    },
+    "intents": {
+      "_id": "veritone-intents-list",
+      "total": 20,
+      "intents": [
+        {
+          "_id": "veritone-AIPlatform-intents",
+          "name": "AIPlatform",
+          "intentId": "AIPlatform",
+          "__typename": "GetIntentsListIntent"
+        },
+        {
+          "_id": "veritone-Discovery-intents",
+          "name": "Discovery",
+          "intentId": "Discovery",
+          "__typename": "GetIntentsListIntent"
+        },
+        {
+          "_id": "veritone-EmailOnly-intents",
+          "name": "EmailOnly",
+          "intentId": "EmailOnly",
+          "__typename": "GetIntentsListIntent"
+        },
+        {
+          "_id": "veritone-Industries-intents",
+          "name": "Industries",
+          "intentId": "Industries",
+          "__typename": "GetIntentsListIntent"
+        },
+        {
+          "_id": "veritone-LeadFlow-intents",
+          "name": "LeadFlow",
+          "intentId": "LeadFlow",
+          "__typename": "GetIntentsListIntent"
+        },
+        {
+          "_id": "veritone-NameOnly-intents",
+          "name": "NameOnly",
+          "intentId": "NameOnly",
+          "__typename": "GetIntentsListIntent"
+        },
+        {
+          "_id": "veritone-PhoneOnly-intents",
+          "name": "PhoneOnly",
+          "intentId": "PhoneOnly",
+          "__typename": "GetIntentsListIntent"
+        },
+        {
+          "_id": "veritone-ProductTypeOnly-intents",
+          "name": "ProductTypeOnly",
+          "intentId": "ProductTypeOnly",
+          "__typename": "GetIntentsListIntent"
+        },
+        {
+          "_id": "veritone-Solutions-intents",
+          "name": "Solutions",
+          "intentId": "Solutions",
+          "__typename": "GetIntentsListIntent"
+        },
+        {
+          "_id": "veritone-Zendesk-intents",
+          "name": "Zendesk",
+          "intentId": "Zendesk",
+          "__typename": "GetIntentsListIntent"
+        },
+        {
+          "_id": "veritone-HelpIntent-intents",
+          "name": "ℹ️ Global Help",
+          "intentId": "HelpIntent",
+          "__typename": "GetIntentsListIntent"
+        },
+        {
+          "_id": "veritone-CancelIntent-intents",
+          "name": "❌ Cancel",
+          "intentId": "CancelIntent",
+          "__typename": "GetIntentsListIntent"
+        },
+        {
+          "_id": "veritone-ByeIntent-intents",
+          "name": "👋 Bye",
+          "intentId": "ByeIntent",
+          "__typename": "GetIntentsListIntent"
+        },
+        {
+          "_id": "veritone-LaunchRequest-intents",
+          "name": "👋 Welcome",
+          "intentId": "LaunchRequest",
+          "__typename": "GetIntentsListIntent"
+        },
+        {
+          "_id": "veritone-ThatsAllIntent-intents",
+          "name": "👍 That's All",
+          "intentId": "ThatsAllIntent",
+          "__typename": "GetIntentsListIntent"
+        },
+        {
+          "_id": "veritone-OCYes-intents",
+          "name": "👍 Yes",
+          "intentId": "OCYes",
+          "__typename": "GetIntentsListIntent"
+        },
+        {
+          "_id": "veritone-OCNo-intents",
+          "name": "👎 No",
+          "intentId": "OCNo",
+          "__typename": "GetIntentsListIntent"
+        },
+        {
+          "_id": "veritone-OCAgent-intents",
+          "name": "💁 Agent",
+          "intentId": "OCAgent",
+          "__typename": "GetIntentsListIntent"
+        },
+        {
+          "_id": "veritone-RepeatIntent-intents",
+          "name": "🔁 Repeat",
+          "intentId": "RepeatIntent",
+          "__typename": "GetIntentsListIntent"
+        },
+        {
+          "_id": "veritone-StopIntent-intents",
+          "name": "🛑 Stop",
+          "intentId": "StopIntent",
+          "__typename": "GetIntentsListIntent"
+        }
+      ],
+      "__typename": "IntentsQuery"
+    },
+    "entities": {
+      "_id": "veritone-entities-list",
+      "total": 4,
+      "entities": [
+        {
+          "_id": "veritone-PRODUCTTYPE-entity",
+          "entityId": "PRODUCTTYPE",
+          "displayName": "ProductType",
+          "__typename": "GetEntitiesListEntity"
+        },
+        {
+          "_id": "veritone-AGENT-entity",
+          "entityId": "AGENT",
+          "displayName": "💁  Agent",
+          "__typename": "GetEntitiesListEntity"
+        },
+        {
+          "_id": "veritone-NO-entity",
+          "entityId": "NO",
+          "displayName": "🙅‍♀️ No",
+          "__typename": "GetEntitiesListEntity"
+        },
+        {
+          "_id": "veritone-YES-entity",
+          "entityId": "YES",
+          "displayName": "🙆‍♀️ Yes",
+          "__typename": "GetEntitiesListEntity"
+        }
+      ],
+      "__typename": "EntitiesQuery"
+    },
+    "content": {
+      "__typename": "TotalWebContent",
+      "total": 821,
+      "content": [
+        {
+          "__typename": "WebContentWithHighlights",
+          "_id": "591196159::faq_content_v1::content",
+          "name": "/resources/investor-faqs/default.aspx",
+          "url": "https://investors.veritone.com/resources/investor-faqs/default.aspx"
+        },
+        {
+          "__typename": "WebContentWithHighlights",
+          "_id": "1857605823::faq_content_v1::content",
+          "name": "/blog/page/10",
+          "url": "https://www.veritone.com/blog/page/10"
+        },
+        {
+          "__typename": "WebContentWithHighlights",
+          "_id": "366988283::faq_content_v1::content",
+          "name": "/blog/author/ben-howell",
+          "url": "https://www.veritone.com/blog/author/ben-howell"
+        },
+        {
+          "__typename": "WebContentWithHighlights",
+          "_id": "240484358::faq_content_v1::content",
+          "name": "/events/temper-your-cabin-fever-tune-into-veritones-live-webinar-series-proven-ai-for-me",
+          "url": "https://www.veritone.com/events/temper-your-cabin-fever-tune-into-veritones-live-webinar-series-proven-ai-for-me"
+        },
+        {
+          "__typename": "WebContentWithHighlights",
+          "_id": "1857605824::faq_content_v1::content",
+          "name": "/blog/page/11",
+          "url": "https://www.veritone.com/blog/page/11"
+        },
+        {
+          "__typename": "WebContentWithHighlights",
+          "_id": "-199296956::faq_content_v1::content",
+          "name": "/blog/webinar-replay-how-ai-transforms-contact-centers-in-the-age-of-covid",
+          "url": "https://www.veritone.com/blog/webinar-replay-how-ai-transforms-contact-centers-in-the-age-of-covid"
+        },
+        {
+          "__typename": "WebContentWithHighlights",
+          "_id": "1044824355::faq_content_v1::content",
+          "name": "/blog/webinar-replay-using-predictive-ai-to-optimize-the-grid",
+          "url": "https://www.veritone.com/blog/webinar-replay-using-predictive-ai-to-optimize-the-grid"
+        },
+        {
+          "__typename": "WebContentWithHighlights",
+          "_id": "-624653835::faq_content_v1::content",
+          "name": "/blog/webinar-replay-how-ai-is-helping-public-safety-agencies-demonstrate-greater-transparency",
+          "url": "https://www.veritone.com/blog/webinar-replay-how-ai-is-helping-public-safety-agencies-demonstrate-greater-transparency"
+        },
+        {
+          "__typename": "WebContentWithHighlights",
+          "_id": "1700302437::faq_content_v1::content",
+          "name": "/blog/webinar-replay-building-trust-in-your-ai",
+          "url": "https://www.veritone.com/blog/webinar-replay-building-trust-in-your-ai"
+        },
+        {
+          "__typename": "WebContentWithHighlights",
+          "_id": "-2018287207::faq_content_v1::content",
+          "name": "/blog/page/9",
+          "url": "https://www.veritone.com/blog/page/9"
+        }
+      ]
+    },
+    "contentSources": {
+      "__typename": "TotalWebContentSources",
+      "total": 2,
+      "sources": [
+        {
+          "__typename": "WebContentSources",
+          "webUrl": "https://investors.veritone.com/resources/investor-faqs/default.aspx",
+          "webUrlPatterns": [
+            "https://investors.veritone.com/resources/investor-faqs/default.aspx[.+]"
+          ]
+        },
+        {
+          "__typename": "WebContentSources",
+          "webUrl": "https://www.veritone.com/",
+          "webUrlPatterns": [
+            "https://[(www.)?]veritone.com[.+]"
+          ]
+        }
+      ]
+    },
+    "faq": {
+      "total": 0,
+      "__typename": "TotalWebFAQ"
+    },
+    "channels": [
+      {
+        "__typename": "ChatWidgetAppChannel",
+        "id": "chat-widget-ad1487",
+        "type": "chat-widget"
+      }
+    ],
+    "analytics": {
+      "user": null,
+      "__typename": "AppAnalytics"
+    }
+  },
+  "intents": [
+    {
+      "__typename": "Intent",
+      "appId": "veritone",
+      "intentId": "AIPlatform",
+      "organizationId": "xapp",
+      "createdAt": "2022-02-22T20:13:12.166Z",
+      "name": "AIPlatform",
+      "langCode": null,
+      "utterancePatterns": [
+        "AI platform",
+        "tell me about your platform",
+        "our platform"
+      ],
+      "dialogflowId": null,
+      "defaultLocale": null,
+      "permissions": null,
+      "slotTypes": null,
+      "slots": []
+    },
+    {
+      "__typename": "Intent",
+      "appId": "veritone",
+      "intentId": "Discovery",
+      "organizationId": "xapp",
+      "createdAt": "2022-02-22T20:40:46.109Z",
+      "name": "Discovery",
+      "langCode": null,
+      "utterancePatterns": [
+        "how does discovery voice search work"
+      ],
+      "dialogflowId": null,
+      "defaultLocale": null,
+      "permissions": null,
+      "slotTypes": null,
+      "slots": []
+    },
+    {
+      "__typename": "Intent",
+      "appId": "veritone",
+      "intentId": "EmailOnly",
+      "organizationId": "xapp",
+      "createdAt": "2022-02-23T14:09:53.386Z",
+      "name": "EmailOnly",
+      "langCode": null,
+      "utterancePatterns": [
+        "{its|it is|my email is|} ${email}"
+      ],
+      "dialogflowId": null,
+      "defaultLocale": null,
+      "permissions": null,
+      "slotTypes": null,
+      "slots": [
+        {
+          "__typename": "Slot",
+          "name": "email",
+          "type": "EMAIL",
+          "isList": null,
+          "nlu": {
+            "lex-connect": {
+              "type": "AMAZON.EmailAddress"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "__typename": "Intent",
+      "appId": "veritone",
+      "intentId": "Industries",
+      "organizationId": "xapp",
+      "createdAt": "2022-02-22T20:19:12.735Z",
+      "name": "Industries",
+      "langCode": null,
+      "utterancePatterns": [
+        "{what|} industries {do you serve|}",
+        "what verticals do you serve"
+      ],
+      "dialogflowId": null,
+      "defaultLocale": null,
+      "permissions": null,
+      "slotTypes": null,
+      "slots": []
+    },
+    {
+      "__typename": "Intent",
+      "appId": "veritone",
+      "intentId": "LeadFlow",
+      "organizationId": "xapp",
+      "createdAt": "2022-02-23T14:11:40.095Z",
+      "name": "LeadFlow",
+      "langCode": null,
+      "utterancePatterns": [
+        "tell me about pricing",
+        "how much is your service",
+        "{how do I|} buy your service"
+      ],
+      "dialogflowId": null,
+      "defaultLocale": null,
+      "permissions": null,
+      "slotTypes": null,
+      "slots": []
+    },
+    {
+      "__typename": "Intent",
+      "appId": "veritone",
+      "intentId": "NameOnly",
+      "organizationId": "xapp",
+      "createdAt": "2022-02-23T13:55:49.700Z",
+      "name": "NameOnly",
+      "langCode": null,
+      "utterancePatterns": [
+        "{my name is|this is|} ${name}"
+      ],
+      "dialogflowId": null,
+      "defaultLocale": null,
+      "permissions": null,
+      "slotTypes": null,
+      "slots": [
+        {
+          "__typename": "Slot",
+          "name": "name",
+          "type": "NAME",
+          "isList": null,
+          "nlu": {
+            "lex-connect": {
+              "type": "AMAZON.US_FIRST_NAME"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "__typename": "Intent",
+      "appId": "veritone",
+      "intentId": "PhoneOnly",
+      "organizationId": "xapp",
+      "createdAt": "2022-02-23T13:58:03.307Z",
+      "name": "PhoneOnly",
+      "langCode": null,
+      "utterancePatterns": [
+        "{its|it it|my number is|} ${phone}"
+      ],
+      "dialogflowId": null,
+      "defaultLocale": null,
+      "permissions": null,
+      "slotTypes": null,
+      "slots": [
+        {
+          "__typename": "Slot",
+          "name": "phone",
+          "type": "STENTOR.PHONE_NUMBER",
+          "isList": null,
+          "nlu": null
+        }
+      ]
+    },
+    {
+      "__typename": "Intent",
+      "appId": "veritone",
+      "intentId": "ProductTypeOnly",
+      "organizationId": "xapp",
+      "createdAt": "2022-02-23T14:18:38.964Z",
+      "name": "ProductTypeOnly",
+      "langCode": null,
+      "utterancePatterns": [
+        "${productType}"
+      ],
+      "dialogflowId": null,
+      "defaultLocale": null,
+      "permissions": null,
+      "slotTypes": null,
+      "slots": [
+        {
+          "__typename": "Slot",
+          "name": "productType",
+          "type": "PRODUCTTYPE",
+          "isList": null,
+          "nlu": null
+        }
+      ]
+    },
+    {
+      "__typename": "Intent",
+      "appId": "veritone",
+      "intentId": "Solutions",
+      "organizationId": "xapp",
+      "createdAt": "2022-02-22T20:16:23.005Z",
+      "name": "Solutions",
+      "langCode": null,
+      "utterancePatterns": [
+        "solutions"
+      ],
+      "dialogflowId": null,
+      "defaultLocale": null,
+      "permissions": null,
+      "slotTypes": null,
+      "slots": []
+    },
+    {
+      "__typename": "Intent",
+      "appId": "veritone",
+      "intentId": "Zendesk",
+      "organizationId": "xapp",
+      "createdAt": "2022-02-23T14:30:38.074Z",
+      "name": "Zendesk",
+      "langCode": null,
+      "utterancePatterns": [
+        "{open a|create a|} {support|} ticket"
+      ],
+      "dialogflowId": null,
+      "defaultLocale": null,
+      "permissions": null,
+      "slotTypes": null,
+      "slots": []
+    },
+    {
+      "__typename": "Intent",
+      "appId": "veritone",
+      "intentId": "HelpIntent",
+      "organizationId": "xapp",
+      "createdAt": "2022-02-16T18:52:32.564Z",
+      "name": "ℹ️ Global Help",
+      "langCode": "en-US",
+      "utterancePatterns": [
+        "help",
+        "help please",
+        "i need help",
+        "please help"
+      ],
+      "dialogflowId": null,
+      "defaultLocale": null,
+      "permissions": null,
+      "slotTypes": null,
+      "slots": []
+    },
+    {
+      "__typename": "Intent",
+      "appId": "veritone",
+      "intentId": "CancelIntent",
+      "organizationId": "xapp",
+      "createdAt": "2022-02-16T18:52:32.534Z",
+      "name": "❌ Cancel",
+      "langCode": "en-US",
+      "utterancePatterns": [
+        "cancel",
+        "cancel please",
+        "please cancel",
+        "cancel now"
+      ],
+      "dialogflowId": null,
+      "defaultLocale": null,
+      "permissions": null,
+      "slotTypes": null,
+      "slots": []
+    },
+    {
+      "__typename": "Intent",
+      "appId": "veritone",
+      "intentId": "ByeIntent",
+      "organizationId": "xapp",
+      "createdAt": "2022-02-16T18:52:32.505Z",
+      "name": "👋 Bye",
+      "langCode": "en-US",
+      "utterancePatterns": [
+        "adios",
+        "bye bye",
+        "ciao",
+        "farewell",
+        "goodbye",
+        "see ya",
+        "see you",
+        "so long"
+      ],
+      "dialogflowId": null,
+      "defaultLocale": null,
+      "permissions": null,
+      "slotTypes": null,
+      "slots": []
+    },
+    {
+      "__typename": "Intent",
+      "appId": "veritone",
+      "intentId": "LaunchRequest",
+      "organizationId": "xapp",
+      "createdAt": "2022-02-16T18:52:32.620Z",
+      "name": "👋 Welcome",
+      "langCode": "en-US",
+      "utterancePatterns": [
+        "hello",
+        "hi",
+        "howdy",
+        "{main|} menu"
+      ],
+      "dialogflowId": null,
+      "defaultLocale": null,
+      "permissions": null,
+      "slotTypes": null,
+      "slots": []
+    },
+    {
+      "__typename": "Intent",
+      "appId": "veritone",
+      "intentId": "ThatsAllIntent",
+      "organizationId": "xapp",
+      "createdAt": "2022-02-16T18:52:32.928Z",
+      "name": "👍 That's All",
+      "langCode": "en-US",
+      "utterancePatterns": [
+        "that's all",
+        "that is all",
+        "thats all",
+        "nothing else"
+      ],
+      "dialogflowId": null,
+      "defaultLocale": null,
+      "permissions": null,
+      "slotTypes": null,
+      "slots": []
+    },
+    {
+      "__typename": "Intent",
+      "appId": "veritone",
+      "intentId": "OCYes",
+      "organizationId": "xapp",
+      "createdAt": "2022-02-16T18:52:32.841Z",
+      "name": "👍 Yes",
+      "langCode": "en-US",
+      "utterancePatterns": [
+        "${yes}",
+        "${yes} {thanks|thank you|please|}"
+      ],
+      "dialogflowId": null,
+      "defaultLocale": null,
+      "permissions": null,
+      "slotTypes": null,
+      "slots": [
+        {
+          "__typename": "Slot",
+          "name": "yes",
+          "type": "YES",
+          "isList": null,
+          "nlu": null
+        }
+      ]
+    },
+    {
+      "__typename": "Intent",
+      "appId": "veritone",
+      "intentId": "OCNo",
+      "organizationId": "xapp",
+      "createdAt": "2022-02-16T18:52:32.800Z",
+      "name": "👎 No",
+      "langCode": "en-US",
+      "utterancePatterns": [
+        "${no}",
+        "${no} {thanks| thank you|}"
+      ],
+      "dialogflowId": null,
+      "defaultLocale": null,
+      "permissions": null,
+      "slotTypes": null,
+      "slots": [
+        {
+          "__typename": "Slot",
+          "name": "no",
+          "type": "NO",
+          "isList": null,
+          "nlu": null
+        }
+      ]
+    },
+    {
+      "__typename": "Intent",
+      "appId": "veritone",
+      "intentId": "OCAgent",
+      "organizationId": "xapp",
+      "createdAt": "2022-02-16T18:52:32.696Z",
+      "name": "💁 Agent",
+      "langCode": "en-US",
+      "utterancePatterns": [
+        "${agent}",
+        "${agent} {please|now}",
+        "i {want|need} to speak to {a|an} ${agent}",
+        "give me an ${agent}"
+      ],
+      "dialogflowId": null,
+      "defaultLocale": null,
+      "permissions": null,
+      "slotTypes": null,
+      "slots": [
+        {
+          "__typename": "Slot",
+          "name": "agent",
+          "type": "AGENT",
+          "isList": null,
+          "nlu": null
+        }
+      ]
+    },
+    {
+      "__typename": "Intent",
+      "appId": "veritone",
+      "intentId": "RepeatIntent",
+      "organizationId": "xapp",
+      "createdAt": "2022-02-16T18:52:32.870Z",
+      "name": "🔁 Repeat",
+      "langCode": "en-US",
+      "utterancePatterns": [
+        "repeat",
+        "repeat please",
+        "please repeat",
+        "say that again",
+        "say again"
+      ],
+      "dialogflowId": null,
+      "defaultLocale": null,
+      "permissions": null,
+      "slotTypes": null,
+      "slots": []
+    },
+    {
+      "__typename": "Intent",
+      "appId": "veritone",
+      "intentId": "StopIntent",
+      "organizationId": "xapp",
+      "createdAt": "2022-02-16T18:52:32.898Z",
+      "name": "🛑 Stop",
+      "langCode": "en-US",
+      "utterancePatterns": [
+        "{please|} stop {please|}",
+        "{please|} off {please|}",
+        "{please|} shut up {please|}"
+      ],
+      "dialogflowId": null,
+      "defaultLocale": null,
+      "permissions": null,
+      "slotTypes": null,
+      "slots": []
+    }
+  ],
+  "handlers": [
+    {
+      "__typename": "Handler",
+      "appId": "veritone",
+      "intentId": "AIPlatform",
+      "organizationId": "xapp",
+      "createdAt": "2022-02-22T20:13:12.166Z",
+      "name": "AIPlatform",
+      "langCode": null,
+      "utterancePatterns": [
+        "AI platform",
+        "tell me about your platform",
+        "our platform"
+      ],
+      "dialogflowId": null,
+      "type": "ConversationHandler",
+      "defaultLocale": null,
+      "graphCoords": null,
+      "permissions": null,
+      "slots": [],
+      "content": [
+        {
+          "__typename": "HandlerContent",
+          "key": "AIPlatform",
+          "handlerResponse": [
+            {
+              "__typename": "SimpleHandlerResponse",
+              "displays": null,
+              "outputSpeech": {
+                "ssml": "<speak>### Transform Data into Actionable Intelligence\n\nThe aiWARE Enterprise AI platform listens, watches, analyzes, extracts, and understands the world’s information, orchestrating a diverse ecosystem of machine learning models to transform audio, video, text, and other data sources into actionable intelligence</speak>",
+                "textToSpeech": null,
+                "displayText": "### Transform Data into Actionable Intelligence\n\nThe aiWARE Enterprise AI platform listens, watches, analyzes, extracts, and understands the world’s information, orchestrating a diverse ecosystem of machine learning models to transform audio, video, text, and other data sources into actionable intelligence",
+                "suggestions": [
+                  {
+                    "__typename": "LinkOutSuggestion",
+                    "title": "Data Sheet",
+                    "url": "https://unlock.veritone.com/resource-library-aiware-overview-brief"
+                  },
+                  {
+                    "__typename": "SuggestionObject",
+                    "title": "Menu"
+                  }
+                ],
+                "__typename": "ResponseOutput"
+              },
+              "segments": null,
+              "reprompt": null,
+              "name": null,
+              "tag": null,
+              "system": null,
+              "data": null,
+              "conditions": null
+            }
+          ]
+        }
+      ],
+      "data": null,
+      "forward": [],
+      "redirect": null
+    },
+    {
+      "__typename": "Handler",
+      "appId": "veritone",
+      "intentId": "Discovery",
+      "organizationId": "xapp",
+      "createdAt": "2022-02-22T20:40:46.109Z",
+      "name": "Discovery",
+      "langCode": null,
+      "utterancePatterns": [
+        "how does discovery voice search work"
+      ],
+      "dialogflowId": null,
+      "type": "VideoHandler",
+      "defaultLocale": null,
+      "graphCoords": null,
+      "permissions": null,
+      "slots": [],
+      "content": [],
+      "data": null,
+      "forward": [],
+      "redirect": null
+    },
+    {
+      "__typename": "Handler",
+      "appId": "veritone",
+      "intentId": "Industries",
+      "organizationId": "xapp",
+      "createdAt": "2022-02-22T20:19:12.735Z",
+      "name": "Industries",
+      "langCode": null,
+      "utterancePatterns": [
+        "{what|} industries {do you serve|}",
+        "what verticals do you serve"
+      ],
+      "dialogflowId": null,
+      "type": "ConversationHandler",
+      "defaultLocale": null,
+      "graphCoords": null,
+      "permissions": null,
+      "slots": [],
+      "content": [
+        {
+          "__typename": "HandlerContent",
+          "key": "Industries",
+          "handlerResponse": [
+            {
+              "__typename": "SimpleHandlerResponse",
+              "displays": null,
+              "outputSpeech": {
+                "ssml": "<speak>### Here are some industries we serve\n\n- Energy\n- Financial Services\n- Government\n- Healthcare\n- Insurance\n- Legal and Compliance\n- Media and Entertainment\n- Retail</speak>",
+                "textToSpeech": null,
+                "displayText": "### Here are some industries we serve\n\n- Energy\n- Financial Services\n- Government\n- Healthcare\n- Insurance\n- Legal & Compliance\n- Media & Entertainment\n- Retail",
+                "suggestions": [
+                  {
+                    "__typename": "LinkOutSuggestion",
+                    "title": "More info",
+                    "url": "https://www.veritone.com/"
+                  },
+                  {
+                    "__typename": "SuggestionObject",
+                    "title": "Menu"
+                  }
+                ],
+                "__typename": "ResponseOutput"
+              },
+              "segments": null,
+              "reprompt": null,
+              "name": null,
+              "tag": null,
+              "system": null,
+              "data": null,
+              "conditions": null
+            }
+          ]
+        }
+      ],
+      "data": null,
+      "forward": [],
+      "redirect": null
+    },
+    {
+      "__typename": "Handler",
+      "appId": "veritone",
+      "intentId": "LeadFlow",
+      "organizationId": "xapp",
+      "createdAt": "2022-02-23T14:11:40.095Z",
+      "name": "LeadFlow",
+      "langCode": null,
+      "utterancePatterns": [
+        "tell me about pricing",
+        "how much is your service",
+        "{how do I|} buy your service"
+      ],
+      "dialogflowId": null,
+      "type": "ConversationHandler",
+      "defaultLocale": null,
+      "graphCoords": null,
+      "permissions": null,
+      "slots": [],
+      "content": [
+        {
+          "__typename": "HandlerContent",
+          "key": "NameOnly",
+          "handlerResponse": [
+            {
+              "__typename": "SimpleHandlerResponse",
+              "displays": null,
+              "outputSpeech": {
+                "ssml": "<speak>Nice to meet you ${name}.  Now, what's your email?</speak>",
+                "textToSpeech": null,
+                "displayText": "Nice to meet you ${name}.  Now, what's your email?",
+                "suggestions": null,
+                "__typename": "ResponseOutput"
+              },
+              "segments": null,
+              "reprompt": null,
+              "name": null,
+              "tag": null,
+              "system": null,
+              "data": null,
+              "conditions": null
+            }
+          ]
+        },
+        {
+          "__typename": "HandlerContent",
+          "key": "EmailOnly",
+          "handlerResponse": [
+            {
+              "__typename": "SimpleHandlerResponse",
+              "displays": null,
+              "outputSpeech": {
+                "ssml": "<speak>Great, what product or service are you interested in?</speak>",
+                "textToSpeech": null,
+                "displayText": "Great, what product or service are you interested in?",
+                "suggestions": [
+                  {
+                    "__typename": "SuggestionObject",
+                    "title": "Discovery"
+                  },
+                  {
+                    "__typename": "SuggestionObject",
+                    "title": "AIWare"
+                  },
+                  {
+                    "__typename": "SuggestionObject",
+                    "title": "Attribution"
+                  },
+                  {
+                    "__typename": "SuggestionObject",
+                    "title": "Redaction"
+                  }
+                ],
+                "__typename": "ResponseOutput"
+              },
+              "segments": null,
+              "reprompt": null,
+              "name": null,
+              "tag": null,
+              "system": null,
+              "data": null,
+              "conditions": null
+            }
+          ]
+        },
+        {
+          "__typename": "HandlerContent",
+          "key": "LeadFlow",
+          "handlerResponse": [
+            {
+              "__typename": "SimpleHandlerResponse",
+              "displays": null,
+              "outputSpeech": {
+                "ssml": "<speak>I can help you with that.  Let me collect a some information to help you better.  What's your name?</speak>",
+                "textToSpeech": null,
+                "displayText": "I can help you with that.  Let me collect a some information to help you better.  What's your name?",
+                "suggestions": null,
+                "__typename": "ResponseOutput"
+              },
+              "segments": null,
+              "reprompt": null,
+              "name": null,
+              "tag": null,
+              "system": null,
+              "data": null,
+              "conditions": null
+            }
+          ]
+        },
+        {
+          "__typename": "HandlerContent",
+          "key": "ProductTypeOnly",
+          "handlerResponse": [
+            {
+              "__typename": "SimpleHandlerResponse",
+              "displays": null,
+              "outputSpeech": {
+                "ssml": "<speak>Great!  Let me connect you with someone right away!\n\n---\n\n- Name: ${name}\n- Email: ${email}\n- Interested In: ${productType}</speak>",
+                "textToSpeech": null,
+                "displayText": "Great!  Let me connect you with someone right away!\n\n---\n\n- Name: ${name}\n- Email: ${email}\n- Interested In: ${productType}",
+                "suggestions": null,
+                "__typename": "ResponseOutput"
+              },
+              "segments": null,
+              "reprompt": null,
+              "name": null,
+              "tag": null,
+              "system": null,
+              "data": null,
+              "conditions": null
+            }
+          ]
+        }
+      ],
+      "data": null,
+      "forward": [],
+      "redirect": null
+    },
+    {
+      "__typename": "Handler",
+      "appId": "veritone",
+      "intentId": "Solutions",
+      "organizationId": "xapp",
+      "createdAt": "2022-02-22T20:16:23.005Z",
+      "name": "Solutions",
+      "langCode": null,
+      "utterancePatterns": [
+        "solutions"
+      ],
+      "dialogflowId": null,
+      "type": "ConversationHandler",
+      "defaultLocale": null,
+      "graphCoords": null,
+      "permissions": null,
+      "slots": [],
+      "content": [
+        {
+          "__typename": "HandlerContent",
+          "key": "Solutions",
+          "handlerResponse": [
+            {
+              "__typename": "SimpleHandlerResponse",
+              "displays": null,
+              "outputSpeech": {
+                "ssml": "<speak>Here are some of our solutions\n\n- Advertising\n- Data Management\n- Energy Management\n- Face and Voice Recognition\n- Media Management and Monetization\n- MLOPS and MODELOPS\n- Recruitement\n- Redaction\n- Transcription and Translation</speak>",
+                "textToSpeech": null,
+                "displayText": "Here are some of our solutions\n\n- Advertising\n- Data Management\n- Energy Management\n- Face & Voice Recognition\n- Media Management & Monetization\n- MLOPS & MODELOPS\n- Recruitement\n- Redaction\n- Transcription & Translation",
+                "suggestions": [
+                  {
+                    "__typename": "LinkOutSuggestion",
+                    "title": "More Info",
+                    "url": "https://www.veritone.com/"
+                  },
+                  {
+                    "__typename": "SuggestionObject",
+                    "title": "Menu"
+                  }
+                ],
+                "__typename": "ResponseOutput"
+              },
+              "segments": null,
+              "reprompt": null,
+              "name": null,
+              "tag": null,
+              "system": null,
+              "data": null,
+              "conditions": null
+            }
+          ]
+        }
+      ],
+      "data": null,
+      "forward": [],
+      "redirect": null
+    },
+    {
+      "__typename": "Handler",
+      "appId": "veritone",
+      "intentId": "Zendesk",
+      "organizationId": "xapp",
+      "createdAt": "2022-02-23T14:30:38.074Z",
+      "name": "Zendesk",
+      "langCode": null,
+      "utterancePatterns": [
+        "{open a|create a|} {support|} ticket"
+      ],
+      "dialogflowId": null,
+      "type": "ZendeskTicketHandler",
+      "defaultLocale": null,
+      "graphCoords": null,
+      "permissions": null,
+      "slots": [],
+      "content": [],
+      "data": null,
+      "forward": [],
+      "redirect": null
+    },
+    {
+      "__typename": "Handler",
+      "appId": "veritone",
+      "intentId": "HelpIntent",
+      "organizationId": "xapp",
+      "createdAt": "2022-02-16T18:52:32.564Z",
+      "name": "ℹ️ Global Help",
+      "langCode": "en-US",
+      "utterancePatterns": [
+        "help",
+        "help please",
+        "i need help",
+        "please help"
+      ],
+      "dialogflowId": null,
+      "type": "ConversationHandler",
+      "defaultLocale": null,
+      "graphCoords": null,
+      "permissions": null,
+      "slots": [],
+      "content": [
+        {
+          "__typename": "HandlerContent",
+          "key": "HelpIntent",
+          "handlerResponse": [
+            {
+              "__typename": "SimpleHandlerResponse",
+              "displays": null,
+              "outputSpeech": {
+                "ssml": "<speak>Sure, I can do my best to answer any questions you may have and if there is a question I can't answer I will direct you to the correct resources that can.  What can I help you with?</speak>",
+                "textToSpeech": null,
+                "displayText": "Sure, I can do my best to answer any questions you may have and if there is a question I can't answer I will direct you to the correct resources that can.  What can I help you with?",
+                "suggestions": [],
+                "__typename": "ResponseOutput"
+              },
+              "segments": null,
+              "reprompt": {
+                "ssml": "<speak>What question can I answer for you?</speak>",
+                "textToSpeech": null,
+                "displayText": "What question can I answer for you?",
+                "suggestions": [],
+                "__typename": "ResponseOutput"
+              },
+              "name": null,
+              "tag": null,
+              "system": null,
+              "data": null,
+              "conditions": null
+            }
+          ]
+        }
+      ],
+      "data": {},
+      "forward": null,
+      "redirect": null
+    },
+    {
+      "__typename": "Handler",
+      "appId": "veritone",
+      "intentId": "CancelIntent",
+      "organizationId": "xapp",
+      "createdAt": "2022-02-16T18:52:32.534Z",
+      "name": "❌ Cancel",
+      "langCode": "en-US",
+      "utterancePatterns": [
+        "cancel",
+        "cancel please",
+        "please cancel",
+        "cancel now"
+      ],
+      "dialogflowId": null,
+      "type": "ConversationHandler",
+      "defaultLocale": null,
+      "graphCoords": null,
+      "permissions": null,
+      "slots": [],
+      "content": [
+        {
+          "__typename": "HandlerContent",
+          "key": "CancelIntent",
+          "handlerResponse": [
+            {
+              "__typename": "SimpleHandlerResponse",
+              "displays": null,
+              "outputSpeech": {
+                "ssml": "<speak>Ok, goodbye.</speak>",
+                "textToSpeech": null,
+                "displayText": "Ok, goodbye.",
+                "suggestions": [],
+                "__typename": "ResponseOutput"
+              },
+              "segments": null,
+              "reprompt": null,
+              "name": null,
+              "tag": null,
+              "system": null,
+              "data": null,
+              "conditions": null
+            }
+          ]
+        }
+      ],
+      "data": {},
+      "forward": null,
+      "redirect": null
+    },
+    {
+      "__typename": "Handler",
+      "appId": "veritone",
+      "intentId": "OCSearch",
+      "organizationId": "xapp",
+      "createdAt": "2022-02-16T18:52:32.828Z",
+      "name": "❓ Search",
+      "langCode": "en-US",
+      "utterancePatterns": null,
+      "dialogflowId": null,
+      "type": "QuestionAnsweringHandler",
+      "defaultLocale": null,
+      "graphCoords": null,
+      "permissions": null,
+      "slots": [],
+      "content": [
+        {
+          "__typename": "HandlerContent",
+          "key": "OCSearch",
+          "handlerResponse": [
+            {
+              "__typename": "SimpleHandlerResponse",
+              "displays": null,
+              "outputSpeech": {
+                "ssml": "<speak>${TOP_FAQ.text} Any other questions?</speak>",
+                "textToSpeech": null,
+                "displayText": "${TOP_FAQ.markdownText}\n\nAny other questions?",
+                "suggestions": [
+                  {
+                    "__typename": "LinkOutSuggestion",
+                    "title": "Read More",
+                    "url": "${TOP_FAQ.source}"
+                  }
+                ],
+                "__typename": "ResponseOutput"
+              },
+              "segments": null,
+              "reprompt": {
+                "ssml": "<speak>Any other questions?</speak>",
+                "textToSpeech": null,
+                "displayText": "Any other questions?",
+                "suggestions": null,
+                "__typename": "ResponseOutput"
+              },
+              "name": null,
+              "tag": null,
+              "system": null,
+              "data": null,
+              "conditions": "!!session('TOP_FAQ')"
+            },
+            {
+              "__typename": "SimpleHandlerResponse",
+              "displays": null,
+              "outputSpeech": {
+                "ssml": "<speak>${TOP_ANSWER.text} Any other questions?</speak>",
+                "textToSpeech": null,
+                "displayText": "${TOP_ANSWER.markdownText}\n\nAny other questions?",
+                "suggestions": [
+                  {
+                    "__typename": "LinkOutSuggestion",
+                    "title": "Read More",
+                    "url": "${TOP_ANSWER.source}"
+                  }
+                ],
+                "__typename": "ResponseOutput"
+              },
+              "segments": null,
+              "reprompt": {
+                "ssml": "<speak>Any other questions?</speak>",
+                "textToSpeech": null,
+                "displayText": "Any other questions?",
+                "suggestions": null,
+                "__typename": "ResponseOutput"
+              },
+              "name": null,
+              "tag": null,
+              "system": null,
+              "data": null,
+              "conditions": "!!session('TOP_ANSWER') && !session('TOP_FAQ')"
+            },
+            {
+              "__typename": "SimpleHandlerResponse",
+              "displays": null,
+              "outputSpeech": {
+                "ssml": "<speak>Here is what I found...${SUGGESTED_ANSWER.markdownText}  Any other questions?</speak>",
+                "textToSpeech": null,
+                "displayText": "Here is what I found...\n\"${SUGGESTED_ANSWER.markdownText}\"\nAny other questions?",
+                "suggestions": [
+                  {
+                    "__typename": "LinkOutSuggestion",
+                    "title": "Read More",
+                    "url": "${SUGGESTED_ANSWER.source}"
+                  }
+                ],
+                "__typename": "ResponseOutput"
+              },
+              "segments": null,
+              "reprompt": {
+                "ssml": "<speak>Any other questions?</speak>",
+                "textToSpeech": null,
+                "displayText": "Any other questions?",
+                "suggestions": null,
+                "__typename": "ResponseOutput"
+              },
+              "name": null,
+              "tag": null,
+              "system": null,
+              "data": null,
+              "conditions": "!${$.request.device.canSpeak} && !!session('SUGGESTED_ANSWER') && !session('TOP_ANSWER') && !session('TOP_FAQ')"
+            },
+            {
+              "__typename": "SimpleHandlerResponse",
+              "displays": [
+                {
+                  "__typename": "ListDisplay",
+                  "type": "LIST",
+                  "token": null,
+                  "title": "${$.request.rawQuery}",
+                  "itemsName": "currentResult",
+                  "itemsObject": "${SEARCH_RESULTS}",
+                  "range": {
+                    "length": 3,
+                    "from": 0,
+                    "__typename": "ListDisplayRange"
+                  },
+                  "items": [
+                    {
+                      "token": "result-${index}",
+                      "synonyms": [],
+                      "image": null,
+                      "title": "${currentResult.title}",
+                      "description": "${currentResult.document}",
+                      "buttons": null,
+                      "__typename": "ListDisplayItem"
+                    }
+                  ]
+                }
+              ],
+              "outputSpeech": {
+                "ssml": "<speak>Here is what I found...</speak>",
+                "textToSpeech": null,
+                "displayText": "Sorry, I’m not sure I understood that.  I’m still learning…\nThe articles below may help.",
+                "suggestions": null,
+                "__typename": "ResponseOutput"
+              },
+              "segments": null,
+              "reprompt": {
+                "ssml": "<speak>Any other questions?</speak>",
+                "textToSpeech": null,
+                "displayText": "Any other questions?",
+                "suggestions": null,
+                "__typename": "ResponseOutput"
+              },
+              "name": null,
+              "tag": null,
+              "system": null,
+              "data": null,
+              "conditions": "!${$.request.device.canSpeak} && !!session('SEARCH_RESULTS') && !session('SUGGESTED_ANSWER') && !session('TOP_ANSWER') && !session('TOP_FAQ')"
+            },
+            {
+              "__typename": "SimpleHandlerResponse",
+              "displays": null,
+              "outputSpeech": {
+                "ssml": "<speak>I'm sorry, I don't know that one. What else can I help you with?</speak>",
+                "textToSpeech": null,
+                "displayText": "I'm sorry, I don't know that one. What else can I help you with?",
+                "suggestions": null,
+                "__typename": "ResponseOutput"
+              },
+              "segments": null,
+              "reprompt": {
+                "ssml": "<speak>What else can I help you with?</speak>",
+                "textToSpeech": null,
+                "displayText": "What else can I help you with?",
+                "suggestions": null,
+                "__typename": "ResponseOutput"
+              },
+              "name": null,
+              "tag": null,
+              "system": null,
+              "data": null,
+              "conditions": null
+            }
+          ]
+        }
+      ],
+      "data": {
+        "QNA_BOT_LONGEST_HIGHLIGHT": false,
+        "REMOVE_LEADING_LINES_WITHOUT_HIGHLIGHTS": true,
+        "REMOVE_TRAILING_LINES_WITHOUT_HIGHLIGHTS": true,
+        "FUZZY_MATCH_FAQS": true
+      },
+      "forward": null,
+      "redirect": null
+    },
+    {
+      "__typename": "Handler",
+      "appId": "veritone",
+      "intentId": "InputUnknown",
+      "organizationId": "xapp",
+      "createdAt": "2022-02-16T18:52:32.591Z",
+      "name": "❔ Unknown Input",
+      "langCode": "en-US",
+      "utterancePatterns": [],
+      "dialogflowId": null,
+      "type": "ConversationHandler",
+      "defaultLocale": null,
+      "graphCoords": null,
+      "permissions": null,
+      "slots": [],
+      "content": [
+        {
+          "__typename": "HandlerContent",
+          "key": "InputUnknown",
+          "handlerResponse": [
+            {
+              "__typename": "SimpleHandlerResponse",
+              "displays": null,
+              "outputSpeech": {
+                "ssml": "<speak>Sorry, I don't fully understand you.  Can try asking in a different way?</speak>",
+                "textToSpeech": null,
+                "displayText": "Sorry, I don't fully understand you. Can try asking in a different way?",
+                "suggestions": [
+                  {
+                    "__typename": "SuggestionObject",
+                    "title": "Help"
+                  },
+                  {
+                    "__typename": "SuggestionObject",
+                    "title": "Agent"
+                  }
+                ],
+                "__typename": "ResponseOutput"
+              },
+              "segments": null,
+              "reprompt": {
+                "ssml": "<speak>Could you try asking in a different way?</speak>",
+                "textToSpeech": null,
+                "displayText": "Could you try asking in a different way?",
+                "suggestions": [],
+                "__typename": "ResponseOutput"
+              },
+              "name": null,
+              "tag": null,
+              "system": null,
+              "data": null,
+              "conditions": null
+            }
+          ]
+        }
+      ],
+      "data": {},
+      "forward": null,
+      "redirect": null
+    },
+    {
+      "__typename": "Handler",
+      "appId": "veritone",
+      "intentId": "ByeIntent",
+      "organizationId": "xapp",
+      "createdAt": "2022-02-16T18:52:32.505Z",
+      "name": "👋 Bye",
+      "langCode": "en-US",
+      "utterancePatterns": [
+        "adios",
+        "bye bye",
+        "ciao",
+        "farewell",
+        "goodbye",
+        "see ya",
+        "see you",
+        "so long"
+      ],
+      "dialogflowId": null,
+      "type": "ConversationHandler",
+      "defaultLocale": null,
+      "graphCoords": null,
+      "permissions": null,
+      "slots": [],
+      "content": [
+        {
+          "__typename": "HandlerContent",
+          "key": "ByeIntent",
+          "handlerResponse": [
+            {
+              "__typename": "SimpleHandlerResponse",
+              "displays": null,
+              "outputSpeech": {
+                "ssml": "<speak>${BYE}</speak>",
+                "textToSpeech": null,
+                "displayText": "${BYE}",
+                "suggestions": [],
+                "__typename": "ResponseOutput"
+              },
+              "segments": [
+                {
+                  "key": "BYE",
+                  "segments": [
+                    {
+                      "segment": {
+                        "ssml": "<speak>Goodbye</speak>",
+                        "displayText": "Goodbye",
+                        "__typename": "ResponseOutput"
+                      },
+                      "__typename": "SimpleHandlerResponseSegment"
+                    },
+                    {
+                      "segment": {
+                        "ssml": "<speak>Bye</speak>",
+                        "displayText": "Bye",
+                        "__typename": "ResponseOutput"
+                      },
+                      "__typename": "SimpleHandlerResponseSegment"
+                    }
+                  ],
+                  "__typename": "HandlerResponseSegmentItem"
+                }
+              ],
+              "reprompt": null,
+              "name": null,
+              "tag": null,
+              "system": null,
+              "data": null,
+              "conditions": null
+            }
+          ]
+        }
+      ],
+      "data": {},
+      "forward": null,
+      "redirect": null
+    },
+    {
+      "__typename": "Handler",
+      "appId": "veritone",
+      "intentId": "LaunchRequest",
+      "organizationId": "xapp",
+      "createdAt": "2022-02-16T18:52:32.620Z",
+      "name": "👋 Welcome",
+      "langCode": "en-US",
+      "utterancePatterns": [
+        "hello",
+        "hi",
+        "howdy",
+        "{main|} menu"
+      ],
+      "dialogflowId": null,
+      "type": "ConversationHandler",
+      "defaultLocale": null,
+      "graphCoords": null,
+      "permissions": null,
+      "slots": [],
+      "content": [
+        {
+          "__typename": "HandlerContent",
+          "key": "LaunchRequest",
+          "handlerResponse": [
+            {
+              "__typename": "SimpleHandlerResponse",
+              "displays": [
+                {
+                  "__typename": "ListDisplay",
+                  "type": "LIST",
+                  "token": null,
+                  "title": null,
+                  "itemsName": null,
+                  "itemsObject": null,
+                  "range": null,
+                  "items": [
+                    {
+                      "token": null,
+                      "synonyms": null,
+                      "image": {
+                        "url": "https://petehaas.s3.amazonaws.com/images/xapp/Veritone/veritone-logo-01.png",
+                        "urlIcon": null,
+                        "imageActionUrl": null,
+                        "accessibilityText": null,
+                        "width": null,
+                        "height": null,
+                        "__typename": "ListDisplayImage"
+                      },
+                      "title": "Our Platform",
+                      "description": "Learn about AIWare",
+                      "buttons": null,
+                      "__typename": "ListDisplayItem"
+                    },
+                    {
+                      "token": null,
+                      "synonyms": null,
+                      "image": {
+                        "url": "https://petehaas.s3.amazonaws.com/images/xapp/Veritone/veritone-logo-01.png",
+                        "urlIcon": null,
+                        "imageActionUrl": null,
+                        "accessibilityText": null,
+                        "width": null,
+                        "height": null,
+                        "__typename": "ListDisplayImage"
+                      },
+                      "title": "Solutions",
+                      "description": "Our suite of AI solutions",
+                      "buttons": null,
+                      "__typename": "ListDisplayItem"
+                    },
+                    {
+                      "token": null,
+                      "synonyms": null,
+                      "image": {
+                        "url": "https://petehaas.s3.amazonaws.com/images/xapp/Veritone/veritone-logo-01.png",
+                        "urlIcon": null,
+                        "imageActionUrl": null,
+                        "accessibilityText": null,
+                        "width": null,
+                        "height": null,
+                        "__typename": "ListDisplayImage"
+                      },
+                      "title": "Industries",
+                      "description": "The verticals we serve",
+                      "buttons": null,
+                      "__typename": "ListDisplayItem"
+                    }
+                  ]
+                }
+              ],
+              "outputSpeech": {
+                "ssml": "<speak>Welcome to Veritone! 👋\n\nHow can I help you?</speak>",
+                "textToSpeech": null,
+                "displayText": "Welcome to Veritone! 👋\n\nHow can I help you?",
+                "suggestions": [],
+                "__typename": "ResponseOutput"
+              },
+              "segments": [],
+              "reprompt": {
+                "ssml": "<speak>What can I help you with?</speak>",
+                "textToSpeech": null,
+                "displayText": "What can I help you with?",
+                "suggestions": [],
+                "__typename": "ResponseOutput"
+              },
+              "name": null,
+              "tag": null,
+              "system": null,
+              "data": null,
+              "conditions": null
+            }
+          ]
+        }
+      ],
+      "data": {},
+      "forward": [],
+      "redirect": null
+    },
+    {
+      "__typename": "Handler",
+      "appId": "veritone",
+      "intentId": "OCAgent",
+      "organizationId": "xapp",
+      "createdAt": "2022-02-16T18:52:32.696Z",
+      "name": "💁 Agent",
+      "langCode": "en-US",
+      "utterancePatterns": [
+        "${agent}",
+        "${agent} {please|now}",
+        "i {want|need} to speak to {a|an} ${agent}",
+        "give me an ${agent}"
+      ],
+      "dialogflowId": null,
+      "type": "ConversationHandler",
+      "defaultLocale": null,
+      "graphCoords": null,
+      "permissions": null,
+      "slots": [
+        {
+          "name": "agent",
+          "type": "AGENT",
+          "isList": null,
+          "nlu": null,
+          "_id": "agent-AGENT",
+          "__typename": "Slot"
+        }
+      ],
+      "content": [
+        {
+          "__typename": "HandlerContent",
+          "key": "OCAgent",
+          "handlerResponse": [
+            {
+              "__typename": "SimpleHandlerResponse",
+              "displays": null,
+              "outputSpeech": {
+                "ssml": "<speak>I'm sorry, an agent isn't available at this time.  Is there anything else I can try to help you with?</speak>",
+                "textToSpeech": null,
+                "displayText": "I'm sorry, an agent isn't available at this time.  Is there anything else I can try to help you with?",
+                "suggestions": [],
+                "__typename": "ResponseOutput"
+              },
+              "segments": null,
+              "reprompt": {
+                "ssml": "<speak>Is there anything else I can try to help you with?</speak>",
+                "textToSpeech": null,
+                "displayText": "Is there anything else I can try to help you with?",
+                "suggestions": [],
+                "__typename": "ResponseOutput"
+              },
+              "name": null,
+              "tag": null,
+              "system": null,
+              "data": null,
+              "conditions": null
+            }
+          ]
+        }
+      ],
+      "data": null,
+      "forward": null,
+      "redirect": null
+    }
+  ],
+  "entities": [
+    {
+      "entityId": "PRODUCTTYPE",
+      "displayName": "ProductType",
+      "values": [
+        {
+          "name": "Discovery",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "AIWare",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "Redaction",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "Attribution",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        }
+      ],
+      "__typename": "Entity"
+    },
+    {
+      "entityId": "AGENT",
+      "displayName": "💁  Agent",
+      "values": [
+        {
+          "name": "agent",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "representative",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "associate",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "live person",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        }
+      ],
+      "__typename": "Entity"
+    },
+    {
+      "entityId": "NO",
+      "displayName": "🙅‍♀️ No",
+      "values": [
+        {
+          "name": "no",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "naw",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "nope",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        }
+      ],
+      "__typename": "Entity"
+    },
+    {
+      "entityId": "YES",
+      "displayName": "🙆‍♀️ Yes",
+      "values": [
+        {
+          "name": "yes",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "yeah",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "sure",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "yup",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        }
+      ],
+      "__typename": "Entity"
+    }
+  ]
+}

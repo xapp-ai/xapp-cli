@@ -1,0 +1,50 @@
+{
+  "__typename": "Intent",
+  "appId": "veritone",
+  "intentId": "FilterDayOfWeekIntent",
+  "organizationId": "veritone",
+  "createdAt": "2019-09-02T22:25:13.302Z",
+  "name": " 🔰 Filter Day of Week",
+  "langCode": "en-US",
+  "utterancePatterns": [
+    "it aired sometime {on the|} ${day_of_week}",
+    "{${negative_modifier} |${yes_no} |${acknowledgement} |}${filter_carrier}{ from the|} ${day_of_week}",
+    "{${negative_modifier} |${yes_no} |}{${filter_carrier} |}${day_of_week}"
+  ],
+  "dialogflowId": "projects/veritone-c4d4e/agent/intents/b7ef719d-37bd-4fa6-9283-a6a5aa66fd3a",
+  "defaultLocale": null,
+  "permissions": null,
+  "slotTypes": {},
+  "slots": [
+    {
+      "__typename": "Slot",
+      "name": "day_of_week",
+      "type": "DAY_OF_WEEK",
+      "isList": null
+    },
+    {
+      "__typename": "Slot",
+      "name": "yes_no",
+      "type": "YES_NO",
+      "isList": null
+    },
+    {
+      "__typename": "Slot",
+      "name": "filter_carrier",
+      "type": "FILTER_CARRIER",
+      "isList": null
+    },
+    {
+      "__typename": "Slot",
+      "name": "negative_modifier",
+      "type": "NEGATIVE_MODIFIER",
+      "isList": null
+    },
+    {
+      "__typename": "Slot",
+      "name": "acknowledgement",
+      "type": "ACKNOWLEDGEMENT",
+      "isList": null
+    }
+  ]
+}

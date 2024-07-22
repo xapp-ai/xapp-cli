@@ -1,0 +1,197 @@
+{
+  "app": {
+    "summary": "Pensacolas Nash FM 102.7",
+    "templateType": "RADIO_TEMPLATE",
+    "icon": "https://assets.xapp.media/prod/Cumulus-Media/WXBM-FM.png",
+    "largeIcon": "https://assets.xapp.media/prod/Cumulus-Media/512x512/WXBM-FM.png",
+    "invocationName": "nash f. m. one oh two point seven",
+    "keywords": [
+      "Nash Fm 102.7",
+      "102.7",
+      "radio",
+      "cumulus",
+      "cumulus media",
+      "XAPP",
+      "XAPPmedia",
+      "VOICE RADIO",
+      "RADIO"
+    ],
+    "testingInstructions": "We have collaborated with the owner of this content to create and publish this skill.\n\nThe signed IP rights for the app can be downloaded at: https://go.xappmedia.com/Cumulus-Media/iprights \n\nYou will be prompted to login in first. The username is \"alexa.cert@xappmedia.com\" and the password is \"S&9jDq@9\".\n\nAfter successful login, the pdf should automatically download. If it does not download, then refresh https://go.xappmedia.com/Cumulus-Media/iprights or click the link on the page to try again.",
+    "description": "Pensacolas Nash FM 102.7\n\nOnce you've enabled the skill, you can say \"Alexa, open nash f. m. one oh two point seven“ to start listening.",
+    "smallIcon": "https://assets.xapp.media/prod/Cumulus-Media/108x108/WXBM-FM.png",
+    "examplePhrases": [
+      "Alexa, open nash f. m. one oh two point seven",
+      "Alexa, pause",
+      "Alexa, resume"
+    ],
+    "name": "NASH FM 102.7",
+    "appId": "nash-fm-1027",
+    "organizationId": "Cumulus-Media"
+  },
+  "intents": [],
+  "handlers": [
+    {
+      "content": {
+        "HelpIntent": [
+          {
+            "reprompt": "<speak>During playback, you can either pause or resume</speak>",
+            "outputSpeech": "<speak>During playback, you can either pause or resume</speak>"
+          }
+        ]
+      },
+      "intentId": "HelpIntent",
+      "name": "Help",
+      "data": {},
+      "type": "HandlerIntent"
+    },
+    {
+      "content": {
+        "LaunchRequest": [
+          {
+            "name": "Ryan Andrew",
+            "outputSpeech": {
+              "ssml": "<speak><audio src='https://s3.amazonaws.com/xapp-stentor-assets/prod/Cumulus-Media/nash-fm-1027/ryan-andrew-alexassml.mp3' /></speak>"
+            }
+          },
+          {
+            "name": "Matt Fisher",
+            "schedule": {
+              "duration": {
+                "format": "h",
+                "amount": "4"
+              },
+              "start": {
+                "format": "H:mm",
+                "timeZone": "America/Chicago",
+                "time": "15:00",
+                "dayOfWeek": "123456"
+              }
+            },
+            "outputSpeech": {
+              "ssml": "<speak><audio src='https://s3.amazonaws.com/xapp-stentor-assets/prod/Cumulus-Media/nash-fm-1027/ryan-andrew-1z57AXhawb-alexassml.mp3' /></speak>"
+            }
+          },
+          {
+            "name": "Ryan Andrew",
+            "schedule": {
+              "duration": {
+                "format": "h",
+                "amount": "4"
+              },
+              "start": {
+                "format": "H:mm",
+                "timeZone": "America/Chicago",
+                "time": "15:00",
+                "dayOfWeek": "12345"
+              }
+            },
+            "outputSpeech": {
+              "ssml": "<speak><audio src='https://s3.amazonaws.com/xapp-files/Voice+Apps/Cumulus+Media/NASH+FM+102.7/Ryan+Alexa.mp3'/></speak>"
+            }
+          },
+          {
+            "name": "Ryan Andrew",
+            "schedule": {
+              "duration": {
+                "format": "h",
+                "amount": "4"
+              },
+              "start": {
+                "format": "H:mm",
+                "timeZone": "America/Chicago",
+                "time": "15:00",
+                "dayOfWeek": "12345"
+              }
+            },
+            "outputSpeech": "<speak><audio src='https://s3.amazonaws.com/xapp-files/Voice+Apps/Cumulus+Media/NASH+FM+102.7/Ryan+Alexa.mp3'/></speak>"
+          },
+          {
+            "name": "Ryan Andrew",
+            "schedule": {
+              "duration": {
+                "format": "h",
+                "amount": "4"
+              },
+              "start": {
+                "format": "H:mm",
+                "timeZone": "America/Chicago",
+                "time": "15:00",
+                "dayOfWeek": "12345"
+              }
+            },
+            "outputSpeech": "<speak><audio src='https://s3.amazonaws.com/xapp-files/Voice+Apps/Cumulus+Media/NASH+FM+102.7/Ryan+Alexa.mp3'/></speak>"
+          },
+          {
+            "name": "Ryan Andrew",
+            "schedule": {
+              "duration": {
+                "format": "h",
+                "amount": "4"
+              },
+              "start": {
+                "format": "H:mm",
+                "timeZone": "America/Chicago",
+                "time": "15:00",
+                "dayOfWeek": "12345"
+              }
+            },
+            "outputSpeech": "<speak><audio src='https://s3.amazonaws.com/xapp-files/Voice+Apps/Cumulus+Media/NASH+FM+102.7/Ryan+Alexa.mp3'/></speak>"
+          },
+          {
+            "name": "Ryan Andrew",
+            "schedule": {
+              "duration": {
+                "format": "h",
+                "amount": "4"
+              },
+              "start": {
+                "format": "H:mm",
+                "timeZone": "America/Chicago",
+                "time": "15:00",
+                "dayOfWeek": "12345"
+              }
+            },
+            "outputSpeech": "<speak><audio src='https://s3.amazonaws.com/xapp-files/Voice+Apps/Cumulus+Media/NASH+FM+102.7/Ryan+Alexa.mp3'/></speak>"
+          },
+          {
+            "name": "Ryan Andrew",
+            "schedule": {
+              "duration": {
+                "format": "h",
+                "amount": "4"
+              },
+              "start": {
+                "format": "H:mm",
+                "timeZone": "America/Chicago",
+                "time": "15:00",
+                "dayOfWeek": "12345"
+              }
+            },
+            "outputSpeech": "<speak><audio src='https://s3.amazonaws.com/xapp-files/Voice+Apps/Cumulus+Media/NASH+FM+102.7/Ryan+Alexa.mp3'/></speak>"
+          }
+        ],
+        "HelpIntent": [
+          {
+            "outputSpeech": "<speak>During playback, you can either pause or resume</speak>",
+            "reprompt": "<speak>During playback, you can either pause or resume</speak>"
+          }
+        ],
+        "CancelIntent": [
+          {
+            "outputSpeech": "<speak>Goodbye</speak>"
+          }
+        ]
+      },
+      "forward": {},
+      "data": {
+        "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/WXBMFMAAC.aac?dist=xapp-alexa"
+      },
+      "intentId": "LaunchRequest",
+      "langCode": "en-US",
+      "name": "Live Stream",
+      "type": "PlayLiveStreamIntent",
+      "utterancePatterns": []
+    }
+  ],
+  "entities": []
+}

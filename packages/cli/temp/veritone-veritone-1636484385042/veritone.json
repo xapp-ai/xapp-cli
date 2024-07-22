@@ -1,0 +1,1361 @@
+{
+  "app": {
+    "__typename": "App",
+    "_id": "veritone",
+    "appId": "veritone",
+    "name": "Veritone",
+    "description": "Search for and share your air checks on your assistant.  For Veritone customers only, account linking is required.",
+    "summary": "Veritone customers, perform your air checks on your assistant.",
+    "organizationId": "veritone",
+    "invocationName": "veritone",
+    "templateType": "CUSTOM",
+    "icon": "https://assets.xapp.media/prod/veritone/veritone/icons/c8d334c7-dc87-44d0-bef9-0779e9da1554.png",
+    "smallIcon": "https://assets.xapp.media/prod/veritone/veritone/icons/108x108/c8d334c7-dc87-44d0-bef9-0779e9da1554.png",
+    "largeIcon": "https://assets.xapp.media/prod/veritone/veritone/icons/512x512/c8d334c7-dc87-44d0-bef9-0779e9da1554.png",
+    "banner": "https://assets.xapp.media/prod/veritone/veritone/banners/df7d5675-b0ac-41da-9846-ec621f582978.png",
+    "largeBanner": "https://assets.xapp.media/prod/veritone/veritone/banners/1920x1080/df7d5675-b0ac-41da-9846-ec621f582978.png",
+    "status": {
+      "type": "Live",
+      "timestamp": "1583868010827",
+      "email": "mmm@xappmedia.com",
+      "__typename": "Status"
+    },
+    "handlers": {
+      "_id": "veritone-handlers-list",
+      "total": 14,
+      "handlers": [
+        {
+          "_id": "veritone-HelpIntent-handlers",
+          "name": "ℹ️ Global Help",
+          "intentId": "HelpIntent",
+          "type": "InSessionIntent",
+          "__typename": "GetHandlersListHandler"
+        },
+        {
+          "_id": "veritone-TutorialOneHandler-handlers",
+          "name": "ℹ️ Tutorial One",
+          "intentId": "TutorialOneHandler",
+          "type": "InSessionIntent",
+          "__typename": "GetHandlersListHandler"
+        },
+        {
+          "_id": "veritone-InputUnknown-handlers",
+          "name": "❓ Global Input Unknown",
+          "intentId": "InputUnknown",
+          "type": "InSessionIntent",
+          "__typename": "GetHandlersListHandler"
+        },
+        {
+          "_id": "veritone-AuthenticationErrorHandler-handlers",
+          "name": "❗Authentication Error",
+          "intentId": "AuthenticationErrorHandler",
+          "type": "InSessionIntent",
+          "__typename": "GetHandlersListHandler"
+        },
+        {
+          "_id": "veritone-LaunchRequest-handlers",
+          "name": "👋 Welcome",
+          "intentId": "LaunchRequest",
+          "type": "InSessionIntent",
+          "__typename": "GetHandlersListHandler"
+        },
+        {
+          "_id": "veritone-SearchHandler-handlers",
+          "name": "🔍 Search",
+          "intentId": "SearchHandler",
+          "type": "SearchHandler",
+          "__typename": "GetHandlersListHandler"
+        },
+        {
+          "_id": "veritone-SignIn-handlers",
+          "name": "🔐 Sign In Response",
+          "intentId": "SignIn",
+          "type": "InSessionIntent",
+          "__typename": "GetHandlersListHandler"
+        },
+        {
+          "_id": "veritone-FilterBrandOnly-handlers",
+          "name": "🔰 Filter Brand Only",
+          "intentId": "FilterBrandOnly",
+          "type": "InSessionIntent",
+          "__typename": "GetHandlersListHandler"
+        },
+        {
+          "_id": "veritone-FilterPersonOnly-handlers",
+          "name": "🔰 Filter Person Only",
+          "intentId": "FilterPersonOnly",
+          "type": "InSessionIntent",
+          "__typename": "GetHandlersListHandler"
+        },
+        {
+          "_id": "veritone-FilterBrandandQuery-handlers",
+          "name": "🔰Filter Brand and Query",
+          "intentId": "FilterBrandandQuery",
+          "type": "InSessionIntent",
+          "__typename": "GetHandlersListHandler"
+        },
+        {
+          "_id": "veritone-TalkTo-handlers",
+          "name": "🗣️Talk To",
+          "intentId": "TalkTo",
+          "type": "InSessionIntent",
+          "__typename": "GetHandlersListHandler"
+        },
+        {
+          "_id": "veritone-CancelIntent-handlers",
+          "name": "🚫 Global Cancel",
+          "intentId": "CancelIntent",
+          "type": "InSessionIntent",
+          "__typename": "GetHandlersListHandler"
+        },
+        {
+          "_id": "veritone-StopIntent-handlers",
+          "name": "🛑 Stop",
+          "intentId": "StopIntent",
+          "type": "InSessionIntent",
+          "__typename": "GetHandlersListHandler"
+        },
+        {
+          "_id": "veritone-ExternalHelpHandler-handlers",
+          "name": "🤷 Need External Help",
+          "intentId": "ExternalHelpHandler",
+          "type": "InSessionIntent",
+          "__typename": "GetHandlersListHandler"
+        }
+      ],
+      "__typename": "HandlersQuery"
+    },
+    "intents": {
+      "_id": "veritone-intents-list",
+      "total": 41,
+      "intents": [
+        {
+          "_id": "veritone-StartOver-intents",
+          "name": " 🔂 Start Over",
+          "intentId": "StartOver",
+          "__typename": "GetIntentsListIntent"
+        },
+        {
+          "_id": "veritone-FilterDayOfWeekIntent-intents",
+          "name": " 🔰 Filter Day of Week",
+          "intentId": "FilterDayOfWeekIntent",
+          "__typename": "GetIntentsListIntent"
+        },
+        {
+          "_id": "veritone-HelpIntent-intents",
+          "name": "ℹ️ Global Help",
+          "intentId": "HelpIntent",
+          "__typename": "GetIntentsListIntent"
+        },
+        {
+          "_id": "veritone-DoneIntent-intents",
+          "name": "⌛ Done",
+          "intentId": "DoneIntent",
+          "__typename": "GetIntentsListIntent"
+        },
+        {
+          "_id": "veritone-NextIntent-intents",
+          "name": "⏩ Next",
+          "intentId": "NextIntent",
+          "__typename": "GetIntentsListIntent"
+        },
+        {
+          "_id": "veritone-PreviousIntent-intents",
+          "name": "⏪ Previous",
+          "intentId": "PreviousIntent",
+          "__typename": "GetIntentsListIntent"
+        },
+        {
+          "_id": "veritone-PlayAgain-intents",
+          "name": "⏯️ Play Again",
+          "intentId": "PlayAgain",
+          "__typename": "GetIntentsListIntent"
+        },
+        {
+          "_id": "veritone-GoPlay-intents",
+          "name": "▶️ Go Play",
+          "intentId": "GoPlay",
+          "__typename": "GetIntentsListIntent"
+        },
+        {
+          "_id": "veritone-MoreIntent-intents",
+          "name": "♻️ More",
+          "intentId": "MoreIntent",
+          "__typename": "GetIntentsListIntent"
+        },
+        {
+          "_id": "veritone-NegativeModifierNextIntent-intents",
+          "name": "⛔ ⏩ Negative Modifier Next",
+          "intentId": "NegativeModifierNextIntent",
+          "__typename": "GetIntentsListIntent"
+        }
+      ],
+      "__typename": "IntentsQuery"
+    },
+    "entities": {
+      "_id": "veritone-entities-list",
+      "total": 23,
+      "entities": [
+        {
+          "_id": "veritone-DIRECTION-entity",
+          "entityId": "DIRECTION",
+          "displayName": "⏭️ DIRECTION",
+          "__typename": "GetEntitiesListEntity"
+        },
+        {
+          "_id": "veritone-ACKNOWLEDGEMENT-entity",
+          "entityId": "ACKNOWLEDGEMENT",
+          "displayName": "✅ Acknowledgement",
+          "__typename": "GetEntitiesListEntity"
+        },
+        {
+          "_id": "veritone-NEGATIVE_FILTER_CARRIER-entity",
+          "entityId": "NEGATIVE_FILTER_CARRIER",
+          "displayName": "❌ Negative Filter Carrier",
+          "__typename": "GetEntitiesListEntity"
+        },
+        {
+          "_id": "veritone-NEGATIVE_MODIFIER-entity",
+          "entityId": "NEGATIVE_MODIFIER",
+          "displayName": "❌ Negative Modifier",
+          "__typename": "GetEntitiesListEntity"
+        },
+        {
+          "_id": "veritone-FIELD-entity",
+          "entityId": "FIELD",
+          "displayName": "⭐ Field",
+          "__typename": "GetEntitiesListEntity"
+        },
+        {
+          "_id": "veritone-TIMEZONE-entity",
+          "entityId": "TIMEZONE",
+          "displayName": "🌐 Time Zones",
+          "__typename": "GetEntitiesListEntity"
+        },
+        {
+          "_id": "veritone-NOON___MIDNIGHT-entity",
+          "entityId": "NOON___MIDNIGHT",
+          "displayName": "🌞 Noon 🌝 Midnight",
+          "__typename": "GetEntitiesListEntity"
+        },
+        {
+          "_id": "veritone-BRANDS-entity",
+          "entityId": "BRANDS",
+          "displayName": "🍔 Brands",
+          "__typename": "GetEntitiesListEntity"
+        },
+        {
+          "_id": "veritone-YES_NO-entity",
+          "entityId": "YES_NO",
+          "displayName": "👍 Yes 👎 No",
+          "__typename": "GetEntitiesListEntity"
+        },
+        {
+          "_id": "veritone-PROFESSION-entity",
+          "entityId": "PROFESSION",
+          "displayName": "👩‍⚕️ Profession",
+          "__typename": "GetEntitiesListEntity"
+        }
+      ],
+      "__typename": "EntitiesQuery"
+    },
+    "content": {
+      "__typename": "TotalWebContent",
+      "total": 0,
+      "content": []
+    },
+    "contentSources": {
+      "__typename": "TotalWebContentSources",
+      "total": 0,
+      "sources": []
+    },
+    "faq": {
+      "total": 0,
+      "__typename": "TotalWebFAQ"
+    },
+    "channels": [
+      {
+        "__typename": "DialogflowAppChannel",
+        "id": "907db5a0-b652-467e-a096-6ac621c1d6ed",
+        "type": "dialogflow"
+      }
+    ],
+    "analytics": {
+      "user": null,
+      "__typename": "AppAnalytics"
+    }
+  },
+  "handlers": [
+    {
+      "__typename": "Intent",
+      "appId": "veritone",
+      "intentId": "StartOver",
+      "organizationId": "veritone",
+      "createdAt": "2019-08-31T21:59:16.811Z",
+      "name": " 🔂 Start Over",
+      "langCode": "en-US",
+      "utterancePatterns": [
+        "start over {please|}"
+      ],
+      "dialogflowId": "projects/veritone-c4d4e/agent/intents/24b65717-5e24-459f-9434-1acee7814852",
+      "defaultLocale": null,
+      "permissions": null,
+      "slotTypes": {},
+      "slots": []
+    },
+    {
+      "__typename": "Intent",
+      "appId": "veritone",
+      "intentId": "FilterDayOfWeekIntent",
+      "organizationId": "veritone",
+      "createdAt": "2019-09-02T22:25:13.302Z",
+      "name": " 🔰 Filter Day of Week",
+      "langCode": "en-US",
+      "utterancePatterns": [
+        "it aired sometime {on the|} ${day_of_week}",
+        "{${negative_modifier} |${yes_no} |${acknowledgement} |}${filter_carrier}{ from the|} ${day_of_week}",
+        "{${negative_modifier} |${yes_no} |}{${filter_carrier} |}${day_of_week}"
+      ],
+      "dialogflowId": "projects/veritone-c4d4e/agent/intents/b7ef719d-37bd-4fa6-9283-a6a5aa66fd3a",
+      "defaultLocale": null,
+      "permissions": null,
+      "slotTypes": {},
+      "slots": [
+        {
+          "__typename": "Slot",
+          "name": "day_of_week",
+          "type": "DAY_OF_WEEK",
+          "isList": null
+        },
+        {
+          "__typename": "Slot",
+          "name": "yes_no",
+          "type": "YES_NO",
+          "isList": null
+        },
+        {
+          "__typename": "Slot",
+          "name": "filter_carrier",
+          "type": "FILTER_CARRIER",
+          "isList": null
+        },
+        {
+          "__typename": "Slot",
+          "name": "negative_modifier",
+          "type": "NEGATIVE_MODIFIER",
+          "isList": null
+        },
+        {
+          "__typename": "Slot",
+          "name": "acknowledgement",
+          "type": "ACKNOWLEDGEMENT",
+          "isList": null
+        }
+      ]
+    },
+    {
+      "__typename": "Intent",
+      "appId": "veritone",
+      "intentId": "HelpIntent",
+      "organizationId": "veritone",
+      "createdAt": "2019-05-22T16:45:09.411Z",
+      "name": "ℹ️ Global Help",
+      "langCode": "en-US",
+      "utterancePatterns": [
+        "i need help {please|}",
+        "help {please|}"
+      ],
+      "dialogflowId": "projects/veritone-c4d4e/agent/intents/9427e292-d761-4e67-9788-8ec8aeb7243f",
+      "defaultLocale": null,
+      "permissions": null,
+      "slotTypes": {},
+      "slots": []
+    },
+    {
+      "__typename": "Intent",
+      "appId": "veritone",
+      "intentId": "DoneIntent",
+      "organizationId": "veritone",
+      "createdAt": "2019-07-16T21:01:39.602Z",
+      "name": "⌛ Done",
+      "langCode": "en-US",
+      "utterancePatterns": [
+        "i'm done for now thanks",
+        "i'm done for now",
+        "i'm done",
+        "i am done for now thanks",
+        "i am done",
+        "done for now",
+        "done for now thanks"
+      ],
+      "dialogflowId": "projects/veritone-c4d4e/agent/intents/157927cd-8686-4b85-ac7c-75bcfd68cf1e",
+      "defaultLocale": null,
+      "permissions": null,
+      "slotTypes": {},
+      "slots": []
+    },
+    {
+      "__typename": "Intent",
+      "appId": "veritone",
+      "intentId": "NextIntent",
+      "organizationId": "veritone",
+      "createdAt": "2019-06-04T03:06:43.099Z",
+      "name": "⏩ Next",
+      "langCode": "en-US",
+      "utterancePatterns": [
+        "next {one|}",
+        "play the next {one|}"
+      ],
+      "dialogflowId": "projects/veritone-c4d4e/agent/intents/f3e954be-f33d-4916-ba3b-6ce5aa5a2cd9",
+      "defaultLocale": null,
+      "permissions": null,
+      "slotTypes": {},
+      "slots": []
+    },
+    {
+      "__typename": "Intent",
+      "appId": "veritone",
+      "intentId": "PreviousIntent",
+      "organizationId": "veritone",
+      "createdAt": "2019-06-04T03:06:48.376Z",
+      "name": "⏪ Previous",
+      "langCode": "en-US",
+      "utterancePatterns": [
+        "previous {one|}",
+        "play the previous{ one| one again|}{ please|}",
+        "go back{ one|}{ please|}"
+      ],
+      "dialogflowId": "projects/veritone-c4d4e/agent/intents/9bdf549c-0f6e-450a-ab4a-17f6388f812e",
+      "defaultLocale": null,
+      "permissions": null,
+      "slotTypes": {},
+      "slots": []
+    },
+    {
+      "__typename": "Intent",
+      "appId": "veritone",
+      "intentId": "PlayAgain",
+      "organizationId": "veritone",
+      "createdAt": "2019-11-18T22:00:59.402Z",
+      "name": "⏯️ Play Again",
+      "langCode": "en-US",
+      "utterancePatterns": [
+        "play it again",
+        "hear it again",
+        "hear again",
+        "play again"
+      ],
+      "dialogflowId": "projects/veritone-c4d4e/agent/intents/038ddaa7-a56d-43b6-8a3c-af43d0b1d25f",
+      "defaultLocale": null,
+      "permissions": null,
+      "slotTypes": {},
+      "slots": []
+    },
+    {
+      "__typename": "Intent",
+      "appId": "veritone",
+      "intentId": "GoPlay",
+      "organizationId": "veritone",
+      "createdAt": "2020-02-12T17:48:13.169Z",
+      "name": "▶️ Go Play",
+      "langCode": "en-US",
+      "utterancePatterns": [
+        "{play|go} ${back_forward}",
+        "{play|go} ${back_forward} ${duration}",
+        "{play|go} ${duration} ${back_forward}"
+      ],
+      "dialogflowId": "projects/veritone-c4d4e/agent/intents/953901be-6229-4f08-ba87-3fad30811b1a",
+      "defaultLocale": null,
+      "permissions": null,
+      "slotTypes": {},
+      "slots": [
+        {
+          "__typename": "Slot",
+          "name": "duration",
+          "type": "STENTOR.DURATION",
+          "isList": null
+        },
+        {
+          "__typename": "Slot",
+          "name": "back_forward",
+          "type": "DIRECTION",
+          "isList": null
+        }
+      ]
+    },
+    {
+      "__typename": "Intent",
+      "appId": "veritone",
+      "intentId": "MoreIntent",
+      "organizationId": "veritone",
+      "createdAt": "2019-06-04T03:06:17.199Z",
+      "name": "♻️ More",
+      "langCode": "en-US",
+      "utterancePatterns": [
+        "more {please|}"
+      ],
+      "dialogflowId": "projects/veritone-c4d4e/agent/intents/63f3cf89-943a-46f2-90d0-799f693ab6d4",
+      "defaultLocale": null,
+      "permissions": null,
+      "slotTypes": {},
+      "slots": []
+    },
+    {
+      "__typename": "Intent",
+      "appId": "veritone",
+      "intentId": "NegativeModifierNextIntent",
+      "organizationId": "veritone",
+      "createdAt": "2019-07-14T19:36:20.231Z",
+      "name": "⛔ ⏩ Negative Modifier Next",
+      "langCode": "en-US",
+      "utterancePatterns": [
+        "{${negative_modifier}|${yes_no}}{ try the|} next {one|}",
+        "{${negative_modifier}|${yes_no}} play the next {one|}",
+        "{${negative_modifier}|${yes_no}} go to the next{ one|}"
+      ],
+      "dialogflowId": "projects/veritone-c4d4e/agent/intents/9af1b140-0a96-42dc-916b-5aca3d9dfbc4",
+      "defaultLocale": null,
+      "permissions": null,
+      "slotTypes": {},
+      "slots": [
+        {
+          "__typename": "Slot",
+          "name": "negative_modifier",
+          "type": "NEGATIVE_MODIFIER",
+          "isList": null
+        },
+        {
+          "__typename": "Slot",
+          "name": "yes_no",
+          "type": "YES_NO",
+          "isList": null
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "entityId": "DIRECTION",
+      "displayName": "⏭️ DIRECTION",
+      "values": [
+        {
+          "name": "forward",
+          "synonyms": [
+            "forward",
+            "after"
+          ],
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "back",
+          "synonyms": [
+            "back",
+            "backwards",
+            "before"
+          ],
+          "__typename": "EntityValue"
+        }
+      ],
+      "__typename": "Entity"
+    },
+    {
+      "entityId": "ACKNOWLEDGEMENT",
+      "displayName": "✅ Acknowledgement",
+      "values": [
+        {
+          "name": "ok",
+          "synonyms": [
+            "ok",
+            "o. k.",
+            "O. K.",
+            "okay",
+            "o k and",
+            "ok and"
+          ],
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "gotcha",
+          "synonyms": [
+            "gotcha",
+            "got it"
+          ],
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "sweet",
+          "synonyms": [
+            "sweet",
+            "cool"
+          ],
+          "__typename": "EntityValue"
+        }
+      ],
+      "__typename": "Entity"
+    },
+    {
+      "entityId": "NEGATIVE_FILTER_CARRIER",
+      "displayName": "❌ Negative Filter Carrier",
+      "values": [
+        {
+          "name": "don't show",
+          "synonyms": [
+            "don't show",
+            "do not show",
+            "don't show results",
+            "do not show results"
+          ],
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "remove",
+          "synonyms": [
+            "remove",
+            "remove results"
+          ],
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "omit",
+          "synonyms": [
+            "omit",
+            "omit results"
+          ],
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "stop showing",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        }
+      ],
+      "__typename": "Entity"
+    },
+    {
+      "entityId": "NEGATIVE_MODIFIER",
+      "displayName": "❌ Negative Modifier",
+      "values": [
+        {
+          "name": "that's not it",
+          "synonyms": [
+            "that's not it",
+            "thats not it",
+            "that is not it",
+            "no that's not it",
+            "no that is not it",
+            "thats not what i'm looking for",
+            "no thats not what i'm looking for"
+          ],
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "shit",
+          "synonyms": [
+            "shit",
+            "fuck",
+            "damn it"
+          ],
+          "__typename": "EntityValue"
+        }
+      ],
+      "__typename": "Entity"
+    },
+    {
+      "entityId": "FIELD",
+      "displayName": "⭐ Field",
+      "values": [
+        {
+          "name": "characters",
+          "synonyms": [
+            "characters",
+            "OCR",
+            "o.c.r.",
+            "optical character recognition"
+          ],
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "person",
+          "synonyms": [
+            "person",
+            "face",
+            "face recognition",
+            "space"
+          ],
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "object",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "transcript",
+          "synonyms": [
+            "transcript",
+            "keyword"
+          ],
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "logo",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        }
+      ],
+      "__typename": "Entity"
+    },
+    {
+      "entityId": "TIMEZONE",
+      "displayName": "🌐 Time Zones",
+      "values": [
+        {
+          "name": "eastern",
+          "synonyms": [
+            "eastern",
+            "eastern time",
+            "eastern standard time",
+            "eastern daylight time"
+          ],
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "central",
+          "synonyms": [
+            "central",
+            "central time",
+            "central standard time",
+            "central daylight time"
+          ],
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "mountain",
+          "synonyms": [
+            "mountain",
+            "mountain time",
+            "mountain standard time",
+            "mountain daylight time"
+          ],
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "pacific",
+          "synonyms": [
+            "pacific",
+            "pacific time",
+            "pacific standard time",
+            "pacific daylight time"
+          ],
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "alaska",
+          "synonyms": [
+            "alaska",
+            "alaska time",
+            "alaska standard time",
+            "alaska daylight time"
+          ],
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "hawaii",
+          "synonyms": [
+            "hawaii",
+            "hawaii time",
+            "hawaii standard time",
+            "hawaii daylight time"
+          ],
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "atlantic",
+          "synonyms": [
+            "atlantic",
+            "atlantic time",
+            "atlantic standard time",
+            "atlantic daylight time"
+          ],
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "american samoa",
+          "synonyms": [
+            "american samoa",
+            "american samoa time"
+          ],
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "chamorro",
+          "synonyms": [
+            "chamorro",
+            "chamorro time"
+          ],
+          "__typename": "EntityValue"
+        }
+      ],
+      "__typename": "Entity"
+    },
+    {
+      "entityId": "NOON___MIDNIGHT",
+      "displayName": "🌞 Noon 🌝 Midnight",
+      "values": [
+        {
+          "name": "noon",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "midnight",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        }
+      ],
+      "__typename": "Entity"
+    },
+    {
+      "entityId": "BRANDS",
+      "displayName": "🍔 Brands",
+      "values": [
+        {
+          "name": "geico",
+          "synonyms": [
+            "geico",
+            "geico insurance"
+          ],
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "state farm",
+          "synonyms": [
+            "state farm",
+            "state farm insurance",
+            "statefarm",
+            "statefarm insurance"
+          ],
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "1-800 flowers",
+          "synonyms": [
+            "1-800 flowers",
+            "1-800 Flowers",
+            "one eight hundred flowers"
+          ],
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "turkish airlines",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "general motors",
+          "synonyms": [
+            "general motors",
+            "g. m."
+          ],
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "comcast",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "verizon",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "a. t. and t.",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "amazon",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "charter",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "samsung",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "american express",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "walmart",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "fiat",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "chrysler",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "toyota",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "disney",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "time warner",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "capital one",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "fox",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "busch",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "mcdonalds",
+          "synonyms": [
+            "mcdonalds",
+            "mcdonald's",
+            "Mcdonald's",
+            "McDonald's"
+          ],
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "bank of america",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "target",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "nike",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "macys",
+          "synonyms": [
+            "macys",
+            "macy's"
+          ],
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "pepsi",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "honda",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "kohls",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "nissan",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "home depot",
+          "synonyms": [
+            "home depot",
+            "the home depot"
+          ],
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "lowes",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "coca cola",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "apple",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "coors",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "citigroup",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "microsoft",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "volkswagen",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "best buy",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "kroger",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "kia",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "walgreens",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "wells fargo",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "hyundai",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "netflix",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "heineken",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "kellogg",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "subaru",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "BMW",
+          "synonyms": [
+            "BMW",
+            "b. m. w."
+          ],
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "progressive",
+          "synonyms": [
+            "progressive",
+            "progressive insurance"
+          ],
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "auto zone",
+          "synonyms": [
+            "auto zone",
+            "autozone"
+          ],
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "napa",
+          "synonyms": [
+            "napa",
+            "napa auto parts"
+          ],
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "o'reilly",
+          "synonyms": [
+            "o'reilly",
+            "o'reilly auto parts"
+          ],
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "dunkin donuts",
+          "synonyms": [
+            "dunkin donuts",
+            "dunkin",
+            "dunk in"
+          ],
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "allstate",
+          "synonyms": [
+            "allstate",
+            "all state",
+            "allstate insurance"
+          ],
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "jeep",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "t-mobile",
+          "synonyms": [
+            "t-mobile",
+            "t. mobile",
+            "tee mobile",
+            "t mobile"
+          ],
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "cricket wireless",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "taco bell",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "ford",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "sleep number",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "staples",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "burger king",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "quicken loans",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "turbo tax",
+          "synonyms": [
+            "turbo tax",
+            "turbotax"
+          ],
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "mattress firm",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "subway",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "chevrolet",
+          "synonyms": [
+            "chevrolet",
+            "chevy"
+          ],
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "bud light",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "tesla",
+          "synonyms": [
+            "tesla",
+            "tesla motors"
+          ],
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "uBreakiFix",
+          "synonyms": [
+            "uBreakiFix",
+            "you break i fix"
+          ],
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "Whataburger",
+          "synonyms": [
+            "Whataburger",
+            "what a burger"
+          ],
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "jeep wrangler",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "IBM",
+          "synonyms": [
+            "IBM",
+            "i. b. m.",
+            "IBM"
+          ],
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "starbucks",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "CNN",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "veritone",
+          "synonyms": [
+            "veritone",
+            "verutum"
+          ],
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "landrover",
+          "synonyms": [
+            "landrover",
+            "land rover",
+            "landroller"
+          ],
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "tide",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        }
+      ],
+      "__typename": "Entity"
+    },
+    {
+      "entityId": "YES_NO",
+      "displayName": "👍 Yes 👎 No",
+      "values": [
+        {
+          "name": "yes",
+          "synonyms": [
+            "yes",
+            "yeah",
+            "sure"
+          ],
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "no",
+          "synonyms": [
+            "no",
+            "naw",
+            "nope"
+          ],
+          "__typename": "EntityValue"
+        }
+      ],
+      "__typename": "Entity"
+    },
+    {
+      "entityId": "PROFESSION",
+      "displayName": "👩‍⚕️ Profession",
+      "values": [
+        {
+          "name": "athlete",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "celebrity",
+          "synonyms": null,
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "tv-news-personality",
+          "synonyms": [
+            "tv-news-personality",
+            "tv news personality",
+            "t.v. news personality",
+            "news anchor"
+          ],
+          "__typename": "EntityValue"
+        },
+        {
+          "name": "foreign-dignitary",
+          "synonyms": [
+            "foreign-dignitary",
+            "foreign dignitary"
+          ],
+          "__typename": "EntityValue"
+        }
+      ],
+      "__typename": "Entity"
+    }
+  ]
+}
