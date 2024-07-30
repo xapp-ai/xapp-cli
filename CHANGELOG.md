@@ -1,3 +1,10 @@
+## [1.5.228](https://github.com/xapp-ai/xapp-cli/compare/v1.5.227...v1.5.228) (2024-07-30)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @xapp/stentor-chat-widget to v1.72.4 ([1ae97d4](https://github.com/xapp-ai/xapp-cli/commit/1ae97d418f9ad7b1fe34c52f88dd7aedf9451ed6))
+
 ## [1.5.227](https://github.com/xapp-ai/xapp-cli/compare/v1.5.226...v1.5.227) (2024-07-29)
 
 
