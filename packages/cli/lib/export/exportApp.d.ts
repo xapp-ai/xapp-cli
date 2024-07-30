@@ -1,4 +1,5 @@
-import { ExportOptions } from "../models/options";
+/*! Copyright (c) 2022, XAPP AI*/
+import { ExportOptions } from "@xapp/client";
 /**
  * Exports an app to the provided directory.
  */

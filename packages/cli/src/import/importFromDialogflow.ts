@@ -1,12 +1,11 @@
 /*! Copyright (c) 2022, XAPP AI*/
+import { getGraphQLClient, AddAppMutation, AddEntityMutation, AddIntentMutation } from "@xapp/client";
 import { DialogflowV2Service } from "@xapp/stentor-service-dialogflow";
 import log from "stentor-logger";
 
 import { getConfigProfile } from "../getConfig";
 import { getGoogleCredentials } from "../getGoogleCredentials";
 import { getUserToken } from "../getUserToken";
-import { getGraphQLClient } from "../graphql/getGraphQLClient";
-import { AddAppMutation, AddEntityMutation, AddIntentMutation } from "../graphql/mutations";
 
 export async function importFromDialogflow(credentialsPath: string, options: { organizationId: string }): Promise<void> {
 

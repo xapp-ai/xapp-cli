@@ -1,5 +1,5 @@
+import { App } from "@xapp/client";
 import { Entity, Handler, Intent } from "stentor-models";
-import { App } from "./models";
 export interface FullApp {
     app: App;
     intents?: Intent[];

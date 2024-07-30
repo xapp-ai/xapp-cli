@@ -13,7 +13,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.exportToLex = exportToLex;
-/*! Copyright (c) 2022, XAPP AI*/
 const stentor_guards_1 = require("stentor-guards");
 const stentor_logger_1 = __importDefault(require("stentor-logger"));
 const stentor_lex_lib_1 = require("@xapp/stentor-lex-lib");

@@ -23,6 +23,7 @@
   },
   "scripts": {
     "api": "lerna run api",
+    "codegen": "lerna run codegen",
     "docs": "api-documenter markdown -i ./api/json -o ./api/docs",
     "lerna": "lerna",
     "clean": "lerna run clean",

@@ -14,13 +14,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.importFromDialogflow = importFromDialogflow;
 /*! Copyright (c) 2022, XAPP AI*/
+const client_1 = require("@xapp/client");
 const stentor_service_dialogflow_1 = require("@xapp/stentor-service-dialogflow");
 const stentor_logger_1 = __importDefault(require("stentor-logger"));
 const getConfig_1 = require("../getConfig");
 const getGoogleCredentials_1 = require("../getGoogleCredentials");
 const getUserToken_1 = require("../getUserToken");
-const getGraphQLClient_1 = require("../graphql/getGraphQLClient");
-const mutations_1 = require("../graphql/mutations");
 function importFromDialogflow(credentialsPath, options) {
     return __awaiter(this, void 0, void 0, function* () {
         const { organizationId } = options;
@@ -43,8 +42,8 @@ function importFromDialogflow(credentialsPath, options) {
         stentor_logger_1.default.info(`Creating app on organization with ID ${organizationId}`);
         const token = yield (0, getUserToken_1.getUserToken)();
         const profile = yield (0, getConfig_1.getConfigProfile)();
-        const client = (0, getGraphQLClient_1.getGraphQLClient)(token, profile.basePath);
-        const appReturn = yield client.mutation(mutations_1.AddAppMutation, {
+        const client = (0, client_1.getGraphQLClient)(token, profile.basePath);
+        const appReturn = yield client.mutation(client_1.AddAppMutation, {
             app: {
                 organizationId,
                 name: app.name,
@@ -57,7 +56,7 @@ function importFromDialogflow(credentialsPath, options) {
         const addIntentPromises = intents.map((rawIntent) => {
             const intent = Object.assign({}, rawIntent);
             delete intent.dialogflowId;
-            return client.mutation(mutations_1.AddIntentMutation, {
+            return client.mutation(client_1.AddIntentMutation, {
                 appId,
                 intent
             }).toPromise();
@@ -67,7 +66,7 @@ function importFromDialogflow(credentialsPath, options) {
         const addEntityPromises = entities.map((rawEntity) => {
             const entity = Object.assign({}, rawEntity);
             delete entity.dialogflowId;
-            return client.mutation(mutations_1.AddEntityMutation, {
+            return client.mutation(client_1.AddEntityMutation, {
                 entity: {
                     appId,
                     displayName: entity.displayName,

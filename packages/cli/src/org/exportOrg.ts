@@ -1,12 +1,11 @@
 /*! Copyright (c) 2022, XAPP AI*/
+import { XAPPClient } from "@xapp/client";
+import { log } from "stentor-logger";
 
 import { existsSync, mkdirSync } from "fs";
 import { resolve } from "path";
-
 import { createObjectCsvWriter, } from "csv-writer";
-import { log } from "stentor-logger";
 
-import { XAPPClient } from "../XAPPClient";
 import { getUserToken } from "../getUserToken";
 import { getConfigProfile } from "../getConfig";
 

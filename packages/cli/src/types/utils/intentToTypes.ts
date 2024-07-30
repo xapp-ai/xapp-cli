@@ -1,6 +1,7 @@
 /*! Copyright (c) 2022, XAPP AI*/
 import { Intent } from "stentor-models";
 import { existsAndNotEmpty } from "stentor-utils";
+
 import { slotsToTypes } from "./slotsToTypes";
 
 const FS = "    ";

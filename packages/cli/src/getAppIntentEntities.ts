@@ -1,14 +1,13 @@
 /*! Copyright (c) 2022, XAPP AI*/
 import * as fs from "fs";
 
+import { App, convertGraphQLHandler } from "@xapp/client";
 import log from "stentor-logger";
 import { Entity, Handler, Intent } from "stentor-models";
 
 import { getAppId } from "./getAppId";
 import { getUserToken } from "./getUserToken";
 import { getXAPPClient } from "./getXAPPClient";
-import { App } from "./models";
-import { convertGraphQLHandler } from "./utils/convert";
 
 export interface FullApp { app: App; intents?: Intent[]; handlers?: Handler[]; entities?: Entity[]; token: string }
 

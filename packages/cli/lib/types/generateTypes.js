@@ -1,5 +1,4 @@
 "use strict";
-/*! Copyright (c) 2022, XAPP AI*/
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -11,14 +10,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.generateTypes = generateTypes;
+/*! Copyright (c) 2022, XAPP AI*/
+const stentor_utils_1 = require("stentor-utils");
+const stentor_guards_1 = require("stentor-guards");
 const stentor_logger_1 = require("stentor-logger");
 const fs_1 = require("fs");
 const path_1 = require("path");
-const getStentorApp_1 = require("../getStentorApp");
-const stentor_utils_1 = require("stentor-utils");
-const intentToTypes_1 = require("./utils/intentToTypes");
 const entityToTypes_1 = require("./utils/entityToTypes");
-const stentor_guards_1 = require("stentor-guards");
+const intentToTypes_1 = require("./utils/intentToTypes");
+const getStentorApp_1 = require("../getStentorApp");
 function generateTypes(output_1) {
     return __awaiter(this, arguments, void 0, function* (output, appId = undefined, options) {
         const { app, intents, handlers, entities } = yield (0, getStentorApp_1.getStentorApp)(appId);

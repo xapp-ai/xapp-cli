@@ -13,12 +13,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getUserToken = exports.XAPPClient = exports.getXAPPClient = exports.getStentorApp = void 0;
+exports.getUserToken = exports.getXAPPClient = exports.getStentorApp = void 0;
 /*! Copyright (c) 2022, XAPP AI*/
 require("dotenv").config(); // process the .env file
 // For the CLI, we want the log level to always be info
 process.env.STENTOR_LOG_LEVEL = "info";
 // It will only last this execution
+const client_1 = require("@xapp/client");
 const commander_1 = __importDefault(require("commander"));
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkg = require("../package.json");
@@ -38,7 +39,6 @@ const import_2 = require("./import");
 const profile_1 = require("./profile");
 const types_1 = require("./types");
 const getUserToken_1 = require("./getUserToken");
-const XAPPClient_1 = require("./XAPPClient");
 const channelLexV2_1 = require("./create/channelLexV2");
 const serve_1 = require("./serve");
 const exportOrg_1 = require("./org/exportOrg");
@@ -47,8 +47,6 @@ var getStentorApp_1 = require("./getStentorApp");
 Object.defineProperty(exports, "getStentorApp", { enumerable: true, get: function () { return getStentorApp_1.getStentorApp; } });
 var getXAPPClient_1 = require("./getXAPPClient");
 Object.defineProperty(exports, "getXAPPClient", { enumerable: true, get: function () { return getXAPPClient_1.getXAPPClient; } });
-var XAPPClient_2 = require("./XAPPClient");
-Object.defineProperty(exports, "XAPPClient", { enumerable: true, get: function () { return XAPPClient_2.XAPPClient; } });
 var getUserToken_2 = require("./getUserToken");
 Object.defineProperty(exports, "getUserToken", { enumerable: true, get: function () { return getUserToken_2.getUserToken; } });
 commander_1.default.version(pkg.version);
@@ -81,7 +79,7 @@ commander_1.default.command("whoami")
     .description("Returns the email you are currently logged in with.")
     .action(() => __awaiter(void 0, void 0, void 0, function* () {
     const userToken = yield (0, getUserToken_1.getUserToken)();
-    const profile = yield new XAPPClient_1.XAPPClient({ userToken }).getProfile();
+    const profile = yield new client_1.XAPPClient({ userToken }).getProfile();
     (0, stentor_logger_1.log)().info(`email:${profile.profile.email}`);
     (0, stentor_logger_1.log)().info(`If above is masked, run the following to unmask: STENTOR_LOG_PII=true xapp whoami`);
 }));

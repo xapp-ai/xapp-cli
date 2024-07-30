@@ -11,10 +11,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.importApp = importApp;
 /*! Copyright (c) 2022, XAPP AI*/
+const client_1 = require("@xapp/client");
 const stentor_logger_1 = require("stentor-logger");
 const getUserToken_1 = require("../getUserToken");
 const getConfig_1 = require("../getConfig");
-const XAPPClient_1 = require("../XAPPClient");
 function importApp(uri, options) {
     return __awaiter(this, void 0, void 0, function* () {
         const { organizationId } = options;
@@ -26,7 +26,7 @@ function importApp(uri, options) {
         }
         const token = yield (0, getUserToken_1.getUserToken)();
         const profile = yield (0, getConfig_1.getConfigProfile)();
-        const studioClient = new XAPPClient_1.XAPPClient({
+        const studioClient = new client_1.XAPPClient({
             userToken: token,
             url: profile.basePath
         });

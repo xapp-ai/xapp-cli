@@ -5,7 +5,7 @@ import { existsSync, readFileSync } from "fs";
 import { log } from "stentor-logger";
 import { App, Intent, Handler, Entity } from "stentor-models";
 
-import { UpdateAppInput } from "../graphql/models"
+import { UpdateAppInput } from "@xapp/client"
 
 import { getXAPPClient } from "../getXAPPClient";
 import { getUserToken } from "../getUserToken";

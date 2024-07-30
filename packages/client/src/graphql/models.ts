@@ -28,16 +28,16 @@ export type Scalars = {
   StringMap: { input: any; output: any; }
   URL: { input: any; output: any; }
   URLString: { input: any; output: any; }
-  XAPPLead_String_maxLength_50_format_email: { input: any; output: any; }
+  XAPPLead_String_maxLength_150_format_email: { input: any; output: any; }
   awsEventBusArn_String_maxLength_200_pattern_arnawsusgovcneventsaz0909eventbus: { input: any; output: any; }
   businessDescription_String_maxLength_4000: { input: any; output: any; }
-  contactName_String_maxLength_50: { input: any; output: any; }
+  contactName_String_maxLength_150: { input: any; output: any; }
   contactPhone_String_maxLength_50: { input: any; output: any; }
-  contact_String_maxLength_50_format_email: { input: any; output: any; }
+  contact_String_maxLength_150_format_email: { input: any; output: any; }
   contractDate_String_format_ISO8601: { input: any; output: any; }
   description_String_maxLength_4000: { input: any; output: any; }
   keywords_List_String_NotNull_maxLength_50: { input: any; output: any; }
-  name_String_NotNull_maxLength_50: { input: any; output: any; }
+  name_String_NotNull_maxLength_150: { input: any; output: any; }
   notes_String_maxLength_4000: { input: any; output: any; }
   settlingTimeSeconds_Int_max_5_exclusiveMin_0: { input: any; output: any; }
   templateType_String_maxLength_50: { input: any; output: any; }
@@ -587,6 +587,8 @@ export type AdminLaboratory = {
   sagemakerKnn: Scalars['JSON']['output'];
   /** Returns a spellcheck of the given sentence. */
   spellCheck: AdminSpellCheckLabResult;
+  /** Query comparison vectors databases. */
+  vectorsDatabases: VectorDatabaseQuery;
 };
 
 
@@ -698,6 +700,34 @@ export type AdminMutation = {
   webCrawler?: Maybe<WebCrawlerSettings>;
 };
 
+export type AdminPinconeResultTextResult = {
+  appId?: Maybe<Scalars['String']['output']>;
+  date?: Maybe<Scalars['String']['output']>;
+  executionId?: Maybe<Scalars['String']['output']>;
+  length?: Maybe<Scalars['Int']['output']>;
+  organizationId?: Maybe<Scalars['String']['output']>;
+  s3TextUri?: Maybe<Scalars['String']['output']>;
+  s3Uri?: Maybe<Scalars['String']['output']>;
+  text?: Maybe<Scalars['String']['output']>;
+  url?: Maybe<Scalars['String']['output']>;
+  vectorAlgorithm?: Maybe<Scalars['String']['output']>;
+};
+
+export type AdminPineconeResult = {
+  processedText: Scalars['String']['output'];
+  results: Scalars['JSON']['output'];
+  text: Scalars['String']['output'];
+  textResults: Scalars['JSON']['output'];
+  textVectors: Array<Scalars['Float']['output']>;
+  xnlu: AdminXnluResult;
+};
+
+
+export type AdminPineconeResultXnluArgs = {
+  appId: Scalars['ID']['input'];
+  prodAppId: Scalars['ID']['input'];
+};
+
 export type AdminQuery = {
   /** Returns AWS server related stats. */
   aws: AdminAwsQuery;
@@ -744,6 +774,8 @@ export type AdminUpdateAppMutation = {
   removeAllNotifications: Scalars['String']['output'];
   /** Removes a notification from the app list */
   removeNotification?: Maybe<Array<Maybe<SystemNotification>>>;
+  /** Sets the verified status of a Google PlaceId for the app to the specified value. */
+  verifyGooglePlacesId: App;
 };
 
 
@@ -763,6 +795,17 @@ export type AdminUpdateAppMutationAddNotificationArgs = {
 
 export type AdminUpdateAppMutationRemoveNotificationArgs = {
   id: Scalars['ID']['input'];
+};
+
+
+export type AdminUpdateAppMutationVerifyGooglePlacesIdArgs = {
+  googlePlacesId: Scalars['ID']['input'];
+  verified: Scalars['Boolean']['input'];
+};
+
+export type AdminXnluResult = {
+  llmResponse: Scalars['JSON']['output'];
+  ragResponse: Scalars['JSON']['output'];
 };
 
 export type AlexaAppChannel = BaseAppChannel & {
@@ -2192,17 +2235,61 @@ export type AppNluInput = {
 };
 
 export type AppPlaceDescription = {
+  /** Legacy: Use formattedAddress */
   address?: Maybe<Scalars['String']['output']>;
+  addressComponents?: Maybe<Array<AppPlaceDescriptionAddressComponent>>;
+  /** Whether or not this business has been verified to be the owner of the Google PlaceId. */
+  adminVerified?: Maybe<Scalars['Boolean']['output']>;
+  /** Allows the business to opt-out of having a book online button on their profile. */
+  bookingOptOut?: Maybe<Scalars['Boolean']['output']>;
   default?: Maybe<Scalars['Boolean']['output']>;
+  formattedAddress?: Maybe<Scalars['String']['output']>;
   name?: Maybe<Scalars['String']['output']>;
+  phone?: Maybe<Scalars['String']['output']>;
   placeId?: Maybe<Scalars['String']['output']>;
+  website?: Maybe<Scalars['URLString']['output']>;
+};
+
+export type AppPlaceDescriptionAddressComponent = {
+  /** The full text description or name of the address component as returned by the Google Places API Geocoder. */
+  longName?: Maybe<Scalars['String']['output']>;
+  /**
+   * An abbreviated textual name for the address component, if available.
+   * For example, an address component for the state of Alaska may have a longName of
+   * "Alaska" and a short_name of "AK" using the 2-letter postal abbreviation.
+   */
+  shortName?: Maybe<Scalars['String']['output']>;
+  /** An array of strings denoting the type of this address component. */
+  types?: Maybe<Array<Scalars['String']['output']>>;
+};
+
+export type AppPlaceDescriptionAddressComponentInput = {
+  /** The full text description or name of the address component as returned by the Google Places API Geocoder. */
+  longName?: InputMaybe<Scalars['String']['input']>;
+  /**
+   * An abbreviated textual name for the address component, if available.
+   * For example, an address component for the state of Alaska may have a longName of
+   * "Alaska" and a short_name of "AK" using the 2-letter postal abbreviation.
+   */
+  shortName?: InputMaybe<Scalars['String']['input']>;
+  /** An array of strings denoting the type of this address component. */
+  types?: InputMaybe<Array<Scalars['String']['input']>>;
 };
 
 export type AppPlaceDescriptionInput = {
-  address?: InputMaybe<Scalars['String']['input']>;
+  addressComponents?: InputMaybe<Array<AppPlaceDescriptionAddressComponentInput>>;
+  /**
+   * Allows the business to opt-out of having a book online button on their profile.
+   *
+   * This may take 24 hours to fully take effect.
+   */
+  bookingOptOut?: InputMaybe<Scalars['Boolean']['input']>;
   default?: InputMaybe<Scalars['Boolean']['input']>;
+  formattedAddress?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
+  phone?: InputMaybe<Scalars['String']['input']>;
   placeId?: InputMaybe<Scalars['String']['input']>;
+  website?: InputMaybe<Scalars['URLString']['input']>;
 };
 
 export type AppReferenceId = {
@@ -3549,7 +3636,7 @@ export type CreateOrganizationAppInput = {
    */
   keywords?: InputMaybe<Array<Scalars['keywords_List_String_NotNull_maxLength_50']['input']>>;
   /** The human-readable name of the app. */
-  name: Scalars['name_String_NotNull_maxLength_50']['input'];
+  name: Scalars['name_String_NotNull_maxLength_150']['input'];
   /** Type of template the app and its intents adhere to. */
   templateType?: InputMaybe<Scalars['templateType_String_maxLength_50']['input']>;
   /** Primary website for the company or division of a company that the app is representing. */
@@ -3558,16 +3645,16 @@ export type CreateOrganizationAppInput = {
 
 export type CreateOrganizationInput = {
   /** The email XAPPineer that is in charge of handling the organization's account */
-  XAPPLead?: InputMaybe<Scalars['XAPPLead_String_maxLength_50_format_email']['input']>;
+  XAPPLead?: InputMaybe<Scalars['XAPPLead_String_maxLength_150_format_email']['input']>;
   /** An event bus that is attatched to the organization to receive specific events related to the organization such as App status changes. */
   awsEventBusArn?: InputMaybe<Scalars['awsEventBusArn_String_maxLength_200_pattern_arnawsusgovcneventsaz0909eventbus']['input']>;
   /**
    * The email address of a user who can be contacted about issues
    * related to the organization.
    */
-  contact?: InputMaybe<Scalars['contact_String_maxLength_50_format_email']['input']>;
+  contact?: InputMaybe<Scalars['contact_String_maxLength_150_format_email']['input']>;
   /** The organization contact's name. */
-  contactName?: InputMaybe<Scalars['contactName_String_maxLength_50']['input']>;
+  contactName?: InputMaybe<Scalars['contactName_String_maxLength_150']['input']>;
   /** The organization contact's phone number. */
   contactPhone?: InputMaybe<Scalars['contactPhone_String_maxLength_50']['input']>;
   /**
@@ -3587,7 +3674,7 @@ export type CreateOrganizationInput = {
   /** URL for the organization's logo. */
   logoUrl?: InputMaybe<Scalars['URL']['input']>;
   /** The human-readable name of the organization. */
-  name: Scalars['name_String_NotNull_maxLength_50']['input'];
+  name: Scalars['name_String_NotNull_maxLength_150']['input'];
   /** Any notes that are related to the organization. */
   notes?: InputMaybe<Scalars['notes_String_maxLength_4000']['input']>;
   /**
@@ -4604,6 +4691,16 @@ export type FormWidgetAppChannel = BaseAppChannel & {
   autoGreeting?: Maybe<Scalars['String']['output']>;
   /** Used for autocomplete suggestions. */
   autocompleteSuggestionsUrl?: Maybe<Scalars['URLString']['output']>;
+  /** When provided, when on stand-along pages, it will display the business address */
+  businessAddress?: Maybe<Scalars['String']['output']>;
+  /** When provided, when on stand-along pages, it will display the business logo */
+  businessLogoUrl?: Maybe<Scalars['String']['output']>;
+  /** When provided, when on stand-along pages, it will display the business name */
+  businessName?: Maybe<Scalars['String']['output']>;
+  /** When provided, when on stand-along pages, it will display the business website */
+  businessWebsite?: Maybe<Scalars['String']['output']>;
+  /** When provided, for stand-alone pages, it will display the chat widget */
+  chatWidgetKey?: Maybe<Scalars['String']['output']>;
   connection?: Maybe<FormWidgetConnectionConfig>;
   /** URL for the directory listing. */
   directoryListing?: Maybe<Scalars['String']['output']>;
@@ -4611,6 +4708,14 @@ export type FormWidgetAppChannel = BaseAppChannel & {
   endPoint?: Maybe<Scalars['String']['output']>;
   /** The ID of the channel. */
   id: Scalars['String']['output'];
+  /**
+   * The ID of the intent (thus the handler) that has the content for the form.
+   *
+   * If this is provided, autoGreeting will be ignored.
+   *
+   * This is the preferred method as it doesn't require an NLU at all and is more performant.
+   */
+  intentId?: Maybe<Scalars['ID']['output']>;
   /** The key that goes in the url when retrieving the form widget to apply custom themes. */
   key?: Maybe<Scalars['String']['output']>;
   /** The display name for the channel. */
@@ -4648,6 +4753,16 @@ export type FormWidgetAppChannelInput = {
   autoGreeting?: InputMaybe<Scalars['String']['input']>;
   /** Used for autocomplete suggestions. */
   autocompleteSuggestionsUrl?: InputMaybe<Scalars['URL']['input']>;
+  /** When provided, when on stand-along pages, it will display the business address */
+  businessAddress?: InputMaybe<Scalars['String']['input']>;
+  /** When provided, when on stand-along pages, it will display the business logo */
+  businessLogoUrl?: InputMaybe<Scalars['String']['input']>;
+  /** When provided, when on stand-along pages, it will display the business name */
+  businessName?: InputMaybe<Scalars['String']['input']>;
+  /** When provided, when on stand-along pages, it will display the business website */
+  businessWebsite?: InputMaybe<Scalars['String']['input']>;
+  /** When provided, for stand-alone pages, it will display the chat widget */
+  chatWidgetKey?: InputMaybe<Scalars['String']['input']>;
   connection?: InputMaybe<FormWidgetConnectionConfigInput>;
   /** URL for the directory listing. */
   directoryListing?: InputMaybe<Scalars['String']['input']>;
@@ -4655,6 +4770,14 @@ export type FormWidgetAppChannelInput = {
   endPoint?: InputMaybe<Scalars['String']['input']>;
   /** The ID of the channel. */
   id?: InputMaybe<Scalars['String']['input']>;
+  /**
+   * The ID of the intent (thus the handler) that has the content for the form.
+   *
+   * If this is provided, autoGreeting will be ignored.
+   *
+   * This is the preferred method as it doesn't require an NLU at all and is more performant.
+   */
+  intentId?: InputMaybe<Scalars['ID']['input']>;
   /** The display name for the channel. */
   name?: InputMaybe<Scalars['String']['input']>;
   sideButtonLabel?: InputMaybe<Scalars['String']['input']>;
@@ -4771,6 +4894,20 @@ export type FormWidgetSideButtonThemeInput = {
   top?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type FormWidgetStandAloneTheme = {
+  /** Background color of the page */
+  backgroundColor?: Maybe<Scalars['String']['output']>;
+  /** Header Theme that displays the logo and business name */
+  header?: Maybe<FormWidgetTextTheme>;
+};
+
+export type FormWidgetStandAloneThemeInput = {
+  /** Background color of the page */
+  backgroundColor?: InputMaybe<Scalars['String']['input']>;
+  /** Header Theme that displays the logo and business name */
+  header?: InputMaybe<FormWidgetTextThemeInput>;
+};
+
 export type FormWidgetTextTheme = {
   backgroundColor?: Maybe<Scalars['String']['output']>;
   color?: Maybe<Scalars['String']['output']>;
@@ -4804,6 +4941,7 @@ export type FormWidgetTheme = {
   secondaryButtonColor?: Maybe<Scalars['String']['output']>;
   secondaryButtonTextColor?: Maybe<Scalars['String']['output']>;
   sideButton?: Maybe<FormWidgetSideButtonTheme>;
+  standAlone?: Maybe<FormWidgetStandAloneTheme>;
   text?: Maybe<FormWidgetTextTheme>;
 };
 
@@ -4822,6 +4960,7 @@ export type FormWidgetThemeInput = {
   secondaryButtonColor?: InputMaybe<Scalars['String']['input']>;
   secondaryButtonTextColor?: InputMaybe<Scalars['String']['input']>;
   sideButton?: InputMaybe<FormWidgetSideButtonThemeInput>;
+  standAlone?: InputMaybe<FormWidgetStandAloneThemeInput>;
   text?: InputMaybe<FormWidgetTextThemeInput>;
 };
 
@@ -5619,7 +5758,8 @@ export enum IntegrationType {
   Servicefusion = 'servicefusion',
   Servicetitan = 'servicetitan',
   Surefire = 'surefire',
-  TestCognito = 'test_cognito'
+  TestCognito = 'test_cognito',
+  Zapier = 'zapier'
 }
 
 export type IntegrationsMutation = {
@@ -5650,6 +5790,9 @@ export type IntegrationsMutationAddServiceTitanIntegrationArgs = {
   bookingProviderId: Scalars['ID']['input'];
   clientId: Scalars['ID']['input'];
   clientSecret: Scalars['String']['input'];
+  defaultBusinessUnitId: Scalars['Int']['input'];
+  defaultCampaignId: Scalars['Int']['input'];
+  defaultJobTypeId: Scalars['Int']['input'];
   serviceTitanAppId: Scalars['ID']['input'];
   tenantId: Scalars['ID']['input'];
 };
@@ -10722,6 +10865,17 @@ export type UtteranceTestUpdateMatchedSlot = {
   stringArrayValue?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /** The value of the slot if it is a string. */
   stringValue?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type VectorDatabaseQuery = {
+  pinecone: AdminPineconeResult;
+};
+
+
+export type VectorDatabaseQueryPineconeArgs = {
+  appId: Scalars['ID']['input'];
+  text: Scalars['String']['input'];
+  topK?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type WebContent = BaseWebContent & {

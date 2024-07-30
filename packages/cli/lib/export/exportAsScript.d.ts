@@ -1,5 +1,5 @@
 /*! Copyright (c) 2022, XAPP AI*/
-import { ExportOptions } from "../models/options";
+import { ExportOptions } from "@xapp/client";
 /**
  * Generates a word document of the experience.
  *

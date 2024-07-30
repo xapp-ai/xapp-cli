@@ -1,4 +1,3 @@
-/*! Copyright (c) 2022, XAPP AI*/
 export interface GenerateTypesOptions {
     header?: string;
     file?: string;

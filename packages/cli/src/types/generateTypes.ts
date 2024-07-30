@@ -1,14 +1,13 @@
 /*! Copyright (c) 2022, XAPP AI*/
-
+import { existsAndNotEmpty } from "stentor-utils";
+import { isIntent } from "stentor-guards";
 import { log } from "stentor-logger";
 import { existsSync, writeFileSync } from "fs";
 import { resolve } from "path";
-import { getStentorApp } from "../getStentorApp";
 
-import { existsAndNotEmpty } from "stentor-utils";
-import { intentToTypes } from "./utils/intentToTypes";
 import { entityToTypes } from "./utils/entityToTypes";
-import { isIntent } from "stentor-guards";
+import { intentToTypes } from "./utils/intentToTypes";
+import { getStentorApp } from "../getStentorApp";
 
 export interface GenerateTypesOptions {
     header?: string;

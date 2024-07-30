@@ -11,8 +11,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getXAPPClient = getXAPPClient;
 /*! Copyright (c) 2022, XAPP AI*/
+const client_1 = require("@xapp/client");
 const getAppId_1 = require("./getAppId");
-const XAPPClient_1 = require("./XAPPClient");
 const getConfig_1 = require("./getConfig");
 const getUserToken_1 = require("./getUserToken");
 /**
@@ -33,7 +33,7 @@ function getXAPPClient(token, appId) {
         const profile = yield (0, getConfig_1.getConfigProfile)();
         // Profile can be undefined here so we set the default if it doesn't exist
         const url = profile ? profile.basePath : "https://api.xapp.ai";
-        return new XAPPClient_1.XAPPClient({
+        return new client_1.XAPPClient({
             userToken: token,
             url
         });

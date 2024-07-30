@@ -1,5 +1,5 @@
 /*! Copyright (c) 2022, XAPP AI*/
-
+import { ExportOptions } from "@xapp/client";
 import log from "stentor-logger";
 import {
     ExportEntityAndEntityEntries,
@@ -11,7 +11,7 @@ import {
 import { existsSync, mkdirSync, writeFileSync } from "fs";
 import { resolve } from "path";
 import { getAppIntentEntities } from "../getAppIntentEntities";
-import { ExportOptions } from "../models/options";
+
 
 /**
  * Create a Dialogflow zip from the intents and the app

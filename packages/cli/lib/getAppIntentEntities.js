@@ -39,11 +39,11 @@ exports.getAppIntentEntities = getAppIntentEntities;
 exports.getAppIntentEntitiesFromExport = getAppIntentEntitiesFromExport;
 /*! Copyright (c) 2022, XAPP AI*/
 const fs = __importStar(require("fs"));
+const client_1 = require("@xapp/client");
 const stentor_logger_1 = __importDefault(require("stentor-logger"));
 const getAppId_1 = require("./getAppId");
 const getUserToken_1 = require("./getUserToken");
 const getXAPPClient_1 = require("./getXAPPClient");
-const convert_1 = require("./utils/convert");
 /**
  * Fetch the app, intents, and entities
  *
@@ -104,7 +104,7 @@ function getAppIntentEntities(appId_1) {
                 const graphQLHandlers = yield Promise.all(getHandlersPromise);
                 // convert these to the normal handler
                 handlers = graphQLHandlers.map((value) => {
-                    return (0, convert_1.convertGraphQLHandler)(value);
+                    return (0, client_1.convertGraphQLHandler)(value);
                 });
             }
             catch (err) {

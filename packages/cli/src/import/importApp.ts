@@ -1,9 +1,10 @@
 /*! Copyright (c) 2022, XAPP AI*/
+import { XAPPClient, ImportApp } from "@xapp/client";
 import { log } from "stentor-logger";
-import { ImportApp } from "../models";
+
 import { getUserToken } from "../getUserToken";
 import { getConfigProfile } from "../getConfig";
-import { XAPPClient } from "../XAPPClient";
+
 
 export async function importApp(uri: string, options: ImportApp): Promise<void> {
 

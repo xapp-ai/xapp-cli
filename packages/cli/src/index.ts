@@ -6,6 +6,7 @@ require("dotenv").config(); // process the .env file
 process.env.STENTOR_LOG_LEVEL = "info";
 // It will only last this execution
 
+import { XAPPClient, ExportOptions } from "@xapp/client";
 import program from "commander";
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkg = require("../package.json");
@@ -25,10 +26,8 @@ import { log } from "stentor-logger";
 import { importApp, importAppFromFile } from "./import";
 import { importFromDialogflow } from "./import";
 import { profile, ProfileOptions } from "./profile";
-import { ExportOptions } from "./models/options";
 import { generateTypes, GenerateTypesOptions } from "./types";
 import { getUserToken } from "./getUserToken";
-import { XAPPClient } from "./XAPPClient";
 import { createChannelLexV2 } from "./create/channelLexV2";
 import { serve } from "./serve";
 import { exportOrg } from "./org/exportOrg";
@@ -36,7 +35,6 @@ import { exportOrg } from "./org/exportOrg";
 // A couple of exports for if you use it not like a CLI
 export { getStentorApp } from "./getStentorApp";
 export { getXAPPClient } from "./getXAPPClient";
-export { XAPPClient } from "./XAPPClient";
 export { getUserToken } from "./getUserToken"
 
 program.version(pkg.version);

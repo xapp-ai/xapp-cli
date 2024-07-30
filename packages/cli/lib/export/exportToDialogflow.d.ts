@@ -1,5 +1,5 @@
 /*! Copyright (c) 2022, XAPP AI*/
-import { ExportOptions } from "../models/options";
+import { ExportOptions } from "@xapp/client";
 /**
  * Create a Dialogflow zip from the intents and the app
  *

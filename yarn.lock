@@ -3869,6 +3869,7 @@ __metadata:
     "@types/request-promise-native": 1.0.21
     "@typescript-eslint/eslint-plugin": 5.62.0
     "@typescript-eslint/parser": 5.62.0
+    "@xapp/client": 1.5.221
     "@xapp/config": 0.2.3
     "@xapp/stentor-actions-on-google": 1.62.1
     "@xapp/stentor-alexa": 1.62.1
@@ -3920,7 +3921,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@xapp/client@workspace:packages/client":
+"@xapp/client@1.5.221, @xapp/client@workspace:packages/client":
   version: 0.0.0-use.local
   resolution: "@xapp/client@workspace:packages/client"
   dependencies:
@@ -3933,8 +3934,10 @@ __metadata:
     "@graphql-codegen/typescript-urql": 4.0.0
     "@n1ru4l/graphql-live-query": 0.10.0
     "@urql/core": 3.2.2
+    chai: 5.1.1
     graphql: 16.9.0
     graphql-tag: 2.12.6
+    mocha: 10.7.0
   languageName: unknown
   linkType: soft
 

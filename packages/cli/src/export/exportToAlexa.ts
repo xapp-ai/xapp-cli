@@ -1,12 +1,12 @@
 /*! Copyright (c) 2022, XAPP AI*/
-
+import { ExportOptions } from "@xapp/client";
 import { log } from "stentor-logger";
 import { hasAudioPlayerHandlerProps } from "@xapp/stentor-handler-media";
 import { TranslateToAlexaInteractionModel, TranslateToAlexaSkillManifest } from "@xapp/stentor-alexa";
 import { existsSync, mkdirSync, writeFileSync } from "fs";
 import { resolve } from "path";
+
 import { getStentorApp } from "../getStentorApp";
-import { ExportOptions } from "../models/options";
 
 export async function exportToAlexa(targetDirectory: string, options?: ExportOptions): Promise<void> {
     const { appId } = options;

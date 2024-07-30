@@ -1,5 +1,5 @@
 /*! Copyright (c) 2022, XAPP AI*/
-
+import { ExportOptions } from "@xapp/client";
 import { isExecutablePath } from "stentor-guards";
 import { isSlotDependable, UtteranceGenerator } from "stentor-interaction-model";
 import log from "stentor-logger";
@@ -8,7 +8,7 @@ import { findValueForKey, hasForwards, toMap } from "stentor-utils";
 import { Document, Packer, PageNumberFormat } from "docx";
 import { existsSync, writeFileSync } from "fs";
 import { resolve } from "path";
-import { ExportOptions } from "../models/options";
+
 import { getStentorApp } from "../getStentorApp";
 
 const XML_REGEX = /<.*\/>/;

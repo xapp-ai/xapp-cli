@@ -1,9 +1,10 @@
 /*! Copyright (c) 2022, XAPP AI*/
+import { ExportOptions } from "@xapp/client";
 import { log } from "stentor-logger";
 import { existsSync, mkdirSync, writeFileSync } from "fs";
 import { resolve } from "path";
+
 import { getStentorApp } from "../getStentorApp";
-import { ExportOptions } from "../models/options";
 import { getXAPPClient } from "../getXAPPClient";
 import { getUserToken } from "../getUserToken";
 

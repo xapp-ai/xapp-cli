@@ -1,6 +1,7 @@
 /*! Copyright (c) 2022, XAPP AI*/
+import { XAPPClient } from "@xapp/client";
+
 import { getAppId } from "./getAppId";
-import { XAPPClient } from "./XAPPClient";
 import { getConfigProfile } from "./getConfig";
 import { getUserToken } from "./getUserToken";
 

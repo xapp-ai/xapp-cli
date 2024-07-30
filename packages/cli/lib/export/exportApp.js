@@ -10,7 +10,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.exportApp = exportApp;
-/*! Copyright (c) 2022, XAPP AI*/
 const stentor_logger_1 = require("stentor-logger");
 const fs_1 = require("fs");
 const path_1 = require("path");
