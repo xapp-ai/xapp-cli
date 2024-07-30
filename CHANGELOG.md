@@ -1,3 +1,52 @@
+## [1.5.228](https://github.com/xapp-ai/xapp-cli/compare/v1.5.227...v1.5.228) (2024-07-30)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @xapp/stentor-chat-widget to v1.72.4 ([1ae97d4](https://github.com/xapp-ai/xapp-cli/commit/1ae97d418f9ad7b1fe34c52f88dd7aedf9451ed6))
+
+## [1.5.227](https://github.com/xapp-ai/xapp-cli/compare/v1.5.226...v1.5.227) (2024-07-29)
+
+
+### Bug Fixes
+
+* **deps:** update stentor to v1.59.90 ([dc3beff](https://github.com/xapp-ai/xapp-cli/commit/dc3beff6b02e12f298388dbc9535c059d030bb20))
+
+## [1.5.226](https://github.com/xapp-ai/xapp-cli/compare/v1.5.225...v1.5.226) (2024-07-27)
+
+
+### Bug Fixes
+
+* **deps:** update stentor to v1.59.89 ([2e1c58c](https://github.com/xapp-ai/xapp-cli/commit/2e1c58ce7c939092b536a494b8f01e761e86d249))
+
+## [1.5.225](https://github.com/xapp-ai/xapp-cli/compare/v1.5.224...v1.5.225) (2024-07-26)
+
+
+### Bug Fixes
+
+* **deps:** update stentor to v1.59.88 ([408ba95](https://github.com/xapp-ai/xapp-cli/commit/408ba95c97d4c998c0e8c771c36c5b0d113f6afd))
+
+## [1.5.224](https://github.com/xapp-ai/xapp-cli/compare/v1.5.223...v1.5.224) (2024-07-25)
+
+
+### Bug Fixes
+
+* **deps:** update stentor ([e965efc](https://github.com/xapp-ai/xapp-cli/commit/e965efc4ca53f28df6f2c6f78e1133d172a8cfe7))
+
+## [1.5.223](https://github.com/xapp-ai/xapp-cli/compare/v1.5.222...v1.5.223) (2024-07-24)
+
+
+### Bug Fixes
+
+* **deps:** update stentor to v1.59.85 ([cc07f76](https://github.com/xapp-ai/xapp-cli/commit/cc07f76a960c53ae0eb983948a29807b22bfbe9f))
+
+## [1.5.222](https://github.com/xapp-ai/xapp-cli/compare/v1.5.221...v1.5.222) (2024-07-24)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @xapp/stentor-chat-widget to v1.72.1 ([a42d4e4](https://github.com/xapp-ai/xapp-cli/commit/a42d4e4f78aeff8fa003f7f29c60b1254bfe5553))
+
 ## [1.5.221](https://github.com/xapp-ai/xapp-cli/compare/v1.5.220...v1.5.221) (2024-07-22)
 
 
