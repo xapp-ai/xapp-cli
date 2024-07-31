@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.8.0](https://github.com/xapp-ai/xapp-cli/compare/v1.7.0...v1.8.0) (2024-07-31)
+
+
+### Features
+
+* Expose getToken in Client ([a9a8960](https://github.com/xapp-ai/xapp-cli/commit/a9a89600789e5987396ae19e5be8df0cf115a57c))
+
+
+
+
+
 # [1.7.0](https://github.com/xapp-ai/xapp-cli/compare/v1.6.0...v1.7.0) (2024-07-31)
 
 
