@@ -1,13 +1,13 @@
 /*! Copyright (c) 2022, XAPP AI*/
-
+import { TokenResponse } from "@xapp/client";
 import log from "stentor-logger";
 import { createHash, randomBytes } from "crypto";
 import express from "express";
 import open from "open";
 import request, { OptionsWithUrl } from "request";
+
 import { getConfig, getConfigProfile } from "./getConfig";
 import { saveConfig } from "./saveConfig";
-import { TokenResponse } from "./TokenResponse";
 
 const DEFAULT_LISTENING_PORT = 8787;
 
@@ -50,7 +50,7 @@ async function getCode(challenge: string): Promise<string> {
         });
         // Open the url
         log.info(`Opening the login page in a browser.`);
-        log.debug(`${get}`);
+        // log.debug(`${get}`);
         open(get);
     });
 }
@@ -117,60 +117,10 @@ async function getToken(code: string, verifier: string): Promise<TokenResponse> 
     });
 }
 
-export async function refreshToken(refreshToken: string): Promise<TokenResponse> {
-    return new Promise((resolve, reject) => {
-
-        const profile = getConfigProfile();
-
-        const authPath = profile.authPath || 'https://auth.xapp.ai';
-        const clientId = profile.clientId || '1h8mjojsn6k3vup08uk91rgagm';
-        const tokenPath = profile.tokenPath || "oauth2/token"
-        const clientSecret: string = profile.clientSecret || undefined;
-
-        const url = `${authPath}/${tokenPath}`;
-
-        log.info(`Attempting to refresh token from ${url} with client_id ${clientId} token path ${tokenPath} and client secret ${clientSecret}`);
-
-        const options = {
-            method: "POST",
-            url,
-            headers: { "content-type": "application/x-www-form-urlencoded" },
-            form: {
-                grant_type: "refresh_token",
-                client_id: clientId,
-                client_secret: clientSecret,
-                refresh_token: refreshToken
-            }
-        };
-
-        request(options, (error, response, body) => {
-
-            const code = response.statusCode;
-
-            if (code !== 200) {
-                reject(new Error(body));
-                return;
-            }
-            if (error) {
-                reject(error);
-            } else {
-                const token = JSON.parse(body);
-                // Another opportunity for an error
-                if (token.error) {
-                    reject(new Error(`${token.error} ${token.error_description}`));
-                } else {
-                    log.info(`Token refreshed successfully!`);
-                    resolve(token);
-                }
-            }
-        });
-    });
-}
-
 /**
  * Logs the user in.
  */
-export async function login(): Promise<string> {
+export async function login(): Promise<TokenResponse> {
     function base64URLEncode(str: Buffer): string {
         return str
             .toString("base64")
@@ -209,5 +159,5 @@ export async function login(): Promise<string> {
 
     log.info(`You are logged in. Enjoy`);
     // Return it
-    return token.access_token;
+    return token;
 }

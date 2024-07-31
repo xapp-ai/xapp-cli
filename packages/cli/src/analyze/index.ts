@@ -2,18 +2,15 @@
 
 import log from "stentor-logger";
 import { getAppId } from "../getAppId";
-import { getUserToken } from "../getUserToken";
 import { getXAPPClient } from "../getXAPPClient";
 
 export async function info(appId: string, handlerId?: string): Promise<void> {
-
-    const token = await getUserToken();
 
     if (!appId) {
         appId = getAppId();
     }
 
-    const client = await getXAPPClient(token, appId);
+    const client = await getXAPPClient();
 
     const now = new Date();
     const end = now.toISOString();

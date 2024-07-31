@@ -6,7 +6,6 @@ import { resolve } from "path";
 
 import { getStentorApp } from "../getStentorApp";
 import { getXAPPClient } from "../getXAPPClient";
-import { getUserToken } from "../getUserToken";
 
 /**
  * Exports an app to the provided directory.
@@ -65,8 +64,7 @@ export async function exportApp(output: string, options?: ExportOptions): Promis
 
     if (channels) {
         // Ok! find the channel
-        const token = await getUserToken();
-        const client = await getXAPPClient(token, appId);
+        const client = await getXAPPClient();
         const channels = await client.getAppChannels(appId);
 
         log().info(`Found ${channels.length} channels`);

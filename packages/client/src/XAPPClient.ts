@@ -137,6 +137,8 @@ export interface XAPPClientProps {
     url?: string;
 }
 
+export { UpdateAppInput, UpdateHandlerInput };
+
 export class XAPPClient {
     private client: Client;
 
@@ -165,7 +167,7 @@ export class XAPPClient {
      * @param app 
      * @returns 
      */
-    public createApp(app: App): Promise<App> {
+    public createApp(app: Partial<App>): Promise<App> {
         return this.client.mutation(AddAppMutation, {
             app
         }).toPromise().then((response) => {
@@ -609,7 +611,7 @@ export class XAPPClient {
      * @param entity 
      * @returns 
      */
-    public createEntity(appId: string, entity: Entity): Promise<Pick<Entity, "entityId" | "displayName">> {
+    public createEntity(appId: string, entity: Partial<Entity>): Promise<Pick<Entity, "entityId" | "displayName">> {
         return this.client.mutation(AddEntityMutation, {
             entity: {
                 appId,

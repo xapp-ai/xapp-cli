@@ -2,8 +2,8 @@
 import { writeFileSync } from "fs";
 import moment from "moment";
 
-import { Config } from "./Config";
-import { getConfigPath } from "./getConfigPath";
+import { Config, getConfigPath } from "@xapp/client";
+
 
 /**
  * Saves the config file to the home directory.

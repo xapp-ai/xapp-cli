@@ -1,13 +1,11 @@
 /*! Copyright (c) 2022, XAPP AI*/
-import { XAPPClient } from "@xapp/client";
 import { log } from "stentor-logger";
 
 import { existsSync, mkdirSync } from "fs";
 import { resolve } from "path";
 import { createObjectCsvWriter, } from "csv-writer";
 
-import { getUserToken } from "../getUserToken";
-import { getConfigProfile } from "../getConfig";
+import { getXAPPClient } from "../getXAPPClient";
 
 export interface ExportOrgOptions {
     delimiter?: string;
@@ -30,13 +28,7 @@ export async function exportOrg(organizationId: string, output: string, options:
     const exportPath = resolve(path, exportDirName);
     mkdirSync(exportPath);
 
-    const token = await getUserToken();
-    const profile = await getConfigProfile();
-
-    const client = new XAPPClient({
-        userToken: token,
-        url: profile.basePath
-    });
+    const client = await getXAPPClient();
 
     log().info(`Retreiving apps for ${organizationId}...`)
     const orgApps = await client.getAppsForOrg(organizationId, 1000);

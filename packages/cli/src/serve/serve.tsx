@@ -6,10 +6,9 @@ import log from "stentor-logger";
 import express from "express";
 import { WidgetEnv } from "@xapp/stentor-chat-widget";
 
-import { getAppId } from "../getAppId";
-import { getUserToken } from "../getUserToken";
-import { getXAPPClient } from "../getXAPPClient";
 
+import { getAppId } from "../getAppId";
+import { getXAPPClient } from "../getXAPPClient";
 
 export async function serve(props?: { url?: string, port?: string, appId?: string, key?: string }): Promise<void> {
 
@@ -32,8 +31,7 @@ export async function serve(props?: { url?: string, port?: string, appId?: strin
         }
     };
 
-    const token = await getUserToken();
-    const client = await getXAPPClient(token, appId);
+    const client = await getXAPPClient();
     const channels = await client.getAppChannels(appId);
 
     // find a chat-widget channel

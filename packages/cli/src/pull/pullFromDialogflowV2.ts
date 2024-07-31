@@ -9,7 +9,6 @@ import { getGoogleCredentials } from "../getGoogleCredentials";
 import { getAppIntentEntities } from "../getAppIntentEntities";
 
 import { getXAPPClient } from "../getXAPPClient";
-import { getUserToken } from "../getUserToken";
 
 export async function pullFromDialogflowV2(
     credentialsPath: string,
@@ -48,9 +47,7 @@ export async function pullFromDialogflowV2(
 
     log().debug(`Retrieved ${intents.length} intents`);
 
-    const token = await getUserToken();
-
-    const client = await getXAPPClient(token, appId);
+    const client = await getXAPPClient();
 
     const intentTranslator = new TranslateDialogflowV2Intent({ appId, organizationId });
 

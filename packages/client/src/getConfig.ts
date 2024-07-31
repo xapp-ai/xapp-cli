@@ -2,7 +2,8 @@
 import { readFileSync } from "fs";
 import { log } from "stentor-logger";
 
-import { Config, ConfigProfile, getConfigPath } from "@xapp/client";
+import { Config, ConfigProfile } from "./Config";
+import { getConfigPath } from "./getConfigPath";
 
 /**
  * Gets the config.  Will create a new one if one does not exist.

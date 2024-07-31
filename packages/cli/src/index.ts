@@ -6,7 +6,7 @@ require("dotenv").config(); // process the .env file
 process.env.STENTOR_LOG_LEVEL = "info";
 // It will only last this execution
 
-import { XAPPClient, ExportOptions } from "@xapp/client";
+import { ExportOptions } from "@xapp/client";
 import program from "commander";
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkg = require("../package.json");
@@ -27,15 +27,15 @@ import { importApp, importAppFromFile } from "./import";
 import { importFromDialogflow } from "./import";
 import { profile, ProfileOptions } from "./profile";
 import { generateTypes, GenerateTypesOptions } from "./types";
-import { getUserToken } from "./getUserToken";
+
 import { createChannelLexV2 } from "./create/channelLexV2";
 import { serve } from "./serve";
 import { exportOrg } from "./org/exportOrg";
+import { getXAPPClient } from "./getXAPPClient";
 
 // A couple of exports for if you use it not like a CLI
 export { getStentorApp } from "./getStentorApp";
 export { getXAPPClient } from "./getXAPPClient";
-export { getUserToken } from "./getUserToken"
 
 program.version(pkg.version);
 
@@ -71,8 +71,8 @@ program.command("set")
 program.command("whoami")
     .description("Returns the email you are currently logged in with.")
     .action(async () => {
-        const userToken = await getUserToken();
-        const profile = await new XAPPClient({ userToken }).getProfile();
+        const client = await getXAPPClient();
+        const profile = await client.getProfile();
         log().info(`email:${profile.profile.email}`);
         log().info(`If above is masked, run the following to unmask: STENTOR_LOG_PII=true xapp whoami`);
     });

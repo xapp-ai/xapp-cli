@@ -1,10 +1,8 @@
 /*! Copyright (c) 2022, XAPP AI*/
-import { XAPPClient, ImportApp } from "@xapp/client";
+import { ImportApp } from "@xapp/client";
 import { log } from "stentor-logger";
 
-import { getUserToken } from "../getUserToken";
-import { getConfigProfile } from "../getConfig";
-
+import { getXAPPClient } from "../getXAPPClient";
 
 export async function importApp(uri: string, options: ImportApp): Promise<void> {
 
@@ -18,13 +16,7 @@ export async function importApp(uri: string, options: ImportApp): Promise<void> 
         throw new Error(`organizationId is required to import an app.`);
     }
 
-    const token = await getUserToken();
-    const profile = await getConfigProfile();
-
-    const studioClient = new XAPPClient({
-        userToken: token,
-        url: profile.basePath
-    });
+    const studioClient = await getXAPPClient();
 
     log().info(`Importing app to ${organizationId}`);
 

@@ -1,11 +1,9 @@
 /*! Copyright (c) 2022, XAPP AI*/
-import { getGraphQLClient, AddAppMutation, AddEntityMutation, AddIntentMutation } from "@xapp/client";
 import { DialogflowV2Service } from "@xapp/stentor-service-dialogflow";
 import log from "stentor-logger";
 
-import { getConfigProfile } from "../getConfig";
 import { getGoogleCredentials } from "../getGoogleCredentials";
-import { getUserToken } from "../getUserToken";
+import { getXAPPClient } from "../getXAPPClient";
 
 export async function importFromDialogflow(credentialsPath: string, options: { organizationId: string }): Promise<void> {
 
@@ -35,30 +33,21 @@ export async function importFromDialogflow(credentialsPath: string, options: { o
 
     log.info(`Creating app on organization with ID ${organizationId}`);
 
-    const token = await getUserToken();
-    const profile = await getConfigProfile();
+    const client = await getXAPPClient();
 
-    const client = getGraphQLClient(token, profile.basePath);
+    const newApp = await client.createApp({
+        organizationId,
+        name: app.name,
+        description: app.description
+    });
 
-    const appReturn = await client.mutation(AddAppMutation, {
-        app: {
-            organizationId,
-            name: app.name,
-            description: app.description
-        }
-    }).toPromise();
-
-    const newApp = appReturn.data.addApp as { appId: string; name: string; organizationId: string };
     const { appId } = newApp;
     log.info(`App ${newApp.name} created with id ${newApp.appId}`);
 
     const addIntentPromises = intents.map((rawIntent) => {
         const intent = { ...rawIntent };
         delete intent.dialogflowId;
-        return client.mutation(AddIntentMutation, {
-            appId,
-            intent
-        }).toPromise();
+        return client.createIntent(appId, intent);
     });
 
     const intentReturns = await Promise.all(addIntentPromises);
@@ -68,14 +57,11 @@ export async function importFromDialogflow(credentialsPath: string, options: { o
     const addEntityPromises = entities.map((rawEntity) => {
         const entity = { ...rawEntity };
         delete entity.dialogflowId;
-        return client.mutation(AddEntityMutation, {
-            entity: {
-                appId,
-                displayName: entity.displayName,
-                type: entity.type,
-                values: entity.values
-            }
-        }).toPromise();
+        return client.createEntity(appId, {
+            displayName: entity.displayName,
+            type: entity.type,
+            values: entity.values
+        });
     });
 
     const entityReturns = await Promise.all(addEntityPromises);

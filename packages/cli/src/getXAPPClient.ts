@@ -1,9 +1,10 @@
 /*! Copyright (c) 2022, XAPP AI*/
-import { XAPPClient } from "@xapp/client";
+import { XAPPClient, getUserToken, getConfig } from "@xapp/client";
 
-import { getAppId } from "./getAppId";
+import { login } from "./login";
+import { refreshToken } from "./refreshToken";
 import { getConfigProfile } from "./getConfig";
-import { getUserToken } from "./getUserToken";
+import { saveConfig } from "./saveConfig";
 
 /**
  * Helper function to get a Studio API client.
@@ -11,14 +12,20 @@ import { getUserToken } from "./getUserToken";
  * @param token User auth token.
  * @param appId
  */
-export async function getXAPPClient(token?: string, appId?: string): Promise<XAPPClient> {
-    if (!appId) {
-        appId = getAppId();
-    }
+export async function getXAPPClient(token?: string): Promise<XAPPClient> {
+
     // we aren't doing anything with appId?
 
     if (!token) {
-        token = await getUserToken();
+        const tokenResponse = await getUserToken({ login, refreshToken });
+
+        // update the config
+        const config = getConfig();
+        const currentProfile: string = config.currentProfile || "default";
+        config.profiles[currentProfile] = { ...config.profiles[currentProfile], token: tokenResponse };
+        saveConfig(config);
+
+        token = tokenResponse.access_token;
     }
 
     const profile = await getConfigProfile();

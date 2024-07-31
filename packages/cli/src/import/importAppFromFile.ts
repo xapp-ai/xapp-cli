@@ -8,7 +8,6 @@ import { App, Intent, Handler, Entity } from "stentor-models";
 import { UpdateAppInput } from "@xapp/client"
 
 import { getXAPPClient } from "../getXAPPClient";
-import { getUserToken } from "../getUserToken";
 
 /**
  * Imports an app from the provided file
@@ -42,8 +41,7 @@ export async function importAppFromFile(file: string, options: { appId: string }
     log().info(`Importing ${app.name} to app ID "${appId}", ${combinedIntentsAndHandlers.length} intents & handlers with ${entities.length} entities`);
 
     // Lets start writing
-    const token = await getUserToken();
-    const client = await getXAPPClient(token, appId);
+    const client = await getXAPPClient();
 
     // Get the existing app, we will need it for the organizationId
     // It is also a test of if the user has access to this app.

@@ -11,8 +11,8 @@ export async function copy(appId: string, newAppId: string, intentId: string | u
         throw Error("New APP Id undefined");
     }
 
-    const { intents, token } = await getAppIntentEntities(appId);
-    const client = await getXAPPClient(token);
+    const { intents } = await getAppIntentEntities(appId);
+    const client = await getXAPPClient();
 
     const data = await client.getApp(newAppId);
     const newApp = data.app;

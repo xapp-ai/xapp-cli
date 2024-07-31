@@ -7,6 +7,7 @@ export type GraphqlApp = Omit<_GraphqlApp, "_id" | "cmsTokens" | "faqQuery">;
 export interface App {
     appId: string;
     name: string;
+    description?: string;
     organizationId: string;
     invocationName?: string;
     actionsOnGoogleId?: string;

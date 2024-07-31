@@ -6,10 +6,9 @@ import log from "stentor-logger";
 import { Entity, Handler, Intent } from "stentor-models";
 
 import { getAppId } from "./getAppId";
-import { getUserToken } from "./getUserToken";
 import { getXAPPClient } from "./getXAPPClient";
 
-export interface FullApp { app: App; intents?: Intent[]; handlers?: Handler[]; entities?: Entity[]; token: string }
+export interface FullApp { app: App; intents?: Intent[]; handlers?: Handler[]; entities?: Entity[]; }
 
 /**
  * Fetch the app, intents, and entities
@@ -27,7 +26,6 @@ export async function getAppIntentEntities(
         excludeIntents?: boolean;
     } = {}
 ): Promise<FullApp> {
-    const token = await getUserToken();
 
     if (!appId) {
         appId = getAppId();
@@ -37,7 +35,7 @@ export async function getAppIntentEntities(
 
     log.info(`Retrieving app with ID: ${appId}`);
 
-    const client = await getXAPPClient(token, appId);
+    const client = await getXAPPClient();
 
     const data = await client.getApp(appId);
     const app = data.app;
@@ -46,7 +44,7 @@ export async function getAppIntentEntities(
         throw new Error(`Unable to find app with ID ${appId}`);
     }
 
-    const value: FullApp = { app, token };
+    const value: FullApp = { app };
 
     if (!excludeIntents) {
 
