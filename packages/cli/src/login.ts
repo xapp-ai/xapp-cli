@@ -143,12 +143,7 @@ export async function refreshToken(refreshToken: string): Promise<TokenResponse>
             }
         };
 
-        console.log(options);
-
         request(options, (error, response, body) => {
-
-            console.log(`Response: ${response.statusCode}`);
-            console.log(body);
 
             const code = response.statusCode;
 
@@ -206,7 +201,6 @@ export async function login(): Promise<string> {
     }
     log.info(`And got the token, saving it to use in the future...`);
 
-    console.log(token);
     // Save it on the config
     const config = getConfig();
     const currentProfile: string = config.currentProfile || "default";
