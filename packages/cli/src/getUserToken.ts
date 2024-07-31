@@ -37,17 +37,23 @@ export async function getUserToken(): Promise<string> {
     if (profile?.token?.access_token) {
         // see if it is expired
         if (isTokenExpired(profile.token.access_token)) {
-            log.info("Token is expired, refreshing it for you free of charge...");
 
-            // refresh the token
-            const refreshed = await refreshToken(profile.token.refresh_token);
-            token = refreshed.access_token;
+            if (profile.token.refresh_token) {
+                log.info("Token is expired, refreshing it for you free of charge...");
 
-            // update the config
-            const config = getConfig();
-            const currentProfile: string = config.currentProfile || "default";
-            config.profiles[currentProfile] = { ...config.profiles[currentProfile], token: refreshed };
-            saveConfig(config);
+                // refresh the token
+                const refreshed = await refreshToken(profile.token.refresh_token);
+                token = refreshed.access_token;
+
+                // update the config
+                const config = getConfig();
+                const currentProfile: string = config.currentProfile || "default";
+                config.profiles[currentProfile] = { ...config.profiles[currentProfile], token: refreshed };
+                saveConfig(config);
+            } else {
+                log.info("Token was expired, but no refresh token was found. Logging in again...");
+                token = await login();
+            }
 
             // token = await login();
         } else {
