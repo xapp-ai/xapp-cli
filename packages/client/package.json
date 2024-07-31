@@ -1,0 +1,48 @@
+{
+  "name": "@xapp/client",
+  "license": "Apache-2.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "version": "1.5.221",
+  "description": "Client for XAPP AI API, for Node.JS environments",
+  "engines": {
+    "node": "^14 || ^16 || ^18 || ^20"
+  },
+  "files": [
+    "lib",
+    "assets"
+  ],
+  "types": "lib/index.d.ts",
+  "devDependencies": {
+    "@graphql-codegen/add": "5.0.3",
+    "@graphql-codegen/cli": "5.0.2",
+    "@graphql-codegen/introspection": "4.0.3",
+    "@graphql-codegen/typescript": "4.0.9",
+    "@graphql-codegen/typescript-graphql-files-modules": "3.0.0",
+    "@graphql-codegen/typescript-operations": "4.2.3",
+    "@graphql-codegen/typescript-urql": "4.0.0",
+    "@n1ru4l/graphql-live-query": "0.10.0",
+    "chai": "5.1.1",
+    "eslint": "8.57.0",
+    "eslint-plugin-notice": "0.9.10",
+    "mocha": "10.7.0",
+    "stentor-models": "1.59.90",
+    "typescript": "5.5.4"
+  },
+  "peerDependencies": {
+    "stentor-models": "1.X"
+  },
+  "dependencies": {
+    "@urql/core": "3.2.2",
+    "graphql": "16.9.0",
+    "graphql-tag": "2.12.6"
+  },
+  "scripts": {
+    "build": "tsc -d true -p .",
+    "clean": "rm -rf ./lib/* && rm -rf ./src/graphql/models.ts",
+    "lint": "eslint 'src/**/*.{ts,tsx}'",
+    "test": "mocha --recursive -r ts-node/register \"./src/**/*.test.ts\"",
+    "codegen": "graphql-codegen --config codegen.yml"
+  }
+}
