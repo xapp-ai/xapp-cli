@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0](https://github.com/stentorium/stentor/compare/v1.6.0...v1.7.0) (2024-07-31)
+
+
+### Bug Fixes
+
+* adding name for release ([a98401b](https://github.com/stentorium/stentor/commit/a98401bef6843175adec93da1d418066104ade61))
+* another try at fixing publish ([3902482](https://github.com/stentorium/stentor/commit/3902482610176da99e41b46af767591cfd817137))
+* burning version ([1b9fd21](https://github.com/stentorium/stentor/commit/1b9fd21ddef2bb5e388f9feb7a59991e00894d1a))
+* client not found error in cli ([ef7d65e](https://github.com/stentorium/stentor/commit/ef7d65ec6d759891b2381fefd74dbfe3aa1bcb5b))
+
+
+
+
+
 # [1.6.0](https://github.com/stentorium/stentor/compare/v1.5.228...v1.6.0) (2024-07-31)
 
 

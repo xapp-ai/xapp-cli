@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0](https://github.com/xapp-ai/xapp-cli/compare/v1.6.0...v1.7.0) (2024-07-31)
+
+
+### Bug Fixes
+
+* client not found error in cli ([ef7d65e](https://github.com/xapp-ai/xapp-cli/commit/ef7d65ec6d759891b2381fefd74dbfe3aa1bcb5b))
+
+
+
+
+
 # [1.6.0](https://github.com/xapp-ai/xapp-cli/compare/v1.5.228...v1.6.0) (2024-07-31)
 
 
