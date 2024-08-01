@@ -38,7 +38,11 @@ export interface ConfigProfile {
     /**
      * Defaults to 'authorization_code'
      */
-    grantType?: "client_credentials" | "authorization_code"
+    grantType?: "client_credentials" | "authorization_code";
+    /**
+     * Defaults to stentor/api
+     */
+    scope?: string;
 }
 
 export interface Config {

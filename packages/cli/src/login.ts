@@ -25,11 +25,13 @@ async function getCode(challenge: string): Promise<string> {
         const authPath = profile.authPath || 'https://auth.xapp.ai';
         const clientId = profile.clientId || '1h8mjojsn6k3vup08uk91rgagm';
 
+        const scope = profile.scope || 'studio/api';
+
         const path = profile.path || 'authorize';
         const port = profile.port || DEFAULT_LISTENING_PORT;
         const redirect = `http://localhost:${port}/${path}`;
 
-        const get = `${authPath}/authorize?audience=${basePath}&scope=studio/api&response_type=code&client_id=${clientId}&redirect_uri=${redirect}&code_challenge=${challenge}&code_challenge_method=S256&state=XAPP_CLI`;
+        const get = `${authPath}/authorize?audience=${basePath}&scope=${scope}&response_type=code&client_id=${clientId}&redirect_uri=${redirect}&code_challenge=${challenge}&code_challenge_method=S256&state=XAPP_CLI`;
         // Start the server to listen
         const app = express();
 

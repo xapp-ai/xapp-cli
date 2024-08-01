@@ -19,6 +19,7 @@ export async function getStentorApp(appId?: string, options: { withChannels?: bo
 
     // Temporary to get organizationId
     const data = await client.getApp(appId);
+
     const app = data.app;
 
     const { organizationId } = app;

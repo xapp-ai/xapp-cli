@@ -73,7 +73,12 @@ program.command("whoami")
     .action(async () => {
         const client = await getXAPPClient();
         const profile = await client.getProfile();
-        log().info(`email:${profile.profile.email}`);
+        if (profile?.profile?.email) {
+            log().info(`email:${profile.profile.email}`);
+        } else {
+            log().info(`profile:${JSON.stringify(profile, undefined, 2)}`);
+        }
+
         log().info(`If above is masked, run the following to unmask: STENTOR_LOG_PII=true xapp whoami`);
     });
 

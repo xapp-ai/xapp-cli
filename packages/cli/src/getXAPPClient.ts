@@ -1,4 +1,6 @@
 /*! Copyright (c) 2022, XAPP AI*/
+import log from "stentor-logger";
+
 import { XAPPClient, getUserToken, getConfig } from "@xapp/client";
 
 import { login } from "./login";
@@ -32,6 +34,10 @@ export async function getXAPPClient(token?: string): Promise<XAPPClient> {
 
     // Profile can be undefined here so we set the default if it doesn't exist
     const url = profile ? profile.basePath : "https://api.xapp.ai";
+
+    if (url !== "https://api.xapp.ai") {
+        log.info(`Using custom API URL: ${url}`);
+    }
 
     return new XAPPClient({
         userToken: token,
