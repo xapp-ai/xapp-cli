@@ -131,13 +131,12 @@ export interface AppEventsTotal {
     }
 }
 
-
 export interface XAPPClientProps {
     userToken: string;
     url?: string;
 }
 
-export { UpdateAppInput, UpdateHandlerInput };
+export { Handler, UpdateAppInput, UpdateHandlerInput, ChatWidgetAppChannelInput };
 
 export class XAPPClient {
     private client: Client;
