@@ -4,6 +4,7 @@ export * from "./getConfig";
 export * from "./getConfigPath";
 export * from "./getUserToken";
 export * from "./graphql/getGraphQLClient";
+export { BaseAppChannel, CtaAnimation, HandlerResponse } from "./graphql/models";
 export * from "./models";
 export * from "./TokenResponse";
 export * from "./utils";
