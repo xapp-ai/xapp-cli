@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.1](https://github.com/stentorium/stentor/compare/v1.8.0...v1.8.1) (2024-08-01)
+
+
+### Bug Fixes
+
+* Expose some models from Client ([#1154](https://github.com/stentorium/stentor/issues/1154)) ([72eb4d1](https://github.com/stentorium/stentor/commit/72eb4d1a33f5f73b5f3ff5ea446a36a7cd726b65))
+
+
+
+
+
 # [1.8.0](https://github.com/stentorium/stentor/compare/v1.7.0...v1.8.0) (2024-07-31)
 
 
