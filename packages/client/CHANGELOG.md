@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.4](https://github.com/xapp-ai/xapp-cli/compare/v1.8.3...v1.8.4) (2024-08-05)
+
+
+### Bug Fixes
+
+* **deps:** update stentor to v1.59.91 ([96b7fb6](https://github.com/xapp-ai/xapp-cli/commit/96b7fb633120756541c5e5a8a1becd93c179e6a2))
+
+
+
+
+
 ## [1.8.3](https://github.com/xapp-ai/xapp-cli/compare/v1.8.2...v1.8.3) (2024-08-01)
 
 **Note:** Version bump only for package @xapp/client

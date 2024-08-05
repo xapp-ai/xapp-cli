@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.4](https://github.com/xapp-ai/xapp-cli/compare/v1.8.3...v1.8.4) (2024-08-05)
+
+
+### Bug Fixes
+
+* **deps:** update dependency aws-sdk to v2.1666.0 ([#1102](https://github.com/xapp-ai/xapp-cli/issues/1102)) ([6911b95](https://github.com/xapp-ai/xapp-cli/commit/6911b9524ecef3dfa060f3b150530049c7730af4))
+* **deps:** update dependency inquirer to v10.1.6 ([#1139](https://github.com/xapp-ai/xapp-cli/issues/1139)) ([6ea1815](https://github.com/xapp-ai/xapp-cli/commit/6ea18154ef4b6b3d62343dcf31206c48ff704b55))
+* **deps:** update stentor to v1.59.91 ([96b7fb6](https://github.com/xapp-ai/xapp-cli/commit/96b7fb633120756541c5e5a8a1becd93c179e6a2))
+* moving assets to lower cli package ([6562b02](https://github.com/xapp-ai/xapp-cli/commit/6562b023abd7fd0b5101939b313f0e18e1dbe58e))
+
+
+
+
+
 ## [1.8.3](https://github.com/xapp-ai/xapp-cli/compare/v1.8.2...v1.8.3) (2024-08-01)
 
 **Note:** Version bump only for package @xapp/cli
