@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.5](https://github.com/xapp-ai/xapp-cli/compare/v1.8.4...v1.8.5) (2024-09-06)
+
+
+### Bug Fixes
+
+* Ability to pass through custom queries and mutations to XAPPClient ([#1178](https://github.com/xapp-ai/xapp-cli/issues/1178)) ([1b2bc28](https://github.com/xapp-ai/xapp-cli/commit/1b2bc281e744ef72039e23dcc62651b5586e92aa))
+* **deps:** update stentor ([9d11acb](https://github.com/xapp-ai/xapp-cli/commit/9d11acb5728a3cff6aba959feb680dce99701369))
+* **deps:** update stentor ([394c712](https://github.com/xapp-ai/xapp-cli/commit/394c7122ffd2fd4602180ad5973d64cbf976741d))
+
+
+
+
+
 ## [1.8.4](https://github.com/xapp-ai/xapp-cli/compare/v1.8.3...v1.8.4) (2024-08-05)
 
 
