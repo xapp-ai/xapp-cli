@@ -9,3 +9,5 @@ export * from "./models";
 export * from "./TokenResponse";
 export * from "./utils";
 export * from "./XAPPClient";
+
+export { gql } from "graphql-tag";

@@ -55,6 +55,7 @@ import {
 import { GetIntent, GetEntity, GetAppWithChannels } from "./graphql/queries";
 import { App, Channel, ExportApp, GraphqlApp, ImportApp } from "./models";
 import { cleanForAddHandler, cleanForUpdateHandler, cleanObj, removeKey } from "./utils/clean";
+import { DocumentNode } from "graphql";
 
 export interface HandlerDescription {
     intentId: string;
@@ -637,6 +638,28 @@ export class XAPPClient {
             entity
         }).toPromise().then((response) => {
             return response.data.updateEntity;
+        });
+    }
+
+    /**
+     * Pass through any query and corresponding variables.
+     * 
+     * Leverage exported gql function to wrap the graphql query.
+     */
+    public query<T>(document: DocumentNode, variables: any): Promise<T> {
+        return this.client.query(document, variables).toPromise().then((response) => {
+            return response.data;
+        });
+    }
+
+    /**
+     * Pass through any mutation and corresponding variables.
+     * 
+     * Leverage exported gql function to wrap the graphql mutation. 
+     */
+    public mutation<T>(document: DocumentNode, variables: any): Promise<T> {
+        return this.client.mutation(document, variables).toPromise().then((response) => {
+            return response.data;
         });
     }
 }
