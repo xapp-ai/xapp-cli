@@ -27,11 +27,15 @@
     "eslint": "8.57.0",
     "eslint-plugin-notice": "1.0.0",
     "mocha": "10.7.3",
+    "stentor-logger": "1.59.104",
     "stentor-models": "1.59.102",
+    "stentor-utils": "1.59.104",
     "typescript": "5.5.4"
   },
   "peerDependencies": {
-    "stentor-models": "1.X"
+    "stentor-logger": "1.X",
+    "stentor-models": "1.X",
+    "stentor-utils": "1.X"
   },
   "dependencies": {
     "@urql/core": "3.2.2",
