@@ -1587,14 +1587,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@inquirer/expand@npm:^2.2.0":
-  version: 2.2.0
-  resolution: "@inquirer/expand@npm:2.2.0"
+"@inquirer/expand@npm:^2.3.0":
+  version: 2.3.0
+  resolution: "@inquirer/expand@npm:2.3.0"
   dependencies:
     "@inquirer/core": ^9.1.0
     "@inquirer/type": ^1.5.3
     yoctocolors-cjs: ^2.1.2
-  checksum: 1ae942cb81a0e2de23c520aa1897a6cf9c5f92e4b71089d85cd9b2837a88b4721b5d0d0046fd35f833427835e39162510140800180ed9c76ae4a6b0a617210cc
+  checksum: fdc9b2d0a509e9c0120fda8e1c044593b1f4b68038fd13e19fc35cc305f1e132fddd482bc1b44966cbcab06d579d130cabbb5cac50d917549d16d7e66fad4e74
   languageName: node
   linkType: hard
 
@@ -1636,21 +1636,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@inquirer/prompts@npm:^5.4.0":
-  version: 5.4.0
-  resolution: "@inquirer/prompts@npm:5.4.0"
+"@inquirer/prompts@npm:^5.5.0":
+  version: 5.5.0
+  resolution: "@inquirer/prompts@npm:5.5.0"
   dependencies:
     "@inquirer/checkbox": ^2.5.0
     "@inquirer/confirm": ^3.2.0
     "@inquirer/editor": ^2.2.0
-    "@inquirer/expand": ^2.2.0
+    "@inquirer/expand": ^2.3.0
     "@inquirer/input": ^2.3.0
     "@inquirer/number": ^1.1.0
     "@inquirer/password": ^2.2.0
     "@inquirer/rawlist": ^2.3.0
     "@inquirer/search": ^1.1.0
     "@inquirer/select": ^2.5.0
-  checksum: fd5ee0dbb94269f6397411d0eea03e5a03500c99dc78feba9f8c218ee8c357f85ed4ed1647b3c0b41959cc9aba716087bb5d9fafdbfc88bfaaa08a75e9d46897
+  checksum: 647312c644284223483ec67fa476fee7bcc099793fb6773e44f325554c91f7db7a124dd81f0b5a9ad22b07c9e807c9f276b34ee4614c99921a9644b9e831d4e9
   languageName: node
   linkType: hard
 
@@ -3760,7 +3760,7 @@ __metadata:
     eslint: 8.57.0
     eslint-plugin-notice: 1.0.0
     express: 4.19.2
-    inquirer: 10.2.0
+    inquirer: 10.2.2
     isomorphic-fetch: 3.0.0
     lodash.padstart: 4.6.1
     mocha: 10.7.3
@@ -8542,18 +8542,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"inquirer@npm:10.2.0":
-  version: 10.2.0
-  resolution: "inquirer@npm:10.2.0"
+"inquirer@npm:10.2.2":
+  version: 10.2.2
+  resolution: "inquirer@npm:10.2.2"
   dependencies:
-    "@inquirer/prompts": ^5.4.0
+    "@inquirer/core": ^9.1.0
+    "@inquirer/prompts": ^5.5.0
     "@inquirer/type": ^1.5.3
     "@types/mute-stream": ^0.0.4
     ansi-escapes: ^4.3.2
     mute-stream: ^1.0.0
     run-async: ^3.0.0
     rxjs: ^7.8.1
-  checksum: f100f3d5be7cacdba49749506a31ef79c510b790b309e001ef3b233ad1be6ff31db9cdcbce8027821e1f446e7f56a8481c0ab2ab0f46c3ccf23cd129daf668e8
+  checksum: 41e09d818f9545d52698f69f6c832f6a2ea2cf40e7b0e056147aadd8ea4b76d489a2a10e34b0593cd1f43989def3114c086502166c2a0bdab353ea5c43f4173b
   languageName: node
   linkType: hard
 
