@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.6](https://github.com/xapp-ai/xapp-cli/compare/v1.8.5...v1.8.6) (2024-09-26)
+
+
+### Bug Fixes
+
+* Add Form Widget Channel ([#1193](https://github.com/xapp-ai/xapp-cli/issues/1193)) ([d465fc4](https://github.com/xapp-ai/xapp-cli/commit/d465fc413105add8345d5e7fbad8961c234001e4))
+* **deps:** update stentor ([#1195](https://github.com/xapp-ai/xapp-cli/issues/1195)) ([39766f7](https://github.com/xapp-ai/xapp-cli/commit/39766f77072418ce73d637e7247a0b6d5d0c1bc0))
+* **deps:** update stentor to v1.59.105 ([00fd7f3](https://github.com/xapp-ai/xapp-cli/commit/00fd7f3a8d606687e3078dd2fcc73abf837de87f))
+
+
+
+
+
 ## [1.8.5](https://github.com/xapp-ai/xapp-cli/compare/v1.8.4...v1.8.5) (2024-09-06)
 
 

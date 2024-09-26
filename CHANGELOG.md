@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.6](https://github.com/stentorium/stentor/compare/v1.8.5...v1.8.6) (2024-09-26)
+
+
+### Bug Fixes
+
+* Add Form Widget Channel ([#1193](https://github.com/stentorium/stentor/issues/1193)) ([d465fc4](https://github.com/stentorium/stentor/commit/d465fc413105add8345d5e7fbad8961c234001e4))
+* **deps:** update dependency inquirer to v10.2.2 ([#1180](https://github.com/stentorium/stentor/issues/1180)) ([f46212f](https://github.com/stentorium/stentor/commit/f46212f5491ebc592aafe95cab6b94357967455f))
+* **deps:** update stentor ([#1195](https://github.com/stentorium/stentor/issues/1195)) ([39766f7](https://github.com/stentorium/stentor/commit/39766f77072418ce73d637e7247a0b6d5d0c1bc0))
+* **deps:** update stentor to v1.59.105 ([00fd7f3](https://github.com/stentorium/stentor/commit/00fd7f3a8d606687e3078dd2fcc73abf837de87f))
+* **deps:** update stentor to v1.62.46 ([2cad3e9](https://github.com/stentorium/stentor/commit/2cad3e956fdbfc846804473e0bd90d884c601114))
+* **deps:** update stentor to v1.62.47 ([0cbba66](https://github.com/stentorium/stentor/commit/0cbba667925859416287160dba7a4028b29f5ae9))
+* **deps:** update stentor to v1.62.52 ([94b0257](https://github.com/stentorium/stentor/commit/94b02573f2de9782ad5cc842803853e5425fe0b4))
+* **deps:** update stentor to v1.62.55 ([68e69a3](https://github.com/stentorium/stentor/commit/68e69a305af0fa5387233c7b2a8718a8753dd0b9))
+
+
+
+
+
 ## [1.8.5](https://github.com/stentorium/stentor/compare/v1.8.4...v1.8.5) (2024-09-06)
 
 
