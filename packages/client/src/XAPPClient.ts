@@ -5,6 +5,7 @@ import { Entity, Intent } from "stentor-models";
 import { getGraphQLClient } from "./graphql/getGraphQLClient";
 import {
     AddChatWidgetChannelDocument,
+    AddFormWidgetChannelDocument,
     AddHandlerInput,
     AddLexV2ChannelDocument,
     AddScheduledCrawlDocument,
@@ -12,6 +13,7 @@ import {
     BaseAppChannel,
     ChatWidgetAppChannelInput,
     CreateHandlerDocument,
+    FormWidgetAppChannelInput,
     GetAnalyticsAndEventsDocument,
     GetAnalyticsAndEventsQuery,
     GetAnalyticsAndEventsQueryVariables,
@@ -411,6 +413,18 @@ export class XAPPClient {
             });
     }
 
+    public createFormWidgetChannel(appId: string, channel: FormWidgetAppChannelInput): Promise<Channel> {
+        return this.client.mutation(AddFormWidgetChannelDocument, { appId, channel })
+            .toPromise().then((response) => {
+                if (response.data) {
+                    return response.data.app.update.addFormWidgetChannel;
+                } else {
+                    const error = response.error || `Unable to create form widget channel, unknown error`;
+                    throw error;
+                }
+            });
+    }
+
     /**
      * Create a Lex Channel for the App
      * @param appId 
@@ -509,7 +523,7 @@ export class XAPPClient {
             appId,
             intentId
         }).toPromise().then((response) => {
-            return response.data.handler;
+            return response?.data?.handler;
         });
     }
 

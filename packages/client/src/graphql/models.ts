@@ -482,8 +482,11 @@ export type AdminAppMutationUpdateArgs = {
 
 export enum AdminAppProduct {
   StudioComplete = 'STUDIO_COMPLETE',
+  StudioLeads_2024 = 'STUDIO_LEADS_2024',
+  StudioLeadsPlus_2024 = 'STUDIO_LEADS_PLUS_2024',
   StudioMax = 'STUDIO_MAX',
-  StudioScheduler = 'STUDIO_SCHEDULER'
+  StudioScheduler = 'STUDIO_SCHEDULER',
+  StudioScheduler_2024 = 'STUDIO_SCHEDULER_2024'
 }
 
 export type AdminChatSuggestion = {
@@ -732,9 +735,16 @@ export type AdminQuery = {
   /** Returns AWS server related stats. */
   aws: AdminAwsQuery;
   events: AdminEventsQuery;
+  getLimitations: Scalars['JSON']['output'];
   isAdmin: Scalars['Boolean']['output'];
   laboratory: AdminLaboratory;
   webCrawler?: Maybe<WebCrawlerQuery>;
+};
+
+
+export type AdminQueryGetLimitationsArgs = {
+  appId?: InputMaybe<Scalars['ID']['input']>;
+  organizationId?: InputMaybe<Scalars['ID']['input']>;
 };
 
 export type AdminSpellCheckLabResult = {
@@ -1276,6 +1286,8 @@ export type App = {
   analytics?: Maybe<AppAnalytics>;
   /** Unique identifier of the app in Stentor. */
   appId: Scalars['ID']['output'];
+  /** Settings for the availability of the CRM service. */
+  availability?: Maybe<CrmServiceAvailabilitySettings>;
   /**
    * URL of the original banner image with aspect ratio of 16:9 and minimum dimensions of 1920x1080.
    *
@@ -1684,7 +1696,11 @@ export type AppChannelMutation = {
    * @return The channel that was just added.
    */
   addAlexaChannel: AlexaAppChannel;
-  /** Adds a custom channel to the app. */
+  /**
+   * Adds a custom channel to the app.
+   *
+   * @deprecated Please use the specific channel mutation instead.
+   */
   addChannel: AppChannel;
   /**
    * Adds or updates a Chat Widget channel to the specified app.
@@ -1839,6 +1855,8 @@ export type AppInput = {
    * If not provided then the name will derive the appId.
    */
   appId?: InputMaybe<Scalars['ID']['input']>;
+  /** Settings for the availability of the CRM service. */
+  availability?: InputMaybe<CrmServiceAvailabilitySettingsInput>;
   /**
    * URL of the original banner image with aspect ratio of 16:9 and minimum dimensions of 1920x1080.
    *
@@ -2244,6 +2262,8 @@ export type AppPlaceDescription = {
   bookingOptOut?: Maybe<Scalars['Boolean']['output']>;
   default?: Maybe<Scalars['Boolean']['output']>;
   formattedAddress?: Maybe<Scalars['String']['output']>;
+  latitude?: Maybe<Scalars['Float']['output']>;
+  longitude?: Maybe<Scalars['Float']['output']>;
   name?: Maybe<Scalars['String']['output']>;
   phone?: Maybe<Scalars['String']['output']>;
   placeId?: Maybe<Scalars['String']['output']>;
@@ -2311,6 +2331,10 @@ export type AppSchedules = {
   nextKey?: Maybe<Scalars['String']['output']>;
   /** The schedules that were found */
   schedules: Array<Maybe<WebCrawlSchedule>>;
+};
+
+export type AppSubscriptionMutation = {
+  update: UpdateAppSubscriptionMutation;
 };
 
 export type AppTemplateInput = {
@@ -2761,6 +2785,114 @@ export type CmsUpdateMutation = {
   delete: Scalars['String']['output'];
 };
 
+export type CrmAvailabilityClass = {
+  /**
+   * Maximum number of appointments that can be scheduled per day for this type.
+   *
+   * If not provided, it is assumed to be unlimited.
+   */
+  appointmentsPerDay?: Maybe<Scalars['Int']['output']>;
+  /** ID for the availability class, typically the slugged name. */
+  id: Scalars['String']['output'];
+  /** If true, this availability class is only for leads and not for appointments as they typically require more information and followup. */
+  leadOnly?: Maybe<Scalars['Boolean']['output']>;
+  /** Human readable name of the availability class */
+  name: Scalars['String']['output'];
+  /**
+   * Minimum number of days out that can be scheduled for this type.
+   *
+   * This is independent of if the day is available or not.
+   *
+   * Value of 0 is the default if not provided, meaning same day could be available.
+   */
+  numberOfDaysOut?: Maybe<Scalars['Int']['output']>;
+  /** Summary of the availability class.  This is used to describe the availability class so the AI can match it to user input.  It contains high level description as well as examples of input that would match to this class. */
+  summary: Scalars['String']['output'];
+};
+
+export type CrmAvailabilityClassInput = {
+  /**
+   * Maximum number of appointments that can be scheduled per day for this type.
+   *
+   * If not provided, it is assumed to be unlimited.
+   */
+  appointmentsPerDay?: InputMaybe<Scalars['Int']['input']>;
+  /** ID for the availability class, typically the slugged name. */
+  id: Scalars['String']['input'];
+  /** If true, this availability class is only for leads and not for appointments as they typically require more information and followup. */
+  leadOnly?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Human readable name of the availability class */
+  name: Scalars['String']['input'];
+  /**
+   * Minimum number of days out that can be scheduled for this type.
+   *
+   * This is independent of if the day is available or not.
+   *
+   * Value of 0 is the default if not provided, meaning same day could be available.
+   */
+  numberOfDaysOut?: InputMaybe<Scalars['Int']['input']>;
+  /** Summary of the availability class.  This is used to describe the availability class so the AI can match it to user input.  It contains high level description as well as examples of input that would match to this class. */
+  summary: Scalars['String']['input'];
+};
+
+export type CrmDateTime = {
+  /** ISO-8601 for the date, in the format YYYY-MM-dd */
+  date?: Maybe<Scalars['String']['output']>;
+  /** ISO-8601 for time, in the format HH:mm:ss */
+  time?: Maybe<Scalars['String']['output']>;
+  /** ISO-8601 timezone offset string in the format -05:00 or Z */
+  tz?: Maybe<Scalars['String']['output']>;
+};
+
+export type CrmDateTimeInput = {
+  /** ISO-8601 for the date, in the format YYYY-MM-dd */
+  date?: InputMaybe<Scalars['String']['input']>;
+  /** ISO-8601 for time, in the format HH:mm:ss */
+  time?: InputMaybe<Scalars['String']['input']>;
+  /** ISO-8601 timezone offset string in the format -05:00 or Z */
+  tz?: InputMaybe<Scalars['String']['input']>;
+};
+
+export enum CrmDayOfWeek {
+  Friday = 'FRIDAY',
+  Monday = 'MONDAY',
+  Saturday = 'SATURDAY',
+  Sunday = 'SUNDAY',
+  Thursday = 'THURSDAY',
+  Tuesday = 'TUESDAY',
+  Wednesday = 'WEDNESDAY'
+}
+
+export type CrmServiceAvailabilitySettings = {
+  /** The customer specific "availability classes" that describes the scheduling strategy for job types. */
+  availabilityClasses?: Maybe<Array<Maybe<CrmAvailabilityClass>>>;
+  /** The days of the week they are available to schedule appointments through the scheduler. */
+  availableDays?: Maybe<Array<Maybe<CrmDayOfWeek>>>;
+  /** These are holidays or any other days specific to the business that they are not available for appointments. */
+  blockedDays?: Maybe<Array<Maybe<CrmDateTime>>>;
+  /** The default availability class (when the AI cannot figure it out) */
+  defaultAvailabilityClass?: Maybe<Scalars['String']['output']>;
+  /** Job types, where we only schedule a few days (3) ahead */
+  delayedJobTypes?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  /** Maximum total number of appointments a day that can be scheduled through the scheduler. */
+  maxTotalDailyAppointments?: Maybe<Scalars['Int']['output']>;
+};
+
+export type CrmServiceAvailabilitySettingsInput = {
+  /** The customer specific "availability classes" that describes the scheduling strategy for job types. */
+  availabilityClasses?: InputMaybe<Array<InputMaybe<CrmAvailabilityClassInput>>>;
+  /** The days of the week they are available to schedule appointments through the scheduler. */
+  availableDays?: InputMaybe<Array<InputMaybe<CrmDayOfWeek>>>;
+  /** These are holidays or any other days specific to the business that they are not available for appointments. */
+  blockedDays?: InputMaybe<Array<InputMaybe<CrmDateTimeInput>>>;
+  /** The default availability class (when the AI cannot figure it out) */
+  defaultAvailabilityClass?: InputMaybe<Scalars['String']['input']>;
+  /** Job types, where we only schedule a few days (3) ahead */
+  delayedJobTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Maximum total number of appointments a day that can be scheduled through the scheduler. */
+  maxTotalDailyAppointments?: InputMaybe<Scalars['Int']['input']>;
+};
+
 export enum CtaAnimation {
   Bounce = 'bounce',
   Wiggle = 'wiggle'
@@ -2842,11 +2974,13 @@ export type CaughtOpportunityAlertsResult = {
 
 /** A channel that is specific for apps to run on the Actions On Google. */
 export type ChatWidgetAppChannel = BaseAppChannel & {
+  /** Information about how people are accessing the channel's widget. */
+  access: WidgetAppChannelAccess;
   /** Optional key used for basic authentication */
   accountKey?: Maybe<Scalars['String']['output']>;
   autoOpenOnPattern?: Maybe<WidgetAutoOpenOnPattern>;
   autoOpenOnWidth?: Maybe<Scalars['String']['output']>;
-  autocompleteSuggestionsUrl?: Maybe<Scalars['URL']['output']>;
+  autocompleteSuggestionsUrl?: Maybe<Scalars['URLString']['output']>;
   /** The web location for the avatar */
   avatarUrl?: Maybe<Scalars['URL']['output']>;
   botName?: Maybe<Scalars['String']['output']>;
@@ -2911,7 +3045,7 @@ export type ChatWidgetAppChannelInput = {
   accountKey?: InputMaybe<Scalars['String']['input']>;
   autoOpenOnPattern?: InputMaybe<WidgetAutoOpenOnPatternInput>;
   autoOpenOnWidth?: InputMaybe<Scalars['String']['input']>;
-  autocompleteSuggestionsUrl?: InputMaybe<Scalars['URL']['input']>;
+  autocompleteSuggestionsUrl?: InputMaybe<Scalars['URLString']['input']>;
   /** The web location for the avatar */
   avatarUrl?: InputMaybe<Scalars['URL']['input']>;
   botName?: InputMaybe<Scalars['String']['input']>;
@@ -4685,10 +4819,14 @@ export type FlagTotals = {
 };
 
 export type FormWidgetAppChannel = BaseAppChannel & {
+  /** Information about how people are accessing the channel's widget. */
+  access: WidgetAppChannelAccess;
   /** Extra custom values */
   attributes?: Maybe<Scalars['StringMap']['output']>;
   /** The auto-greeting string (intent we start the widget with) */
   autoGreeting?: Maybe<Scalars['String']['output']>;
+  /** Configure auto-open settings */
+  autoOpen?: Maybe<FormWidgetAutoOpen>;
   /** Used for autocomplete suggestions. */
   autocompleteSuggestionsUrl?: Maybe<Scalars['URLString']['output']>;
   /** When provided, when on stand-along pages, it will display the business address */
@@ -4704,6 +4842,8 @@ export type FormWidgetAppChannel = BaseAppChannel & {
   connection?: Maybe<FormWidgetConnectionConfig>;
   /** URL for the directory listing. */
   directoryListing?: Maybe<Scalars['String']['output']>;
+  /** Form Widget is disabled and will not appear on the website */
+  disabled?: Maybe<Scalars['Boolean']['output']>;
   /** URI where the channel can be accessed. */
   endPoint?: Maybe<Scalars['String']['output']>;
   /** The ID of the channel. */
@@ -4751,8 +4891,10 @@ export type FormWidgetAppChannelInput = {
   attributes?: InputMaybe<Scalars['StringMap']['input']>;
   /** The auto-greeting string (intent we start the widget with) */
   autoGreeting?: InputMaybe<Scalars['String']['input']>;
+  /** Configure auto-open settings */
+  autoOpen?: InputMaybe<FormWidgetAutoOpenInput>;
   /** Used for autocomplete suggestions. */
-  autocompleteSuggestionsUrl?: InputMaybe<Scalars['URL']['input']>;
+  autocompleteSuggestionsUrl?: InputMaybe<Scalars['URLString']['input']>;
   /** When provided, when on stand-along pages, it will display the business address */
   businessAddress?: InputMaybe<Scalars['String']['input']>;
   /** When provided, when on stand-along pages, it will display the business logo */
@@ -4766,6 +4908,8 @@ export type FormWidgetAppChannelInput = {
   connection?: InputMaybe<FormWidgetConnectionConfigInput>;
   /** URL for the directory listing. */
   directoryListing?: InputMaybe<Scalars['String']['input']>;
+  /** Form Widget is disabled and will not appear on the website */
+  disabled?: InputMaybe<Scalars['Boolean']['input']>;
   /** URI where the channel can be accessed. */
   endPoint?: InputMaybe<Scalars['String']['input']>;
   /** The ID of the channel. */
@@ -4794,6 +4938,16 @@ export type FormWidgetAppChannelInput = {
    * If the value is "*", then it will pick the first available NLU within app.nlu[]
    */
   useNLU?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type FormWidgetAutoOpen = {
+  /** If true, it will automatically open the form widget, remove the ability to close it, remove the shadow boxing effect. */
+  enabled?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type FormWidgetAutoOpenInput = {
+  /** If true, it will automatically open the form widget, remove the ability to close it, remove the shadow boxing effect. */
+  enabled?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type FormWidgetCardTheme = {
@@ -5810,7 +5964,9 @@ export type IntegrationsMutationDisconnectArgs = {
 };
 
 export type IntelligentSearchAppChannel = BaseAppChannel & {
-  autocompleteSuggestionsUrl?: Maybe<Scalars['URL']['output']>;
+  /** Information about how people are accessing the channel's widget. */
+  access: WidgetAppChannelAccess;
+  autocompleteSuggestionsUrl?: Maybe<Scalars['URLString']['output']>;
   connection?: Maybe<IntelligentSearchConnectionConfig>;
   /** URL for the directory listing. */
   directoryListing?: Maybe<Scalars['String']['output']>;
@@ -5847,7 +6003,7 @@ export type IntelligentSearchAppChannelUsageEventsArgs = {
 };
 
 export type IntelligentSearchAppChannelInput = {
-  autocompleteSuggestionsUrl?: InputMaybe<Scalars['URL']['input']>;
+  autocompleteSuggestionsUrl?: InputMaybe<Scalars['URLString']['input']>;
   connection?: InputMaybe<IntelligentSearchConnectionConfigInput>;
   /** URL for the directory listing. */
   directoryListing?: InputMaybe<Scalars['String']['input']>;
@@ -10126,6 +10282,8 @@ export type UpdateAppInput = {
   alexaSkillId?: InputMaybe<Scalars['String']['input']>;
   /** Unique identifier of the app in Stentor. This attribute will not be updated on an update request. */
   appId?: InputMaybe<Scalars['ID']['input']>;
+  /** Settings for the availability of the CRM service. */
+  availability?: InputMaybe<CrmServiceAvailabilitySettingsInput>;
   /**
    * URL of the original banner image with aspect ratio of 16:9 and minimum dimensions of 1920x1080.
    *
@@ -10277,6 +10435,7 @@ export type UpdateAppMutation = {
   scheduleWeeklyWebCrawls: WebCrawlSchedule;
   /** Crawls a website and retrieves the FAQs found on the website. It saves the FAQs to a database, and downloads the items to S3. */
   startWebsiteCrawling: Scalars['String']['output'];
+  subscriptions: AppSubscriptionMutation;
   /**
    * Update an existing app.  Only the attributes included will be updated.
    *
@@ -10347,6 +10506,10 @@ export type UpdateAppMutationStartWebsiteCrawlingArgs = {
 
 export type UpdateAppMutationUpdateAppArgs = {
   app: UpdateAppInput;
+};
+
+export type UpdateAppSubscriptionMutation = {
+  cancel: App;
 };
 
 export type UpdateEntityInput = {
@@ -11174,6 +11337,12 @@ export type WebsiteDataPhoneNumber = {
   purpose?: Maybe<Scalars['String']['output']>;
 };
 
+/** ChatWidget menu items */
+export type WidgetAppChannelAccess = {
+  /** Number of times the widget was accessed. */
+  total: Scalars['Int']['output'];
+};
+
 export type WidgetAutoOpenOnPattern = {
   minimumWidth?: Maybe<Scalars['String']['output']>;
   patterns?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
@@ -11297,6 +11466,14 @@ export type AddLexV2ChannelMutationVariables = Exact<{
 
 
 export type AddLexV2ChannelMutation = { app: { update: { channel: { addLexV2Channel: { __typename: 'LexV2ConnectAppChannel', id: string, type: string, name?: string | null, endPoint?: string | null, botId?: string | null, botName?: string | null, botRegion?: string | null, detectSentiment?: boolean | null, enableModelImprovements?: boolean | null, idleSessionTTLInSeconds?: number | null, isLinkedToKendra: boolean, lexFulfillmentLambdaARN?: string | null, lexPostTextUrl?: string | null, managementRole?: string | null, managementRoleExternalId?: string | null, voiceId?: string | null, status?: { type: string } | null } } } } };
+
+export type AddFormWidgetChannelMutationVariables = Exact<{
+  appId: Scalars['ID']['input'];
+  channel: FormWidgetAppChannelInput;
+}>;
+
+
+export type AddFormWidgetChannelMutation = { app: { update: { channel: { addFormWidgetChannel: { __typename: 'FormWidgetAppChannel', id: string, type: string, name?: string | null, endPoint?: string | null, directoryListing?: string | null, autoGreeting?: string | null, intentId?: string | null, sideButtonLabel?: string | null, useNLU?: string | null, businessName?: string | null, businessLogoUrl?: string | null, businessAddress?: string | null, businessWebsite?: string | null, chatWidgetKey?: string | null, key?: string | null, autocompleteSuggestionsUrl?: any | null, attributes?: any | null, theme?: { accentColor?: string | null, backgroundColor?: string | null, headerBackgroundColor?: string | null, headerTextColor?: string | null, primaryButtonColor?: string | null, primaryButtonTextColor?: string | null, secondaryButtonColor?: string | null, secondaryButtonTextColor?: string | null, data?: any | null, card?: { backgroundColor?: string | null, color?: string | null, fontSize?: string | null } | null, checkbox?: { backgroundColor?: string | null, color?: string | null, fontSize?: string | null } | null, chips?: { backgroundColor?: string | null, backgroundColorSelected?: string | null, color?: string | null, colorSelected?: string | null, fontSize?: string | null } | null, date?: { backgroundColor?: string | null, backgroundColorSelected?: string | null, color?: string | null, fontSize?: string | null } | null, dropdown?: { backgroundColor?: string | null, color?: string | null, fontSize?: string | null } | null, sideButton?: { backgroundColor?: string | null, color?: string | null, fontSize?: string | null, minLength?: string | null, top?: string | null } | null, text?: { backgroundColor?: string | null, color?: string | null, fontSize?: string | null } | null, standAlone?: { backgroundColor?: string | null, header?: { backgroundColor?: string | null, color?: string | null, fontSize?: string | null } | null } | null } | null, connection?: { serverUrl?: any | null, accountKey?: string | null } | null, status?: { type: string } | null } } } } };
 
 export type AddSurefireIntegrationMutationVariables = Exact<{
   appId: Scalars['ID']['input'];
@@ -11924,6 +12101,102 @@ export const AddLexV2ChannelDocument = gql`
           managementRole
           managementRoleExternalId
           voiceId
+        }
+      }
+    }
+  }
+}
+    `;
+export const AddFormWidgetChannelDocument = gql`
+    mutation addFormWidgetChannel($appId: ID!, $channel: FormWidgetAppChannelInput!) {
+  app {
+    update(appId: $appId) {
+      channel {
+        addFormWidgetChannel(channel: $channel) {
+          __typename
+          id
+          type
+          name
+          endPoint
+          directoryListing
+          autoGreeting
+          intentId
+          sideButtonLabel
+          useNLU
+          businessName
+          businessLogoUrl
+          businessAddress
+          businessWebsite
+          chatWidgetKey
+          key
+          theme {
+            accentColor
+            backgroundColor
+            headerBackgroundColor
+            headerTextColor
+            primaryButtonColor
+            primaryButtonTextColor
+            secondaryButtonColor
+            secondaryButtonTextColor
+            data
+            card {
+              backgroundColor
+              color
+              fontSize
+            }
+            checkbox {
+              backgroundColor
+              color
+              fontSize
+            }
+            chips {
+              backgroundColor
+              backgroundColorSelected
+              color
+              colorSelected
+              fontSize
+            }
+            date {
+              backgroundColor
+              backgroundColorSelected
+              color
+              fontSize
+            }
+            dropdown {
+              backgroundColor
+              color
+              fontSize
+            }
+            sideButton {
+              backgroundColor
+              color
+              fontSize
+              minLength
+              top
+            }
+            text {
+              backgroundColor
+              color
+              fontSize
+            }
+            standAlone {
+              backgroundColor
+              header {
+                backgroundColor
+                color
+                fontSize
+              }
+            }
+          }
+          connection {
+            serverUrl
+            accountKey
+          }
+          status {
+            type
+          }
+          autocompleteSuggestionsUrl
+          attributes
         }
       }
     }

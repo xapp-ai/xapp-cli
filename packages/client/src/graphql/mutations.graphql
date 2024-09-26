@@ -319,6 +319,104 @@ mutation addLexV2Channel($appId: ID!, $channel: LexV2ConnectAppChannelInput!) {
   }
 }
 
+mutation addFormWidgetChannel(
+  $appId: ID!
+  $channel: FormWidgetAppChannelInput!
+) {
+  app {
+    update(appId: $appId) {
+      channel {
+        addFormWidgetChannel(channel: $channel) {
+          __typename
+          id
+          type
+          name
+          endPoint
+          directoryListing
+          autoGreeting
+          intentId
+          sideButtonLabel
+          useNLU
+          businessName
+          businessLogoUrl
+          businessAddress
+          businessWebsite
+          chatWidgetKey
+          key
+          theme {
+            accentColor
+            backgroundColor
+            headerBackgroundColor
+            headerTextColor
+            primaryButtonColor
+            primaryButtonTextColor
+            secondaryButtonColor
+            secondaryButtonTextColor
+            data
+            card {
+              backgroundColor
+              color
+              fontSize
+            }
+            checkbox {
+              backgroundColor
+              color
+              fontSize
+            }
+            chips {
+              backgroundColor
+              backgroundColorSelected
+              color
+              colorSelected
+              fontSize
+            }
+            date {
+              backgroundColor
+              backgroundColorSelected
+              color
+              fontSize
+            }
+            dropdown {
+              backgroundColor
+              color
+              fontSize
+            }
+            sideButton {
+              backgroundColor
+              color
+              fontSize
+              minLength
+              top
+            }
+            text {
+              backgroundColor
+              color
+              fontSize
+            }
+            standAlone {
+              backgroundColor
+              header {
+                backgroundColor
+                color
+                fontSize
+              }
+            }
+          }
+          connection {
+            serverUrl
+            accountKey
+          }
+          status {
+            type
+          }
+          autocompleteSuggestionsUrl
+          attributes
+        }
+      }
+    }
+  }
+}
+
 mutation addSurefireIntegration(
   $appId: ID!
   $token: String!
