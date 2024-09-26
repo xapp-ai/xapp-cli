@@ -1885,31 +1885,31 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@microsoft/api-documenter@npm:7.25.12":
-  version: 7.25.12
-  resolution: "@microsoft/api-documenter@npm:7.25.12"
+"@microsoft/api-documenter@npm:7.25.14":
+  version: 7.25.14
+  resolution: "@microsoft/api-documenter@npm:7.25.14"
   dependencies:
-    "@microsoft/api-extractor-model": 7.29.6
+    "@microsoft/api-extractor-model": 7.29.8
     "@microsoft/tsdoc": ~0.15.0
-    "@rushstack/node-core-library": 5.7.0
-    "@rushstack/terminal": 0.14.0
-    "@rushstack/ts-command-line": 4.22.6
+    "@rushstack/node-core-library": 5.9.0
+    "@rushstack/terminal": 0.14.2
+    "@rushstack/ts-command-line": 4.22.8
     js-yaml: ~3.13.1
     resolve: ~1.22.1
   bin:
     api-documenter: bin/api-documenter
-  checksum: 68e482be397e9b69833afa42a00a2e0d6d5f4bb7a6c87639a5ddf4464904361c840655e7c90377a9b2db81517206ca66fe3b2661d6ea316e03f7eb984329997f
+  checksum: 1b4f5054c93ab77b4de196c07432d29ac40a488dd33881ad230897f4c393859ef05ab3503163ecaa4914ba4043b33070d9887bdde64a496a7d27dbcd94583622
   languageName: node
   linkType: hard
 
-"@microsoft/api-extractor-model@npm:7.29.6":
-  version: 7.29.6
-  resolution: "@microsoft/api-extractor-model@npm:7.29.6"
+"@microsoft/api-extractor-model@npm:7.29.8":
+  version: 7.29.8
+  resolution: "@microsoft/api-extractor-model@npm:7.29.8"
   dependencies:
     "@microsoft/tsdoc": ~0.15.0
     "@microsoft/tsdoc-config": ~0.17.0
-    "@rushstack/node-core-library": 5.7.0
-  checksum: 8a44082a306337c37ee972d26f0c74e1773b58ac7bcebf7b976cf52ad9b73135d94bb2f8f53759d87761f22152a7a19dd8f85a349e2882decc17cc34907482eb
+    "@rushstack/node-core-library": 5.9.0
+  checksum: 95a6b5df089d8bf44555f4565a6f0eda9323917266b2f4730b606aeb2c7f36df7c2cbcae9ca48a9198af7a33442cda8ce2c791e0f4c7c92f3bdaee6c3190b1f5
   languageName: node
   linkType: hard
 
@@ -2709,9 +2709,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rushstack/node-core-library@npm:5.7.0":
-  version: 5.7.0
-  resolution: "@rushstack/node-core-library@npm:5.7.0"
+"@rushstack/node-core-library@npm:5.9.0":
+  version: 5.9.0
+  resolution: "@rushstack/node-core-library@npm:5.9.0"
   dependencies:
     ajv: ~8.13.0
     ajv-draft-04: ~1.0.0
@@ -2726,34 +2726,34 @@ __metadata:
   peerDependenciesMeta:
     "@types/node":
       optional: true
-  checksum: ca7d1d7143bd5735b420829e2b666a5104c21a261eb82def81b4832f9ee3bc88a7f3cd974d6787644506fc851ce77ddcccade771768d5eff188edf37924da5f3
+  checksum: beb558f118a796260f7df38b48b6669a94bbdb9711715785e0c5a426bd3a38c14721c03fc05e7a33883ec25a331ef0fb9e36438bb451ace021a7248a4f1fc74b
   languageName: node
   linkType: hard
 
-"@rushstack/terminal@npm:0.14.0":
-  version: 0.14.0
-  resolution: "@rushstack/terminal@npm:0.14.0"
+"@rushstack/terminal@npm:0.14.2":
+  version: 0.14.2
+  resolution: "@rushstack/terminal@npm:0.14.2"
   dependencies:
-    "@rushstack/node-core-library": 5.7.0
+    "@rushstack/node-core-library": 5.9.0
     supports-color: ~8.1.1
   peerDependencies:
     "@types/node": "*"
   peerDependenciesMeta:
     "@types/node":
       optional: true
-  checksum: 32bc1578847fcf1fc75b752d8e5c9abfcaf719addc0f77850c2a602af19ce89df1967a64a9ad65ee6dc83376d839cd8c4ebb23bf66c2a12958a1c0100a54ce96
+  checksum: 90d38e6979737dcd97fdfdcebcc378194eed32a994341846235769273b6446b702e53e51e18fc8a373e8ed989c5622216aa6804198b8c7ae0e65cd6b103b90a1
   languageName: node
   linkType: hard
 
-"@rushstack/ts-command-line@npm:4.22.6":
-  version: 4.22.6
-  resolution: "@rushstack/ts-command-line@npm:4.22.6"
+"@rushstack/ts-command-line@npm:4.22.8":
+  version: 4.22.8
+  resolution: "@rushstack/ts-command-line@npm:4.22.8"
   dependencies:
-    "@rushstack/terminal": 0.14.0
+    "@rushstack/terminal": 0.14.2
     "@types/argparse": 1.0.38
     argparse: ~1.0.9
     string-argv: ~0.3.1
-  checksum: 27c717e7d721fdd385288c3518f51336c3a40056430390340fb16413c23776ecfe0fb9fb75d5d9b55096fc274f499136e93379b1f11b73a91e15f5e7b0f65534
+  checksum: b0108e4b567c364a7c62b30dc3e4d17130b6f8ba16a0457c56b8c898ba84316e72726a4e043ca5183da7bf5d0189aed585ab3ac8bce5991b8e80ac94d333cd6c
   languageName: node
   linkType: hard
 
@@ -12722,7 +12722,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "root-workspace-0b6124@workspace:."
   dependencies:
-    "@microsoft/api-documenter": 7.25.12
+    "@microsoft/api-documenter": 7.25.14
     "@typescript-eslint/eslint-plugin": 6.21.0
     "@typescript-eslint/parser": 6.21.0
     "@xapp/config": 0.2.3
