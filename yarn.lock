@@ -3183,15 +3183,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/image-size@npm:0.0.29":
-  version: 0.0.29
-  resolution: "@types/image-size@npm:0.0.29"
-  dependencies:
-    "@types/node": "*"
-  checksum: e9fb3cf8598c1285e0ee815c67d754579a804b9e03db94419f4a6788768bf452ec4a5c12b12ac3ae35114f5487dda151263fefe49c9516ea1b7168930e5471a1
-  languageName: node
-  linkType: hard
-
 "@types/inquirer@npm:9.0.7":
   version: 9.0.7
   resolution: "@types/inquirer@npm:9.0.7"
@@ -3213,15 +3204,6 @@ __metadata:
   version: 7.0.15
   resolution: "@types/json-schema@npm:7.0.15"
   checksum: 97ed0cb44d4070aecea772b7b2e2ed971e10c81ec87dd4ecc160322ffa55ff330dace1793489540e3e318d90942064bb697cc0f8989391797792d919737b3b98
-  languageName: node
-  linkType: hard
-
-"@types/jszip@npm:^3.1.4":
-  version: 3.4.0
-  resolution: "@types/jszip@npm:3.4.0"
-  dependencies:
-    jszip: "*"
-  checksum: c1e181b0021aeb1ee86c603e0e5db16f2be1a327098a5c3f1573fed429b7e4bb8e4a437eae923743a8f5fb42c77985c802fa813723470eeda82f8f8892ff5bbc
   languageName: node
   linkType: hard
 
@@ -3293,6 +3275,15 @@ __metadata:
   dependencies:
     undici-types: ~6.19.2
   checksum: 8b4d5a0af828871627e80da095df50ef8ae7ca458f39ccde1d060e3bf97b0bc76af9547bd5d75ce4ccb1dd80466804b2fe4f12553c11cb8691c6667effd9a9d7
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^20.3.1":
+  version: 20.16.11
+  resolution: "@types/node@npm:20.16.11"
+  dependencies:
+    undici-types: ~6.19.2
+  checksum: 68a239e4cff66972c990a89faa052da27d17d9f8d3ee324e9e5899323feaf229b475c1969ae9e189d0c499736fc04e9f20f480613d16b93ce249518dc32707a0
   languageName: node
   linkType: hard
 
@@ -3779,7 +3770,7 @@ __metadata:
     conventional-changelog-conventionalcommits: 8.0.0
     cross-undici-fetch: 0.4.14
     csv-writer: 1.6.0
-    docx: 4.7.1
+    docx: 9.0.0
     dotenv: 16.4.5
     eslint: 8.57.1
     eslint-plugin-notice: 1.0.0
@@ -6228,17 +6219,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"docx@npm:4.7.1":
-  version: 4.7.1
-  resolution: "docx@npm:4.7.1"
+"docx@npm:9.0.0":
+  version: 9.0.0
+  resolution: "docx@npm:9.0.0"
   dependencies:
-    "@types/image-size": 0.0.29
-    "@types/jszip": ^3.1.4
-    image-size: ^0.6.2
-    jszip: ^3.1.5
+    "@types/node": ^20.3.1
+    jszip: ^3.10.1
+    nanoid: ^5.0.4
     xml: ^1.0.1
     xml-js: ^1.6.8
-  checksum: 3dfce1ed90cd4636c73d28ee9545a27a5f5ac84fa3755be9d8c3d981047c965abccb7f5ef5d36791207a07f935c656f239ebce00248c00548bf4e9d9ea4011b6
+  checksum: a235935a6b2f897f9d2f3b6d2caf64f04933bf770ef4a13e8678e56f080b673f18965df58a3f45e14514973245ab08f9a22d9b7e673676a217d6093b376ba833
   languageName: node
   linkType: hard
 
@@ -8365,15 +8355,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"image-size@npm:^0.6.2":
-  version: 0.6.3
-  resolution: "image-size@npm:0.6.3"
-  bin:
-    image-size: bin/image-size.js
-  checksum: cfd01d7672d584a4dd09d29bcf593c4bec3c9bb63769a51f735bd10673a7ddce7445da79771ea70b582a114b35bb4c148366b027ee9d1071c1a051aead54c788
-  languageName: node
-  linkType: hard
-
 "immediate@npm:~3.0.5":
   version: 3.0.6
   resolution: "immediate@npm:3.0.6"
@@ -9354,7 +9335,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jszip@npm:*, jszip@npm:^3.1.5":
+"jszip@npm:^3.10.1":
   version: 3.10.1
   resolution: "jszip@npm:3.10.1"
   dependencies:
@@ -10660,6 +10641,15 @@ __metadata:
   bin:
     nanoid: bin/nanoid.cjs
   checksum: d36c427e530713e4ac6567d488b489a36582ef89da1d6d4e3b87eded11eb10d7042a877958c6f104929809b2ab0bafa17652b076cdf84324aa75b30b722204f2
+  languageName: node
+  linkType: hard
+
+"nanoid@npm:^5.0.4":
+  version: 5.0.7
+  resolution: "nanoid@npm:5.0.7"
+  bin:
+    nanoid: bin/nanoid.js
+  checksum: 25ab0b0cf9082ae6747f0f55cec930e6c1cc5975103aa3a5fda44be5720eff57d9b25a8a9850274bfdde8def964b49bf03def71c6aa7ad1cba32787819b79f60
   languageName: node
   linkType: hard
 
