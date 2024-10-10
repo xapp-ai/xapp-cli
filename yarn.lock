@@ -3761,13 +3761,13 @@ __metadata:
     "@xapp/client": 1.8.6
     "@xapp/config": 0.2.3
     "@xapp/stentor-actions-on-google": 1.62.75
-    "@xapp/stentor-alexa": 1.62.76
+    "@xapp/stentor-alexa": 1.62.77
     "@xapp/stentor-alexa-lib": 1.62.75
     "@xapp/stentor-app": 1.62.75
     "@xapp/stentor-chat-widget": 1.74.6
     "@xapp/stentor-dialogflow": 1.62.75
     "@xapp/stentor-handler-media": 1.62.75
-    "@xapp/stentor-interaction-model-profiler": 1.62.76
+    "@xapp/stentor-interaction-model-profiler": 1.62.77
     "@xapp/stentor-lex-lib": 1.62.75
     "@xapp/stentor-service-dialogflow": 1.62.75
     "@xapp/stentor-service-lex": 1.62.75
@@ -3894,9 +3894,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@xapp/stentor-alexa@npm:1.62.76":
-  version: 1.62.76
-  resolution: "@xapp/stentor-alexa@npm:1.62.76"
+"@xapp/stentor-alexa@npm:1.62.77":
+  version: 1.62.77
+  resolution: "@xapp/stentor-alexa@npm:1.62.77"
   dependencies:
     "@xapp/patterns": 2.0.2
     "@xapp/stentor-alexa-lib": 1.62.75
@@ -3904,7 +3904,7 @@ __metadata:
     amazon-date-parser: 0.3.0
     ask-sdk-model: 1.86.0
     isomorphic-fetch: 3.0.0
-    jsonpath-plus: 9.0.0
+    jsonpath-plus: 10.0.0
     lodash.intersection: 4.4.0
     lodash.invert: 4.3.0
     moment: 2.30.1
@@ -3918,7 +3918,7 @@ __metadata:
     stentor-request: 1.x
     stentor-response: 1.x
     stentor-utils: 1.x
-  checksum: 9b1c0db2b7bc1d8b1ac2ad3055b7349a96db90fc58e78308f1856e23fadade6a256fbee3e768cdd8aa2b519eb90fe87a7a1f683bef234475a1043981809acba9
+  checksum: 45652030f7b12d2770086a9cc235aa5e8d8aa240f060cfce58d5400d5e4a7d2630dd0818a1397685d0f0a67aac6b30aba3e9785600f3e95716028e4efe169a02
   languageName: node
   linkType: hard
 
@@ -3991,19 +3991,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@xapp/stentor-interaction-model-profiler@npm:1.62.76":
-  version: 1.62.76
-  resolution: "@xapp/stentor-interaction-model-profiler@npm:1.62.76"
+"@xapp/stentor-interaction-model-profiler@npm:1.62.77":
+  version: 1.62.77
+  resolution: "@xapp/stentor-interaction-model-profiler@npm:1.62.77"
   dependencies:
     "@xapp/stentor-service-dialogflow": 1.62.75
-    "@xapp/stentor-service-smapi": 1.62.76
+    "@xapp/stentor-service-smapi": 1.62.77
     lodash.isequal: 4.5.0
   peerDependencies:
     stentor-interaction-model: 1.x
     stentor-models: 1.x
     stentor-request: 1.x
     stentor-utils: 1.x
-  checksum: 3b18f7b4a4532428e67bfadd8cb6bb74df8d11df65a4cff5311d4f89859729e47add6eaccd2e302cddadeef04b987103d9a04d7c5cd28735b67576e90ed36797
+  checksum: e0b86f6f1c169ecf4eb8276b6cfebfeff1062196ae2a2d581c7f2ffa2adfb4799d6faa04f2d8bbfb08b0705ad5eaa2cd11e2b3da81f2f2858e20c78dab3d5516
   languageName: node
   linkType: hard
 
@@ -4097,11 +4097,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@xapp/stentor-service-smapi@npm:1.62.76":
-  version: 1.62.76
-  resolution: "@xapp/stentor-service-smapi@npm:1.62.76"
+"@xapp/stentor-service-smapi@npm:1.62.77":
+  version: 1.62.77
+  resolution: "@xapp/stentor-service-smapi@npm:1.62.77"
   dependencies:
-    "@xapp/stentor-alexa": 1.62.76
+    "@xapp/stentor-alexa": 1.62.77
     "@xapp/stentor-app": 1.62.75
     isomorphic-fetch: 3.0.0
   peerDependencies:
@@ -4109,7 +4109,7 @@ __metadata:
     stentor-logger: 1.x
     stentor-models: 1.x
     stentor-service-fetch: 1.x
-  checksum: d310dd679cf846ff4d48d4b1a6329a6a9f598709ed13a072803d44f1dcbc8b6471259bee9995e42e02e960397057c386b78ff2400cf2c607583e2d8f750351d7
+  checksum: bfb85306473b6ff9d08dd31bde1c238198a21e2c1ed5e02d5df5644ba0bfea71a63a942842ea28bd27393e66f5686e3bd7fc685a0c4daf6ee2ea9c93c5736a4c
   languageName: node
   linkType: hard
 
@@ -9154,7 +9154,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jsep@npm:^1.3.8, jsep@npm:^1.3.9":
+"jsep@npm:^1.3.9":
   version: 1.3.9
   resolution: "jsep@npm:1.3.9"
   checksum: d1f3e2cc00209f67a989b73c2a89d2ccbea908d950ec959e2448c6449b134c6367b47eef4e1292767cb490f0b5b72e7309080b93ee4c7398684df2514dbd33a3
@@ -9325,20 +9325,6 @@ __metadata:
     jsonpath: bin/jsonpath-cli.js
     jsonpath-plus: bin/jsonpath-cli.js
   checksum: 992a62a0a5d2b96b40389de0608943840db39b466f9d3c1d71b4801e34b8d397c74811213e24e33c833b74aa83d9ce7860c1e7e0bc29980161489ea4a3962ecf
-  languageName: node
-  linkType: hard
-
-"jsonpath-plus@npm:9.0.0":
-  version: 9.0.0
-  resolution: "jsonpath-plus@npm:9.0.0"
-  dependencies:
-    "@jsep-plugin/assignment": ^1.2.1
-    "@jsep-plugin/regex": ^1.0.3
-    jsep: ^1.3.8
-  bin:
-    jsonpath: bin/jsonpath-cli.js
-    jsonpath-plus: bin/jsonpath-cli.js
-  checksum: 483812f6cd141988b251a529dbe6664994c3ef34bb3a8db6871746ea10ae03232e49dcdc4a45636a79005a6c6531413be10fd9d2c3da1e425b5b5a9ada56108c
   languageName: node
   linkType: hard
 
