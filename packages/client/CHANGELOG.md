@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.7](https://github.com/xapp-ai/xapp-cli/compare/v1.8.6...v1.8.7) (2024-11-06)
+
+
+### Bug Fixes
+
+* Actually Refresh and Persist the Token ([#1237](https://github.com/xapp-ai/xapp-cli/issues/1237)) ([cc83a4c](https://github.com/xapp-ai/xapp-cli/commit/cc83a4ccb832518c269e726056ff456690bde951))
+* **deps:** update stentor ([a367d10](https://github.com/xapp-ai/xapp-cli/commit/a367d1089b401ad557252e768adab7716560c89e))
+* **deps:** update stentor ([7e0d2bf](https://github.com/xapp-ai/xapp-cli/commit/7e0d2bf8bb91a355f04ec1477329f5262faa3498))
+* **deps:** update stentor ([ccc12d2](https://github.com/xapp-ai/xapp-cli/commit/ccc12d2773a1307a7709cbfd26c4e30e02841933))
+* **deps:** update stentor ([9f80b9a](https://github.com/xapp-ai/xapp-cli/commit/9f80b9a84490c8583079bee4c22014e57a880111))
+* **deps:** update stentor ([#1199](https://github.com/xapp-ai/xapp-cli/issues/1199)) ([e64a5e2](https://github.com/xapp-ai/xapp-cli/commit/e64a5e229a1c0e36fff42bedba5d25726e188070))
+* **deps:** update stentor ([#1236](https://github.com/xapp-ai/xapp-cli/issues/1236)) ([59d467c](https://github.com/xapp-ai/xapp-cli/commit/59d467c0fba88b57faf1c08e0a1c6a23595e9a8d))
+* **deps:** update stentor to v1.59.118 ([de2e0b2](https://github.com/xapp-ai/xapp-cli/commit/de2e0b243317f7b082eb80173986dc8a8394be32))
+* **deps:** update stentor to v1.59.120 ([d0c837f](https://github.com/xapp-ai/xapp-cli/commit/d0c837f61a4504732adc76ba90bc1c5d57dd0505))
+* **deps:** update stentor to v1.59.121 ([b21143e](https://github.com/xapp-ai/xapp-cli/commit/b21143e61b6740a06607b01c76efe6be7d41fb6d))
+* **deps:** update stentor to v1.59.122 ([c92a08b](https://github.com/xapp-ai/xapp-cli/commit/c92a08bcca1161b9c8c99aea252a0d41c8824f2d))
+* **deps:** update stentor to v1.59.125 ([3fef7e5](https://github.com/xapp-ai/xapp-cli/commit/3fef7e5b8651dcf0b4936b42210d416f5fa392b7))
+* **deps:** update stentor to v1.59.127 ([14a8e34](https://github.com/xapp-ai/xapp-cli/commit/14a8e347d17529ac474483187291a51fbaa123c1))
+
+
+
+
+
 ## [1.8.6](https://github.com/xapp-ai/xapp-cli/compare/v1.8.5...v1.8.6) (2024-09-26)
 
 
