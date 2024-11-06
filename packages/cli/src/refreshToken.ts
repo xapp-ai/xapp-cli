@@ -1,5 +1,5 @@
 /*! Copyright (c) 2024, XAPP AI*/
-import { TokenResponse } from "@xapp/client";
+import { getTokenExpiration, TokenResponse } from "@xapp/client";
 import log from "stentor-logger";
 
 import request from "request";
@@ -48,7 +48,10 @@ export async function refreshToken(refreshToken: string): Promise<TokenResponse>
                 if (token.error) {
                     reject(new Error(`${token.error} ${token.error_description}`));
                 } else {
-                    log.info(`Token refreshed successfully!`);
+                    const newExpiration = getTokenExpiration(token.access_token);
+
+                    log.info(`Token refreshed, it expires ${new Date(newExpiration * 1000).toISOString()}`);
+
                     resolve(token);
                 }
             }
