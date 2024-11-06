@@ -9,7 +9,6 @@ import { saveConfig } from "./saveConfig";
  */
 export async function logout(): Promise<void> {
 
-
     const config = getConfig();
 
     if (!config) {
