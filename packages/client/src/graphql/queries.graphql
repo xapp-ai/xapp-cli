@@ -37,6 +37,7 @@ query getAppsForOrg(
         smallIcon
         description
         summary
+        website
         status {
           type
           timestamp
@@ -72,6 +73,28 @@ query getAppOverview(
     website
     businessDescription
     businessHighValueLeadDescription
+    location {
+      geocode {
+        latitude
+        longitude
+      }
+      streetAddress
+    }
+    places {
+      name
+      placeId
+      formattedAddress
+      address
+      addressComponents {
+        types
+        longName
+        shortName
+      }
+      website
+      phone
+      bookingOptOut
+      adminVerified
+    }
     status {
       type
       timestamp

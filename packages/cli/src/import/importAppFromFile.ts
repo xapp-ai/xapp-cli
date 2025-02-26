@@ -5,112 +5,142 @@ import { existsSync, readFileSync } from "fs";
 import { log } from "stentor-logger";
 import { App, Intent, Handler, Entity } from "stentor-models";
 
-import { UpdateAppInput } from "@xapp/client"
+import { UpdateAppInput } from "@xapp/client";
+import { LocationInput } from "@xapp/client/lib/graphql/models";
 
 import { getXAPPClient } from "../getXAPPClient";
 
 /**
  * Imports an app from the provided file
- * 
- * @param file 
- * @param options 
+ *
+ * @param file
+ * @param options
  */
-export async function importAppFromFile(file: string, options: { appId: string }): Promise<void> {
+export async function importAppFromFile(
+  file: string,
+  options: { appId: string }
+): Promise<void> {
+  const { appId } = options;
+  const path = resolve(file);
 
-    const { appId } = options;
-    const path = resolve(file);
+  if (!existsSync(path)) {
+    throw new Error(
+      `File ${file} does not exist.  Please provide an existing path to create the export within.`
+    );
+  }
 
-    if (!existsSync(path)) {
-        throw new Error(`File ${file} does not exist.  Please provide an existing path to create the export within.`);
-    }
+  const importedFile = readFileSync(path, "utf8");
 
-    const importedFile = readFileSync(path, "utf8");
+  let imported: {
+    app: App;
+    handlers?: (Intent | Handler)[];
+    intents?: (Intent | Handler)[];
+    entities: Entity[];
+  };
 
-    let imported: { app: App; handlers?: (Intent | Handler)[]; intents?: (Intent | Handler)[]; entities: Entity[] };
+  try {
+    imported = JSON.parse(importedFile);
+  } catch (e) {
+    throw new Error(`Unable to parse contents of file at ${path}`);
+  }
 
-    try {
-        imported = JSON.parse(importedFile);
-    } catch (e) {
-        throw new Error(`Unable to parse contents of file at ${path}`);
-    }
+  const { app, intents, handlers, entities } = imported;
 
-    const { app, intents, handlers, entities } = imported;
+  const combinedIntentsAndHandlers = (intents || []).concat(handlers);
 
-    const combinedIntentsAndHandlers = (intents || []).concat(handlers);
+  log().info(
+    `Importing ${app.name} to app ID "${appId}", ${combinedIntentsAndHandlers.length} intents & handlers with ${entities.length} entities`
+  );
 
-    log().info(`Importing ${app.name} to app ID "${appId}", ${combinedIntentsAndHandlers.length} intents & handlers with ${entities.length} entities`);
+  // Lets start writing
+  const client = await getXAPPClient();
 
-    // Lets start writing
-    const client = await getXAPPClient();
+  // Get the existing app, we will need it for the organizationId
+  // It is also a test of if the user has access to this app.
+  let existingApp: Partial<App>;
+  try {
+    const data = await client.getApp(appId);
+    existingApp = data.app;
+  } catch (e) {
+    log().error(
+      `Unable to access app with ID ${appId}, ensure you have the correct app ID`
+    );
+    throw e;
+  }
 
-    // Get the existing app, we will need it for the organizationId
-    // It is also a test of if the user has access to this app.
-    let existingApp: Partial<App>;
-    try {
-        const data = await client.getApp(appId);
-        existingApp = data.app;
-    } catch (e) {
-        log().error(`Unable to access app with ID ${appId}, ensure you have the correct app ID`);
-        throw e;
-    }
+  // clean it up
+  delete existingApp.channels;
+  delete existingApp.channels;
+  delete existingApp.dialogflowClientToken;
+  delete existingApp.dialogflowDeveloperToken;
+  delete existingApp.endPoint;
+  delete existingApp.platformData;
+  delete existingApp.nlu;
+  // and this
+  delete app.channels;
+  delete app.channels;
+  delete app.dialogflowClientToken;
+  delete app.dialogflowDeveloperToken;
+  delete app.endPoint;
+  delete app.platformData;
+  delete app.nlu;
 
-    // clean it up
-    delete existingApp.channels;
-    delete existingApp.channels;
-    delete existingApp.dialogflowClientToken;
-    delete existingApp.dialogflowDeveloperToken;
-    delete existingApp.endPoint;
-    delete existingApp.platformData;
-    delete existingApp.nlu;
-    // and this
-    delete app.channels;
-    delete app.channels;
-    delete app.dialogflowClientToken;
-    delete app.dialogflowDeveloperToken;
-    delete app.endPoint;
-    delete app.platformData;
-    delete app.nlu;
+  const organizationId = existingApp.organizationId;
 
-    const organizationId = existingApp.organizationId;
-    // Update the app!
-    // The app must already exist
-    const appToUpdate: Omit<UpdateAppInput, "platformData"> = { ...existingApp, ...app, appId, organizationId };
+  const location: LocationInput = {
+    geocode: {
+      latitude: app.location?.geocode?.latitude,
+      longitude: app.location?.geocode?.longitude,
+    },
+    streetAddress: app.location?.streetAddress,
+  };
 
-    client.updateApp(appToUpdate);
-    log().info(`App updated`);
+  // Update the app!
+  // The app must already exist
+  const appToUpdate: Omit<UpdateAppInput, "platformData"> = {
+    ...existingApp,
+    ...app,
+    appId,
+    organizationId,
+    location,
+  };
 
-    // Entities
-    const entityCreatePromises = entities.map((entity) => {
-        delete entity.appId;
-        delete entity.dialogflowId;
-        return client.createEntity(appId, entity);
-    });
+  client.updateApp(appToUpdate);
+  log().info(`App updated`);
 
-    let entityResults: Pick<Entity, "entityId" | "displayName">[];
-    try {
-        entityResults = await Promise.all(entityCreatePromises);
-    } catch (e) {
-        log().error(`Unable to import entities.`);
-        throw e;
-    }
+  // Entities
+  const entityCreatePromises = entities.map((entity) => {
+    delete entity.appId;
+    delete entity.dialogflowId;
+    return client.createEntity(appId, entity);
+  });
 
-    log().info(`Imported ${entityResults.length} entities.`);
+  let entityResults: Pick<Entity, "entityId" | "displayName">[];
+  try {
+    entityResults = await Promise.all(entityCreatePromises);
+  } catch (e) {
+    log().error(`Unable to import entities.`);
+    throw e;
+  }
 
-    const intentAndHandlerPromises = combinedIntentsAndHandlers.map((intent) => {
-        delete intent.appId;
-        delete intent.organizationId;
-        delete intent.dialogflowId;
-        delete intent.slotTypes;
-        return client.createIntent(appId, intent);
-    });
+  log().info(`Imported ${entityResults.length} entities.`);
 
-    let intentAndHandlerResults: Intent[];
-    try {
-        intentAndHandlerResults = await Promise.all(intentAndHandlerPromises);
-    } catch (e) {
-        log().error(`Unable to import intents and handlers.`)
-    }
+  const intentAndHandlerPromises = combinedIntentsAndHandlers.map((intent) => {
+    delete intent.appId;
+    delete intent.organizationId;
+    delete intent.dialogflowId;
+    delete intent.slotTypes;
+    return client.createIntent(appId, intent);
+  });
 
-    log().info(`Imported ${intentAndHandlerResults.length} intents and handlers.`);
+  let intentAndHandlerResults: Intent[];
+  try {
+    intentAndHandlerResults = await Promise.all(intentAndHandlerPromises);
+  } catch (e) {
+    log().error(`Unable to import intents and handlers.`);
+  }
 
+  log().info(
+    `Imported ${intentAndHandlerResults.length} intents and handlers.`
+  );
 }

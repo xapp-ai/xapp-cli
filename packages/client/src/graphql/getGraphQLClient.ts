@@ -5,6 +5,7 @@ import { Client } from "@urql/core";
 export function getGraphQLClient(token: string, url = "https://api.xapp.ai"): Client {
 
     const client = new Client({
+
         fetchOptions: {
             headers: {
                 "Content-Type": "application/json",
