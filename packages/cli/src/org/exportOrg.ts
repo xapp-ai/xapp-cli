@@ -3,93 +3,100 @@ import { log } from "stentor-logger";
 
 import { existsSync, mkdirSync } from "fs";
 import { resolve } from "path";
-import { createObjectCsvWriter, } from "csv-writer";
+import { createObjectCsvWriter } from "csv-writer";
 
 import { getXAPPClient } from "../getXAPPClient";
 
 export interface ExportOrgOptions {
-    delimiter?: string;
+  delimiter?: string;
 }
 
-export async function exportOrg(organizationId: string, output: string, options: ExportOrgOptions): Promise<void> {
+export async function exportOrg(
+  organizationId: string,
+  output: string,
+  options: ExportOrgOptions
+): Promise<void> {
+  if (!organizationId) {
+    throw new Error(`Organization is required for exporting.`);
+  }
 
-    if (!organizationId) {
-        throw new Error(`Organization is required for exporting.`);
-    }
+  // Resolve the path
+  const path = resolve(output);
 
-    // Resolve the path
-    const path = resolve(output);
+  if (!existsSync(path)) {
+    throw new Error(
+      `Path ${output} does not exist.  Please provide an existing path to create the export within.`
+    );
+  }
 
-    if (!existsSync(path)) {
-        throw new Error(`Path ${output} does not exist.  Please provide an existing path to create the export within.`);
-    }
+  const exportDirName = `${organizationId}-${new Date().getTime()}`;
+  const exportPath = resolve(path, exportDirName);
+  mkdirSync(exportPath);
 
-    const exportDirName = `${organizationId}-${new Date().getTime()}`;
-    const exportPath = resolve(path, exportDirName);
-    mkdirSync(exportPath);
+  const client = await getXAPPClient();
 
-    const client = await getXAPPClient();
+  log().info(`Retrieving apps for ${organizationId}...`);
+  const orgApps = await client.getAppsForOrg(organizationId, 1000);
 
-    log().info(`Retreiving apps for ${organizationId}...`)
-    const orgApps = await client.getAppsForOrg(organizationId, 1000);
+  const total = orgApps.org.apps.total;
 
-    const total = orgApps.org.apps.total;
+  log().info(`Retrieved ${total} app(s).`);
 
-    log().info(`Retrieved ${total} app(s).`);
+  if (total === 0) {
+    log().info(`No apps found for ${organizationId}`);
+    return;
+  }
 
-    if (total === 0) {
-        log().info(`No apps found for ${organizationId}`);
-        return;
-    }
+  interface AppExportRecord {
+    name: string;
+    organizationId: string;
+    appId: string;
+    status: string;
+    statusTime: string;
+    studioLink: string;
+    website?: string;
+  }
 
-    interface AppExportRecord {
-        name: string;
-        organizationId: string;
-        appId: string;
-        status: string;
-        statusTime: string;
-        studioLink: string;
-    }
+  interface ObjectHeader {
+    title: string;
+    id: keyof AppExportRecord;
+  }
 
-    interface ObjectHeader {
-        title: string;
-        id: keyof AppExportRecord
-    }
+  const header: ObjectHeader[] = [
+    { title: "Name", id: "name" },
+    { title: "organizationId", id: "organizationId" },
+    { title: "appId", id: "appId" },
+    { title: "Website", id: "website" },
+    { title: "Link", id: "studioLink" },
+    { title: "Status", id: "status" },
+    { title: "Status Time", id: "statusTime" },
+  ];
 
-    const header: ObjectHeader[] = [
-        { title: "Name", id: "name" },
-        { title: "organizationId", id: "organizationId" },
-        { title: "appId", id: "appId" },
-        { title: "Link", id: "studioLink" },
-        { title: "Status", id: "status" },
-        { title: "Status Time", id: "statusTime" }
-    ];
+  const fieldDelimiter: string = options?.delimiter || ",";
 
-    const fieldDelimiter: string = options?.delimiter || ",";
+  const csvWriter = createObjectCsvWriter({
+    path: `${exportPath}/${organizationId}-apps-${new Date().toISOString()}.csv`,
+    header,
+    fieldDelimiter,
+  });
 
-    const csvWriter = createObjectCsvWriter({
-        path: `${exportPath}/${organizationId}-apps-${new Date().toISOString()}.csv`,
-        header,
-        fieldDelimiter
-    });
+  log().info(`Retrieved ${total} app(s).`);
 
-    log().info(`Retrieved ${total} app(s).`);
+  const apps = orgApps.org.apps.apps;
 
-    const apps = orgApps.org.apps.apps;
+  for (const app of apps) {
+    const record: AppExportRecord = {
+      name: app.name,
+      appId: app.appId,
+      organizationId: app.organizationId,
+      studioLink: `https://studio.xapp.ai/${app.organizationId}/${app.appId}`,
+      status: app.status?.type || undefined,
+      statusTime: app.status?.timestamp || undefined,
+      website: app.website || undefined,
+    };
 
-    for (const app of apps) {
+    await csvWriter.writeRecords([record]);
+  }
 
-        const record: AppExportRecord = {
-            name: app.name,
-            appId: app.appId,
-            organizationId: app.organizationId,
-            studioLink: `https://studio.xapp.ai/${app.organizationId}/${app.appId}`,
-            status: app.status?.type || undefined,
-            statusTime: app.status?.timestamp || undefined,
-        };
-
-        await csvWriter.writeRecords([record]);
-    }
-
-    log().info(`CSV available at ${exportPath}`);
+  log().info(`CSV available at ${exportPath}`);
 }

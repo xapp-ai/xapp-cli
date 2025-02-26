@@ -1275,6 +1275,8 @@ export type Analytics = {
 
 export type App = {
   _id: Scalars['ID']['output'];
+  /** Information about how people are accessing the app's widgets. */
+  access: WidgetChannelAccess;
   /** The type of the account linking. This tells us how to redeem the token for PII. */
   accountLinkType?: Maybe<Scalars['String']['output']>;
   /** The unique ID of the google action that the app is linked to. */
@@ -1409,6 +1411,7 @@ export type App = {
   leadsContact?: Maybe<Scalars['EmailAddress']['output']>;
   /** The phone number of a leads user. */
   leadsContactPhone?: Maybe<Scalars['String']['output']>;
+  limitations: AppLimitations;
   /**
    * This is a series of locales that the apps supports.  These can override the
    * items that are in the original App.  The items in the main app are used as defaults if they
@@ -1444,6 +1447,8 @@ export type App = {
   refernceId?: Maybe<AppReferenceId>;
   /** The status that the app is currently in Stentor. */
   schedules: AppSchedules;
+  /** The leads by session id */
+  sessionLeads: SessionLeadsResult;
   /**
    * A small icon for the app, 108x108 PNG
    *
@@ -1456,6 +1461,9 @@ export type App = {
   stripeProductId?: Maybe<Scalars['String']['output']>;
   /** The subscription ID that is linked to this app in Stripe. */
   stripeSubscriptionId?: Maybe<Scalars['String']['output']>;
+  subscription?: Maybe<SubscriptionDetails>;
+  /** The payment status in Stripe. */
+  subscriptionPaymentStatus?: Maybe<Scalars['String']['output']>;
   /**
    * The summary of the app.
    *
@@ -1483,8 +1491,17 @@ export type App = {
 };
 
 
+export type AppAccessArgs = {
+  endDate?: InputMaybe<Scalars['DateTime']['input']>;
+  host?: InputMaybe<Scalars['String']['input']>;
+  refererDomain?: InputMaybe<Scalars['String']['input']>;
+  startDate?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+
 export type AppCaughtLeadsArgs = {
   nextKey?: InputMaybe<Scalars['String']['input']>;
+  source?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -1604,6 +1621,11 @@ export type AppSchedulesArgs = {
 };
 
 
+export type AppSessionLeadsArgs = {
+  sessionId?: InputMaybe<Scalars['String']['input']>;
+};
+
+
 export type AppUsageEventsArgs = {
   from?: InputMaybe<Scalars['Int']['input']>;
   size?: InputMaybe<Scalars['Int']['input']>;
@@ -1615,6 +1637,7 @@ export type AppAnalytics = {
 
 
 export type AppAnalyticsUserArgs = {
+  byChannel?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   byEnvironment?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   end: Scalars['DateTime']['input'];
   start: Scalars['DateTime']['input'];
@@ -1964,6 +1987,8 @@ export type AppInput = {
   stripeProductId?: InputMaybe<Scalars['String']['input']>;
   /** The subscription ID that is linked to this app in Stripe. */
   stripeSubscriptionId?: InputMaybe<Scalars['String']['input']>;
+  /** The payment status in Stripe. */
+  subscriptionPaymentStatus?: InputMaybe<Scalars['String']['input']>;
   /**
    * The summary of the app.
    *
@@ -1982,6 +2007,33 @@ export type AppInput = {
   website?: InputMaybe<Scalars['URLString']['input']>;
   /** Data related to what was found on the customers website */
   websiteData?: InputMaybe<AppWebsiteDataInput>;
+};
+
+export type AppLimitations = {
+  /** Whether the app can tag leads using AI */
+  aiLeadTagging: Scalars['Boolean']['output'];
+  /** The integrations that are allowed in the app */
+  allowedIntegrations: Array<Scalars['String']['output']>;
+  /** Whether the app can capture leads from the widget */
+  captureLead: Scalars['Boolean']['output'];
+  /** Whether a business representative can enter a live chat and talk to the client. */
+  liveTakeover: Scalars['Boolean']['output'];
+  /** The maximum number of entities that can be created in the app */
+  maxEntities: Scalars['Int']['output'];
+  /** The maximum number of handlers that can be created in the app */
+  maxHandlers: Scalars['Int']['output'];
+  /** The maximum number of intents that can be created in the app */
+  maxIntents: Scalars['Int']['output'];
+  /** The maximum number of Kendra documents that can be indexed in the app */
+  maxKendraDocs: Scalars['Int']['output'];
+  /** Whether the users can set preferred time for the appointment */
+  preferredTime: Scalars['Boolean']['output'];
+  /** Whether the app can be use the Reserve With Google actions widget. */
+  reserveWithGoogle: Scalars['Boolean']['output'];
+  /** Whether the app can use the schedule widget */
+  schedule: Scalars['Boolean']['output'];
+  /** Whether the app can access the chat transcript for a lead */
+  transcriptAccess: Scalars['Boolean']['output'];
 };
 
 /**
@@ -2942,10 +2994,9 @@ export type CaughtLead = {
   integrationSent?: Maybe<Array<LeadSentToIntegration>>;
   /** The lead that was sent to the app. */
   lead?: Maybe<Lead>;
-  /** Third party reference ID. */
-  refId?: Maybe<Scalars['ID']['output']>;
   /** The session that the lead is related to. */
   sessionId?: Maybe<Scalars['ID']['output']>;
+  /** The source of the lead (chat widget, form, etc) */
   source?: Maybe<Scalars['String']['output']>;
   /** The user that the lead is related to. */
   userId?: Maybe<Scalars['ID']['output']>;
@@ -2956,6 +3007,8 @@ export type CaughtLeadsResult = {
   leads: Array<CaughtLead>;
   /** The key to retrieve more leads or null if there are none left. */
   nextKey?: Maybe<Scalars['String']['output']>;
+  /** The total number of leads that are available. */
+  total: Scalars['Int']['output'];
 };
 
 export type CaughtOpportunityAlert = {
@@ -2972,10 +3025,15 @@ export type CaughtOpportunityAlertsResult = {
   oppAlerts: Array<CaughtOpportunityAlert>;
 };
 
+export type ChargeSummary = {
+  amount: Scalars['Float']['output'];
+  currency: Scalars['String']['output'];
+  date: Scalars['String']['output'];
+  paid: Scalars['Boolean']['output'];
+};
+
 /** A channel that is specific for apps to run on the Actions On Google. */
 export type ChatWidgetAppChannel = BaseAppChannel & {
-  /** Information about how people are accessing the channel's widget. */
-  access: WidgetAppChannelAccess;
   /** Optional key used for basic authentication */
   accountKey?: Maybe<Scalars['String']['output']>;
   autoOpenOnPattern?: Maybe<WidgetAutoOpenOnPattern>;
@@ -4819,8 +4877,6 @@ export type FlagTotals = {
 };
 
 export type FormWidgetAppChannel = BaseAppChannel & {
-  /** Information about how people are accessing the channel's widget. */
-  access: WidgetAppChannelAccess;
   /** Extra custom values */
   attributes?: Maybe<Scalars['StringMap']['output']>;
   /** The auto-greeting string (intent we start the widget with) */
@@ -5187,6 +5243,8 @@ export type GetAppsListApp = {
    * Shorter than the description, maximum 160 characters.
    */
   summary?: Maybe<Scalars['String']['output']>;
+  /** The website associated with the app. */
+  website?: Maybe<Scalars['String']['output']>;
 };
 
 export type GetAppsListStatus = {
@@ -5903,9 +5961,12 @@ export type Integration = {
   isAllowed: Scalars['Boolean']['output'];
   /** Determines if the app is currently linked to the integration. */
   isLinked: Scalars['Boolean']['output'];
+  /** The integration parameters */
+  token?: Maybe<Scalars['JSON']['output']>;
 };
 
 export enum IntegrationType {
+  Fieldpulse = 'fieldpulse',
   Housecallpro = 'housecallpro',
   Jobber = 'jobber',
   Lacrm = 'lacrm',
@@ -5917,6 +5978,7 @@ export enum IntegrationType {
 }
 
 export type IntegrationsMutation = {
+  addFieldPulseIntegration: Integration;
   addHouseCallProIntegration: Integration;
   /**
    * Adds a new Service Titan Integration to the app.
@@ -5935,12 +5997,22 @@ export type IntegrationsMutation = {
 };
 
 
+export type IntegrationsMutationAddFieldPulseIntegrationArgs = {
+  defaultJobTypeId: Scalars['String']['input'];
+  lookAheadDays: Scalars['Int']['input'];
+  maxJobsPerDay: Scalars['Int']['input'];
+  token: Scalars['String']['input'];
+};
+
+
 export type IntegrationsMutationAddHouseCallProIntegrationArgs = {
   token: Scalars['String']['input'];
 };
 
 
 export type IntegrationsMutationAddServiceTitanIntegrationArgs = {
+  apiEndpoint: Scalars['String']['input'];
+  authEndpoint: Scalars['String']['input'];
   bookingProviderId: Scalars['ID']['input'];
   clientId: Scalars['ID']['input'];
   clientSecret: Scalars['String']['input'];
@@ -5964,8 +6036,6 @@ export type IntegrationsMutationDisconnectArgs = {
 };
 
 export type IntelligentSearchAppChannel = BaseAppChannel & {
-  /** Information about how people are accessing the channel's widget. */
-  access: WidgetAppChannelAccess;
   autocompleteSuggestionsUrl?: Maybe<Scalars['URLString']['output']>;
   connection?: Maybe<IntelligentSearchConnectionConfig>;
   /** URL for the directory listing. */
@@ -6817,6 +6887,8 @@ export type LeadSentToIntegration = {
    * @see IntegrationType
    */
   integrationId: Scalars['String']['output'];
+  /** Third reference ID (the internal object id in the integration) */
+  refId?: Maybe<Scalars['String']['output']>;
   /**
    * Whether the last attempt was an error.
    *
@@ -7306,6 +7378,7 @@ export type LocaleApp = {
   status?: Maybe<Status>;
   stripeProductId?: Maybe<Scalars['String']['output']>;
   stripeSubscriptionId?: Maybe<Scalars['String']['output']>;
+  subscriptionPaymentStatus?: Maybe<Scalars['String']['output']>;
   summary?: Maybe<Scalars['String']['output']>;
   templateType?: Maybe<Scalars['String']['output']>;
   termsOfUseUrl?: Maybe<Scalars['String']['output']>;
@@ -7341,6 +7414,7 @@ export type LocaleAppInput = {
   status?: InputMaybe<StatusInput>;
   stripeProductId?: InputMaybe<Scalars['String']['input']>;
   stripeSubscriptionId?: InputMaybe<Scalars['String']['input']>;
+  subscriptionPaymentStatus?: InputMaybe<Scalars['String']['input']>;
   summary?: InputMaybe<Scalars['String']['input']>;
   templateType?: InputMaybe<Scalars['String']['input']>;
   termsOfUseUrl?: InputMaybe<Scalars['String']['input']>;
@@ -8254,6 +8328,7 @@ export type OrgAnalytics = {
 
 
 export type OrgAnalyticsUserArgs = {
+  byChannel?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   byEnvironment?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   end: Scalars['DateTime']['input'];
   start: Scalars['DateTime']['input'];
@@ -9293,6 +9368,13 @@ export type ServiceOrderAccountInput = {
   paymentType?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type SessionLeadsResult = {
+  /** The leads that were found. */
+  leads: Array<CaughtLead>;
+  /** The key to retrieve more leads or null if there are none left. */
+  nextKey?: Maybe<Scalars['String']['output']>;
+};
+
 export type SimpleDisplay = BaseDisplay & {
   backButtonVisible?: Maybe<Scalars['Boolean']['output']>;
   backgroundImage?: Maybe<DisplayImage>;
@@ -9810,6 +9892,23 @@ export enum StudioTierType {
   TrialStandard = 'TRIAL_STANDARD'
 }
 
+export type SubscriptionDetails = {
+  summary?: Maybe<SubscriptionSummary>;
+};
+
+export type SubscriptionSummary = {
+  /** Subscription is cancelled */
+  isCancelled: Scalars['Boolean']['output'];
+  /** When we last charged them and what amount */
+  lastCharge?: Maybe<ChargeSummary>;
+  /** When is the next bill and what that amount will be */
+  nextCharge?: Maybe<UpcomingInvoice>;
+  /** Subscription status(stripe) */
+  status: Scalars['String']['output'];
+  /** When their trial runs out  (The ISO formatted date) */
+  trialEndDate?: Maybe<Scalars['String']['output']>;
+};
+
 export enum SubscriptionType {
   AppSub = 'APP_SUB',
   /** OCS Bronze tier */
@@ -10252,6 +10351,12 @@ export type UnknownOpportunityAlert = BaseOpportunityAlert & {
   placeId?: Maybe<Scalars['String']['output']>;
 };
 
+export type UpcomingInvoice = {
+  amountDue: Scalars['Float']['output'];
+  currency: Scalars['String']['output'];
+  date: Scalars['String']['output'];
+};
+
 export type UpdateAppChannelMutation = {
   deleteScheduledEvent: Scalars['String']['output'];
   scheduleWeeklyWebCrawls: WebCrawlSchedule;
@@ -10385,6 +10490,8 @@ export type UpdateAppInput = {
   stripeProductId?: InputMaybe<Scalars['String']['input']>;
   /** The subscription ID that is linked to this app in Stripe. */
   stripeSubscriptionId?: InputMaybe<Scalars['String']['input']>;
+  /** The payment status in Stripe. */
+  subscriptionPaymentStatus?: InputMaybe<Scalars['String']['input']>;
   /**
    * The summary of the app.
    *
@@ -10510,6 +10617,7 @@ export type UpdateAppMutationUpdateAppArgs = {
 
 export type UpdateAppSubscriptionMutation = {
   cancel: App;
+  uncancel: App;
 };
 
 export type UpdateEntityInput = {
@@ -11337,12 +11445,6 @@ export type WebsiteDataPhoneNumber = {
   purpose?: Maybe<Scalars['String']['output']>;
 };
 
-/** ChatWidget menu items */
-export type WidgetAppChannelAccess = {
-  /** Number of times the widget was accessed. */
-  total: Scalars['Int']['output'];
-};
-
 export type WidgetAutoOpenOnPattern = {
   minimumWidth?: Maybe<Scalars['String']['output']>;
   patterns?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
@@ -11351,6 +11453,12 @@ export type WidgetAutoOpenOnPattern = {
 export type WidgetAutoOpenOnPatternInput = {
   minimumWidth?: InputMaybe<Scalars['String']['input']>;
   patterns?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+/** Access statistics on the app's widgets. */
+export type WidgetChannelAccess = {
+  /** Number of times the widget was accessed. */
+  total: Scalars['Int']['output'];
 };
 
 export type WidgetConfigurableMessageConfig = {
@@ -11507,7 +11615,7 @@ export type GetAppsForOrgQueryVariables = Exact<{
 }>;
 
 
-export type GetAppsForOrgQuery = { org?: { apps?: { total: number, apps: Array<{ appId: string, organizationId: string, name: string, largeIcon?: string | null, smallIcon?: string | null, description?: string | null, summary?: string | null, status?: { type: string, timestamp: string, notes?: string | null, email?: string | null } | null } | null> } | null } | null };
+export type GetAppsForOrgQuery = { org?: { apps?: { total: number, apps: Array<{ appId: string, organizationId: string, name: string, largeIcon?: string | null, smallIcon?: string | null, description?: string | null, summary?: string | null, website?: string | null, status?: { type: string, timestamp: string, notes?: string | null, email?: string | null } | null } | null> } | null } | null };
 
 export type GetAppOverviewQueryVariables = Exact<{
   appId: Scalars['ID']['input'];
@@ -11517,7 +11625,7 @@ export type GetAppOverviewQueryVariables = Exact<{
 }>;
 
 
-export type GetAppOverviewQuery = { app?: { __typename: 'App', _id: string, appId: string, name: string, description?: string | null, summary?: string | null, organizationId: string, invocationName?: string | null, templateType?: string | null, icon?: string | null, smallIcon?: string | null, largeIcon?: string | null, banner?: string | null, largeBanner?: string | null, website?: string | null, businessDescription?: string | null, businessHighValueLeadDescription?: string | null, status?: { type: string, timestamp: any, email: string, statusHistory?: Array<{ type: string, email: string, timestamp: any, notes?: string | null } | null> | null } | null, handlers?: { _id: string, total: number, handlers?: Array<{ _id: string, name?: string | null, intentId: string, type: string } | null> | null } | null, intents?: { _id: string, total: number, intents?: Array<{ _id: string, name: string, intentId: string } | null> | null } | null, entities?: { _id: string, total: number, entities?: Array<{ _id: string, entityId: string, displayName: string } | null> | null } | null, content?: { __typename: 'TotalWebContent', total: number, content: Array<{ __typename: 'WebContentWithHighlights', _id: string, name: string, url: string } | null> } | null, contentSources?: { __typename: 'TotalWebContentSources', total: number, sources: Array<{ __typename: 'WebContentSources', webUrl: string, webUrlPatterns: Array<string | null> } | null> } | null, faq?: { total: number } | null, channels?: Array<{ __typename: 'ActionsOnGoogleAppChannel', type: string, id: string, name?: string | null } | { __typename: 'AlexaAppChannel', type: string, id: string, name?: string | null } | { __typename: 'AppChannel', type: string, id: string, name?: string | null } | { __typename: 'ChatWidgetAppChannel', key?: string | null, type: string, id: string, name?: string | null, theme?: { primaryColor?: string | null } | null } | { __typename: 'DialogflowAppChannel', type: string, id: string, name?: string | null } | { __typename: 'FacebookMessengerAppChannel', type: string, id: string, name?: string | null } | { __typename: 'FormWidgetAppChannel', type: string, id: string, name?: string | null } | { __typename: 'GoogleBusinessMessagesAppChannel', type: string, id: string, name?: string | null } | { __typename: 'IntelligentSearchAppChannel', key?: string | null, type: string, id: string, name?: string | null, theme?: { accentColor?: string | null } | null } | { __typename: 'LexConnectAppChannel', type: string, id: string, name?: string | null } | { __typename: 'LexV2ConnectAppChannel', type: string, id: string, name?: string | null } | null> | null, analytics?: { user: { totalUsers: number, totalSessions: number, returningUsers: number, newUsers: number } } | null } | null };
+export type GetAppOverviewQuery = { app?: { __typename: 'App', _id: string, appId: string, name: string, description?: string | null, summary?: string | null, organizationId: string, invocationName?: string | null, templateType?: string | null, icon?: string | null, smallIcon?: string | null, largeIcon?: string | null, banner?: string | null, largeBanner?: string | null, website?: string | null, businessDescription?: string | null, businessHighValueLeadDescription?: string | null, location?: { streetAddress?: string | null, geocode?: { latitude?: number | null, longitude?: number | null } | null } | null, places?: Array<{ name?: string | null, placeId?: string | null, formattedAddress?: string | null, address?: string | null, website?: any | null, phone?: string | null, bookingOptOut?: boolean | null, adminVerified?: boolean | null, addressComponents?: Array<{ types?: Array<string> | null, longName?: string | null, shortName?: string | null }> | null }> | null, status?: { type: string, timestamp: any, email: string, statusHistory?: Array<{ type: string, email: string, timestamp: any, notes?: string | null } | null> | null } | null, handlers?: { _id: string, total: number, handlers?: Array<{ _id: string, name?: string | null, intentId: string, type: string } | null> | null } | null, intents?: { _id: string, total: number, intents?: Array<{ _id: string, name: string, intentId: string } | null> | null } | null, entities?: { _id: string, total: number, entities?: Array<{ _id: string, entityId: string, displayName: string } | null> | null } | null, content?: { __typename: 'TotalWebContent', total: number, content: Array<{ __typename: 'WebContentWithHighlights', _id: string, name: string, url: string } | null> } | null, contentSources?: { __typename: 'TotalWebContentSources', total: number, sources: Array<{ __typename: 'WebContentSources', webUrl: string, webUrlPatterns: Array<string | null> } | null> } | null, faq?: { total: number } | null, channels?: Array<{ __typename: 'ActionsOnGoogleAppChannel', type: string, id: string, name?: string | null } | { __typename: 'AlexaAppChannel', type: string, id: string, name?: string | null } | { __typename: 'AppChannel', type: string, id: string, name?: string | null } | { __typename: 'ChatWidgetAppChannel', key?: string | null, type: string, id: string, name?: string | null, theme?: { primaryColor?: string | null } | null } | { __typename: 'DialogflowAppChannel', type: string, id: string, name?: string | null } | { __typename: 'FacebookMessengerAppChannel', type: string, id: string, name?: string | null } | { __typename: 'FormWidgetAppChannel', type: string, id: string, name?: string | null } | { __typename: 'GoogleBusinessMessagesAppChannel', type: string, id: string, name?: string | null } | { __typename: 'IntelligentSearchAppChannel', key?: string | null, type: string, id: string, name?: string | null, theme?: { accentColor?: string | null } | null } | { __typename: 'LexConnectAppChannel', type: string, id: string, name?: string | null } | { __typename: 'LexV2ConnectAppChannel', type: string, id: string, name?: string | null } | null> | null, analytics?: { user: { totalUsers: number, totalSessions: number, returningUsers: number, newUsers: number } } | null } | null };
 
 export type GetAppContentQueryVariables = Exact<{
   appId: Scalars['ID']['input'];
@@ -12255,6 +12363,7 @@ export const GetAppsForOrgDocument = gql`
         smallIcon
         description
         summary
+        website
         status {
           type
           timestamp
@@ -12286,6 +12395,28 @@ export const GetAppOverviewDocument = gql`
     website
     businessDescription
     businessHighValueLeadDescription
+    location {
+      geocode {
+        latitude
+        longitude
+      }
+      streetAddress
+    }
+    places {
+      name
+      placeId
+      formattedAddress
+      address
+      addressComponents {
+        types
+        longName
+        shortName
+      }
+      website
+      phone
+      bookingOptOut
+      adminVerified
+    }
     status {
       type
       timestamp
