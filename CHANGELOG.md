@@ -3,6 +3,43 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.8](https://github.com/stentorium/stentor/compare/v1.8.7...v1.8.8) (2025-02-26)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @xapp/stentor-service-lex to v1.64.3 ([#1247](https://github.com/stentorium/stentor/issues/1247)) ([be1b5bf](https://github.com/stentorium/stentor/commit/be1b5bfeb9bc743447aa00cd5b268df8d48d1ced))
+* **deps:** update dependency @xapp/stentor-service-lex to v1.64.34 ([#1267](https://github.com/stentorium/stentor/issues/1267)) ([e33b3e6](https://github.com/stentorium/stentor/commit/e33b3e667dd1a45711c30aaedf8a70aeab539091))
+* **deps:** update dependency @xapp/stentor-service-lex to v1.64.48 ([#1277](https://github.com/stentorium/stentor/issues/1277)) ([3d350e9](https://github.com/stentorium/stentor/commit/3d350e928d5aa9ab69df9aca4c84a05cedad0cb4))
+* **deps:** update dependency aws-sdk to v2.1692.0 ([#1242](https://github.com/stentorium/stentor/issues/1242)) ([a45794b](https://github.com/stentorium/stentor/commit/a45794bc78bba7e1a3235f6edbcfac49bf8703fe))
+* **deps:** update dependency dotenv to v16.4.7 ([#1253](https://github.com/stentorium/stentor/issues/1253)) ([ba2713c](https://github.com/stentorium/stentor/commit/ba2713c70645474d61aa667ba859195624329d81))
+* **deps:** update dependency express to v4.21.2 ([#1254](https://github.com/stentorium/stentor/issues/1254)) ([88cbf96](https://github.com/stentorium/stentor/commit/88cbf9632379b0bfdd2f30f0082481e134335273))
+* **deps:** update dependency graphql to v16.10.0 ([#1260](https://github.com/stentorium/stentor/issues/1260)) ([450abc4](https://github.com/stentorium/stentor/commit/450abc49acb112054a50be8f4e236a730b5a0c4a))
+* **deps:** update dependency inquirer to v12.2.0 ([#1245](https://github.com/stentorium/stentor/issues/1245)) ([10e0e9d](https://github.com/stentorium/stentor/commit/10e0e9d04632b250b8fe22df0da86bf6df75badd))
+* **deps:** update dependency inquirer to v12.4.2 ([#1261](https://github.com/stentorium/stentor/issues/1261)) ([73ac3d7](https://github.com/stentorium/stentor/commit/73ac3d75dc41b6f4f510409061377e89ec5e63ee))
+* **deps:** update stentor ([#1244](https://github.com/stentorium/stentor/issues/1244)) ([ddb2cb3](https://github.com/stentorium/stentor/commit/ddb2cb36bf1e01e1e49bb20df6df3598c2d12eea))
+* **deps:** update stentor ([#1248](https://github.com/stentorium/stentor/issues/1248)) ([980ccb9](https://github.com/stentorium/stentor/commit/980ccb9b42cbfbaffacb0b1820004f7b87aafd1e))
+* **deps:** update stentor ([#1249](https://github.com/stentorium/stentor/issues/1249)) ([21576a1](https://github.com/stentorium/stentor/commit/21576a1181b874d6fdf7bf12718e1a68416a996c))
+* **deps:** update stentor ([#1251](https://github.com/stentorium/stentor/issues/1251)) ([e6ce4ae](https://github.com/stentorium/stentor/commit/e6ce4aec97aef761dc75cb842dcb096e4f3bc1b4))
+* **deps:** update stentor ([#1258](https://github.com/stentorium/stentor/issues/1258)) ([e535eaf](https://github.com/stentorium/stentor/commit/e535eaf6372231f9760f65a1f9312ef246034e1c))
+* **deps:** update stentor ([#1265](https://github.com/stentorium/stentor/issues/1265)) ([19f6397](https://github.com/stentorium/stentor/commit/19f6397380d8ec4540851361d717ca2bfed3efee))
+* **deps:** update stentor ([#1279](https://github.com/stentorium/stentor/issues/1279)) ([28a7343](https://github.com/stentorium/stentor/commit/28a73436027a2cda570304c27fb905a9a7b49b8f))
+* **deps:** update stentor to v1.64.1 ([#1246](https://github.com/stentorium/stentor/issues/1246)) ([22ad596](https://github.com/stentorium/stentor/commit/22ad59678bb4d66f4cfbb41d18c807bf72e1123b))
+* **deps:** update stentor to v1.64.29 ([#1263](https://github.com/stentorium/stentor/issues/1263)) ([fe974d9](https://github.com/stentorium/stentor/commit/fe974d96527800752b0c4c76bf4f22eace25beb6))
+* **deps:** update stentor to v1.64.35 ([#1268](https://github.com/stentorium/stentor/issues/1268)) ([fe1dff1](https://github.com/stentorium/stentor/commit/fe1dff1bdb1fe0f22df7f98e39170c364215b7b7))
+* **deps:** update stentor to v1.64.37 ([#1269](https://github.com/stentorium/stentor/issues/1269)) ([a3fa002](https://github.com/stentorium/stentor/commit/a3fa002179f8cc5040c5cfef9c3fa8b6c3e75453))
+* **deps:** update stentor to v1.64.40 ([#1271](https://github.com/stentorium/stentor/issues/1271)) ([b47ef06](https://github.com/stentorium/stentor/commit/b47ef06a628cbcc44452202cc460850fb8a309d3))
+* **deps:** update stentor to v1.64.41 ([#1272](https://github.com/stentorium/stentor/issues/1272)) ([de85f81](https://github.com/stentorium/stentor/commit/de85f813935f7397df6eaa96148ae6350fd8308b))
+* **deps:** update stentor to v1.64.46 ([#1274](https://github.com/stentorium/stentor/issues/1274)) ([b9917b5](https://github.com/stentorium/stentor/commit/b9917b5643d477a759fb8f2fd265c9239b685000))
+* **deps:** update stentor to v1.64.47 ([#1276](https://github.com/stentorium/stentor/issues/1276)) ([fafc023](https://github.com/stentorium/stentor/commit/fafc0238f99b73e4f6bf2e2d2ca2e065792a1107))
+* **deps:** update stentor to v1.64.59 ([#1281](https://github.com/stentorium/stentor/issues/1281)) ([0687eca](https://github.com/stentorium/stentor/commit/0687eca614a8c9f108d275019cc2c6d3b53ede55))
+* **deps:** update stentor to v1.64.61 ([#1285](https://github.com/stentorium/stentor/issues/1285)) ([9d3bb5b](https://github.com/stentorium/stentor/commit/9d3bb5bba01da8918fff3f05ff52160aa0d4d9fa))
+* More Fields to getApp ([#1286](https://github.com/stentorium/stentor/issues/1286)) ([3417d12](https://github.com/stentorium/stentor/commit/3417d12cc3bf7834f48b3e5675022052d5bf27d1))
+
+
+
+
+
 ## [1.8.7](https://github.com/stentorium/stentor/compare/v1.8.6...v1.8.7) (2024-11-06)
 
 
