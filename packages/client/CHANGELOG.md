@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.9](https://github.com/xapp-ai/xapp-cli/compare/v1.8.8...v1.8.9) (2025-02-27)
+
+
+### Bug Fixes
+
+* Export FormWidgetAppInput ([#1289](https://github.com/xapp-ai/xapp-cli/issues/1289)) ([5dbc2ae](https://github.com/xapp-ai/xapp-cli/commit/5dbc2ae2d5a69b2ca6abcc960fc75f2135a083f6))
+
+
+
+
+
 ## [1.8.8](https://github.com/xapp-ai/xapp-cli/compare/v1.8.7...v1.8.8) (2025-02-26)
 
 

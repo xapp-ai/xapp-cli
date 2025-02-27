@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.9](https://github.com/stentorium/stentor/compare/v1.8.8...v1.8.9) (2025-02-27)
+
+
+### Bug Fixes
+
+* **deps:** update stentor to v1.64.65 ([#1287](https://github.com/stentorium/stentor/issues/1287)) ([39dd1f7](https://github.com/stentorium/stentor/commit/39dd1f7e68eae708019b535d8a01fee285cdc784))
+* Export FormWidgetAppInput ([#1289](https://github.com/stentorium/stentor/issues/1289)) ([5dbc2ae](https://github.com/stentorium/stentor/commit/5dbc2ae2d5a69b2ca6abcc960fc75f2135a083f6))
+
+
+
+
+
 ## [1.8.8](https://github.com/stentorium/stentor/compare/v1.8.7...v1.8.8) (2025-02-26)
 
 
