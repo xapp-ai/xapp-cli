@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.10](https://github.com/xapp-ai/xapp-cli/compare/v1.8.9...v1.8.10) (2025-02-27)
+
+**Note:** Version bump only for package @xapp/cli
+
+
+
+
+
 ## [1.8.9](https://github.com/xapp-ai/xapp-cli/compare/v1.8.8...v1.8.9) (2025-02-27)
 
 

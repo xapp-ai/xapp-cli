@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.10](https://github.com/stentorium/stentor/compare/v1.8.9...v1.8.10) (2025-02-27)
+
+
+### Bug Fixes
+
+* Return was wrong on Create Form Widget ([#1290](https://github.com/stentorium/stentor/issues/1290)) ([3c8d4a1](https://github.com/stentorium/stentor/commit/3c8d4a1e4d72acec3ae62ac69b2ac3026d317c77))
+
+
+
+
+
 ## [1.8.9](https://github.com/stentorium/stentor/compare/v1.8.8...v1.8.9) (2025-02-27)
 
 
