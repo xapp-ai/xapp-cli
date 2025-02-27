@@ -476,13 +476,19 @@ export class XAPPClient {
             });
     }
 
+    /**
+     * Creates a Form Widget Channel
+     * @param appId
+     * @param channel
+     * @returns
+     */
     public createFormWidgetChannel(appId: string, channel: FormWidgetAppChannelInput): Promise<Channel> {
         return this.client
             .mutation(AddFormWidgetChannelDocument, { appId, channel })
             .toPromise()
             .then((response) => {
                 if (response.data) {
-                    return response.data.app.update.addFormWidgetChannel;
+                    return response.data.app.update.channel.addFormWidgetChannel;
                 } else {
                     const error = response.error || `Unable to create form widget channel, unknown error`;
                     throw error;
