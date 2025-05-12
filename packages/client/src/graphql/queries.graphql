@@ -4,6 +4,16 @@ query getProfile {
   }
 }
 
+query getOrgs {
+  orgs(size:10) {
+    total
+    orgs {
+      organizationId
+      name
+    }
+  }
+}
+
 query getOrgAnalytics($orgId: ID!, $startDate: DateTime!, $endDate: DateTime!) {
   org(organizationId: $orgId) {
     _id

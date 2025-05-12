@@ -29,6 +29,8 @@ import {
     GetEventsQuery,
     GetEventsQueryVariables,
     GetHandlerDocument,
+    GetOrgsDocument,
+    GetOrgsQuery,
     GetProfileDocument,
     GetProfileQuery,
     Handler,
@@ -165,6 +167,19 @@ export class XAPPClient {
     public getProfile(): Promise<GetProfileQuery> {
         return this.client
             .query(GetProfileDocument, {})
+            .toPromise()
+            .then((response) => {
+                return response.data;
+            });
+    }
+
+    //
+    // Orgs
+    //
+
+    public getOrgs(): Promise<GetOrgsQuery> {
+        return this.client
+            .query(GetOrgsDocument, {})
             .toPromise()
             .then((response) => {
                 return response.data;

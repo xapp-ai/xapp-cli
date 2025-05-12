@@ -782,6 +782,12 @@ export type AdminUpdateAppMutation = {
   addNotification: SystemNotification;
   /** Removes all notifications associated with an app. */
   removeAllNotifications: Scalars['String']['output'];
+  /**
+   * Removes the product tier from the app.
+   *
+   * This removes any privileges that were added to the app by the product tier.
+   */
+  removeAppProduct: App;
   /** Removes a notification from the app list */
   removeNotification?: Maybe<Array<Maybe<SystemNotification>>>;
   /** Sets the verified status of a Google PlaceId for the app to the specified value. */
@@ -1420,6 +1426,8 @@ export type App = {
   locales?: Maybe<AppLocales>;
   /** Physical location associated with the app. */
   location?: Maybe<Location>;
+  /** Manual override available features for the app.  This is set by the administrator.  These are already accounted for in the limitations */
+  manualOverrideAvailableFeatures?: Maybe<PartialAppLimitations>;
   /**
    * A medium icon for the app, 192x192 PNG.
    *
@@ -2013,7 +2021,7 @@ export type AppLimitations = {
   /** Whether the app can tag leads using AI */
   aiLeadTagging: Scalars['Boolean']['output'];
   /** The integrations that are allowed in the app */
-  allowedIntegrations: Array<Scalars['String']['output']>;
+  allowedIntegrations?: Maybe<Array<Scalars['String']['output']>>;
   /** Whether the app can capture leads from the widget */
   captureLead: Scalars['Boolean']['output'];
   /** Whether a business representative can enter a live chat and talk to the client. */
@@ -2915,6 +2923,32 @@ export enum CrmDayOfWeek {
   Wednesday = 'WEDNESDAY'
 }
 
+export type CrmServiceAvailabilityBusyDayDescription = {
+  /** The days of the week they are available to schedule appointments through the scheduler. */
+  availableDays?: Maybe<Array<Maybe<CrmDayOfWeek>>>;
+  /** Block the current day */
+  blockCurrentDay?: Maybe<Scalars['Boolean']['output']>;
+  /** Block the next business days */
+  blockNextBusinessDays?: Maybe<Scalars['Int']['output']>;
+  /** Block both Saturday & Sunday */
+  blockWeekends?: Maybe<Scalars['Boolean']['output']>;
+  /** Make the current day available until a specific time */
+  currentDayAvailableUntil?: Maybe<Scalars['String']['output']>;
+};
+
+export type CrmServiceAvailabilityBusyDayDescriptionInput = {
+  /** The days of the week they are available to schedule appointments through the scheduler. */
+  availableDays?: InputMaybe<Array<InputMaybe<CrmDayOfWeek>>>;
+  /** Block the current day */
+  blockCurrentDay?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Block the next business days */
+  blockNextBusinessDays?: InputMaybe<Scalars['Int']['input']>;
+  /** Block both Saturday & Sunday */
+  blockWeekends?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Make the current day available until a specific time */
+  currentDayAvailableUntil?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type CrmServiceAvailabilitySettings = {
   /** The customer specific "availability classes" that describes the scheduling strategy for job types. */
   availabilityClasses?: Maybe<Array<Maybe<CrmAvailabilityClass>>>;
@@ -2924,6 +2958,8 @@ export type CrmServiceAvailabilitySettings = {
   blockedDays?: Maybe<Array<Maybe<CrmDateTime>>>;
   /** The default availability class (when the AI cannot figure it out) */
   defaultAvailabilityClass?: Maybe<Scalars['String']['output']>;
+  /** The default busy days for the business. */
+  defaultBusyDays?: Maybe<CrmServiceAvailabilityBusyDayDescription>;
   /** Job types, where we only schedule a few days (3) ahead */
   delayedJobTypes?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   /** Maximum total number of appointments a day that can be scheduled through the scheduler. */
@@ -2939,6 +2975,8 @@ export type CrmServiceAvailabilitySettingsInput = {
   blockedDays?: InputMaybe<Array<InputMaybe<CrmDateTimeInput>>>;
   /** The default availability class (when the AI cannot figure it out) */
   defaultAvailabilityClass?: InputMaybe<Scalars['String']['input']>;
+  /** The default busy days for the business. */
+  defaultBusyDays?: InputMaybe<CrmServiceAvailabilityBusyDayDescriptionInput>;
   /** Job types, where we only schedule a few days (3) ahead */
   delayedJobTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /** Maximum total number of appointments a day that can be scheduled through the scheduler. */
@@ -8625,6 +8663,33 @@ export type OrgsQuery = {
   total: Scalars['Int']['output'];
 };
 
+export type PartialAppLimitations = {
+  /** Whether the app can tag leads using AI */
+  aiLeadTagging?: Maybe<Scalars['Boolean']['output']>;
+  /** The integrations that are allowed in the app */
+  allowedIntegrations?: Maybe<Array<Scalars['String']['output']>>;
+  /** Whether the app can capture leads from the widget */
+  captureLead?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether a business representative can enter a live chat and talk to the client. */
+  liveTakeover?: Maybe<Scalars['Boolean']['output']>;
+  /** The maximum number of entities that can be created in the app */
+  maxEntities?: Maybe<Scalars['Int']['output']>;
+  /** The maximum number of handlers that can be created in the app */
+  maxHandlers?: Maybe<Scalars['Int']['output']>;
+  /** The maximum number of intents that can be created in the app */
+  maxIntents?: Maybe<Scalars['Int']['output']>;
+  /** The maximum number of Kendra documents that can be indexed in the app */
+  maxKendraDocs?: Maybe<Scalars['Int']['output']>;
+  /** Whether the users can set preferred time for the appointment */
+  preferredTime?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether the app can be use the Reserve With Google actions widget. */
+  reserveWithGoogle?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether the app can use the schedule widget */
+  schedule?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether the app can access the chat transcript for a lead */
+  transcriptAccess?: Maybe<Scalars['Boolean']['output']>;
+};
+
 export type PaymentAccounts = {
   _id: Scalars['ID']['output'];
   /** Account information related to the AWS Marketplace payment platform. */
@@ -11381,6 +11446,8 @@ export type WebsiteDataBusinessData = {
   /** Category related to the business of the website. */
   category?: Maybe<Scalars['String']['output']>;
   geo?: Maybe<WebsiteDataBusinessDataGeo>;
+  /** The likely logo for the business */
+  logo?: Maybe<Scalars['String']['output']>;
   name?: Maybe<Scalars['String']['output']>;
   phoneNumbers?: Maybe<Array<WebsiteDataPhoneNumber>>;
   serviceArea?: Maybe<WebsiteDataBusinessDataAreasServed>;
@@ -11597,6 +11664,11 @@ export type GetProfileQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetProfileQuery = { profile?: { email: string } | null };
+
+export type GetOrgsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetOrgsQuery = { orgs?: { total: number, orgs?: Array<{ organizationId: string, name: string } | null> | null } | null };
 
 export type GetOrgAnalyticsQueryVariables = Exact<{
   orgId: Scalars['ID']['input'];
@@ -12330,6 +12402,17 @@ export const GetProfileDocument = gql`
     query getProfile {
   profile {
     email
+  }
+}
+    `;
+export const GetOrgsDocument = gql`
+    query getOrgs {
+  orgs(size: 10) {
+    total
+    orgs {
+      organizationId
+      name
+    }
   }
 }
     `;

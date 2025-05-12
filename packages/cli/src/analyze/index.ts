@@ -5,7 +5,6 @@ import { getAppId } from "../getAppId";
 import { getXAPPClient } from "../getXAPPClient";
 
 export async function info(appId: string, handlerId?: string): Promise<void> {
-
     if (!appId) {
         appId = getAppId();
     }
@@ -24,19 +23,30 @@ export async function info(appId: string, handlerId?: string): Promise<void> {
 
     if (!app) {
         log.info(`Cannot find app with id: ${appId}`);
+
+        // get a little more info to help with debugging
+
+        const profile = await client.getProfile();
+
+        log.info(`Profile: ${JSON.stringify(profile, undefined, 2)}`);
+
+        const orgs = await client.getOrgs();
+
+        log.info(`Orgs: ${JSON.stringify(orgs, undefined, 2)}`);
+
         return;
     }
 
     const { entities, intents, handlers } = app;
 
-    log.info(`name: ${app.name}`)
-    log.info(`Summary...`)
+    log.info(`name: ${app.name}`);
+    log.info(`Summary...`);
     log.info(`\t${entities.total} entities`);
     log.info(`\t${intents.total} intents`);
     log.info(`\t${handlers.total} handlers`);
 
     if (app.analytics?.user) {
-        log.info(`Last 7 days...`)
+        log.info(`Last 7 days...`);
         log.info(`\t${app.analytics.user.totalUsers} total users`);
         log.info(`\t${app.analytics.user.newUsers} new users`);
         log.info(`\t${app.analytics.user.totalSessions} total sessions`);
@@ -45,7 +55,7 @@ export async function info(appId: string, handlerId?: string): Promise<void> {
     }
 
     const noAnswerFlags = await client.getAppEvents(appId, start, end, {
-        byTag: ["KB_NO_ANSWER"]
+        byTag: ["KB_NO_ANSWER"],
     });
 
     const noAnswerTotal = noAnswerFlags.app.events.total;
@@ -58,10 +68,11 @@ export async function info(appId: string, handlerId?: string): Promise<void> {
         return event.stentorRequest.rawQuery;
     });
 
-    log.info(unansweredQueries.reduce((prev, curr) => {
-        return `${prev}\n\t\t"${curr}"`;
-    }, "Sample of unanswered..."));
-
+    log.info(
+        unansweredQueries.reduce((prev, curr) => {
+            return `${prev}\n\t\t"${curr}"`;
+        }, "Sample of unanswered...")
+    );
 
     if (handlerId) {
         log.info(`Retrieving handler with ID ${handlerId}`);
