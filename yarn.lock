@@ -2504,6 +2504,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@octokit/openapi-types@npm:^25.0.0":
+  version: 25.0.0
+  resolution: "@octokit/openapi-types@npm:25.0.0"
+  checksum: f751b75da153ac98623e2e4c033ffa4f4707eb9ff2aa60b2ed603b1100f4ba154f93c3bad8cfa248c341f9aedc51fe37f3aed1c11e0cd838a95f8d95769a54e3
+  languageName: node
+  linkType: hard
+
 "@octokit/plugin-enterprise-rest@npm:6.0.1":
   version: 6.0.1
   resolution: "@octokit/plugin-enterprise-rest@npm:6.0.1"
@@ -2522,14 +2529,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@octokit/plugin-paginate-rest@npm:^11.0.0":
-  version: 11.3.3
-  resolution: "@octokit/plugin-paginate-rest@npm:11.3.3"
+"@octokit/plugin-paginate-rest@npm:^12.0.0":
+  version: 12.0.0
+  resolution: "@octokit/plugin-paginate-rest@npm:12.0.0"
   dependencies:
-    "@octokit/types": ^13.5.0
+    "@octokit/types": ^14.0.0
   peerDependencies:
     "@octokit/core": ">=6"
-  checksum: 93c7993562caed67b67f75aa77ffb10d032c242a70e9380e2fb9ab67dd2fb84d420231d09cd8a64f1553ffd325f3ef8c640c62e4267b7f3b352b16d4d5e11ef6
+  checksum: a7eb9b1ca6485765043d9009902c02611073d5ac39147fc1f7b4e927d298fb34b0a17c329fab741402db1e0ea9ee223c8b055611a680e065bebf7c87505b113f
   languageName: node
   linkType: hard
 
@@ -2566,15 +2573,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@octokit/plugin-throttling@npm:^9.0.0":
-  version: 9.3.1
-  resolution: "@octokit/plugin-throttling@npm:9.3.1"
+"@octokit/plugin-throttling@npm:^10.0.0":
+  version: 10.0.0
+  resolution: "@octokit/plugin-throttling@npm:10.0.0"
   dependencies:
-    "@octokit/types": ^13.0.0
+    "@octokit/types": ^14.0.0
     bottleneck: ^2.15.3
   peerDependencies:
-    "@octokit/core": ^6.0.0
-  checksum: abf6ff9d8bdc54484048167fb1664294022c623832bfdad03be361cbb23165f84887b54ff9f737e24c76f8a386140e5da5c0fffa0ff38f8acf9912861ee137ff
+    "@octokit/core": ^6.1.3
+  checksum: abc587a393b850fc1329180c00f901679b07ecd10b35c6c0371630642d76f533483c896f7fe62d662443d460db64a1512902106f07505e973414911cf6b6603c
   languageName: node
   linkType: hard
 
@@ -2634,7 +2641,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@octokit/types@npm:^13.0.0, @octokit/types@npm:^13.1.0, @octokit/types@npm:^13.5.0":
+"@octokit/types@npm:^13.0.0, @octokit/types@npm:^13.1.0":
   version: 13.5.0
   resolution: "@octokit/types@npm:13.5.0"
   dependencies:
@@ -2649,6 +2656,15 @@ __metadata:
   dependencies:
     "@octokit/openapi-types": ^24.2.0
   checksum: fca3764548d5872535b9025c3b5fe6373fe588b287cb5b5259364796c1931bbe5e9ab8a86a5274ce43bb2b3e43b730067c3b86b6b1ade12a98cd59b2e8b3610d
+  languageName: node
+  linkType: hard
+
+"@octokit/types@npm:^14.0.0":
+  version: 14.0.0
+  resolution: "@octokit/types@npm:14.0.0"
+  dependencies:
+    "@octokit/openapi-types": ^25.0.0
+  checksum: 2c63dd529449b1dec8ff0dc4a6c9839032edc3c38cc8d76e368d124e67496e26dfe75fb106409aebd5120924266a12f8be2c05c8baa165a772523075a6dfdb93
   languageName: node
   linkType: hard
 
@@ -2895,14 +2911,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@semantic-release/github@npm:11.0.1":
-  version: 11.0.1
-  resolution: "@semantic-release/github@npm:11.0.1"
+"@semantic-release/github@npm:11.0.2":
+  version: 11.0.2
+  resolution: "@semantic-release/github@npm:11.0.2"
   dependencies:
     "@octokit/core": ^6.0.0
-    "@octokit/plugin-paginate-rest": ^11.0.0
+    "@octokit/plugin-paginate-rest": ^12.0.0
     "@octokit/plugin-retry": ^7.0.0
-    "@octokit/plugin-throttling": ^9.0.0
+    "@octokit/plugin-throttling": ^10.0.0
     "@semantic-release/error": ^4.0.0
     aggregate-error: ^5.0.0
     debug: ^4.3.4
@@ -2917,7 +2933,7 @@ __metadata:
     url-join: ^5.0.0
   peerDependencies:
     semantic-release: ">=24.1.0"
-  checksum: e6b3a78ab3aadf8f6c05b530bcb395060a414f0ca3000e6e12874db869a2220a3e81bff08ecdb74ee091234534ddc69e0fd28ff7d5b6ffaed996fad0c245377a
+  checksum: cc291e70ce8b0e6aba963ed9a482fbec11b759ecd975a9e6726bca1fa2ab1c7810acf05e7273a62ff0739dd50e18facdaaadc4df73454807299058ed1d46b366
   languageName: node
   linkType: hard
 
@@ -3790,7 +3806,7 @@ __metadata:
     "@semantic-release/changelog": 6.0.3
     "@semantic-release/commit-analyzer": 13.0.1
     "@semantic-release/git": 10.0.1
-    "@semantic-release/github": 11.0.1
+    "@semantic-release/github": 11.0.2
     "@semantic-release/npm": 12.0.1
     "@semantic-release/release-notes-generator": 14.0.3
     "@types/adm-zip": 0.5.7
