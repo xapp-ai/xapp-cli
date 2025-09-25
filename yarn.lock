@@ -2031,20 +2031,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@microsoft/api-documenter@npm:7.26.32":
-  version: 7.26.32
-  resolution: "@microsoft/api-documenter@npm:7.26.32"
+"@microsoft/api-documenter@npm:7.26.34":
+  version: 7.26.34
+  resolution: "@microsoft/api-documenter@npm:7.26.34"
   dependencies:
     "@microsoft/api-extractor-model": 7.30.7
     "@microsoft/tsdoc": ~0.15.1
     "@rushstack/node-core-library": 5.14.0
-    "@rushstack/terminal": 0.15.4
-    "@rushstack/ts-command-line": 5.0.2
+    "@rushstack/terminal": 0.16.0
+    "@rushstack/ts-command-line": 5.0.3
     js-yaml: ~3.13.1
     resolve: ~1.22.1
   bin:
     api-documenter: bin/api-documenter
-  checksum: 4f56698f1cd0d3a788abbc0bca87ea15b5ff6e75e85082263d0da58f21a182b7bfb6daf5df372507088a1a50c7a9f9baec8f24de531be5872e9b27b712099c04
+  checksum: 3942452d27bcd9b5c699fc6bf069d495bf3a7ad59ce596b6029bc780d55b2365dd946329ce3d9702d98de36204ecfd283f10ff7a959caca7f8684904a1ad9b3f
   languageName: node
   linkType: hard
 
@@ -3022,9 +3022,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rushstack/terminal@npm:0.15.4":
-  version: 0.15.4
-  resolution: "@rushstack/terminal@npm:0.15.4"
+"@rushstack/terminal@npm:0.16.0":
+  version: 0.16.0
+  resolution: "@rushstack/terminal@npm:0.16.0"
   dependencies:
     "@rushstack/node-core-library": 5.14.0
     supports-color: ~8.1.1
@@ -3033,19 +3033,19 @@ __metadata:
   peerDependenciesMeta:
     "@types/node":
       optional: true
-  checksum: bff3a32c5a2f76cdeab25efe110c0ef4ce2651a5f360021977b9ea46bda52aa96c3bef0b2d74225dbc8a86b39c98a6f2a97c4054a0f14d471084811ced1c89d5
+  checksum: 80e48a78c03f0b02ccaf0428ab9636b811d4c85b71b703e58f69e59af6644e01cd71f8b1e780c8824f43b1bd67e663ca3c11673490e9c46e90e7745bca11de2a
   languageName: node
   linkType: hard
 
-"@rushstack/ts-command-line@npm:5.0.2":
-  version: 5.0.2
-  resolution: "@rushstack/ts-command-line@npm:5.0.2"
+"@rushstack/ts-command-line@npm:5.0.3":
+  version: 5.0.3
+  resolution: "@rushstack/ts-command-line@npm:5.0.3"
   dependencies:
-    "@rushstack/terminal": 0.15.4
+    "@rushstack/terminal": 0.16.0
     "@types/argparse": 1.0.38
     argparse: ~1.0.9
     string-argv: ~0.3.1
-  checksum: cbf3f09e33d5cf4d106c39c389cc38c9785c1c7dad4e93db8c979d19bccd1f7430785787057028e6d97e0f14c4384b55892e6a3fac03cbf9b83558f2d287424e
+  checksum: a8c584ab664aceeaefc28a34bf60019214b0f78dc8915cf19b573db35df7f2522c9b9e3683668d735940b7be3adb635b218ce6e6c516b9ecbe881f0bee307ad0
   languageName: node
   linkType: hard
 
@@ -13348,7 +13348,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "root-workspace-0b6124@workspace:."
   dependencies:
-    "@microsoft/api-documenter": 7.26.32
+    "@microsoft/api-documenter": 7.26.34
     "@typescript-eslint/eslint-plugin": 6.21.0
     "@typescript-eslint/parser": 6.21.0
     "@xapp/config": 0.2.3
