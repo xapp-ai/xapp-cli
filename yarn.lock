@@ -4133,7 +4133,7 @@ __metadata:
     "@xapp/stentor-alexa": 1.71.27
     "@xapp/stentor-alexa-lib": 1.71.27
     "@xapp/stentor-app": 1.71.27
-    "@xapp/stentor-chat-widget": 1.79.0
+    "@xapp/stentor-chat-widget": 1.80.0
     "@xapp/stentor-dialogflow": 1.71.27
     "@xapp/stentor-handler-media": 1.71.27
     "@xapp/stentor-interaction-model-profiler": 1.71.27
@@ -4301,15 +4301,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@xapp/stentor-chat-widget@npm:1.79.0":
-  version: 1.79.0
-  resolution: "@xapp/stentor-chat-widget@npm:1.79.0"
+"@xapp/stentor-chat-widget@npm:1.80.0":
+  version: 1.80.0
+  resolution: "@xapp/stentor-chat-widget@npm:1.80.0"
   dependencies:
-    stentor-constants: 1.66.0
-    stentor-guards: 1.66.0
+    stentor-constants: 1.66.25
+    stentor-guards: 1.66.25
   peerDependencies:
     stentor-models: 1.x
-  checksum: 5f424ef54d093d140e39735d2c213ddb8ca67d1590bdd1b655f4ffc54ffc713443873c0e47455d6295de8f9f45c5b60344e02e227d1a831649ca0f8d274188f7
+  checksum: f5d8b7df223b504d4ac930f327acc031109fb95aa48b5c5ebc9bb173ac2e559dea3ed5adce8edfb8d33723f7b5d66c7bfe890d41e5aa5b83b4a9fcba183cae04
   languageName: node
   linkType: hard
 
@@ -14093,15 +14093,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stentor-constants@npm:1.66.0":
-  version: 1.66.0
-  resolution: "stentor-constants@npm:1.66.0"
-  peerDependencies:
-    stentor-models: 1.x
-  checksum: 3c465bb1b458cfca1e50eddc333343cb188e1eca844997fa1bd7dd13f9fa4ce4faabffd52c8f5c58f8921cdfb616049f78da61f201549b408ef333b908e6645e
-  languageName: node
-  linkType: hard
-
 "stentor-constants@npm:1.66.25":
   version: 1.66.25
   resolution: "stentor-constants@npm:1.66.25"
@@ -14142,17 +14133,6 @@ __metadata:
   peerDependencies:
     stentor-models: 1.x
   checksum: 3cb2a30baad1c83802e2d891ac49d7b013aa8e396fd8f4ac554b2580439c5ce4137522de77f1d08a3192ee87380a61baa91a0ae6f20c0a0d0634ef1fcd932b89
-  languageName: node
-  linkType: hard
-
-"stentor-guards@npm:1.66.0":
-  version: 1.66.0
-  resolution: "stentor-guards@npm:1.66.0"
-  dependencies:
-    stentor-constants: 1.66.0
-  peerDependencies:
-    stentor-models: 1.x
-  checksum: 3bba8c72ade3822a32591ae1fc6feb34790ccc02dab1f3044bbc14c153cf1593d23a96d4b466027c164e573e8e118a927e63ac571a98dd05f317a63125525bf1
   languageName: node
   linkType: hard
 
