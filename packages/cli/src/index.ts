@@ -21,7 +21,6 @@ import { logout } from "./logout";
 import { Options } from "./Options";
 import { pullFromDialogflowV2 } from "./pull";
 import { pushToDialogflowV2, pushToLexV2 } from "./push";
-import { pushToLex } from "./push/pushToLex";
 import { saveConfig } from "./saveConfig";
 import { log } from "stentor-logger";
 import { importApp, importAppFromFile } from "./import";
@@ -105,7 +104,7 @@ program
     .description("Profile your interaction model against an NLU")
     .option(
         "-p --platform <platform>",
-        "Comma delimited list of NLUs to profile. 'a' for Alexa, 'd' for Dialogflow (v2), 'l' for Lex (v1)"
+        "Comma delimited list of NLUs to profile. 'a' for Alexa, 'd' for Dialogflow (v2), 'l2' for Lex V2"
     )
     .option("-a --appId <appId>", "OC Studio App ID.")
     .option("-u, --utterance <utterance>", "The utterance.")
@@ -131,11 +130,10 @@ program
 
 program
     .command("push")
-    .description("BETA - Pushes the provided appId to either Dialogflow (v2) or Lex (v1 and v2")
+    .description("BETA - Pushes the provided appId to either Dialogflow (v2) or Lex V2")
     .option(
         "-p --platform <platform>",
-        "Comma delimited list of platforms to push to. 'd' for Dialogflow version 2," +
-            " 'l' for Lex and 'l2' for Lex version 2"
+        "Comma delimited list of platforms to push to. 'd' for Dialogflow version 2, 'l2' for Lex version 2"
     )
     .option("-a --appId <appId>", "XAPP App ID")
     .option("-o --output <output>", "Output directory")
@@ -165,10 +163,6 @@ program
 
             if (platforms.includes("d")) {
                 await pushToDialogflowV2(credentials, options);
-            }
-
-            if (platforms.includes("l")) {
-                await pushToLex(options);
             }
 
             if (platforms.includes("l2")) {
@@ -294,7 +288,7 @@ program
     .option("-a --appId <appId>", "App ID in XAPP that will be imported")
     .option(
         "-p --platform <platform>",
-        "Platform to import from: 'd' for Dialogflow, 'l' for Lex. Defaults to stentor based import"
+        "Platform to import from: 'd' for Dialogflow. Defaults to stentor based import"
     )
     .option("-c --credentials <credentials>", "Path to the service account credentials required for Dialogflow")
     .action(
