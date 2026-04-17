@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.11](https://github.com/xapp-ai/xapp-cli/compare/v1.8.10...v1.8.11) (2026-04-17)
+
+
+### Bug Fixes
+
+* **deps:** update dependency graphql to v16.11.0 ([#1327](https://github.com/xapp-ai/xapp-cli/issues/1327)) ([2aea7eb](https://github.com/xapp-ai/xapp-cli/commit/2aea7ebe204d8a2b17f000d0c5312d7f55e67cdb))
+* **deps:** update stentor ([#1293](https://github.com/xapp-ai/xapp-cli/issues/1293)) ([450ea82](https://github.com/xapp-ai/xapp-cli/commit/450ea821b14e57c794697e8b77abdc2fe96a835b))
+* **deps:** update stentor ([#1300](https://github.com/xapp-ai/xapp-cli/issues/1300)) ([9098f6a](https://github.com/xapp-ai/xapp-cli/commit/9098f6a99c7d2cdca582fb5efec3c35bad5fd3bb))
+* **deps:** update stentor ([#1309](https://github.com/xapp-ai/xapp-cli/issues/1309)) ([4f3847b](https://github.com/xapp-ai/xapp-cli/commit/4f3847b58853bd8149cce0126d9b08751590b746))
+* **deps:** update stentor ([#1311](https://github.com/xapp-ai/xapp-cli/issues/1311)) ([e182ade](https://github.com/xapp-ai/xapp-cli/commit/e182adee9ef4124a0ad6849ab3a2a302884c0e66))
+* **deps:** update stentor ([#1318](https://github.com/xapp-ai/xapp-cli/issues/1318)) ([a5a0cdb](https://github.com/xapp-ai/xapp-cli/commit/a5a0cdbffe8c5e01d7451e65f0e81af99460d20c))
+* **deps:** update stentor ([#1321](https://github.com/xapp-ai/xapp-cli/issues/1321)) ([4029321](https://github.com/xapp-ai/xapp-cli/commit/4029321a2e4a59b43c845b329013cfed7b63ab92))
+* **deps:** update stentor ([#1324](https://github.com/xapp-ai/xapp-cli/issues/1324)) ([2aaa5b6](https://github.com/xapp-ai/xapp-cli/commit/2aaa5b6969624499811ff3badb8d6281fe68334b))
+* **deps:** update stentor ([#1329](https://github.com/xapp-ai/xapp-cli/issues/1329)) ([e407eca](https://github.com/xapp-ai/xapp-cli/commit/e407eca4703e64c961ce6a5f897caa28d02900a9))
+* **deps:** update stentor ([#1332](https://github.com/xapp-ai/xapp-cli/issues/1332)) ([b9d262e](https://github.com/xapp-ai/xapp-cli/commit/b9d262e7b058d26d4ffea700cbb26cdb2ea0f96e))
+* **deps:** update stentor ([#1341](https://github.com/xapp-ai/xapp-cli/issues/1341)) ([7783e50](https://github.com/xapp-ai/xapp-cli/commit/7783e5077351e3fb7ac0f8bf1a611f2d4e3a4a95))
+* **deps:** update stentor ([#1344](https://github.com/xapp-ai/xapp-cli/issues/1344)) ([15d083d](https://github.com/xapp-ai/xapp-cli/commit/15d083de99c8a8d150f537688513596f8439ee77))
+* **deps:** update stentor ([#1347](https://github.com/xapp-ai/xapp-cli/issues/1347)) ([8b04db0](https://github.com/xapp-ai/xapp-cli/commit/8b04db0a2954c0ccc7fe3f684f9551c3b98d244c))
+* **deps:** update stentor to v1.60.3 ([#1296](https://github.com/xapp-ai/xapp-cli/issues/1296)) ([9b2c64c](https://github.com/xapp-ai/xapp-cli/commit/9b2c64c4050bc34a416c35e56b4a967a80d44a52))
+* **deps:** update stentor to v1.60.31 ([#1319](https://github.com/xapp-ai/xapp-cli/issues/1319)) ([995ff39](https://github.com/xapp-ai/xapp-cli/commit/995ff399582333f3ae272d6422c7f544ec3acc9e))
+* **deps:** update stentor to v1.60.7 ([#1306](https://github.com/xapp-ai/xapp-cli/issues/1306)) ([8e029f7](https://github.com/xapp-ai/xapp-cli/commit/8e029f7b6354e3d60f99b621e6d12eb9278c93a1))
+* **deps:** update stentor to v1.61.1 ([#1326](https://github.com/xapp-ai/xapp-cli/issues/1326)) ([c377d7b](https://github.com/xapp-ai/xapp-cli/commit/c377d7ba9cdf7c3d1cd53607579c051e0856a060))
+* **deps:** update stentor to v1.65.0 ([#1333](https://github.com/xapp-ai/xapp-cli/issues/1333)) ([cd69913](https://github.com/xapp-ai/xapp-cli/commit/cd6991337529090f149b7c0e8c674a7de48f773a))
+
+
+
+
+
 ## [1.8.10](https://github.com/xapp-ai/xapp-cli/compare/v1.8.9...v1.8.10) (2025-02-27)
 
 

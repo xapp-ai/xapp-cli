@@ -3,6 +3,46 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.11](https://github.com/xapp-ai/xapp-cli/compare/v1.8.10...v1.8.11) (2026-04-17)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @xapp/stentor-chat-widget to v1.80.0 ([#1345](https://github.com/xapp-ai/xapp-cli/issues/1345)) ([1310d0f](https://github.com/xapp-ai/xapp-cli/commit/1310d0ff174a54d7678248e5da305f0089430318))
+* **deps:** update dependency dotenv to v16.6.1 ([#1325](https://github.com/xapp-ai/xapp-cli/issues/1325)) ([1bc5057](https://github.com/xapp-ai/xapp-cli/commit/1bc5057a960eedc5ba4be592fd0e1c5b52082fe7))
+* **deps:** update dependency express to v5 ([#1310](https://github.com/xapp-ai/xapp-cli/issues/1310)) ([3bf53f2](https://github.com/xapp-ai/xapp-cli/commit/3bf53f2123e5bb8e58f6f08adb7729bb47d81c2d))
+* **deps:** update dependency inquirer to v12.6.1 ([#1304](https://github.com/xapp-ai/xapp-cli/issues/1304)) ([0624cea](https://github.com/xapp-ai/xapp-cli/commit/0624cead3ed46b29acba3b8d9cbdab53dd878aa1))
+* **deps:** update dependency inquirer to v12.9.6 ([#1328](https://github.com/xapp-ai/xapp-cli/issues/1328)) ([0d5b398](https://github.com/xapp-ai/xapp-cli/commit/0d5b398d349dc71418d37cd18af68ae7452b14bc))
+* **deps:** update stentor ([#1293](https://github.com/xapp-ai/xapp-cli/issues/1293)) ([450ea82](https://github.com/xapp-ai/xapp-cli/commit/450ea821b14e57c794697e8b77abdc2fe96a835b))
+* **deps:** update stentor ([#1297](https://github.com/xapp-ai/xapp-cli/issues/1297)) ([e2194ed](https://github.com/xapp-ai/xapp-cli/commit/e2194ed1322373bbbd9e4fc281bbb4184c046970))
+* **deps:** update stentor ([#1299](https://github.com/xapp-ai/xapp-cli/issues/1299)) ([2e5b242](https://github.com/xapp-ai/xapp-cli/commit/2e5b242e264d50c909553916dce577c01cbf683b))
+* **deps:** update stentor ([#1300](https://github.com/xapp-ai/xapp-cli/issues/1300)) ([9098f6a](https://github.com/xapp-ai/xapp-cli/commit/9098f6a99c7d2cdca582fb5efec3c35bad5fd3bb))
+* **deps:** update stentor ([#1303](https://github.com/xapp-ai/xapp-cli/issues/1303)) ([61c05e1](https://github.com/xapp-ai/xapp-cli/commit/61c05e1938dc6cd0ab06ee5d6c259d5b8d0a269d))
+* **deps:** update stentor ([#1309](https://github.com/xapp-ai/xapp-cli/issues/1309)) ([4f3847b](https://github.com/xapp-ai/xapp-cli/commit/4f3847b58853bd8149cce0126d9b08751590b746))
+* **deps:** update stentor ([#1311](https://github.com/xapp-ai/xapp-cli/issues/1311)) ([e182ade](https://github.com/xapp-ai/xapp-cli/commit/e182adee9ef4124a0ad6849ab3a2a302884c0e66))
+* **deps:** update stentor ([#1318](https://github.com/xapp-ai/xapp-cli/issues/1318)) ([a5a0cdb](https://github.com/xapp-ai/xapp-cli/commit/a5a0cdbffe8c5e01d7451e65f0e81af99460d20c))
+* **deps:** update stentor ([#1321](https://github.com/xapp-ai/xapp-cli/issues/1321)) ([4029321](https://github.com/xapp-ai/xapp-cli/commit/4029321a2e4a59b43c845b329013cfed7b63ab92))
+* **deps:** update stentor ([#1324](https://github.com/xapp-ai/xapp-cli/issues/1324)) ([2aaa5b6](https://github.com/xapp-ai/xapp-cli/commit/2aaa5b6969624499811ff3badb8d6281fe68334b))
+* **deps:** update stentor ([#1329](https://github.com/xapp-ai/xapp-cli/issues/1329)) ([e407eca](https://github.com/xapp-ai/xapp-cli/commit/e407eca4703e64c961ce6a5f897caa28d02900a9))
+* **deps:** update stentor ([#1332](https://github.com/xapp-ai/xapp-cli/issues/1332)) ([b9d262e](https://github.com/xapp-ai/xapp-cli/commit/b9d262e7b058d26d4ffea700cbb26cdb2ea0f96e))
+* **deps:** update stentor ([#1341](https://github.com/xapp-ai/xapp-cli/issues/1341)) ([7783e50](https://github.com/xapp-ai/xapp-cli/commit/7783e5077351e3fb7ac0f8bf1a611f2d4e3a4a95))
+* **deps:** update stentor ([#1344](https://github.com/xapp-ai/xapp-cli/issues/1344)) ([15d083d](https://github.com/xapp-ai/xapp-cli/commit/15d083de99c8a8d150f537688513596f8439ee77))
+* **deps:** update stentor ([#1347](https://github.com/xapp-ai/xapp-cli/issues/1347)) ([8b04db0](https://github.com/xapp-ai/xapp-cli/commit/8b04db0a2954c0ccc7fe3f684f9551c3b98d244c))
+* **deps:** update stentor to v1.60.3 ([#1296](https://github.com/xapp-ai/xapp-cli/issues/1296)) ([9b2c64c](https://github.com/xapp-ai/xapp-cli/commit/9b2c64c4050bc34a416c35e56b4a967a80d44a52))
+* **deps:** update stentor to v1.60.31 ([#1319](https://github.com/xapp-ai/xapp-cli/issues/1319)) ([995ff39](https://github.com/xapp-ai/xapp-cli/commit/995ff399582333f3ae272d6422c7f544ec3acc9e))
+* **deps:** update stentor to v1.60.7 ([#1306](https://github.com/xapp-ai/xapp-cli/issues/1306)) ([8e029f7](https://github.com/xapp-ai/xapp-cli/commit/8e029f7b6354e3d60f99b621e6d12eb9278c93a1))
+* **deps:** update stentor to v1.61.1 ([#1326](https://github.com/xapp-ai/xapp-cli/issues/1326)) ([c377d7b](https://github.com/xapp-ai/xapp-cli/commit/c377d7ba9cdf7c3d1cd53607579c051e0856a060))
+* **deps:** update stentor to v1.64.68 ([#1294](https://github.com/xapp-ai/xapp-cli/issues/1294)) ([54175d4](https://github.com/xapp-ai/xapp-cli/commit/54175d4e453f549b0f41c1e359a99b080b78be36))
+* **deps:** update stentor to v1.65.0 ([#1333](https://github.com/xapp-ai/xapp-cli/issues/1333)) ([cd69913](https://github.com/xapp-ai/xapp-cli/commit/cd6991337529090f149b7c0e8c674a7de48f773a))
+* **deps:** update stentor to v1.65.3 ([#1302](https://github.com/xapp-ai/xapp-cli/issues/1302)) ([c0de467](https://github.com/xapp-ai/xapp-cli/commit/c0de46765644f25077ecb031ddd18a8f2e1247d1))
+* **deps:** update stentor to v1.65.8 ([#1307](https://github.com/xapp-ai/xapp-cli/issues/1307)) ([78dba85](https://github.com/xapp-ai/xapp-cli/commit/78dba8535ccc7aab667d063baf54fb17c0664e73))
+* **deps:** update stentor to v1.70.19 ([#1336](https://github.com/xapp-ai/xapp-cli/issues/1336)) ([adbddfb](https://github.com/xapp-ai/xapp-cli/commit/adbddfb9452fc9ac2e55c210144eb4a24673c94b))
+* **deps:** update stentor to v1.71.2 ([#1342](https://github.com/xapp-ai/xapp-cli/issues/1342)) ([3df306b](https://github.com/xapp-ai/xapp-cli/commit/3df306ba2ea02cdf9dca3c8393930b0226aadb60))
+
+
+
+
+
 ## [1.8.10](https://github.com/xapp-ai/xapp-cli/compare/v1.8.9...v1.8.10) (2025-02-27)
 
 **Note:** Version bump only for package @xapp/cli
