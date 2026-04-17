@@ -11,7 +11,7 @@ import { log } from "stentor-logger";
 import { convertToUtteranceTest, UtteranceProfiler, UtteranceTest } from "@xapp/stentor-interaction-model-profiler";
 import { NLUService } from "stentor-models";
 import { DialogflowV2Service } from "@xapp/stentor-service-dialogflow";
-import { LexService, LexServiceV2 } from "@xapp/stentor-service-lex";
+import { LexServiceV2 } from "@xapp/stentor-service-lex";
 import { getGoogleCredentials } from "../getGoogleCredentials";
 import { getStentorApp } from "../getStentorApp";
 
@@ -58,27 +58,6 @@ export async function profile(options?: ProfileOptions): Promise<void> {
                 nlu.push({
                     name: "dialogflowV2",
                     service: dialogflowV2,
-                });
-                break;
-            case "l":
-                // Make sure AWS_PROFILE is set in the environment variables
-                if (!awsRole && !process.env.AWS_PROFILE) {
-                    throw new Error("An aws role or the environment variable AWS_PROFILE is required to profile LEX.");
-                }
-
-                const lex = new LexService({
-                    config: {
-                        credentials: {
-                            role: {
-                                arn: awsRole,
-                                externalId: undefined, // cross-account not supported for non-user creds yet
-                            },
-                        },
-                    },
-                }); // If AWS_PROFILE is set then it'll default to that.
-                nlu.push({
-                    name: "lex",
-                    service: lex,
                 });
                 break;
             case "l2":
