@@ -5579,11 +5579,11 @@ __metadata:
     "@typescript-eslint/parser": 5.62.0
     "@xapp/client": 1.8.11
     "@xapp/config": 0.3.0
-    "@xapp/stentor-actions-on-google": 1.78.2
+    "@xapp/stentor-actions-on-google": 1.78.5
     "@xapp/stentor-alexa": 1.78.2
-    "@xapp/stentor-alexa-lib": 1.78.2
+    "@xapp/stentor-alexa-lib": 1.78.5
     "@xapp/stentor-app": 1.78.2
-    "@xapp/stentor-chat-widget": 1.87.2
+    "@xapp/stentor-chat-widget": 1.88.0
     "@xapp/stentor-dialogflow": 1.78.2
     "@xapp/stentor-handler-media": 1.78.2
     "@xapp/stentor-interaction-model-profiler": 1.78.2
@@ -5701,6 +5701,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@xapp/stentor-actions-on-google@npm:1.78.5":
+  version: 1.78.5
+  resolution: "@xapp/stentor-actions-on-google@npm:1.78.5"
+  dependencies:
+    "@xapp/patterns": 2.0.3
+    actions-on-google: 2.14.0
+  peerDependencies:
+    stentor-constants: 1.x
+    stentor-guards: 1.x
+    stentor-interaction-model: 1.x
+    stentor-media: 1.x
+    stentor-models: 1.x
+    stentor-request: 1.x
+    stentor-response: 1.x
+    stentor-utils: 1.x
+  checksum: 13f9647e6561f8ff5fa4547a88c32d0ee09d161203eafc8fd6461cc8f265bd1838d5eec8f41cb03394c4f0d41c561c79a2ac4751b69050ea629559b262e1e871
+  languageName: node
+  linkType: hard
+
 "@xapp/stentor-alexa-lib@npm:1.78.2":
   version: 1.78.2
   resolution: "@xapp/stentor-alexa-lib@npm:1.78.2"
@@ -5712,6 +5731,20 @@ __metadata:
     stentor-models: 1.x
     stentor-utils: 1.x
   checksum: 18abba52bbcfb911411b306c11dce438aa267a8c734624efe724bcbfaaf0cdd8bb2309e54a47fddb140ec76fea28d09bf087f7ae5be88640b1fbd8529dbef908
+  languageName: node
+  linkType: hard
+
+"@xapp/stentor-alexa-lib@npm:1.78.5":
+  version: 1.78.5
+  resolution: "@xapp/stentor-alexa-lib@npm:1.78.5"
+  dependencies:
+    ask-sdk-model: 1.86.0
+    lodash.invert: 4.3.0
+  peerDependencies:
+    stentor-constants: 1.x
+    stentor-models: 1.x
+    stentor-utils: 1.x
+  checksum: c264791ab7c7353469d40ddda62487eb6e6bfea9be6bf146d4245f78c603408eea1bb076bfe42bc410a35e1f6e24e8a50ae40ea5769dfdb8a8b6213bddcb3c00
   languageName: node
   linkType: hard
 
@@ -5750,16 +5783,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@xapp/stentor-chat-widget@npm:1.87.2":
-  version: 1.87.2
-  resolution: "@xapp/stentor-chat-widget@npm:1.87.2"
+"@xapp/stentor-chat-widget@npm:1.88.0":
+  version: 1.88.0
+  resolution: "@xapp/stentor-chat-widget@npm:1.88.0"
   dependencies:
-    stentor-constants: 1.69.14
-    stentor-guards: 1.69.14
+    stentor-constants: 1.72.0
+    stentor-guards: 1.72.0
   peerDependencies:
     react: ^18.0.0 || ^19.0.0
     stentor-models: ^1.0.0
-  checksum: 7aae9ca5fd6a8d0b100a4b863397c18201ffe61ff2bd56934f6b928a43c7b2e0ac3cf0ccc1519e407a97324c701f73571237b6f6b7f700e8a56ed2fdf041b30b
+  checksum: b9a05d4782c2516d734b1a8fa5eb6286e75274958c72f8ed714ee8e499b431959f4a4d753f45be8efd317f410b9bafc4014cb587ce479e3d211a424ac26b0df1
   languageName: node
   linkType: hard
 
@@ -15668,15 +15701,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stentor-constants@npm:1.69.14":
-  version: 1.69.14
-  resolution: "stentor-constants@npm:1.69.14"
-  peerDependencies:
-    stentor-models: 1.x
-  checksum: 4233fdd8fdb75ace5111336e990b267cd2e068b11141752ecbd7bf987e1d6fb729e64a609b629389f60b5f2a763b86d4eb73307458b89c3578073ed0789d02a4
-  languageName: node
-  linkType: hard
-
 "stentor-constants@npm:1.72.0":
   version: 1.72.0
   resolution: "stentor-constants@npm:1.72.0"
@@ -15717,17 +15741,6 @@ __metadata:
   peerDependencies:
     stentor-models: 1.x
   checksum: 0e6a1149b2aa015b55dc43ae5fe4ea880ea84b59c66903c9ec23c35563d2bd91e39c5aa660e218271715b8bb381f705d32dcbb99fef70926ba365b752497ece9
-  languageName: node
-  linkType: hard
-
-"stentor-guards@npm:1.69.14":
-  version: 1.69.14
-  resolution: "stentor-guards@npm:1.69.14"
-  dependencies:
-    stentor-constants: 1.69.14
-  peerDependencies:
-    stentor-models: 1.x
-  checksum: f208f9383ddbeb5965e5996068e263651ebce7f59e31829d19c90ccd1d8e781db46705d4dd27d335c62c2fed27337ee018800a770eeb5275ef2bf36a2611c3e7
   languageName: node
   linkType: hard
 
