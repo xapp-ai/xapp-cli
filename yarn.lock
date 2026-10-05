@@ -3861,23 +3861,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@semantic-release/release-notes-generator@npm:14.1.0":
-  version: 14.1.0
-  resolution: "@semantic-release/release-notes-generator@npm:14.1.0"
+"@semantic-release/release-notes-generator@npm:14.1.1":
+  version: 14.1.1
+  resolution: "@semantic-release/release-notes-generator@npm:14.1.1"
   dependencies:
     conventional-changelog-angular: ^8.0.0
     conventional-changelog-writer: ^8.0.0
     conventional-commits-filter: ^5.0.0
     conventional-commits-parser: ^6.0.0
     debug: ^4.0.0
-    get-stream: ^7.0.0
     import-from-esm: ^2.0.0
-    into-stream: ^7.0.0
     lodash-es: ^4.17.21
     read-package-up: ^11.0.0
   peerDependencies:
     semantic-release: ">=20.1.0"
-  checksum: 3abc52cd45e5822af28ff7b4ef68730ff82e5d6177de52de3197df899395489a49bddc3fe2823cd9ec95060a2c943940e8d19e81269a6b94c9b9253d7bce9fa3
+  checksum: 802cbc6024cd2db2024cee3cbb427306da70bb394b3323bb298c15a05761861a59b2f16d721b39345f4c02a46f42b85d230c6e9ee70d34bdcda8a8366fa159c4
   languageName: node
   linkType: hard
 
@@ -5437,7 +5435,7 @@ __metadata:
     "@semantic-release/git": 10.0.1
     "@semantic-release/github": 11.0.6
     "@semantic-release/npm": 12.0.2
-    "@semantic-release/release-notes-generator": 14.1.0
+    "@semantic-release/release-notes-generator": 14.1.1
     "@types/adm-zip": 0.5.8
     "@types/chai": 5.2.3
     "@types/dialogflow": 4.0.4
@@ -9141,16 +9139,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"from2@npm:^2.3.0":
-  version: 2.3.0
-  resolution: "from2@npm:2.3.0"
-  dependencies:
-    inherits: ^2.0.1
-    readable-stream: ^2.0.0
-  checksum: 6080eba0793dce32f475141fb3d54cc15f84ee52e420ee22ac3ab0ad639dc95a1875bc6eb9c0e1140e94972a36a89dc5542491b85f1ab8df0c126241e0f1a61b
-  languageName: node
-  linkType: hard
-
 "front-matter@npm:^4.0.2":
   version: 4.0.2
   resolution: "front-matter@npm:4.0.2"
@@ -9385,13 +9373,6 @@ __metadata:
   version: 6.0.1
   resolution: "get-stream@npm:6.0.1"
   checksum: e04ecece32c92eebf5b8c940f51468cd53554dcbb0ea725b2748be583c9523d00128137966afce410b9b051eb2ef16d657cd2b120ca8edafcf5a65e81af63cad
-  languageName: node
-  linkType: hard
-
-"get-stream@npm:^7.0.0":
-  version: 7.0.1
-  resolution: "get-stream@npm:7.0.1"
-  checksum: 107083c25faf274136a246fa72faea65aa8cea0db54c2dc8c70d3cfe2dcf0d036356927d870dc83fccea8fa32f183ce3696a04eca9617f3e19119f87c5fc0807
   languageName: node
   linkType: hard
 
@@ -10444,16 +10425,6 @@ __metadata:
     through: ^2.3.6
     wrap-ansi: ^6.0.1
   checksum: 387ffb0a513559cc7414eb42c57556a60e302f820d6960e89d376d092e257a919961cd485a1b4de693dbb5c0de8bc58320bfd6247dfd827a873aa82a4215a240
-  languageName: node
-  linkType: hard
-
-"into-stream@npm:^7.0.0":
-  version: 7.0.0
-  resolution: "into-stream@npm:7.0.0"
-  dependencies:
-    from2: ^2.3.0
-    p-is-promise: ^3.0.0
-  checksum: 10c259101237622b2f90a3a30388f2e997f7c4cb16d7236da0380f2e5691b8f9ce32ea2614ae5d1d3b5ad4eba89e2adac0e3d3d24f8494bff69de145432c2d94
   languageName: node
   linkType: hard
 
@@ -13393,13 +13364,6 @@ __metadata:
   version: 1.0.0
   resolution: "p-finally@npm:1.0.0"
   checksum: 93a654c53dc805dd5b5891bab16eb0ea46db8f66c4bfd99336ae929323b1af2b70a8b0654f8f1eae924b2b73d037031366d645f1fd18b3d30cbd15950cc4b1d4
-  languageName: node
-  linkType: hard
-
-"p-is-promise@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "p-is-promise@npm:3.0.0"
-  checksum: 74e511225fde5eeda7a120d51c60c284de90d68dec7c73611e7e59e8d1c44cc7e2246686544515849149b74ed0571ad470a456ac0d00314f8d03d2cc1ad43aae
   languageName: node
   linkType: hard
 
